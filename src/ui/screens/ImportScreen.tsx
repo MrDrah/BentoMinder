@@ -79,6 +79,15 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
   const store = useStore();
   const storeRef = useRef<BentoMinderStore>(store);
   storeRef.current = store;
+  /** Writes and keeps the ref current, so a follow-up step in the same action builds on it. */
+  const save = useCallback(
+    async (next: BentoMinderStore) => {
+      const ok = await commit(next);
+      if (ok) storeRef.current = next;
+      return ok;
+    },
+    [commit],
+  );
   const lang = state.language;
   const months = importMonthOptions(today, store.settings.nextMonthPromptFromDay);
   const [month, setMonth] = useState<YearMonth>(months.selected);
@@ -142,22 +151,22 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
       const calls = result.ok ? result.meta.providerCalls : result.providerCalls;
       let next = addAiUsage(storeRef.current, now(), calls);
       if (!result.ok) {
-        if (next !== storeRef.current) await commit(next);
+        if (next !== storeRef.current) await save(next);
         showPanel(aiPanel(result.error, result.retryAfterSec));
         return;
       }
       const menu = stampOrigin(result.menu, p.origin);
       if (menu === null) {
-        if (next !== storeRef.current) await commit(next);
+        if (next !== storeRef.current) await save(next);
         showPanel(aiPanel('MALFORMED_OUTPUT'));
         return;
       }
       next = recordExtraction(next, menu, now(), p.origin.url);
-      if (await commit(next)) navigate(reviewRoute(menu.targetMonth));
+      if (await save(next)) navigate(reviewRoute(menu.targetMonth));
       else showPanel({ kind: 'ai', message: 'toast.saveFailed', retry: true, upload: false });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [services, month, now, commit],
+    [services, month, now, save],
   );
 
   const continueWith = async (p: Pending) => {
@@ -166,7 +175,7 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
     // US-E2-07/AC1 (BR-10): a PDF already read reopens its stored reading, 0 AI calls.
     const known = findExtractionBySha(storeRef.current, p.sha256, month);
     if (known !== null) {
-      if (await commit(recordExtraction(storeRef.current, known, now()))) {
+      if (await save(recordExtraction(storeRef.current, known, now()))) {
         // Read once by the review screen (in memory only).
         setFlash({ sameFile: true });
         navigate(reviewRoute(known.targetMonth));
@@ -229,7 +238,7 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
     setPhase('idle');
     // US-E2-04/AC8: nothing from this action is stored except aiUsage; the request had reached
     // the proxy, so call 1 is counted (the proxy makes no further call once the client leaves).
-    void commit(addAiUsage(storeRef.current, now(), 1));
+    void save(addAiUsage(storeRef.current, now(), 1));
   };
 
   const manualRoute: Route = onboarding ? { name: 'onboarding', step: 3, month, manual: true } : { name: 'review', month, manual: true };
@@ -389,7 +398,7 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
             const p = consentFor;
             setConsentFor(null);
             void (async () => {
-              if (await commit(giveConsent(storeRef.current, now()))) await runExtraction(p);
+              if (await save(giveConsent(storeRef.current, now()))) await runExtraction(p);
             })();
           }}
           onDecline={() => {

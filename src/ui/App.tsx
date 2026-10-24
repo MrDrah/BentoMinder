@@ -1,12 +1,12 @@
 // App shell: skip link, storage banner, toast, and the screen for the current hash route. On
 // first load it opens onboarding when needed (US-E1-01/AC1–AC3, US-E1-06/AC3).
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { startScreen } from '../domain/menu/store-ops.ts';
 import { formatMonth } from '../i18n/format.ts';
 import { monthOf } from '../domain/time/jst.ts';
 import { useApp } from './app-store.tsx';
 import { Toast } from './components/Controls.tsx';
-import { navigate, useRoute, type Route } from './router.ts';
+import { navigate, toHash, useRoute, type Route } from './router.ts';
 import { CalendarScreen } from './screens/CalendarScreen.tsx';
 import { ImportScreen } from './screens/ImportScreen.tsx';
 import { OnboardingScreen } from './screens/OnboardingScreen.tsx';
@@ -30,17 +30,22 @@ export function App() {
     document.title = docTitle;
   }, [docTitle]);
 
-  const ready = state.phase === 'ready';
-  useEffect(() => {
-    if (!ready || gated.current || state.phase !== 'ready') return;
+  // Decided once, on the first ready render, and shown at once (no flash of the calendar).
+  const [redirect, setRedirect] = useState<Route | null>(null);
+  if (state.phase === 'ready' && !gated.current) {
     gated.current = true;
     const start = startScreen(state.store);
-    if (start === 'onboarding-1' && !(route.name === 'onboarding' && route.step === 1)) {
-      navigate({ name: 'onboarding', step: 1, month: null, manual: false });
-    } else if (start === 'onboarding-2' && route.name !== 'onboarding') {
-      navigate({ name: 'onboarding', step: 2, month: null, manual: false });
-    }
-  }, [ready, state, route]);
+    let target: Route | null = null;
+    if (start === 'onboarding-1' && !(route.name === 'onboarding' && route.step === 1)) target = { name: 'onboarding', step: 1, month: null, manual: false };
+    else if (start === 'onboarding-2' && route.name !== 'onboarding') target = { name: 'onboarding', step: 2, month: null, manual: false };
+    if (target !== null) setRedirect(target);
+  }
+  useEffect(() => {
+    if (redirect === null) return;
+    if (toHash(route) === toHash(redirect)) setRedirect(null);
+    else navigate(redirect);
+  }, [redirect, route]);
+  const shown = redirect ?? route;
 
   if (state.phase === 'loading') return <LoadingScreen />;
   if (state.phase === 'too-new' || state.phase === 'corrupt') return <RecoveryScreen kind={state.phase} raw={state.raw} />;
@@ -56,7 +61,7 @@ export function App() {
           <span>{t('storage.unavailable.body')}</span>
         </div>
       )}
-      <Screen route={route} />
+      <Screen route={shown} />
       <Toast />
     </>
   );
