@@ -361,7 +361,7 @@ Errors: storage write fails → danger banner, control reverts (US-E10-02/AC5).
 
 | Path | Shown | Story |
 |---|---|---|
-| データを書き出す | Downloads `bentominder-export-YYYY-MM-DD.json` (Tokyo date); toast 「書き出しました」; disabled with 「書き出すデータがありません」 when empty | US-E10-03/AC1–AC2 |
+| データを書き出す | Downloads `bentominder-export-YYYY-MM-DD.json` (Tokyo date); toast 「書き出しました」; disabled with 「書き出すデータがありません」 when empty | US-E10-03/AC2, AC4 |
 | データを読み込む (Could) | File pick → validate (≤ app schema) → dialog 「今のデータを置き換えますか？」 → replace → C1; invalid/newer file → error line | US-E10-03/AC3 |
 | すべてのデータを削除 | Dialog (one confirmation) → 「削除する」 removes every BentoMinder key → S1 in Japanese; キャンセル → unchanged | US-E10-04/AC1–AC2, BR-22 |
 | Storage unavailable | Persistent danger banner 「この端末に保存できません」; no "saved" toasts | US-E10-02/AC5 |

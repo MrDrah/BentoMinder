@@ -1,6 +1,6 @@
 # User stories — BentoMinder
 
-Owner: BA · 2026-10-24 · Status: **H1 final** (PO answers of 2026-10-24 applied; reconciliations R-1, R-2, R-3 applied; H1 fix round of 2026-10-24 applied: rulings B1, B2, B4–B7, B10, B14 and follow-ups) · Rules: approved BR table in `docs/PLAN.md` §3 · Decisions: `docs/PLAN.md` §7 · Data: `docs/ba/data-contract.md` (source of all state and field names) · Terms: `docs/ba/domain-dictionary.md` · QA traces tests to these IDs (`validate.mjs trace`).
+Owner: BA · 2026-10-24 · Status: **H1 final** (PO answers of 2026-10-24 applied; reconciliations R-1, R-2, R-3 applied; H1 fix round of 2026-10-24 applied: rulings B1, B2, B4–B7, B10, B14 and follow-ups; M1 prep of 2026-10-24 applied, see "M1 prep" below) · Rules: approved BR table in `docs/PLAN.md` §3 · Decisions: `docs/PLAN.md` §7 · Data: `docs/ba/data-contract.md` (source of all state and field names) · Terms: `docs/ba/domain-dictionary.md` · QA traces tests to these IDs (`validate.mjs trace`).
 
 ## H1 changes (since the kick-off draft of 2026-10-24: 72 stories / 245 ACs → 73 / 264 at the first H1 pass → 73 / 287 after the H1 fix round and closing rulings)
 No AC was renumbered. Added ACs take the next free number; a retired AC stays in its story as a comment.
@@ -31,6 +31,15 @@ No AC was renumbered. Added ACs take the next free number; a retired AC stays in
 | OQ-16 collapse narrowed (not transitive) and collapse detail (PLAN §7): a dish collapses only with its `definingIngredientId` within one item; other named ingredients stay separate; a found ancestor folds into each found descendant, siblings separate; never chained | E4 counting paragraph and worked example (incl. しょうが焼き and 鶏肉/もも/むね), US-E4-01/AC15 (title: "defining ingredient"; outcome unchanged), US-E4-01/AC16 (example items without a dish; outcome unchanged) | US-E4-01/AC17, AC18 | |
 | H1 closing rulings (PLAN §7): verdict precedence ingredient → dish → category (A61); O-3 defining-ingredient links never cross items; A57 removed date with override listed for review; S10 dormant not-confirmed / school-lunch records on removed dates, only not-confirmed listed; U5 CONFIRM_RECIPE on お弁当の日 replaces a dormant record; RU1 plannedAt cleared on leaving homemade-bento-planned; N3 = OQ-20 | E4 counting paragraph (verdict levels, O-3, worked example wording), US-E3-05/AC9 (Given made explicit; listing rule narrowed to overrides and homemade-bento-planned / not-confirmed records; outcome unchanged) | US-E4-01/AC19, AC20; US-E3-05/AC11, AC12; US-E5-06/AC4; US-E5-08/AC5; US-E7-05/AC4 | US-E4-01/AC15 (→ AC19), US-E3-05/AC10 (→ AC12) |
 
+### M1 prep (2026-10-24: 73 / 287 → 73 / 310)
+Items from PLAN §7 "H2 gate closed." and "M0 done.". No AC was renumbered; no test named a changed or retired AC at the time of the change.
+
+| Why | Changed | Added | Retired |
+|-----|---------|-------|---------|
+| H2 design readings accepted: 「今月の献立がまだありません」 only while no menu was ever confirmed; 「行事」 is `originalText`, not a reason; an empty week drops 「ほかの日は…」 | US-E1-01/AC5 (Given made explicit + note), US-E3-06/AC1 (note only), US-E3-02/AC3 (example data: reason no-lunch + wording 「行事」; restore step written out), US-E9-01/AC3 (exact text) | US-E3-06/AC5 (which "no menu" wording) | |
+| US-E10-03/AC1 vs `export-roundtrip`: `exportedAt` dropped, the date stays in the file name (data contract §4) | | US-E10-03/AC4 | US-E10-03/AC1 (→ AC4) |
+| Strings in `design/copy.md` that carry a rule but had no AC | | US-E2-01/AC5 (target month, OQ-21); US-E2-04/AC8 (stop an import); US-E2-06/AC9 (retry countdown); US-E3-01/AC4 (warnings); US-E3-02/AC6 (no-lunch reason and wording, OQ-22); US-E3-03/AC4 (accept one field), AC5 (leave review, OQ-23); US-E3-05/AC13 (nothing to review); US-E3-06/AC6 (hide the next-month card, OQ-24), AC7 (prompt-day setting); US-E5-02/AC4 (month without a menu); US-E6-01/AC7 (quick reason); US-E6-05/AC3, AC4 (date picker); US-E7-03/AC4, AC5 (today card); US-E7-05/AC5 (several reminders); US-E9-01/AC4 (copy fails); US-E10-02/AC6 (save failure), AC7 (start over); US-E10-03/AC5, AC6 (Could: import errors) | |
+
 Acceptance criteria are numbered per story: `Scenario: AC1 …` has the full ID `US-E1-01/AC1`. Tests name the full AC ID; milestone evidence counts an AC as verified only when an executed test that names it passed. Never renumber an AC once a test names it; retire it and add a new number.
 
 Priority: **M**ust / **S**hould / **C**ould / **W**on't (MoSCoW) · Size: S / M / L · `(v1)` in a title means the story is out of the MVP and must not be built before the PO approves v1.
@@ -51,19 +60,19 @@ Counts are active ACs (retired ACs are kept as comments and not counted). `(v1)`
 |------|---------|-----------|---------------------|-------|
 | E0 End-to-end journey | US-E0-01 | 1 | 3 | MVP |
 | E1 Onboarding & profile | US-E1-01 … 06 | 6 | 28 | MVP |
-| E2 Menu import & AI extraction | US-E2-01 … 08 | 8 | 39 | MVP |
-| E3 Menu review, confirm & refresh | US-E3-01 … 06 | 6 | 28 (1) | MVP; US-E3-06/AC4 is v1 |
+| E2 Menu import & AI extraction | US-E2-01 … 08 | 8 | 42 | MVP |
+| E3 Menu review, confirm & refresh | US-E3-01 … 06 | 6 | 36 (1) | MVP; US-E3-06/AC4 is v1 |
 | E4 Preference assessment & overrides | US-E4-01 … 05 | 5 | 33 | MVP |
-| E5 Calendar & family decisions | US-E5-01 … 08 | 8 | 32 | MVP |
-| E6 Bento recommendations & recipes | US-E6-01 … 07 | 7 | 28 | MVP |
-| E7 Reminders & today view | US-E7-01 … 08 | 8 | 30 (1) | MVP; US-E7-08 is v1 |
+| E5 Calendar & family decisions | US-E5-01 … 08 | 8 | 33 | MVP |
+| E6 Bento recommendations & recipes | US-E6-01 … 07 | 7 | 31 | MVP |
+| E7 Reminders & today view | US-E7-01 … 08 | 8 | 33 (1) | MVP; US-E7-08 is v1 |
 | E8 Localization & display | US-E8-01 … 05 | 5 | 15 | MVP |
-| E9 Sharing | US-E9-01 … 02 | 2 | 5 | MVP |
-| E10 Data | US-E10-01 … 05 | 5 | 14 | MVP |
+| E9 Sharing | US-E9-01 … 02 | 2 | 6 | MVP |
+| E10 Data | US-E10-01 … 05 | 5 | 18 | MVP |
 | E11 Debug panel | US-E11-01 … 03 | 3 | 8 | MVP (development builds only) |
 | E12 Android | US-E12-01 … 04 | 4 | 9 (8) | MVP: US-E12-01 only; US-E12-02 … 04 are v1 |
 | NF Non-functional | US-NF-01 … 05 | 5 | 15 | MVP |
-| **Total** | | **73** | **287 (10 v1)** | |
+| **Total** | | **73** | **310 (10 v1)** | |
 
 ---
 
@@ -140,10 +149,11 @@ Scenario: AC4 Onboarding can be left and resumed
   Then step 2 is shown and the step-1 answers are preserved
 
 Scenario: AC5 Skipping the menu shows an empty calendar with a clear next step
-  Given the parent is on step 2
+  Given the parent is on step 2 and no menu has ever been confirmed on this device
   When the parent chooses 「あとで取り込む」
   Then the calendar is shown with no assessments
   And an empty-state card 「今月の献立がまだありません」 offers 「献立を取り込む」
+  # M1 prep (H2 design reading accepted): the generic 「今月の…」 wording is used only while no menu has ever been confirmed; in every other case a month without a menu uses the month-named wording of US-E3-06/AC1 (rule: US-E3-06/AC5).
 ```
 
 ### US-E1-02 Create the child profile · M · M
@@ -335,6 +345,15 @@ Scenario: AC4 Saved URL is offered for the next month
   Given a source URL was stored from the November import
   When the parent opens 「献立を取り込む」 again
   Then the URL field is prefilled with the stored URL and can be edited
+
+Scenario: AC5 Target month: this month or next, preselected by date (OQ-21)
+  Given today is 2026-11-19 JST and nextMonthPromptFromDay is 20
+  When the import screen opens
+  Then 「取り込む月」 offers exactly 2026年11月 and 2026年12月, with 2026年11月 selected
+  Given today is 2026-11-20 JST
+  When the import screen opens
+  Then 2026年12月 is selected
+  And the month the parent leaves selected is the import's targetMonth (also for upload and for 「手入力する」, US-E3-04/AC1)
 ```
 
 ### US-E2-02 Fall back to upload when the URL can't be retrieved · M · M
@@ -432,6 +451,13 @@ Scenario: AC7 The AI request contains no child data (BR-10)
   Then the app's request to the adapter contains exactly: pdf (bytes or URL), targetMonth, promptVersion, schemaVersion
   And the adapter's request to the provider contains only the PDF bytes, the fixed extraction prompt for that promptVersion, the target month and the response schema
   And neither contains any of: the nickname, age range, likes, dislikes, allergy status, allergens, excluded ingredients, diet, themes, note, decisions or overrides
+
+Scenario: AC8 Stopping a running import (BR-10, BR-12)
+  Given an import for 2026-12 is in progress (「献立を読み取っています…」)
+  When the parent taps 「中止する」
+  Then the import screen is shown again with the entered URL or the chosen file kept
+  And no extraction from this action is stored, also if the provider's answer arrives later, and no other stored data changes except aiUsage, which counts the provider calls already made
+  And no further provider call is made for this action
 ```
 
 ### US-E2-05 Reject malformed or impossible AI output · M · M
@@ -520,6 +546,13 @@ Scenario: AC8 The proxy's own call cap answers without calling the provider (BR-
   When an extraction is requested
   Then 0 provider calls are made
   And the message of AC6 is shown
+
+Scenario: AC9 The disabled retry shows a countdown (BR-10)
+  Given the 「もう一度」 button is disabled for 60 seconds (AC6)
+  Then its label reads 「もう一度（あと60秒）」 and counts down once per second to 「もう一度（あと1秒）」
+  And after 60 seconds it reads 「もう一度」 and is enabled
+  And the upload option and 「手入力する」 stay enabled during the countdown
+  # The countdown is held in memory only; after a reload the import screen starts fresh, and the proxy's own cap (AC8) still protects the provider.
 ```
 
 ### US-E2-07 One AI extraction per month · M · S
@@ -624,6 +657,18 @@ Scenario: AC2 Uncertain fields are highlighted and counted (BR-11)
 Scenario: AC3 The source PDF can be opened for comparison
   When the parent taps 「元のPDFを見る」
   Then the uploaded file (or the source URL) opens in a new view
+
+Scenario Outline: AC4 Extraction warnings are shown on review and don't block confirming (BR-11)
+  Given the extraction's warnings contain <warning>
+  When the review screen opens
+  Then the banner <text> is shown once above the days
+  And 「この内容で確定」 stays available (subject only to US-E3-03/AC2 and US-E3-04/AC2)
+  Examples:
+    | warning             | text                                                                   |
+    | month-mismatch      | 「献立表の月が、選んだ月（11月）と違うようです。」 (target month 2026-11) |
+    | pages-unreadable    | 「読み取れないページがありました。抜けている日がないか確かめてください。」   |
+    | layout-unrecognised | 「献立表の形式をうまく読み取れなかった可能性があります。」                 |
+    | partial-extraction  | 「一部の日だけ読み取れました。足りない日は入力してください。」             |
 ```
 
 ### US-E3-02 Edit extracted items · M · M
@@ -639,8 +684,11 @@ Scenario: AC2 Add and remove items
   Then the confirmed menu reflects both changes
 
 Scenario: AC3 Mark a day as no school lunch, or restore it (BR-25)
-  When the parent marks 2026-11-27 as 「給食なし」 with reason 「行事」
-  Then 2026-11-27 moves to noLunchDays and its dishes are kept hidden but restorable until confirmation
+  When the parent taps 「給食なしの日にする」 on 2026-11-27, chooses the reason 「給食なし（午前保育など）」 and enters the wording 「行事」
+  Then 2026-11-27 moves to noLunchDays with reason "no-lunch" and originalText 「行事」, and its dishes are kept hidden but restorable until confirmation
+  When the parent taps 「給食ありに戻す」 before confirming
+  Then 2026-11-27 is a lunch day again with its dishes
+  # M1 prep (H2 design reading accepted): 「行事」 is the printed wording (originalText), not a reason; the reasons are bento-day, no-lunch, closed and unknown (data contract §3.3). Same rule as before, example data corrected.
 
 Scenario: AC4 Dish name boundary
   When the parent enters a dish name of 40 characters
@@ -651,6 +699,15 @@ Scenario: AC4 Dish name boundary
 Scenario: AC5 Item count boundary per day
   Given a day with 12 dishes
   Then 「料理を追加」 is disabled for that day with the hint 「1日12品まで」
+
+Scenario: AC6 No-lunch reason and wording (BR-25, OQ-22)
+  When the parent taps 「給食なしの日にする」 on a day
+  Then exactly one reason is selected from 「お弁当の日（みんなお弁当）」 (bento-day), 「給食なし（午前保育など）」 (no-lunch), 「お休み（休園など）」 (closed) and 「その他」 (unknown), with 「給食なし（午前保育など）」 preselected
+  And the wording field 「献立表での書き方」 is prefilled with the selected reason's label without its bracketed part (「お弁当の日」, 「給食なし」, 「お休み」 or 「その他」), follows the reason until the parent types in it, and can be edited
+  When the wording has 60 characters
+  Then it is accepted
+  When the wording has 61 characters or only whitespace
+  Then the field is marked as an error and 「この内容で確定」 is disabled with 「入力の誤りを直すと確定できます」
 ```
 
 ### US-E3-03 Confirm the menu · M · S
@@ -676,6 +733,23 @@ Scenario: AC3 Unconfirmed extractions are never used (BR-12)
   When the app opens
   Then the calendar shows no assessments for that month
   And a card 「確認待ちの献立があります」 reopens the review
+
+Scenario: AC4 Accept one uncertain field as it is (BR-11)
+  Given 3 fields are "uncertain"
+  When the parent taps 「このままにする」 on one of them
+  Then that field's text is unchanged and it is counted as "uncertain-accepted" (stored so on confirm)
+  And the summary reads 「確認が必要な項目：2件」
+  When the parent then edits that field
+  Then it becomes "parent-edited"
+
+Scenario: AC5 Leaving the review asks first (BR-12, OQ-23)
+  Given the review screen for 2026-11 is open and not confirmed
+  When the parent leaves it (back, or another screen)
+  Then a dialog asks 「確認を中断しますか？」 with 「中断する」 and 「確認を続ける」
+  When the parent taps 「確認を続ける」
+  Then the review stays open with every edit made so far
+  When the parent taps 「中断する」
+  Then nothing from this review is stored or used by the calendar (edits made since the review opened are discarded), and the card 「確認待ちの献立があります」 reopens the same extraction (AC3)
 ```
 
 ### US-E3-04 Enter or complete a menu manually · S · M
@@ -781,6 +855,12 @@ Scenario: AC12 Not-confirmed and school-lunch records on a no-lunch or removed d
   And 2026-11-11 (not-confirmed) is listed in the refresh's 「確認が必要な日」 list and 2026-11-12 (school-lunch-planned) is not
   When a later refresh lists both dates as school days again
   Then they display not-confirmed and school-lunch-planned (with the reservation record) again, unchanged
+
+Scenario: AC13 A refresh with nothing to review says so (BR-13)
+  Given November is confirmed and no date in the refresh's changedDatesSincePrevious carries an override or a stored homemade-bento-planned or not-confirmed decision
+  When the parent confirms the refresh
+  Then the 「確認が必要な日」 screen says 「確認が必要な日はありません」 and offers 「カレンダーへ」
+  And no stored decision or override is changed
 ```
 
 ### US-E3-06 Detect that the menu is outdated or missing · M · S
@@ -792,6 +872,7 @@ Scenario: AC1 Current month without a confirmed menu (BR-12)
   When the calendar opens on December 2026
   Then a card 「12月の献立がまだありません」 with 「献立を取り込む」 is shown
   And no December day shows an assessment
+  # M1 prep: the month-named wording applies whenever the generic wording of US-E1-01/AC5 does not (rule: AC5).
 
 Scenario: AC2 Next month reminder from the 20th
   Given today is 2026-11-20 JST and December is not confirmed
@@ -809,6 +890,29 @@ Scenario: AC4 (v1) Changed source PDF is detected (BR-10)
   When the parent taps 「更新を確認」 and the adapter returns a PDF with sha256 H2 ≠ H1
   Then 「園の献立が更新されています」 is shown with 「取り込み直す」
   And no AI call is made until the parent taps it
+
+Scenario: AC5 Which "no menu" wording is shown (BR-12)
+  Given no menu has ever been confirmed on this device and today is 2026-11-10 JST
+  When the calendar opens on November 2026
+  Then the card reads 「今月の献立がまだありません」
+  When the parent navigates to December 2026
+  Then the card reads 「12月の献立がまだありません」
+  Given only October 2026 has ever been confirmed and today is 2026-11-10 JST
+  When the calendar opens on November 2026
+  Then the card reads 「11月の献立がまだありません」
+  And in every case the card offers 「献立を取り込む」 and no day of the shown month has an assessment
+
+Scenario: AC6 The next-month card can be hidden for the rest of the day (OQ-24)
+  Given today is 2026-11-20 JST, December is not confirmed and the card 「来月（12月）の献立を取り込みましょう」 is shown
+  When the parent taps 「今日は表示しない」
+  Then the card is not shown again on 2026-11-20, also after a reload
+  And it is shown again on 2026-11-21 (Tokyo date), and on each later day until December is confirmed
+  And hiding it changes no menu, assessment, decision or reminder
+
+Scenario: AC7 The prompt day is a setting from 1 to 28 (OQ-15)
+  Then the setting 「来月の献立のお知らせ」 offers 「毎月1日から」 … 「毎月28日から」, default 「毎月20日から」
+  Given the parent chose 「毎月25日から」 and December is not confirmed
+  Then the card is not shown on 2026-11-24 and is shown on 2026-11-25
 ```
 
 ---
@@ -1133,6 +1237,12 @@ Scenario: AC3 Past days are read-only (BR-27)
   Given today is 2026-11-10 JST
   When the parent opens 2026-11-09
   Then the decision and recipe are shown but no action changes them
+
+Scenario: AC4 A weekday in a month without a confirmed menu (BR-12)
+  Given December 2026 has no confirmed menu
+  When the parent taps Wednesday 2026-12-02
+  Then the sheet says 「この月の献立はまだ取り込まれていません」
+  And it shows no assessment and offers no decision action
 ```
 
 ### US-E5-03 Choose homemade bento and confirm a recipe · M · M
@@ -1305,6 +1415,11 @@ Scenario: AC5 None pass the filters (empty state) (BR-02, BR-06)
 Scenario: AC6 See more (BR-06, BR-09)
   When the parent taps 「ほかのレシピ」
   Then the full filtered, ranked list is shown, still without any filtered-out recipe
+
+Scenario: AC7 The "quick" reason follows the 20-minute rule (BR-09)
+  Given recipe A takes 20 minutes and recipe B takes 21 minutes
+  Then A qualifies for the reason 「20分以内でできます」
+  And B's card never shows it
 ```
 
 ### US-E6-02 Hard filters for allergens and diet · M · M
@@ -1404,6 +1519,18 @@ Scenario: AC1 List with conflicts last (BR-06)
 Scenario: AC2 Plan from the library (BR-03)
   When the parent opens a recipe, taps 「日付を選んで計画」 and picks 2026-11-18
   Then the same confirm step as US-E5-03/AC2 applies
+
+Scenario: AC3 Which dates can be picked (BR-03, BR-25, BR-27)
+  Given today is 2026-11-10 JST, November is confirmed and the recipe passes the child's filters
+  When the parent taps 「日付を選んで計画」
+  Then the sheet 「どの日に作りますか？」 lists, in date order, every school day and every お弁当の日 of any confirmed menu from 2026-11-10 on, each with its current decision
+  And it lists no past date, no date outside a confirmed menu, no no-lunch day other than お弁当の日, and no day in an open refresh conflict (US-E3-05/AC2, AC6)
+  And picking a day that is already homemade-bento-planned leads to a recipe change (CHANGE_RECIPE) through the confirm step of US-E5-03/AC2
+
+Scenario: AC4 No day can be planned
+  Given no confirmed menu has a school day or お弁当の日 from today on
+  When the parent taps 「日付を選んで計画」
+  Then the sheet says 「計画できる日がありません。献立を取り込むと選べるようになります。」 and offers no date
 ```
 
 ### US-E6-06 Planned recipe missing after a library change · S · S
@@ -1533,6 +1660,15 @@ Scenario: AC2 Weekend or day outside the menu
 Scenario: AC3 Day rollover at Tokyo midnight (BR-15)
   Given the app stays open from 2026-11-03 23:59 JST to 2026-11-04 00:01 JST
   Then the today card switches to 2026-11-04 without a reload (the clock is checked at least once per minute)
+
+Scenario: AC4 No upcoming school day is known
+  Given today is Saturday 2026-11-28 JST, the November menu lists no school day after 2026-11-27, and December has no confirmed menu
+  Then the today card shows 「次の登園日は、献立を取り込むと表示されます」
+
+Scenario: AC5 An undecided today offers to decide (BR-02)
+  Given today's decision is not-confirmed
+  When the parent taps 「予定を決める」 on the today card
+  Then today's day sheet opens and no decision has changed
 ```
 
 ### US-E7-04 Configure reminder times · M · S
@@ -1582,6 +1718,13 @@ Scenario: AC4 A shown but undismissed reminder shows again until dismissed or ex
   When the parent dismisses it and reopens the app at 2026-11-03 22:00 JST
   Then it is not shown again
   And if it is never dismissed, it is not shown on an open at or after 2026-11-04 00:00 JST (expired)
+
+Scenario: AC5 Several due reminders are all reachable (BR-17)
+  Given 3 reminders are due, unexpired and not dismissed when the app opens
+  Then one reminder banner is shown with 「ほかに2件のお知らせ」
+  When the parent opens 「ほかに2件のお知らせ」
+  Then the other 2 reminders are shown
+  And none of the 3 gets a dismissedAt until the parent dismisses that reminder
 ```
 
 ### US-E7-06 Honest notification promises on the web · M · S
@@ -1748,9 +1891,23 @@ Scenario: AC2 OS share sheet with copy fallback
   Given navigator.share is unavailable or rejected
   Then the text is copied to the clipboard and 「コピーしました」 is shown
 
-Scenario: AC3 Empty week (BR-21)
-  Given no planned or not-confirmed days in the next 7 days
-  Then the text says 「今週は手作りお弁当の予定はありません。」
+Scenario: AC3 Empty week (exact format, ja) (BR-21)
+  Given today is 2026-11-01 and no day from 2026-11-02 to 2026-11-08 is homemade-bento-planned or not-confirmed
+  When the parent taps 「今週の予定を共有」
+  Then the share text is:
+    """
+    【BentoMinder】11月2日（月）〜11月8日（日）のお弁当予定
+    今週は手作りお弁当の予定はありません。
+    ※給食の予約は園の方法で行ってください。
+    """
+  # M1 prep (H2 design reading accepted): the line 「ほかの日は給食（または給食なし）です。」 is left out when the week has no planned or not-confirmed day. Same rule as before, exact text added.
+
+Scenario: AC4 Copying fails too
+  Given navigator.share is unavailable or rejected, and writing to the clipboard fails
+  When the parent taps 「今週の予定を共有」
+  Then 「コピーできませんでした。下の文章を選んでコピーしてください。」 is shown
+  And the share text in 「送る内容」 is selected so the parent can copy it by hand
+  And 「コピーしました」 is not shown
 ```
 
 ### US-E9-02 Shared text exposes no unnecessary child data · M · S
@@ -1809,16 +1966,30 @@ Scenario: AC4 Corrupt store
 Scenario: AC5 Storage unavailable or full
   Given storage writes throw (private mode or quota exceeded)
   Then the app shows 「この端末に保存できません」 and does not claim that a decision was saved
+
+Scenario: AC6 A failed write never shows a "saved" message (BR-22)
+  Given storage writes throw
+  When the parent confirms a recipe for 2026-11-04 with 「この日に決定」
+  Then 「保存できませんでした。もう一度お試しください。」 is shown and 「11月4日（水）を手作りお弁当にしました」 is not shown
+  And the calendar and the day sheet still show the previous decision for 2026-11-04
+  When writes succeed again and the parent repeats the action
+  Then the decision is stored and 「11月4日（水）を手作りお弁当にしました」 is shown
+
+Scenario: AC7 Starting over from the recovery screen asks first (BR-22)
+  Given the recovery screen of AC4 is shown
+  When the parent taps 「初期化する」
+  Then a dialog asks 「データを初期化しますか？」
+  When the parent cancels the dialog
+  Then storage is unchanged and the recovery screen is still shown
+  When the parent taps 「初期化する」 again and confirms
+  Then the unreadable store is removed, and onboarding opens in Japanese at step 1 with no profile, menu or decision
 ```
 
 ### US-E10-03 Export my data · M · S
 As a parent I want to download my data so that I have a copy or can move it.
 
 ```gherkin
-Scenario: AC1 Export file (BR-22)
-  When the parent taps 「データを書き出す」
-  Then a file "bentominder-export-2026-11-01.json" downloads containing the full store with schemaVersion and exportedAt
-  And it validates against the root store contract
+  # AC1 retired at M1 prep: it required an exportedAt field in the file, which the root store contract rejects (unknown-field). Replaced by AC4: the export date is in the file name only (data contract §4 export-roundtrip).
 
 Scenario: AC2 Export with no data
   Given nothing is stored
@@ -1828,6 +1999,23 @@ Scenario: AC3 (Could) Import an export
   Given a valid export file with schemaVersion ≤ the app's version
   When the parent chooses 「データを読み込む」 and confirms replacing current data
   Then the store is replaced and the calendar shows the imported plans
+
+Scenario: AC4 Export file is the store as is (BR-22)
+  Given today is 2026-11-01 JST
+  When the parent taps 「データを書き出す」
+  Then a file "bentominder-export-2026-11-01.json" downloads
+  And its content is the full stored BentoMinderStore with its schemaVersion and no other top-level field
+  And it validates against the root store contract (export-roundtrip)
+
+Scenario: AC5 (Could) A file that isn't a valid export changes nothing
+  Given a file that is not JSON, or fails the root store contract
+  When the parent chooses it with 「データを読み込む」
+  Then 「このファイルは読み込めません。BentoMinderから書き出したファイルを選んでください。」 is shown, no replace dialog opens, and storage is unchanged
+
+Scenario: AC6 (Could) An export from a newer app version changes nothing (BR-22)
+  Given an export file whose schemaVersion is greater than the app's
+  When the parent chooses it with 「データを読み込む」
+  Then 「このファイルは新しいバージョンのアプリで作られています。アプリを更新してください。」 is shown, no replace dialog opens, and storage is unchanged
 ```
 
 ### US-E10-04 Delete all data · M · S

@@ -1,0 +1,589 @@
+{
+  "synthetic": true,
+  "fixtureId": "fixture-menu-2027-03-allergens",
+  "fixture": "FX-07",
+  "hardFields": [
+    "days[2027-03-05].allergenDeclaration"
+  ],
+  "menu": {
+    "id": "ext-2027-03-7fe604ca",
+    "contract": "extracted-menu/1",
+    "targetMonth": "2027-03",
+    "detectedMonth": "2027-03",
+    "source": {
+      "kind": "fixture",
+      "filename": "menu.pdf",
+      "sha256": "7fe604cabd641a402eab0cc32eccda6434d7aa9db02b1478fa8a9e15c7ed21cb",
+      "byteSize": 1,
+      "fetchedAt": "2027-02-24T20:00:00+09:00",
+      "model": "gemini-3.8-flash",
+      "promptVersion": 1
+    },
+    "days": [
+      {
+        "date": "2027-03-01",
+        "printedDateText": "1日（月）",
+        "printedWeekday": "月",
+        "items": [
+          {
+            "text": "肉じゃが",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "みそ汁",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-egg",
+            "alg-milk",
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：卵・乳・小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-02",
+        "printedDateText": "2日（火）",
+        "printedWeekday": "火",
+        "items": [
+          {
+            "text": "さけのムニエル",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "パン",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "コーンスープ",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-shrimp",
+            "alg-crab"
+          ],
+          "rawText": "特定原材料：えび・かに",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-03",
+        "printedDateText": "3日（水）",
+        "printedWeekday": "水",
+        "items": [
+          {
+            "text": "麻婆豆腐",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "中華スープ",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared-none",
+          "allergenIds": [],
+          "rawText": "アレルゲン：なし",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-04",
+        "printedDateText": "4日（木）",
+        "printedWeekday": "木",
+        "items": [
+          {
+            "text": "ミートボール",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ポテトサラダ",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "パン",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-milk",
+            "alg-soybean"
+          ],
+          "rawText": "アレルゲン：乳成分・大豆",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-05",
+        "printedDateText": "5日（金）",
+        "printedWeekday": "金",
+        "items": [
+          {
+            "text": "豚のしょうが焼き",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "けんちん汁",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "unreadable",
+          "allergenIds": [],
+          "rawText": null,
+          "verification": {
+            "status": "uncertain",
+            "reason": "low-legibility"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-08",
+        "printedDateText": "8日（月）",
+        "printedWeekday": "月",
+        "items": [
+          {
+            "text": "ぎょうざ",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "もやしのナムル",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "not-declared",
+          "allergenIds": [],
+          "rawText": null,
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-09",
+        "printedDateText": "9日（火）",
+        "printedWeekday": "火",
+        "items": [
+          {
+            "text": "鶏肉のクリーム煮",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "パン",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ブロッコリーのサラダ",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-10",
+        "printedDateText": "10日（水）",
+        "printedWeekday": "水",
+        "items": [
+          {
+            "text": "筑前煮",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "すまし汁",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-11",
+        "printedDateText": "11日（木）",
+        "printedWeekday": "木",
+        "items": [
+          {
+            "text": "ハヤシライス",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "大根サラダ",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-12",
+        "printedDateText": "12日（金）",
+        "printedWeekday": "金",
+        "items": [
+          {
+            "text": "焼き魚",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ひじきの煮物",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "みそ汁",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-15",
+        "printedDateText": "15日（月）",
+        "printedWeekday": "月",
+        "items": [
+          {
+            "text": "春巻き",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "わかめスープ",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-16",
+        "printedDateText": "16日（火）",
+        "printedWeekday": "火",
+        "items": [
+          {
+            "text": "鶏のから揚げ",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ごはん",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "小松菜のおひたし",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2027-03-17",
+        "printedDateText": "17日（水）",
+        "printedWeekday": "水",
+        "items": [
+          {
+            "text": "かき揚げうどん",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "みかん",
+            "kind": "dessert",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "declared",
+          "allergenIds": [
+            "alg-wheat"
+          ],
+          "rawText": "アレルゲン：小麦",
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      }
+    ],
+    "noLunchDays": [
+      {
+        "date": "2027-03-18",
+        "reason": "no-lunch",
+        "originalText": "修了式・午前保育（給食なし）",
+        "verification": {
+          "status": "ok"
+        }
+      }
+    ],
+    "outOfMonthDays": [],
+    "warnings": [],
+    "extractedAt": "2027-02-24T20:00:12+09:00"
+  }
+}

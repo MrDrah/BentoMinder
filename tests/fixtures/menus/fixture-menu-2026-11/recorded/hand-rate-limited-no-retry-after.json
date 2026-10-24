@@ -1,0 +1,23 @@
+{
+  "synthetic": true,
+  "recordedBy": "hand",
+  "fixtureId": "fixture-menu-2026-11",
+  "scenario": "rate-limited",
+  "description": "RX-429: HTTP 429 without a Retry-After header.",
+  "model": "gemini-3.8-flash",
+  "promptVersion": 1,
+  "response": {
+    "httpStatus": 429,
+    "retryAfterSeconds": null,
+    "body": {
+      "error": {
+        "code": 429,
+        "status": "RESOURCE_EXHAUSTED",
+        "message": "Quota exceeded (synthetic test response)."
+      }
+    }
+  },
+  "expect": {
+    "extractResult": "call 2 = fallback model immediately; RATE_LIMITED without retryAfterSec if call 2 is also 429 (US-E2-06/AC5, AC6)"
+  }
+}

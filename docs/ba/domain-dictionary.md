@@ -1,19 +1,19 @@
 # Domain dictionary — BentoMinder
 
-Owner: BA · 2026-10-24 · Version **v1 (expandable)** · Status: **H1 final** (2026-10-24; ids are stable from here on, new terms by proposal only; H1 fix round: `animalOrigin` column (ruling B14), 2 new ingredients, verdict rule B2)
+Owner: BA · 2026-10-24 · Version **v1 (expandable)** · Status: **H1 final** (2026-10-24; ids are stable from here on, new terms by proposal only; H1 fix round: `animalOrigin` column (ruling B14), 2 new ingredients, verdict rule B2; M1 prep 2026-10-24: categories are labels only, new ambiguity group `amb-imo`, §8)
 
-Used by: preference assessment (BR-04, US-E4-01), profile pickers (US-E1-02), allergen and diet filters (BR-06), recipe validation (`docs/ba/data-contract.md` §3.7). The Developer converts these tables into `data/dictionary.json` (one record per row, same ids and fields); this file stays the human-readable source until that file exists, after which changes go through the BA and are mirrored in both.
+Used by: preference assessment (BR-04, US-E4-01), profile pickers (US-E1-02), allergen and diet filters (BR-06), recipe validation (`docs/ba/data-contract.md` §3.7). `scripts/build-dictionary.mjs` converts these tables into `data/dictionary.json` (generated: one record per row, same ids; never edited by hand). This file is the source: changes go through the BA here, then `npm run build:dictionary`.
 
-Scope: v1 covers the dishes and ingredients typical of Japanese kindergarten 給食 menus and of children's bentos: 30 categories and sub-categories, 29 current allergens (+1 retired), 171 ingredients, 55 dishes (226 food terms), 8 themes, 9 ambiguity groups. New terms are added by proposal (id, 表記, よみ, English, category, synonyms) and never by changing an existing id.
+Scope: v1 covers the dishes and ingredients typical of Japanese kindergarten 給食 menus and of children's bentos: 30 categories and sub-categories, 29 current allergens (+1 retired), 171 ingredients, 55 dishes (226 food terms), 8 themes, 10 ambiguity groups. New terms are added by proposal (id, 表記, よみ, English, category, synonyms) and never by changing an existing id.
 
 ## 1. Matching rules (deterministic)
 1. **Normalise** both the menu text and every surface form: Unicode NFKC (full/half-width), katakana → hiragana, remove spaces, 「・」 and brackets; keep 「ー」.
-2. **One surface form → one id.** Each normalised synonym belongs to exactly one entry, or to one ambiguity group (§7). A form listed in an ambiguity group belongs to the group, not to the candidate entries (e.g. 「さけ」 → amb-sake even though 鮭 → ing-salmon). Text in full-width brackets in the 表記 column (「なし（梨）」) is a display disambiguator, not a surface form; the surface forms are the bare 表記 and the synonyms. Validator rule `dict-synonym-unique`.
+2. **One surface form → one id.** Each normalised synonym belongs to exactly one entry, or to one ambiguity group (§7). A form listed in an ambiguity group belongs to the group, not to the candidate entries (e.g. 「さけ」 → amb-sake even though 鮭 → ing-salmon). Text in full-width brackets in the 表記 column (「なし（梨）」) is a display disambiguator, not a surface form; the surface forms are the bare 表記 and the synonyms. Only ingredients (§4), dishes (§5) and ambiguity groups (§7) have surface forms; **categories (§2) have none** (their 表記 is a label, M1 prep). Validator rule `dict-synonym-unique`.
 3. **Minimum length.** Kana surface forms match only if they have ≥ 2 characters; single-kanji forms (卵, 鮭, 梨…) are allowed.
 4. **Dish pass first.** Scan the item left to right with longest match over dish forms. Text covered by a dish match is not rescanned; the dish adds its `name ingredients` (only ingredients literally named in the dish name).
-5. **Ingredient pass.** Scan the remaining text, then the listed ingredients of the day, with longest match over ingredient and category forms (e.g. 「切り干し大根」 beats 「大根」, 「ごま油」 beats 「ごま」, 「カニカマ」 beats 「カニ」).
+5. **Ingredient pass.** Scan the remaining text, then the listed ingredients of the day, with longest match over ingredient forms and ambiguity-group forms (e.g. 「切り干し大根」 beats 「大根」, 「ごま油」 beats 「ごま」, 「カニカマ」 beats 「カニ」).
 6. **Ambiguity.** A match on an ambiguity-group form is not resolved automatically unless a resolution rule in §7 applies; otherwise it is "unresolved", counts towards `U`, and the review screen asks the parent (US-E4-01/AC6). Typos are never auto-corrected.
-7. **Categories.** Liking/disliking a category (e.g. `cat-fish`) matches every ingredient and dish whose category is that category or one of its descendants.
+7. **Categories.** Liking/disliking a category (e.g. `cat-fish`) matches every found ingredient and dish whose category is that category or one of its descendants. A category is never found in menu text by itself: a menu word that names a whole group is a surface form of one generic ingredient (「さかな」→ `ing-fish`, 「鶏肉」→ `ing-chicken`) or of an ambiguity group (「いも」→ `amb-imo`), and reaches the category through that entry.
 7a. **One verdict per food, most specific entry wins** (H1 rulings B1, B2, follow-up, "OQ-16 overruled", "collapse narrowed", "collapse detail"). D and L count foods, not profile entries. Within one lunch item a matched dish and its `definingIngredientId` (§5) are one food; other ingredients named in the dish stay separate (豚のしょうが焼き = 豚肉-food + しょうが = 2). A found ancestor id folds into each found descendant; siblings stay separate (鶏肉 + 鶏もも肉 + 鶏むね肉 = 2 foods). Nothing is chained: different items merge only through identical or ancestor/descendant ids, and two dishes never merge. A defining-ingredient link never crosses items (「鶏のから揚げ」 + 「鶏もも肉のてりやき」 = 2 foods). The verdict is checked level by level: the food's ingredient ids → their dictionary parents → the dish id → categories and ancestors (ingredient → dish → category); at the deciding level a dislike beats a like. Example: likes `cat-fish`, dislikes `ing-mackerel` → さば is disliked only, さけ is liked. Full rule and worked example: `user-stories.md` E4.
 8. **Seasonings do not count** towards D or L unless the child's profile names that exact id.
 9. **Allergens are never inferred from the menu.** `inherent allergens` below are used only to validate recipes (`recipe-ingredient-inherent-allergen`) and to label profile pickers; school-menu allergen notices use only what the PDF declares (BR-08).
@@ -55,6 +55,8 @@ Column meaning: **inherent allergens** = the food is itself that allergen item (
 | cat-dish-simmered | 煮もの | にもの | Simmered dishes | – |
 | cat-dish-soup | 汁もの・スープ | しるもの・すーぷ | Soups | – |
 | cat-dish-salad | サラダ・あえもの | さらだ・あえもの | Salads & dressed vegetables | – |
+
+**Labels only (M1 prep).** The 表記 column is the label shown in profile pickers and explanations; it is **not** a surface form, and the matcher never finds a category in menu text (§1 rules 2, 5, 7). Where a category label is also an everyday menu word, that word belongs to exactly one ingredient or ambiguity group: 「鶏肉」→ `ing-chicken`, 「豚肉」→ `ing-pork`, 「牛肉」→ `ing-beef`, 「たまご」→ `ing-egg`, 「さかな」→ `ing-fish`, 「いも」→ `amb-imo` (§7). A child who dislikes `cat-chicken` therefore still gets a disliked verdict for 「鶏肉」 in a menu, through `ing-chicken`'s category.
 
 `cat-fish-processed` is deliberately **not** under `cat-fish`: many children who dislike fish eat ちくわ or かまぼこ, so parents select it separately. Diet filters list it explicitly (data contract §3.8).
 
@@ -124,7 +126,7 @@ Allergen synonyms are used only to map **declared** allergen lines of the menu P
 | ing-yam | やまいも | やまいも | Japanese yam | cat-potato | 山芋, 長いも, 長芋, ながいも | alg-yam | known | – |
 | ing-konjac | こんにゃく | こんにゃく | Konjac | cat-potato | 蒟蒻, 糸こんにゃく, しらたき | – | known | – |
 
-`いも` alone maps to the category `cat-potato`, not to one ingredient.
+`いも`, `芋` and `おいも` alone belong to the ambiguity group `amb-imo` (§7; M1 prep, replacing the earlier "maps to `cat-potato`"): the menu doesn't say which potato, so the review asks. The compound forms above (じゃがいも, さつま芋, 里芋, 長いも…) are ingredient forms and win by longest match.
 
 ### 4.2 Vegetables
 | id | 表記 | よみ | English | category | synonyms | inherent allergens | info | animalOrigin |
@@ -402,8 +404,10 @@ No licensed characters (copyright): themes are generic.
 | amb-tako | たこ / タコ | ing-octopus, dish-octopus-sausage | 「たこさんウインナー」「たこウインナー」 → dish (no octopus). Kanji 蛸 → octopus. Standalone → ing-octopus. |
 | amb-sake | さけ / サケ | ing-salmon, ing-cooking-sake | In an ingredient list next to seasonings (「さとう、さけ、しょうゆ」) → ask; in a dish name (「さけのしおやき」) → salmon. Kanji 鮭 → salmon; 酒 → cooking sake. |
 | amb-pan | パン | ing-bread, ing-bread-crumbs (パン粉) | Longest match only: 「パン粉」 → bread crumbs; 「フライパン」 is ignored (not a food); else ing-bread. No question needed. |
+| amb-imo | いも / 芋 / おいも | ing-potato, ing-sweet-potato, ing-taro, ing-yam | Longest match first: the ingredient forms in §4.1 (「じゃがいも」「じゃが芋」「さつまいも」「さつま芋」「さといも」「里芋」「やまいも」「山芋」「長いも」…) → that ingredient. Standalone 「いも」「芋」「おいも」 (e.g. 「おいものにもの」) → ask. (M1 prep: replaces the category-level form 「いも」 → `cat-potato`.) |
 
 ## 8. Change process
 - Research agents and developers propose new terms in their report (id, 表記, よみ, English, category, synonyms, inherent allergens); the BA adds them here. Ids are never renamed or reused; a retired term keeps its id with `retired: <date>`.
-- Validator rules for the JSON version: `dict-id-format`, `dict-id-unique`, `dict-synonym-unique`, `dict-parent-resolves`, `dict-category-resolves`, `dict-allergen-resolves`, `dict-ambiguity-candidates-resolve`, `dict-animal-origin-valid` (every `ing-` record has `animalOrigin` ⊆ the 8 tags and a boolean `animalOriginKnown`).
+- Validator rules for the JSON version: `id-format` (the general id rule of data contract §2; the earlier name `dict-id-format` is merged into it, M1 prep), `dict-id-unique`, `dict-synonym-unique`, `dict-parent-resolves`, `dict-category-resolves`, `dict-allergen-resolves`, `dict-ambiguity-candidates-resolve`, `dict-animal-origin-valid` (every `ing-` record has `animalOrigin` ⊆ the 8 tags and a boolean `animalOriginKnown`).
 - H1 fix round additions (BA, 2026-10-24): `ing-niboshi` 煮干し (B14 hidden source, stock fish) and `ing-stew-roux` シチュールウ (B14 hidden source). Note: in a menu *item* the dish pass matches 「シチュー」 (dish-stew) first, so 「シチュールウ」 is recognised in listed ingredients and recipes, not inside dish names.
+- M1 prep changes (BA, 2026-10-24; Developer item in PLAN §7 "M0 done"): categories are **labels only**, with no surface forms (§1 rules 2, 5, 7; §2 note), so `dict-synonym-unique` holds for 鶏肉, 豚肉, 牛肉, たまご and さかな, which stay forms of `ing-chicken`, `ing-pork`, `ing-beef`, `ing-egg` and `ing-fish`. The one category-level form that had no entry, 「いも」, moves to the new ambiguity group `amb-imo` (with 「芋」「おいも」). `dict-id-format` merged into `id-format`. No id changed.

@@ -1,6 +1,6 @@
 # Open questions and proposed business rules — BentoMinder
 
-Owner: BA · 2026-10-24 · Status: **closed at H1**; H1 fix-round points OQ-16…OQ-20 have defaults applied (section at the end) · BR table approved by the PO on 2026-10-24; all 15 open questions decided by the PO on 2026-10-24 (default accepted). Answers are logged in `docs/PLAN.md` §7. No question is open.
+Owner: BA · 2026-10-24 · Status: **closed at H1**; H1 fix-round points OQ-16…OQ-20 and M1-prep points OQ-21…OQ-26 have defaults applied (sections at the end) · BR table approved by the PO on 2026-10-24; all 15 open questions decided by the PO on 2026-10-24 (default accepted). Answers are logged in `docs/PLAN.md` §7. No question is open.
 
 ## Business rules: Approved 2026-10-24 (PO)
 The binding text is `docs/PLAN.md` §3; only the Orchestrator changes it. This is the BA's proposal as approved, kept for history. Where the two differ, PLAN §3 wins, together with the H1 reconciliations noted after the table.
@@ -86,3 +86,15 @@ The rulings B1, B2, B4–B7, B10, B14 and the "H1 follow-ups confirmed" row (PLA
 | OQ-19 (**Accepted** 2026-10-24) | BR-18 phrases ("even when closed", "push notification") are not in `data/banned-phrases.json`, which covers BR-07, BR-19 and judging words only | Keep BR-18 checks in US-E7-06/AC2 (web build only), since Android v1 may legitimately say "notification" | QA string-catalog test |
 | OQ-20 (**Accepted** 2026-10-24) | QA N3: a reminder shown but not dismissed: shown again on the next open? | Yes, until it is dismissed or expires (BR-17 "shown on next open until it expires"); to be written as an AC at M4 | US-E7-05, reminder oracle |
 | — | QA FX-Q1 (range bands) and FX-Q2 (merged cells): fixture answer-key conventions | Deferred to M1 with QA's proposals (weekdays only; item on each spanned day, `ok` or `uncertain/other` accepted) | Fixtures only |
+
+## Raised in M1 prep (2026-10-24): proposed defaults for the Orchestrator to confirm or log
+Each default is already written into the stories, the contract or the dictionary; nothing here blocks M1.
+
+| # | Point | Default applied | Impact |
+|---|-------|-----------------|--------|
+| OQ-21 | Which months can be imported, and which is preselected? (`import.month.label`; components.md gives only the default) | Exactly the current Tokyo month and the next month; the next month is preselected from `nextMonthPromptFromDay` on, else the current month (US-E2-01/AC5). Alternative: also earlier months (little use: past days are read-only, BR-27) | Import screen, manual entry |
+| OQ-22 | When the parent marks a day 「給食なし」 on review, what is preselected and what is the required wording (`originalText`, 1–60)? | Reason 「給食なし（午前保育など）」 preselected; the wording is prefilled with the chosen reason's short label and follows it until the parent types (US-E3-02/AC6) | Review screen |
+| OQ-23 | Leaving the review: are edits made so far kept? The design copy promised 「あとで続きから確認できます」, but the contract has no review draft | No draft: 「中断する」 discards edits made since the review opened; the extraction itself stays pending and reopens from 「確認待ちの献立があります」 (US-E3-03/AC5). `review.leave.body` reworded to say so. Alternative: a stored draft (`MenuMonth.reviewDraft`, more contract and migration work) | Review screen, contract |
+| OQ-24 | 「今日は表示しない」 on the next-month card: should it survive a reload? | Yes: new root field `nextMonthCardHiddenOn` (data contract §3.1); the card shows again the next Tokyo day (US-E3-06/AC6). Alternative: memory only (simpler, but the card would come back on every reload, contradicting its label) | Store schema (+1 field), calendar |
+| OQ-25 | US-E10-03/AC1 wanted `exportedAt` inside the export file, which `unknown-field` rejects | Dropped: the export is the store as is; the date is in the file name (data contract §4 `export-roundtrip`; AC1 retired → AC4). Alternative: an optional envelope field that import ignores (schema change, two shapes to validate) | Export/import |
+| OQ-26 | With categories as labels only (dictionary §2), generic menu words that are only a category label no longer match anything: 「くだもの」, 「野菜」, 「きのこ」, 「肉」, 「海そう」 | Leave them unmatched in the MVP (they count towards U like any unknown dish); add generic ingredients (e.g. `ing-fruit` 「くだもの」 with 果物, フルーツ, like `ing-fish` for 「さかな」) only if the PO's real PDF (OQ-04) or the fixtures show such items | Assessment of days with a bare 「くだもの」 item |

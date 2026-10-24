@@ -39,7 +39,7 @@
 | common.next | 次へ | Next | Onboarding step 1 | US-E1-02/AC1 (verbatim) |
 | common.save | 保存 | Save | Profile edit, settings forms | |
 | common.retry | もう一度 | Try again | Import error actions | US-E2-05/AC2 (verbatim) |
-| common.retryIn | もう一度（あと{s}秒） | Try again (in {s} s) | Disabled retry with countdown | US-E2-06/AC6 |
+| common.retryIn | もう一度（あと{s}秒） | Try again (in {s} s) | Disabled retry with countdown | US-E2-06/AC6, AC9 (verbatim pattern) |
 | common.loading | 読み込んでいます… | Loading… | Generic loading (screen reader text for skeletons) | |
 | common.optional | 任意 | optional | Field label suffix | |
 | common.required | 必須 | required | Field label suffix | |
@@ -148,7 +148,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 |---|---|---|---|---|
 | import.title | 給食の献立表を取り込みます | Import the school lunch menu | Screen title | US-E2-01 |
 | import.lead | 園が公開している月間献立表（PDF）のURLを入力するか、PDFファイルを選んでください。 | Enter the address of the monthly menu PDF your school publishes, or choose the PDF file. | Lead | US-E2-01, US-E2-03 |
-| import.month.label | 取り込む月 | Month to import | Month select | US-E3-04/AC1 |
+| import.month.label | 取り込む月 | Month to import | Month select | US-E2-01/AC5, US-E3-04/AC1 |
 | import.url.label | 献立表PDFのURL | Menu PDF address (URL) | Field label | US-E2-01 |
 | import.url.placeholder | https://… | https://… | Placeholder | BR-14 |
 | import.url.hint | 次の月からも同じURLを使えます。 | We'll keep this address for next month. | Hint | US-E2-01/AC4 |
@@ -165,7 +165,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | import.progress | 献立を読み取っています… | Reading the menu… | Progress screen | US-E2-01/AC1 (verbatim) |
 | import.progress.sub | 1分ほどかかることがあります。このままお待ちください。 | This can take about a minute. Please keep this screen open. | Progress sub-line | US-NF-04/AC3 |
 | import.progress.fetching | PDFを取得しています… | Getting the PDF… | Progress step 1 (URL path) | US-E2-01 |
-| import.progress.cancel | 中止する | Stop | Cancel the running import | US-E3-05/AC5 |
+| import.progress.cancel | 中止する | Stop | Cancel the running import | US-E2-04/AC8 |
 | import.sameFile | 同じファイルです | This is the same file | Info banner on review when sha256 matches | US-E2-07/AC1 (verbatim) |
 | import.sameFile.sub | 前に読み取った内容を表示しています（AIは使っていません）。 | Showing the earlier reading (the AI wasn't used again). | Sub-line | US-E2-07/AC1 |
 | import.err.network | URLから取得できませんでした。PDFをアップロードしてください。 | We couldn't get the file from this address. Please upload the PDF. | Error panel | US-E2-02/AC1 (verbatim, AC en) |
@@ -214,10 +214,10 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | review.uncertain.tag | 要確認 | Check | Tag on an uncertain field (with warning icon) | US-E3-01/AC2 |
 | review.reason.lowLegibility | 読み取りにくい文字があります | Some characters were hard to read | Reason line | US-E2-04/AC4 |
 | review.reason.weekdayMismatch | 日付と曜日が合いません（献立表では「{printed}」） | The date and weekday don't match (the sheet says "{printed}") | Reason line | US-E2-05/AC5 |
-| review.reason.duplicateDate | 同じ日付が2回あったため、1つにまとめました | This date appeared twice, so the entries were combined | Reason line | US-E2-05/AC6 |
+| review.reason.duplicateDate | 同じ日付が複数あったため、1つにまとめました | This date appeared more than once, so the entries were combined | Reason line | US-E2-05/AC6 |
 | review.reason.ambiguous | どちらの意味か選んでください | Please choose which one is meant | Reason line + choice | US-E4-01/AC6 |
 | review.reason.other | 内容を確かめてください | Please check this entry | Reason line | |
-| review.accept | このままでよい | It's correct | Per-field action: stores the field as `uncertain-accepted` (same as the confirm dialog, field by field) | US-E3-03/AC2 |
+| review.accept | このままにする | Keep as is | Per-field action: stores the field as `uncertain-accepted` (same as the confirm dialog, field by field) | US-E3-03/AC2, AC4 (verbatim) |
 | review.openPdf | 元のPDFを見る | Open the original PDF | Link/button | US-E3-01/AC3 (verbatim) |
 | review.day.empty | 献立に記載なし | Not on the menu | Weekday row without an entry | US-E3-01/AC1 (verbatim) |
 | review.day.noLunch | 給食なし | No school lunch | Row state label | US-E3-01/AC1 (verbatim) |
@@ -235,30 +235,30 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | review.allergens.notDeclared | 記載なし | Not printed | status not-declared | BR-08 |
 | review.allergens.unreadable | 読み取れませんでした | Couldn't be read | status unreadable | BR-08 |
 | review.allergens.declaredNone | 献立表の記載：「{raw}」 | The sheet says: "{raw}" | status declared-none: quotes the PDF, never a summary | BR-08, US-E2-04/AC3 |
-| review.noLunch.toggle | 給食なしの日にする | Mark as a no-lunch day | Toggle/button on a day | US-E3-02/AC3 |
-| review.noLunch.restore | 給食ありに戻す | Restore school lunch | Undo on a no-lunch day | US-E3-02/AC3 |
-| review.noLunch.reason | 理由 | Reason | Radio-group legend | US-E3-02/AC3 |
-| review.noLunch.bentoDay | お弁当の日（みんなお弁当） | Bento day (everyone brings a bento) | reason bento-day | US-E5-08 |
-| review.noLunch.noLunch | 給食なし（午前保育など） | No lunch (half day etc.) | reason no-lunch | |
-| review.noLunch.closed | お休み（休園など） | School closed | reason closed | |
-| review.noLunch.unknown | その他 | Other | reason unknown | |
-| review.noLunch.text | 献立表での書き方 | Wording on the sheet | originalText field (1–60), e.g. 「行事」 | US-E3-02/AC3 |
-| review.noLunch.hiddenDishes | 料理{n}品は確定するまで元に戻せます | {n, plural, one {# dish is} other {# dishes are}} kept until you confirm, so you can restore them | Note | US-E3-02/AC3 |
+| review.noLunch.toggle | 給食なしの日にする | Mark as a no-lunch day | Toggle/button on a day | US-E3-02/AC3, AC6 (verbatim) |
+| review.noLunch.restore | 給食ありに戻す | Restore school lunch | Undo on a no-lunch day | US-E3-02/AC3 (verbatim) |
+| review.noLunch.reason | 理由 | Reason | Radio-group legend | US-E3-02/AC6 |
+| review.noLunch.bentoDay | お弁当の日（みんなお弁当） | Bento day (everyone brings a bento) | reason bento-day | US-E3-02/AC6 (verbatim), US-E5-08 |
+| review.noLunch.noLunch | 給食なし（午前保育など） | No lunch (half day etc.) | reason no-lunch | US-E3-02/AC3, AC6 (verbatim) |
+| review.noLunch.closed | お休み（休園など） | School closed | reason closed | US-E3-02/AC6 (verbatim) |
+| review.noLunch.unknown | その他 | Other | reason unknown | US-E3-02/AC6 (verbatim) |
+| review.noLunch.text | 献立表での書き方 | Wording on the sheet | originalText field (1–60), e.g. 「行事」 | US-E3-02/AC3, AC6 (verbatim) |
+| review.noLunch.hiddenDishes | この日の料理{n}品は、確定するまで元に戻せます | {n, plural, one {# dish} other {# dishes}} can be restored until you confirm | Note | US-E3-02/AC3 |
 | review.outOfMonth.title | 対象月以外の日付（取り込みません） | Dates outside this month (not imported) | Collapsed list | US-E2-05/AC4 (verbatim) |
-| review.warn.monthMismatch | 献立表の月が、選んだ月（{m}月）と違うようです。 | The sheet seems to be for a different month than {m}. | Warning banner (warnings[]) | data contract §3.3 |
-| review.warn.pagesUnreadable | 読み取れないページがありました。抜けている日がないか確かめてください。 | Some pages couldn't be read. Check that no days are missing. | Warning banner | data contract §3.3 |
-| review.warn.layout | 献立表の形式をうまく読み取れなかった可能性があります。 | The sheet's layout may not have been read correctly. | Warning banner | data contract §3.3 |
-| review.warn.partial | 一部の日だけ読み取れました。足りない日は入力してください。 | Only some days were read. Please add the missing ones. | Warning banner | data contract §3.3 |
+| review.warn.monthMismatch | 献立表の月が、選んだ月（{m}月）と違うようです。 | The sheet seems to be for a different month than {m}. | Warning banner (warnings[]) | US-E3-01/AC4 (verbatim) |
+| review.warn.pagesUnreadable | 読み取れないページがありました。抜けている日がないか確かめてください。 | Some pages couldn't be read. Check that no days are missing. | Warning banner | US-E3-01/AC4 (verbatim) |
+| review.warn.layout | 献立表の形式をうまく読み取れなかった可能性があります。 | The sheet's layout may not have been read correctly. | Warning banner | US-E3-01/AC4 (verbatim) |
+| review.warn.partial | 一部の日だけ読み取れました。足りない日は入力してください。 | Only some days were read. Please add the missing ones. | Warning banner | US-E3-01/AC4 (verbatim) |
 | review.confirm | この内容で確定 | Confirm this menu | Primary (sticky footer) | US-E3-03/AC1 (verbatim) |
 | review.confirm.emptyManual | 少なくとも1日分を入力してください | Enter at least one day | Disabled-confirm hint | US-E3-04/AC2 (verbatim) |
 | review.confirm.hasErrors | 入力の誤りを直すと確定できます | Fix the highlighted entries to confirm | Disabled-confirm hint (dish errors) | US-E3-02/AC4 |
 | review.uncertainDialog.title | 確認が必要な項目が{n}件あります。このまま確定しますか？ | {n, plural, one {# item still needs} other {# items still need}} checking. Confirm anyway? | Dialog | US-E3-03/AC2 (verbatim) |
 | review.uncertainDialog.confirm | 確定する | Confirm | Dialog primary | US-E3-03/AC2 (verbatim) |
 | review.uncertainDialog.back | 戻る | Go back | Dialog secondary | US-E3-03/AC2 (verbatim) |
-| review.leave.title | 確認を中断しますか？ | Stop checking? | Dialog when leaving review | US-E3-05/AC5 |
-| review.leave.body | 確定していない内容は、カレンダーには使われません。あとで続きから確認できます。 | Nothing unconfirmed is used in the calendar. You can continue later. | Dialog body | US-E3-03/AC3, US-E3-05/AC5 |
-| review.leave.confirm | 中断する | Stop | Dialog primary | |
-| review.leave.stay | 確認を続ける | Keep checking | Dialog secondary | |
+| review.leave.title | 確認を中断しますか？ | Stop checking? | Dialog when leaving review | US-E3-03/AC5 (verbatim), US-E3-05/AC5 |
+| review.leave.body | 確定していない内容は、カレンダーには使われません。ここまでの修正は保存されませんが、あとでもう一度確認できます。 | Nothing unconfirmed is used in the calendar. Changes made so far aren't saved, but you can check the menu again later. | Dialog body | US-E3-03/AC5, US-E3-05/AC5 |
+| review.leave.confirm | 中断する | Stop | Dialog primary | US-E3-03/AC5 (verbatim) |
+| review.leave.stay | 確認を続ける | Keep checking | Dialog secondary | US-E3-03/AC5 (verbatim) |
 | review.done | {m}月の献立を確定しました | The {m} menu is confirmed | Toast after a successful write | US-E3-03/AC1 |
 
 ### Ambiguity chooser
@@ -277,7 +277,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | key | ja | en | where | story/AC |
 |---|---|---|---|---|
 | refresh.review.title | 確認が必要な日 | Days to check | List heading | US-E3-05/AC8, AC9, AC11, AC12 (verbatim) |
-| refresh.review.lead | 献立の更新で内容が変わった日です。予定や判定はそのまま残しています。 | The menu update changed these days. Your plans and assessments were kept as they were. | Lead | US-E3-05/AC9, BR-13 |
+| refresh.review.lead | 献立の更新で内容が変わった日です。予定と、手動で変えた判定はそのまま残しています。 | The menu update changed these days. Your plans and the assessments you changed yourself were kept as they were. | Lead | US-E3-05/AC9, BR-13 |
 | refresh.review.item.planned | 手作りお弁当の予定があります | Homemade bento planned | Row reason | US-E3-05/AC9 |
 | refresh.review.item.notConfirmed | 「あとで決める」にしています | Marked "decide later" | Row reason | US-E3-05/AC12 |
 | refresh.review.item.override | 判定を手動で変更しています | You changed the assessment | Row reason | US-E3-05/AC8, AC11 |
@@ -286,8 +286,8 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | refresh.review.open | 開く | Open | Row action (accessible name: refresh.review.openDay) | US-E3-05/AC9 |
 | refresh.review.openDay | {date}を開く | Open {date} | Accessible name | |
 | refresh.review.visited | 確認済み | checked | Visually hidden suffix on a visited row | US-E3-05/AC9 |
-| refresh.review.empty | 確認が必要な日はありません | No days need checking | Empty state | US-E3-05/AC9 |
-| refresh.review.done | カレンダーへ | Go to the calendar | Primary | |
+| refresh.review.empty | 確認が必要な日はありません | No days need checking | Empty state | US-E3-05/AC13 (verbatim) |
+| refresh.review.done | カレンダーへ | Go to the calendar | Primary | US-E3-05/AC13 (verbatim) |
 
 ## 8. Calendar (home)
 
@@ -334,7 +334,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | menuCard.pending | 確認待ちの献立があります | A menu is waiting for your check | Card | US-E3-03/AC3 (verbatim) |
 | menuCard.pending.action | 確認する | Check it | Card action | US-E3-03/AC3 |
 | menuCard.nextMonth | 来月（{m}月）の献立を取り込みましょう | Time to import next month's ({m}) menu | Card, from settings.nextMonthPromptFromDay | US-E3-06/AC2 (verbatim) |
-| menuCard.dismiss | 今日は表示しない | Hide for today | Card dismiss (shows again next day) | US-E3-06/AC2 |
+| menuCard.dismiss | 今日は表示しない | Hide for today | Card dismiss (shows again next day) | US-E3-06/AC6 (verbatim) |
 | upcoming.title | これからの手作りお弁当 | Upcoming homemade bentos | Summary heading | US-E5-01/AC7 |
 | upcoming.empty | 予定している手作りお弁当はありません | No homemade bentos planned | Summary empty | US-E5-01/AC7 (verbatim) |
 | upcoming.tomorrow | 明日 | Tomorrow | Row sub-line | |
@@ -407,7 +407,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | day.reservation.check | 園で予約済み（自分で記録） | Already arranged with the school (my own note) | Checkbox (Should) | US-E5-07/AC3 (verbatim) |
 | day.reservation.checkHint | あなた自身の記録です。アプリから園には何も送りません。 | This is only your own note. Nothing is sent to the school. | Checkbox hint | US-E5-07/AC3, BR-19 |
 | day.outside | この日は献立に記載がありません | This day isn't on the menu | Body for weekends/unlisted dates | US-E5-02/AC2 (verbatim) |
-| day.noMenu | この月の献立はまだ取り込まれていません | This month's menu hasn't been imported yet | Body for weekdays in a month without a menu | US-E3-06/AC1 |
+| day.noMenu | この月の献立はまだ取り込まれていません | This month's menu hasn't been imported yet | Body for weekdays in a month without a menu | US-E5-02/AC4 (verbatim), US-E3-06/AC1 |
 | day.noLunch.body | この日は給食がありません（献立表：「{originalText}」） | No school lunch on this day (the sheet says "{originalText}") | Body on a no-lunch day | US-E5-08/AC2 |
 | day.bentoDay.body | 園の「お弁当の日」です。 | It's the school's bento day. | Body on a bento day | US-E5-08/AC1 |
 | day.snackOnly | おやつだけの日のため、判定と予定はありません。 | Only a snack is listed, so there's no assessment or plan. | Body on a snack-only date | US-E4-01/AC10 |
@@ -425,8 +425,8 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | day.clear.title | {dateNoWd}の手作りお弁当の計画を取り消しますか？ | Remove the homemade bento plan for {dateNoWd}? | Confirm dialog (計画を取り消す) | US-E5-08/AC3, US-E3-05/AC7 |
 | day.clear.body | この日の予定はなくなり、前日のお知らせもなくなります。 | The plan for this day and its day-before reminder are removed. | Dialog body | US-E5-08/AC3, US-E3-05/AC7 |
 | day.clear.confirm | 取り消す | Remove plan | Dialog destructive | |
-| day.saved.bento | {date}を手作りお弁当にしました | {date} is now a homemade bento day | Toast after write succeeds | US-E5-03/AC2 |
-| day.saved.later | {date}を「未定」にしました | {date} is marked TBD | Toast | US-E5-05/AC1 |
+| day.saved.bento | {date}を手作りお弁当にしました | {date} is now a homemade bento day | Toast after write succeeds | US-E5-03/AC2, US-E10-02/AC6 (verbatim pattern) |
+| day.saved.later | {date}を「未定」にしました | {date} is marked as undecided | Toast | US-E5-05/AC1 |
 | day.saved.school | {date}を給食に戻しました | {date} is back to school lunch | Toast | US-E5-06/AC2 |
 | day.saved.cleared | {date}の計画を取り消しました | The plan for {date} was removed | Toast | US-E5-08/AC3 |
 | day.saved.kept | {date}の予定をそのままにしました | Kept the plan for {date} | Toast | US-E3-05/AC7 |
@@ -440,7 +440,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | rec.rank | {n}位 | No. {n} | Rank badge (text, not colour) | US-E6-01/AC1 |
 | rec.reason.liked | 好きな{food}入り | With {food}, a favourite | Reason chip (≤ 2 per card) | US-E6-01/AC2 (verbatim pattern 「好きな鶏肉入り」) |
 | rec.reason.theme | {theme}テーマ | {theme} theme | Reason chip | US-E6-01/AC2 (verbatim pattern 「どうぶつテーマ」) |
-| rec.reason.quick | 20分以内でできます | Ready in 20 minutes or less | Reason chip | BR-09 |
+| rec.reason.quick | 20分以内でできます | Ready in 20 minutes or less | Reason chip | US-E6-01/AC7 (verbatim), BR-09 |
 | rec.allergens | アレルゲン：{list} | Allergens: {list} | Badge line | US-E6-01/AC2 |
 | rec.mayContain | 製品によって含むことがあるもの：{list} | May be in some products: {list} | Badge line | US-E6-02/AC4 |
 | rec.allergensNone | 表示対象のアレルゲン：使用していません（食品の表示をご確認ください） | Labelled allergens: none used (please check the food labels) | Badge line when allergenIds is empty and nothing varies | US-E6-03/AC3 (verbatim) |
@@ -482,10 +482,10 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | recipe.notFound | レシピが見つかりません | Recipe not found | Deep link with unknown id | US-E6-04/AC3 (verbatim) |
 | recipe.notFound.back | カレンダーに戻る | Back to the calendar | Link | US-E6-04/AC3 |
 | recipe.planPick | 日付を選んで計画 | Pick a date to plan | Button in library context | US-E6-05/AC2 (verbatim) |
-| recipe.planPick.title | どの日に作りますか？ | Which day will you make it? | Date-picker sheet title | US-E6-05/AC2 |
-| recipe.planPick.lead | 今日以降の給食の日とお弁当の日から選べます。 | Choose a school-lunch day or bento day from today on. | Lead | BR-25, BR-27 |
-| recipe.planPick.empty | 計画できる日がありません。献立を取り込むと選べるようになります。 | There are no days to plan. Import a menu to choose one. | Empty state | US-E3-06 |
-| recipe.planPick.option | {date}（{decision}） | {date} ({decision}) | Radio option | |
+| recipe.planPick.title | どの日に作りますか？ | Which day will you make it? | Date-picker sheet title | US-E6-05/AC3 (verbatim) |
+| recipe.planPick.lead | 今日以降の給食の日とお弁当の日から選べます。 | Choose a school-lunch day or bento day from today on. | Lead | US-E6-05/AC3, BR-25, BR-27 |
+| recipe.planPick.empty | 計画できる日がありません。献立を取り込むと選べるようになります。 | There are no days to plan. Import a menu to choose one. | Empty state | US-E6-05/AC4 (verbatim) |
+| recipe.planPick.option | {date}（{decision}） | {date} ({decision}) | Radio option | US-E6-05/AC3 |
 | library.title | レシピ一覧 | All recipes | Screen title | US-E6-05 (verbatim 「レシピ一覧」 in US-E6-02/AC1) |
 | library.lead | 全{n}品。アレルギーや食事の制限に合わないレシピは、理由とともに最後に並べています。 | {n} recipes. Those that don't fit the allergies or restrictions are listed last, with the reason. | Lead | US-E6-05/AC1 |
 | library.conflict.allergen | {allergen}を含む | Contains {allergen} | Greyed row reason | US-E6-02/AC1 (verbatim pattern 「卵を含む」) |
@@ -501,7 +501,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | key | ja | en | where | story/AC |
 |---|---|---|---|---|
 | reminder.region | お知らせ | Reminders | Landmark/region name of the banner stack | US-E7-01 |
-| reminder.more | ほかに{n}件のお知らせ | {n, plural, one {# more reminder} other {# more reminders}} | Disclosure under the first banner | US-E7-05 |
+| reminder.more | ほかに{n}件のお知らせ | {n, plural, one {# more reminder} other {# more reminders}} | Disclosure under the first banner | US-E7-05/AC5 (verbatim pattern) |
 | reminder.dismiss | 閉じる | Dismiss | Banner close (accessible name reminder.dismissName) | US-E7-05/AC1 |
 | reminder.dismissName | このお知らせを閉じる | Dismiss this reminder | Accessible name | |
 | reminder.dayBefore | 明日は手作りお弁当の日！レシピを確認しましょう。 | Homemade bento tomorrow! Take a look at the recipe. | Day-before banner title | US-E7-02/AC1, US-E0-01/AC1 (verbatim) |
@@ -523,9 +523,9 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | today.notConfirmed | 今日の予定は未定です | Today's plan isn't decided yet | Today card | US-E7-03/AC1 (verbatim) |
 | today.noLunch | 今日は給食がありません | No school lunch today | Today card | US-E7-03/AC1 (verbatim) |
 | today.next | 次の登園日：{date}{decision} | Next school day: {date} {decision} | Weekend/outside the menu (decision = 給食 / 未定 / 手作りお弁当：{recipe}) | US-E7-03/AC2 (verbatim pattern 「次の登園日：11月9日（月）給食」) |
-| today.nextUnknown | 次の登園日は、献立を取り込むと表示されます | Your next school day appears once a menu is imported | Today card with no upcoming school day | US-E7-03/AC2 |
+| today.nextUnknown | 次の登園日は、献立を取り込むと表示されます | Your next school day appears once a menu is imported | Today card with no upcoming school day | US-E7-03/AC4 (verbatim) |
 | today.cta.recipe | レシピを見る | View recipe | Today card action | US-E7-03/AC1 (verbatim) |
-| today.cta.plan | 予定を決める | Decide the plan | Today card action when not-confirmed | US-E7-03/AC1 |
+| today.cta.plan | 予定を決める | Decide the plan | Today card action when not-confirmed | US-E7-03/AC5 (verbatim) |
 
 ## 14. Settings
 
@@ -562,8 +562,8 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | settings.menu.urlNone | まだ保存していません | None saved yet | Empty value | |
 | settings.menu.import | 献立を取り込む | Import the menu | Button | US-E2-01/AC4 (verbatim) |
 | settings.menu.review | 献立を確認・修正 | Check or fix the menu | Button (opens review of the shown month; re-confirm = refresh) | US-E3-05 |
-| settings.menu.promptDay | 来月の献立のお知らせ | Next month's menu reminder | Select label (1–28) | US-E3-06/AC2 (OQ-15) |
-| settings.menu.promptDay.value | 毎月{n}日から | From the {n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} of each month | Option label | US-E3-06/AC2 |
+| settings.menu.promptDay | 来月の献立のお知らせ | Next month's menu reminder | Select label (1–28) | US-E3-06/AC7 (verbatim), OQ-15 |
+| settings.menu.promptDay.value | 毎月{n}日から | From the {n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} of each month | Option label | US-E3-06/AC7 (verbatim pattern) |
 | settings.profile | プロフィール | Profile | Section | US-E1-05 |
 | settings.profile.edit | プロフィールを編集 | Edit profile | Button | US-E1-05 |
 | settings.profile.delete | プロフィールを削除 | Delete profile | Destructive text button | US-E1-06/AC1 (verbatim) |
@@ -595,13 +595,13 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | key | ja | en | where | story/AC |
 |---|---|---|---|---|
 | share.sheet.title | 今週の予定を共有 | Share this week's plan | Share sheet title | US-E9-01 |
-| share.sheet.preview | 送る内容 | What will be sent | Preview label | US-E9-02/AC1 |
+| share.sheet.preview | 送る内容 | What will be sent | Preview label | US-E9-01/AC4, US-E9-02/AC1 |
 | share.sheet.note | 共有した時点の予定です。自動では同期されません。 | This is the plan as of now. It doesn't update automatically. | Note | US-E9-02/AC2 (verbatim) |
 | share.sheet.privacy | お子さまのプロフィールは含まれません。 | Your child's profile isn't included. | Note | US-E9-02/AC1, BR-21 |
 | share.sheet.share | 共有する | Share | Primary (navigator.share) | US-E9-01/AC2 |
 | share.sheet.copy | コピーする | Copy | Secondary (clipboard) | US-E9-01/AC2 |
 | share.copied | コピーしました | Copied | Toast | US-E9-01/AC2 (verbatim) |
-| share.copyFailed | コピーできませんでした。文章を長押しして選び、コピーしてください。 | Couldn't copy. Select the text and copy it yourself. | Inline message; text gets selected | US-E9-01/AC2 |
+| share.copyFailed | コピーできませんでした。下の文章を選んでコピーしてください。 | Couldn't copy. Please select the text below and copy it. | Inline message; text gets selected | US-E9-01/AC4 (verbatim) |
 | share.text.header | 【BentoMinder】{range}のお弁当予定 | [BentoMinder] Bento plan for {range} | Share text line 1 | US-E9-01/AC1 (exact) |
 | share.text.bento | {date}手作りお弁当：{recipe} | {date} Homemade bento: {recipe} | Share text line | US-E9-01/AC1 (exact) |
 | share.text.notConfirmed | {date}未定 | {date} Not decided | Share text line | US-E9-01/AC1 (exact) |
@@ -625,16 +625,16 @@ Empty week (US-E9-01/AC3): header line, then 「今週は手作りお弁当の�
 
 | key | ja | en | where | story/AC |
 |---|---|---|---|---|
-| data.export | データを書き出す | Export data | Button | US-E10-03/AC1 (verbatim) |
-| data.export.hint | すべての記録を1つのファイル（JSON）に保存します。 | Saves all your records in one file (JSON). | Hint | US-E10-03/AC1 |
+| data.export | データを書き出す | Export data | Button | US-E10-03/AC4 (verbatim) |
+| data.export.hint | すべての記録を1つのファイル（JSON）に保存します。 | Saves all your records in one file (JSON). | Hint | US-E10-03/AC4 |
 | data.export.empty | 書き出すデータがありません | There's no data to export | Disabled-button hint | US-E10-03/AC2 (verbatim) |
 | data.export.done | 書き出しました | Exported | Toast | |
 | data.import | データを読み込む | Import data | Button (Could) | US-E10-03/AC3 (verbatim) |
 | data.import.title | 今のデータを置き換えますか？ | Replace your current data? | Confirm dialog | US-E10-03/AC3 |
 | data.import.body | 選んだファイルの内容で、この端末のデータがすべて置き換わります。 | All data on this device will be replaced by the file's contents. | Dialog body | US-E10-03/AC3 |
 | data.import.confirm | 置き換える | Replace | Dialog destructive | |
-| data.import.invalid | このファイルは読み込めません。BentoMinderから書き出したファイルを選んでください。 | This file can't be imported. Choose a file exported from BentoMinder. | Error | US-E10-03/AC3 |
-| data.import.newer | このファイルは新しいバージョンのアプリで作られています。アプリを更新してください。 | This file was made by a newer version of the app. Please update the app. | Error | US-E10-03/AC3 |
+| data.import.invalid | このファイルは読み込めません。BentoMinderから書き出したファイルを選んでください。 | This file can't be imported. Choose a file exported from BentoMinder. | Error | US-E10-03/AC5 (verbatim) |
+| data.import.newer | このファイルは新しいバージョンのアプリで作られています。アプリを更新してください。 | This file was made by a newer version of the app. Please update the app. | Error | US-E10-03/AC6 (verbatim) |
 | data.deleteAll | すべてのデータを削除 | Delete all data | Destructive text button | US-E10-04/AC1 (verbatim) |
 | data.deleteAll.title | すべてのデータを削除しますか？ | Delete all data? | Dialog title | US-E10-04/AC1 |
 | data.deleteAll.body | プロフィール、献立、予定、お知らせの記録、同意、言語の設定がこの端末から消え、元に戻せません。必要なら先に「データを書き出す」で保存してください。 | Your profile, menus, plans, reminder history, consent and language setting are removed from this device and can't be recovered. Export your data first if you need it. | Dialog body | US-E10-04/AC1 |
@@ -648,15 +648,15 @@ Empty week (US-E9-01/AC3): header line, then 「今週は手作りお弁当の�
 | storage.corrupt.body | どうするか選ぶまで、データには何も書き込みません。 | Nothing will be written until you choose what to do. | Body | US-E10-02/AC4 |
 | storage.corrupt.export | データを書き出す（そのまま） | Export the data as it is | Recovery action | US-E10-02/AC4 (verbatim) |
 | storage.corrupt.reset | 初期化する | Start over | Recovery action (destructive, confirm dialog) | US-E10-02/AC4 (verbatim) |
-| storage.corrupt.resetTitle | データを初期化しますか？ | Start over with empty data? | Dialog | US-E10-02/AC4 |
-| storage.corrupt.resetBody | 読み込めなかったデータは消え、はじめての設定から始まります。 | The unreadable data is removed and setup starts again. | Dialog body | US-E10-02/AC4 |
+| storage.corrupt.resetTitle | データを初期化しますか？ | Start over with empty data? | Dialog | US-E10-02/AC7 (verbatim) |
+| storage.corrupt.resetBody | 読み込めなかったデータは消え、はじめての設定から始まります。 | The unreadable data is removed and setup starts again. | Dialog body | US-E10-02/AC7 |
 | storage.migrated | データを新しい形式に更新しました（元のデータは控えとして残しています）。 | Your data was updated to the new format (a backup copy is kept). | One-time info toast | US-E10-02/AC2 |
 
 ## 17. Toasts and live messages (generic)
 
 | key | ja | en | where | story/AC |
 |---|---|---|---|---|
-| toast.saveFailed | 保存できませんでした。もう一度お試しください。 | Couldn't save. Please try again. | Toast after a failed write (never shows a "saved" toast) | US-E10-02/AC5, US-E10-05/AC1 |
+| toast.saveFailed | 保存できませんでした。もう一度お試しください。 | Couldn't save. Please try again. | Toast after a failed write (never shows a "saved" toast) | US-E10-02/AC5, AC6 (verbatim), US-E10-05/AC1 |
 | live.monthChanged | {month}を表示しています | Showing {month} | Polite live region after month navigation | US-E5-01/AC5 |
 | live.recCount | おすすめのレシピが{n}件あります | {n, plural, one {# suggested recipe} other {# suggested recipes}} | Polite live region on recommendations | US-E6-01 |
 | live.formErrors | 入力内容に{n}件の誤りがあります | {n, plural, one {# entry needs fixing} other {# entries need fixing}} | Assertive, on submit with errors | US-E1-02/AC4 |
@@ -717,3 +717,5 @@ Empty week (US-E9-01/AC3): header line, then 「今週は手作りお弁当の�
 
 All rows without a story marker above are designer copy. The ones that are **load-bearing for behaviour** (tests will likely assert them by key) and that no AC defines:
 `import.month.label` (how the target month is chosen), `import.progress.cancel`, `review.accept`, all `review.reason.*` except the reasons themselves, `review.warn.*` (the 4 `warnings[]` values), `review.noLunch.*` reasons and `review.noLunch.text`, `review.leave.*`, `amb.unsure`, `refresh.review.*` (except the title), `menuCard.dismiss`, `upcoming.notConfirmed`, `upcoming.conflict`, `reminder.weekly.notConfirmed`, `reminder.missedAt`, `reminder.more`, `today.nextUnknown`, `today.cta.plan`, `day.snackOnly`, `day.noMenu`, `day.past`, `day.clear.*`, `day.conflict.kept`, `day.saved.*`, `override.note`, `assess.likely`, `assess.mixedOne`, `assess.notAssessed`, `assess.noLunch`, `assess.override.calc`, `rec.reason.quick`, `rec.mayContain`, `recipe.planPick.*`, `library.conflict.diet`, `settings.menu.promptDay*`, `share.sheet.*` (except the note), `share.copyFailed`, `data.import.*` messages, `storage.corrupt.title/body/reset*`, `toast.saveFailed`, `common.retryIn`.
+
+**BA review (M1 prep, 2026-10-24).** Every key above was checked for natural ja/en and against `data/banned-phrases.json` (0 matches). Fixed, with the reason: `review.accept` (「このままにする」 / "Keep as is": the parent keeps the reading without claiming it is correct), `review.reason.duplicateDate` (a date can appear more than twice), `review.noLunch.hiddenDishes` (en "is … them" disagreed in number; ja names the day), `review.leave.body` (the review keeps no draft, so it no longer promises to continue where the parent left off; OQ-23), `refresh.review.lead` (assessments are recalculated on refresh; only plans and manual overrides are kept, BR-13), `day.saved.later` (en "TBD" → "undecided", as elsewhere), `share.copyFailed` (no "long-press" on desktop). The keys that carry a rule are now quoted by an AC (story/AC column updated): US-E2-01/AC5, US-E2-04/AC8, US-E2-06/AC9, US-E3-01/AC4, US-E3-02/AC3, AC6, US-E3-03/AC4, AC5, US-E3-05/AC13, US-E3-06/AC6, AC7, US-E5-02/AC4, US-E6-01/AC7, US-E6-05/AC3, AC4, US-E7-03/AC4, AC5, US-E7-05/AC5, US-E9-01/AC4, US-E10-02/AC6, AC7, US-E10-03/AC5, AC6. The rest are presentational and need no AC: `review.reason.*` texts, `amb.unsure` (rule already in US-E4-01/AC13), `refresh.review.item.*`, `refresh.review.open*`, `refresh.review.visited`, `upcoming.*`, `reminder.weekly.notConfirmed`, `reminder.missedAt` (rule in US-E7-05/AC2), `day.snackOnly`, `day.past`, `day.clear.*`, `day.conflict.kept`, `day.saved.*` other than `bento`, `override.note`, the `assess.*` explanations (keys fixed by US-E4-02), `rec.mayContain`, `library.conflict.diet`, `share.sheet.*`, `data.import.title/body/confirm`, `storage.corrupt.title/body/reset`.

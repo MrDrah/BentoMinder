@@ -1,0 +1,398 @@
+{
+  "synthetic": true,
+  "recordedBy": "hand",
+  "fixtureId": "fixture-menu-2027-01-twocol",
+  "scenario": "partial-extraction",
+  "description": "The model reads only the left block (weeks 2 and 3) and says so.",
+  "model": "gemini-3.8-flash",
+  "promptVersion": 1,
+  "response": {
+    "httpStatus": 200,
+    "modelOutput": {
+      "contract": "extracted-menu/1",
+      "targetMonth": "2027-01",
+      "detectedMonth": "2027-01",
+      "days": [
+        {
+          "date": "2027-01-12",
+          "printedDateText": "12",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "かき揚げうどん",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-13",
+          "printedDateText": "13",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "ハンバーグ",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "にんじんのグラッセ",
+              "kind": "side",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "パン",
+              "kind": "staple",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "野菜スープ",
+              "kind": "soup",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-14",
+          "printedDateText": "14",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "親子丼",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "すまし汁",
+              "kind": "soup",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-15",
+          "printedDateText": "15",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "白身魚のフライ",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "ごはん",
+              "kind": "staple",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "きんぴらごぼう",
+              "kind": "side",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-18",
+          "printedDateText": "18",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "ちゃんぽん",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "りんご",
+              "kind": "dessert",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-19",
+          "printedDateText": "19",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "鶏の照り焼き",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "ごはん",
+              "kind": "staple",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "かぼちゃの煮物",
+              "kind": "side",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "みそ汁",
+              "kind": "soup",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "りんご",
+              "kind": "dessert",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-20",
+          "printedDateText": "20",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "スパゲッティミートソース",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "コールスロー",
+              "kind": "side",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "りんご",
+              "kind": "dessert",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-21",
+          "printedDateText": "21",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "ちらしずし",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "すまし汁",
+              "kind": "soup",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "りんご",
+              "kind": "dessert",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        },
+        {
+          "date": "2027-01-22",
+          "printedDateText": "22",
+          "printedWeekday": null,
+          "items": [
+            {
+              "text": "肉じゃが",
+              "kind": "main",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "ごはん",
+              "kind": "staple",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "みそ汁",
+              "kind": "soup",
+              "verification": {
+                "status": "ok"
+              }
+            },
+            {
+              "text": "りんご",
+              "kind": "dessert",
+              "verification": {
+                "status": "ok"
+              }
+            }
+          ],
+          "ingredientsStatus": "not-listed",
+          "allergenDeclaration": {
+            "status": "not-declared",
+            "allergenIds": [],
+            "rawText": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          "notes": [],
+          "verification": {
+            "status": "ok"
+          }
+        }
+      ],
+      "noLunchDays": [],
+      "outOfMonthDays": [],
+      "warnings": [
+        "partial-extraction"
+      ]
+    }
+  },
+  "expect": {
+    "strictSchemaValid": true,
+    "extractResult": "ok",
+    "afterValidation": "review shows the partial-extraction warning; 1-07, 1-08 and 1-25…1-29 missing"
+  }
+}

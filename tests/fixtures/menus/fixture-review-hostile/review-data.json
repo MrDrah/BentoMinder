@@ -1,0 +1,373 @@
+{
+  "synthetic": true,
+  "fixtureId": "fixture-review-hostile",
+  "fixture": "FX-08",
+  "hardFields": [],
+  "menu": {
+    "id": "ext-2026-11-a0e2cd02",
+    "contract": "extracted-menu/1",
+    "targetMonth": "2026-11",
+    "detectedMonth": "2026-11",
+    "source": {
+      "kind": "fixture",
+      "filename": "menu.pdf",
+      "sha256": "a0e2cd02311f47b985aab60381bf9279b527254ccbaa04b86d37638e23b51906",
+      "byteSize": 1,
+      "fetchedAt": "2026-10-28T10:00:00+09:00",
+      "model": "gemini-3.8-flash",
+      "promptVersion": 1
+    },
+    "days": [
+      {
+        "date": "2026-11-02",
+        "printedDateText": "2日（月）",
+        "printedWeekday": "月",
+        "items": [
+          {
+            "text": "<script>alert(1)</script>",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "\"><img src=x onerror=alert(1)>",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "not-declared",
+          "allergenIds": [],
+          "rawText": null,
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2026-11-04",
+        "printedDateText": "4日（水）",
+        "printedWeekday": "水",
+        "items": [
+          {
+            "text": "🍙🍱",
+            "kind": "staple",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "とってもながいなまえのとくべつなおりょうりですよとってもながいなまえのとくべつな",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "not-declared",
+          "allergenIds": [],
+          "rawText": null,
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2026-11-05",
+        "printedDateText": "5日（木）",
+        "printedWeekday": "木",
+        "items": [
+          {
+            "text": "から​あげ",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "‮あいう‬",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ｶﾚｰﾗｲｽ",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "not-declared",
+          "allergenIds": [],
+          "rawText": null,
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2026-11-06",
+        "printedDateText": "6日（金）",
+        "printedWeekday": "金",
+        "items": [
+          {
+            "text": "ごはん",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "みそ汁",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "からあげ",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "たまごやき",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "サラダ",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "ゼリー",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "りんご",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "みかん",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "バナナ",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "牛乳",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "のり",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "つけもの",
+            "kind": "unknown",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "not-listed",
+        "allergenDeclaration": {
+          "status": "not-declared",
+          "allergenIds": [],
+          "rawText": null,
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [],
+        "verification": {
+          "status": "ok"
+        }
+      },
+      {
+        "date": "2026-11-09",
+        "printedDateText": "9日（月）",
+        "printedWeekday": "月",
+        "items": [
+          {
+            "text": "{{constructor.constructor(\"x\")()}}",
+            "kind": "main",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "${alert(1)}",
+            "kind": "side",
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "&lt;b&gt;太字&lt;/b&gt;",
+            "kind": "soup",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ],
+        "ingredientsStatus": "listed",
+        "allergenDeclaration": {
+          "status": "not-declared",
+          "allergenIds": [],
+          "rawText": null,
+          "verification": {
+            "status": "ok"
+          }
+        },
+        "notes": [
+          "<a href=\"javascript:alert(1)\">リンク</a>"
+        ],
+        "verification": {
+          "status": "ok"
+        },
+        "ingredients": [
+          {
+            "text": "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほ",
+            "foodGroup": null,
+            "verification": {
+              "status": "ok"
+            }
+          },
+          {
+            "text": "<b>bold</b>",
+            "foodGroup": "red",
+            "verification": {
+              "status": "ok"
+            }
+          }
+        ]
+      }
+    ],
+    "noLunchDays": [
+      {
+        "date": "2026-11-20",
+        "reason": "unknown",
+        "originalText": "<iframe src=\"https://example.test\"></iframe>",
+        "verification": {
+          "status": "ok"
+        }
+      }
+    ],
+    "outOfMonthDays": [],
+    "warnings": [],
+    "extractedAt": "2026-10-28T10:00:14+09:00"
+  },
+  "expectOnReview": "every string is rendered literally as text: no script runs, no element or attribute is injected, no request is made to example.test; layout does not break (long names wrap or truncate with the full text available)",
+  "typedInputCases": [
+    {
+      "id": "TI-01",
+      "field": "dish name",
+      "input": "とってもながいなまえのとくべつなおりょうりですよとってもながいなまえのとくべつな",
+      "codePoints": 40,
+      "expected": "accepted (US-E3-02/AC4)"
+    },
+    {
+      "id": "TI-02",
+      "field": "dish name",
+      "input": "とってもながいなまえのとくべつなおりょうりですよとってもながいなまえのとくべつなす",
+      "codePoints": 41,
+      "expected": "「料理名は1〜40文字で入力してください」 shown; confirm disabled (US-E3-02/AC4)"
+    },
+    {
+      "id": "TI-03",
+      "field": "dish name",
+      "input": "   ",
+      "codePoints": 3,
+      "expected": "same error as TI-02 (only whitespace, US-E3-02/AC4)"
+    },
+    {
+      "id": "TI-04",
+      "field": "dish name",
+      "input": "　　",
+      "codePoints": 2,
+      "expected": "same error as TI-02 (only ideographic spaces)"
+    },
+    {
+      "id": "TI-05",
+      "field": "dish name",
+      "input": "  からあげ  ",
+      "codePoints": 8,
+      "expected": "accepted and stored trimmed as 「からあげ」 (contract string-untrimmed)"
+    },
+    {
+      "id": "TI-06",
+      "field": "dish name",
+      "input": "<script>alert(1)</script>",
+      "codePoints": 25,
+      "expected": "accepted and shown literally; no script runs"
+    },
+    {
+      "id": "TI-07",
+      "field": "dish name",
+      "input": "🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙",
+      "codePoints": 40,
+      "expected": "accepted (40 code points, 80 UTF-16 units)"
+    },
+    {
+      "id": "TI-08",
+      "field": "dish name",
+      "input": "🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙🍙",
+      "codePoints": 41,
+      "expected": "rejected as TI-02"
+    },
+    {
+      "id": "TI-09",
+      "field": "add dish",
+      "input": "day 2026-11-06 (12 items)",
+      "expected": "「料理を追加」 disabled with the hint 「1日12品まで」 (US-E3-02/AC5)"
+    }
+  ]
+}

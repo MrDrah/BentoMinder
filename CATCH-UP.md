@@ -28,8 +28,10 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 | H1 | 73 stories / 287 ACs, data contract v1, dictionary, ADR 001–005, QA strategy + 4 oracles; ~30 rulings in PLAN §7 | `docs/ba/`, `docs/dev/`, `tests/plan/`, `tests/oracle/` |
 
 ### In progress 🔄
-Nothing running. **M0 done** and merged locally (merge commit e1ad2fc); `gate --stage dev` green on main. Uncommitted: `.gitattributes`, plan/catch-up/lessons/event-log updates (ask the PO).
-**Open for the PO:** the env example file (variables listed in `docs/dev/architecture.md` §11.3) is blocked for agents by the secrets deny rule (FL-12).
+**M1 prep** (docs/data, shared checkout, baselines `m1-prep-ba` and `m1-prep-qa`; check with `diff-guard --task <name>`):
+- BA: AC amendments, export `exportedAt` decision, rule ids into the contract, approved recipe hosts, dictionary category forms, the ~60 undefined strings.
+- QA: synthetic menu fixtures + PDFs rendered with system Japanese fonts (`tests/fixtures/menus/`, `tests/fixtures/pdf/`).
+If the session ends here: diff-guard each task, re-dispatch with "continue; check saved files first".
 
 ### Next 📋
 1. Commit the M0 integration fixes (PO).

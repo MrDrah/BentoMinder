@@ -5387,6 +5387,22 @@
       ],
       "candidatesNote": "ing-bread, ing-bread-crumbs (パン粉)",
       "resolution": "Longest match only: 「パン粉」 → bread crumbs; 「フライパン」 is ignored (not a food); else ing-bread. No question needed."
+    },
+    {
+      "id": "amb-imo",
+      "forms": [
+        "いも",
+        "芋",
+        "おいも"
+      ],
+      "candidateIds": [
+        "ing-potato",
+        "ing-sweet-potato",
+        "ing-taro",
+        "ing-yam"
+      ],
+      "candidatesNote": "ing-potato, ing-sweet-potato, ing-taro, ing-yam",
+      "resolution": "Longest match first: the ingredient forms in §4.1 (「じゃがいも」「じゃが芋」「さつまいも」「さつま芋」「さといも」「里芋」「やまいも」「山芋」「長いも」…) → that ingredient. Standalone 「いも」「芋」「おいも」 (e.g. 「おいものにもの」) → ask. (M1 prep: replaces the category-level form 「いも」 → `cat-potato`.)"
     }
   ]
 }

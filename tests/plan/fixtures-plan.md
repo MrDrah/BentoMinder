@@ -1,10 +1,10 @@
 # Fixtures plan — synthetic Japanese kindergarten menus (built in M1)
 
-Owner: QA (with BA for answer keys) · 2026-10-24 · Status: H1 plan · Contract: `docs/ba/data-contract.md` §3.3–§3.4 and §5
+Owner: QA (with BA for answer keys) · 2026-10-24 · Status: menu fixtures FX-01…FX-08 **built** (M1 prep, §7); BA answer-key review pending; §3–§5 partly built · Contract: `docs/ba/data-contract.md` §3.3–§3.4 and §5
 
 ## 1. Rules for every fixture
 - **Synthetic.** Every fixture is invented for testing. No real school's menu, name, logo, address or layout is copied. The PDF footer prints 「テスト用の架空の献立表です。実在の園とは関係ありません。」 and the school name is 「テストようちえん（架空）」. Every JSON file carries `"synthetic": true`. The PO's real menu PDF (OQ-04) is used only locally for the live eval and is never committed.
-- **One source, generated outputs.** Each fixture has a hand-written answer key `tests/fixtures/menus/<id>/answer-key.json` (an `ExtractedMenu` as a perfect reader would produce it, plus `hardFields[]` listing paths that must be `uncertain`). The PDF is **generated** from a layout template (`layout.html`) by a script (`npm run fixtures:menus`, Playwright `page.pdf()` with a bundled OFL-licensed Japanese font such as Noto Sans JP). PDFs are listed as `generated` in `quality-gate.json` and never edited by hand.
+- **One source, generated outputs.** Each fixture has a hand-written answer key `tests/fixtures/menus/<id>/answer-key.json` (an `ExtractedMenu` as a perfect reader would produce it, plus `hardFields[]` listing paths that must be `uncertain`). The PDF is **generated** from a layout template (`layout.html`) by a script (`node tests/fixtures/pdf/generate-menus.mjs`, alias `npm run fixtures:menus` requested; Playwright Chromium `page.pdf()`, A4, using only Japanese fonts installed with Windows: "Yu Gothic", "Meiryo", "BIZ UDGothic"; nothing downloaded; see §7). PDFs are listed as `generated` in `quality-gate.json` and never edited by hand.
 - **Recorded model output.** `recorded/<model>-<n>.json` holds what the extractor returned when run live (M5) or, before M5, a hand-written stand-in marked `"recordedBy": "hand"`. Gate tests (unit, contract, e2e) use only these files; the live eval (opt-in) compares new live output with the answer key.
 - **Answer-key review.** The BA reviews each answer key against its PDF (dates, weekdays, dish texts, reasons) before the fixture is used; the review is one line in the fixture's `README.md` (who, date).
 - **Calendar facts** used below were checked by weekday arithmetic: 2026-11-01 Sun; 2026-12-01 Tue; 2027-01-01 Fri, 2027-01-11 Mon (成人の日); 2027-02-01 Mon, 02-11 Thu (建国記念の日), 02-23 Tue (天皇誕生日); 2027-03-01 Mon; 2028-02-01 Tue, 02-11 Fri, 02-23 Wed, 02-29 Tue. Reiwa: 2026 = 令和8年, 2027 = 令和9年, 2028 = 令和10年.
@@ -57,7 +57,7 @@ Tests: grid layout date mapping, several no-lunch reasons in one month, event no
 | 12-11 金 | 「お弁当の日」 | `noLunchDays` `bento-day` |
 | 12-18 金 | lunch + note 「クリスマス会」 | `days[].notes = ["クリスマス会"]` |
 | 12-23 水 | 「終業式・午前保育（給食なし）」 | `noLunchDays` `no-lunch` |
-| 12-24 … 1-7 | band 「冬休み（12月24日〜1月7日）」 | `noLunchDays` `closed` for 12-24, 12-25, 12-28, 12-29, 12-30, 12-31 (in-month weekdays; see FX-Q1); nothing for January |
+| 12-24 … 1-6 | band 「冬休み（12月24日〜1月6日）」 (built with 1月6日 so it agrees with FX-05's 1-07 始業式) | `noLunchDays` `closed` for 12-24, 12-25, 12-28, 12-29, 12-30, 12-31 (in-month weekdays; see FX-Q1); January part → `outOfMonthDays` `no-lunch-day` `closed` for 2027-01-01, 01-04, 01-05, 01-06 (contract H1, FX-Q3, US-E2-05/AC4) |
 
 ### FX-03 `fixture-menu-2027-02-reiwa` — 令和 header, 28 days
 Layout: header only 「令和9年2月 こんだてひょう」 (no Gregorian year), dates printed as 「1（月）」 without month; holidays printed as rows with 「おやすみ」.
@@ -73,7 +73,7 @@ Tests: 2-29 mapping (US-E5-01/AC6), day-before reminders on 2-28 and 2-29 (US-E7
 Layout: landscape page, two week-blocks side by side (left: weeks of 1-12 and 1-18; right: weeks of 1-25 and the start week), dates printed only as day numbers in a narrow left column, a merged cell 「今週のデザート：りんご」 spanning the five rows of the week of 1-18, a merged blank band across 1-11 (成人の日), 1-07 「始業式・午前保育（給食なし）」, 1-08 金 first lunch.
 Tests: date mapping when reading order is not row order, merged-cell handling, `layout-unrecognised` / `partial-extraction` warnings in recorded failure variants, US-E7-02/AC3 (1-29 金 planned).
 Expected outline: lunch days 1-08, 1-12…1-15, 1-18…1-22, 1-25…1-29; `noLunchDays` = [1-07 `no-lunch`]; 1-11 absent; the merged dessert appears as an item 「りんご」 (kind `dessert`) on each of 1-18…1-22 (see FX-Q2 for its verification status).
-Variant: **FX-05b** recorded output that shifts the right-hand block by one week (a realistic misreading) → used only by the live-eval scorer to prove it detects wrong date mapping (score < 100%).
+Variant: **FX-05b** recorded output that misreads the side-by-side blocks (built as: the weeks of 1-18 and 1-25 swapped, 10 of 15 lunch days wrong; schema-valid) → used only by the live-eval scorer to prove it detects wrong date mapping (score < 100%).
 
 ### FX-06 `fixture-menu-2026-11-scan` — scanned-image style
 The FX-01 layout rendered to an image (≈150 dpi), rotated 1.5°, with light noise and one column at reduced contrast, embedded as the only content of the PDF (no text layer).
@@ -133,4 +133,46 @@ The proxy repeats the check server-side (ADR 002 SSRF guard): a contract test po
 ## 6. Answer-key conventions to confirm with the BA (not blocking H1)
 - **FX-Q1** A printed range band (「冬休み 12月24日〜1月7日」) → which in-month dates become `noLunchDays` (weekdays only, or every date)? Proposed: weekdays only; weekends listed only if printed as their own rows (US-E3-01/AC1).
 - **FX-Q2** A merged cell spanning several days → the item on each spanned day, with `ok` or `uncertain/other`? Proposed: on each day; both statuses accepted by the scorer.
-- **FX-Q3** Contract gap: `outOfMonthDays` is `ExtractedDay[]` (items 1–12), so an out-of-month **no-lunch** entry (e.g. the January part of the band) cannot be represented. Proposed: such entries are dropped and counted in a `warnings` entry; or add `outOfMonthNoLunchDays`.
+- **FX-Q4** (new, M1 prep) Grid layout (FX-02): the weekday is printed only as the column header, not next to the day number. Built as `printedDateText` "1" and `printedWeekday` = the column header. Alternative: `printedWeekday` null.
+- **FX-Q3** (resolved at H1: contract `OutOfMonthEntry` holds both kinds) Contract gap: `outOfMonthDays` is `ExtractedDay[]` (items 1–12), so an out-of-month **no-lunch** entry (e.g. the January part of the band) cannot be represented. Proposed: such entries are dropped and counted in a `warnings` entry; or add `outOfMonthNoLunchDays`.
+
+## 7. Built (M1 prep, 2026-10-24)
+
+### 7.1 Status per fixture
+| Fixture | Folder (`tests/fixtures/menus/…`) | days / no-lunch / out-of-month | Recorded stand-ins | menu.pdf | BA review |
+|---------|------------------------------------|-------------------------------|--------------------|----------|-----------|
+| FX-01 | `fixture-menu-2026-11/` | 18 / 2 / 0; hardFields 1 | `hand-1` (RX-ok), `hand-malformed`, `hand-schema-invalid`, `hand-out-of-month`, `hand-duplicate`, `hand-not-a-menu`, `hand-rate-limited` (Retry-After 60), `hand-rate-limited-no-retry-after` | 87 KB, 1 page | pending |
+| FX-01b | `fixture-menu-2026-11-v2/` | 18 / 2 / 0 | `hand-1` | 87 KB | pending |
+| FX-01c | `fixture-menu-2026-11-v3/` | 16 / 3 / 0 | `hand-1` | 88 KB | pending |
+| FX-01d | `fixture-menu-2026-11-wdmismatch/` | 18 / 2 / 0; hardFields 2 | `hand-1` (model flags it), `hand-unflagged` (domain must flag) | 87 KB | pending |
+| FX-02 | `fixture-menu-2026-12-events/` | 15 / 8 / 4 | `hand-1` | 86 KB | pending |
+| FX-03 | `fixture-menu-2027-02-reiwa/` | 18 / 2 / 0 | `hand-1`, `hand-leap-invalid` (FX-03b), `hand-wrong-era` (FX-03c), `hand-target-2027-03` (FX-03d) | 66 KB | pending |
+| FX-04 | `fixture-menu-2028-02-leap/` | 19 / 0 / 0 | `hand-1` | 71 KB | pending |
+| FX-05 | `fixture-menu-2027-01-twocol/` (landscape) | 15 / 1 / 0 | `hand-1`, `hand-partial`, `hand-layout-unrecognised`, `hand-shifted` (FX-05b) | 65 KB | pending |
+| FX-06 | `fixture-menu-2026-11-scan/` | 18 / 2 / 0; hardFields 8 (11-05 dish + 7 green-column ingredients) | `hand-1` | 207 KB, image only (1241×1755 JPEG, no text layer) | pending |
+| FX-07 | `fixture-menu-2027-03-allergens/` | 13 / 1 / 0; hardFields 1 | `hand-1` | 92 KB | pending |
+| FX-08 | `fixture-review-hostile/` (`review-data.json`, no PDF) | 5 / 1 / 0; 9 typed-input cases | – | – | pending |
+| File | `tests/fixtures/pdf/not-a-pdf.pdf` | text bytes with a .pdf name | – | – | – |
+
+Not built yet (owner QA, before the M1 tests that need them): §3 provider responses for 5xx/503/504, timeout, 408, 400/403/404, not-configured, proxy cap and the multi-call sequences of US-E2-07/AC4 (to live in `tests/fixtures/extractor/`, reusing the FX-01 recorded files above); §4 file fixtures other than `not-a-pdf.pdf` (`empty.pdf`, `encrypted.pdf`, `menu.jpg`, `renamed.pdf`, `exact-10mb.pdf`); §5 store fixtures. **`over-10mb.pdf` (too large) is generated at test time** (a valid PDF padded to 10,485,761 bytes in a temp dir) and never committed.
+
+### 7.2 Files in each fixture folder
+- `answer-key.json` (hand-written, BA-reviewed): `{ "synthetic": true, "fixtureId", "fixture": "FX-0n", "hardFields": [path…], "menu": ExtractedMenu v1 }`. The wrapper exists because `extractedMenuSchema` is strict (`unknown-field`), so `synthetic` and `hardFields` cannot sit inside the menu. `menu.id`, `menu.source` and `menu.extractedAt` are fixed synthetic stand-ins (`source.kind` `fixture`, `sha256` = SHA-256 of `synthetic:<fixtureId>`, `byteSize` 1): **not** the PDF's real hash or size, and never scored; the import pipeline sets them from the bytes. Paths in `hardFields` read `days[2026-11-05].items[0].text` (array element by date or by index).
+- `layout.html` (hand-written source of the PDF): self-contained HTML/CSS, no URLs, school 「テストようちえん（架空）」 and footer 「テスト用の架空の献立表です。実在の園とは関係ありません。」. FX-06's layout is the scan composer (`data-scan-of`); its printed content comes from FX-01's layout.
+- `menu.pdf` (**generated**, never hand-edited).
+- `recorded/hand-*.json`: `{ "synthetic": true, "recordedBy": "hand", "fixtureId", "scenario", "description", "model", "promptVersion", "response": { "httpStatus", … }, "expect": { … } }`. `response` holds either `modelOutput` (what the model returns: `ExtractedMenu` minus `id`, `source`, `extractedAt`, ADR 002 §3), or `rawText` (non-JSON), or an HTTP failure (`httpStatus`, `retryAfterSeconds`, `body`). `expect` states `strictSchemaValid` and `strictSchemaRules` (the result of `extractedMenuSchema` after adding the app-set fields), `extractResult`, `differsFromAnswerKeyAt` (the only allowed differences from the answer key), `flagsHardFields`, and `afterValidation` (what the domain layer must turn it into). Live recordings (M5) use `"recordedBy": "live"` and `<model>-<n>.json`.
+- `README.md`: what it tests, expected outline, file list, and the BA review line ("pending").
+
+### 7.3 Regenerate and check
+```bash
+node tests/fixtures/pdf/generate-menus.mjs            # all PDFs + not-a-pdf.pdf  (or: … <fixture-id>)
+node tests/fixtures/pdf/check-fixtures.mjs            # schemas, weekdays, recorded expectations, PDF header and size
+```
+- Regenerate **on Windows**: the fonts are the installed Yu Gothic / Meiryo / BIZ UDGothic; elsewhere Chromium substitutes fonts. Output is byte-stable for the same Chromium build (PDF dates fixed to 2026-10-24; two runs gave identical SHA-256 for all 10 PDFs). A Playwright upgrade may change bytes, which is expected for generated files. CI should only run the check, never regenerate.
+- The generator fails if a layout overflows its single page (body is fixed to the page size).
+- `check-fixtures.mjs` at build time: OK, 11 fixtures, 2,686 checks; every PDF starts with `%PDF-` and is < 1 MB (largest 207 KB). A mutation run (one wrong weekday, one missing `synthetic`) produced the expected failures.
+- The first version of the answer keys, layouts and stand-ins was written from compact specs by a one-off QA authoring aid (`tests/_scratch/fixtures/author-fixtures.mjs`, `author-hostile.mjs`); from now on the fixture files themselves are the source and are edited by hand.
+
+### 7.4 Findings for the Developer (from building the stand-ins)
+- **F-1 (P2 if not handled in M1): strict schema vs domain checks.** `extractedMenuSchema` rejects raw model output that ADR 002 §4 layer 3 says the domain should *flag or move*: a day outside the target month (`extracted-day-outside-month`), a duplicated date (`days-unique-sorted`), an unflagged weekday mismatch (`weekday-mismatch`). If the proxy runs the strict schema on raw output first, US-E2-05/AC4, AC5, AC6 and FX-03d end as `MALFORMED_OUTPUT` instead of review flags. Pinned by `hand-out-of-month`, `hand-duplicate`, `hand-unflagged`, `hand-target-2027-03` (see their `expect.afterValidation`). Needs a normalise step (or a lenient model-output schema) before the strict parse.
+- **F-2:** `npm run validate:data` reads only `tests/fixtures/menus/*.json` (top level) as bare `ExtractedMenu`s, so the nested fixture folders are not covered (it passes but checks none of them). Use `check-fixtures.mjs`, or extend the script to `menus/*/answer-key.json` and `review-data.json` → `.menu`.

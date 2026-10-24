@@ -1,0 +1,17 @@
+{
+  "synthetic": true,
+  "recordedBy": "hand",
+  "fixtureId": "fixture-menu-2026-11",
+  "scenario": "malformed",
+  "description": "RX-malformed: call 1 returns text that is not JSON (truncated, wrapped in a code fence).",
+  "model": "gemini-3.8-flash",
+  "promptVersion": 1,
+  "response": {
+    "httpStatus": 200,
+    "rawText": "```json\n{\"contract\": \"extracted-menu/1\", \"targetMonth\": \"2026-11\", \"detectedMonth\": \"2026-11\", \"days\": [{\"date\": \"2026-11-02\", \"printedDateText\": \"2日（月）\", \"items\": [{\"text\": \"鶏のから揚げ\", \"kind\": \"main\""
+  },
+  "expect": {
+    "jsonParses": false,
+    "extractResult": "repair retry (call 2); MALFORMED_OUTPUT if call 2 is also invalid (US-E2-05/AC1, AC2)"
+  }
+}

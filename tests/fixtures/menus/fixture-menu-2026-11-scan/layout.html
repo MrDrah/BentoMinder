@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<!-- Synthetic test fixture fixture-menu-2026-11-scan: a scanned-looking copy of ../fixture-menu-2026-11/layout.html.
+     generate-menus.mjs screenshots the source page (150 dpi, JPEG), calls composeScan() below and
+     prints the result as the only content of menu.pdf (no text layer). -->
+<title>scan of fixture-menu-2026-11</title>
+<style>
+  @page { size: A4; margin: 0; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  #out { display: block; width: 210mm; height: 297mm; }
+  canvas { display: none; }
+</style>
+</head>
+<body data-fixture="fixture-menu-2026-11-scan" data-scan-of="fixture-menu-2026-11">
+<img id="out" alt="">
+<canvas id="c"></canvas>
+<script>
+  // Scan parameters (edit here, then regenerate).
+  const SCAN = { rotateDeg: 1.5, noiseAmplitude: 22, seed: 20261105, lowContrastSelector: '.col-green', lowContrastFactor: 0.35, jpegQuality: 0.72 };
+  window.SCAN = SCAN;
+  function rng(seed) { let s = seed >>> 0; return () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  // box: the low-contrast column in source-image pixels { x, y, w, h }.
+  window.composeScan = (dataUrl, box) => new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const W = img.naturalWidth, H = img.naturalHeight;
+      const src = document.createElement('canvas'); src.width = W; src.height = H;
+      const sctx = src.getContext('2d'); sctx.drawImage(img, 0, 0);
+      const data = sctx.getImageData(0, 0, W, H); const p = data.data; const rand = rng(SCAN.seed);
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const i = (y * W + x) * 4;
+        const inBox = box && x >= box.x && x < box.x + box.w && y >= box.y && y < box.y + box.h;
+        const n = (rand() - 0.5) * SCAN.noiseAmplitude;
+        for (let c = 0; c < 3; c++) {
+          let v = p[i + c];
+          if (inBox) v = 255 - (255 - v) * SCAN.lowContrastFactor;
+          p[i + c] = Math.max(0, Math.min(255, v + n));
+        }
+      }
+      sctx.putImageData(data, 0, 0);
+      const out = document.getElementById('c'); out.width = W; out.height = H;
+      const ctx = out.getContext('2d'); ctx.fillStyle = '#f7f6f2'; ctx.fillRect(0, 0, W, H);
+      ctx.translate(W / 2, H / 2); ctx.rotate(SCAN.rotateDeg * Math.PI / 180); ctx.drawImage(src, -W / 2, -H / 2);
+      const el = document.getElementById('out');
+      el.onload = () => resolve(true);
+      el.src = out.toDataURL('image/jpeg', SCAN.jpegQuality);
+    };
+    img.src = dataUrl;
+  });
+</script>
+</body>
+</html>

@@ -52,6 +52,15 @@
     {
       "path": "reports/**",
       "by": "npm run coverage, npm run test:e2e, npm run eval:extraction"
+    },
+    {
+      "path": "tests/fixtures/menus/*/menu.pdf",
+      "from": "tests/fixtures/menus/*/layout.html",
+      "by": "npm run fixtures:menus (Windows: uses installed Japanese fonts)"
+    },
+    {
+      "path": "tests/fixtures/pdf/not-a-pdf.pdf",
+      "by": "npm run fixtures:menus"
     }
   ],
   "docs": {

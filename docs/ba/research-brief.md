@@ -43,7 +43,8 @@ Candidate-list agent: verify each domain's recipe pages (title matches, page is 
 | Food-manufacturer recipe sites: 味の素パーク, キッコーマン ホームクッキング, ハウス食品, ミツカン | Many kids' bento recipes with times | verify; rule 9 (brand → generic). |
 | Editorial video recipe sites: クラシル (kurashiru.com), DELISH KITCHEN (delishkitchen.tv) | Short kids' bentos | verify; editorial (not user-posted) pages only. |
 | Just One Cookbook (justonecookbook.com) | English-language Japanese bento recipes; English names | verify. |
-| BBC Good Food (bbcgoodfood.com) | Western-inspired lunchbox recipes | verify; convert units to g/ml. |
+| BBC Good Food (bbcgoodfood.com; publisher: Immediate Media Company Ltd under BBC licence) | Western-inspired lunchbox recipes | verify; convert units to g/ml. |
+| 仙台市 (city.sendai.jp) | Allergen-labelling scheme changes (source for the dictionary's allergen list only, not for recipes) | verify. |
 
 **Not approved:** user-generated recipe posts (e.g. Cookpad user recipes, Allrecipes user submissions), blogs without a named author, AI-generated recipe sites, pages behind a login or paywall.
 
