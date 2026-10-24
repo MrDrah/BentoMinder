@@ -30,6 +30,9 @@ export const bentoMinderStoreSchema = obj({
   decisions: z.record(dateSchema, dayDecisionSchema),
   reminderLog: z.array(reminderLogEntrySchema),
   consent: obj({ aiNoticeVersion: intRange(1), consentedAt: timestampSchema }).nullable(),
+  // US-E3-06/AC6 (OQ-24): the Tokyo date on which the next-month card was hidden; added to v1
+  // at M1 prep before any store shipped, so no migration (ADR 003 change log).
+  nextMonthCardHiddenOn: dateSchema.nullable(),
   aiUsage: z.record(monthSchema, intRange(0)),
 }).superRefine((s, ctx) => {
   if (!metaTimestampsOk(s)) issue(ctx, 'meta-timestamps', ['updatedAt']);
