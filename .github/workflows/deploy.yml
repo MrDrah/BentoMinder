@@ -1,0 +1,85 @@
+name: Deploy
+
+# Deploys only a commit on main whose CI run succeeded, whether triggered automatically after CI or
+# by hand. Pair this with the repository settings in .claude/SECURITY-MODEL.md:
+#   - branch protection on main: required "CI" checks, PR review, no force-push, no deletion
+#   - environment "github-pages" (or "production"): required reviewer = product owner,
+#     deployment branch rule = main only
+#
+# v1: replace the Pages steps with your host (Vercel/Netlify/Cloud Run…) and add a staging job that
+# applies migrations to staging before production. Production secrets live in the protected
+# environment and are set by the product owner, never by an agent.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read # to look up the CI result of a manually dispatched commit
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Require green CI for this commit on main
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.check.outputs.sha }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          RUN_EVENT: ${{ github.event.workflow_run.event }}
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "workflow_run" ]; then
+            [ "$RUN_CONCLUSION" = "success" ] || { echo "::error::CI concluded '$RUN_CONCLUSION'"; exit 1; }
+            [ "$RUN_BRANCH" = "main" ] && [ "$RUN_EVENT" = "push" ] || { echo "::error::CI run was not a push to main"; exit 1; }
+            sha="$RUN_SHA"
+          else
+            [ "$GITHUB_REF" = "refs/heads/main" ] || { echo "::error::manual deploys run from main only (got $GITHUB_REF)"; exit 1; }
+            sha="$GITHUB_SHA"
+            ok=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$sha&branch=main&status=success&per_page=1" --jq '.total_count')
+            [ "${ok:-0}" -gt 0 ] || { echo "::error::no successful CI run for $sha on main"; exit 1; }
+          fi
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "Deploying $sha"
+
+  build:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.verify.outputs.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages # protect it: required reviewer + "main only" deployment branch rule
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

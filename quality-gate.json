@@ -1,0 +1,152 @@
+{
+  "$comment": "app-boilerplate quality gate config. Used by .claude/skills/quality-gate/scripts/validate.mjs, the guard hook and CI.",
+  "commands": [
+    {
+      "name": "validate data",
+      "run": "npm run validate:data"
+    },
+    {
+      "name": "typecheck",
+      "run": "npm run typecheck"
+    },
+    {
+      "name": "unit + coverage",
+      "run": "npm run coverage"
+    },
+    {
+      "name": "build",
+      "run": "npm run build"
+    }
+  ],
+  "generated": [
+    {
+      "path": "dist/**",
+      "by": "npm run build"
+    },
+    {
+      "path": "data/library.json",
+      "from": "data/_research/batch-*.json",
+      "by": "npm run merge:research"
+    }
+  ],
+  "docs": {
+    "required": [
+      "CATCH-UP.md",
+      "docs/PLAN.md",
+      "docs/PROJECT_BRIEF.md",
+      "docs/ba/user-stories.md"
+    ],
+    "catchUp": "CATCH-UP.md",
+    "maxStaleDays": 7,
+    "decisionLog": {
+      "file": "docs/PLAN.md",
+      "heading": "Decision"
+    }
+  },
+  "trace": {
+    "stories": "docs/ba/user-stories.md",
+    "tests": [
+      "tests/**/*.{test,spec}.{ts,tsx,js,jsx,mjs,cjs}",
+      "src/**/*.{test,spec}.{ts,tsx,js,jsx,mjs,cjs}"
+    ],
+    "pattern": "US-[A-Z0-9]+-\\d+",
+    "allowUntested": []
+  },
+  "stages": {
+    "dev": [
+      "preflight",
+      "secrets",
+      "commands",
+      "budget"
+    ],
+    "release": [
+      "preflight",
+      "docs",
+      "trace",
+      "secrets",
+      "commands",
+      "budget",
+      "overlap",
+      "evidence"
+    ]
+  },
+  "budgets": [
+    {
+      "name": "JS bundle",
+      "glob": "dist/assets/*.js",
+      "maxGzipKb": 400
+    },
+    {
+      "name": "CSS",
+      "glob": "dist/assets/*.css",
+      "maxGzipKb": 50
+    }
+  ],
+  "secrets": {
+    "exclude": [
+      "package-lock.json",
+      "**/*.lock",
+      "**/*.min.js"
+    ]
+  },
+  "overlap": {
+    "records": [
+      "data/_research/batch-*.json"
+    ],
+    "idField": "id",
+    "fields": [
+      "shortDescription",
+      "history",
+      "tasteProfile"
+    ],
+    "sourcesField": "sources",
+    "urlField": "url",
+    "cacheDir": ".cache/sources",
+    "minRun": 7,
+    "failAt": 12,
+    "acceptFile": "data/_research/overlap-accepted.json",
+    "delayMs": 3000,
+    "inGate": true
+  },
+  "preflight": {
+    "nodeMajor": 20,
+    "requireRemote": true,
+    "optional": [
+      "gh",
+      "playwright"
+    ]
+  },
+  "evidence": {
+    "$comment": "Milestone evidence packages (milestone-evidence skill). Milestone ids are yours to choose; liveUrl and smokeMarker enable the live check. billingModel: api, subscription, mixed or unknown. pricing (optional): list prices per model in USD per million tokens, e.g. { <model>: { inputPerMTok, outputPerMTok, cacheWritePerMTok, cacheReadPerMTok, source: <pricing page URL> } }. Without pricing, tokens are measured and cost stays unavailable.",
+    "project": {
+      "id": "bentominder",
+      "name": "BentoMinder",
+      "repository": null
+    },
+    "milestones": [
+      {
+        "id": "mvp",
+        "label": "MVP"
+      },
+      {
+        "id": "beta-0.5",
+        "label": "Beta 0.5"
+      },
+      {
+        "id": "release-1.0",
+        "label": "Version 1.0"
+      }
+    ],
+    "events": "docs/evidence/events.jsonl",
+    "testResults": [
+      "reports/junit*.xml"
+    ],
+    "testCommand": "npx vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=reports/junit.xml",
+    "coverageSummary": "coverage/coverage-summary.json",
+    "billingModel": "unknown",
+    "usageLog": "docs/evidence/usage.jsonl",
+    "pricing": null,
+    "liveUrl": null,
+    "smokeMarker": null
+  }
+}

@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    # Name this job as a required status check in branch protection for main.
+    name: Release gate (docs, traceability, secrets, data, types, tests, build, budgets)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # docs check compares CATCH-UP.md with the latest commit date
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Release gate
+        # Everything that reaches main passes the full release stage. The lighter "dev" stage is for
+        # the local Dev → QA handoff only.
+        run: node .claude/skills/quality-gate/scripts/validate.mjs gate --stage release
+        env:
+          NO_COLOR: '1'
+
+  e2e:
+    name: Playwright e2e + axe (desktop + mobile)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run e2e
+        run: npm run e2e
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+  # v1: uncomment when the app has a database and API adapters.
+  # backend:
+  #   name: Migrations, contract and auth tests
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     postgres:
+  #       image: postgres:16
+  #       env: { POSTGRES_PASSWORD: postgres }
+  #       ports: ['5432:5432']
+  #       options: --health-cmd pg_isready --health-interval 5s --health-retries 10
+  #   env:
+  #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with: { node-version: 22, cache: npm }
+  #     - run: npm ci
+  #     - run: npm run db:migrate:check
+  #     - run: npm run test:contract
+  #     - run: npm run test:auth

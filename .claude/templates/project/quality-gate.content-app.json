@@ -1,0 +1,20 @@
+{
+  "$comment": "Extra keys for an app that ships researched content. Merge into quality-gate.json.",
+  "generated": [
+    { "path": "dist/**", "by": "npm run build" },
+    { "path": "data/library.json", "from": "data/_research/batch-*.json", "by": "npm run merge:research" }
+  ],
+  "overlap": {
+    "records": ["data/_research/batch-*.json"],
+    "idField": "id",
+    "fields": ["shortDescription", "history", "tasteProfile"],
+    "sourcesField": "sources",
+    "urlField": "url",
+    "cacheDir": ".cache/sources",
+    "minRun": 7,
+    "failAt": 12,
+    "acceptFile": "data/_research/overlap-accepted.json",
+    "delayMs": 3000,
+    "inGate": true
+  }
+}

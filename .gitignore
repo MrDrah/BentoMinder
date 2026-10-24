@@ -1,0 +1,22 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+reports/
+.cache/
+*.log
+.DS_Store
+
+# secrets: document variables in .env.example instead
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# local Claude Code settings (personal, not shared)
+.claude/settings.local.json
+# task baselines (validate.mjs task-start) and framework upgrade backups
+.claude/state/
+.claude/.upgrade-backup/

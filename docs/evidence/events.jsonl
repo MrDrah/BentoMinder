@@ -1,0 +1,2 @@
+{"v":1,"at":"2026-10-24T07:38:12.438Z","type":"product-decision","summary":"Kick-off: BentoMinder scaffolded from app-boilerplate v0.5.0 (content-app), local git only, no push or deploy without PO approval","by":"orchestrator"}
+{"v":1,"at":"2026-10-24T07:38:12.851Z","type":"product-decision","summary":"PO asked to delegate requirements, architecture and design proposals before BR-table approval; framework order (BR yes before dispatch) relaxed for proposal-only work","by":"orchestrator"}
