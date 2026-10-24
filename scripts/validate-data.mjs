@@ -17,6 +17,7 @@ import {
   toRuleIssues,
 } from '../src/domain/schema/index.ts';
 import { migrate } from '../src/domain/storage/migrations/index.ts';
+import { parseModelReply } from '../src/domain/menu/extraction.ts';
 import { buildDictionary } from './build-dictionary.mjs';
 import { batchFiles, mergeBatches } from './merge-research.mjs';
 
@@ -136,12 +137,52 @@ for (const file of listJson(join(root, 'tests', 'fixtures', 'state'))) {
   if (!parsed.success) zodReport(rel(file), parsed.error);
 }
 
-// 4. Menu fixtures (extracted menus, M1+).
-for (const file of listJson(join(root, 'tests', 'fixtures', 'menus'))) {
-  const doc = readJson(file);
-  if (!doc.ok) continue;
-  const parsed = extractedMenuSchema.safeParse(doc.value);
-  if (!parsed.success) zodReport(rel(file), parsed.error);
+// 4. Menu fixtures (finding F-2): QA's nested folders tests/fixtures/menus/<id>/.
+//    - answer-key.json / review-data.json → `.menu` must be a valid ExtractedMenu;
+//    - recorded/*.json with a model output: the app's own pipeline (JSON → F-1 normaliser →
+//      strict schema, src/domain/menu/extraction.ts) must give the outcome the stand-in expects
+//      (`ok` stays ok; MALFORMED / NOT_A_MENU stand-ins must not pass), and stand-ins declared
+//      strictly valid must also pass the strict schema as recorded.
+//    QA's check-fixtures.mjs (npm run check:fixtures) checks the fixture conventions themselves
+//    (answer-key diffs, hard fields, PDFs); this step checks that the *app* reads every fixture.
+const menusDir = join(root, 'tests', 'fixtures', 'menus');
+let menuFixtures = 0;
+let recordedChecked = 0;
+for (const id of existsSync(menusDir) ? readdirSync(menusDir).sort() : []) {
+  const dir = join(menusDir, id);
+  const keyFile = ['answer-key.json', 'review-data.json'].map((f) => join(dir, f)).find((f) => existsSync(f));
+  if (keyFile === undefined) continue;
+  const key = readJson(keyFile);
+  if (!key.ok) continue;
+  menuFixtures += 1;
+  const parsed = extractedMenuSchema.safeParse(key.value?.menu);
+  if (!parsed.success) zodReport(rel(keyFile), parsed.error, 'menu');
+  for (const file of listJson(join(dir, 'recorded'))) {
+    const doc = readJson(file);
+    if (!doc.ok) continue;
+    const res = doc.value?.response ?? {};
+    const expected = String(doc.value?.expect?.extractResult ?? '');
+    if (res.httpStatus !== 200) continue;
+    const text = res.rawText ?? JSON.stringify(res.modelOutput);
+    const month = String(res.modelOutput?.targetMonth ?? key.value?.menu?.targetMonth ?? '');
+    const outcome = parseModelReply(text, {
+      targetMonth: month,
+      sha256: '0'.repeat(64),
+      byteSize: 1,
+      model: String(doc.value?.model ?? 'fixture'),
+      promptVersion: 1,
+      at: '2026-10-24T00:00:00+09:00',
+    });
+    recordedChecked += 1;
+    const wantOk = expected === 'ok';
+    if (wantOk && outcome.kind !== 'ok') report(rel(file), 'fixture-pipeline', `expected ok, got ${outcome.kind} ${outcome.issues?.join(';') ?? ''}`.trim());
+    if (!wantOk && outcome.kind === 'ok') report(rel(file), 'fixture-pipeline', `expected "${expected}", the pipeline accepted it`);
+    if (doc.value?.expect?.strictSchemaValid === true && res.modelOutput !== undefined && parsed.success) {
+      const full = { id: parsed.data.id, ...res.modelOutput, source: parsed.data.source, extractedAt: parsed.data.extractedAt };
+      const strict = extractedMenuSchema.safeParse(full);
+      if (!strict.success) zodReport(rel(file), strict.error, 'modelOutput');
+    }
+  }
 }
 
 // 5. Banned phrases (BA-owned list the UI must never contain; BR-07, BR-18, BR-19).
@@ -163,5 +204,5 @@ if (errors.length > 0) {
 }
 console.log(
   `validate-data: OK (dictionary ${dictionary ? 'valid' : 'missing'}, ${batches.length} batch file(s), ` +
-    `library ${libJson.ok ? libJson.value.length : 0} recipes, state + menu fixtures, banned phrases)`,
+    `library ${libJson.ok ? libJson.value.length : 0} recipes, state fixtures, ${menuFixtures} menu fixtures / ${recordedChecked} recorded replies, banned phrases)`,
 );
