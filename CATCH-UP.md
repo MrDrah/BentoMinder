@@ -28,16 +28,13 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 | H1 | 73 stories / 287 ACs, data contract v1, dictionary, ADR 001–005, QA strategy + 4 oracles; ~30 rulings in PLAN §7 | `docs/ba/`, `docs/dev/`, `tests/plan/`, `tests/oracle/` |
 
 ### In progress 🔄
-**M1 prep** (docs/data, shared checkout, baselines `m1-prep-ba` and `m1-prep-qa`; check with `diff-guard --task <name>`):
-- BA: AC amendments, export `exportedAt` decision, rule ids into the contract, approved recipe hosts, dictionary category forms, the ~60 undefined strings.
-- QA: synthetic menu fixtures + PDFs rendered with system Japanese fonts (`tests/fixtures/menus/`, `tests/fixtures/pdf/`).
-If the session ends here: diff-guard each task, re-dispatch with "continue; check saved files first".
+Nothing running. **M1 merged locally (25eb8bc), dev gate green on main, independent QA: GO with conditions** (`tests/reports/m1-qa-report.md`). Not yet committed on main: QA suite + report, Orchestrator edits (agent models, gate command, Playwright testIgnore, docs). Ask the PO before committing.
 
 ### Next 📋
-1. Commit the M0 integration fixes (PO).
-2. **M1 prep (BA + QA, docs/data):** amend US-E1-01/AC5, US-E3-02/AC3, US-E9-01/AC3 and US-E10-03/AC1 (exportedAt); define the ~60 strings listed at the end of `design/copy.md`; dictionary category forms; review `RULES_NOT_IN_CONTRACT` and `APPROVED_HOSTS`. QA builds the synthetic menu fixtures (`tests/plan/fixtures-plan.md`).
-3. **M1 (developer, worktree):** onboarding, import with mocked AI, review/confirm, export/delete, recovery-screen actions.
-4. Recipe research (BA) alongside M2/M3.
+1. **M1 fix round** (developer, Sonnet, worktree): D-M1-06 (cross-tab store safety, before any M2 decision write), D-M1-08, D-M1-02, D-M1-09, D-M1-05; mock-scenario header off by default outside tests. Remove the matching `test.fixme` and re-run the QA suite (`npx playwright test -c tests/e2e/qa/playwright.qa.config.ts`).
+2. **M2 prep** (BA + designer, Opus): `weekday-mismatch` into contract §6.1; date correction in review (US-E2-05/AC5) design + copy; food-picker kind labels; rule on D-M1-03 and D-M1-04.
+3. **M2** (developer, Sonnet): assessment + overrides, calendar grid, decision state machine, menu refresh (E3-05/06); QA oracles become executable tests.
+4. Recipe research (BA) alongside M2.
 
 ## 4. Key decisions (summary; the full log is in docs/PLAN.md §7)
 - Local git only; no push, deploy or paid services without PO approval.
@@ -45,6 +42,7 @@ If the session ends here: diff-guard each task, re-dispatch with "continue; chec
 - AI: Gemini free tier, `gemini-3.8-flash` + `gemini-3.5-flash-lite` fallback; import used from Japan only; only the public PDF is sent.
 - Design: white page background (`surface-1` #FFFFFF), navy type, soft-red accents, Monday week start, no tab bar.
 - All 15 open-question defaults accepted.
+- **Agent models (PO, 2026-10-24):** dispatch `developer` and `qa` agents with `model: "sonnet"`; Orchestrator, `ba` and `verifier` stay on Opus.
 
 ## 5. How to work in this repo
 ```bash

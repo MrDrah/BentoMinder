@@ -6,6 +6,10 @@
       "run": "npm run validate:data"
     },
     {
+      "name": "fixture conventions",
+      "run": "npm run check:fixtures"
+    },
+    {
       "name": "lint",
       "run": "npm run lint"
     },

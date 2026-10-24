@@ -80,3 +80,7 @@ Two gate stages, so the Dev → QA handoff doesn't depend on tests QA hasn't wri
 ## 6. Project-specific rules
 
 <!-- Everything below this line belongs to the project, not the framework. -->
+
+### Agent models (product owner, 2026-10-24)
+`developer` and `qa` agents run on **Sonnet** (`model: sonnet` in `.claude/agents/developer.md` and `qa.md`). The Orchestrator, `ba`, `verifier` and `metrics` stay on Opus. Don't override this per dispatch unless the product owner asks. Never switch an agent that is mid-task: let it finish on its current model.
+Note: the two agent files are framework-owned, so a framework `--upgrade` reports them as CONFLICT and leaves them alone; re-apply the `model:` line if you ever upgrade with `--force`.

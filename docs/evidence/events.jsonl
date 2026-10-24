@@ -53,3 +53,23 @@
 {"v":1,"at":"2026-10-24T11:22:59.779Z","type":"product-decision","summary":"M1 prep: OQ-21..26 defaults accepted; export without exportedAt; rule-id renames for the developer","by":"orchestrator"}
 {"v":1,"at":"2026-10-24T11:22:59.896Z","type":"task-end","summary":"M1 prep BA integrated (union diff-guard PASS, 99 files with QA)","task":"m1-prep-ba","outcome":"success"}
 {"v":1,"at":"2026-10-24T11:22:59.995Z","type":"task-end","summary":"M1 prep QA integrated: 11 fixtures, check-fixtures re-run by Orchestrator OK","task":"m1-prep-qa","outcome":"success"}
+{"v":1,"at":"2026-10-24T11:23:24.296Z","by":"orchestrator","type":"task-start","task":"m1-build","summary":"Task m1-build dispatched (21 allowed globs)"}
+{"v":1,"at":"2026-10-24T14:31:50.357Z","type":"interruption","summary":"Usage limit hit during the M1 build; developer agent stopped with work saved in its worktree","task":"m1-build"}
+{"v":1,"at":"2026-10-24T14:31:50.525Z","type":"resume","summary":"M1 build resumed in the same worktree after the usage limit reset","task":"m1-build","outcome":"success"}
+{"v":1,"at":"2026-10-24T14:45:30.510Z","type":"product-decision","summary":"PO: from now on developer and QA agents run on Sonnet; orchestrator, BA and verifier stay on Opus. Running M1 developer finishes on Opus","by":"product-owner"}
+{"v":1,"at":"2026-10-24T15:12:28.607Z","by":"orchestrator","type":"task-end","task":"m1-build","outcome":"failure","summary":"diff-guard: 6 files outside the allow-list"}
+{"v":1,"at":"2026-10-24T15:12:38.443Z","type":"task-end","summary":"Correction: m1-build diff-guard flagged only 6 Orchestrator-owned uncommitted files; all agent files were inside the allow-list","task":"m1-build","outcome":"success"}
+{"v":1,"at":"2026-10-24T15:15:21.284Z","by":"orchestrator","type":"task-start","task":"m1-qa","summary":"Task m1-qa dispatched (3 allowed globs)"}
+{"v":1,"at":"2026-10-24T15:15:32.356Z","type":"verification","summary":"M1 dev gate re-run by the Orchestrator on main after merge: PASS incl. new check:fixtures command","task":"m1-build","outcome":"success"}
+{"v":1,"at":"2026-10-24T16:11:53.950Z","by":"orchestrator","type":"task-end","task":"m1-qa","outcome":"success","summary":"diff-guard: 17 changed files, all allowed"}
+{"v":1,"at":"2026-10-24T16:12:49.771Z","type":"defect","summary":"Stale second tab overwrites the whole store on save, erasing the other tab's confirmed menu (BR-22); confirmed in code by the Orchestrator","by":"qa","defect":"D-M1-06","severity":"P2","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:49.908Z","type":"defect","summary":"Language toggle below 44x44 px at 360 px width (US-NF-02/AC3)","by":"qa","defect":"D-M1-08","severity":"P2","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.018Z","type":"defect","summary":"First tap on import after an invalid-URL error does nothing: error line collapses and the button shifts","by":"qa","defect":"D-M1-02","severity":"P3","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.148Z","type":"defect","summary":"PDF allergen line lacks lang=ja in the English UI (WCAG 3.1.2)","by":"qa","defect":"D-M1-05","severity":"P3","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.253Z","type":"defect","summary":"Scenario-header extraction is written to the proxy cache and poisons later normal requests","by":"qa","defect":"D-M1-09","severity":"P3","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.384Z","type":"defect","summary":"Nickname of ZWJ emoji truncated mid-sequence","by":"qa","defect":"D-M1-01","severity":"P4","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.513Z","type":"defect","summary":"Settings unreachable before onboarding step 2, so the disabled-export state can never be seen","by":"qa","defect":"D-M1-03","severity":"P4","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.631Z","type":"defect","summary":"US-E10-02/AC2 v0 migration cannot be exercised: no v0 shape exists","by":"qa","defect":"D-M1-04","severity":"P4","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.739Z","type":"defect","summary":"source.sha256 taken from the proxy reply instead of computed on the device","by":"qa","defect":"D-M1-07","severity":"P4","state":"found"}
+{"v":1,"at":"2026-10-24T16:12:50.866Z","type":"manual-implementation","summary":"Orchestrator excluded QA's own e2e suite from the main Playwright config (it needs the proxy and its own config); main e2e back to 24 passing","task":"m1-qa"}
+{"v":1,"at":"2026-10-24T23:49:02.460Z","type":"approval","summary":"PO approved committing M1 locally and running the M1 fix round in parallel with M2 prep","by":"product-owner"}

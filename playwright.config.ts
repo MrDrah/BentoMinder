@@ -4,6 +4,8 @@ import { defineConfig, devices } from '@playwright/test';
 // (BR-15, BR-23). Tests run against the production build served by `vite preview`.
 export default defineConfig({
   testDir: 'tests/e2e',
+  // QA's independent suite needs the proxy and its own config: tests/e2e/qa/playwright.qa.config.ts
+  testIgnore: ['qa/**'],
   fullyParallel: true,
   forbidOnly: !!process.env['CI'],
   retries: process.env['CI'] ? 1 : 0,
