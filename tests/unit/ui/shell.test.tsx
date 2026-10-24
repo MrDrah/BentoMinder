@@ -13,7 +13,10 @@ import { fixedClock, memoryStorage } from '../helpers/memory-storage.ts';
 const clock = fixedClock('2026-11-14T15:30:00Z'); // 2026-11-15 00:30 JST
 const DEVICE_ID = '3f1c9a52-7d4e-4b8a-9c21-5e6f7a8b9c0d';
 
-async function renderApp(storage: Storage = memoryStorage(), hash = '') {
+// M1: a fresh device opens onboarding, so the shell tests start from a stored profile and menu.
+const seeded = () => memoryStorage({ 'bentominder.state': JSON.stringify(storeV1()) });
+
+async function renderApp(storage: Storage = seeded(), hash = '') {
   window.location.hash = hash;
   const repository = createRepository(storage, clock);
   const utils = render(
@@ -21,7 +24,7 @@ async function renderApp(storage: Storage = memoryStorage(), hash = '') {
       <App />
     </AppProvider>,
   );
-  await screen.findByTestId(/^screen-(calendar|newer-data|corrupt-data|not-found|day|recipe|recipes|settings|onboarding)$/);
+  await screen.findByTestId(/^screen-(calendar|newer-data|corrupt-data|not-found|day|recipe|recipes|settings|onboarding|profile|import-page)$/);
   return utils;
 }
 
@@ -71,7 +74,7 @@ describe('US-E8-01 Japanese by default, one-tap English', () => {
 
   it('US-E8-01/AC2 the toggle is reachable on other screens and supports arrow keys', async () => {
     const user = userEvent.setup();
-    await renderApp(memoryStorage(), '#/settings');
+    await renderApp(seeded(), '#/settings');
     expect(screen.getByTestId('topbar-title')).toHaveTextContent('設定');
     screen.getByTestId('lang-toggle-ja').focus();
     await user.keyboard('{ArrowRight}');
@@ -82,10 +85,10 @@ describe('US-E8-01 Japanese by default, one-tap English', () => {
 
   it('US-E8-01/AC3 the language choice persists across a reload', async () => {
     const user = userEvent.setup();
-    const storage = memoryStorage();
+    const storage = seeded();
     const first = await renderApp(storage);
     await user.click(screen.getByTestId('lang-toggle-en'));
-    await vi.waitFor(() => expect(storage.data.has('bentominder.state')).toBe(true));
+    await vi.waitFor(() => expect(storage.data.get('bentominder.state')).toContain('"language":"en"'));
     first.unmount();
     document.documentElement.lang = 'ja';
     await renderApp(storage);
@@ -99,7 +102,7 @@ describe('US-E8-02/AC2 no hard-coded strings', () => {
     'US-E8-02/AC2 in EN, %s shows no Japanese except the 日本語 toggle label',
     async (hash) => {
       const user = userEvent.setup();
-      const { container } = await renderApp(memoryStorage(), hash);
+      const { container } = await renderApp(seeded(), hash);
       await user.click(screen.getByTestId('lang-toggle-en'));
       expect(visibleJapanese(container)).toEqual([]);
       expect(document.title).not.toMatch(JAPANESE);
@@ -170,7 +173,7 @@ describe('stored-data states (design/components.md §12)', () => {
 
   it('US-E10-02/AC5 shows 「この端末に保存できません」 when a write fails', async () => {
     const user = userEvent.setup();
-    const storage = memoryStorage();
+    const storage = seeded();
     storage.failWrites = true;
     await renderApp(storage);
     await user.click(screen.getByTestId('lang-toggle-en'));
@@ -178,7 +181,7 @@ describe('stored-data states (design/components.md §12)', () => {
   });
 
   it('shows the not-found page for unknown routes, including /debug', async () => {
-    await renderApp(memoryStorage(), '#/debug');
+    await renderApp(seeded(), '#/debug');
     expect(screen.getByTestId('screen-not-found')).toHaveTextContent('ページが見つかりません');
   });
 

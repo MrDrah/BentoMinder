@@ -29,7 +29,7 @@ const http = (status: number): ProviderReply => ({ kind: 'http', status, retryAf
 
 function setup(replies: ProviderReply[], extra: Partial<ExtractDeps> = {}) {
   const requests: ProviderRequest[] = [];
-  const sleep = vi.fn((_ms: number) => Promise.resolve());
+  const sleep = vi.fn<(ms: number) => Promise<void>>(() => Promise.resolve());
   const deps: ExtractDeps = {
     transport: {
       call(req) {

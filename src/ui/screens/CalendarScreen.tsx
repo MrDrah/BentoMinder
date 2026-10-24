@@ -1,4 +1,4 @@
-// M0 placeholder calendar shell (architecture §11.3): app bar, month navigation, weekday
+// Calendar shell (M2 adds assessments and decisions) (architecture §11.3): app bar, month navigation, weekday
 // header and day numerals for the current Tokyo month (US-E5-01/AC1–AC2, AC5–AC6). Cells
 // carry no assessment or decision yet (M2) and a plain table stands in for the M2 grid.
 import { useEffect, useRef, useState } from 'react';
@@ -8,7 +8,9 @@ import type { MessageKey } from '../../i18n/index.ts';
 import { useApp } from '../app-store.tsx';
 import { AppBar } from '../components/Bars.tsx';
 import { Icon } from '../components/Icon.tsx';
-import { navigate } from '../router.ts';
+import { navigate, toHash } from '../router.ts';
+import { hasEverConfirmed, pendingReview } from '../../domain/menu/store-ops.ts';
+import { monthLabel } from './ImportScreen.tsx';
 
 export function CalendarScreen({ month: requested }: { month: YearMonth | null }) {
   const { state, t, today } = useApp();
@@ -29,17 +31,36 @@ export function CalendarScreen({ month: requested }: { month: YearMonth | null }
   }, [month, t, title]);
 
   const go = (target: YearMonth) => navigate({ name: 'calendar', month: target });
-  const missingKey: MessageKey = month === currentMonth ? 'menuCard.missing.current' : 'menuCard.missing.month';
-  const monthNumber = Number(month.slice(5, 7));
+  const store = state.phase === 'ready' ? state.store : null;
+  const everConfirmed = store !== null && hasEverConfirmed(store);
+  // US-E1-01/AC5, US-E3-06/AC5: the generic wording only while no menu was ever confirmed.
+  const missingKey: MessageKey = month === currentMonth && !everConfirmed ? 'menuCard.missing.current' : 'menuCard.missing.month';
+  const confirmed = store?.menus[month]?.confirmed ?? null;
+  // US-E3-06/AC3: never for past months.
+  const showMissing = confirmed === null && month >= currentMonth;
+  const pending = store === null ? null : pendingReview(store);
 
   return (
     <div className="screen" data-testid="screen-calendar">
       <AppBar />
       <main id="main" className="page">
-        <section className="card" data-testid="menu-card-missing">
-          <h2 className="card__title">{t(missingKey, { m: monthNumber })}</h2>
-          <p className="card__body">{t('menuCard.missing.body')}</p>
-        </section>
+        {pending !== null && (
+          <section className="card card--warning" data-testid="card-menu-pending">
+            <h2 className="card__title">{t('menuCard.pending')}</h2>
+            <a className="btn btn--primary" href={toHash({ name: 'review', month: pending.month as YearMonth, manual: false })} data-testid="card-menu-pending-action">
+              {t('menuCard.pending.action')}
+            </a>
+          </section>
+        )}
+        {showMissing && (
+          <section className="card card--warning" data-testid="menu-card-missing">
+            <h2 className="card__title">{t(missingKey, { m: monthLabel(t, lang, month) })}</h2>
+            <p className="card__body">{t('menuCard.missing.body')}</p>
+            <a className="btn btn--primary" href={toHash({ name: 'import' })} data-testid="card-menu-import">
+              {t('menuCard.import')}
+            </a>
+          </section>
+        )}
 
         <nav className="monthnav" aria-label={t('cal.grid.label', { month: title })}>
           <button type="button" className="iconbtn" data-testid="cal-prev" aria-label={t('cal.prevMonth')} onClick={() => go(addMonths(month, -1))}>

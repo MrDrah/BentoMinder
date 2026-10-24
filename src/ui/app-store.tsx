@@ -1,22 +1,30 @@
 // App state: React context + reducer around the domain store (ADR 001). The repository does
-// validation and persistence; the reducer only holds what the screens render.
-import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, type ReactNode } from 'react';
-import type { Clock } from '../domain/ports.ts';
+// validation and persistence; the reducer only holds what the screens render. `commit` writes
+// first and updates the screen only when the write succeeded, so a failed write never shows a
+// "saved" state (US-E10-02/AC5–AC6).
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react';
+import { createWebExtractor } from '../adapters/web/extractor.ts';
+import { createWebFileExport, webIsOnline } from '../adapters/web/file-export.ts';
+import { createWebPdfSource } from '../adapters/web/pdf-source.ts';
+import type { Clock, FileExport, MenuExtractor, PdfSource } from '../domain/ports.ts';
+import type { Dictionary } from '../domain/schema/dictionary.ts';
 import type { BentoMinderStore } from '../domain/schema/store.ts';
 import { createEmptyStore } from '../domain/storage/defaults.ts';
 import type { LoadResult, Repository } from '../domain/storage/repository.ts';
-import { toJstTimestamp, todayJst, type LocalDate } from '../domain/time/jst.ts';
+import { toJstTimestamp, todayJst, type Instant, type LocalDate } from '../domain/time/jst.ts';
 import { createTranslator, type Language, type Translate } from '../i18n/index.ts';
+import { shippedDictionary } from './dictionary.ts';
 
 export type AppState =
   | { phase: 'loading'; language: Language }
-  | { phase: 'ready'; language: Language; store: BentoMinderStore; saveFailed: boolean }
-  | { phase: 'too-new'; language: Language; version: number }
-  | { phase: 'corrupt'; language: Language };
+  | { phase: 'ready'; language: Language; store: BentoMinderStore; persisted: boolean; saveFailed: boolean }
+  | { phase: 'too-new'; language: Language; version: number; raw: string }
+  | { phase: 'corrupt'; language: Language; raw: string };
 
 export type AppAction =
   | { type: 'loaded'; result: LoadResult; fresh: BentoMinderStore }
-  | { type: 'store-changed'; store: BentoMinderStore }
+  | { type: 'store-changed'; store: BentoMinderStore; persisted?: boolean }
+  | { type: 'reset'; store: BentoMinderStore }
   | { type: 'language-changed'; language: Language }
   | { type: 'save-result'; ok: boolean };
 
@@ -24,27 +32,60 @@ export function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
     case 'loaded': {
       const r = action.result;
-      if (r.kind === 'too-new') return { phase: 'too-new', language: state.language, version: r.version };
-      if (r.kind === 'corrupt') return { phase: 'corrupt', language: state.language };
+      if (r.kind === 'too-new') return { phase: 'too-new', language: state.language, version: r.version, raw: r.raw };
+      if (r.kind === 'corrupt') return { phase: 'corrupt', language: state.language, raw: r.raw };
       const store = r.kind === 'empty' ? action.fresh : r.state;
-      return { phase: 'ready', language: store.settings.language, store, saveFailed: false };
+      return { phase: 'ready', language: store.settings.language, store, persisted: r.kind !== 'empty', saveFailed: false };
     }
     case 'store-changed':
       return state.phase === 'ready'
-        ? { ...state, store: action.store, language: action.store.settings.language }
+        ? {
+            ...state,
+            store: action.store,
+            language: action.store.settings.language,
+            ...(action.persisted === true ? { persisted: true, saveFailed: false } : {}),
+          }
         : state;
+    case 'reset':
+      return { phase: 'ready', language: action.store.settings.language, store: action.store, persisted: false, saveFailed: false };
     case 'language-changed':
       return { ...state, language: action.language };
     case 'save-result':
-      return state.phase === 'ready' ? { ...state, saveFailed: !action.ok } : state;
+      return state.phase === 'ready' ? { ...state, saveFailed: !action.ok, ...(action.ok ? { persisted: true } : {}) } : state;
   }
+}
+
+export interface AppServices {
+  pdfSource: PdfSource;
+  extractor: MenuExtractor;
+  fileExport: FileExport;
+  isOnline: () => boolean;
+  dictionary: Dictionary;
+}
+
+/** One-shot notes passed from the import screen to the review screen (in memory only). */
+export interface Flash {
+  sameFile?: boolean;
 }
 
 interface AppContextValue {
   state: AppState;
   t: Translate;
   today: LocalDate;
+  now: () => Instant;
+  services: AppServices;
+  repository: Repository;
   setLanguage: (language: Language) => void;
+  /** Validates and writes; true when stored. The screen updates only on success. */
+  commit: (store: BentoMinderStore) => Promise<boolean>;
+  /** US-E10-04/AC1, US-E10-02/AC7: removes every app key and starts over in Japanese. */
+  startOver: () => Promise<void>;
+  /** US-E10-03/AC3: replaces the stored data with an imported store. */
+  replaceStore: (store: BentoMinderStore) => Promise<boolean>;
+  toast: string | null;
+  showToast: (text: string) => void;
+  flash: Flash;
+  setFlash: (flash: Flash) => void;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
@@ -53,14 +94,29 @@ export interface AppProviderProps {
   repository: Repository;
   clock: Clock;
   newDeviceId: () => string;
+  services?: Partial<AppServices>;
   warn?: (message: string) => void;
   children: ReactNode;
 }
 
-export function AppProvider({ repository, clock, newDeviceId, warn, children }: AppProviderProps) {
+const TOAST_MS = 4000;
+
+export function AppProvider({ repository, clock, newDeviceId, services: given, warn, children }: AppProviderProps) {
   const [state, dispatch] = useReducer(appReducer, { phase: 'loading', language: 'ja' });
+  const [toast, setToast] = useState<string | null>(null);
+  const [flash, setFlash] = useState<Flash>({});
   const stateRef = useRef(state);
   stateRef.current = state;
+  const services = useMemo<AppServices>(
+    () => ({
+      pdfSource: given?.pdfSource ?? createWebPdfSource(),
+      extractor: given?.extractor ?? createWebExtractor(),
+      fileExport: given?.fileExport ?? createWebFileExport(),
+      isOnline: given?.isOnline ?? webIsOnline,
+      dictionary: given?.dictionary ?? shippedDictionary,
+    }),
+    [given],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -95,7 +151,55 @@ export function AppProvider({ repository, clock, newDeviceId, warn, children }: 
     [repository, clock],
   );
 
+  const commit = useCallback(
+    async (store: BentoMinderStore) => {
+      try {
+        await repository.save(store);
+      } catch {
+        dispatch({ type: 'save-result', ok: false });
+        return false;
+      }
+      dispatch({ type: 'store-changed', store, persisted: true });
+      return true;
+    },
+    [repository],
+  );
+
+  const startOver = useCallback(async () => {
+    await repository.deleteAll();
+    dispatch({ type: 'reset', store: createEmptyStore({ deviceId: newDeviceId(), now: clock.now() }) });
+  }, [repository, newDeviceId, clock]);
+
+  const replaceStore = useCallback(
+    async (store: BentoMinderStore) => {
+      try {
+        await repository.save(store);
+      } catch {
+        dispatch({ type: 'save-result', ok: false });
+        return false;
+      }
+      dispatch({ type: 'reset', store });
+      dispatch({ type: 'save-result', ok: true });
+      return true;
+    },
+    [repository],
+  );
+
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const showToast = useCallback((text: string) => {
+    setToast(text);
+    if (timer.current !== null) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setToast(null), TOAST_MS);
+  }, []);
+  useEffect(
+    () => () => {
+      if (timer.current !== null) clearTimeout(timer.current);
+    },
+    [],
+  );
+
   const t = useMemo(() => createTranslator(state.language, warn ? { warn } : {}), [state.language, warn]);
+  const now = useCallback(() => clock.now(), [clock]);
   const today = todayJst(clock.now());
 
   useEffect(() => {
@@ -108,7 +212,10 @@ export function AppProvider({ repository, clock, newDeviceId, warn, children }: 
     else document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const value = useMemo(() => ({ state, t, today, setLanguage }), [state, t, today, setLanguage]);
+  const value = useMemo(
+    () => ({ state, t, today, now, services, repository, setLanguage, commit, startOver, replaceStore, toast, showToast, flash, setFlash }),
+    [state, t, today, now, services, repository, setLanguage, commit, startOver, replaceStore, toast, showToast, flash],
+  );
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
@@ -116,4 +223,11 @@ export function useApp(): AppContextValue {
   const value = useContext(AppContext);
   if (value === null) throw new Error('useApp must be used inside <AppProvider>');
   return value;
+}
+
+/** The ready store; screens that need it render only in the ready phase. */
+export function useStore(): BentoMinderStore {
+  const { state } = useApp();
+  if (state.phase !== 'ready') throw new Error('store not ready');
+  return state.store;
 }

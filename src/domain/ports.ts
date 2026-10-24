@@ -19,7 +19,16 @@ export interface Storage {
 
 export type PdfBytes = Uint8Array;
 
-export type ExtractError = 'RATE_LIMITED' | 'UNAVAILABLE' | 'MALFORMED_OUTPUT' | 'NOT_A_MENU' | 'TOO_LARGE' | 'NETWORK';
+/** ADR 002 §3 wire errors, plus NOT_A_PDF / NOT_CONFIGURED (M1) and NETWORK (proxy unreachable). */
+export type ExtractError =
+  | 'RATE_LIMITED'
+  | 'UNAVAILABLE'
+  | 'MALFORMED_OUTPUT'
+  | 'NOT_A_MENU'
+  | 'TOO_LARGE'
+  | 'NOT_A_PDF'
+  | 'NOT_CONFIGURED'
+  | 'NETWORK';
 export type ProviderCalls = 0 | 1 | 2;
 
 export type ExtractResult =
@@ -34,14 +43,20 @@ export interface MenuExtractor {
   extract(input: { pdf: PdfBytes; targetMonth: string }, signal?: AbortSignal): Promise<ExtractResult>;
 }
 
-export type PdfError = 'NETWORK' | 'NOT_FOUND' | 'NOT_A_PDF' | 'TOO_LARGE' | 'URL_NOT_ALLOWED' | 'UNAVAILABLE';
+/** US-E2-02/AC1, AC3, US-E2-03: BLOCKED = 403 / private address / > 3 redirects; EMPTY = 0 bytes. */
+export type PdfError = 'NETWORK' | 'NOT_FOUND' | 'NOT_A_PDF' | 'TOO_LARGE' | 'BLOCKED' | 'EMPTY';
 export type PdfResult =
   | { ok: true; bytes: PdfBytes; sha256: string; byteSize: number; filename?: string }
   | { ok: false; error: PdfError };
 
 export interface PdfSource {
-  fromUrl(url: string): Promise<PdfResult>;
-  fromFile(file: Blob): Promise<PdfResult>;
+  fromUrl(url: string, signal?: AbortSignal): Promise<PdfResult>;
+  fromFile(file: Blob & { name?: string }): Promise<PdfResult>;
+}
+
+/** Saving a file the parent keeps (export, US-E10-03/AC4); Android uses the share sheet in v1. */
+export interface FileExport {
+  save(filename: string, contents: string, mime: string): Promise<void>;
 }
 
 /** ADR 004 §4: a planned reminder; keys follow the contract's ReminderLogEntry.key. */
