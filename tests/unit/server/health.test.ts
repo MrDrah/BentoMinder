@@ -52,8 +52,8 @@ afterAll(async () => {
   await new Promise<void>((resolve) => server.close(() => resolve()));
 });
 
-const extract = (query: string, body: Uint8Array | Buffer = PDF, headers: Record<string, string> = {}) =>
-  fetch(`${base}/api/menu/extract?${query}`, { method: 'POST', body, headers: { 'content-type': 'application/pdf', ...headers } });
+const extract = (query: string, raw: Uint8Array = PDF, headers: Record<string, string> = {}) =>
+  fetch(`${base}/api/menu/extract?${query}`, { method: 'POST', body: new Uint8Array(raw), headers: { 'content-type': 'application/pdf', ...headers } });
 
 describe('local proxy', () => {
   it('GET /api/health answers { ok: true, version }', async () => {

@@ -8,17 +8,19 @@ const PDF = new TextEncoder().encode('%PDF-1.7\n...fixture bytes...');
 const PUBLIC: ResolvedAddress = { address: '93.184.215.14', family: 4 };
 
 function response(status: number, body: Uint8Array[] = [], headers: Record<string, string> = {}): PdfResponse & { destroyed: boolean } {
+  const state = { destroyed: false };
   const r = {
     status,
     headers,
     destroyed: false,
     body: (async function* () {
       for (const c of body) {
-        if (r.destroyed) return;
+        if (state.destroyed) return;
         yield c;
       }
     })(),
     destroy() {
+      state.destroyed = true;
       r.destroyed = true;
     },
   };
@@ -156,16 +158,18 @@ describe('US-E2-02/AC3 the 10 MB cap is enforced while streaming (BR-14)', () =>
     const chunk = new Uint8Array(MB);
     chunk.set(PDF);
     let served = 0;
+    const stop = { destroyed: false };
     const big: PdfResponse & { destroyed: boolean } = {
       status: 200,
       headers: {},
       destroyed: false,
       destroy() {
+        stop.destroyed = true;
         big.destroyed = true;
       },
       body: (async function* () {
         for (let i = 0; i < 50; i += 1) {
-          if (big.destroyed) return;
+          if (stop.destroyed) return;
           served += 1;
           yield chunk;
         }
