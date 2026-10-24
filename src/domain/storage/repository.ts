@@ -19,7 +19,7 @@ export type LoadResult =
   | { kind: 'ok'; state: BentoMinderStore; migratedFrom?: number }
   | { kind: 'recovered-from-prev'; state: BentoMinderStore; reason: CorruptReason }
   | { kind: 'corrupt'; raw: string; reason: CorruptReason }
-  | { kind: 'too-new'; version: number };
+  | { kind: 'too-new'; version: number; raw: string };
 
 export type ImportResult =
   | { ok: true; state: BentoMinderStore; migratedFrom?: number }
@@ -108,7 +108,7 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
         }
         return { kind: 'ok', state: result.state };
       }
-      if (result.error === 'too-new') return { kind: 'too-new', version: result.version };
+      if (result.error === 'too-new') return { kind: 'too-new', version: result.version, raw };
       const reason = reasonOf(result);
       const prevRaw = await storage.read('bentominder.state.prev');
       const prev = prevRaw === null ? null : decode(prevRaw);

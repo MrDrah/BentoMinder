@@ -21,6 +21,8 @@
     "merge:research": "node scripts/merge-research.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "check:no-debug": "node scripts/check-no-debug.mjs",
+    "fixtures:menus": "node tests/fixtures/pdf/generate-menus.mjs",
+    "check:fixtures": "node tests/fixtures/pdf/check-fixtures.mjs",
     "eval:extraction": "node --env-file=.env scripts/eval-extraction.mjs"
   },
   "dependencies": {

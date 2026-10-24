@@ -3,6 +3,7 @@
    `virtual:display-font.css`: the unicode-range slices covering the catalogs and recipe names,
    woff2 only, font-display: swap (see vite.config.ts and scripts/display-font.mjs). */
 @import '../../../design/tokens.css';
+@import './forms.css';
 
 *,
 *::before,

@@ -158,15 +158,34 @@ describe('US-E10-05 extracted menu (§3.3)', () => {
 
   it('US-E10-05 menu sources: https URLs only, required fields per kind (BR-14)', () => {
     const src = extraction().source;
-    expect(rules(menuSourceSchema, { ...src, kind: 'url' })).toContain('source-field-required');
-    expect(rules(menuSourceSchema, { ...src, kind: 'url', url: 'http://example-kinder.test/m.pdf' })).toContain('source-url-https');
+    expect(rules(menuSourceSchema, { ...src, kind: 'url' })).toContain('menu-source-field-required');
+    expect(rules(menuSourceSchema, { ...src, kind: 'url', url: 'http://example-kinder.test/m.pdf' })).toContain('menu-source-url-https');
     expect(rules(menuSourceSchema, { ...src, kind: 'url', url: 'https://example-kinder.test/m.pdf' })).toEqual([]);
-    expect(rules(menuSourceSchema, { ...src, kind: 'upload' })).toContain('source-field-required');
-    expect(rules(menuSourceSchema, { kind: 'fixture', fetchedAt: src.fetchedAt })).toContain('source-field-required');
+    expect(rules(menuSourceSchema, { ...src, kind: 'upload' })).toContain('menu-source-field-required');
+    expect(rules(menuSourceSchema, { ...src, kind: 'upload', filename: 'm.pdf', url: 'http://a.test/m.pdf' })).toContain('menu-source-url-https');
+    expect(rules(menuSourceSchema, { ...src, kind: 'upload', filename: 'm.pdf', url: 'https://a.test/m.pdf' })).toEqual([]);
+    expect(rules(menuSourceSchema, { kind: 'fixture', fetchedAt: src.fetchedAt })).toContain('menu-source-field-required');
+    expect(rules(menuSourceSchema, { ...src, sha256: 'ABC' })).toContain('menu-source-field-required');
     expect(rules(menuSourceSchema, { kind: 'manual', fetchedAt: src.fetchedAt })).toEqual([]);
     expect(isHttpsUrl('https://a.test:8443/m.pdf')).toBe(false);
     expect(isHttpsUrl('https://a.test:443/m.pdf')).toBe(true);
     expect(isHttpsUrl('not a url')).toBe(false);
+  });
+
+  it('US-E2-01/AC3 a menu source URL longer than 2,048 characters fails text-length (BR-14)', () => {
+    const src = extraction().source;
+    const prefix = 'https://example-kinder.test/';
+    const url2048 = prefix + 'a'.repeat(2048 - prefix.length);
+    expect(rules(menuSourceSchema, { ...src, kind: 'url', url: url2048 })).toEqual([]);
+    expect(rules(menuSourceSchema, { ...src, kind: 'url', url: `${url2048}a` })).toEqual(['text-length']);
+  });
+
+  it('US-E3-06/AC6 the root store requires nextMonthCardHiddenOn: a Tokyo date or null', () => {
+    expect(rules(bentoMinderStoreSchema, { ...clone(base), nextMonthCardHiddenOn: '2026-11-20' })).toEqual([]);
+    expect(rules(bentoMinderStoreSchema, { ...clone(base), nextMonthCardHiddenOn: '2026-11-31' })).toContain('date-invalid');
+    const { nextMonthCardHiddenOn: _omit, ...withoutField } = clone(base);
+    void _omit;
+    expect(bentoMinderStoreSchema.safeParse(withoutField).success).toBe(false);
   });
 
   it('US-E10-05 days are unique, sorted, disjoint from no-lunch days and inside the target month', () => {

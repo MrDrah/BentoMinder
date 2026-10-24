@@ -190,5 +190,6 @@
     }
   ],
   "consent": { "aiNoticeVersion": 1, "consentedAt": "2026-10-28T20:19:00+09:00" },
+  "nextMonthCardHiddenOn": null,
   "aiUsage": { "2026-11": 1 }
 }

@@ -101,25 +101,25 @@ export type OutOfMonthEntry = z.infer<typeof outOfMonthEntrySchema>;
 
 const SHA256_RE = /^[0-9a-f]{64}$/;
 export const MAX_PDF_BYTES = 10_485_760; // BR-14
+export const MAX_URL_LENGTH = 2048; // BR-14
 
 export const menuSourceSchema = obj({
   kind: z.enum(['url', 'upload', 'manual', 'fixture']),
-  url: z.string().max(2048).optional(),
+  url: z.string().refine((u) => u.length <= MAX_URL_LENGTH, { error: 'text-length' }).optional(),
   filename: boundedText(1, 255).optional(),
-  sha256: z.string().regex(SHA256_RE, { error: 'source-field-required' }).optional(),
+  sha256: z.string().regex(SHA256_RE, { error: 'menu-source-field-required' }).optional(),
   byteSize: intRange(1, MAX_PDF_BYTES).optional(),
   fetchedAt: timestampSchema,
   model: z.string().min(1).optional(),
   promptVersion: intRange(1).optional(),
 }).superRefine((s, ctx) => {
-  if (s.kind === 'url') {
-    if (s.url === undefined) issue(ctx, 'source-field-required', ['url']);
-    else if (!isHttpsUrl(s.url)) issue(ctx, 'source-url-https', ['url']);
-  }
-  if (s.kind === 'upload' && s.filename === undefined) issue(ctx, 'source-field-required', ['filename']);
+  if (s.kind === 'url' && s.url === undefined) issue(ctx, 'menu-source-field-required', ['url']);
+  // An upload may also carry the URL the parent entered before it (US-E2-02/AC2), same rules.
+  if (s.url !== undefined && !isHttpsUrl(s.url)) issue(ctx, 'menu-source-url-https', ['url']);
+  if (s.kind === 'upload' && s.filename === undefined) issue(ctx, 'menu-source-field-required', ['filename']);
   if (s.kind !== 'manual') {
     for (const field of ['sha256', 'byteSize', 'model', 'promptVersion'] as const) {
-      if (s[field] === undefined) issue(ctx, 'source-field-required', [field]);
+      if (s[field] === undefined) issue(ctx, 'menu-source-field-required', [field]);
     }
   }
 });

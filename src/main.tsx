@@ -12,6 +12,7 @@ import './ui/styles/global.css';
 
 const adapters = selectAdapters();
 const repository = createRepository(adapters.storage, adapters.clock);
+const services = { pdfSource: adapters.pdfSource, extractor: adapters.extractor, fileExport: adapters.fileExport, isOnline: adapters.isOnline };
 const warn = import.meta.env.DEV ? (message: string) => console.warn(message) : undefined;
 
 const rootElement = document.getElementById('root');
@@ -19,7 +20,7 @@ if (rootElement === null) throw new Error('#root is missing from index.html');
 
 createRoot(rootElement).render(
   <StrictMode>
-    <AppProvider repository={repository} clock={adapters.clock} newDeviceId={adapters.newDeviceId} {...(warn ? { warn } : {})}>
+    <AppProvider repository={repository} clock={adapters.clock} newDeviceId={adapters.newDeviceId} services={services} {...(warn ? { warn } : {})}>
       <App />
     </AppProvider>
   </StrictMode>,

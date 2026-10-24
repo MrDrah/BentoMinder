@@ -15,7 +15,8 @@ describe('US-E8-02/AC1 catalog parity (BR-23)', () => {
   });
 
   it('US-E8-02/AC1 every placeholder in a ja message exists in the en message and vice versa', () => {
-    const names = (s: string) => [...s.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort();
+    // `{n}` in ja and `{n, plural, …}` in en name the same parameter.
+    const names = (s: string) => [...new Set([...s.matchAll(/\{(\w+)(?:\}|,)/g)].map((m) => m[1]))].sort();
     const differing = (Object.keys(ja) as (keyof typeof ja)[]).filter((k) => {
       // Date formats legitimately use different parts per language (copy.md §2).
       if (k.startsWith('fmt.')) return false;
@@ -39,6 +40,18 @@ describe('US-E8-02/AC3 missing key fallback (BR-23)', () => {
   it('US-E8-02/AC3 without a warn hook the fallback is silent; unknown keys show the key', () => {
     const t = createTranslator('en', { catalogs: { ja: {}, en: {} } });
     expect(t('cal.today')).toBe('cal.today');
+  });
+
+  it('US-E3-03/AC2 formats the copy sheet plurals: ja count, en one/other', () => {
+    expect(createTranslator('ja')('review.uncertainDialog.title', { n: 2 })).toBe('確認が必要な項目が2件あります。このまま確定しますか？');
+    expect(createTranslator('en')('review.uncertainDialog.title', { n: 1 })).toBe('1 item still needs checking. Confirm anyway?');
+    expect(createTranslator('en')('review.uncertainDialog.title', { n: 2 })).toBe('2 items still need checking. Confirm anyway?');
+    expect(interpolate('{k, select, a {A{x}} other {O}}', { k: 'a', x: '!' })).toBe('A!');
+    expect(interpolate('{k, select, a {A} other {O}}', { k: 'b' })).toBe('O');
+    expect(interpolate('{n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}}', { n: 22 }, 'en')).toBe('22nd');
+    expect(interpolate('{n, plural, =0 {none} other {#}}', { n: 0 }, 'en')).toBe('none');
+    expect(interpolate('{n, plural, one {x}}', { n: 5 }, 'en')).toBe('{n, plural, one {x}}');
+    expect(interpolate('a {b, foo} {unclosed', {})).toBe('a {b, foo} {unclosed');
   });
 
   it('interpolates named parameters and leaves unknown ones visible', () => {

@@ -8,6 +8,7 @@ import { en } from './src/i18n/en.ts';
 import { ja } from './src/i18n/ja.ts';
 
 const root = dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as { version: string };
 
 /**
  * `virtual:display-font.css`: Zen Maru Gothic 500/700 @font-face rules for the slices that
@@ -46,6 +47,7 @@ function displayFont(): Plugin {
 export default defineConfig({
   base: './',
   plugins: [react(), displayFont()],
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   build: {
     target: ['es2022', 'chrome111'],
     sourcemap: false,
@@ -59,5 +61,9 @@ export default defineConfig({
   preview: {
     port: 4173,
     strictPort: true,
+    // The e2e run serves the production build with the local proxy behind it (ADR 002).
+    proxy: {
+      '/api': 'http://127.0.0.1:8787',
+    },
   },
 });

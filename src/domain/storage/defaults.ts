@@ -39,6 +39,7 @@ export function createEmptyStore(input: { deviceId: string; now: Instant }): Ben
     decisions: {},
     reminderLog: [],
     consent: null,
+    nextMonthCardHiddenOn: null,
     aiUsage: {},
   };
 }
