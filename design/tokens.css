@@ -1,0 +1,194 @@
+/* BentoMinder design tokens v0.1 (direction preview, 2026-10-24)
+   Source of truth: design/tokens.json. Light is default; dark via
+   [data-theme="dark"] or the OS preference when no explicit theme is set. */
+
+:root {
+  color-scheme: light;
+
+  /* Colour roles: light */
+  --surface-1: #FFFFFF;
+  --surface-2: #FFFDF8;
+  --surface-3: #F2EADB;
+  --line-1: #E4DAC8;
+  --line-ui: #8C8574;
+  --ink-1: #1B2A4A;
+  --ink-2: #3F4B66;
+  --ink-3: #5F6880;
+  --ink-inverse: #FBF6EC;
+  --accent: #D2574F;
+  --accent-strong: #B8443C;
+  --accent-strong-hover: #A23A33;
+  --accent-ink: #A83A33;
+  --accent-soft: #F8E1DC;
+  --navy-fill: #1B2A4A;
+  --saturday: #2F5C9A;
+  --sunday: #A83A33;
+  --info: #2F5C9A;
+  --info-soft: #E3ECF8;
+  --success: #2F6B4F;
+  --success-soft: #E1F0E6;
+  --warning: #7A4E00;
+  --warning-soft: #FFF0D1;
+  --danger: #A3271F;
+  --danger-soft: #FBE3E0;
+  --focus-ring: #1F5FBF;
+  --stripe-a: #1B2A4A;
+  --stripe-b: #D2574F;
+  --scrim: rgba(27, 42, 74, 0.45);
+  /* Illustration only (decorative) */
+  --illus-rice: #FFFFFF;
+  --illus-egg: #F2C14E;
+  --illus-green: #7FA86A;
+  --illus-brown: #9A6544;
+  --illus-nori: #1B2A4A;
+  --illus-pink: #F4B6AE;
+
+  /* Typography */
+  --font-display: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --font-body: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 34px;
+  --leading-tight: 1.35;
+  --leading-normal: 1.7;
+  --leading-relaxed: 1.85;
+  --tracking-body: 0.02em;
+  --tracking-heading: 0.04em;
+
+  /* Spacing: 4px scale */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Sizes */
+  --touch-min: 44px;
+  --touch-comfy: 52px;
+  --cell-min-height: 68px;
+  --content-max: 480px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --elevation-1: 0 1px 2px rgba(27, 42, 74, 0.06), 0 1px 1px rgba(27, 42, 74, 0.04);
+  --elevation-2: 0 4px 12px rgba(27, 42, 74, 0.08), 0 1px 3px rgba(27, 42, 74, 0.06);
+  --elevation-3: 0 -8px 28px rgba(27, 42, 74, 0.14);
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  /* Patterns */
+  --stripe-band: repeating-linear-gradient(180deg, var(--stripe-a) 0 3px, transparent 3px 7px);
+  --stripe-band-red: repeating-linear-gradient(180deg, var(--stripe-b) 0 3px, transparent 3px 7px);
+  --hatch: repeating-linear-gradient(135deg, var(--line-1) 0 2px, transparent 2px 7px);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-1: #141B2B;
+  --surface-2: #1C2539;
+  --surface-3: #253049;
+  --line-1: #2F3A54;
+  --line-ui: #7D7A72;
+  --ink-1: #F6EFE2;
+  --ink-2: #CDC6B8;
+  --ink-3: #A7A398;
+  --ink-inverse: #141B2B;
+  --accent: #F08A80;
+  --accent-strong: #F08A80;
+  --accent-strong-hover: #F4A097;
+  --accent-ink: #F4A097;
+  --accent-soft: #3A2429;
+  --navy-fill: #F6EFE2;
+  --saturday: #8FB4F0;
+  --sunday: #F4A097;
+  --info: #8FB4F0;
+  --info-soft: #22314F;
+  --success: #8FD3AE;
+  --success-soft: #1D3A30;
+  --warning: #F2C66D;
+  --warning-soft: #3A3020;
+  --danger: #FF9C92;
+  --danger-soft: #40242A;
+  --focus-ring: #8FB4F0;
+  --stripe-a: #F6EFE2;
+  --stripe-b: #F08A80;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --illus-rice: #F6EFE2;
+  --illus-nori: #141B2B;
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --surface-1: #141B2B;
+    --surface-2: #1C2539;
+    --surface-3: #253049;
+    --line-1: #2F3A54;
+    --line-ui: #7D7A72;
+    --ink-1: #F6EFE2;
+    --ink-2: #CDC6B8;
+    --ink-3: #A7A398;
+    --ink-inverse: #141B2B;
+    --accent: #F08A80;
+    --accent-strong: #F08A80;
+    --accent-strong-hover: #F4A097;
+    --accent-ink: #F4A097;
+    --accent-soft: #3A2429;
+    --navy-fill: #F6EFE2;
+    --saturday: #8FB4F0;
+    --sunday: #F4A097;
+    --info: #8FB4F0;
+    --info-soft: #22314F;
+    --success: #8FD3AE;
+    --success-soft: #1D3A30;
+    --warning: #F2C66D;
+    --warning-soft: #3A3020;
+    --danger: #FF9C92;
+    --danger-soft: #40242A;
+    --focus-ring: #8FB4F0;
+    --stripe-a: #F6EFE2;
+    --stripe-b: #F08A80;
+    --scrim: rgba(0, 0, 0, 0.6);
+  --illus-rice: #F6EFE2;
+  --illus-nori: #141B2B;
+    --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
+    --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

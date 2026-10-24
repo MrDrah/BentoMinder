@@ -1,2 +1,16 @@
 {"v":1,"at":"2026-10-24T07:38:12.438Z","type":"product-decision","summary":"Kick-off: BentoMinder scaffolded from app-boilerplate v0.5.0 (content-app), local git only, no push or deploy without PO approval","by":"orchestrator"}
 {"v":1,"at":"2026-10-24T07:38:12.851Z","type":"product-decision","summary":"PO asked to delegate requirements, architecture and design proposals before BR-table approval; framework order (BR yes before dispatch) relaxed for proposal-only work","by":"orchestrator"}
+{"v":1,"at":"2026-10-24T07:38:39.569Z","by":"orchestrator","type":"task-start","task":"ba-kickoff","summary":"Task ba-kickoff dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T07:38:39.738Z","by":"orchestrator","type":"task-start","task":"tech-research","summary":"Task tech-research dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T07:38:39.903Z","by":"orchestrator","type":"task-start","task":"dev-architecture","summary":"Task dev-architecture dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T07:38:40.073Z","by":"orchestrator","type":"task-start","task":"design-preview","summary":"Task design-preview dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T07:40:20.569Z","type":"manual-implementation","summary":"Orchestrator set the new repo's local git identity by hand (preflight warning; framework forbids global config)","by":"orchestrator"}
+{"v":1,"at":"2026-10-24T07:46:27.442Z","by":"orchestrator","type":"task-end","task":"dev-architecture","outcome":"failure","summary":"diff-guard: 14 files outside the allow-list"}
+{"v":1,"at":"2026-10-24T07:53:54.820Z","type":"verification","summary":"Verifier confirmed 13/13 AI-provider and Android claims; one merged quote and one missing citation found","task":"tech-research","outcome":"success"}
+{"v":1,"at":"2026-10-24T07:53:55.025Z","type":"technical-correction","summary":"Orchestrator split a merged model-card quote and added the Android 14 exact-alarm citation after verification","task":"tech-research"}
+{"v":1,"at":"2026-10-24T08:03:16.983Z","type":"verification","summary":"Orchestrator reviewed the design preview in a browser; four kick-off tasks touched only their allowed files (checked as a union, FL-08)","task":"design-preview","outcome":"success"}
+{"v":1,"at":"2026-10-24T08:11:53.066Z","type":"approval","summary":"PO approved the architecture (ADR 001-005 direction) and the BR table BR-01..BR-27 at kick-off","by":"product-owner"}
+{"v":1,"at":"2026-10-24T08:13:09.547Z","type":"product-decision","summary":"PO: design token surface-1 (light page background) changed from cream to pure white, no yellow tint","by":"product-owner"}
+{"v":1,"at":"2026-10-24T08:28:01.973Z","type":"product-decision","summary":"PO accepted the design direction: Monday week start (Sunday setting), Sat blue / Sun red numbers, Zen Maru Gothic + system fonts, no tab bar","by":"product-owner"}
+{"v":1,"at":"2026-10-24T08:30:01.453Z","type":"product-decision","summary":"PO: AI menu import used from Japan only; Gemini free tier, no billing account","by":"product-owner"}
+{"v":1,"at":"2026-10-24T08:30:01.703Z","type":"product-decision","summary":"PO accepted all 15 BA open-question defaults OQ-01..OQ-15","by":"product-owner"}
