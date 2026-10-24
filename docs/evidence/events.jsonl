@@ -38,3 +38,4 @@
 {"v":1,"at":"2026-10-24T09:39:01.194Z","by":"orchestrator","type":"task-start","task":"h2-design","summary":"Task h2-design dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-10-24T10:06:47.975Z","by":"orchestrator","type":"task-end","task":"h2-design","outcome":"success","summary":"diff-guard: 19 changed files, all allowed"}
 {"v":1,"at":"2026-10-24T10:07:16.017Z","type":"verification","summary":"H2 closed: diff-guard PASS (19 files in design/), contrast 0/136 fails re-checked independently, 0 banned phrases in 561 copy rows","task":"h2-design","outcome":"success"}
+{"v":1,"at":"2026-10-24T10:28:45.995Z","type":"approval","summary":"PO approved committing H1 and H2 locally and starting M0","by":"product-owner"}

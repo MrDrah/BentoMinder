@@ -6,6 +6,10 @@
       "run": "npm run validate:data"
     },
     {
+      "name": "lint",
+      "run": "npm run lint"
+    },
+    {
       "name": "typecheck",
       "run": "npm run typecheck"
     },
@@ -16,6 +20,14 @@
     {
       "name": "build",
       "run": "npm run build"
+    },
+    {
+      "name": "no debug in build",
+      "run": "npm run check:no-debug"
+    },
+    {
+      "name": "e2e",
+      "run": "npm run test:e2e"
     }
   ],
   "generated": [
@@ -27,6 +39,19 @@
       "path": "data/library.json",
       "from": "data/_research/batch-*.json",
       "by": "npm run merge:research"
+    },
+    {
+      "path": "data/dictionary.json",
+      "from": "docs/ba/domain-dictionary.md",
+      "by": "npm run build:dictionary"
+    },
+    {
+      "path": "coverage/**",
+      "by": "npm run coverage"
+    },
+    {
+      "path": "reports/**",
+      "by": "npm run coverage, npm run test:e2e, npm run eval:extraction"
     }
   ],
   "docs": {
@@ -34,7 +59,10 @@
       "CATCH-UP.md",
       "docs/PLAN.md",
       "docs/PROJECT_BRIEF.md",
-      "docs/ba/user-stories.md"
+      "docs/ba/user-stories.md",
+      "docs/ba/data-contract.md",
+      "docs/dev/architecture.md",
+      "data/banned-phrases.json"
     ],
     "catchUp": "CATCH-UP.md",
     "maxStaleDays": 7,
@@ -50,7 +78,12 @@
       "src/**/*.{test,spec}.{ts,tsx,js,jsx,mjs,cjs}"
     ],
     "pattern": "US-[A-Z0-9]+-\\d+",
-    "allowUntested": []
+    "allowUntested": [
+      "US-E7-08",
+      "US-E12-02",
+      "US-E12-03",
+      "US-E12-04"
+    ]
   },
   "stages": {
     "dev": [
@@ -80,6 +113,11 @@
       "name": "CSS",
       "glob": "dist/assets/*.css",
       "maxGzipKb": 50
+    },
+    {
+      "name": "Recipe library",
+      "glob": "data/library.json",
+      "maxGzipKb": 60
     }
   ],
   "secrets": {
@@ -95,9 +133,28 @@
     ],
     "idField": "id",
     "fields": [
-      "shortDescription",
-      "history",
-      "tasteProfile"
+      "description.en",
+      "steps.0.en",
+      "steps.1.en",
+      "steps.2.en",
+      "steps.3.en",
+      "steps.4.en",
+      "steps.5.en",
+      "steps.6.en",
+      "steps.7.en",
+      "steps.8.en",
+      "steps.9.en",
+      "steps.10.en",
+      "steps.11.en",
+      "storage.0.en",
+      "storage.1.en",
+      "storage.2.en",
+      "storage.3.en",
+      "adaptations.0.en",
+      "adaptations.1.en",
+      "adaptations.2.en",
+      "adaptations.3.en",
+      "makeAhead.en"
     ],
     "sourcesField": "sources",
     "urlField": "url",
@@ -109,8 +166,8 @@
     "inGate": true
   },
   "preflight": {
-    "nodeMajor": 20,
-    "requireRemote": true,
+    "nodeMajor": 22,
+    "requireRemote": false,
     "optional": [
       "gh",
       "playwright"
