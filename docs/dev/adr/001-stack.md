@@ -82,6 +82,17 @@ Related: ADR 002 (AI extraction), ADR 003 (local data), ADR 004 (domain engines)
 - We own ~200 lines of infrastructure (router, jst, i18n) that libraries would otherwise provide. Each is pure and covered by unit tests.
 - Must test: `jst` across month/year boundaries and foreign device timezones; router round-trip; both locales render every screen; production bundle contains no debug code (architecture §5).
 
+### Measured at M0 (2026-10-24, production build, `vite build` 7.3.7)
+| What | Measured | Budget / threshold |
+|------|----------|--------------------|
+| JS (`dist/assets/*.js`, one chunk) | 350.9 KB raw, **105.3 KB gzip** (React 19 + ReactDOM, zod v4 for the store schemas, shell, two catalogs) | 400 KB gzip; audit at 250 KB |
+| CSS (`dist/assets/*.css`) | 32.7 KB raw, **6.9 KB gzip** (tokens + shell + display-font `@font-face` subset) | 50 KB gzip |
+| First-screen font transfer, calendar in ja (390 px and 1280 px, empty cache) | **93.0 KB**, 8 woff2 slices (Zen Maru Gothic 500 + 700) | revisit at ~400 KB |
+| First-screen font transfer, calendar in en | **22.6 KB**, 2 woff2 slices (latin 500 + 700) | revisit at ~400 KB |
+| Font files emitted to `dist/` | 44 woff2 slices (22 per weight), fetched only when a glyph on screen needs them | not budgeted |
+
+**Display-font subset (applied at M0, within the "subset" revisit clause above).** The stock `@fontsource` CSS declares ~120 unicode-range slices per weight, each with woff2 and woff sources; for two weights it built to **129.7 KB gzip of CSS**, and the unicode-range lists alone are ~57 KB gzip, so the CSS budget (50 KB) could not be met with full coverage. `vite.config.ts` therefore generates `virtual:display-font.css` at build time (`scripts/display-font.mjs`): it keeps the `@font-face` rules of the slices whose unicode-range covers any character of the ja/en catalogs, printable ASCII and the recipe names in `data/library.json`, woff2 only (every target WebView supports it). Nothing is committed as a generated file; the subset follows the catalogs and library automatically. A display-font character outside the kept slices (rare kanji in a user-entered nickname, say) renders in the next font of `--font-display`, the same fallback `font-display: swap` already shows while loading. Body text never used the web font.
+
 ## Revisit when
 - A third locale or real plural/gender rules are needed → reconsider FormatJS / i18next.
 - The app must schedule in a timezone other than Asia/Tokyo, or Japan reintroduces DST → adopt `@date-fns/tz` or native Temporal.
@@ -95,3 +106,4 @@ Related: ADR 002 (AI extraction), ADR 003 (local data), ADR 004 (domain engines)
 - 2026-10-24 · **accepted** at H1. Added: Monday week start by default with a Sunday setting (design decision; `settings.weekStartsOn`, calendar grid only) and `settings.theme`; recipe short names (`shortNameJa/En`, 1–8 characters, curated in the Recipe contract, no mechanical truncation); Zen Maru Gothic display font self-hosted via `@fontsource` instead of "system fonts only" (design direction accepted by the PO); `preflight.nodeMajor: 22` agreed.
 - 2026-10-24 · H1 fix round (Developer): short-name open point closed: `DayDecision` snapshots `shortNameJa/En` (PLAN §7 "H1 non-blocking").
 - 2026-10-24 · H1 late ruling (Developer): short-name snapshot named `DayDecision.recipeShortNameSnapshot { ja, en }` per data contract §3.6.
+- 2026-10-24 · M0 (Developer): measured bundle and first-screen font transfer recorded ("Measured at M0"); display-font `@font-face` rules subset to the slices the catalogs and recipe names use, because the stock `@fontsource` CSS alone exceeded the 50 KB CSS budget. Versions pinned at M0: Vite 7.3, React 19.3, TypeScript 5.9, zod 4.6, Vitest 4.1, Playwright 1.64, ESLint 9.39 (`eslint-plugin-react` does not support ESLint 10 yet).
