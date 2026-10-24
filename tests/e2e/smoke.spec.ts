@@ -2,12 +2,15 @@
 // en-US browser locale on purpose (BR-15, BR-23). Time comes from page.clock, never the debug panel.
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
+import { seedStore } from './helpers.ts';
 
 // 2026-11-15 00:30 JST = 2026-11-14 16:30 in Paris, 07:30 in Los Angeles.
 const TOKYO_JUST_AFTER_MIDNIGHT = new Date('2026-11-14T15:30:00Z');
 
+// M1: a fresh device opens onboarding, so the shell checks start from a stored profile and menu.
 test.beforeEach(async ({ page }) => {
   await page.clock.setFixedTime(TOKYO_JUST_AFTER_MIDNIGHT);
+  await seedStore(page);
 });
 
 test('US-E8-01/AC1 opens in Japanese whatever the browser language', async ({ page }) => {

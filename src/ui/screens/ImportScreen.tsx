@@ -455,9 +455,7 @@ export function ConsentDialog({ onAccept, onDecline, readOnly = false }: { onAcc
     return <Dialog name="consent" title={t('consent.title')} body={body} confirmLabel={t('common.close')} cancelLabel={t('common.close')} onConfirm={onAccept} onCancel={onDecline} />;
   }
   return (
-    <div data-testid="consent-dialog">
-      <Dialog name="consent" title={t('consent.title')} body={body} confirmLabel={t('consent.accept')} cancelLabel={t('consent.decline')} confirmTestId="consent-accept" cancelTestId="consent-decline" onConfirm={onAccept} onCancel={onDecline} />
-    </div>
+    <Dialog testId="consent-dialog" name="consent" title={t('consent.title')} body={body} confirmLabel={t('consent.accept')} cancelLabel={t('consent.decline')} confirmTestId="consent-accept" cancelTestId="consent-decline" onConfirm={onAccept} onCancel={onDecline} />
   );
 }
 

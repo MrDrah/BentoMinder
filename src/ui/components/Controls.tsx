@@ -17,11 +17,12 @@ export interface DialogProps {
   error?: string | null;
   children?: ReactNode;
   confirmTestId?: string;
+  testId?: string;
   cancelTestId?: string;
 }
 
 /** §1.13: modal, labelled and described; initial focus on the least destructive action; Esc = cancel. */
-export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm, onCancel, destructive = false, busy = false, error = null, children, confirmTestId, cancelTestId }: DialogProps) {
+export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm, onCancel, destructive = false, busy = false, error = null, children, confirmTestId, cancelTestId, testId }: DialogProps) {
   const titleId = useId();
   const bodyId = useId();
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -58,7 +59,7 @@ export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={body === undefined ? undefined : bodyId}
-        data-testid={`dialog-${name}`}
+        data-testid={testId ?? `dialog-${name}`}
         onKeyDown={onKeyDown}
       >
         <h2 id={titleId} className="dialog__title">

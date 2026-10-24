@@ -12,12 +12,23 @@ export default defineConfig({
     baseURL: 'http://localhost:4173',
     trace: 'retain-on-failure',
   },
-  webServer: {
-    command: 'npm run preview',
-    port: 4173,
-    reuseExistingServer: true,
-    timeout: 60_000,
-  },
+  // The production build (vite preview proxies /api) and the local proxy with the recorded-fixture
+  // extractor (M1, ADR 002). The proxy's own call caps are raised for the test run only.
+  webServer: [
+    {
+      command: 'npm run preview',
+      port: 4173,
+      reuseExistingServer: true,
+      timeout: 60_000,
+    },
+    {
+      command: 'node server/index.ts',
+      url: 'http://127.0.0.1:8787/api/health',
+      reuseExistingServer: true,
+      timeout: 30_000,
+      env: { PROXY_EXTRACT_PER_HOUR: '1000', PROXY_EXTRACT_PER_DAY: '1000', PROXY_FETCH_PER_HOUR: '1000' },
+    },
+  ],
   projects: [
     {
       name: 'mobile',
