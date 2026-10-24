@@ -39,3 +39,11 @@
 {"v":1,"at":"2026-10-24T10:06:47.975Z","by":"orchestrator","type":"task-end","task":"h2-design","outcome":"success","summary":"diff-guard: 19 changed files, all allowed"}
 {"v":1,"at":"2026-10-24T10:07:16.017Z","type":"verification","summary":"H2 closed: diff-guard PASS (19 files in design/), contrast 0/136 fails re-checked independently, 0 banned phrases in 561 copy rows","task":"h2-design","outcome":"success"}
 {"v":1,"at":"2026-10-24T10:28:45.995Z","type":"approval","summary":"PO approved committing H1 and H2 locally and starting M0","by":"product-owner"}
+{"v":1,"at":"2026-10-24T10:29:27.206Z","by":"orchestrator","type":"task-start","task":"m0-skeleton","summary":"Task m0-skeleton dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T11:00:44.255Z","by":"orchestrator","type":"task-end","task":"m0-skeleton","outcome":"failure","summary":"diff-guard: 86 files outside the allow-list"}
+{"v":1,"at":"2026-10-24T11:00:48.601Z","by":"orchestrator","type":"task-end","task":"m0-skeleton","outcome":"failure","summary":"diff-guard: 86 files outside the allow-list"}
+{"v":1,"at":"2026-10-24T11:01:21.537Z","type":"technical-correction","summary":"Orchestrator error: task-start --allow was given comma lists (needs one flag per glob); diff-guard runs falsely failed. Re-run correctly: 86 files all allowed","task":"m0-skeleton"}
+{"v":1,"at":"2026-10-24T11:01:21.631Z","type":"task-end","summary":"M0 integrated: diff-guard PASS with corrected allow-list (86 files)","task":"m0-skeleton","outcome":"success"}
+{"v":1,"at":"2026-10-24T11:01:21.732Z","type":"agent-failure","summary":"Developer could not write the env example file: blocked by the secrets deny rule; surfaced to the PO, not bypassed","task":"m0-skeleton"}
+{"v":1,"at":"2026-10-24T11:03:20.285Z","type":"manual-implementation","summary":"Orchestrator added .gitattributes (eol=lf): CRLF checkout of merged M0 broke a Vitest import; gate green after","task":"m0-skeleton"}
+{"v":1,"at":"2026-10-24T11:06:40.358Z","type":"product-decision","summary":"PO will write the env example file personally (agents are blocked by the secrets rule); M1 approved to start","by":"product-owner"}

@@ -22,3 +22,6 @@ data/_research/.cache/
 # task baselines (validate.mjs task-start) and framework upgrade backups
 .claude/state/
 .claude/.upgrade-backup/
+
+# agent worktrees (Claude Code Agent isolation)
+.claude/worktrees/

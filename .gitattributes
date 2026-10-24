@@ -1,0 +1,5 @@
+# Keep LF everywhere so a checkout on Windows (core.autocrlf) behaves like the agents' worktrees:
+# a CRLF shebang line breaks Vitest's import of scripts/*.mjs.
+* text=auto eol=lf
+*.png binary
+*.woff2 binary

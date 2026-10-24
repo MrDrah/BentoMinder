@@ -23,17 +23,19 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 | Scaffold | Project created with `new-project.mjs --content-app`, local git, first commit | `.claude/`, `quality-gate.json` |
 | Brief | PO brief saved verbatim; structured brief with proposed defaults | `docs/ba/po-brief-2026-10-24.md`, `docs/PROJECT_BRIEF.md` |
 | Kick-off | Approved by the PO: architecture, BR-01…27, design direction, OQ-01…15 | `docs/PLAN.md` |
+| M0 | App skeleton: Vite/React/TS, i18n + toggle, JST module, contract v1 schemas, storage, proxy health, data scripts; dev gate green | `src/`, `server/`, `scripts/`, `tests/` |
 | H2 | Final tokens, 64 component specs, flows, a11y spec, ja/en copy (561 rows), preview v1.0 | `design/` |
 | H1 | 73 stories / 287 ACs, data contract v1, dictionary, ADR 001–005, QA strategy + 4 oracles; ~30 rulings in PLAN §7 | `docs/ba/`, `docs/dev/`, `tests/plan/`, `tests/oracle/` |
 
 ### In progress 🔄
-Nothing running. H1 and H2 are closed (2026-10-24) but **not committed**: ask the PO.
+Nothing running. **M0 done** and merged locally (merge commit e1ad2fc); `gate --stage dev` green on main. Uncommitted: `.gitattributes`, plan/catch-up/lessons/event-log updates (ask the PO).
+**Open for the PO:** the env example file (variables listed in `docs/dev/architecture.md` §11.3) is blocked for agents by the secrets deny rule (FL-12).
 
 ### Next 📋
-1. Commit H1 + H2 locally (PO approval).
-2. **M0** skeleton (developer, own worktree) from `docs/dev/architecture.md` §11; apply the agreed `quality-gate.json` changes.
-3. M1 (BA side): amend US-E1-01/AC5, US-E3-02/AC3, US-E9-01/AC3 to the designer's accepted readings; curate recipe short names; define the ~60 strings listed at the end of `design/copy.md`.
-4. Recipe research (BA) alongside M2/M3; verify the 農林水産省 sentences in US-E6-04/AC2.
+1. Commit the M0 integration fixes (PO).
+2. **M1 prep (BA + QA, docs/data):** amend US-E1-01/AC5, US-E3-02/AC3, US-E9-01/AC3 and US-E10-03/AC1 (exportedAt); define the ~60 strings listed at the end of `design/copy.md`; dictionary category forms; review `RULES_NOT_IN_CONTRACT` and `APPROVED_HOSTS`. QA builds the synthetic menu fixtures (`tests/plan/fixtures-plan.md`).
+3. **M1 (developer, worktree):** onboarding, import with mocked AI, review/confirm, export/delete, recovery-screen actions.
+4. Recipe research (BA) alongside M2/M3.
 
 ## 4. Key decisions (summary; the full log is in docs/PLAN.md §7)
 - Local git only; no push, deploy or paid services without PO approval.
@@ -44,10 +46,10 @@ Nothing running. H1 and H2 are closed (2026-10-24) but **not committed**: ask th
 
 ## 5. How to work in this repo
 ```bash
-npm install            # (after M0)
-npm run dev
+npm ci
+npm run dev            # proxy (127.0.0.1:8787) + Vite
 node .claude/skills/quality-gate/scripts/validate.mjs gate --stage dev
-npm run e2e
+npm run test:e2e
 ```
 - Generated files (see `quality-gate.json` → `generated`) are never hand-edited.
 - Commits: small and descriptive. No remote yet.

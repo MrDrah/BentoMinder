@@ -1,6 +1,6 @@
 # Plan — BentoMinder
 
-Owner: Orchestrator · Status: **approved** · H1 and H2 closed 2026-10-24 · next: M0 · 2026-10-24 · framework v0.5.0
+Owner: Orchestrator · Status: **approved** · H1, H2 and M0 done 2026-10-24 · next: M1 · 2026-10-24 · framework v0.5.0
 
 Inputs: PO brief `docs/ba/po-brief-2026-10-24.md` · structured brief `docs/PROJECT_BRIEF.md` · stories `docs/ba/user-stories.md` (73 stories, 264 active ACs, 10 of them v1) · data contract `docs/ba/data-contract.md` · open questions `docs/ba/open-questions.md` · architecture `docs/dev/architecture.md` + ADR 001–005 · research `docs/dev/research/` · design `design/`.
 
@@ -82,7 +82,7 @@ Semantics owned by the BA (`docs/ba/data-contract.md`: ChildProfile, ExtractedMe
 ```
 Phase 0  Kick-off: brief → this plan → BR table + architecture approved by PO   ✓ 2026-10-24
 Phase 1  H1: BA finalises stories with PO answers; Dev aligns ADRs; QA oracles        ✓ 2026-10-24
-Phase 2  H2: Designer full package   ✓ 2026-10-24    ║  M0 skeleton + local gate   ◄ next
+Phase 2  H2: Designer full package   ✓ 2026-10-24    ║  M0 skeleton + local gate   ✓ 2026-10-24
 Phase 3  M1 → M5 (Dev), BA recipe research in parallel with M2/M3, QA per milestone
 Phase 4  QA: e2e journey, verification, report  → MVP milestone evidence
 Phase 5  M6 Android feasibility doc → PO decides v1 Android build
@@ -148,3 +148,5 @@ Phase 5  M6 Android feasibility doc → PO decides v1 Android build
 | 2026-10-24 | **H1 gate closed.** 73 stories / 287 active ACs (10 v1), data contract v1 with `definingIngredientId`, `animalOrigin`, `plannedAt`; ADR 001–004 accepted, ADR 005 accepted for web; QA oracles 65 + 15 / 56 + 23 / 30 / 43 cases, no undecided rule ("H1 oracle-ready"). Carried to M4: US-E7 wording "reminders already shown are not shown again" to read "not fired again as a new reminder" (OQ-20). | Orchestrator |
 | 2026-10-24 | **H2 gate closed.** Tokens (JSON source → generated CSS), 64 component specs with all states, flows for all 73 stories, a11y/responsive spec, ja/en copy sheet (561 rows, 0 banned phrases), preview v1.0. Contrast: 0 of 136 pairs fail (lowest text 4.65:1, lowest UI 3.07:1), re-checked by the Orchestrator. Designer interpretations accepted: 「今月の献立がまだありません」 only when no menu was ever confirmed (else US-E3-06/AC1 wording); 「行事」 in US-E3-02/AC3 is `originalText`, not a reason enum; empty week drops 「ほかの日は…」; calendar switches to a list at 360 px + 200 % text. **Carried to M1 (BA):** amend US-E1-01/AC5, US-E3-02/AC3, US-E9-01/AC3 to match; curate `shortNameJa` with a natural phrase split; define the ~60 strings no AC fixes (listed at the end of `design/copy.md`). **Carried to recipe research:** verify the two 農林水産省 food-handling sentences in US-E6-04/AC2 against the cited source. | Orchestrator |
 | 2026-10-24 | H1 + H2 committed locally (PO). M0 started: `quality-gate.json` updated to architecture §11.4 (7 commands incl. lint, no-debug and e2e; generated dictionary, coverage and reports; required docs; `allowUntested` for the 4 v1 stories; recipe-library budget; overlap fields on `.en` paths; preflight Node 22, `requireRemote: false` while local-only). | Orchestrator |
+| 2026-10-24 | **M0 done.** Skeleton merged locally from the developer's worktree; `gate --stage dev` green on main (139 unit tests, domain coverage 99.8 % statements / 98.4 % branches, 14 e2e, JS 105 KB gzip); `/api/health` checked. Accepted deviations: build-time subset of the Zen Maru Gothic font CSS to meet the 50 KB CSS budget (ADR 001 revisit clause), `#/recipes` route, calendar as a semantic table until M2, ESLint 9. Orchestrator added `.gitattributes` (LF) after a CRLF checkout broke a test on main. **Open:** the env example file could not be written (secrets deny rule, FL-12) — PO to write it or allow it. **For the BA in M1:** category surface forms vs `dict-synonym-unique`; review the rule ids in `RULES_NOT_IN_CONTRACT`; confirm `APPROVED_HOSTS`; US-E10-03/AC1 `exportedAt` vs `export-roundtrip`. **For QA in M1:** newer/corrupt-data screens lack their export/reset actions. | Orchestrator |
+| 2026-10-24 | PO: M0 integration fixes committed; the PO writes the env example file personally (FL-12); M1 started. | PO |
