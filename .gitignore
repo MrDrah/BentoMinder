@@ -5,6 +5,8 @@ playwright-report/
 test-results/
 reports/
 .cache/
+server/.cache/
+data/_research/.cache/
 *.log
 .DS_Store
 

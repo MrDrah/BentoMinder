@@ -1,0 +1,5392 @@
+{
+  "version": "1",
+  "source": "docs/ba/domain-dictionary.md",
+  "allergenScheme": "caa-2026-04",
+  "categories": [
+    {
+      "id": "cat-grain",
+      "ja": "主食・穀類",
+      "kana": "しゅしょく・こくるい",
+      "en": "Grains & staples",
+      "parentId": null
+    },
+    {
+      "id": "cat-noodle",
+      "ja": "めん類",
+      "kana": "めんるい",
+      "en": "Noodles",
+      "parentId": "cat-grain"
+    },
+    {
+      "id": "cat-potato",
+      "ja": "いも類",
+      "kana": "いもるい",
+      "en": "Potatoes & tubers",
+      "parentId": null
+    },
+    {
+      "id": "cat-vegetable",
+      "ja": "野菜",
+      "kana": "やさい",
+      "en": "Vegetables",
+      "parentId": null
+    },
+    {
+      "id": "cat-green-vegetable",
+      "ja": "緑黄色野菜",
+      "kana": "りょくおうしょくやさい",
+      "en": "Green & yellow vegetables",
+      "parentId": "cat-vegetable"
+    },
+    {
+      "id": "cat-leafy-vegetable",
+      "ja": "葉もの野菜",
+      "kana": "はものやさい",
+      "en": "Leafy greens",
+      "parentId": "cat-vegetable"
+    },
+    {
+      "id": "cat-mushroom",
+      "ja": "きのこ",
+      "kana": "きのこ",
+      "en": "Mushrooms",
+      "parentId": null
+    },
+    {
+      "id": "cat-seaweed",
+      "ja": "海そう",
+      "kana": "かいそう",
+      "en": "Seaweed",
+      "parentId": null
+    },
+    {
+      "id": "cat-soy",
+      "ja": "大豆・大豆製品",
+      "kana": "だいず・だいずせいひん",
+      "en": "Soy & soy products",
+      "parentId": null
+    },
+    {
+      "id": "cat-egg",
+      "ja": "たまご",
+      "kana": "たまご",
+      "en": "Eggs",
+      "parentId": null
+    },
+    {
+      "id": "cat-dairy",
+      "ja": "乳製品",
+      "kana": "にゅうせいひん",
+      "en": "Dairy",
+      "parentId": null
+    },
+    {
+      "id": "cat-meat",
+      "ja": "肉",
+      "kana": "にく",
+      "en": "Meat",
+      "parentId": null
+    },
+    {
+      "id": "cat-chicken",
+      "ja": "鶏肉",
+      "kana": "とりにく",
+      "en": "Chicken",
+      "parentId": "cat-meat"
+    },
+    {
+      "id": "cat-pork",
+      "ja": "豚肉",
+      "kana": "ぶたにく",
+      "en": "Pork",
+      "parentId": "cat-meat"
+    },
+    {
+      "id": "cat-beef",
+      "ja": "牛肉",
+      "kana": "ぎゅうにく",
+      "en": "Beef",
+      "parentId": "cat-meat"
+    },
+    {
+      "id": "cat-meat-processed",
+      "ja": "ハム・ソーセージ類",
+      "kana": "はむ・そーせーじるい",
+      "en": "Processed meat",
+      "parentId": "cat-meat"
+    },
+    {
+      "id": "cat-fish",
+      "ja": "さかな",
+      "kana": "さかな",
+      "en": "Fish",
+      "parentId": null
+    },
+    {
+      "id": "cat-seafood",
+      "ja": "えび・いか・貝など",
+      "kana": "えび・いか・かいなど",
+      "en": "Shellfish & other seafood",
+      "parentId": null
+    },
+    {
+      "id": "cat-fish-processed",
+      "ja": "練りもの",
+      "kana": "ねりもの",
+      "en": "Fish-paste products",
+      "parentId": null
+    },
+    {
+      "id": "cat-fruit",
+      "ja": "くだもの",
+      "kana": "くだもの",
+      "en": "Fruit",
+      "parentId": null
+    },
+    {
+      "id": "cat-nuts-seeds",
+      "ja": "ナッツ・種実",
+      "kana": "なっつ・しゅじつ",
+      "en": "Nuts & seeds",
+      "parentId": null
+    },
+    {
+      "id": "cat-seasoning",
+      "ja": "調味料",
+      "kana": "ちょうみりょう",
+      "en": "Seasonings",
+      "parentId": null
+    },
+    {
+      "id": "cat-sweets",
+      "ja": "おやつ・デザート",
+      "kana": "おやつ・でざーと",
+      "en": "Sweets & desserts",
+      "parentId": null
+    },
+    {
+      "id": "cat-drink",
+      "ja": "飲みもの",
+      "kana": "のみもの",
+      "en": "Drinks",
+      "parentId": null
+    },
+    {
+      "id": "cat-dish-rice",
+      "ja": "ごはんもの",
+      "kana": "ごはんもの",
+      "en": "Rice dishes",
+      "parentId": null
+    },
+    {
+      "id": "cat-dish-noodle",
+      "ja": "めん料理",
+      "kana": "めんりょうり",
+      "en": "Noodle dishes",
+      "parentId": null
+    },
+    {
+      "id": "cat-dish-fried",
+      "ja": "揚げもの",
+      "kana": "あげもの",
+      "en": "Fried dishes",
+      "parentId": null
+    },
+    {
+      "id": "cat-dish-simmered",
+      "ja": "煮もの",
+      "kana": "にもの",
+      "en": "Simmered dishes",
+      "parentId": null
+    },
+    {
+      "id": "cat-dish-soup",
+      "ja": "汁もの・スープ",
+      "kana": "しるもの・すーぷ",
+      "en": "Soups",
+      "parentId": null
+    },
+    {
+      "id": "cat-dish-salad",
+      "ja": "サラダ・あえもの",
+      "kana": "さらだ・あえもの",
+      "en": "Salads & dressed vegetables",
+      "parentId": null
+    }
+  ],
+  "allergens": [
+    {
+      "id": "alg-shrimp",
+      "ja": "えび",
+      "kana": "えび",
+      "en": "Shrimp/prawn",
+      "tier": "mandatory",
+      "synonyms": [
+        "エビ",
+        "海老"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-crab",
+      "ja": "かに",
+      "kana": "かに",
+      "en": "Crab",
+      "tier": "mandatory",
+      "synonyms": [
+        "カニ",
+        "蟹"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-walnut",
+      "ja": "くるみ",
+      "kana": "くるみ",
+      "en": "Walnut",
+      "tier": "mandatory",
+      "synonyms": [
+        "クルミ",
+        "胡桃"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-wheat",
+      "ja": "小麦",
+      "kana": "こむぎ",
+      "en": "Wheat",
+      "tier": "mandatory",
+      "synonyms": [
+        "こむぎ"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-buckwheat",
+      "ja": "そば",
+      "kana": "そば",
+      "en": "Buckwheat",
+      "tier": "mandatory",
+      "synonyms": [
+        "蕎麦",
+        "ソバ"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-egg",
+      "ja": "卵",
+      "kana": "たまご",
+      "en": "Egg",
+      "tier": "mandatory",
+      "synonyms": [
+        "たまご",
+        "玉子",
+        "鶏卵"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-milk",
+      "ja": "乳",
+      "kana": "にゅう",
+      "en": "Milk",
+      "tier": "mandatory",
+      "synonyms": [
+        "乳成分",
+        "牛乳"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-peanut",
+      "ja": "落花生",
+      "kana": "らっかせい",
+      "en": "Peanut",
+      "tier": "mandatory",
+      "synonyms": [
+        "ピーナッツ"
+      ],
+      "retired": false
+    },
+    {
+      "id": "alg-cashew",
+      "ja": "カシューナッツ",
+      "kana": "かしゅーなっつ",
+      "en": "Cashew nut",
+      "tier": "mandatory",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-almond",
+      "ja": "アーモンド",
+      "kana": "あーもんど",
+      "en": "Almond",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-abalone",
+      "ja": "あわび",
+      "kana": "あわび",
+      "en": "Abalone",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-squid",
+      "ja": "いか",
+      "kana": "いか",
+      "en": "Squid",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-salmon-roe",
+      "ja": "いくら",
+      "kana": "いくら",
+      "en": "Salmon roe",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-orange",
+      "ja": "オレンジ",
+      "kana": "おれんじ",
+      "en": "Orange",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-kiwi",
+      "ja": "キウイフルーツ",
+      "kana": "きういふるーつ",
+      "en": "Kiwifruit",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-beef",
+      "ja": "牛肉",
+      "kana": "ぎゅうにく",
+      "en": "Beef",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-sesame",
+      "ja": "ごま",
+      "kana": "ごま",
+      "en": "Sesame",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-salmon",
+      "ja": "さけ",
+      "kana": "さけ",
+      "en": "Salmon",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-mackerel",
+      "ja": "さば",
+      "kana": "さば",
+      "en": "Mackerel",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-soybean",
+      "ja": "大豆",
+      "kana": "だいず",
+      "en": "Soybean",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-chicken",
+      "ja": "鶏肉",
+      "kana": "とりにく",
+      "en": "Chicken",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-banana",
+      "ja": "バナナ",
+      "kana": "ばなな",
+      "en": "Banana",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-pistachio",
+      "ja": "ピスタチオ",
+      "kana": "ぴすたちお",
+      "en": "Pistachio",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-pork",
+      "ja": "豚肉",
+      "kana": "ぶたにく",
+      "en": "Pork",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-macadamia",
+      "ja": "マカダミアナッツ",
+      "kana": "まかだみあなっつ",
+      "en": "Macadamia nut",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-peach",
+      "ja": "もも",
+      "kana": "もも",
+      "en": "Peach",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-yam",
+      "ja": "やまいも",
+      "kana": "やまいも",
+      "en": "Yam (Japanese yam)",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-apple",
+      "ja": "りんご",
+      "kana": "りんご",
+      "en": "Apple",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-gelatin",
+      "ja": "ゼラチン",
+      "kana": "ぜらちん",
+      "en": "Gelatin",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": false
+    },
+    {
+      "id": "alg-matsutake",
+      "ja": "まつたけ",
+      "kana": "まつたけ",
+      "en": "matsutake",
+      "tier": "recommended",
+      "synonyms": [],
+      "retired": true
+    }
+  ],
+  "ingredients": [
+    {
+      "id": "ing-rice",
+      "ja": "ごはん",
+      "kana": "ごはん",
+      "en": "Cooked rice",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ごはん",
+        "ご飯",
+        "白飯",
+        "米",
+        "お米",
+        "ライス",
+        "白ごはん"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-rice-flour",
+      "ja": "米粉",
+      "kana": "こめこ",
+      "en": "Rice flour",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "米粉"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mixed-grain-rice",
+      "ja": "麦ごはん",
+      "kana": "むぎごはん",
+      "en": "Rice with barley",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "麦ごはん",
+        "麦ご飯",
+        "押麦"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bread",
+      "ja": "パン",
+      "kana": "ぱん",
+      "en": "Bread",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "食パン",
+        "ロールパン",
+        "コッペパン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "dairy",
+        "egg"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-wheat-flour",
+      "ja": "小麦粉",
+      "kana": "こむぎこ",
+      "en": "Wheat flour",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "小麦粉",
+        "薄力粉",
+        "強力粉"
+      ],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bread-crumbs",
+      "ja": "パン粉",
+      "kana": "ぱんこ",
+      "en": "Bread crumbs",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "パン粉"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "dairy",
+        "egg"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-udon",
+      "ja": "うどん",
+      "kana": "うどん",
+      "en": "Udon noodles",
+      "categoryIds": [
+        "cat-noodle"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "うどん",
+        "饂飩"
+      ],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-soba",
+      "ja": "そば（蕎麦）",
+      "kana": "そば",
+      "en": "Buckwheat noodles",
+      "categoryIds": [
+        "cat-noodle"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "蕎麦",
+        "日本そば"
+      ],
+      "inherentAllergenIds": [
+        "alg-buckwheat"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chinese-noodles",
+      "ja": "中華めん",
+      "kana": "ちゅうかめん",
+      "en": "Chinese-style wheat noodles",
+      "categoryIds": [
+        "cat-noodle"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "中華めん",
+        "中華麺",
+        "ラーメン",
+        "焼きそばめん"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-spaghetti",
+      "ja": "スパゲティ",
+      "kana": "すぱげてぃ",
+      "en": "Spaghetti",
+      "categoryIds": [
+        "cat-noodle"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "スパゲティ",
+        "スパゲッティ",
+        "パスタ"
+      ],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-macaroni",
+      "ja": "マカロニ",
+      "kana": "まかろに",
+      "en": "Macaroni",
+      "categoryIds": [
+        "cat-noodle"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "マカロニ"
+      ],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-harusame",
+      "ja": "春雨",
+      "kana": "はるさめ",
+      "en": "Glass noodles",
+      "categoryIds": [
+        "cat-noodle"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "春雨",
+        "はるさめ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-potato",
+      "ja": "じゃがいも",
+      "kana": "じゃがいも",
+      "en": "Potato",
+      "categoryIds": [
+        "cat-potato"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "じゃがいも",
+        "じゃが芋",
+        "馬鈴薯",
+        "ポテト"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-sweet-potato",
+      "ja": "さつまいも",
+      "kana": "さつまいも",
+      "en": "Sweet potato",
+      "categoryIds": [
+        "cat-potato"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "さつまいも",
+        "さつま芋",
+        "薩摩芋"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-taro",
+      "ja": "さといも",
+      "kana": "さといも",
+      "en": "Taro",
+      "categoryIds": [
+        "cat-potato"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "さといも",
+        "里芋"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-yam",
+      "ja": "やまいも",
+      "kana": "やまいも",
+      "en": "Japanese yam",
+      "categoryIds": [
+        "cat-potato"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "やまいも",
+        "山芋",
+        "長いも",
+        "長芋",
+        "ながいも"
+      ],
+      "inherentAllergenIds": [
+        "alg-yam"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-konjac",
+      "ja": "こんにゃく",
+      "kana": "こんにゃく",
+      "en": "Konjac",
+      "categoryIds": [
+        "cat-potato"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "こんにゃく",
+        "蒟蒻",
+        "糸こんにゃく",
+        "しらたき"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-carrot",
+      "ja": "にんじん",
+      "kana": "にんじん",
+      "en": "Carrot",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "にんじん",
+        "人参",
+        "キャロット"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-onion",
+      "ja": "たまねぎ",
+      "kana": "たまねぎ",
+      "en": "Onion",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "たまねぎ",
+        "玉ねぎ",
+        "玉葱",
+        "オニオン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cabbage",
+      "ja": "キャベツ",
+      "kana": "きゃべつ",
+      "en": "Cabbage",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "キャベツ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chinese-cabbage",
+      "ja": "はくさい",
+      "kana": "はくさい",
+      "en": "Napa cabbage",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "はくさい",
+        "白菜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-daikon",
+      "ja": "だいこん",
+      "kana": "だいこん",
+      "en": "Daikon radish",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "だいこん",
+        "大根"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-dried-daikon",
+      "ja": "切り干し大根",
+      "kana": "きりぼしだいこん",
+      "en": "Dried daikon strips",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "切り干し大根",
+        "切干大根",
+        "切り干しだいこん"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-burdock",
+      "ja": "ごぼう",
+      "kana": "ごぼう",
+      "en": "Burdock root",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ごぼう",
+        "牛蒡"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-lotus-root",
+      "ja": "れんこん",
+      "kana": "れんこん",
+      "en": "Lotus root",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "れんこん",
+        "蓮根"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-green-pepper",
+      "ja": "ピーマン",
+      "kana": "ぴーまん",
+      "en": "Green bell pepper",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ピーマン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-paprika",
+      "ja": "パプリカ",
+      "kana": "ぱぷりか",
+      "en": "Red/yellow bell pepper",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "パプリカ",
+        "赤ピーマン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-eggplant",
+      "ja": "なす",
+      "kana": "なす",
+      "en": "Eggplant",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "なす",
+        "茄子",
+        "なすび"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-pumpkin",
+      "ja": "かぼちゃ",
+      "kana": "かぼちゃ",
+      "en": "Kabocha squash",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "かぼちゃ",
+        "南瓜",
+        "パンプキン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-broccoli",
+      "ja": "ブロッコリー",
+      "kana": "ぶろっこりー",
+      "en": "Broccoli",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ブロッコリー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cauliflower",
+      "ja": "カリフラワー",
+      "kana": "かりふらわー",
+      "en": "Cauliflower",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "カリフラワー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-spinach",
+      "ja": "ほうれん草",
+      "kana": "ほうれんそう",
+      "en": "Spinach",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ほうれん草",
+        "ほうれんそう"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-komatsuna",
+      "ja": "こまつな",
+      "kana": "こまつな",
+      "en": "Komatsuna",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "こまつな",
+        "小松菜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bok-choy",
+      "ja": "チンゲン菜",
+      "kana": "ちんげんさい",
+      "en": "Bok choy",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "チンゲン菜",
+        "チンゲンサイ",
+        "青梗菜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mizuna",
+      "ja": "水菜",
+      "kana": "みずな",
+      "en": "Mizuna",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "水菜",
+        "みずな"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shungiku",
+      "ja": "春菊",
+      "kana": "しゅんぎく",
+      "en": "Garland chrysanthemum",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "春菊",
+        "しゅんぎく"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-lettuce",
+      "ja": "レタス",
+      "kana": "れたす",
+      "en": "Lettuce",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "レタス"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cucumber",
+      "ja": "きゅうり",
+      "kana": "きゅうり",
+      "en": "Cucumber",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "きゅうり",
+        "胡瓜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-tomato",
+      "ja": "トマト",
+      "kana": "とまと",
+      "en": "Tomato",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "トマト"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cherry-tomato",
+      "ja": "ミニトマト",
+      "kana": "みにとまと",
+      "en": "Cherry tomato",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": "ing-tomato",
+      "forms": [
+        "ミニトマト",
+        "プチトマト"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bean-sprouts",
+      "ja": "もやし",
+      "kana": "もやし",
+      "en": "Bean sprouts",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "もやし"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-green-onion",
+      "ja": "ねぎ",
+      "kana": "ねぎ",
+      "en": "Green onion / leek",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ねぎ",
+        "長ねぎ",
+        "青ねぎ",
+        "万能ねぎ",
+        "葱"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chinese-chive",
+      "ja": "にら",
+      "kana": "にら",
+      "en": "Chinese chives",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "にら",
+        "韮"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-corn",
+      "ja": "とうもろこし",
+      "kana": "とうもろこし",
+      "en": "Corn",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "とうもろこし",
+        "コーン",
+        "スイートコーン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-edamame",
+      "ja": "えだまめ",
+      "kana": "えだまめ",
+      "en": "Edamame",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "えだまめ",
+        "枝豆"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": "conservative, see note"
+    },
+    {
+      "id": "ing-green-peas",
+      "ja": "グリーンピース",
+      "kana": "ぐりーんぴーす",
+      "en": "Green peas",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "グリーンピース",
+        "グリンピース",
+        "えんどう豆"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-green-beans",
+      "ja": "いんげん",
+      "kana": "いんげん",
+      "en": "Green beans",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "いんげん",
+        "さやいんげん"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-snow-peas",
+      "ja": "きぬさや",
+      "kana": "きぬさや",
+      "en": "Snow peas",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "きぬさや",
+        "絹さや",
+        "さやえんどう"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-okra",
+      "ja": "オクラ",
+      "kana": "おくら",
+      "en": "Okra",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "オクラ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-asparagus",
+      "ja": "アスパラガス",
+      "kana": "あすぱらがす",
+      "en": "Asparagus",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "アスパラガス",
+        "アスパラ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-celery",
+      "ja": "セロリ",
+      "kana": "せろり",
+      "en": "Celery",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "セロリ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-turnip",
+      "ja": "かぶ",
+      "kana": "かぶ",
+      "en": "Turnip",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "かぶ",
+        "蕪"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-zucchini",
+      "ja": "ズッキーニ",
+      "kana": "ずっきーに",
+      "en": "Zucchini",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ズッキーニ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bamboo-shoot",
+      "ja": "たけのこ",
+      "kana": "たけのこ",
+      "en": "Bamboo shoot",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "たけのこ",
+        "筍"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-garlic",
+      "ja": "にんにく",
+      "kana": "にんにく",
+      "en": "Garlic",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "にんにく",
+        "大蒜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-ginger",
+      "ja": "しょうが",
+      "kana": "しょうが",
+      "en": "Ginger",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "しょうが",
+        "生姜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mixed-vegetables",
+      "ja": "ミックスベジタブル",
+      "kana": "みっくすべじたぶる",
+      "en": "Frozen mixed vegetables",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ミックスベジタブル"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shiitake",
+      "ja": "しいたけ",
+      "kana": "しいたけ",
+      "en": "Shiitake",
+      "categoryIds": [
+        "cat-mushroom"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "しいたけ",
+        "椎茸",
+        "干ししいたけ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-enoki",
+      "ja": "えのき",
+      "kana": "えのき",
+      "en": "Enoki",
+      "categoryIds": [
+        "cat-mushroom"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "えのき",
+        "えのきたけ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shimeji",
+      "ja": "しめじ",
+      "kana": "しめじ",
+      "en": "Shimeji",
+      "categoryIds": [
+        "cat-mushroom"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "しめじ",
+        "ぶなしめじ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-maitake",
+      "ja": "まいたけ",
+      "kana": "まいたけ",
+      "en": "Maitake",
+      "categoryIds": [
+        "cat-mushroom"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "まいたけ",
+        "舞茸"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-eringi",
+      "ja": "エリンギ",
+      "kana": "えりんぎ",
+      "en": "King oyster mushroom",
+      "categoryIds": [
+        "cat-mushroom"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "エリンギ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mushroom",
+      "ja": "マッシュルーム",
+      "kana": "まっしゅるーむ",
+      "en": "Button mushroom",
+      "categoryIds": [
+        "cat-mushroom"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "マッシュルーム"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-hijiki",
+      "ja": "ひじき",
+      "kana": "ひじき",
+      "en": "Hijiki seaweed",
+      "categoryIds": [
+        "cat-seaweed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ひじき",
+        "鹿尾菜",
+        "芽ひじき"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-wakame",
+      "ja": "わかめ",
+      "kana": "わかめ",
+      "en": "Wakame",
+      "categoryIds": [
+        "cat-seaweed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "わかめ",
+        "若布"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-nori",
+      "ja": "のり",
+      "kana": "のり",
+      "en": "Nori",
+      "categoryIds": [
+        "cat-seaweed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "のり",
+        "海苔",
+        "焼きのり",
+        "きざみのり"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-aonori",
+      "ja": "青のり",
+      "kana": "あおのり",
+      "en": "Green laver flakes",
+      "categoryIds": [
+        "cat-seaweed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "青のり",
+        "あおのり"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-kombu",
+      "ja": "こんぶ",
+      "kana": "こんぶ",
+      "en": "Kombu",
+      "categoryIds": [
+        "cat-seaweed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "こんぶ",
+        "昆布",
+        "塩こんぶ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-agar",
+      "ja": "寒天",
+      "kana": "かんてん",
+      "en": "Agar",
+      "categoryIds": [
+        "cat-seaweed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "寒天",
+        "かんてん"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-soybean",
+      "ja": "大豆",
+      "kana": "だいず",
+      "en": "Soybeans",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "大豆",
+        "だいず",
+        "水煮大豆"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-tofu",
+      "ja": "とうふ",
+      "kana": "とうふ",
+      "en": "Tofu",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "とうふ",
+        "豆腐",
+        "木綿豆腐",
+        "絹ごし豆腐"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-fried-tofu",
+      "ja": "油揚げ",
+      "kana": "あぶらあげ",
+      "en": "Fried tofu pouch",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "油揚げ",
+        "油あげ",
+        "あぶらあげ",
+        "うす揚げ"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-thick-fried-tofu",
+      "ja": "厚揚げ",
+      "kana": "あつあげ",
+      "en": "Thick fried tofu",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "厚揚げ",
+        "生揚げ",
+        "あつあげ"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-koya-tofu",
+      "ja": "高野豆腐",
+      "kana": "こうやどうふ",
+      "en": "Freeze-dried tofu",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "高野豆腐",
+        "凍り豆腐"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-natto",
+      "ja": "納豆",
+      "kana": "なっとう",
+      "en": "Natto",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "納豆",
+        "なっとう"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-soy-milk",
+      "ja": "豆乳",
+      "kana": "とうにゅう",
+      "en": "Soy milk",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "豆乳",
+        "とうにゅう"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-kinako",
+      "ja": "きな粉",
+      "kana": "きなこ",
+      "en": "Roasted soybean flour",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "きな粉",
+        "きなこ"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-egg",
+      "ja": "たまご",
+      "kana": "たまご",
+      "en": "Egg",
+      "categoryIds": [
+        "cat-egg"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "たまご",
+        "卵",
+        "玉子",
+        "鶏卵",
+        "全卵"
+      ],
+      "inherentAllergenIds": [
+        "alg-egg"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-quail-egg",
+      "ja": "うずらの卵",
+      "kana": "うずらのたまご",
+      "en": "Quail egg",
+      "categoryIds": [
+        "cat-egg"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "うずらの卵",
+        "うずら卵",
+        "うずらたまご"
+      ],
+      "inherentAllergenIds": [
+        "alg-egg"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-milk",
+      "ja": "牛乳",
+      "kana": "ぎゅうにゅう",
+      "en": "Milk",
+      "categoryIds": [
+        "cat-dairy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "牛乳",
+        "ミルク"
+      ],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cheese",
+      "ja": "チーズ",
+      "kana": "ちーず",
+      "en": "Cheese",
+      "categoryIds": [
+        "cat-dairy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "チーズ",
+        "とろけるチーズ",
+        "粉チーズ",
+        "スライスチーズ"
+      ],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
+      "info": "varies",
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-yogurt",
+      "ja": "ヨーグルト",
+      "kana": "よーぐると",
+      "en": "Yogurt",
+      "categoryIds": [
+        "cat-dairy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ヨーグルト"
+      ],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
+      "info": "varies",
+      "animalOrigin": [
+        "dairy",
+        "gelatin"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-butter",
+      "ja": "バター",
+      "kana": "ばたー",
+      "en": "Butter",
+      "categoryIds": [
+        "cat-dairy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "バター"
+      ],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cream",
+      "ja": "生クリーム",
+      "kana": "なまくりーむ",
+      "en": "Fresh cream",
+      "categoryIds": [
+        "cat-dairy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "生クリーム"
+      ],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
+      "info": "varies",
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-skim-milk",
+      "ja": "スキムミルク",
+      "kana": "すきむみるく",
+      "en": "Skim milk powder",
+      "categoryIds": [
+        "cat-dairy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "スキムミルク",
+        "脱脂粉乳"
+      ],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chicken",
+      "ja": "鶏肉",
+      "kana": "とりにく",
+      "en": "Chicken",
+      "categoryIds": [
+        "cat-chicken"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "鶏肉",
+        "とり肉",
+        "とりにく",
+        "鶏",
+        "チキン"
+      ],
+      "inherentAllergenIds": [
+        "alg-chicken"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chicken-thigh",
+      "ja": "鶏もも肉",
+      "kana": "とりももにく",
+      "en": "Chicken thigh",
+      "categoryIds": [
+        "cat-chicken"
+      ],
+      "parentIngredientId": "ing-chicken",
+      "forms": [
+        "鶏もも肉",
+        "鶏もも",
+        "とりもも"
+      ],
+      "inherentAllergenIds": [
+        "alg-chicken"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chicken-breast",
+      "ja": "鶏むね肉",
+      "kana": "とりむねにく",
+      "en": "Chicken breast",
+      "categoryIds": [
+        "cat-chicken"
+      ],
+      "parentIngredientId": "ing-chicken",
+      "forms": [
+        "鶏むね肉",
+        "鶏むね",
+        "鶏胸肉"
+      ],
+      "inherentAllergenIds": [
+        "alg-chicken"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chicken-tender",
+      "ja": "ささみ",
+      "kana": "ささみ",
+      "en": "Chicken tenderloin",
+      "categoryIds": [
+        "cat-chicken"
+      ],
+      "parentIngredientId": "ing-chicken",
+      "forms": [
+        "ささみ",
+        "鶏ささみ"
+      ],
+      "inherentAllergenIds": [
+        "alg-chicken"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-ground-chicken",
+      "ja": "鶏ひき肉",
+      "kana": "とりひきにく",
+      "en": "Ground chicken",
+      "categoryIds": [
+        "cat-chicken"
+      ],
+      "parentIngredientId": "ing-chicken",
+      "forms": [
+        "鶏ひき肉",
+        "鶏ミンチ",
+        "とりひき肉"
+      ],
+      "inherentAllergenIds": [
+        "alg-chicken"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-pork",
+      "ja": "豚肉",
+      "kana": "ぶたにく",
+      "en": "Pork",
+      "categoryIds": [
+        "cat-pork"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "豚肉",
+        "ぶた肉",
+        "豚",
+        "ポーク",
+        "豚こま",
+        "豚ロース"
+      ],
+      "inherentAllergenIds": [
+        "alg-pork"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "pork"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-ground-pork",
+      "ja": "豚ひき肉",
+      "kana": "ぶたひきにく",
+      "en": "Ground pork",
+      "categoryIds": [
+        "cat-pork"
+      ],
+      "parentIngredientId": "ing-pork",
+      "forms": [
+        "豚ひき肉",
+        "豚ミンチ"
+      ],
+      "inherentAllergenIds": [
+        "alg-pork"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "pork"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-beef",
+      "ja": "牛肉",
+      "kana": "ぎゅうにく",
+      "en": "Beef",
+      "categoryIds": [
+        "cat-beef"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "牛肉",
+        "牛こま",
+        "ビーフ"
+      ],
+      "inherentAllergenIds": [
+        "alg-beef"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "beef"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-ground-beef",
+      "ja": "牛ひき肉",
+      "kana": "ぎゅうひきにく",
+      "en": "Ground beef",
+      "categoryIds": [
+        "cat-beef"
+      ],
+      "parentIngredientId": "ing-beef",
+      "forms": [
+        "牛ひき肉",
+        "牛ミンチ"
+      ],
+      "inherentAllergenIds": [
+        "alg-beef"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "beef"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-ground-mixed",
+      "ja": "合いびき肉",
+      "kana": "あいびきにく",
+      "en": "Ground beef & pork",
+      "categoryIds": [
+        "cat-beef",
+        "cat-pork"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "合いびき肉",
+        "あいびき肉",
+        "合挽肉"
+      ],
+      "inherentAllergenIds": [
+        "alg-beef",
+        "alg-pork"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "beef",
+        "pork"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-ground-meat",
+      "ja": "ひき肉",
+      "kana": "ひきにく",
+      "en": "Ground meat (species not stated)",
+      "categoryIds": [
+        "cat-meat"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ひき肉",
+        "挽肉",
+        "ミンチ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "meat"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-ham",
+      "ja": "ハム",
+      "kana": "はむ",
+      "en": "Ham",
+      "categoryIds": [
+        "cat-meat-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ハム",
+        "ロースハム"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "meat",
+        "pork"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-sausage",
+      "ja": "ウインナー",
+      "kana": "ういんなー",
+      "en": "Sausage / wiener",
+      "categoryIds": [
+        "cat-meat-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ウインナー",
+        "ウィンナー",
+        "ソーセージ",
+        "ウインナーソーセージ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "meat",
+        "pork"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bacon",
+      "ja": "ベーコン",
+      "kana": "べーこん",
+      "en": "Bacon",
+      "categoryIds": [
+        "cat-meat-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ベーコン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "pork"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-fish",
+      "ja": "魚",
+      "kana": "さかな",
+      "en": "Fish (unspecified)",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "魚",
+        "さかな",
+        "お魚"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-white-fish",
+      "ja": "白身魚",
+      "kana": "しろみざかな",
+      "en": "White fish (unspecified)",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "白身魚",
+        "白身",
+        "ホキ",
+        "メルルーサ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-salmon",
+      "ja": "さけ",
+      "kana": "さけ",
+      "en": "Salmon",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "鮭",
+        "しゃけ",
+        "サーモン",
+        "銀鮭"
+      ],
+      "inherentAllergenIds": [
+        "alg-salmon"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mackerel",
+      "ja": "さば",
+      "kana": "さば",
+      "en": "Mackerel",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "さば",
+        "鯖"
+      ],
+      "inherentAllergenIds": [
+        "alg-mackerel"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cod",
+      "ja": "たら",
+      "kana": "たら",
+      "en": "Cod",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "たら",
+        "鱈"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-yellowtail",
+      "ja": "ぶり",
+      "kana": "ぶり",
+      "en": "Yellowtail",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ぶり",
+        "鰤"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-horse-mackerel",
+      "ja": "あじ（鯵）",
+      "kana": "あじ",
+      "en": "Horse mackerel",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "鯵"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-spanish-mackerel",
+      "ja": "さわら",
+      "kana": "さわら",
+      "en": "Japanese Spanish mackerel",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "さわら",
+        "鰆"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-saury",
+      "ja": "さんま",
+      "kana": "さんま",
+      "en": "Pacific saury",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "さんま",
+        "秋刀魚"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-sardine",
+      "ja": "いわし",
+      "kana": "いわし",
+      "en": "Sardine",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "いわし",
+        "鰯"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shishamo",
+      "ja": "ししゃも",
+      "kana": "ししゃも",
+      "en": "Shishamo smelt",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ししゃも",
+        "柳葉魚"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-tuna",
+      "ja": "まぐろ",
+      "kana": "まぐろ",
+      "en": "Tuna",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "まぐろ",
+        "鮪"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-canned-tuna",
+      "ja": "ツナ",
+      "kana": "つな",
+      "en": "Canned tuna",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ツナ",
+        "ツナ缶"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-whitebait",
+      "ja": "しらす",
+      "kana": "しらす",
+      "en": "Whitebait",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "しらす",
+        "ちりめんじゃこ",
+        "じゃこ",
+        "しらす干し"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bonito-flakes",
+      "ja": "かつおぶし",
+      "kana": "かつおぶし",
+      "en": "Bonito flakes",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "かつおぶし",
+        "かつお節",
+        "鰹節",
+        "おかか",
+        "削り節"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-niboshi",
+      "ja": "煮干し",
+      "kana": "にぼし",
+      "en": "Dried baby sardines (for stock)",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "煮干し",
+        "にぼし",
+        "いりこ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-salmon-roe",
+      "ja": "いくら",
+      "kana": "いくら",
+      "en": "Salmon roe",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "いくら"
+      ],
+      "inherentAllergenIds": [
+        "alg-salmon-roe"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shrimp",
+      "ja": "えび",
+      "kana": "えび",
+      "en": "Shrimp",
+      "categoryIds": [
+        "cat-seafood"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "えび",
+        "海老",
+        "むきえび",
+        "桜えび"
+      ],
+      "inherentAllergenIds": [
+        "alg-shrimp"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-crab",
+      "ja": "かに",
+      "kana": "かに",
+      "en": "Crab",
+      "categoryIds": [
+        "cat-seafood"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "かに",
+        "蟹"
+      ],
+      "inherentAllergenIds": [
+        "alg-crab"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-squid",
+      "ja": "いか",
+      "kana": "いか",
+      "en": "Squid",
+      "categoryIds": [
+        "cat-seafood"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "いか",
+        "烏賊"
+      ],
+      "inherentAllergenIds": [
+        "alg-squid"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-octopus",
+      "ja": "たこ",
+      "kana": "たこ",
+      "en": "Octopus",
+      "categoryIds": [
+        "cat-seafood"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "蛸"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-clam",
+      "ja": "あさり",
+      "kana": "あさり",
+      "en": "Manila clam",
+      "categoryIds": [
+        "cat-seafood"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "あさり",
+        "浅蜊"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-scallop",
+      "ja": "ほたて",
+      "kana": "ほたて",
+      "en": "Scallop",
+      "categoryIds": [
+        "cat-seafood"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ほたて",
+        "帆立",
+        "ベビーほたて"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-oyster",
+      "ja": "かき（牡蠣）",
+      "kana": "かき",
+      "en": "Oyster",
+      "categoryIds": [
+        "cat-seafood"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "牡蠣"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-chikuwa",
+      "ja": "ちくわ",
+      "kana": "ちくわ",
+      "en": "Chikuwa fish cake",
+      "categoryIds": [
+        "cat-fish-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ちくわ",
+        "竹輪"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-kamaboko",
+      "ja": "かまぼこ",
+      "kana": "かまぼこ",
+      "en": "Kamaboko fish cake",
+      "categoryIds": [
+        "cat-fish-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "かまぼこ",
+        "蒲鉾"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-hanpen",
+      "ja": "はんぺん",
+      "kana": "はんぺん",
+      "en": "Hanpen fish cake",
+      "categoryIds": [
+        "cat-fish-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "はんぺん"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood",
+        "egg"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-satsuma-age",
+      "ja": "さつま揚げ",
+      "kana": "さつまあげ",
+      "en": "Fried fish cake",
+      "categoryIds": [
+        "cat-fish-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "さつま揚げ",
+        "さつまあげ",
+        "薩摩揚げ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-crab-stick",
+      "ja": "カニカマ",
+      "kana": "かにかま",
+      "en": "Crab-flavoured fish stick",
+      "categoryIds": [
+        "cat-fish-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "カニカマ",
+        "かに風味かまぼこ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-apple",
+      "ja": "りんご",
+      "kana": "りんご",
+      "en": "Apple",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "りんご",
+        "林檎",
+        "アップル"
+      ],
+      "inherentAllergenIds": [
+        "alg-apple"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-banana",
+      "ja": "バナナ",
+      "kana": "ばなな",
+      "en": "Banana",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "バナナ"
+      ],
+      "inherentAllergenIds": [
+        "alg-banana"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mandarin",
+      "ja": "みかん",
+      "kana": "みかん",
+      "en": "Mandarin orange",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "みかん",
+        "蜜柑",
+        "温州みかん",
+        "みかん缶"
+      ],
+      "inherentAllergenIds": [
+        "alg-orange"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": "conservative, see note §4.2"
+    },
+    {
+      "id": "ing-orange",
+      "ja": "オレンジ",
+      "kana": "おれんじ",
+      "en": "Orange",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "オレンジ"
+      ],
+      "inherentAllergenIds": [
+        "alg-orange"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-grapefruit",
+      "ja": "グレープフルーツ",
+      "kana": "ぐれーぷふるーつ",
+      "en": "Grapefruit",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "グレープフルーツ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-kiwi",
+      "ja": "キウイ",
+      "kana": "きうい",
+      "en": "Kiwifruit",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "キウイ",
+        "キウイフルーツ"
+      ],
+      "inherentAllergenIds": [
+        "alg-kiwi"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-strawberry",
+      "ja": "いちご",
+      "kana": "いちご",
+      "en": "Strawberry",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "いちご",
+        "苺"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-peach",
+      "ja": "もも（果物）",
+      "kana": "もも",
+      "en": "Peach",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "桃",
+        "ピーチ",
+        "黄桃",
+        "白桃"
+      ],
+      "inherentAllergenIds": [
+        "alg-peach"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-pineapple",
+      "ja": "パイナップル",
+      "kana": "ぱいなっぷる",
+      "en": "Pineapple",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "パイナップル",
+        "パイン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-grape",
+      "ja": "ぶどう",
+      "kana": "ぶどう",
+      "en": "Grape",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ぶどう",
+        "葡萄",
+        "グレープ",
+        "マスカット"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-raisin",
+      "ja": "レーズン",
+      "kana": "れーずん",
+      "en": "Raisin",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "レーズン",
+        "干しぶどう"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-melon",
+      "ja": "メロン",
+      "kana": "めろん",
+      "en": "Melon",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "メロン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-watermelon",
+      "ja": "すいか",
+      "kana": "すいか",
+      "en": "Watermelon",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "すいか",
+        "西瓜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-pear",
+      "ja": "なし（梨）",
+      "kana": "なし",
+      "en": "Japanese pear",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "梨",
+        "洋なし",
+        "ラ・フランス"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-persimmon",
+      "ja": "かき（柿）",
+      "kana": "かき",
+      "en": "Persimmon",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "柿"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-lemon",
+      "ja": "レモン",
+      "kana": "れもん",
+      "en": "Lemon",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "レモン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-sesame",
+      "ja": "ごま",
+      "kana": "ごま",
+      "en": "Sesame",
+      "categoryIds": [
+        "cat-nuts-seeds"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ごま",
+        "胡麻",
+        "すりごま",
+        "いりごま",
+        "白ごま",
+        "黒ごま",
+        "ねりごま"
+      ],
+      "inherentAllergenIds": [
+        "alg-sesame"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-peanut",
+      "ja": "ピーナッツ",
+      "kana": "ぴーなっつ",
+      "en": "Peanut",
+      "categoryIds": [
+        "cat-nuts-seeds"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ピーナッツ",
+        "落花生",
+        "らっかせい",
+        "ピーナツ"
+      ],
+      "inherentAllergenIds": [
+        "alg-peanut"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-walnut",
+      "ja": "くるみ",
+      "kana": "くるみ",
+      "en": "Walnut",
+      "categoryIds": [
+        "cat-nuts-seeds"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "くるみ",
+        "胡桃"
+      ],
+      "inherentAllergenIds": [
+        "alg-walnut"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-almond",
+      "ja": "アーモンド",
+      "kana": "あーもんど",
+      "en": "Almond",
+      "categoryIds": [
+        "cat-nuts-seeds"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "アーモンド"
+      ],
+      "inherentAllergenIds": [
+        "alg-almond"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-cashew",
+      "ja": "カシューナッツ",
+      "kana": "かしゅーなっつ",
+      "en": "Cashew",
+      "categoryIds": [
+        "cat-nuts-seeds"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "カシューナッツ"
+      ],
+      "inherentAllergenIds": [
+        "alg-cashew"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-soy-sauce",
+      "ja": "しょうゆ",
+      "kana": "しょうゆ",
+      "en": "Soy sauce",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "しょうゆ",
+        "醤油",
+        "しょう油",
+        "うすくちしょうゆ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-miso",
+      "ja": "みそ",
+      "kana": "みそ",
+      "en": "Miso",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "みそ",
+        "味噌",
+        "白みそ",
+        "赤みそ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-sugar",
+      "ja": "砂糖",
+      "kana": "さとう",
+      "en": "Sugar",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "砂糖",
+        "さとう",
+        "三温糖"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-salt",
+      "ja": "塩",
+      "kana": "しお",
+      "en": "Salt",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "塩",
+        "しお"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-vinegar",
+      "ja": "酢",
+      "kana": "す",
+      "en": "Vinegar",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "酢",
+        "米酢",
+        "穀物酢"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-mirin",
+      "ja": "みりん",
+      "kana": "みりん",
+      "en": "Mirin",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "みりん",
+        "本みりん"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-cooking-sake",
+      "ja": "酒",
+      "kana": "さけ",
+      "en": "Cooking sake",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "酒",
+        "料理酒"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-oil",
+      "ja": "油",
+      "kana": "あぶら",
+      "en": "Cooking oil",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "油",
+        "サラダ油",
+        "植物油",
+        "なたね油"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-sesame-oil",
+      "ja": "ごま油",
+      "kana": "ごまあぶら",
+      "en": "Sesame oil",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ごま油"
+      ],
+      "inherentAllergenIds": [
+        "alg-sesame"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-mayonnaise",
+      "ja": "マヨネーズ",
+      "kana": "まよねーず",
+      "en": "Mayonnaise",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "マヨネーズ",
+        "マヨ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-ketchup",
+      "ja": "ケチャップ",
+      "kana": "けちゃっぷ",
+      "en": "Ketchup",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ケチャップ",
+        "トマトケチャップ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-worcester-sauce",
+      "ja": "ソース",
+      "kana": "そーす",
+      "en": "Japanese brown sauce",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ソース",
+        "ウスターソース",
+        "中濃ソース",
+        "とんかつソース"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-curry-roux",
+      "ja": "カレールウ",
+      "kana": "かれーるう",
+      "en": "Curry roux",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "カレールウ",
+        "カレールー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "meat",
+        "pork",
+        "beef",
+        "chicken",
+        "dairy"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-stew-roux",
+      "ja": "シチュールウ",
+      "kana": "しちゅーるう",
+      "en": "Stew roux",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "シチュールウ",
+        "シチュールー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "meat",
+        "pork",
+        "beef",
+        "chicken",
+        "dairy"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-curry-powder",
+      "ja": "カレー粉",
+      "kana": "かれーこ",
+      "en": "Curry powder",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "カレー粉",
+        "カレーパウダー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-dashi",
+      "ja": "だし",
+      "kana": "だし",
+      "en": "Dashi stock",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "だし",
+        "出汁",
+        "かつおだし",
+        "和風だし"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-consomme",
+      "ja": "コンソメ",
+      "kana": "こんそめ",
+      "en": "Consommé stock",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "コンソメ",
+        "ブイヨン",
+        "洋風だし"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "beef",
+        "chicken",
+        "pork"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-potato-starch",
+      "ja": "片栗粉",
+      "kana": "かたくりこ",
+      "en": "Potato starch",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "片栗粉",
+        "かたくり粉"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-gelatin",
+      "ja": "ゼラチン",
+      "kana": "ぜらちん",
+      "en": "Gelatin",
+      "categoryIds": [
+        "cat-sweets"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ゼラチン",
+        "粉ゼラチン",
+        "板ゼラチン"
+      ],
+      "inherentAllergenIds": [
+        "alg-gelatin"
+      ],
+      "info": "known",
+      "animalOrigin": [
+        "gelatin"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-jam",
+      "ja": "ジャム",
+      "kana": "じゃむ",
+      "en": "Jam",
+      "categoryIds": [
+        "cat-sweets"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ジャム",
+        "いちごジャム"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-honey",
+      "ja": "はちみつ",
+      "kana": "はちみつ",
+      "en": "Honey",
+      "categoryIds": [
+        "cat-sweets"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "はちみつ",
+        "蜂蜜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-barley-tea",
+      "ja": "麦茶",
+      "kana": "むぎちゃ",
+      "en": "Barley tea",
+      "categoryIds": [
+        "cat-drink"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "麦茶",
+        "むぎちゃ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    }
+  ],
+  "dishes": [
+    {
+      "id": "dish-curry-rice",
+      "ja": "カレーライス",
+      "kana": "かれーらいす",
+      "en": "Curry and rice",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "カレーライス",
+        "ライスカレー",
+        "ポークカレー",
+        "チキンカレー",
+        "野菜カレー"
+      ],
+      "nameIngredientIds": [
+        "ing-rice"
+      ],
+      "conditionalNameIds": [
+        "ing-pork",
+        "ing-chicken",
+        "cat-vegetable"
+      ],
+      "nameIngredientsNote": "ing-rice (+ ing-pork/ing-chicken/cat-vegetable from the variant)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-hayashi-rice",
+      "ja": "ハヤシライス",
+      "kana": "はやしらいす",
+      "en": "Hashed beef rice",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "ハヤシライス"
+      ],
+      "nameIngredientIds": [
+        "ing-rice"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-oyakodon",
+      "ja": "親子丼",
+      "kana": "おやこどん",
+      "en": "Chicken and egg rice bowl",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "親子丼",
+        "おやこどん"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-gomoku-rice",
+      "ja": "五目ごはん",
+      "kana": "ごもくごはん",
+      "en": "Mixed rice",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "五目ごはん",
+        "五目ご飯",
+        "炊き込みごはん",
+        "かやくごはん"
+      ],
+      "nameIngredientIds": [
+        "ing-rice"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-rice"
+    },
+    {
+      "id": "dish-chirashi",
+      "ja": "ちらし寿司",
+      "kana": "ちらしずし",
+      "en": "Scattered sushi",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "ちらし寿司",
+        "ちらしずし",
+        "ちらし"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-onigiri",
+      "ja": "おにぎり",
+      "kana": "おにぎり",
+      "en": "Rice ball",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "おにぎり",
+        "おむすび"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-fried-rice",
+      "ja": "チャーハン",
+      "kana": "ちゃーはん",
+      "en": "Fried rice",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "チャーハン",
+        "炒飯",
+        "焼き飯",
+        "焼きめし"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-omurice",
+      "ja": "オムライス",
+      "kana": "おむらいす",
+      "en": "Omelette rice",
+      "categoryId": "cat-dish-rice",
+      "role": null,
+      "forms": [
+        "オムライス"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-yakisoba",
+      "ja": "焼きそば",
+      "kana": "やきそば",
+      "en": "Fried noodles",
+      "categoryId": "cat-dish-noodle",
+      "role": null,
+      "forms": [
+        "焼きそば",
+        "やきそば",
+        "ソース焼きそば"
+      ],
+      "nameIngredientIds": [
+        "ing-chinese-noodles"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-chinese-noodles"
+    },
+    {
+      "id": "dish-yaki-udon",
+      "ja": "焼きうどん",
+      "kana": "やきうどん",
+      "en": "Fried udon",
+      "categoryId": "cat-dish-noodle",
+      "role": null,
+      "forms": [
+        "焼きうどん"
+      ],
+      "nameIngredientIds": [
+        "ing-udon"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-udon"
+    },
+    {
+      "id": "dish-napolitan",
+      "ja": "ナポリタン",
+      "kana": "なぽりたん",
+      "en": "Ketchup spaghetti",
+      "categoryId": "cat-dish-noodle",
+      "role": null,
+      "forms": [
+        "ナポリタン",
+        "スパゲティナポリタン"
+      ],
+      "nameIngredientIds": [
+        "ing-spaghetti"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": "ing-spaghetti (when named)",
+      "definingIngredientId": "ing-spaghetti"
+    },
+    {
+      "id": "dish-meat-sauce",
+      "ja": "ミートソーススパゲティ",
+      "kana": "みーとそーすすぱげてぃ",
+      "en": "Spaghetti with meat sauce",
+      "categoryId": "cat-dish-noodle",
+      "role": null,
+      "forms": [
+        "ミートソーススパゲティ",
+        "ミートスパゲティ",
+        "ミートソース"
+      ],
+      "nameIngredientIds": [
+        "ing-spaghetti"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-spaghetti"
+    },
+    {
+      "id": "dish-karaage",
+      "ja": "からあげ",
+      "kana": "からあげ",
+      "en": "Japanese fried chicken",
+      "categoryId": "cat-dish-fried",
+      "role": null,
+      "forms": [
+        "からあげ",
+        "から揚げ",
+        "唐揚げ",
+        "鶏のから揚げ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [
+        "ing-chicken"
+      ],
+      "nameIngredientsNote": "(ing-chicken when 鶏 is in the name)",
+      "definingIngredientId": "ing-chicken"
+    },
+    {
+      "id": "dish-white-fish-fry",
+      "ja": "白身魚のフライ",
+      "kana": "しろみざかなのふらい",
+      "en": "Fried white fish",
+      "categoryId": "cat-dish-fried",
+      "role": null,
+      "forms": [
+        "白身魚のフライ",
+        "魚フライ",
+        "白身フライ"
+      ],
+      "nameIngredientIds": [
+        "ing-white-fish"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-white-fish"
+    },
+    {
+      "id": "dish-croquette",
+      "ja": "コロッケ",
+      "kana": "ころっけ",
+      "en": "Croquette",
+      "categoryId": "cat-dish-fried",
+      "role": null,
+      "forms": [
+        "コロッケ",
+        "ポテトコロッケ",
+        "かぼちゃコロッケ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": "(variant ingredient if named)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-kakiage",
+      "ja": "かき揚げ",
+      "kana": "かきあげ",
+      "en": "Mixed vegetable tempura",
+      "categoryId": "cat-dish-fried",
+      "role": null,
+      "forms": [
+        "かき揚げ",
+        "かきあげ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-tempura",
+      "ja": "天ぷら",
+      "kana": "てんぷら",
+      "en": "Tempura",
+      "categoryId": "cat-dish-fried",
+      "role": null,
+      "forms": [
+        "天ぷら",
+        "てんぷら"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": "(named ingredient, e.g. ちくわの天ぷら)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-spring-roll",
+      "ja": "春巻き",
+      "kana": "はるまき",
+      "en": "Spring roll",
+      "categoryId": "cat-dish-fried",
+      "role": null,
+      "forms": [
+        "春巻き",
+        "春巻",
+        "はるまき"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-hamburg",
+      "ja": "ハンバーグ",
+      "kana": "はんばーぐ",
+      "en": "Hamburg steak",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "ハンバーグ",
+        "煮込みハンバーグ",
+        "豆腐ハンバーグ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [
+        "ing-tofu"
+      ],
+      "nameIngredientsNote": "(ing-tofu when named)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-meatball",
+      "ja": "肉だんご",
+      "kana": "にくだんご",
+      "en": "Meatballs",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "肉だんご",
+        "ミートボール",
+        "肉団子"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-teriyaki-chicken",
+      "ja": "鶏の照り焼き",
+      "kana": "とりのてりやき",
+      "en": "Teriyaki chicken",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "鶏の照り焼き",
+        "照り焼きチキン",
+        "チキンの照り焼き"
+      ],
+      "nameIngredientIds": [
+        "ing-chicken"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-chicken"
+    },
+    {
+      "id": "dish-ginger-pork",
+      "ja": "豚のしょうが焼き",
+      "kana": "ぶたのしょうがやき",
+      "en": "Ginger pork",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "豚のしょうが焼き",
+        "しょうが焼き",
+        "生姜焼き"
+      ],
+      "nameIngredientIds": [
+        "ing-pork",
+        "ing-ginger"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-pork"
+    },
+    {
+      "id": "dish-saba-miso",
+      "ja": "さばのみそ煮",
+      "kana": "さばのみそに",
+      "en": "Mackerel simmered in miso",
+      "categoryId": "cat-dish-simmered",
+      "role": null,
+      "forms": [
+        "さばのみそ煮",
+        "鯖の味噌煮",
+        "さばみそ"
+      ],
+      "nameIngredientIds": [
+        "ing-mackerel",
+        "ing-miso"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-mackerel"
+    },
+    {
+      "id": "dish-salted-salmon",
+      "ja": "鮭の塩焼き",
+      "kana": "さけのしおやき",
+      "en": "Salt-grilled salmon",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "鮭の塩焼き",
+        "さけのしおやき",
+        "焼き鮭"
+      ],
+      "nameIngredientIds": [
+        "ing-salmon",
+        "ing-salt"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-salmon"
+    },
+    {
+      "id": "dish-tamagoyaki",
+      "ja": "卵焼き",
+      "kana": "たまごやき",
+      "en": "Rolled omelette",
+      "categoryId": null,
+      "role": "side",
+      "forms": [
+        "卵焼き",
+        "たまご焼き",
+        "玉子焼き",
+        "だし巻き卵"
+      ],
+      "nameIngredientIds": [
+        "ing-egg"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-egg"
+    },
+    {
+      "id": "dish-gyoza",
+      "ja": "餃子",
+      "kana": "ぎょうざ",
+      "en": "Gyoza dumplings",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "餃子",
+        "ぎょうざ",
+        "ギョーザ",
+        "焼き餃子"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-shumai",
+      "ja": "しゅうまい",
+      "kana": "しゅうまい",
+      "en": "Shumai dumplings",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "しゅうまい",
+        "焼売",
+        "シューマイ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-mapo-tofu",
+      "ja": "麻婆豆腐",
+      "kana": "まーぼーどうふ",
+      "en": "Mapo tofu (mild)",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "麻婆豆腐",
+        "マーボー豆腐",
+        "マーボ豆腐"
+      ],
+      "nameIngredientIds": [
+        "ing-tofu"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-tofu"
+    },
+    {
+      "id": "dish-happosai",
+      "ja": "八宝菜",
+      "kana": "はっぽうさい",
+      "en": "Stir-fried mixed vegetables",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "八宝菜"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-sweet-sour-pork",
+      "ja": "酢豚",
+      "kana": "すぶた",
+      "en": "Sweet and sour pork",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "酢豚",
+        "すぶた"
+      ],
+      "nameIngredientIds": [
+        "ing-pork"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-pork"
+    },
+    {
+      "id": "dish-octopus-sausage",
+      "ja": "たこさんウインナー",
+      "kana": "たこさんういんなー",
+      "en": "Octopus-shaped sausage (no octopus)",
+      "categoryId": null,
+      "role": "side",
+      "forms": [
+        "たこさんウインナー",
+        "たこウインナー"
+      ],
+      "nameIngredientIds": [
+        "ing-sausage"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-sausage"
+    },
+    {
+      "id": "dish-nikujaga",
+      "ja": "肉じゃが",
+      "kana": "にくじゃが",
+      "en": "Meat and potato stew",
+      "categoryId": "cat-dish-simmered",
+      "role": null,
+      "forms": [
+        "肉じゃが",
+        "にくじゃが"
+      ],
+      "nameIngredientIds": [
+        "ing-potato"
+      ],
+      "conditionalNameIds": [
+        "cat-meat"
+      ],
+      "nameIngredientsNote": "ing-potato (+ cat-meat)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-chikuzenni",
+      "ja": "筑前煮",
+      "kana": "ちくぜんに",
+      "en": "Simmered chicken and root vegetables",
+      "categoryId": "cat-dish-simmered",
+      "role": null,
+      "forms": [
+        "筑前煮",
+        "がめ煮"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-hijiki-nimono",
+      "ja": "ひじきの煮物",
+      "kana": "ひじきのにもの",
+      "en": "Simmered hijiki",
+      "categoryId": "cat-dish-simmered",
+      "role": null,
+      "forms": [
+        "ひじきの煮物",
+        "ひじき煮",
+        "ひじきの煮もの"
+      ],
+      "nameIngredientIds": [
+        "ing-hijiki"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-hijiki"
+    },
+    {
+      "id": "dish-kiriboshi-nimono",
+      "ja": "切り干し大根の煮物",
+      "kana": "きりぼしだいこんのにもの",
+      "en": "Simmered dried daikon",
+      "categoryId": "cat-dish-simmered",
+      "role": null,
+      "forms": [
+        "切り干し大根の煮物",
+        "切り干し大根煮"
+      ],
+      "nameIngredientIds": [
+        "ing-dried-daikon"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-dried-daikon"
+    },
+    {
+      "id": "dish-kinpira",
+      "ja": "きんぴらごぼう",
+      "kana": "きんぴらごぼう",
+      "en": "Burdock kinpira",
+      "categoryId": "cat-dish-simmered",
+      "role": null,
+      "forms": [
+        "きんぴらごぼう",
+        "きんぴら",
+        "金平ごぼう"
+      ],
+      "nameIngredientIds": [
+        "ing-burdock"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-burdock"
+    },
+    {
+      "id": "dish-pumpkin-nimono",
+      "ja": "かぼちゃの煮物",
+      "kana": "かぼちゃのにもの",
+      "en": "Simmered kabocha",
+      "categoryId": "cat-dish-simmered",
+      "role": null,
+      "forms": [
+        "かぼちゃの煮物",
+        "かぼちゃの煮もの",
+        "かぼちゃ煮"
+      ],
+      "nameIngredientIds": [
+        "ing-pumpkin"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-pumpkin"
+    },
+    {
+      "id": "dish-miso-soup",
+      "ja": "みそ汁",
+      "kana": "みそしる",
+      "en": "Miso soup",
+      "categoryId": "cat-dish-soup",
+      "role": null,
+      "forms": [
+        "みそ汁",
+        "味噌汁",
+        "おみそしる",
+        "おみそ汁"
+      ],
+      "nameIngredientIds": [
+        "ing-miso"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-clear-soup",
+      "ja": "すまし汁",
+      "kana": "すましじる",
+      "en": "Clear soup",
+      "categoryId": "cat-dish-soup",
+      "role": null,
+      "forms": [
+        "すまし汁",
+        "おすまし",
+        "すましじる"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-tonjiru",
+      "ja": "豚汁",
+      "kana": "とんじる",
+      "en": "Pork and vegetable miso soup",
+      "categoryId": "cat-dish-soup",
+      "role": null,
+      "forms": [
+        "豚汁",
+        "ぶたじる",
+        "とん汁"
+      ],
+      "nameIngredientIds": [
+        "ing-pork"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-pork"
+    },
+    {
+      "id": "dish-corn-soup",
+      "ja": "コーンスープ",
+      "kana": "こーんすーぷ",
+      "en": "Corn soup",
+      "categoryId": "cat-dish-soup",
+      "role": null,
+      "forms": [
+        "コーンスープ",
+        "コーンポタージュ"
+      ],
+      "nameIngredientIds": [
+        "ing-corn"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-corn"
+    },
+    {
+      "id": "dish-consomme-soup",
+      "ja": "コンソメスープ",
+      "kana": "こんそめすーぷ",
+      "en": "Consommé soup",
+      "categoryId": "cat-dish-soup",
+      "role": null,
+      "forms": [
+        "コンソメスープ",
+        "野菜スープ"
+      ],
+      "nameIngredientIds": [
+        "ing-consomme"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-pot-au-feu",
+      "ja": "ポトフ",
+      "kana": "ぽとふ",
+      "en": "Pot-au-feu",
+      "categoryId": "cat-dish-soup",
+      "role": null,
+      "forms": [
+        "ポトフ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-stew",
+      "ja": "クリームシチュー",
+      "kana": "くりーむしちゅー",
+      "en": "Cream stew",
+      "categoryId": "cat-dish-soup",
+      "role": null,
+      "forms": [
+        "クリームシチュー",
+        "シチュー",
+        "ホワイトシチュー"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-gratin",
+      "ja": "グラタン",
+      "kana": "ぐらたん",
+      "en": "Gratin",
+      "categoryId": null,
+      "role": "main",
+      "forms": [
+        "グラタン",
+        "マカロニグラタン"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [
+        "ing-macaroni"
+      ],
+      "nameIngredientsNote": "(ing-macaroni when named)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-potato-salad",
+      "ja": "ポテトサラダ",
+      "kana": "ぽてとさらだ",
+      "en": "Potato salad",
+      "categoryId": "cat-dish-salad",
+      "role": null,
+      "forms": [
+        "ポテトサラダ",
+        "ポテサラ"
+      ],
+      "nameIngredientIds": [
+        "ing-potato"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-potato"
+    },
+    {
+      "id": "dish-macaroni-salad",
+      "ja": "マカロニサラダ",
+      "kana": "まかろにさらだ",
+      "en": "Macaroni salad",
+      "categoryId": "cat-dish-salad",
+      "role": null,
+      "forms": [
+        "マカロニサラダ"
+      ],
+      "nameIngredientIds": [
+        "ing-macaroni"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-macaroni"
+    },
+    {
+      "id": "dish-coleslaw",
+      "ja": "コールスロー",
+      "kana": "こーるすろー",
+      "en": "Coleslaw",
+      "categoryId": "cat-dish-salad",
+      "role": null,
+      "forms": [
+        "コールスロー",
+        "コールスローサラダ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-harusame-salad",
+      "ja": "春雨サラダ",
+      "kana": "はるさめさらだ",
+      "en": "Glass noodle salad",
+      "categoryId": "cat-dish-salad",
+      "role": null,
+      "forms": [
+        "春雨サラダ",
+        "中華サラダ"
+      ],
+      "nameIngredientIds": [
+        "ing-harusame"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": "ing-harusame"
+    },
+    {
+      "id": "dish-ohitashi",
+      "ja": "おひたし",
+      "kana": "おひたし",
+      "en": "Blanched greens with soy dressing",
+      "categoryId": "cat-dish-salad",
+      "role": null,
+      "forms": [
+        "おひたし",
+        "お浸し"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": "(named green, e.g. ほうれん草のおひたし)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-goma-ae",
+      "ja": "ごまあえ",
+      "kana": "ごまあえ",
+      "en": "Sesame-dressed vegetables",
+      "categoryId": "cat-dish-salad",
+      "role": null,
+      "forms": [
+        "ごまあえ",
+        "ごま和え",
+        "胡麻和え"
+      ],
+      "nameIngredientIds": [
+        "ing-sesame"
+      ],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-jelly",
+      "ja": "ゼリー",
+      "kana": "ぜりー",
+      "en": "Jelly",
+      "categoryId": "cat-sweets",
+      "role": null,
+      "forms": [
+        "ゼリー",
+        "フルーツゼリー"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": "(named fruit)",
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-pudding",
+      "ja": "プリン",
+      "kana": "ぷりん",
+      "en": "Custard pudding",
+      "categoryId": "cat-sweets",
+      "role": null,
+      "forms": [
+        "プリン"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-fruit-punch",
+      "ja": "フルーツポンチ",
+      "kana": "ふるーつぽんち",
+      "en": "Fruit punch (dessert)",
+      "categoryId": "cat-sweets",
+      "role": null,
+      "forms": [
+        "フルーツポンチ"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    },
+    {
+      "id": "dish-steamed-bread",
+      "ja": "蒸しパン",
+      "kana": "むしぱん",
+      "en": "Steamed bun",
+      "categoryId": "cat-sweets",
+      "role": null,
+      "forms": [
+        "蒸しパン",
+        "むしパン"
+      ],
+      "nameIngredientIds": [],
+      "conditionalNameIds": [],
+      "nameIngredientsNote": null,
+      "definingIngredientId": null
+    }
+  ],
+  "themes": [
+    {
+      "id": "theme-animals",
+      "ja": "どうぶつ",
+      "en": "Animals"
+    },
+    {
+      "id": "theme-dinosaurs",
+      "ja": "きょうりゅう",
+      "en": "Dinosaurs"
+    },
+    {
+      "id": "theme-vehicles",
+      "ja": "のりもの",
+      "en": "Vehicles"
+    },
+    {
+      "id": "theme-flowers",
+      "ja": "おはな",
+      "en": "Flowers"
+    },
+    {
+      "id": "theme-stars",
+      "ja": "ほし・うちゅう",
+      "en": "Stars & space"
+    },
+    {
+      "id": "theme-sea",
+      "ja": "うみのいきもの",
+      "en": "Sea creatures"
+    },
+    {
+      "id": "theme-seasonal",
+      "ja": "きせつ・行事",
+      "en": "Seasons & events"
+    },
+    {
+      "id": "theme-rainbow",
+      "ja": "カラフル",
+      "en": "Colourful"
+    }
+  ],
+  "ambiguity": [
+    {
+      "id": "amb-curry",
+      "forms": [
+        "カレー"
+      ],
+      "candidateIds": [
+        "dish-curry-rice",
+        "ing-curry-powder",
+        "ing-curry-roux"
+      ],
+      "candidatesNote": "dish-curry-rice, ing-curry-powder (flavour), ing-curry-roux",
+      "resolution": "Longest match first: 「カレーライス」→dish; 「カレー粉」「カレールウ」→ingredient. Followed by 味/風味/炒め/煮 (「カレー炒め」) → ing-curry-powder. Standalone 「カレー」 → ask."
+    },
+    {
+      "id": "amb-aji",
+      "forms": [
+        "あじ",
+        "アジ"
+      ],
+      "candidateIds": [
+        "ing-horse-mackerel"
+      ],
+      "candidatesNote": "ing-horse-mackerel, 「味」 (taste suffix, not a food)",
+      "resolution": "Preceded by a seasoning or flavour word (「しおあじ」「みそあじ」「カレーあじ」) → taste suffix, ignored. Kanji 鯵 → fish. Else ask."
+    },
+    {
+      "id": "amb-momo",
+      "forms": [
+        "もも",
+        "モモ"
+      ],
+      "candidateIds": [
+        "ing-peach",
+        "ing-chicken-thigh"
+      ],
+      "candidatesNote": "ing-peach, ing-chicken-thigh, pork thigh",
+      "resolution": "「鶏もも」「とりもも」→ ing-chicken-thigh; 「豚もも」→ ing-pork; kanji 桃 → peach. Standalone → ask."
+    },
+    {
+      "id": "amb-nashi",
+      "forms": [
+        "なし"
+      ],
+      "candidateIds": [
+        "ing-pear"
+      ],
+      "candidatesNote": "ing-pear, 「無し」 (none)",
+      "resolution": "Directly after a noun (「給食なし」「アレルゲンなし」「〇〇なし」) → \"none\", ignored as food. Kanji 梨 → pear. Standalone item 「なし」 → ask."
+    },
+    {
+      "id": "amb-kaki",
+      "forms": [
+        "かき",
+        "カキ"
+      ],
+      "candidateIds": [
+        "ing-persimmon",
+        "ing-oyster",
+        "dish-kakiage"
+      ],
+      "candidatesNote": "ing-persimmon, ing-oyster, dish-kakiage",
+      "resolution": "「かき揚げ」→ dish-kakiage; kanji 柿 → persimmon; 牡蠣 → oyster. Else ask."
+    },
+    {
+      "id": "amb-soba",
+      "forms": [
+        "そば"
+      ],
+      "candidateIds": [
+        "ing-soba",
+        "dish-yakisoba",
+        "ing-chinese-noodles"
+      ],
+      "candidatesNote": "ing-soba (buckwheat), dish-yakisoba / ing-chinese-noodles",
+      "resolution": "「焼きそば」「中華そば」「ソース焼きそば」→ wheat noodles (longest match). Standalone 「そば」 or 蕎麦 → ing-soba (buckwheat), but flagged on review because it matters for allergies."
+    },
+    {
+      "id": "amb-tako",
+      "forms": [
+        "たこ",
+        "タコ"
+      ],
+      "candidateIds": [
+        "ing-octopus",
+        "dish-octopus-sausage"
+      ],
+      "candidatesNote": "ing-octopus, dish-octopus-sausage",
+      "resolution": "「たこさんウインナー」「たこウインナー」 → dish (no octopus). Kanji 蛸 → octopus. Standalone → ing-octopus."
+    },
+    {
+      "id": "amb-sake",
+      "forms": [
+        "さけ",
+        "サケ"
+      ],
+      "candidateIds": [
+        "ing-salmon",
+        "ing-cooking-sake"
+      ],
+      "candidatesNote": "ing-salmon, ing-cooking-sake",
+      "resolution": "In an ingredient list next to seasonings (「さとう、さけ、しょうゆ」) → ask; in a dish name (「さけのしおやき」) → salmon. Kanji 鮭 → salmon; 酒 → cooking sake."
+    },
+    {
+      "id": "amb-pan",
+      "forms": [
+        "パン"
+      ],
+      "candidateIds": [
+        "ing-bread",
+        "ing-bread-crumbs"
+      ],
+      "candidatesNote": "ing-bread, ing-bread-crumbs (パン粉)",
+      "resolution": "Longest match only: 「パン粉」 → bread crumbs; 「フライパン」 is ignored (not a food); else ing-bread. No question needed."
+    }
+  ]
+}

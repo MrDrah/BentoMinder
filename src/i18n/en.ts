@@ -1,0 +1,67 @@
+// English catalog: same keys as ja (a missing key is a type error), values verbatim from
+// design/copy.md.
+import type { Catalog } from './ja.ts';
+
+export const en = {
+  'app.name': 'BentoMinder',
+  'app.tagline': 'Never forget a bento day.',
+  'app.docTitle': '{screen} · BentoMinder',
+  'lang.toggle.ja': '日本語',
+  'lang.toggle.en': 'EN',
+  'lang.toggle.aria': 'Display language',
+  'nav.recipes': 'Recipes',
+  'nav.settings': 'Settings',
+  'nav.calendar': 'Calendar',
+  'nav.back': 'Back',
+  'nav.backTo': 'Back to {screen}',
+  'nav.skip': 'Skip to main content',
+  'common.loading': 'Loading…',
+  'notFound.title': 'Page not found',
+  'notFound.back': 'Back to the calendar',
+
+  'fmt.month': '{monthName} {year}',
+  'fmt.date': '{wdShort}, {monShort} {day}',
+  'fmt.dateNoWd': '{monShort} {day}',
+  'wd.short.0': 'Sun',
+  'wd.short.1': 'Mon',
+  'wd.short.2': 'Tue',
+  'wd.short.3': 'Wed',
+  'wd.short.4': 'Thu',
+  'wd.short.5': 'Fri',
+  'wd.short.6': 'Sat',
+  'wd.long.0': 'Sunday',
+  'wd.long.1': 'Monday',
+  'wd.long.2': 'Tuesday',
+  'wd.long.3': 'Wednesday',
+  'wd.long.4': 'Thursday',
+  'wd.long.5': 'Friday',
+  'wd.long.6': 'Saturday',
+
+  'ob.step1.name': 'About your child',
+  'ob.step2.name': 'Import the menu',
+  'ob.step3.name': 'Check the menu',
+
+  'cal.prevMonth': 'Previous month',
+  'cal.nextMonth': 'Next month',
+  'cal.today': 'Today',
+  'cal.grid.label': 'Calendar for {month}',
+  'cell.aria.today': 'Today, ',
+  'cell.aria.outside': '{date}, not on the menu',
+  'cell.aria.noMenu': '{date}, menu not imported',
+  'menuCard.missing.current': 'No menu for this month yet',
+  'menuCard.missing.month': 'No menu for {m} yet',
+  'menuCard.missing.body': 'Import the menu to see lunch assessments and plan bentos.',
+
+  'day.panel.empty': 'Choose a date to see its details here.',
+  'library.title': 'All recipes',
+  'settings.title': 'Settings',
+
+  'storage.unavailable': "This device can't save data",
+  'storage.unavailable.body': "You may be in private browsing, or storage may be full. Your latest change wasn't saved.",
+  'storage.newer': 'This data is from a newer version. Please update the app.',
+  'storage.newer.body': "To protect your data, this app won't write anything.",
+  'storage.corrupt.title': "Your saved data couldn't be read",
+  'storage.corrupt.body': 'Nothing will be written until you choose what to do.',
+
+  'live.monthChanged': 'Showing {month}',
+} satisfies Catalog;
