@@ -1,0 +1,194 @@
+{
+  "deviceId": "3f1c9a52-7d4e-4b8a-9c21-5e6f7a8b9c0d",
+  "schemaVersion": 1,
+  "createdAt": "2026-10-28T20:15:00+09:00",
+  "updatedAt": "2026-11-01T10:12:00+09:00",
+  "settings": {
+    "language": "ja",
+    "timezone": "Asia/Tokyo",
+    "reminders": {
+      "weekly": { "enabled": true, "weekday": 0, "time": "14:00" },
+      "dayBefore": { "enabled": true, "time": "17:30" }
+    },
+    "nextMonthPromptFromDay": 20,
+    "weekStartsOn": "monday",
+    "theme": "auto",
+    "ownerId": "local",
+    "createdAt": "2026-10-28T20:15:00+09:00",
+    "updatedAt": "2026-10-28T20:15:00+09:00"
+  },
+  "profile": {
+    "id": "child-1",
+    "nickname": "はなちゃん",
+    "ageRange": "age-4-5",
+    "likedIds": ["ing-chicken", "ing-egg", "ing-corn"],
+    "dislikedIds": ["ing-green-pepper", "ing-eggplant", "cat-fish"],
+    "allergyStatus": "has-known",
+    "knownAllergenIds": ["alg-shrimp"],
+    "excludedIngredientIds": [],
+    "diet": [],
+    "themeIds": ["theme-animals"],
+    "note": "野菜は細かく切ると食べます",
+    "ownerId": "local",
+    "createdAt": "2026-10-28T20:16:00+09:00",
+    "updatedAt": "2026-10-28T20:16:00+09:00"
+  },
+  "menus": {
+    "2026-11": {
+      "month": "2026-11",
+      "sourceUrl": "https://example-kinder.test/menu/2026-11.pdf",
+      "extractions": [
+        {
+          "id": "ext-2026-11-3fa9c2d1",
+          "contract": "extracted-menu/1",
+          "targetMonth": "2026-11",
+          "detectedMonth": "2026-11",
+          "source": {
+            "kind": "fixture",
+            "sha256": "3fa9c2d1e4b5a6978877665544332211aabbccddeeff00112233445566778899",
+            "byteSize": 389120,
+            "fetchedAt": "2026-10-28T20:20:00+09:00",
+            "model": "fixture",
+            "promptVersion": 1
+          },
+          "days": [
+            {
+              "date": "2026-11-04",
+              "printedDateText": "4日（水）",
+              "printedWeekday": "水",
+              "items": [
+                { "text": "ごはん", "kind": "staple", "verification": { "status": "ok" } },
+                { "text": "ピーマンとなすのみそ炒め", "kind": "main", "verification": { "status": "ok" } }
+              ],
+              "ingredientsStatus": "not-listed",
+              "allergenDeclaration": { "status": "not-declared", "allergenIds": [], "rawText": null, "verification": { "status": "ok" } },
+              "notes": [],
+              "verification": { "status": "ok" }
+            },
+            {
+              "date": "2026-11-05",
+              "printedDateText": "5日（木）",
+              "printedWeekday": "木",
+              "items": [
+                { "text": "ごはん", "kind": "staple", "verification": { "status": "ok" } },
+                { "text": "さばのみそ煮", "kind": "main", "verification": { "status": "ok" } }
+              ],
+              "ingredientsStatus": "listed",
+              "ingredients": [
+                { "text": "さば", "foodGroup": "red", "verification": { "status": "ok" } },
+                { "text": "みそ", "foodGroup": "red", "verification": { "status": "ok" } }
+              ],
+              "allergenDeclaration": { "status": "declared", "allergenIds": ["alg-egg", "alg-wheat"], "rawText": "卵・小麦", "verification": { "status": "ok" } },
+              "notes": [],
+              "verification": { "status": "ok" }
+            }
+          ],
+          "noLunchDays": [
+            { "date": "2026-11-20", "reason": "bento-day", "originalText": "お弁当の日", "verification": { "status": "ok" } }
+          ],
+          "outOfMonthDays": [],
+          "warnings": [],
+          "extractedAt": "2026-10-28T20:21:00+09:00"
+        }
+      ],
+      "confirmed": {
+        "month": "2026-11",
+        "version": 1,
+        "extractionId": "ext-2026-11-3fa9c2d1",
+        "confirmedAt": "2026-10-28T20:30:00+09:00",
+        "days": [
+          {
+            "date": "2026-11-04",
+            "printedDateText": "4日（水）",
+            "printedWeekday": "水",
+            "items": [
+              { "text": "ごはん", "kind": "staple", "verification": { "status": "ok" } },
+              { "text": "ピーマンとなすのみそ炒め", "kind": "main", "verification": { "status": "ok" } }
+            ],
+            "ingredientsStatus": "not-listed",
+            "allergenDeclaration": { "status": "not-declared", "allergenIds": [], "rawText": null, "verification": { "status": "ok" } },
+            "notes": [],
+            "verification": { "status": "ok" }
+          },
+          {
+            "date": "2026-11-05",
+            "printedDateText": "5日（木）",
+            "printedWeekday": "木",
+            "items": [
+              { "text": "ごはん", "kind": "staple", "verification": { "status": "ok" } },
+              { "text": "さばのみそ煮", "kind": "main", "verification": { "status": "parent-edited" } }
+            ],
+            "ingredientsStatus": "listed",
+            "ingredients": [
+              { "text": "さば", "foodGroup": "red", "verification": { "status": "ok" } },
+              { "text": "みそ", "foodGroup": "red", "verification": { "status": "ok" } }
+            ],
+            "allergenDeclaration": { "status": "declared", "allergenIds": ["alg-egg", "alg-wheat"], "rawText": "卵・小麦", "verification": { "status": "ok" } },
+            "notes": [],
+            "verification": { "status": "ok" }
+          }
+        ],
+        "noLunchDays": [
+          { "date": "2026-11-20", "reason": "bento-day", "originalText": "お弁当の日", "verification": { "status": "ok" } }
+        ],
+        "changedDatesSincePrevious": []
+      },
+      "ownerId": "local",
+      "createdAt": "2026-10-28T20:20:00+09:00",
+      "updatedAt": "2026-10-28T20:30:00+09:00"
+    }
+  },
+  "overrides": {
+    "2026-11-05": {
+      "date": "2026-11-05",
+      "state": "mixed-uncertain",
+      "setAt": "2026-10-28T20:40:00+09:00",
+      "menuVersionAtSet": 1,
+      "ownerId": "local",
+      "createdAt": "2026-10-28T20:40:00+09:00",
+      "updatedAt": "2026-10-28T20:40:00+09:00"
+    }
+  },
+  "decisions": {
+    "2026-11-04": {
+      "date": "2026-11-04",
+      "state": "homemade-bento-planned",
+      "recipeId": "rcp-kuma-onigiri",
+      "recipeNameSnapshot": { "ja": "くまさんおにぎり弁当", "en": "Bear onigiri bento" },
+      "recipeShortNameSnapshot": { "ja": "くまおにぎり", "en": "Bear oni" },
+      "reservationDoneExternally": false,
+      "decidedAt": "2026-11-01T10:12:00+09:00",
+      "plannedAt": "2026-11-01T10:12:00+09:00",
+      "history": [
+        { "state": "homemade-bento-planned", "recipeId": "rcp-kuma-onigiri", "at": "2026-11-01T10:12:00+09:00" }
+      ],
+      "ownerId": "local",
+      "createdAt": "2026-11-01T10:12:00+09:00",
+      "updatedAt": "2026-11-01T10:12:00+09:00"
+    },
+    "2026-11-05": {
+      "date": "2026-11-05",
+      "state": "school-lunch-planned",
+      "reservationDoneExternally": true,
+      "decidedAt": "2026-11-01T10:05:00+09:00",
+      "history": [
+        { "state": "school-lunch-planned", "at": "2026-11-01T10:05:00+09:00" }
+      ],
+      "ownerId": "local",
+      "createdAt": "2026-11-01T10:05:00+09:00",
+      "updatedAt": "2026-11-01T10:05:00+09:00"
+    }
+  },
+  "reminderLog": [
+    {
+      "key": "weekly:2026-11-02",
+      "type": "weekly",
+      "dueAt": "2026-11-01T14:00:00+09:00",
+      "expiresAt": "2026-11-09T00:00:00+09:00",
+      "shownAt": "2026-11-01T14:02:00+09:00",
+      "dismissedAt": "2026-11-01T14:05:00+09:00"
+    }
+  ],
+  "consent": { "aiNoticeVersion": 1, "consentedAt": "2026-10-28T20:19:00+09:00" },
+  "aiUsage": { "2026-11": 1 }
+}
