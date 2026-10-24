@@ -68,8 +68,10 @@ describe('US-E10-02 versioned schema and migrations (repository part)', () => {
   });
 
   it('US-E10-02/AC3 a store from a newer version is reported and nothing is written', async () => {
-    const storage = memoryStorage({ 'bentominder.state': raw({ ...storeV1(), schemaVersion: 99 }) });
-    expect(await createRepository(storage, clock).load()).toEqual({ kind: 'too-new', version: 99 });
+    const text = raw({ ...storeV1(), schemaVersion: 99 });
+    const storage = memoryStorage({ 'bentominder.state': text });
+    // The raw text comes back so the recovery screen can offer it as an export (US-E10-02/AC3).
+    expect(await createRepository(storage, clock).load()).toEqual({ kind: 'too-new', version: 99, raw: text });
     expect(storage.writes).toBe(0);
   });
 
