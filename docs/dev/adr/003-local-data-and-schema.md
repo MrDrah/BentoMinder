@@ -1,25 +1,27 @@
 # ADR-003: Local persistence, versioned schema, export/import, delete-all, and the sync seam
 
-Status: proposed · 2026-10-24 · Owner: Developer
+Status: **accepted** · 2026-10-24 · Owner: Developer
+
+Entity and field names: `docs/ba/data-contract.md` v1 (root store `BentoMinderStore`, H1 final). Binding rules: BR-05, BR-13, BR-20, BR-22. Where this ADR and the contract disagree, the contract wins.
 
 ## Context
 The MVP has no accounts and no backend database (PROJECT_BRIEF §4, §6). Everything the family types stays on the device (brief §5, §13; APPI note in PROJECT_BRIEF §9):
 - one child profile (preferences, allergies, themes; no birthdate, gender, height or weight);
 - confirmed monthly menus (one per month, replaceable; source URL kept for re-import);
 - per-day **assessment overrides** and **family decisions** (incl. selected recipe and the optional "school-lunch reservation done" flag);
-- settings (language, reminder times, effort preference) and reminder bookkeeping (what is scheduled, what was acknowledged).
+- settings (language, week start, reminder times, next-month prompt day) and reminder bookkeeping (which reminder keys were shown or dismissed).
 
 The brief asks for a **versioned schema**, **edit / export / delete**, persistence of overrides "until changed" and of decisions across menu refreshes (§5, §6, §8), and must run on web now and in a Capacitor Android WebView later (§12). v1 may add synced family planning (§13), so the shape must not block that.
 
 Size: one profile (~2 KB) + up to 12 months of menus (~6 KB each) + ~250 decisions/year (~150 B each) → **< 150 KB/year**. Uploaded PDFs are **not** stored (only the URL, file name and SHA-256), so storage never holds megabytes.
 
 ## Decision
-1. **One `Storage` port** with an async document API; the whole app state is **one versioned JSON document** (`AppStateV<n>`), read once at start-up and written after each committed change (debounced 300 ms, flushed on `visibilitychange: hidden` / Capacitor `pause`).
+1. **One `Storage` port** with an async document API; the whole app state is **one versioned JSON document** (the contract's `BentoMinderStore`, `schemaVersion` 1), read once at start-up and written after each committed change (debounced 300 ms, flushed on `visibilitychange: hidden` / Capacitor `pause`).
 2. **Web adapter: `localStorage`** (key `bentominder.state`, plus `bentominder.state.prev` = last good copy). **Android adapter: `@capacitor/preferences`** with the same keys (ADR 005 confirms the plugin set). IndexedDB is not used in the MVP.
 3. **Schema version** is an integer in the document; **forward-only migrations** are pure functions `migrate_n_to_n+1` in `src/domain/storage/migrations/`, each with a frozen fixture of its input version.
-4. **Export** = the same document as a downloadable / shareable `bentominder-backup-YYYYMMDD.json`; **import** = validate → migrate → replace (after confirmation). **Delete all** = remove both keys + cancel all scheduled reminders → onboarding.
+4. **Export** = the store document itself as a downloadable / shareable `bentominder-backup-YYYYMMDD.json` (contract rule `export-roundtrip`: it re-validates as a `BentoMinderStore`); **import** = validate → migrate → replace (after confirmation). **Delete all** = remove all app keys + cancel all reminders → onboarding (BR-22).
 5. **Corrupt or unreadable data is never silently wiped**: the app opens a recovery screen (details below).
-6. **Sync seam**: every record carries `id`, `ownerId`, `createdAt`, `updatedAt`, `deletedAt?` from day one; conflict policy documented below, not built.
+6. **Sync seam**: the contract's record metadata (`ownerId` = `local` in the MVP, `createdAt`, `updatedAt`) on every ChildProfile, MenuMonth, AssessmentOverride, DayDecision and Settings record, plus a root `deviceId`; conflict policy documented below, not built.
 
 ```ts
 // src/domain/storage/port.ts  (port; adapters live in src/adapters/{web,android}/storage.ts)
@@ -28,49 +30,46 @@ export interface Storage {
   write(key: StorageKey, value: string): Promise<void>;
   remove(key: StorageKey): Promise<void>;
 }
-export type StorageKey = 'bentominder.state' | 'bentominder.state.prev' | 'bentominder.device';
+export type StorageKey = 'bentominder.state' | 'bentominder.state.prev';   // deviceId lives inside the store
 
 // src/domain/storage/repository.ts  (pure orchestration over the port; tests use an in-memory Storage)
 export type LoadResult =
   | { kind: 'empty' }                                   // first launch → onboarding
-  | { kind: 'ok'; state: AppState; migratedFrom?: number }
-  | { kind: 'recovered-from-prev'; state: AppState; reason: CorruptReason }
+  | { kind: 'ok'; state: BentoMinderStore; migratedFrom?: number }
+  | { kind: 'recovered-from-prev'; state: BentoMinderStore; reason: CorruptReason }
   | { kind: 'corrupt'; raw: string; reason: CorruptReason }
   | { kind: 'too-new'; version: number };              // written by a newer app version
 export type CorruptReason = 'json-parse' | 'schema-invalid' | 'migration-failed';
 
 export function createRepository(storage: Storage, clock: Clock): {
   load(): Promise<LoadResult>;
-  save(state: AppState): Promise<void>;                 // validates before writing; rotates prev
-  exportJson(state: AppState): string;                  // pretty JSON, includes schemaVersion + exportedAt
+  save(state: BentoMinderStore): Promise<void>;                 // validates before writing; rotates prev
+  exportJson(state: BentoMinderStore): string;                  // pretty JSON of the store itself (export-roundtrip)
   importJson(text: string): ImportResult;               // pure: parse → migrate → validate, no write
   deleteAll(): Promise<void>;
 };
 ```
 
-## The document (schema v1, illustrative)
-```ts
-type AppStateV1 = {
-  schemaVersion: 1;
-  deviceId: string;                 // random UUID, generated at first launch
-  profile: ChildProfile | null;     // one child in MVP
-  menus: MenuMonth[];               // ≤ 1 active per 'YYYY-MM'; replaced menus kept with deletedAt (for undo/sync)
-  overrides: AssessmentOverride[];  // keyed by date; ADR 004
-  decisions: DayDecision[];         // keyed by date; ADR 004
-  settings: Settings;               // locale, reminder times (JST 'HH:mm'), effort preference, horizon
-  reminders: { scheduled: ScheduledJobRef[]; acknowledged: string[] }; // ADR 004 §4
-};
+## The document (schema v1)
+The shape is the data contract's root store `BentoMinderStore` (§3.1), field for field; the zod schema in `src/domain/schema/store.ts` is written from the contract tables and rejects unknown fields (`additionalProperties: false`). Summary:
 
-type SyncMeta = {                   // on every record (profile, menu, override, decision, settings)
-  id: string;                       // UUID (decisions/overrides: `${kind}:${date}` so one per date)
-  ownerId: 'local';                 // v1: the family id
-  createdAt: number;                // Instant (epoch ms UTC) from the Clock port
-  updatedAt: number;
-  updatedBy: string;                // deviceId; v1: memberId
-  deletedAt?: number;               // tombstone instead of hard delete (except delete-all)
-};
-```
-Everything is validated by the zod schema in `src/domain/schema/app-state.ts` on **load, before save, and on import**. Child data never leaves the device except through the parent's explicit export or the share text (which contains no profile data, brief §13).
+| Field | Shape | Notes |
+|-------|-------|-------|
+| `schemaVersion` | `1` | lower → migrate (with backup); higher → read-only (`too-new`) |
+| `deviceId` | UUID v4 | created at first launch, never sent anywhere |
+| `createdAt` / `updatedAt` | timestamps | |
+| `settings` | `Settings` | language, timezone (const `Asia/Tokyo`), reminders (BR-16), `nextMonthPromptFromDay`, `weekStartsOn` (default `monday`), `theme` (default `auto`); display settings never change domain results (ADR 001) |
+| `profile` | `ChildProfile` \| null | one child in the MVP (BR-20 field list only) |
+| `menus` | map `YYYY-MM → MenuMonth` | up to 3 extractions per month + the confirmed menu (`version` +1 per refresh) |
+| `overrides` | map `YYYY-MM-DD → AssessmentOverride` | BR-05 |
+| `decisions` | map `YYYY-MM-DD → DayDecision` | parent-created only (BR-02, ADR 004 §2) |
+| `reminderLog` | `ReminderLogEntry[]` | unique `key`; pruned after 60 days (ADR 004 §4, ADR 005 §2) |
+| `consent` | object \| null | AI notice version + time (US-E2-08) |
+| `aiUsage` | map `YYYY-MM → calls` | provider calls per Tokyo month (ADR 002 `providerCalls`) |
+
+**Record metadata (sync seam):** every ChildProfile, MenuMonth, AssessmentOverride, DayDecision and Settings record carries `ownerId` (`local` in the MVP; v1: the family id), `createdAt` and `updatedAt` (contract rules `meta-owner`, `meta-timestamps`). Maps keyed by date give decisions and overrides a deterministic identity per date. Timestamps come from the `Clock` port.
+
+Everything is validated by that schema on **load, before save, and on import**. Child data never leaves the device except through the parent's explicit export or the share text (which contains no profile data, BR-21).
 
 ## Write safety
 - `save()` validates first; an invalid state is a bug → throw, keep the old document, log to the dev console and (in dev) the debug panel.
@@ -91,16 +90,16 @@ QA cases: truncated JSON, valid JSON with a wrong type, unknown future version, 
 - Migrations are pure and never call the network or the clock (timestamps for new fields use the record's `updatedAt`).
 
 ## Export / import
-- Export file: `{ app: 'BentoMinder', schemaVersion, exportedAt, state }`. Web: download via a Blob link; Android: write to cache with Filesystem + open the share sheet (ADR 005 confirms). Contains the child profile, so the UI says so before export.
-- Import: parse → check `app` → migrate → validate → show a summary ("profile, 2 months of menus, 14 plans") → confirm → replace the whole state → reconcile reminders. Merge-import is **not** in the MVP (it is the same problem as sync).
+- Export file: the `BentoMinderStore` document as stored (BR-22, rule `export-roundtrip`); the file name carries the Tokyo date. Web: download via a Blob link; Android: write to cache with Filesystem + open the share sheet (ADR 005 confirms). Contains the child profile, so the UI says so before export.
+- Import: parse → recognise a `BentoMinderStore` (`schemaVersion` + `deviceId` present) → migrate → validate → show a summary ("profile, 2 months of menus, 14 plans") → confirm → replace the whole state → reconcile reminders. Merge-import is **not** in the MVP (it is the same problem as sync).
 
 ## Delete all
 Settings → "Delete all data": confirmation dialog → `NotificationScheduler.cancelAll()` → `storage.remove()` for all keys → in-memory reset → onboarding. Also used by the debug panel's "clear local data". QA asserts no `bentominder.*` keys remain and no reminder fires afterwards.
 
 ## v1 sync seam (noted, not built)
-- **Ownership**: `ownerId` becomes the family id; `updatedBy` the member id. Local data is offered for upload on first sign-in (`backend-integration` §1).
+- **Ownership**: `ownerId` becomes the family id; v1 adds an `updatedBy` member id and `deletedAt` tombstones (contract change in v1, with a migration). Local data is offered for upload on first sign-in (`backend-integration` §1).
 - **Granularity**: the unit of sync is a record (profile, menu month, a date's decision, a date's override, settings), not the whole document. Decisions/overrides already have one record per date with a deterministic id, so two devices editing the same date collide on the same id instead of creating duplicates.
-- **Conflict policy (proposal for the v1 ADR)**: last-writer-wins per record by `updatedAt`, **except** decisions: if both devices changed the same date since the last sync and the results differ, keep both and ask the parent ("Mom planned a bento, Dad set school lunch"); a decision never silently reverts to school lunch. Tombstones (`deletedAt`) propagate deletes. Clock skew is handled by the server stamping `updatedAt` on receipt.
+- **Conflict policy (proposal for the v1 ADR)**: last-writer-wins per record by `updatedAt`, **except** decisions: if both devices changed the same date since the last sync and the results differ, keep both and ask the parent ("Mom planned a bento, Dad set school lunch"); a decision never silently reverts to school lunch. Tombstones (v1 `deletedAt`) propagate deletes. Clock skew is handled by the server stamping `updatedAt` on receipt.
 - **Out of scope until then**: merge-import, multi-child, multiple devices.
 
 ## Alternatives considered
@@ -120,5 +119,11 @@ Settings → "Delete all data": confirmation dialog → `NotificationScheduler.c
 
 ## Revisit when
 - The document passes ~1 MB, or we decide to keep PDFs or page images → IndexedDB (web) / Filesystem (Android) for blobs, keep the document small.
-- v1 family sync is approved → a new ADR for the backend and the conflict policy above; the `SyncMeta` fields are already there.
+- v1 family sync is approved → a new ADR for the backend and the conflict policy above; `ownerId`, `createdAt`, `updatedAt` and per-date identities are already there.
 - Android testing shows Preferences write latency > 50 ms for the document → split into per-area keys.
+
+## Change log
+- 2026-10-24 · proposed (kick-off).
+- 2026-10-24 · **accepted** at H1. Document shape replaced by the data contract's `BentoMinderStore` (maps keyed by month/date, `reminderLog`, `consent`, `aiUsage`, root `deviceId`); the illustrative `AppStateV1`/`SyncMeta` (with `updatedBy`, `deletedAt`) dropped in favour of the contract's record metadata (`ownerId`, `createdAt`, `updatedAt`). Export is the store itself (`export-roundtrip`). Settings gain `weekStartsOn` (Monday default, Sunday option) and `theme`; recipes gain `shortNameJa/En` (1–8 characters; library data, not stored per device except via `recipeNameSnapshot` and `recipeShortNameSnapshot`).
+- 2026-10-24 · H1 fix round (Developer): `DayDecision` gains `plannedAt` (PLAN §7 B10), `recipeShortNameSnapshot { ja, en }` and `acknowledgedMenuVersion` for refresh conflicts (B7), all per data contract §3.6 (ADR 004 §2). They are part of schema v1 (no store has shipped yet), so no migration is needed.
+- 2026-10-24 · H1 late ruling (Developer): field names aligned with data contract §3.6 (`recipeShortNameSnapshot { ja, en }`, `plannedAt`, `acknowledgedMenuVersion`).

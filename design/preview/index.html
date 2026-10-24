@@ -3,114 +3,343 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BentoMinder デザイン方向性プレビュー v0.1</title>
+<title>BentoMinder デザインプレビュー v1.0（H2）</title>
+<!-- Preview only: Google Fonts is allowed here. The app self-hosts Zen Maru Gothic via @fontsource (ADR 001). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
 <style>
-/* ===== Tokens (copied from design/tokens.css v0.1) ===== */
-:root{color-scheme:light;
---surface-1:#FFFFFF;--surface-2:#FFFDF8;--surface-3:#F2EADB;--line-1:#E4DAC8;--line-ui:#8C8574;
---ink-1:#1B2A4A;--ink-2:#3F4B66;--ink-3:#5F6880;--ink-inverse:#FBF6EC;
---accent:#D2574F;--accent-strong:#B8443C;--accent-strong-hover:#A23A33;--accent-ink:#A83A33;--accent-soft:#F8E1DC;
---navy-fill:#1B2A4A;--saturday:#2F5C9A;--sunday:#A83A33;--info:#2F5C9A;--info-soft:#E3ECF8;
---success:#2F6B4F;--success-soft:#E1F0E6;--warning:#7A4E00;--warning-soft:#FFF0D1;--danger:#A3271F;--danger-soft:#FBE3E0;
---focus-ring:#1F5FBF;--stripe-a:#1B2A4A;--stripe-b:#D2574F;--scrim:rgba(27,42,74,.45);
---illus-rice:#FFFFFF;--illus-egg:#F2C14E;--illus-green:#7FA86A;--illus-brown:#9A6544;--illus-nori:#1B2A4A;--illus-pink:#F4B6AE;
---font-display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","BIZ UDPGothic","Hiragino Sans","Yu Gothic UI","Noto Sans JP",Meiryo,system-ui,sans-serif;
---font-body:"Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Yu Gothic UI","Noto Sans JP",Meiryo,system-ui,sans-serif;
---text-xs:12px;--text-sm:14px;--text-md:16px;--text-lg:18px;--text-xl:22px;--text-2xl:28px;--text-3xl:34px;
---leading-tight:1.35;--leading-normal:1.7;--leading-relaxed:1.85;--tracking-body:.02em;--tracking-heading:.04em;
---space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;
---touch-min:44px;--touch-comfy:52px;--cell-min-height:68px;
---radius-sm:8px;--radius-md:12px;--radius-lg:18px;--radius-xl:24px;--radius-pill:999px;
---elevation-1:0 1px 2px rgba(27,42,74,.06),0 1px 1px rgba(27,42,74,.04);
---elevation-2:0 4px 12px rgba(27,42,74,.08),0 1px 3px rgba(27,42,74,.06);
---elevation-3:0 -8px 28px rgba(27,42,74,.14);
---duration-fast:120ms;--duration-base:200ms;--ease-standard:cubic-bezier(.2,0,0,1);
---stripe-band:repeating-linear-gradient(180deg,var(--stripe-a) 0 2px,transparent 2px 5px);
---hatch:repeating-linear-gradient(135deg,var(--line-1) 0 2px,transparent 2px 7px);
---canvas:#EFE6D4;
+/* ===== Tokens: injected from design/tokens.css (generated from tokens.json) ===== */
+:root {
+  color-scheme: light;
+
+  /* Colour roles: light */
+  --surface-1: #FFFFFF;
+  --surface-2: #FFFDF8;
+  --surface-3: #F2EADB;
+  --line-1: #E4DAC8;
+  --line-ui: #8C8574;
+  --ink-1: #1B2A4A;
+  --ink-2: #3F4B66;
+  --ink-3: #5F6880;
+  --ink-inverse: #FBF6EC;
+  --accent: #D2574F;
+  --accent-strong: #B8443C;
+  --accent-strong-hover: #A23A33;
+  --accent-ink: #A83A33;
+  --accent-soft: #F8E1DC;
+  --navy-fill: #1B2A4A;
+  --planned-edge: #D2574F;
+  --saturday: #2F5C9A;
+  --sunday: #A83A33;
+  --info: #2F5C9A;
+  --info-soft: #E3ECF8;
+  --success: #2F6B4F;
+  --success-soft: #E1F0E6;
+  --warning: #7A4E00;
+  --warning-soft: #FFF0D1;
+  --danger: #A3271F;
+  --danger-soft: #FBE3E0;
+  --danger-strong: #A3271F;
+  --danger-strong-hover: #86201A;
+  --focus-ring: #1F5FBF;
+  --focus-halo: #FFFFFF;
+  --link: #2F5C9A;
+  --stripe-a: #1B2A4A;
+  --stripe-b: #D2574F;
+  --scrim: rgba(27, 42, 74, 0.45);
+  --skeleton: #F2EADB;
+  --skeleton-highlight: #FFFDF8;
+  --debug-surface: #2A1145;
+  --debug-ink: #F5EDFF;
+  --debug-accent: #D8B4FE;
+  --illus-rice: #FFFFFF;
+  --illus-egg: #F2C14E;
+  --illus-green: #7FA86A;
+  --illus-brown: #9A6544;
+  --illus-nori: #1B2A4A;
+  --illus-pink: #F4B6AE;
+
+  /* Typography */
+  --font-display: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --font-body: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "BIZ UDGothic", monospace;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 34px;
+  --leading-tight: 1.35;
+  --leading-normal: 1.7;
+  --leading-relaxed: 1.85;
+  --tracking-body: 0.02em;
+  --tracking-heading: 0.04em;
+
+  /* Spacing: 4 px scale */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Sizes */
+  --touch-min: 44px;
+  --touch-comfy: 52px;
+  --cell-min-height: 68px;
+  --cell-row-compact: 44px;
+  --weekend-col-ratio: 0.62;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --content-max: 560px;
+  --panel-width: 440px;
+  --dialog-max: 480px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-cell: 10px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgba(27, 42, 74, 0.06), 0 1px 1px rgba(27, 42, 74, 0.04);
+  --elevation-2: 0 4px 12px rgba(27, 42, 74, 0.08), 0 1px 3px rgba(27, 42, 74, 0.06);
+  --elevation-3: 0 -8px 28px rgba(27, 42, 74, 0.14);
+  --elevation-4: 0 12px 40px rgba(27, 42, 74, 0.22);
+
+  /* Motion */
+  --duration-instant: 0ms;
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --duration-shimmer: 1400ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --sheet-offset: 24px;
+
+  /* Layers */
+  --z-base: 0;
+  --z-appbar: 10;
+  --z-banner: 20;
+  --z-sheet: 40;
+  --z-dialog: 50;
+  --z-toast: 60;
+  --z-debug: 90;
+
+  /* Breakpoints (for reference in JS; CSS media queries use the literal values) */
+  --bp-xs: 360px;
+  --bp-sm: 390px;
+  --bp-md: 768px;
+  --bp-lg: 1280px;
+
+  /* Patterns */
+  --stripe-band: repeating-linear-gradient(180deg, var(--stripe-a) 0 2px, transparent 2px 5px);
+  --stripe-band-red: repeating-linear-gradient(180deg, var(--stripe-b) 0 3px, transparent 3px 6px);
+  --hatch: repeating-linear-gradient(135deg, var(--line-1) 0 2px, transparent 2px 7px);
+  --debug-hatch: repeating-linear-gradient(45deg, var(--debug-accent) 0 6px, var(--debug-surface) 6px 12px);
 }
-[data-theme="dark"]{color-scheme:dark;
---surface-1:#141B2B;--surface-2:#1C2539;--surface-3:#253049;--line-1:#2F3A54;--line-ui:#7D7A72;
---ink-1:#F6EFE2;--ink-2:#CDC6B8;--ink-3:#A7A398;--ink-inverse:#141B2B;
---accent:#F08A80;--accent-strong:#F08A80;--accent-strong-hover:#F4A097;--accent-ink:#F4A097;--accent-soft:#3A2429;
---navy-fill:#F6EFE2;--saturday:#8FB4F0;--sunday:#F4A097;--info:#8FB4F0;--info-soft:#22314F;
---success:#8FD3AE;--success-soft:#1D3A30;--warning:#F2C66D;--warning-soft:#3A3020;--danger:#FF9C92;--danger-soft:#40242A;
---focus-ring:#8FB4F0;--stripe-a:#F6EFE2;--stripe-b:#F08A80;--scrim:rgba(0,0,0,.6);
---illus-rice:#F6EFE2;--illus-nori:#141B2B;
---elevation-1:0 1px 2px rgba(0,0,0,.4);--elevation-2:0 4px 12px rgba(0,0,0,.45);--elevation-3:0 -8px 28px rgba(0,0,0,.55);
---canvas:#0E1320;
+
+html[lang="en"] {
+  --tracking-body: 0;
+  --tracking-heading: 0;
 }
-@media (prefers-reduced-motion:reduce){:root{--duration-fast:0ms;--duration-base:0ms}}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-1: #141B2B;
+  --surface-2: #1C2539;
+  --surface-3: #253049;
+  --line-1: #2F3A54;
+  --line-ui: #8A877E;
+  --ink-1: #F6EFE2;
+  --ink-2: #CDC6B8;
+  --ink-3: #A7A398;
+  --ink-inverse: #141B2B;
+  --accent: #F08A80;
+  --accent-strong: #F08A80;
+  --accent-strong-hover: #F4A097;
+  --accent-ink: #F4A097;
+  --accent-soft: #3A2429;
+  --navy-fill: #F6EFE2;
+  --planned-edge: #B8443C;
+  --saturday: #8FB4F0;
+  --sunday: #F4A097;
+  --info: #8FB4F0;
+  --info-soft: #22314F;
+  --success: #8FD3AE;
+  --success-soft: #1D3A30;
+  --warning: #F2C66D;
+  --warning-soft: #3A3020;
+  --danger: #FF9C92;
+  --danger-soft: #40242A;
+  --danger-strong: #FF9C92;
+  --danger-strong-hover: #FFB8B0;
+  --focus-ring: #8FB4F0;
+  --focus-halo: #141B2B;
+  --link: #8FB4F0;
+  --stripe-a: #F6EFE2;
+  --stripe-b: #F08A80;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --skeleton: #253049;
+  --skeleton-highlight: #2F3A54;
+  --debug-surface: #2A1145;
+  --debug-ink: #F5EDFF;
+  --debug-accent: #D8B4FE;
+  --illus-rice: #F6EFE2;
+  --illus-egg: #F2C14E;
+  --illus-green: #7FA86A;
+  --illus-brown: #9A6544;
+  --illus-nori: #141B2B;
+  --illus-pink: #F4B6AE;
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+  --elevation-4: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --surface-1: #141B2B;
+    --surface-2: #1C2539;
+    --surface-3: #253049;
+    --line-1: #2F3A54;
+    --line-ui: #8A877E;
+    --ink-1: #F6EFE2;
+    --ink-2: #CDC6B8;
+    --ink-3: #A7A398;
+    --ink-inverse: #141B2B;
+    --accent: #F08A80;
+    --accent-strong: #F08A80;
+    --accent-strong-hover: #F4A097;
+    --accent-ink: #F4A097;
+    --accent-soft: #3A2429;
+    --navy-fill: #F6EFE2;
+    --planned-edge: #B8443C;
+    --saturday: #8FB4F0;
+    --sunday: #F4A097;
+    --info: #8FB4F0;
+    --info-soft: #22314F;
+    --success: #8FD3AE;
+    --success-soft: #1D3A30;
+    --warning: #F2C66D;
+    --warning-soft: #3A3020;
+    --danger: #FF9C92;
+    --danger-soft: #40242A;
+    --danger-strong: #FF9C92;
+    --danger-strong-hover: #FFB8B0;
+    --focus-ring: #8FB4F0;
+    --focus-halo: #141B2B;
+    --link: #8FB4F0;
+    --stripe-a: #F6EFE2;
+    --stripe-b: #F08A80;
+    --scrim: rgba(0, 0, 0, 0.6);
+    --skeleton: #253049;
+    --skeleton-highlight: #2F3A54;
+    --debug-surface: #2A1145;
+    --debug-ink: #F5EDFF;
+    --debug-accent: #D8B4FE;
+    --illus-rice: #F6EFE2;
+    --illus-egg: #F2C14E;
+    --illus-green: #7FA86A;
+    --illus-brown: #9A6544;
+    --illus-nori: #141B2B;
+    --illus-pink: #F4B6AE;
+    --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
+    --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+    --elevation-4: 0 12px 40px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+    --duration-shimmer: 0ms;
+    --sheet-offset: 0px;
+  }
+}
+
+/* Focus: one rule for every focusable element (a11y-responsive.md §4). */
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  box-shadow: 0 0 0 var(--focus-offset) var(--focus-halo);
+}
+
+:root{--canvas:#EFE6D4}
+[data-theme="dark"]{--canvas:#0E1320}
 
 /* ===== Page ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--canvas)}
-body{font-family:var(--font-body);color:var(--ink-1);line-height:var(--leading-normal);letter-spacing:var(--tracking-body);background:var(--canvas);-webkit-font-smoothing:antialiased;padding-bottom:64px}
-html[lang="en"] body{letter-spacing:0}
-button,input{font:inherit;color:inherit;letter-spacing:inherit}
+body{font-family:var(--font-body);color:var(--ink-1);line-height:var(--leading-normal);letter-spacing:var(--tracking-body);background:var(--canvas);-webkit-font-smoothing:antialiased;padding-bottom:64px;line-break:strict;overflow-wrap:anywhere}
+button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
 button{cursor:pointer;background:none;border:0}
-:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;border-radius:6px}
 svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .disp{font-family:var(--font-display);letter-spacing:var(--tracking-heading)}
-
 .page-head{max-width:1320px;margin:0 auto;padding:32px 24px 8px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
 .page-head h1{font-family:var(--font-display);font-size:var(--text-2xl);line-height:var(--leading-tight)}
-.page-head p{color:var(--ink-2);font-size:var(--text-sm);max-width:62ch}
-.toggles{display:flex;gap:8px}
+.page-head p{color:var(--ink-2);font-size:var(--text-sm);max-width:70ch}
+.toggles{display:flex;gap:8px;flex-wrap:wrap}
 .tg{min-height:var(--touch-min);padding:0 18px;border-radius:var(--radius-pill);border:2px solid var(--ink-1);background:var(--surface-2);font-family:var(--font-display);font-weight:700}
-.tg:hover{background:var(--surface-1)}
+.tg:hover{background:var(--surface-3)}
 .stripe-rule{height:13px;background:var(--stripe-band);max-width:1272px;margin:16px auto 0;opacity:.9}
-
-.specimen{max-width:1320px;margin:0 auto;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.specimen{max-width:1320px;margin:0 auto;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
 .spec-card{background:var(--surface-2);border:1px solid var(--line-1);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--elevation-1)}
 .spec-card h2{font-family:var(--font-display);font-size:var(--text-lg);margin-bottom:12px}
+.spec-card h3{font-size:var(--text-xs);color:var(--ink-2);margin:12px 0 6px;font-weight:700}
 .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.sw{border-radius:var(--radius-sm);height:48px;border:1px solid var(--line-1)}
+.sw{border-radius:var(--radius-sm);height:44px;border:1px solid var(--line-1)}
 .sw-l{font-size:var(--text-xs);color:var(--ink-2);line-height:1.4;margin-top:4px}
-.type-row{display:flex;align-items:baseline;gap:12px;border-bottom:1px dashed var(--line-1);padding:6px 0}
-.type-row small{font-size:var(--text-xs);color:var(--ink-3);min-width:48px}
-
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .screens{max-width:1320px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;gap:40px 32px;justify-content:center}
 .slot{width:390px;max-width:100%}
 .slot-cap{font-family:var(--font-display);font-weight:700;font-size:var(--text-md);margin:0 0 10px 8px;display:flex;gap:8px;align-items:center}
 .slot-cap b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink-1);color:var(--surface-2);font-size:var(--text-sm)}
 .slot-note{font-size:var(--text-sm);color:var(--ink-2);margin:10px 8px 0}
-
-/* ===== Phone frame ===== */
 .phone{position:relative;height:844px;background:var(--surface-1);border-radius:40px;overflow:hidden;box-shadow:0 0 0 8px var(--ink-1),0 24px 48px rgba(27,42,74,.25);display:flex;flex-direction:column}
 [data-theme="dark"] .phone{box-shadow:0 0 0 8px #070A12,0 24px 48px rgba(0,0,0,.5)}
 .status{height:40px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0;font-size:var(--text-sm);font-weight:700;font-family:var(--font-display)}
-.status span:last-child{letter-spacing:2px}
-.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain}
+.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;scroll-padding-bottom:96px}
 .scroll::-webkit-scrollbar{width:0}
 
-/* App bar */
-.appbar{display:flex;align-items:center;gap:8px;padding:4px 12px 10px 16px;position:relative}
+/* App bar / top bar */
+.appbar{display:flex;align-items:center;gap:4px;padding:4px 8px 12px 16px;position:relative}
 .appbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:var(--stripe-band);opacity:.85}
 .brand{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
-.brand-name{font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);letter-spacing:.01em}
-.brand-tag{font-size:var(--text-xs);color:var(--ink-2);display:block;line-height:1.2}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:var(--text-lg)}
 .iconbtn{min-width:var(--touch-min);height:var(--touch-min);border-radius:var(--radius-pill);display:inline-grid;place-items:center;color:var(--ink-1)}
 .iconbtn:hover{background:var(--surface-3)}
-.langbtn{height:36px;margin:4px 0;padding:2px;border-radius:var(--radius-pill);border:2px solid var(--ink-1);font-family:var(--font-display);font-weight:700;font-size:var(--text-xs);position:relative;display:inline-flex;gap:0;letter-spacing:0}
+.langbtn{height:36px;margin:4px 2px;padding:2px;border-radius:var(--radius-pill);border:2px solid var(--ink-1);font-family:var(--font-display);font-weight:700;font-size:var(--text-xs);position:relative;display:inline-flex;letter-spacing:0}
 .langbtn::before{content:"";position:absolute;inset:-6px -2px}
 .langbtn b{padding:0 8px;border-radius:var(--radius-pill);display:grid;place-items:center}
 html[lang="ja"] .langbtn .l-ja,html[lang="en"] .langbtn .l-en{background:var(--ink-1);color:var(--surface-2)}
 .topbar{display:flex;align-items:center;gap:4px;padding:2px 8px 8px}
 .topbar h1{font-family:var(--font-display);font-size:var(--text-lg);flex:1;line-height:var(--leading-tight)}
 
-/* Tab bar */
-.tabbar{flex:none;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-1);background:var(--surface-2);padding:4px 8px 22px}
-.tab{min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:var(--text-xs);color:var(--ink-2);font-weight:700;position:relative}
-.tab svg{width:24px;height:24px}
-.tab[aria-current="page"]{color:var(--ink-1)}
-.tab[aria-current="page"]::before{content:"";position:absolute;top:2px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-
-/* Shared bits */
+/* Shared */
 .section{padding:12px 16px}
 .h2{font-family:var(--font-display);font-weight:700;font-size:var(--text-md);display:flex;align-items:center;gap:8px;margin-bottom:8px;letter-spacing:var(--tracking-heading)}
 .h2::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);flex:none}
@@ -120,278 +349,282 @@ html[lang="ja"] .langbtn .l-ja,html[lang="en"] .langbtn .l-en{background:var(--i
 .chip-low{background:var(--accent-soft);color:var(--accent-ink)}
 .chip-ok{background:var(--success-soft);color:var(--success)}
 .chip-warn{background:var(--warning-soft);color:var(--warning)}
-.chip-confirm{background:var(--navy-fill);color:var(--ink-inverse)}
-.btn{min-height:var(--touch-comfy);padding:0 22px;border-radius:var(--radius-pill);font-family:var(--font-display);font-weight:700;font-size:var(--text-md);display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid transparent;transition:background var(--duration-fast) var(--ease-standard);text-align:center;line-height:1.3}
+.cchip{min-height:44px;padding:0 14px;border:2px solid var(--line-ui);border-radius:var(--radius-pill);background:var(--surface-2);font-weight:700;font-size:var(--text-sm);display:inline-flex;align-items:center;gap:6px}
+.cchip:hover{border-color:var(--ink-1)}
+.cchip.on{background:var(--navy-fill);border-color:var(--navy-fill);color:var(--ink-inverse)}
+.cchip.off{background:var(--surface-3);border-style:dashed;color:var(--ink-3);cursor:not-allowed}
+.btn{min-height:var(--touch-comfy);padding:0 22px;border-radius:var(--radius-pill);font-family:var(--font-display);font-weight:700;font-size:var(--text-md);display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid transparent;transition:background var(--duration-fast) var(--ease-standard);text-align:center;line-height:1.3;word-break:auto-phrase}
 .btn-primary{background:var(--accent-strong);color:var(--ink-inverse)}
-.btn-primary:hover{background:var(--accent-strong-hover)}
+.btn-primary:hover,.btn-primary.is-hover,.btn-primary:active{background:var(--accent-strong-hover)}
 .btn-secondary{background:var(--surface-2);color:var(--ink-1);border-color:var(--ink-1)}
-.btn-secondary:hover{background:var(--surface-3)}
-.btn-ghost{color:var(--ink-1);text-decoration:underline;text-underline-offset:4px;min-height:var(--touch-min);padding:0 12px}
+.btn-secondary:hover,.btn-secondary.is-hover{background:var(--surface-3)}
+.btn-text{color:var(--ink-1);text-decoration:underline;text-underline-offset:4px;min-height:var(--touch-min);padding:0 12px}
+.btn-dtext{color:var(--danger);text-decoration:underline;text-underline-offset:4px;min-height:var(--touch-min);padding:0 12px;font-weight:700}
+.btn-danger{background:var(--danger-strong);color:var(--ink-inverse)}
+.btn[aria-disabled="true"]{background:var(--surface-3);color:var(--ink-3);border:2px dashed var(--line-ui);cursor:not-allowed}
+.btn.is-focus{outline:2px solid var(--focus-ring);outline-offset:2px;box-shadow:0 0 0 2px var(--focus-halo)}
 .btn-block{width:100%}
 .btn-sm{min-height:var(--touch-min);padding:0 16px;font-size:var(--text-sm)}
+.spin{width:18px;height:18px;border:2.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp 800ms linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none;border-style:dotted}}
 .note{display:flex;gap:8px;font-size:var(--text-sm);color:var(--ink-2);line-height:1.6}
 .note svg{width:18px;height:18px;margin-top:3px;color:var(--info)}
-.box-info{background:var(--info-soft);border-radius:var(--radius-md);padding:12px;color:var(--ink-1)}
-.box-info .note{color:var(--ink-1)}
+.banner{display:flex;gap:10px;border-radius:var(--radius-md);padding:12px 14px;font-size:var(--text-sm);line-height:1.6}
+.banner svg{width:20px;height:20px;margin-top:2px}
+.banner b{display:block;font-size:var(--text-md)}
+.b-info{background:var(--info-soft);color:var(--ink-1)}.b-info svg{color:var(--info)}
+.b-warn{background:var(--warning-soft);color:var(--ink-1)}.b-warn svg,.b-warn b{color:var(--warning)}
+.b-danger{background:var(--danger-soft);color:var(--ink-1)}.b-danger svg,.b-danger b{color:var(--danger)}
+.meta{font-size:var(--text-sm);color:var(--ink-2)}
+.field label,.flabel{display:block;font-weight:700;font-size:var(--text-sm);margin-bottom:6px}
+.flabel small{font-weight:400;color:var(--ink-2);margin-left:6px}
+.input{width:100%;min-height:var(--touch-comfy);border:2px solid var(--line-ui);border-radius:var(--radius-md);padding:0 14px;background:var(--surface-2);font-size:var(--text-md);color:var(--ink-1)}
+.input:hover{border-color:var(--ink-1)}
+.input.is-focus{border-color:var(--ink-1);outline:2px solid var(--focus-ring);outline-offset:2px}
+.input.err{border-color:var(--danger)}
+.input:disabled,.input.dis{background:var(--surface-3);border-style:dashed;color:var(--ink-3)}
+.hint{font-size:var(--text-sm);color:var(--ink-2);margin-top:6px}
+.errtext{display:flex;gap:6px;font-size:var(--text-sm);color:var(--danger);margin-top:6px;line-height:1.55;font-weight:700}
+.errtext svg{width:16px;height:16px;margin-top:3px}
+.select{appearance:none;min-height:var(--touch-comfy);border:2px solid var(--line-ui);border-radius:var(--radius-md);padding:0 36px 0 14px;background:var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%238C8574' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;font-size:var(--text-md);color:var(--ink-1)}
+.footer-cta{flex:none;padding:12px 16px 28px;background:var(--surface-1);border-top:1px solid var(--line-1)}
+.stepper{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1}
+.stepper span{height:6px;border-radius:3px;background:var(--line-1)}
+.stepper span.done{background:var(--ink-1)}.stepper span.cur{background:var(--accent)}
+.steplab{font-size:var(--text-sm);color:var(--ink-2);font-weight:700}
+.state-card{background:var(--surface-2);border:1px dashed var(--line-ui);border-radius:var(--radius-lg);padding:12px 14px;margin-top:12px}
+.state-card .lbl{font-size:var(--text-xs);font-weight:700;color:var(--ink-2);margin-bottom:6px;display:block}
+.state-card p{font-size:var(--text-sm);line-height:1.6}
+.state-card p + p{margin-top:6px}
 
-/* ===== Upcoming summary ===== */
-.up-list{list-style:none}
-.up-row{display:flex;align-items:center;gap:10px;min-height:48px;padding:4px 8px 4px 10px;width:100%;text-align:left;border-top:1px solid var(--line-1)}
-.up-list li:first-child .up-row{border-top:0}
-.up-row:hover{background:var(--surface-1)}
-.up-date{width:64px;flex:none;font-family:var(--font-display);font-weight:700;line-height:1.15;display:flex;align-items:baseline;gap:3px;white-space:nowrap}
-.up-date b{font-size:var(--text-md)}
-.up-date span{font-size:var(--text-xs);color:var(--ink-2)}
-.up-text{flex:1;min-width:0;font-size:var(--text-xs);line-height:1.35}
-.up-text strong{display:block;font-size:var(--text-sm);font-family:var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.up-text span{color:var(--ink-2)}
-.up-row > svg.chev{color:var(--ink-3)}
-.up-attn{background:var(--accent-soft);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
-.up-attn:hover{background:var(--accent-soft)}
-.up-attn .ms{background:var(--surface-2)}
+/* Reminder banner */
+.rem{display:flex;gap:10px;align-items:flex-start;background:var(--surface-2);border:2px solid var(--accent);border-radius:var(--radius-lg);padding:12px 4px 12px 14px;box-shadow:var(--elevation-2);position:relative;overflow:hidden}
+.rem::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--stripe-band-red)}
+.rem .bell{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center;flex:none;margin-left:4px}
+.rem .bt{flex:1}
+.rem .bt p{font-weight:700;font-size:var(--text-md);line-height:1.55;font-family:var(--font-display)}
+.rem .bt small{display:block;font-size:var(--text-sm);color:var(--ink-2);margin:2px 0 8px}
+
+/* Today + upcoming */
 .today-mini{padding:12px 14px}
 .tm-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .tm-main{display:flex;align-items:center;gap:10px;margin-top:6px}
 .tm-main strong{font-size:var(--text-xl);line-height:1.3}
-.big-ic.sm{width:44px;height:44px;border-radius:14px}
-.big-ic.sm svg{width:24px;height:24px}
-
-/* Mini state swatch (summary, legend) */
-.ms{width:30px;height:30px;flex:none;border-radius:8px;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line-1);color:var(--ink-3)}
+.big-ic{width:44px;height:44px;border-radius:14px;background:var(--surface-3);display:grid;place-items:center;flex:none}
+.check{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 12px;border:2px solid var(--line-ui);border-radius:var(--radius-md);margin-top:10px;width:100%;text-align:left;font-weight:700;font-size:var(--text-sm)}
+.box{width:24px;height:24px;border:2px solid var(--line-ui);border-radius:6px;flex:none;display:grid;place-items:center}
+.up-list{list-style:none}
+.up-row{display:flex;align-items:center;gap:10px;min-height:48px;padding:4px 8px 4px 10px;width:100%;text-align:left;border-top:1px solid var(--line-1)}
+.up-list li:first-child .up-row{border-top:0}
+.up-row:hover{background:var(--surface-1)}
+.up-date{width:60px;flex:none;font-family:var(--font-display);font-weight:700;line-height:1.15;display:flex;align-items:baseline;gap:3px;white-space:nowrap}
+.up-date span{font-size:var(--text-xs);color:var(--ink-2)}
+.up-text{flex:1;min-width:0;font-size:var(--text-xs);line-height:1.35}
+.up-text strong{display:block;font-size:var(--text-sm);font-family:var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.up-text span{color:var(--ink-2)}
+.up-attn{background:var(--accent-soft)}
+.up-attn:hover{background:var(--accent-soft)}
+.ms{width:30px;height:30px;flex:none;border-radius:8px;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line-1);color:var(--ink-2);position:relative}
 .ms svg{width:16px;height:16px}
-.ms.confirmed{background:var(--navy-fill);border-color:var(--navy-fill);color:var(--ink-inverse);box-shadow:inset 0 3px 0 var(--accent)}
-.ms.norecipe{border:2px solid var(--ink-1);color:var(--ink-1)}
-.ms.suggest{border:2px dashed var(--accent);color:var(--accent-ink)}
-.ms.mixed{color:var(--ink-2)}
-.ms.nolunch{background:var(--hatch),var(--surface-2);color:var(--ink-2)}
-.ms.na{color:var(--ink-3)}
+.ms.planned{background:var(--navy-fill);border-color:var(--navy-fill);color:var(--ink-inverse);box-shadow:inset 0 3px 0 var(--planned-edge)}
+.ms.nc{border:2px solid var(--ink-1);color:var(--ink-1)}
+.ms.sug{border:2px dashed var(--accent);color:var(--accent-ink)}
+.ms.nolunch{background:var(--hatch),var(--surface-2)}
+.ms.flag{background:var(--warning-soft);border:1.5px solid var(--warning);color:var(--warning);border-radius:50%}
 
 /* ===== Calendar ===== */
 .monthnav{display:flex;align-items:center;justify-content:space-between;padding:4px 8px 6px}
 .monthnav h2{font-family:var(--font-display);font-size:var(--text-xl);letter-spacing:var(--tracking-heading)}
-.cal{padding:0 8px}
-.cal-grid{display:grid;grid-template-columns:repeat(5,1fr) .62fr .62fr;gap:3px}
+.cal{padding:0 4px}
+.cal-grid{display:grid;gap:2px;margin-bottom:2px}
+.cal-grid.mon{grid-template-columns:repeat(5,minmax(0,1fr)) repeat(2,minmax(44px,.62fr))}
+.cal-grid.sun{grid-template-columns:minmax(44px,.62fr) repeat(5,minmax(0,1fr)) minmax(44px,.62fr)}
 .dow{font-size:var(--text-xs);text-align:center;font-weight:700;color:var(--ink-2);padding:2px 0 4px}
-.dow.sat{color:var(--saturday)}.dow.sun{color:var(--sunday)}
-.cal-grid{margin-bottom:3px}
-.cell{min-height:var(--cell-min-height);border-radius:10px;background:var(--surface-2);border:1px solid var(--line-1);padding:3px 3px 5px;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative;width:100%;color:var(--ink-1)}
+.dow.sat{color:var(--saturday)}.dow.su{color:var(--sunday)}
+.cell{min-height:var(--cell-min-height);border-radius:var(--radius-cell);background:var(--surface-2);border:1px solid var(--line-1);padding:3px 2px 5px;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;width:100%;color:var(--ink-1)}
+.cal-grid.compact .cell{min-height:var(--cell-row-compact)}
 button.cell:hover{border-color:var(--line-ui)}
-.cell.empty{background:transparent;border:0}
-.ctop{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:24px}
+.cell.pad{background:transparent;border:0}
+.ctop{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:24px;padding:0 1px}
 .num{font-family:var(--font-display);font-weight:700;font-size:15px;line-height:1;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;font-variant-numeric:tabular-nums}
-.mk{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.ctop .mk{width:14px;height:14px;color:var(--ink-2)}
-.ctop .mk:has(use[href="#i-suggest"]){color:var(--accent-ink);width:16px;height:16px}
-.clab{font-size:var(--text-xs);font-weight:700;line-height:1.25;text-align:center;word-break:keep-all;letter-spacing:0}
-.cell.school .clab,.cell.suggest .clab{color:var(--ink-2);margin-top:auto}
-.cell.suggest{border:2px dashed var(--accent);padding:2px 2px 4px}
-.cell.norecipe{border:2px solid var(--ink-1);padding:2px 2px 4px}
-.cell.confirmed{background:var(--navy-fill);border-color:var(--navy-fill);color:var(--ink-inverse);box-shadow:inset 0 3px 0 var(--accent);gap:1px}
-.cell.confirmed .ctop .mk{color:var(--ink-inverse)}
+.mk{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;color:var(--ink-2)}
+.mk.low{width:16px;height:16px;color:var(--accent-ink)}
+.mkw{display:inline-flex;flex-direction:column;align-items:center}
+.mkw.ovr::after{content:"";width:14px;height:2px;border-radius:1px;background:currentColor;margin-top:1px}
+.ic{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.clab{font-size:var(--text-xs);font-weight:700;line-height:1.25;text-align:center;letter-spacing:0;max-inline-size:4em;line-break:strict;word-break:normal;margin-top:auto}
+html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
+.cell.school .clab{color:var(--ink-2)}
+.cell.sug{border:2px dashed var(--accent);padding:2px 1px 4px}
+.cell.nc{border:2px solid var(--ink-1);padding:2px 1px 4px}
+.cell.planned{background:var(--navy-fill);border-color:var(--navy-fill);color:var(--ink-inverse);box-shadow:inset 0 3px 0 var(--planned-edge)}
+.cell.planned .mk,.cell.planned .clab{color:var(--ink-inverse)}
 .cell.nolunch{background:var(--hatch),var(--surface-2)}
 .cell.nolunch .clab{background:var(--surface-2);border-radius:4px;padding:0 2px;color:var(--ink-2)}
-.cell.bentoday .mk{color:var(--ink-1);background:var(--surface-2);border-radius:4px}
-.cell.weekend{background:transparent;border-color:transparent}
-.cell.weekend .ctop{justify-content:center}
-.cell.sat .num{color:var(--saturday)}
-.cell.sun .num,.cell.hol .num{color:var(--sunday)}
-.cell.hol .clab{color:var(--sunday)}
+.cell.bentoday .ic{color:var(--ink-1);background:var(--surface-2);border-radius:4px}
+.cell.bentoday .clab{color:var(--ink-1)}
+.cell.outside{background:transparent;border-color:transparent}
+.cell.outside:hover{background:var(--surface-3)}
+.cell.outside .ctop{justify-content:center}
+.cell .hol{font-size:var(--text-xs);font-weight:700;color:var(--sunday)}
+.cell.satc .num{color:var(--saturday)}
+.cell.sunc .num,.cell.holc .num{color:var(--sunday)}
 .cell.today .num{background:var(--ink-1);color:var(--surface-2)}
-.cell.past:not(.confirmed):not(.today):not(.hol):not(.weekend) .num{color:var(--ink-3)}
-.cell.past.sun .num,.cell.past.hol .num{color:var(--sunday)}
-.cell.past.sat .num{color:var(--saturday)}
-.cal-grid.short .cell{min-height:34px}
-
-.legend{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;list-style:none;padding:14px 14px}
+.cell.today.planned .num{background:var(--ink-inverse);color:var(--navy-fill)}
+.cell.past:not(.planned){background:transparent}
+.cell.past:not(.planned):not(.satc):not(.sunc):not(.holc) .num{color:var(--ink-3)}
+.cell.past.nolunch{background:var(--hatch)}
+.badge{position:absolute;right:2px;bottom:2px;width:16px;height:16px;border-radius:50%;background:var(--warning-soft);border:1.5px solid var(--warning);color:var(--warning);display:grid;place-items:center;font-size:11px;font-weight:700;line-height:1}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;list-style:none;padding:12px 14px 14px}
 .legend li{display:flex;align-items:center;gap:8px;font-size:var(--text-sm);line-height:1.35}
 .legend .ms{width:28px;height:28px}
-.legend .wk{font-family:var(--font-display);font-weight:700;font-size:var(--text-sm)}
 
-/* ===== Day sheet ===== */
-.ghost{padding:0 16px;opacity:1}
+/* Sheet */
 .scrim{position:absolute;inset:0;background:var(--scrim)}
-.sheet{position:absolute;left:0;right:0;bottom:0;top:96px;background:var(--surface-2);border-radius:var(--radius-xl) var(--radius-xl) 0 0;box-shadow:var(--elevation-3);display:flex;flex-direction:column}
+.sheet{position:absolute;left:0;right:0;bottom:0;top:84px;background:var(--surface-2);border-radius:var(--radius-xl) var(--radius-xl) 0 0;box-shadow:var(--elevation-3);display:flex;flex-direction:column}
 .grab{width:40px;height:5px;border-radius:3px;background:var(--line-ui);margin:10px auto 4px;flex:none}
 .sheet-head{display:flex;align-items:flex-start;gap:8px;padding:4px 8px 8px 20px}
 .sheet-head h2{font-family:var(--font-display);font-size:var(--text-xl);line-height:var(--leading-tight);flex:1;padding-top:6px}
 .sheet-body{overflow-y:auto;padding:0 20px 24px;flex:1}
-.menu-list{list-style:none;margin:4px 0 6px}
-.menu-list li{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line-1);font-size:var(--text-md);flex-wrap:wrap}
-.menu-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink-3);flex:none}
-.dis{text-decoration:underline wavy var(--accent);text-underline-offset:5px;text-decoration-thickness:1.5px}
-.tag-dis{font-size:var(--text-xs);font-weight:700;color:var(--accent-ink);background:var(--accent-soft);border-radius:var(--radius-pill);padding:1px 8px}
-.meta{font-size:var(--text-sm);color:var(--ink-2)}
-.assess{background:var(--accent-soft);border-radius:var(--radius-md);padding:12px 14px;margin:14px 0}
-.assess-top{display:flex;align-items:center;gap:8px;justify-content:space-between}
-.assess-top .chip{background:var(--surface-2);border:2px dashed var(--accent);color:var(--accent-ink)}
-.assess p{margin-top:8px}
-.assess .lead{font-size:var(--text-md);font-weight:700;line-height:1.6}
-.assess .sub{font-size:var(--text-sm);color:var(--ink-2)}
-.choices{display:grid;gap:10px;margin:8px 0 14px}
-.choice{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border:2px solid var(--line-ui);border-radius:var(--radius-md);background:var(--surface-2);text-align:left;width:100%}
-.choice:hover{background:var(--surface-1)}
-.choice[aria-checked="true"]{border-color:var(--ink-1);background:var(--surface-1)}
-.radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--line-ui);flex:none;display:grid;place-items:center}
-.choice[aria-checked="true"] .radio{border-color:var(--ink-1)}
-.choice[aria-checked="true"] .radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--ink-1)}
-.choice .ct{flex:1;line-height:1.4}
-.choice .ct strong{display:block;font-family:var(--font-display);font-size:var(--text-md)}
-.choice .ct span{font-size:var(--text-sm);color:var(--ink-2)}
-.choice .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--surface-3);flex:none}
-.choice .ic.bento{background:var(--accent-soft);color:var(--accent-ink)}
+.sheet-body > * + *{margin-top:16px}
+.plan-card{background:var(--navy-fill);color:var(--ink-inverse);border-radius:var(--radius-md);padding:12px 14px;box-shadow:inset 4px 0 0 var(--planned-edge)}
+.plan-card small{display:block;font-size:var(--text-xs);font-weight:700}
+.plan-card a{color:var(--ink-inverse);font-family:var(--font-display);font-weight:700;font-size:var(--text-lg)}
+.stack{display:grid;gap:8px}
 
-/* ===== Recommendations ===== */
-.rec{overflow:hidden;margin-bottom:14px}
-.rec-art{height:112px;background:var(--surface-3);display:grid;place-items:center;position:relative}
-.rec-art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:repeating-linear-gradient(180deg,var(--stripe-b) 0 2px,transparent 2px 5px);opacity:.7}
-.rec-art svg{height:88px;width:auto}
+/* Review */
+.sumbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--warning-soft);padding:10px 16px;font-size:var(--text-sm);font-weight:700;color:var(--warning)}
+.sumbar svg{width:18px;height:18px}
+.sumbar .sp{flex:1}
+.rday{border-bottom:1px solid var(--line-1);padding:12px 16px}
+.rday legend{font-family:var(--font-display);font-weight:700;font-size:var(--text-md);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.rday.unc{background:var(--warning-soft);border:2px solid var(--warning);border-radius:var(--radius-md);margin:8px;padding:10px 12px}
+.dish{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.dish .input{min-height:44px}
+.dish .rm{min-width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--ink-2)}
+.ufield{background:var(--warning-soft);border:2px solid var(--warning)}
+.utag{display:inline-flex;gap:4px;align-items:center;font-size:var(--text-xs);font-weight:700;color:var(--warning);background:var(--warning-soft);border:1.5px solid var(--warning);border-radius:var(--radius-pill);padding:1px 8px;white-space:nowrap}
+.utag svg{width:14px;height:14px}
+.reason{font-size:var(--text-sm);color:var(--warning);display:flex;gap:6px;align-items:center;margin:2px 0 6px;font-weight:700}
+.reason svg{width:16px;height:16px}
+.rmeta{font-size:var(--text-sm);color:var(--ink-2);line-height:1.6}
+.radio-row{display:flex;align-items:center;gap:10px;min-height:44px;font-size:var(--text-sm)}
+.radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--line-ui);flex:none;display:grid;place-items:center;background:var(--surface-2)}
+.radio.on{border-color:var(--ink-1)}.radio.on::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--ink-1)}
+
+/* Settings */
+.set-sec{margin:12px 16px;padding:4px 14px 14px}
+.set-sec h2{font-family:var(--font-display);font-size:var(--text-md);padding:10px 0 4px}
+.set-row{display:flex;align-items:center;gap:10px;min-height:52px;border-top:1px solid var(--line-1);padding:6px 0;flex-wrap:wrap}
+.set-sec h2 + .set-row{border-top:0}
+.set-row .lab{flex:1;font-weight:700;font-size:var(--text-sm)}
+.switch{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:var(--text-sm);font-weight:700}
+.track{width:52px;height:32px;border-radius:16px;background:var(--surface-3);border:2px solid var(--line-ui);position:relative}
+.track::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--ink-3)}
+.switch.on .track{background:var(--success);border-color:var(--success)}
+.switch.on .track::after{left:23px;background:var(--ink-inverse)}
+.times{display:flex;gap:8px;width:100%;padding-left:2px}
+.times .select{min-width:92px}
+.seg{display:inline-flex;border:2px solid var(--ink-1);border-radius:var(--radius-pill);padding:2px;position:relative}
+.seg b{min-height:36px;padding:0 14px;border-radius:var(--radius-pill);display:grid;place-items:center;font-size:var(--text-sm)}
+.seg b.on{background:var(--ink-1);color:var(--surface-2)}
+.radios{display:flex;gap:4px 14px;flex-wrap:wrap;width:100%}
+
+/* Recs */
+.rec{overflow:hidden}
+.rec-art{height:84px;background:var(--surface-3);display:grid;place-items:center;position:relative}
+.rec-art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:var(--stripe-band-red);opacity:.7}
 .rank{position:absolute;top:10px;left:10px;font-size:var(--text-xs);font-weight:700;background:var(--navy-fill);color:var(--ink-inverse);border-radius:var(--radius-pill);padding:2px 10px}
 .rec-body{padding:12px 16px 16px}
 .rec-body h3{font-family:var(--font-display);font-size:var(--text-lg);line-height:var(--leading-tight)}
-.rec-body .en{font-size:var(--text-sm);color:var(--ink-3)}
 .rowchips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.reasons{list-style:none;font-size:var(--text-sm);margin-bottom:8px}
-.reasons li{display:flex;gap:6px;align-items:flex-start;line-height:1.5;padding:2px 0}
-.reasons svg{width:16px;height:16px;color:var(--success);margin-top:3px}
-.allerg{font-size:var(--text-sm);color:var(--ink-2);margin-bottom:6px}
-.warnline{display:flex;gap:6px;font-size:var(--text-sm);background:var(--warning-soft);color:var(--warning);border-radius:var(--radius-sm);padding:6px 10px;margin-bottom:10px;line-height:1.5}
-.warnline svg{width:16px;height:16px;margin-top:3px}
+.warnline{display:flex;gap:6px;font-size:var(--text-sm);background:var(--warning-soft);color:var(--ink-1);border-radius:var(--radius-sm);padding:6px 10px;margin:8px 0;line-height:1.5}
+.warnline svg{width:16px;height:16px;margin-top:3px;color:var(--warning)}
 
-/* ===== Recipe detail ===== */
-.hero{background:var(--surface-3);height:150px;display:grid;place-items:center;position:relative}
-.hero svg{height:118px;width:auto}
-.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--stripe-band);opacity:.85}
-.confirm-pill{display:flex;align-items:center;gap:8px;background:var(--navy-fill);color:var(--ink-inverse);border-radius:var(--radius-md);padding:10px 14px;font-weight:700;font-size:var(--text-sm);box-shadow:inset 4px 0 0 var(--accent);margin-bottom:12px}
-.ingr{list-style:none;font-size:var(--text-md)}
-.ingr li{display:flex;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line-1)}
-.ingr li span:first-child{flex:1}
-.ingr li span:last-child{color:var(--ink-2);font-variant-numeric:tabular-nums}
-.steps{list-style:none;counter-reset:s}
-.steps li{counter-increment:s;display:flex;gap:12px;padding:8px 0;line-height:var(--leading-relaxed)}
-.steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;background:var(--ink-1);color:var(--surface-2);font-family:var(--font-display);font-weight:700;display:grid;place-items:center;line-height:1;margin-top:2px}
-.source{font-size:var(--text-sm);color:var(--ink-2)}
-
-/* ===== Today ===== */
-.banner{display:flex;gap:10px;align-items:flex-start;background:var(--surface-2);border:2px solid var(--accent);border-radius:var(--radius-lg);padding:12px 6px 12px 14px;box-shadow:var(--elevation-2);position:relative;overflow:hidden}
-.banner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:repeating-linear-gradient(180deg,var(--stripe-b) 0 3px,transparent 3px 6px)}
-.banner .bell{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center;flex:none;margin-left:4px}
-.banner .bt{flex:1}
-.banner .bt p{font-weight:700;font-size:var(--text-md);line-height:1.55;font-family:var(--font-display)}
-.banner .bt small{display:block;font-size:var(--text-xs);color:var(--ink-2);margin:2px 0 8px}
-.today-card{padding:18px 16px}
-.today-status{display:flex;gap:14px;align-items:center}
-.big-ic{width:56px;height:56px;border-radius:18px;background:var(--surface-3);display:grid;place-items:center;flex:none}
-.big-ic svg{width:30px;height:30px}
-.today-status h2{font-family:var(--font-display);font-size:var(--text-xl);line-height:1.35}
-.check{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 12px;border:2px solid var(--line-ui);border-radius:var(--radius-md);margin-top:10px;width:100%;text-align:left;font-weight:700}
-.box{width:24px;height:24px;border:2px solid var(--line-ui);border-radius:6px;flex:none;display:grid;place-items:center}
-.box.on{background:var(--success);border-color:var(--success);color:var(--surface-2)}
-.box.on svg{width:16px;height:16px;stroke-width:3}
-.tomorrow{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--radius-md);background:var(--navy-fill);color:var(--ink-inverse);box-shadow:inset 4px 0 0 var(--accent);width:100%;text-align:left}
-.tomorrow .t1{font-size:var(--text-xs);font-weight:700;opacity:1}
-.tomorrow strong{display:block;font-family:var(--font-display);font-size:var(--text-md)}
-
-/* ===== Onboarding ===== */
-.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1}
-.stepper span{height:6px;border-radius:3px;background:var(--line-1)}
-.stepper span.done{background:var(--ink-1)}
-.stepper span.cur{background:var(--accent)}
-.steplab{font-size:var(--text-sm);color:var(--ink-2);font-weight:700}
-.field label{display:block;font-weight:700;font-size:var(--text-sm);margin-bottom:6px}
-.input{width:100%;min-height:var(--touch-comfy);border:2px solid var(--line-ui);border-radius:var(--radius-md);padding:0 14px;background:var(--surface-2);font-size:var(--text-md);color:var(--ink-1)}
-.input:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;border-color:var(--ink-1)}
-.input.err{border-color:var(--danger)}
-.hint{font-size:var(--text-sm);color:var(--ink-2);margin-top:6px}
-.errtext{display:flex;gap:6px;font-size:var(--text-sm);color:var(--danger);margin-top:6px;line-height:1.55;font-weight:700}
-.errtext svg{width:16px;height:16px;margin-top:3px}
-.or{display:flex;align-items:center;gap:12px;color:var(--ink-2);font-size:var(--text-sm);margin:18px 0}
-.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line-ui)}
-.privacy{background:var(--surface-3);border-radius:var(--radius-md);padding:12px 14px;margin-top:20px}
-.privacy h3{font-size:var(--text-sm);display:flex;gap:6px;align-items:center;margin-bottom:4px}
-.privacy p{font-size:var(--text-sm);color:var(--ink-1);line-height:1.6}
-.privacy p + p{color:var(--ink-2);margin-top:4px}
-.footer-cta{flex:none;padding:12px 16px 28px;background:var(--surface-1);border-top:1px solid var(--line-1)}
-.ob-art{display:flex;justify-content:center;margin:6px 0 10px}
-.state-card{background:var(--surface-2);border:1px dashed var(--line-ui);border-radius:var(--radius-lg);padding:14px;margin-top:16px}
-.state-card .lbl{font-size:var(--text-xs);font-weight:700;color:var(--ink-3);margin-bottom:6px;display:block}
+/* Debug sample */
+.debug{background:var(--debug-surface);color:var(--debug-ink);font-family:var(--font-mono);font-size:var(--text-sm);border-top:8px solid transparent;border-image:var(--debug-hatch) 8;padding:12px 14px}
+.debug b{color:var(--debug-accent)}
+.debug .dbtn{display:inline-flex;min-height:44px;align-items:center;padding:0 12px;border:2px solid var(--debug-accent);color:var(--debug-ink);margin:6px 6px 0 0}
+.devpill{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:var(--radius-pill);background:var(--debug-accent);color:var(--debug-surface);font-family:var(--font-mono);font-weight:700}
 
 @media (max-width:440px){body{overflow-x:hidden}.screens,.specimen{padding:16px 8px}.page-head{padding:24px 12px 8px}.phone{border-radius:28px}}
 </style>
 </head>
 <body>
-<!-- ===== Icon sprite ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-enjoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></symbol>
   <symbol id="i-mixed" viewBox="0 0 24 24"><path d="M12 4.5 20 19H4z"/></symbol>
   <symbol id="i-suggest" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-dasharray="3 2.6"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.6"/><path d="M12 17.2v.1"/></symbol>
-  <symbol id="i-bento" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M12 6v13M12 12.5h9"/><circle cx="7.5" cy="12.5" r="1.6" fill="currentColor" stroke="none"/><path d="M5 6l2-2h10l2 2"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
   <symbol id="i-dash" viewBox="0 0 24 24"><path d="M7 12h10"/></symbol>
-  <symbol id="i-nolunch" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M6.5 17.5l11-11"/></symbol>
+  <symbol id="i-bento" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M12 6v13M12 12.5h9"/><circle cx="7.5" cy="12.5" r="1.6" fill="currentColor" stroke="none"/><path d="M5 6l2-2h10l2 2"/></symbol>
+  <symbol id="i-bento-fill" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3" fill="currentColor" fill-opacity=".25"/><path d="M12 6v13M12 12.5h9"/><circle cx="7.5" cy="12.5" r="1.6" fill="currentColor" stroke="none"/><path d="M5 6l2-2h10l2 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
   <symbol id="i-school" viewBox="0 0 24 24"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M8 7.5c0-1.5 1-1.5 1-3M12 7.5c0-1.5 1-1.5 1-3M16 7.5c0-1.5 1-1.5 1-3"/></symbol>
   <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
   <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
   <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/><circle cx="12" cy="12" r="6.5"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
-  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
   <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></symbol>
-  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></symbol>
   <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/></symbol>
   <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.2v.1"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M8.2 3h7.6L21 8.2v7.6L15.8 21H8.2L3 15.8V8.2z"/><path d="M12 7.5v5.5M12 16.2v.1"/></symbol>
   <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15.5V4M7.5 8.5 12 4l4.5 4.5"/><path d="M4 15v3.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V15"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
-  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9z"/></symbol>
-  <symbol id="i-paw" viewBox="0 0 24 24"><circle cx="7" cy="9" r="1.8"/><circle cx="12" cy="6.5" r="1.8"/><circle cx="17" cy="9" r="1.8"/><path d="M12 11.5c-3 0-5.5 3.5-5.5 6 0 1.5 1.5 2.2 3 1.7 1-.3 1.7-.5 2.5-.5s1.5.2 2.5.5c1.5.5 3-.2 3-1.7 0-2.5-2.5-6-5.5-6z"/></symbol>
-  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
-  <!-- Brand mark: top view of a bento with an umeboshi (original, not derived from any apparel brand) -->
-  <symbol id="logo" viewBox="0 0 40 40"><rect x="3" y="7" width="34" height="27" rx="8" stroke-width="2.5" style="fill:var(--surface-2);stroke:var(--ink-1)"/><path d="M3 12.5h34" stroke-width="2" opacity=".0" style="stroke:var(--ink-1)"/><path d="M22 7v27" stroke-width="2.5" style="stroke:var(--ink-1)"/><circle cx="12.5" cy="20.5" r="4" style="fill:var(--accent)"/><path d="M25.5 15h8M25.5 20.5h8M25.5 26h8" stroke-width="2.2" stroke-linecap="round" style="stroke:var(--stripe-b)"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></symbol>
+  <symbol id="logo" viewBox="0 0 40 40"><rect x="3" y="7" width="34" height="27" rx="8" stroke-width="2.5" style="fill:var(--surface-2);stroke:var(--ink-1)"/><path d="M22 7v27" stroke-width="2.5" style="stroke:var(--ink-1)"/><circle cx="12.5" cy="20.5" r="4" style="fill:var(--accent)"/><path d="M25.5 15h8M25.5 20.5h8M25.5 26h8" stroke-width="2.2" stroke-linecap="round" style="stroke:var(--stripe-b)"/></symbol>
 </svg>
 
 <header class="page-head">
   <div>
-    <h1><span data-en="BentoMinder · design direction preview v0.1">BentoMinder・デザイン方向性プレビュー v0.1</span></h1>
-    <p><span data-en="Static preview for the product owner, 2026-10-24. All content is sample data (child: Hana, November 2026). Phone width 390 px. Use the buttons to switch language and theme.">プロダクトオーナー確認用の静的プレビュー（2026-10-24）。内容はすべてサンプルです（お子さま：はなちゃん、2026年11月）。画面幅390px。右のボタンで言語とテーマを切り替えられます。</span></p>
+    <h1><span data-en="BentoMinder · design preview v1.0 (H2)">BentoMinder・デザインプレビュー v1.0（H2）</span></h1>
+    <p><span data-en="Static preview of the final H2 tokens and components, 2026-10-24. Sample data only (November 2026, today = Tue Nov 17). Phone width 390 px. Specs: design/components.md, design/flows.md, design/a11y-responsive.md, strings: design/copy.md.">H2確定版のトークンとコンポーネントの静的プレビューです（2026-10-24）。内容はすべてサンプルです（2026年11月、今日＝11月17日（火））。画面幅390px。仕様：design/components.md・flows.md・a11y-responsive.md、文言：design/copy.md。</span></p>
   </div>
   <div class="toggles">
     <button class="tg" id="langToggle" type="button" aria-label="表示言語を英語に切り替える" data-en-aria="Switch display language to Japanese">EN</button>
     <button class="tg" id="themeToggle" type="button"><span data-en="Dark">ダーク</span></button>
+    <button class="tg" id="weekToggle" type="button"><span data-en="Week: Sunday start">週：日曜始まり</span></button>
   </div>
 </header>
 <div class="stripe-rule" aria-hidden="true"></div>
 
-<!-- ===== Tokens specimen ===== -->
-<section class="specimen" aria-label="Tokens">
+<!-- ===== Tokens and component states ===== -->
+<section class="specimen" aria-label="Tokens and states">
   <div class="spec-card">
-    <h2><span data-en="Palette (light values)">カラー（ライトの値）</span></h2>
-    <div class="swatches">
-      <div><div class="sw" style="background:var(--surface-1)"></div><div class="sw-l">surface-1<br>#FFFFFF</div></div>
-      <div><div class="sw" style="background:var(--ink-1)"></div><div class="sw-l">ink-1 navy<br>#1B2A4A</div></div>
-      <div><div class="sw" style="background:var(--accent)"></div><div class="sw-l">accent<br>#D2574F</div></div>
-      <div><div class="sw" style="background:var(--accent-strong)"></div><div class="sw-l">accent-strong<br>#B8443C</div></div>
-      <div><div class="sw" style="background:var(--surface-3)"></div><div class="sw-l">surface-3<br>#F2EADB</div></div>
-      <div><div class="sw" style="background:var(--accent-soft)"></div><div class="sw-l">accent-soft<br>#F8E1DC</div></div>
-      <div><div class="sw" style="background:var(--saturday)"></div><div class="sw-l">saturday<br>#2F5C9A</div></div>
-      <div><div class="sw" style="background:var(--stripe-band)"></div><div class="sw-l">stripe band<br><span data-en="decor only">装飾のみ</span></div></div>
+    <h2><span data-en="Palette roles (hex = light values)">カラー（役割・数値はライト）</span></h2>
+    <div class="swatches" id="swatches"></div>
+    <p class="meta" style="margin-top:10px"><span data-en="All 68 text/UI pairs pass in both themes (lowest text pair 4.65:1, lowest UI pair 3.07:1). Table: a11y-responsive.md §2.">使っている68組はライト・ダークとも基準を満たします（文字の最小4.65:1、UI部品の最小3.07:1）。表：a11y-responsive.md §2。</span></p>
+  </div>
+  <div class="spec-card">
+    <h2><span data-en="Buttons: states">ボタンの状態</span></h2>
+    <div class="row">
+      <button class="btn btn-primary btn-sm" type="button"><span data-en="Default">通常</span></button>
+      <button class="btn btn-primary btn-sm is-hover" type="button"><span data-en="Hover / pressed">ホバー・押下</span></button>
+      <button class="btn btn-primary btn-sm is-focus" type="button"><span data-en="Focus">フォーカス</span></button>
+      <button class="btn btn-primary btn-sm" type="button" aria-disabled="true"><span data-en="Disabled">使えない</span></button>
+      <button class="btn btn-primary btn-sm" type="button" aria-busy="true"><span class="spin" aria-hidden="true"></span><span data-en="Saving…">保存しています…</span></button>
+    </div>
+    <h3><span data-en="Variants">種類</span></h3>
+    <div class="row">
+      <button class="btn btn-secondary btn-sm" type="button"><span data-en="Secondary">セカンダリ</span></button>
+      <button class="btn btn-text" type="button"><span data-en="Text">テキスト</span></button>
+      <button class="btn btn-danger btn-sm" type="button"><span data-en="Delete">削除する</span></button>
+      <button class="btn btn-dtext" type="button"><span data-en="Remove the plan">計画を取り消す</span></button>
     </div>
   </div>
   <div class="spec-card">
-    <h2><span data-en="Type">文字</span></h2>
-    <div class="type-row"><small>28 / Zen Maru</small><span class="disp" style="font-size:28px;font-weight:700">お弁当の日</span></div>
-    <div class="type-row"><small>18 / Zen Maru</small><span class="disp" style="font-size:18px;font-weight:700">くまさんおにぎり弁当</span></div>
-    <div class="type-row"><small>16 / system</small><span style="font-size:16px">水曜日の給食には、苦手な食材が2つ含まれています。</span></div>
-    <div class="type-row"><small>12 / min</small><span style="font-size:12px;font-weight:700">給食なし・レシピ未定</span></div>
-  </div>
-  <div class="spec-card">
-    <h2><span data-en="Suggested vs confirmed">候補と決定のちがい</span></h2>
-    <p class="meta" style="margin-bottom:10px"><span data-en="Pencil first, then pen: a dashed outline is the app&#39;s suggestion (still school lunch), a solid outline is &quot;decide later&quot;, a solid fill is a planned bento with its recipe name.">鉛筆の下書きからペンの清書へ。点線＝アプリの提案（予定はまだ給食）、実線の枠＝あとで決める、塗りつぶし＝レシピまで決まったお弁当。</span></p>
-    <div style="display:flex;gap:10px;align-items:center">
-      <span class="ms suggest" style="width:44px;height:44px"><svg class="mk"><use href="#i-suggest"/></svg></span><svg class="i" style="color:var(--ink-3)"><use href="#i-right"/></svg>
-      <span class="ms norecipe" style="width:44px;height:44px"><svg class="mk"><use href="#i-bento"/></svg></span><svg class="i" style="color:var(--ink-3)"><use href="#i-right"/></svg>
-      <span class="ms confirmed" style="width:44px;height:44px"><svg class="mk"><use href="#i-bento"/></svg></span>
+    <h2><span data-en="Inputs and chips: states">入力欄とチップの状態</span></h2>
+    <div class="row" style="flex-direction:column;align-items:stretch;gap:10px">
+      <input class="input" value="https://example-kinder.test/menu/2026-11.pdf" aria-label="default">
+      <input class="input is-focus" value="https://" aria-label="focus">
+      <div><input class="input err" value="http://example-kinder.test/menu.pdf" aria-invalid="true" aria-label="error"><p class="errtext"><svg class="i"><use href="#i-warn"/></svg><span data-en="Enter the PDF's address (https://…)">PDFのURL（https://…）を入力してください</span></p></div>
+      <input class="input dis" value="" placeholder="https://…" disabled aria-label="disabled">
     </div>
+    <h3><span data-en="Chips: default / selected / disabled (4th theme)">チップ：通常／選択中／選べない（4つ目のテーマ）</span></h3>
+    <div class="row"><span class="cchip"><span data-en="Nursery year 2 (4–5)">年中（4〜5歳）</span></span><span class="cchip on"><svg class="i" style="width:16px;height:16px"><use href="#i-check"/></svg><span data-en="Animals">どうぶつ</span></span><span class="cchip off"><span data-en="Vehicles">のりもの</span></span></div>
   </div>
 </section>
 
@@ -399,435 +632,321 @@ button.cell:hover{border-color:var(--line-ui)}
 
 <!-- ===================== (a) CALENDAR ===================== -->
 <section class="slot" aria-labelledby="cap-a">
-  <h2 class="slot-cap" id="cap-a"><b>a</b><span data-en="Calendar (home)">カレンダー（ホーム）</span></h2>
+  <h2 class="slot-cap" id="cap-a"><b>a</b><span data-en="Calendar: reminder, today, conflict flag, no-lunch and dormant days">カレンダー：お知らせ・今日・要確認・給食なし・休止中の日</span></h2>
   <div class="phone">
-    <div class="status"><span>7:45</span><span>●●●</span></div>
-    <div class="scroll">
+    <div class="status"><span>17:41</span><span>●●●</span></div>
+    <div class="scroll" id="scrollA">
       <div class="appbar">
         <div class="brand"><svg width="36" height="36" aria-hidden="true"><use href="#logo"/></svg><span class="brand-name">BentoMinder</span></div>
-        <button class="langbtn" type="button" aria-label="表示言語：日本語 / EN" data-en-aria="Display language: 日本語 / EN"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button>
+        <button class="langbtn" type="button" aria-label="表示言語" data-en-aria="Display language"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button>
         <button class="iconbtn" type="button" aria-label="レシピ" data-en-aria="Recipes"><svg class="i"><use href="#i-book"/></svg></button>
         <button class="iconbtn" type="button" aria-label="設定" data-en-aria="Settings"><svg class="i"><use href="#i-gear"/></svg></button>
       </div>
-
-      <div class="section" style="padding:12px 16px 4px">
-        <div class="card today-mini">
-          <div class="tm-head"><span class="steplab"><span data-en="Today · Tue, Nov 17">今日・11月17日（火）</span></span><span class="chip" style="min-height:24px;font-size:12px"><svg class="mk"><use href="#i-enjoy"/></svg><span data-en="Likely enjoyable">食べやすそう</span></span></div>
-          <div class="tm-main"><span class="big-ic sm"><svg class="i"><use href="#i-school"/></svg></span><strong class="disp"><span data-en="School lunch today">今日は給食</span></strong></div>
-          <p class="note" style="margin-top:6px"><svg class="i"><use href="#i-info"/></svg><span data-en="Book school lunch the school's usual way (this app doesn't book it).">給食の予約は園の方法で行ってください（このアプリでは予約されません）</span></p>
-          <button class="check" type="button" role="checkbox" aria-checked="false"><span class="box"></span><span data-en="Booked with the school (my own note)">園で予約済み（自分で記録）</span></button>
+      <div class="section" style="padding-bottom:4px">
+        <div class="rem" role="status">
+          <span class="bell"><svg class="i"><use href="#i-bell"/></svg></span>
+          <div class="bt"><p><span data-en="Homemade bento tomorrow! Take a look at the recipe.">明日は手作りお弁当の日！レシピを確認しましょう。</span></p><small><span data-en="Star omelette bento">ほしのオムレツ弁当</span></small>
+            <button class="btn btn-primary btn-sm" type="button"><span data-en="View recipe">レシピを見る</span></button></div>
+          <button class="iconbtn" type="button" aria-label="このお知らせを閉じる" data-en-aria="Dismiss this reminder"><svg class="i"><use href="#i-x"/></svg></button>
         </div>
       </div>
       <div class="section" style="padding:8px 16px 4px">
-        <h2 class="h2"><span data-en="Upcoming homemade bento">これからの手作りお弁当</span></h2>
-        <div class="card">
-          <ul class="up-list">
-            <li><button class="up-row" type="button">
-              <span class="up-date"><b>11/18</b><span data-en="Wed">水</span></span>
-              <span class="ms confirmed"><svg class="mk"><use href="#i-bento"/></svg></span>
-              <span class="up-text"><strong><span data-en="Bear onigiri bento">くまさんおにぎり弁当</span></strong><span data-en="Tomorrow">明日</span></span>
-              <svg class="i chev"><use href="#i-right"/></svg></button></li>
-            <li><button class="up-row" type="button">
-              <span class="up-date"><b>11/26</b><span data-en="Thu">木</span></span>
-              <span class="ms confirmed"><svg class="mk"><use href="#i-bento"/></svg></span>
-              <span class="up-text"><strong><span data-en="Star mini hamburg bento">星のミニハンバーグ弁当</span></strong><span data-en="In 9 days">9日後</span></span>
-              <svg class="i chev"><use href="#i-right"/></svg></button></li>
-            <li><button class="up-row up-attn" type="button">
-              <span class="ms suggest"><svg class="mk"><use href="#i-suggest"/></svg></span>
-              <span class="up-text"><strong><span data-en="1 day might not suit Hana">苦手かもの日が1日</span></strong><span data-en="Next 7 days · not planned yet (11/20)">7日以内・まだ計画していません（11/20）</span></span>
-              <svg class="i chev"><use href="#i-right"/></svg></button></li>
-          </ul>
+        <div class="card today-mini">
+          <div class="tm-head"><span class="steplab"><span data-en="Today · Tue, Nov 17">今日・11月17日（火）</span></span><span class="chip"><svg class="i" style="width:14px;height:14px"><use href="#i-enjoy"/></svg><span data-en="Likely to enjoy">たのしめそう</span></span></div>
+          <div class="tm-main"><span class="big-ic"><svg class="i"><use href="#i-school"/></svg></span><strong class="disp"><span data-en="School lunch today">今日は給食</span></strong></div>
+          <p class="note" style="margin-top:6px"><svg class="i"><use href="#i-info"/></svg><span data-en="Please arrange school lunch through your school as usual (this app doesn't do it for you).">給食の予約は園の方法で行ってください（このアプリでは予約されません）</span></p>
+          <button class="check" type="button" role="checkbox" aria-checked="false"><span class="box"></span><span data-en="Already arranged with the school (my own note)">園で予約済み（自分で記録）</span></button>
         </div>
       </div>
-
+      <div class="section" style="padding:8px 16px 4px">
+        <h2 class="h2"><span data-en="Upcoming homemade bentos">これからの手作りお弁当</span></h2>
+        <div class="card"><ul class="up-list">
+          <li><button class="up-row" type="button"><span class="up-date"><b>11/18</b><span data-en="Wed">水</span></span><span class="ms planned"><svg class="ic"><use href="#i-bento-fill"/></svg></span><span class="up-text"><strong><span data-en="Star omelette bento">ほしのオムレツ弁当</span></strong><span data-en="Tomorrow">明日</span></span><svg class="i" style="color:var(--ink-3)"><use href="#i-right"/></svg></button></li>
+          <li><button class="up-row" type="button"><span class="ms flag">!</span><span class="up-text"><strong><span data-en="Menu changed: Wed, Nov 25">献立が変わりました：11月25日（水）</span></strong><span data-en="Check this day">予定を確認してください</span></span><svg class="i" style="color:var(--ink-3)"><use href="#i-right"/></svg></button></li>
+          <li><button class="up-row" type="button"><span class="ms nc"><svg class="ic"><use href="#i-bento"/></svg></span><span class="up-text"><strong><span data-en="Undecided: Tue, Nov 24">未定の日：11月24日（火）</span></strong><span data-en="In 7 days">7日後</span></span><svg class="i" style="color:var(--ink-3)"><use href="#i-right"/></svg></button></li>
+          <li><button class="up-row up-attn" type="button"><span class="ms sug"><svg class="ic"><use href="#i-suggest"/></svg></span><span class="up-text"><strong><span data-en="1 day your child might not enjoy">苦手かもの日が1日あります</span></strong><span data-en="Next 7 days · not planned yet">7日以内・まだ計画していません</span></span><svg class="i" style="color:var(--ink-3)"><use href="#i-right"/></svg></button></li>
+        </ul></div>
+      </div>
       <div class="monthnav" id="monthA">
         <button class="iconbtn" type="button" aria-label="前の月" data-en-aria="Previous month"><svg class="i"><use href="#i-left"/></svg></button>
         <h2><span data-en="November 2026">2026年11月</span></h2>
         <button class="iconbtn" type="button" aria-label="次の月" data-en-aria="Next month"><svg class="i"><use href="#i-right"/></svg></button>
       </div>
-
-      <div class="cal" role="group" aria-label="2026年11月" data-en-aria="November 2026">
-        <div class="cal-grid"><div class="dow"><span data-en="Mon">月</span></div><div class="dow"><span data-en="Tue">火</span></div><div class="dow"><span data-en="Wed">水</span></div><div class="dow"><span data-en="Thu">木</span></div><div class="dow"><span data-en="Fri">金</span></div><div class="dow sat"><span data-en="Sat">土</span></div><div class="dow sun"><span data-en="Sun">日</span></div></div>
-        <div class="cal-grid short">
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <button class="cell weekend sun past" type="button" aria-label="11月1日（日）" data-en-aria="Sun, Nov 1"><span class="ctop"><span class="num">1</span></span></button>
-        </div>
-        <div class="cal-grid">
-          <button class="cell school past" type="button" aria-label="11月2日（月）、判定：食べやすそう。予定：給食" data-en-aria="Mon, Nov 2, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">2</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell nolunch hol past" type="button" aria-label="11月3日（火）、文化の日、給食なし" data-en-aria="Tue, Nov 3, Culture Day, no school lunch"><span class="ctop"><span class="num">3</span></span><span class="clab"><span data-en="Hol.">祝</span></span></button>
-          <button class="cell school past" type="button" aria-label="11月4日（水）、判定：食べやすそう。予定：給食" data-en-aria="Wed, Nov 4, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">4</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell school past" type="button" aria-label="11月5日（木）、判定：好き嫌いが混在。予定：給食" data-en-aria="Thu, Nov 5, assessment: mixed. plan: school lunch"><span class="ctop"><span class="num">5</span><svg class="mk"><use href="#i-mixed"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell school past" type="button" aria-label="11月6日（金）、判定：食べやすそう。予定：給食" data-en-aria="Fri, Nov 6, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">6</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell weekend sat past" type="button" aria-label="11月7日（土）" data-en-aria="Sat, Nov 7"><span class="ctop"><span class="num">7</span></span></button>
-          <button class="cell weekend sun past" type="button" aria-label="11月8日（日）" data-en-aria="Sun, Nov 8"><span class="ctop"><span class="num">8</span></span></button>
-        </div>
-        <div class="cal-grid">
-          <button class="cell school past" type="button" aria-label="11月9日（月）、判定：好き嫌いが混在。予定：給食" data-en-aria="Mon, Nov 9, assessment: mixed. plan: school lunch"><span class="ctop"><span class="num">9</span><svg class="mk"><use href="#i-mixed"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell confirmed past" type="button" aria-label="11月10日（火）、判定：苦手かも。予定：手作りお弁当「星のオムレツ弁当」" data-en-aria="Tue, Nov 10, assessment: might not enjoy. plan: homemade bento, star omelette bento"><span class="ctop"><span class="num">10</span><svg class="mk"><use href="#i-suggest"/></svg></span><svg class="mk"><use href="#i-bento"/></svg><span class="clab"><span data-en="Star<br>omelette">ほしの<br>オムレツ</span></span></button>
-          <button class="cell nolunch past" type="button" aria-label="11月11日（水）、給食なし（午前保育）" data-en-aria="Wed, Nov 11, no school lunch (half day)"><span class="ctop"><span class="num">11</span></span><span class="clab"><span data-en="No<br>lunch">給食<br>なし</span></span></button>
-          <button class="cell school past" type="button" aria-label="11月12日（木）、判定：食べやすそう。予定：給食" data-en-aria="Thu, Nov 12, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">12</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell school past" type="button" aria-label="11月13日（金）、判定：好き嫌いが混在。予定：給食" data-en-aria="Fri, Nov 13, assessment: mixed. plan: school lunch"><span class="ctop"><span class="num">13</span><svg class="mk"><use href="#i-mixed"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell weekend sat past" type="button" aria-label="11月14日（土）" data-en-aria="Sat, Nov 14"><span class="ctop"><span class="num">14</span></span></button>
-          <button class="cell weekend sun past" type="button" aria-label="11月15日（日）" data-en-aria="Sun, Nov 15"><span class="ctop"><span class="num">15</span></span></button>
-        </div>
-        <div class="cal-grid">
-          <button class="cell school past" type="button" aria-label="11月16日（月）、判定：食べやすそう。予定：給食" data-en-aria="Mon, Nov 16, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">16</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell school today" type="button" aria-current="date" aria-label="今日、11月17日（火）、判定：食べやすそう。予定：給食" data-en-aria="Today, Tue, Nov 17, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">17</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell confirmed" type="button" aria-label="11月18日（水）、判定：苦手かも。予定：手作りお弁当「くまさんおにぎり弁当」" data-en-aria="Wed, Nov 18, assessment: might not enjoy. plan: homemade bento, bear onigiri bento"><span class="ctop"><span class="num">18</span><svg class="mk"><use href="#i-suggest"/></svg></span><svg class="mk"><use href="#i-bento"/></svg><span class="clab"><span data-en="Bear<br>onigiri">くまさん<br>おにぎり</span></span></button>
-          <button class="cell school" type="button" aria-label="11月19日（木）、判定：食べやすそう。予定：給食" data-en-aria="Thu, Nov 19, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">19</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell norecipe" type="button" aria-label="11月20日（金）、判定：苦手かも。予定：未定（あとで決める）" data-en-aria="Fri, Nov 20, assessment: might not enjoy. plan: not decided yet"><span class="ctop"><span class="num">20</span><svg class="mk"><use href="#i-suggest"/></svg></span><svg class="mk"><use href="#i-bento"/></svg><span class="clab"><span data-en="TBD">未定</span></span></button>
-          <button class="cell weekend sat" type="button" aria-label="11月21日（土）" data-en-aria="Sat, Nov 21"><span class="ctop"><span class="num">21</span></span></button>
-          <button class="cell weekend sun" type="button" aria-label="11月22日（日）" data-en-aria="Sun, Nov 22"><span class="ctop"><span class="num">22</span></span></button>
-        </div>
-        <div class="cal-grid">
-          <button class="cell nolunch hol" type="button" aria-label="11月23日（月）、勤労感謝の日、給食なし" data-en-aria="Mon, Nov 23, Labour Thanksgiving Day, no school lunch"><span class="ctop"><span class="num">23</span></span><span class="clab"><span data-en="Hol.">祝</span></span></button>
-          <button class="cell school" type="button" aria-label="11月24日（火）、判定：食べやすそう。予定：給食" data-en-aria="Tue, Nov 24, assessment: likely enjoyable. plan: school lunch"><span class="ctop"><span class="num">24</span><svg class="mk"><use href="#i-enjoy"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell suggest" type="button" aria-label="11月25日（水）、判定：苦手かも。予定：給食" data-en-aria="Wed, Nov 25, assessment: might not enjoy. plan: school lunch"><span class="ctop"><span class="num">25</span><svg class="mk"><use href="#i-suggest"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <button class="cell confirmed" type="button" aria-label="11月26日（木）、判定：好き嫌いが混在。予定：手作りお弁当「星のミニハンバーグ弁当」" data-en-aria="Thu, Nov 26, assessment: mixed. plan: homemade bento, star mini hamburg bento"><span class="ctop"><span class="num">26</span><svg class="mk"><use href="#i-mixed"/></svg></span><svg class="mk"><use href="#i-bento"/></svg><span class="clab"><span data-en="Star mini<br>hambur…">星のミニ<br>ハンバー…</span></span></button>
-          <button class="cell nolunch bentoday" type="button" aria-label="11月27日（金）、園のお弁当の日・まだ計画していません" data-en-aria="Fri, Nov 27, school's bento day, not planned yet"><span class="ctop"><span class="num">27</span></span><svg class="mk"><use href="#i-bento"/></svg><span class="clab"><span data-en="Bento<br>day">お弁当<br>の日</span></span></button>
-          <button class="cell weekend sat" type="button" aria-label="11月28日（土）" data-en-aria="Sat, Nov 28"><span class="ctop"><span class="num">28</span></span></button>
-          <button class="cell weekend sun" type="button" aria-label="11月29日（日）" data-en-aria="Sun, Nov 29"><span class="ctop"><span class="num">29</span></span></button>
-        </div>
-        <div class="cal-grid">
-          <button class="cell school" type="button" aria-label="11月30日（月）、判定：未判定。予定：給食" data-en-aria="Mon, Nov 30, assessment: not assessed. plan: school lunch"><span class="ctop"><span class="num">30</span><svg class="mk"><use href="#i-dash"/></svg></span><span class="clab"><span data-en="Lunch">給食</span></span></button>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-          <div class="cell empty"></div>
-        </div>
-      </div>
-
+      <div class="cal" id="cal" role="grid" aria-label="2026年11月のカレンダー" data-en-aria="Calendar for November 2026"></div>
       <div class="section">
         <div class="card">
-          <h2 class="h2" style="padding:12px 14px 0;margin:0"><span data-en="Key">表示の見かた</span></h2>
-          <p class="meta" style="padding:6px 14px 0"><span data-en="Top-right mark = how the lunch suits Hana. Word or box = your plan.">右上の記号＝給食の相性（アプリの見立て）。下の文字と枠＝家族の予定。</span></p>
+          <h2 class="h2" style="padding:12px 14px 0;margin:0"><span data-en="How to read the calendar">表示の見かた</span></h2>
+          <p class="meta" style="padding:6px 14px 0"><span data-en="The mark at the top right is the app's guess about the lunch; the word and frame below are your family's plan.">右上の記号は給食の見立て（アプリの判定）、下の文字と枠は家族の予定です。</span></p>
           <ul class="legend">
-            <li><span class="ms confirmed"><svg class="mk"><use href="#i-bento"/></svg></span><span data-en="Homemade bento (planned)">手作りお弁当（決定）</span></li>
-            <li><span class="ms norecipe"><svg class="mk"><use href="#i-bento"/></svg></span><span data-en="Not decided (decide later)">未定（あとで決める）</span></li>
-            <li><span class="ms suggest"><svg class="mk"><use href="#i-suggest"/></svg></span><span data-en="Might not enjoy (still lunch)">苦手かも（予定は給食）</span></li>
-            <li><span class="ms"><svg class="mk"><use href="#i-enjoy"/></svg></span><span data-en="Likely enjoyable">食べやすそう</span></li>
-            <li><span class="ms mixed"><svg class="mk"><use href="#i-mixed"/></svg></span><span data-en="Mixed">好き嫌いが混在</span></li>
-            <li><span class="ms na"><svg class="mk"><use href="#i-dash"/></svg></span><span data-en="Not assessed">未判定</span></li>
-            <li><span class="ms nolunch"><svg class="mk"><use href="#i-nolunch"/></svg></span><span data-en="No school lunch">給食なし</span></li>
-            <li><span class="ms nolunch" style="color:var(--ink-1)"><svg class="mk" style="background:var(--surface-2);border-radius:4px"><use href="#i-bento"/></svg></span><span data-en="School's bento day">園のお弁当の日</span></li>
-            <li><span class="wk" style="color:var(--saturday)"><span data-en="Sat">土</span></span><span class="wk" style="color:var(--sunday)"><span data-en="Sun/Hol">日・祝</span></span><span data-en="No school">お休み</span></li>
+            <li><span class="ms planned"><svg class="ic"><use href="#i-bento-fill"/></svg></span><span data-en="Homemade bento (planned)">手作りお弁当（決定）</span></li>
+            <li><span class="ms nc"><svg class="ic"><use href="#i-bento"/></svg></span><span data-en="TBD (decide later)">未定（あとで決める）</span></li>
+            <li><span class="ms sug"><svg class="ic"><use href="#i-suggest"/></svg></span><span data-en="Might not enjoy (plan is still school lunch)">苦手かも（予定は給食のまま）</span></li>
+            <li><span class="ms"><svg class="ic"><use href="#i-enjoy"/></svg></span><span data-en="Likely to enjoy">たのしめそう</span></li>
+            <li><span class="ms"><svg class="ic"><use href="#i-mixed"/></svg></span><span data-en="Hard to say">どちらとも</span></li>
+            <li><span class="ms"><svg class="ic"><use href="#i-dash"/></svg></span><span data-en="Not assessed">未判定</span></li>
+            <li><span class="ms nolunch"></span><span data-en="No school lunch">給食なし</span></li>
+            <li><span class="ms nolunch" style="color:var(--ink-1)"><svg class="ic" style="background:var(--surface-2);border-radius:4px"><use href="#i-bento"/></svg></span><span data-en="School bento day">園のお弁当の日</span></li>
+            <li><span class="ms flag">!</span><span data-en="Menu changed (check this day)">献立が変わった日（要確認）</span></li>
+            <li><span class="ms"><span class="mkw ovr" style="color:var(--accent-ink)"><svg class="mk low"><use href="#i-suggest"/></svg></span></span><span data-en="Underlined mark: changed by you">記号の下線：手動で変更</span></li>
           </ul>
         </div>
       </div>
-      <div class="section" style="padding-bottom:20px">
-        <button class="btn btn-secondary btn-block" type="button"><svg class="i"><use href="#i-share"/></svg><span data-en="Share this week's plan">今週の予定を共有</span></button>
-      </div>
+      <div class="section" style="padding-bottom:20px"><button class="btn btn-secondary btn-block" type="button"><svg class="i"><use href="#i-share"/></svg><span data-en="Share this week's plan">今週の予定を共有</span></button></div>
     </div>
   </div>
-  <p class="slot-note"><span data-en="Shown scrolled to the month; scroll up for the today card and upcoming summary (also in e). Week starts Monday here (my recommendation; story US-E5-01/AC2 says Sunday, so this is for the PO to decide). Weekend columns are narrower, giving school days room for 4 × 2 characters of recipe name.">月の部分までスクロールした状態で表示しています（上に今日のカードと予定のまとめ。eも参照）。ここでは月曜始まり（デザイン側の提案。ストーリーUS-E5-01/AC2は日曜始まりのため、POの判断待ち）。土日の列を狭くし、平日のマスにレシピ名を4文字×2行で表示しています。</span></p>
+  <p class="slot-note"><span data-en="Scrolled to the month (scroll up for the reminder, today card and summary). 11/11 is a dormant day: a refresh removed it from the menu, so its stored override is kept but not shown (numeral only). 11/25 is a refresh conflict: still planned, flagged with the ! badge. 11/18 has an override (underlined mark). 11/27 has no lunch (hatch). Past days lose their box. The third toggle at the top switches the week to start on Sunday.">月の部分までスクロールしています（上にお知らせ・今日・まとめ）。11/11は休止中の日：献立の更新で献立表から消えたため、保存された手動判定は残したまま表示しません（数字だけ）。11/25は更新による要確認の日：予定は残り、「!」の印がつきます。11/18は手動で変更した日（記号に下線）。11/27は給食なし（斜線）。過去の日は枠の塗りがなくなります。上の3つ目のボタンで日曜始まりに切り替えられます。</span></p>
 </section>
 
-<!-- ===================== (b) DAY SHEET ===================== -->
+<!-- ===================== (b) DAY SHEET: refresh conflict ===================== -->
 <section class="slot" aria-labelledby="cap-b">
-  <h2 class="slot-cap" id="cap-b"><b>b</b><span data-en="Day sheet: low-preference day">日の詳細（苦手かもの日）</span></h2>
+  <h2 class="slot-cap" id="cap-b"><b>b</b><span data-en="Day sheet: refresh conflict (B7)">日の詳細：献立の更新による要確認（B7）</span></h2>
   <div class="phone">
-    <div class="status"><span>17:41</span><span>●●●</span></div>
+    <div class="status"><span>17:42</span><span>●●●</span></div>
     <div class="appbar"><div class="brand"><svg width="36" height="36" aria-hidden="true"><use href="#logo"/></svg><span class="brand-name">BentoMinder</span></div></div>
     <div class="scrim" aria-hidden="true"></div>
     <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dsh">
       <div class="grab" aria-hidden="true"></div>
-      <div class="sheet-head">
-        <h2 id="dsh"><span data-en="Wed, Nov 25">11月25日（水）</span></h2>
-        <button class="iconbtn" type="button" aria-label="閉じる" data-en-aria="Close"><svg class="i"><use href="#i-x"/></svg></button>
-      </div>
+      <div class="sheet-head"><h2 id="dsh" tabindex="-1"><span data-en="Wed, Nov 25">11月25日（水）</span></h2><button class="iconbtn" type="button" aria-label="閉じる" data-en-aria="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
       <div class="sheet-body">
-        <h3 class="h2"><span data-en="School lunch menu">給食の献立</span></h3>
-        <ul class="menu-list">
-          <li lang="ja">ごはん</li>
-          <li><span lang="ja">チンジャオロース（<span class="dis">ピーマン</span>入り）</span><span class="tag-dis"><span data-en="dislikes">苦手</span></span></li>
-          <li><span lang="ja"><span class="dis">しいたけ</span>と豆腐のスープ</span><span class="tag-dis"><span data-en="dislikes">苦手</span></span></li>
-          <li lang="ja">みかん</li>
-        </ul>
-        <p class="meta"><span data-en="Allergens listed on the menu: wheat, soy, milk">献立表のアレルゲン表示：小麦・大豆・乳</span></p>
-
-        <div class="assess">
-          <div class="assess-top">
-            <span class="chip"><svg class="mk"><use href="#i-suggest"/></svg><span data-en="Might not enjoy">苦手かも</span></span>
-            <button class="btn-ghost btn" type="button" style="font-size:14px;padding:0 6px"><span data-en="Change assessment">判定を変更</span></button>
-          </div>
-          <p class="lead"><span data-en="Wednesday's lunch has 2 foods Hana doesn't like.">水曜日の給食には、苦手な食材が2つ含まれています。</span></p>
-          <p class="sub"><span data-en="Disliked: green pepper, shiitake. Based only on the preferences you entered and the menu.">苦手な食材：ピーマン、しいたけ。判定は、登録した好みと献立表の内容だけで決まります。</span></p>
+        <div class="banner b-warn"><svg class="i"><use href="#i-warn"/></svg><div><b><span data-en="Menu changed">献立が変わりました</span></b><span data-en="After the menu update, this day has no school lunch. Please check your plan.">献立の更新で、この日は給食なしになりました。予定を確認してください。</span></div></div>
+        <div>
+          <h3 class="h2"><span data-en="School lunch menu">給食の献立</span></h3>
+          <p class="meta"><span data-en="No school lunch on this day (the sheet says &quot;午前保育（給食なし）&quot;)">この日は給食がありません（献立表：「午前保育（給食なし）」）</span></p>
         </div>
-
-        <h3 class="h2"><span data-en="What's the plan for this day?">この日はどうしますか？</span></h3>
-        <div class="choices" role="radiogroup" aria-label="この日の予定" data-en-aria="Plan for this day">
-          <button class="choice" role="radio" aria-checked="true" type="button"><span class="radio"></span><span class="ic"><svg class="i"><use href="#i-school"/></svg></span><span class="ct"><strong><span data-en="School lunch">給食</span></strong><span data-en="Current plan">いまの予定</span></span></button>
-          <button class="choice" role="radio" aria-checked="false" type="button"><span class="radio"></span><span class="ic bento"><svg class="i"><use href="#i-bento"/></svg></span><span class="ct"><strong><span data-en="Make a homemade bento">手作りお弁当にする</span></strong><span data-en="Pick from 3 recipes">3つのレシピから選べます</span></span><svg class="i" style="color:var(--ink-3)"><use href="#i-right"/></svg></button>
-          <button class="choice" role="radio" aria-checked="false" type="button"><span class="radio"></span><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><span class="ct"><strong><span data-en="Decide later">あとで決める</span></strong><span data-en="Shown as TBD in the calendar">カレンダーに「未定」と表示します</span></span></button>
+        <div>
+          <h3 class="h2"><span data-en="Plan for this day">この日の予定</span></h3>
+          <div class="plan-card"><small><span data-en="Planned for Wed, Nov 25">11月25日（水）のお弁当に決定</span></small><a href="#" data-en="Star mini hamburg bento">星のミニハンバーグ弁当</a></div>
         </div>
-        <div class="note"><svg class="i"><use href="#i-info"/></svg><span data-en="Book school lunch the school&#39;s usual way (this app doesn&#39;t book it).">給食の予約は園の方法で行ってください（このアプリでは予約されません）</span></div>
+        <div class="stack">
+          <button class="btn btn-secondary btn-block" type="button"><span data-en="Keep it">このまま</span></button>
+          <button class="btn btn-dtext" type="button" style="justify-self:center"><span data-en="Remove the plan">計画を取り消す</span></button>
+        </div>
+        <p class="meta"><span data-en="Only these two actions are offered (US-E3-05/AC2). The day-before reminder stays until the plan is removed.">この日はこの2つの操作だけです（US-E3-05/AC2）。計画を取り消すまで、前日のお知らせは残ります。</span></p>
       </div>
     </div>
   </div>
-  <p class="slot-note"><span data-en="The assessment (what the app thinks) and the decision (what the family chose) are two separate blocks. A low-preference day stays school lunch until a parent picks bento.">判定（アプリの見立て）と予定（家族の決定）は別のブロックです。苦手かもの日でも、保護者が選ぶまでは給食のままです。</span></p>
 </section>
 
-<!-- ===================== (c) RECOMMENDATIONS ===================== -->
+<!-- ===================== (c) IMPORT ERROR ===================== -->
 <section class="slot" aria-labelledby="cap-c">
-  <h2 class="slot-cap" id="cap-c"><b>c</b><span data-en="3 recommendations">おすすめ3つ</span></h2>
+  <h2 class="slot-cap" id="cap-c"><b>c</b><span data-en="Import: URL fetch error (404)">献立の取り込み：URLから取得できない（404）</span></h2>
   <div class="phone">
-    <div class="status"><span>17:42</span><span>●●●</span></div>
-    <div class="topbar">
-      <button class="iconbtn" type="button" aria-label="戻る" data-en-aria="Back"><svg class="i"><use href="#i-left"/></svg></button>
-      <h1><span data-en="Bento for Wed, Nov 25">11月25日（水）のお弁当</span></h1>
-      <button class="langbtn" type="button" aria-label="表示言語：日本語 / EN" data-en-aria="Display language: 日本語 / EN"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button>
-    </div>
-    <div class="scroll">
-      <div class="section" style="padding-top:0">
-        <p class="meta" style="margin-bottom:12px"><span data-en="3 ideas that suit Hana">はなちゃんの好みに合いそうな3つ</span></p>
-
-        <article class="card rec">
-          <div class="rec-art"><span class="rank"><span data-en="Top pick">いちばんのおすすめ</span></span>
-            <svg viewBox="0 0 160 100" aria-hidden="true"><rect x="8" y="10" width="144" height="82" rx="18" stroke-width="3" style="fill:var(--surface-2);stroke:var(--ink-1)"/><path d="M84 10v82" stroke-width="3" style="stroke:var(--ink-1)"/>
-              <circle cx="34" cy="38" r="9" stroke-width="2" style="fill:var(--illus-rice);stroke:var(--ink-1)"/><circle cx="58" cy="38" r="9" stroke-width="2" style="fill:var(--illus-rice);stroke:var(--ink-1)"/><circle cx="46" cy="56" r="22" stroke-width="2" style="fill:var(--illus-rice);stroke:var(--ink-1)"/><circle cx="39" cy="52" r="2.6" style="fill:var(--illus-nori)"/><circle cx="53" cy="52" r="2.6" style="fill:var(--illus-nori)"/><ellipse cx="46" cy="61" rx="5" ry="3.6" style="fill:var(--illus-nori)"/><circle cx="34" cy="62" r="3" style="fill:var(--illus-pink)"/><circle cx="58" cy="62" r="3" style="fill:var(--illus-pink)"/>
-              <rect x="94" y="22" width="22" height="18" rx="4" style="fill:var(--illus-egg)"/><rect x="120" y="22" width="22" height="18" rx="4" style="fill:var(--illus-egg)"/><circle cx="104" cy="62" r="9" style="fill:var(--illus-green)"/><circle cx="114" cy="70" r="8" style="fill:var(--illus-green)"/><circle cx="132" cy="64" r="9" style="fill:var(--accent)"/></svg>
-          </div>
-          <div class="rec-body">
-            <h3><span data-en="Bear onigiri bento">くまさんおにぎり弁当</span></h3>
-            <div class="en"><span data-en="くまさんおにぎり弁当">Bear onigiri bento</span></div>
-            <div class="rowchips"><span class="chip"><svg class="i"><use href="#i-clock"/></svg><span data-en="About 20 min">約20分</span></span><span class="chip"><svg class="i"><use href="#i-paw"/></svg><span data-en="Animals">動物</span></span></div>
-            <ul class="reasons">
-              <li><svg class="i"><use href="#i-check"/></svg><span data-en="Uses Hana's favourite: egg">好きな「たまご」を使います</span></li>
-              <li><svg class="i"><use href="#i-check"/></svg><span data-en="Not made recently">最近は作っていません</span></li>
-            </ul>
-            <p class="allerg"><span data-en="Allergens: egg">アレルゲン：卵</span></p>
-            <button class="btn btn-primary btn-block" type="button"><span data-en="Confirm for this day">この日に決定</span></button>
-          </div>
-        </article>
-
-        <article class="card rec">
-          <div class="rec-art">
-            <svg viewBox="0 0 160 100" aria-hidden="true"><rect x="8" y="10" width="144" height="82" rx="18" stroke-width="3" style="fill:var(--surface-2);stroke:var(--ink-1)"/><path d="M76 10v82" stroke-width="3" style="stroke:var(--ink-1)"/>
-              <rect x="18" y="20" width="50" height="62" rx="10" stroke-width="2" style="fill:var(--illus-rice);stroke:var(--ink-1)"/><path d="M43 34l4 8 9 1.3-6.5 6.3 1.5 9-8-4.2-8 4.2 1.5-9-6.5-6.3 9-1.3z" style="fill:var(--illus-egg)"/>
-              <circle cx="100" cy="40" r="15" style="fill:var(--illus-brown)"/><circle cx="130" cy="44" r="13" style="fill:var(--illus-brown)"/><path d="M88 66c10-6 18 6 28 0s18 6 28 0v14H88z" style="fill:var(--illus-green)"/></svg>
-          </div>
-          <div class="rec-body">
-            <h3><span data-en="Star mini hamburg bento">星のミニハンバーグ弁当</span></h3>
-            <div class="en"><span data-en="星のミニハンバーグ弁当">Star mini hamburg bento</span></div>
-            <div class="rowchips"><span class="chip"><svg class="i"><use href="#i-clock"/></svg><span data-en="About 30 min">約30分</span></span><span class="chip"><svg class="i"><use href="#i-star"/></svg><span data-en="Stars">星</span></span></div>
-            <ul class="reasons">
-              <li><svg class="i"><use href="#i-check"/></svg><span data-en="Uses Hana's favourite: hamburg steak">好きな「ハンバーグ」を使います</span></li>
-              <li><svg class="i"><use href="#i-check"/></svg><span data-en="Theme: stars">テーマ：星</span></li>
-            </ul>
-            <p class="allerg"><span data-en="Allergens: egg, wheat, milk, soy">アレルゲン：卵・小麦・乳・大豆</span></p>
-            <button class="btn btn-secondary btn-block" type="button"><span data-en="Confirm for this day">この日に決定</span></button>
-          </div>
-        </article>
-
-        <article class="card rec">
-          <div class="rec-art">
-            <svg viewBox="0 0 160 100" aria-hidden="true"><rect x="8" y="10" width="144" height="82" rx="18" stroke-width="3" style="fill:var(--surface-2);stroke:var(--ink-1)"/>
-              <g stroke-width="3" style="fill:var(--illus-rice);stroke:var(--illus-brown)"><circle cx="40" cy="51" r="20"/><circle cx="82" cy="51" r="20"/><circle cx="124" cy="51" r="20"/></g>
-              <g fill="none" stroke-width="4" style="stroke:var(--illus-egg)"><path d="M40 51m-10 0a10 10 0 1 0 10-10"/><path d="M82 51m-10 0a10 10 0 1 0 10-10"/><path d="M124 51m-10 0a10 10 0 1 0 10-10"/></g>
-              <g style="fill:var(--illus-egg)"><circle cx="40" cy="51" r="3"/><circle cx="82" cy="51" r="3"/><circle cx="124" cy="51" r="3"/></g></svg>
-          </div>
-          <div class="rec-body">
-            <h3><span data-en="Corn and cheese roll sandwiches">コーンとチーズのくるくるサンド</span></h3>
-            <div class="en"><span data-en="コーンとチーズのくるくるサンド">Corn and cheese roll sandwiches</span></div>
-            <div class="rowchips"><span class="chip"><svg class="i"><use href="#i-clock"/></svg><span data-en="About 15 min">約15分</span></span></div>
-            <ul class="reasons">
-              <li><svg class="i"><use href="#i-check"/></svg><span data-en="Uses Hana's favourite: corn">好きな「コーン」を使います</span></li>
-              <li><svg class="i"><use href="#i-check"/></svg><span data-en="Quick to make">朝の準備が短め</span></li>
-            </ul>
-            <p class="allerg"><span data-en="Allergens: wheat, milk">アレルゲン：小麦・乳</span></p>
-            <div class="warnline"><svg class="i"><use href="#i-warn"/></svg><span data-en="Check: ham ingredients (see the package)">確認が必要：ハムの原材料（パッケージをご確認ください）</span></div>
-            <button class="btn btn-secondary btn-block" type="button"><span data-en="Confirm for this day">この日に決定</span></button>
-          </div>
-        </article>
-
-        <button class="btn btn-ghost btn-block" type="button"><span data-en="Show other ideas">ほかの候補を見る</span></button>
-        <div class="box-info" style="margin:12px 0 20px"><div class="note"><svg class="i"><use href="#i-info"/></svg><span data-en="This app can&#39;t guarantee allergy safety. Always check the labels of the foods you use.">アレルギーの安全を保証するものではありません。使用する食品の表示を必ずご確認ください。</span></div></div>
+    <div class="status"><span>20:12</span><span>●●●</span></div>
+    <div class="topbar"><button class="iconbtn" type="button" aria-label="お子さまのことに戻る" data-en-aria="Back to About your child"><svg class="i"><use href="#i-left"/></svg></button><h1><span data-en="Import the menu">献立の取り込み</span></h1><button class="langbtn" type="button" aria-label="表示言語" data-en-aria="Display language"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:0 16px 10px"><div class="stepper" aria-hidden="true"><span class="done"></span><span class="cur"></span><span></span></div><span class="steplab"><span data-en="Step 2 of 3">ステップ 2 / 3</span></span></div>
+    <div class="scroll" style="padding:4px 16px 16px">
+      <h2 class="disp" style="font-size:var(--text-xl);line-height:1.4;margin-bottom:6px"><span data-en="Import the school lunch menu">給食の献立表を取り込みます</span></h2>
+      <div class="field" style="margin-top:12px"><span class="flabel"><span data-en="Month to import">取り込む月</span></span><select class="select" aria-label="取り込む月"><option>2026年11月</option></select></div>
+      <div class="field" style="margin-top:14px"><label for="u1"><span data-en="Menu PDF address (URL)">献立表PDFのURL</span></label><input class="input" id="u1" type="url" value="https://example-kinder.test/kondate/2026-11.pdf"></div>
+      <div class="banner b-danger" role="alert" style="margin-top:12px"><svg class="i"><use href="#i-err"/></svg><div><b><span data-en="No file was found at this address. Check the address or upload the PDF.">ファイルが見つかりませんでした。URLを確かめるか、PDFをアップロードしてください。</span></b><span data-en="The address you entered is kept.">入力したURLはそのまま残しています。</span></div></div>
+      <div class="stack" style="margin-top:14px">
+        <button class="btn btn-primary btn-block" type="button"><svg class="i"><use href="#i-upload"/></svg><span data-en="Choose a PDF file">PDFファイルを選ぶ</span></button>
+        <button class="btn btn-secondary btn-block" type="button"><span data-en="Import">取り込む</span></button>
+        <button class="btn btn-text" type="button"><span data-en="Enter it by hand">手入力する</span></button>
+      </div>
+      <div class="state-card"><span class="lbl"><span data-en="Other error messages in the same slot (components §6.5)">同じ位置に出るほかのエラー（components §6.5）</span></span>
+        <p><span data-en="We couldn't get the file from this address. Please upload the PDF.">URLから取得できませんでした。PDFをアップロードしてください。</span></p>
+        <p><span data-en="This site doesn't allow automatic downloads. Save the PDF, then upload it.">このサイトからは自動で取得できません。PDFを保存してから、アップロードしてください。</span></p>
+        <p><span data-en="The service is busy. Please try again in about a minute.">混み合っています。1分ほどしてからもう一度お試しください。</span> <button class="btn btn-sm" type="button" aria-disabled="true" style="margin-top:6px;background:var(--surface-3);color:var(--ink-3);border:2px dashed var(--line-ui)"><span data-en="Try again (in 42 s)">もう一度（あと42秒）</span></button></p>
       </div>
     </div>
   </div>
-  <p class="slot-note"><span data-en="Only the first card uses the red primary button; the others are outlined so the recommended choice is clear without hiding the alternatives.">赤いボタンは1枚目だけ。ほかは枠線ボタンにして、おすすめが一目でわかるようにしています。</span></p>
 </section>
 
-<!-- ===================== (d) RECIPE DETAIL ===================== -->
+<!-- ===================== (d) REVIEW ===================== -->
 <section class="slot" aria-labelledby="cap-d">
-  <h2 class="slot-cap" id="cap-d"><b>d</b><span data-en="Recipe detail (confirmed)">レシピ詳細（決定済み）</span></h2>
+  <h2 class="slot-cap" id="cap-d"><b>d</b><span data-en="Menu review: uncertain fields">献立の確認：要確認の項目</span></h2>
   <div class="phone">
-    <div class="status"><span>17:43</span><span>●●●</span></div>
-    <div class="topbar">
-      <button class="iconbtn" type="button" aria-label="戻る" data-en-aria="Back"><svg class="i"><use href="#i-left"/></svg></button>
-      <h1><span data-en="Recipe">レシピ</span></h1>
-      <button class="langbtn" type="button" aria-label="表示言語：日本語 / EN" data-en-aria="Display language: 日本語 / EN"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button>
-    </div>
+    <div class="status"><span>20:14</span><span>●●●</span></div>
+    <div class="topbar"><button class="iconbtn" type="button" aria-label="献立の取り込みに戻る" data-en-aria="Back to Import the menu"><svg class="i"><use href="#i-left"/></svg></button><h1><span data-en="Check the November menu">11月の献立を確認</span></h1></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:0 16px 10px"><div class="stepper" aria-hidden="true"><span class="done"></span><span class="done"></span><span class="cur"></span></div><span class="steplab"><span data-en="Step 3 of 3">ステップ 3 / 3</span></span></div>
+    <div class="sumbar"><svg class="i"><use href="#i-warn"/></svg><span class="sp"><span data-en="Items to check: 3">確認が必要な項目：3件</span></span><button class="btn btn-secondary btn-sm" type="button" style="min-height:44px"><span data-en="Next item to check">次の要確認へ</span></button></div>
     <div class="scroll">
-      <div class="hero"><svg viewBox="0 0 160 100" aria-hidden="true"><rect x="8" y="10" width="144" height="82" rx="18" stroke-width="3" style="fill:var(--surface-2);stroke:var(--ink-1)"/><path d="M84 10v82" stroke-width="3" style="stroke:var(--ink-1)"/>
-        <circle cx="34" cy="38" r="9" stroke-width="2" style="fill:var(--illus-rice);stroke:var(--ink-1)"/><circle cx="58" cy="38" r="9" stroke-width="2" style="fill:var(--illus-rice);stroke:var(--ink-1)"/><circle cx="46" cy="56" r="22" stroke-width="2" style="fill:var(--illus-rice);stroke:var(--ink-1)"/><circle cx="39" cy="52" r="2.6" style="fill:var(--illus-nori)"/><circle cx="53" cy="52" r="2.6" style="fill:var(--illus-nori)"/><ellipse cx="46" cy="61" rx="5" ry="3.6" style="fill:var(--illus-nori)"/><circle cx="34" cy="62" r="3" style="fill:var(--illus-pink)"/><circle cx="58" cy="62" r="3" style="fill:var(--illus-pink)"/>
-        <rect x="94" y="22" width="22" height="18" rx="4" style="fill:var(--illus-egg)"/><rect x="120" y="22" width="22" height="18" rx="4" style="fill:var(--illus-egg)"/><circle cx="104" cy="62" r="9" style="fill:var(--illus-green)"/><circle cx="114" cy="70" r="8" style="fill:var(--illus-green)"/><circle cx="132" cy="64" r="9" style="fill:var(--accent)"/></svg></div>
-      <div class="section" style="padding-top:16px">
-        <div class="confirm-pill"><svg class="i"><use href="#i-check"/></svg><span data-en="Planned for Wed, Nov 18 (tomorrow)">11月18日（水）のお弁当に決定（明日）</span></div>
-        <h2 class="disp" style="font-size:var(--text-xl);line-height:1.4"><span data-en="Bear onigiri bento">くまさんおにぎり弁当</span></h2>
-        <p class="meta"><span data-en="くまさんおにぎり弁当">Bear onigiri bento</span></p>
-        <div class="rowchips"><span class="chip"><svg class="i"><use href="#i-clock"/></svg><span data-en="About 20 min">調理時間 約20分</span></span><span class="chip"><svg class="i"><use href="#i-paw"/></svg><span data-en="Animals">動物</span></span><span class="chip chip-warn"><span data-en="Allergen: egg">アレルゲン：卵</span></span></div>
-      </div>
-      <div class="section">
-        <h3 class="h2"><span data-en="Ingredients (1 serving)">材料（1人分）</span></h3>
-        <ul class="ingr">
-          <li><span data-en="Cooked rice">ごはん</span><span data-en="120 g">120g</span></li>
-          <li><span data-en="Nori (for the face)">のり（顔用）</span><span data-en="a little">少々</span></li>
-          <li><span data-en="Egg (tamagoyaki)">卵（卵焼き）</span><span data-en="1">1個</span></li>
-          <li><span data-en="Broccoli">ブロッコリー</span><span data-en="2 florets">2房</span></li>
-          <li><span data-en="Cherry tomato">ミニトマト</span><span data-en="1">1個</span></li>
-        </ul>
-      </div>
-      <div class="section">
-        <h3 class="h2"><span data-en="Steps">作り方</span></h3>
-        <ol class="steps">
-          <li><span data-en="Make one large and two small round rice balls for the face and ears.">ごはんで丸いおにぎりを大1つ、小2つ作り、顔と耳にします。</span></li>
-          <li><span data-en="Cut eyes and a nose from nori and place them on the face.">のりで目と鼻を切り、顔にのせます。</span></li>
-          <li><span data-en="Make the tamagoyaki and cut it into 2 pieces.">卵焼きを作り、2つに切ります。</span></li>
-          <li><span data-en="Pack everything once the rice and sides have cooled.">ごはんとおかずが冷めてから詰めます。</span></li>
-        </ol>
-      </div>
-      <div class="section">
-        <h3 class="h2"><span data-en="Food safety">衛生と保存</span></h3>
-        <div class="box-info"><div class="note"><svg class="i"><use href="#i-info"/></svg><span data-en="Let everything cool before closing the lid. Cut cherry tomatoes into quarters for small children.">しっかり冷ましてからふたをしましょう。小さなお子さまには、ミニトマトを4等分に切ると安心です。</span></div></div>
-      </div>
-      <div class="section" style="padding-top:0">
-        <div class="box-info"><div class="note"><svg class="i"><use href="#i-info"/></svg><span data-en="This app can&#39;t guarantee allergy safety. Always check the labels of the foods you use.">アレルギーの安全を保証するものではありません。使用する食品の表示を必ずご確認ください。</span></div></div>
-      </div>
-      <div class="section">
-        <p class="source"><span data-en="Source: sample text for this preview only. Real recipes ship with a cited source.">出典：プレビュー用のサンプルです。実際のレシピは出典付きで収録します。</span></p>
-      </div>
-      <div class="section" style="display:grid;gap:8px;padding-bottom:24px">
-        <button class="btn btn-secondary btn-block" type="button"><span data-en="Change recipe">レシピを変更</span></button>
-        <button class="btn btn-ghost btn-block" type="button"><span data-en="Back to school lunch">給食に戻す</span></button>
-      </div>
+      <div style="padding:8px 16px 0"><button class="btn btn-text" type="button" style="padding:0"><svg class="i"><use href="#i-pdf"/></svg><span data-en="Open the original PDF">元のPDFを見る</span></button></div>
+      <fieldset class="rday" style="border-left:0;border-right:0;border-top:0"><legend><span data-en="Mon, Nov 2">11月2日（月）</span></legend>
+        <div class="dish"><input class="input" lang="ja" value="ごはん" aria-label="料理名"><button class="rm" aria-label="「ごはん」を削除"><svg class="i"><use href="#i-x"/></svg></button></div>
+        <div class="dish"><input class="input" lang="ja" value="とりのからあげ" aria-label="料理名"><button class="rm" aria-label="削除"><svg class="i"><use href="#i-x"/></svg></button></div>
+        <p class="rmeta"><span data-en="Allergens printed on the menu: Not printed">献立表のアレルゲン表示：記載なし</span></p>
+      </fieldset>
+      <fieldset class="rday unc"><legend><span data-en="Wed, Nov 4">11月4日（水）</span><span class="utag"><svg class="i"><use href="#i-warn"/></svg><span data-en="Check">要確認</span></span></legend>
+        <p class="reason"><svg class="i"><use href="#i-warn"/></svg><span data-en="The date and weekday don't match (the sheet says &quot;木&quot;)">日付と曜日が合いません（献立表では「木」）</span></p>
+        <div class="dish"><input class="input" lang="ja" value="ピーマンとなすのみそ炒め" aria-label="料理名"></div>
+        <button class="btn btn-text" type="button" style="padding:0"><span data-en="It's correct">このままでよい</span></button>
+      </fieldset>
+      <fieldset class="rday" style="border-left:0;border-right:0;border-top:0"><legend><span data-en="Thu, Nov 5">11月5日（木）</span></legend>
+        <div style="display:flex;gap:6px;align-items:center;margin-bottom:2px"><span class="utag"><svg class="i"><use href="#i-warn"/></svg><span data-en="Check">要確認</span></span></div>
+        <div class="dish"><input class="input ufield" lang="ja" value="さばのみそに" aria-label="料理名" aria-describedby="r5"></div>
+        <p class="reason" id="r5"><svg class="i"><use href="#i-warn"/></svg><span data-en="Some characters were hard to read">読み取りにくい文字があります</span></p>
+        <div class="dish"><input class="input" lang="ja" value="ごはん" aria-label="料理名"></div>
+        <p class="rmeta"><span data-en="Allergens printed on the menu: egg, wheat">献立表のアレルゲン表示：卵・小麦</span></p>
+      </fieldset>
+      <fieldset class="rday" style="border-left:0;border-right:0;border-top:0"><legend><span data-en="Fri, Nov 6">11月6日（金）</span></legend>
+        <div style="display:flex;gap:6px;align-items:center;margin-bottom:2px"><span class="utag"><svg class="i"><use href="#i-warn"/></svg><span data-en="Check">要確認</span></span></div>
+        <div class="dish"><input class="input ufield" lang="ja" value="カレー" aria-label="料理名"></div>
+        <p class="reason"><svg class="i"><use href="#i-warn"/></svg><span data-en="Which &quot;カレー&quot; is it?">「カレー」はどちらですか？</span></p>
+        <div class="radio-row"><span class="radio"></span><span data-en="Curry and rice (dish)">カレーライス（料理）</span></div>
+        <div class="radio-row"><span class="radio"></span><span data-en="Curry powder (seasoning)">カレー粉（調味料）</span></div>
+        <div class="radio-row"><span class="radio"></span><span data-en="Not sure">わからない</span></div>
+      </fieldset>
+      <fieldset class="rday" style="border-left:0;border-right:0;border-top:0"><legend><span data-en="Fri, Nov 27">11月27日（金）</span></legend>
+        <p class="rmeta"><b><span data-en="No school lunch">給食なし</span></b>・<span data-en="No lunch (half day etc.)">給食なし（午前保育など）</span>「午前保育（給食なし）」</p>
+        <button class="btn btn-text" type="button" style="padding:0"><span data-en="Restore school lunch">給食ありに戻す</span></button>
+      </fieldset>
     </div>
+    <div class="footer-cta"><button class="btn btn-primary btn-block" type="button"><span data-en="Confirm this menu">この内容で確定</span></button></div>
   </div>
-  <p class="slot-note"><span data-en="The confirmed banner reuses the calendar's solid-fill look, so the same visual means &quot;decided&quot; everywhere.">「決定」バナーはカレンダーと同じ塗りつぶし表現。どの画面でも、塗りつぶし＝決定です。</span></p>
 </section>
 
-<!-- ===================== (e) TODAY + REMINDER ===================== -->
+<!-- ===================== (e) SETTINGS ===================== -->
 <section class="slot" aria-labelledby="cap-e">
-  <h2 class="slot-cap" id="cap-e"><b>e</b><span data-en="Today card + day-before reminder">今日のカード＋前日のお知らせ</span></h2>
+  <h2 class="slot-cap" id="cap-e"><b>e</b><span data-en="Settings">設定</span></h2>
   <div class="phone">
-    <div class="status"><span>17:40</span><span>●●●</span></div>
+    <div class="status"><span>21:03</span><span>●●●</span></div>
+    <div class="topbar"><button class="iconbtn" type="button" aria-label="カレンダーに戻る" data-en-aria="Back to Calendar"><svg class="i"><use href="#i-left"/></svg></button><h1><span data-en="Settings">設定</span></h1><button class="langbtn" type="button" aria-label="表示言語" data-en-aria="Display language"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button></div>
     <div class="scroll">
-      <div class="appbar">
-        <div class="brand"><svg width="36" height="36" aria-hidden="true"><use href="#logo"/></svg><span class="brand-name">BentoMinder</span></div>
-        <button class="langbtn" type="button" aria-label="表示言語：日本語 / EN" data-en-aria="Display language: 日本語 / EN"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button>
-        <button class="iconbtn" type="button" aria-label="レシピ" data-en-aria="Recipes"><svg class="i"><use href="#i-book"/></svg></button>
-        <button class="iconbtn" type="button" aria-label="設定" data-en-aria="Settings"><svg class="i"><use href="#i-gear"/></svg></button>
+      <div class="card set-sec">
+        <h2><span data-en="Reminders">お知らせ</span></h2>
+        <div class="set-row"><span class="lab"><span data-en="Weekly summary">週のまとめ</span></span><span class="switch on" role="switch" aria-checked="true"><span data-en="On">オン</span><span class="track"></span></span>
+          <div class="times"><select class="select" aria-label="曜日"><option>日曜日</option></select><select class="select" aria-label="時"><option>14</option></select><select class="select" aria-label="分"><option>00</option><option>15</option><option>30</option><option>45</option></select></div>
+          <p class="hint"><span data-en="Sums up the 7 days starting the next day.">次の日から7日間の予定をまとめてお知らせします。</span></p></div>
+        <div class="set-row"><span class="lab"><span data-en="Day-before reminder">前日のお知らせ</span></span><span class="switch on" role="switch" aria-checked="true"><span data-en="On">オン</span><span class="track"></span></span>
+          <div class="times"><select class="select" aria-label="時"><option>17</option></select><select class="select" aria-label="分"><option>30</option></select></div></div>
+        <div class="banner b-info" style="margin-top:8px"><svg class="i"><use href="#i-info"/></svg><span data-en="In the browser, reminders appear while the app is open or the next time you open it. They can't reach you while it's closed.">ブラウザ版では、アプリを開いているとき・次に開いたときにお知らせします。閉じている間は通知できません。</span></div>
       </div>
-      <div class="section" style="padding-top:16px">
-        <div class="banner" role="status">
-          <span class="bell"><svg class="i"><use href="#i-bell"/></svg></span>
-          <div class="bt">
-            <p><span data-en="Homemade bento tomorrow! Take a look at the recipe.">明日は手作りお弁当の日！レシピを確認しましょう。</span></p>
-            <small><span data-en="Wed, Nov 18 · Bear onigiri bento">11月18日（水）・くまさんおにぎり弁当</span></small>
-            <button class="btn btn-primary btn-sm" type="button"><span data-en="View recipe">レシピを見る</span></button>
-          </div>
-          <button class="iconbtn" type="button" aria-label="閉じる" data-en-aria="Dismiss"><svg class="i"><use href="#i-x"/></svg></button>
-        </div>
+      <div class="card set-sec">
+        <h2><span data-en="Display">表示</span></h2>
+        <div class="set-row"><span class="lab"><span data-en="Language">言語</span></span><span class="seg" role="radiogroup" aria-label="言語"><b class="on" lang="ja">日本語</b><b lang="en">English</b></span></div>
+        <div class="set-row"><span class="lab" style="flex-basis:100%"><span data-en="Week starts on">週のはじまり</span></span><div class="radios"><span class="radio-row"><span class="radio on"></span><span data-en="Monday">月曜日</span></span><span class="radio-row"><span class="radio"></span><span data-en="Sunday">日曜日</span></span></div></div>
+        <div class="set-row"><span class="lab" style="flex-basis:100%"><span data-en="Theme">テーマ</span></span><div class="radios"><span class="radio-row"><span class="radio on"></span><span data-en="Automatic">自動</span></span><span class="radio-row"><span class="radio"></span><span data-en="Light">ライト</span></span><span class="radio-row"><span class="radio"></span><span data-en="Dark">ダーク</span></span></div><p class="hint"><span data-en="Follows your device.">端末の設定に合わせます。</span></p></div>
       </div>
-      <div class="section">
-        <div class="card today-card">
-          <p class="steplab"><span data-en="Today · Tue, Nov 17">今日・11月17日（火）</span></p>
-          <div class="today-status" style="margin-top:8px">
-            <span class="big-ic"><svg class="i"><use href="#i-school"/></svg></span>
-            <div><h2><span data-en="School lunch today">今日は給食</span></h2>
-              <span class="chip" style="margin-top:4px"><svg class="mk"><use href="#i-enjoy"/></svg><span data-en="Likely enjoyable">食べやすそう</span></span></div>
-          </div>
-          <p class="meta" style="margin-top:12px" lang="ja">ポークカレー、コールスロー、りんご</p>
-          <button class="check" type="button" role="checkbox" aria-checked="true"><span class="box on"><svg class="i"><use href="#i-check"/></svg></span><span data-en="Booked with the school (my own note)">園で予約済み（自分で記録）</span></button>
-          <div class="note" style="margin-top:10px"><svg class="i"><use href="#i-info"/></svg><span data-en="Book school lunch the school&#39;s usual way (this app doesn&#39;t book it).">給食の予約は園の方法で行ってください（このアプリでは予約されません）</span></div>
-        </div>
+      <div class="card set-sec">
+        <h2><span data-en="Menu">献立表</span></h2>
+        <div class="set-row"><span class="lab"><span data-en="Saved address">保存しているURL</span><br><span class="meta" style="font-weight:400;word-break:break-all">https://example-kinder.test/kondate/2026-11.pdf</span></span></div>
+        <div class="set-row"><button class="btn btn-secondary btn-sm" type="button"><span data-en="Import the menu">献立を取り込む</span></button><button class="btn btn-secondary btn-sm" type="button"><span data-en="Check or fix the menu">献立を確認・修正</span></button></div>
       </div>
-      <div class="section">
-        <p class="steplab" style="margin-bottom:6px"><span data-en="Other today-card states">ほかの日の表示</span></p>
-        <div class="card" style="padding:4px 0">
-          <div class="up-row" style="border-top:0"><span class="ms confirmed"><svg class="mk"><use href="#i-bento"/></svg></span><span class="up-text"><strong><span data-en="Homemade bento today: Bear onigiri bento">今日は手作りお弁当：くまさんおにぎり弁当</span></strong></span></div>
-          <div class="up-row"><span class="ms norecipe"><svg class="mk"><use href="#i-bento"/></svg></span><span class="up-text"><strong><span data-en="Today's plan isn't decided yet">今日の予定は未定です</span></strong></span></div>
-          <div class="up-row"><span class="ms nolunch"><svg class="mk"><use href="#i-nolunch"/></svg></span><span class="up-text"><strong><span data-en="No school lunch today">今日は給食がありません</span></strong></span></div>
-          <div class="up-row"><span class="ms"><svg class="mk"><use href="#i-cal"/></svg></span><span class="up-text"><strong><span data-en="Next school day: Mon, Nov 9 · lunch">次の登園日：11月9日（月）給食</span></strong></span></div>
-        </div>
+      <div class="card set-sec">
+        <h2><span data-en="Data">データ</span></h2>
+        <p class="meta"><span data-en="Your data is stored only on this device. It isn't synced with other devices.">データはこの端末だけに保存されています。ほかの端末とは同期されません。</span></p>
+        <div class="set-row"><button class="btn btn-secondary btn-sm" type="button"><span data-en="Export data">データを書き出す</span></button></div>
+        <div class="set-row"><button class="btn btn-dtext" type="button" style="padding:0"><span data-en="Delete all data">すべてのデータを削除</span></button></div>
       </div>
-      <div class="section" style="padding-bottom:20px">
-        <div class="box-info"><div class="note"><svg class="i"><use href="#i-info"/></svg><span data-en="In the browser, reminders appear while the app is open or the next time you open it. They can't reach you while it's closed.">ブラウザ版では、アプリを開いているとき・次に開いたときにお知らせします。閉じている間は通知できません。</span></div></div>
+      <div style="padding:8px 16px 24px"><span class="devpill">Debug</span> <span class="meta"><span data-en="(dev builds only)">（開発ビルドのみ）</span></span>
+        <div class="debug" style="margin-top:8px"><b>デバッグパネル（開発用）</b><br>現在：2026-11-17 21:03（日本時間） <b>シミュレーション中</b><br><span class="dbtn">+1分</span><span class="dbtn">実時間に戻す</span><span class="dbtn">前日のお知らせを表示</span><br>AI calls this month: 1</div>
       </div>
     </div>
   </div>
-  <p class="slot-note"><span data-en="17:40 the day before a planned bento. The banner sits above the today card at the top of the calendar screen (no separate tab). The browser limitation is stated, never hidden.">お弁当の前日17:40。バナーはカレンダー画面の上部、今日のカードの上に出ます（別タブは作りません）。ブラウザ版の制限は隠さず表示します。</span></p>
 </section>
 
-<!-- ===================== (f) ONBOARDING 2 ===================== -->
+<!-- ===================== (f) RECOMMENDATIONS ===================== -->
 <section class="slot" aria-labelledby="cap-f">
-  <h2 class="slot-cap" id="cap-f"><b>f</b><span data-en="Onboarding step 2: menu">はじめての設定 2：献立表</span></h2>
+  <h2 class="slot-cap" id="cap-f"><b>f</b><span data-en="Recommendations: flagged incomplete data + disclaimer">おすすめ：アレルゲン情報が不完全なレシピと注意書き</span></h2>
   <div class="phone">
-    <div class="status"><span>9:12</span><span>●●●</span></div>
-    <div class="topbar" style="gap:10px;padding-right:12px">
-      <button class="iconbtn" type="button" aria-label="戻る" data-en-aria="Back"><svg class="i"><use href="#i-left"/></svg></button>
-      <div class="stepper" aria-hidden="true"><span class="done"></span><span class="cur"></span><span></span><span></span></div>
-      <button class="langbtn" type="button" aria-label="表示言語：日本語 / EN" data-en-aria="Display language: 日本語 / EN"><b class="l-ja" lang="ja">日本語</b><b class="l-en" lang="en">EN</b></button>
+    <div class="status"><span>21:10</span><span>●●●</span></div>
+    <div class="topbar"><button class="iconbtn" type="button" aria-label="カレンダーに戻る" data-en-aria="Back to Calendar"><svg class="i"><use href="#i-left"/></svg></button><h1><span data-en="Bento for Thu, Nov 19">11月19日（木）のお弁当</span></h1></div>
+    <div class="scroll" style="padding:4px 16px 16px">
+      <p class="meta" style="margin-bottom:10px"><span data-en="Recipes that may suit your child.">好みに合いそうなレシピです。</span></p>
+      <article class="card rec" style="margin-bottom:14px"><div class="rec-art"><span class="rank"><span data-en="No. 1">1位</span></span><svg width="70" height="56" aria-hidden="true"><use href="#logo"/></svg></div>
+        <div class="rec-body"><h3><span data-en="Bear onigiri bento">くまさんおにぎり弁当</span></h3><p class="meta"><svg class="i" style="width:16px;height:16px;vertical-align:-3px"><use href="#i-clock"/></svg> <span data-en="About 20 min">約20分</span></p>
+          <div class="rowchips"><span class="chip chip-ok"><svg class="i"><use href="#i-check"/></svg><span data-en="With chicken, a favourite">好きな鶏肉入り</span></span><span class="chip chip-ok"><svg class="i"><use href="#i-check"/></svg><span data-en="Animals theme">どうぶつテーマ</span></span></div>
+          <p class="meta"><span data-en="Allergens: wheat, soybean, chicken">アレルゲン：小麦・大豆・鶏肉</span></p>
+          <button class="btn btn-primary btn-block" type="button" style="margin-top:10px"><span data-en="Choose for this day">この日に決定</span></button></div></article>
+      <article class="card rec" style="margin-bottom:14px"><div class="rec-art"><span class="rank"><span data-en="No. 3">3位</span></span><svg width="70" height="56" aria-hidden="true"><use href="#logo"/></svg></div>
+        <div class="rec-body"><h3><span data-en="Corn and cheese roll sandwiches">コーンとチーズのくるくるサンド</span></h3>
+          <div class="warnline"><svg class="i"><use href="#i-warn"/></svg><span data-en="Allergen information is missing for some ingredients. Check the food labels.">一部の材料のアレルゲン情報がわかりません。食品の表示を確認してください。</span></div>
+          <p class="meta"><span data-en="About 15 min · Allergens: wheat, milk">約15分・アレルゲン：小麦・乳</span></p>
+          <button class="btn btn-secondary btn-block" type="button" style="margin-top:10px"><span data-en="Choose for this day">この日に決定</span></button></div></article>
+      <button class="btn btn-text" type="button"><span data-en="Other recipes">ほかのレシピ</span></button>
+      <div class="banner b-info" style="margin-top:10px"><svg class="i"><use href="#i-info"/></svg><span data-en="BentoMinder can't guarantee anything about allergies. Always check the labels of the foods you use.">アレルギーの安全を保証するものではありません。使用する食品の表示を必ずご確認ください。</span></div>
     </div>
-    <div class="scroll">
-      <div class="section">
-        <p class="steplab"><span data-en="Step 2 of 4">ステップ 2 / 4</span></p>
-        <div class="ob-art"><svg width="120" height="76" viewBox="0 0 160 100" aria-hidden="true"><rect x="40" y="6" width="80" height="90" rx="10" stroke-width="3" style="fill:var(--surface-2);stroke:var(--ink-1)"/><path d="M52 26h56M52 40h56M52 54h40M52 68h48" stroke-width="4" stroke-linecap="round" style="stroke:var(--line-ui)"/><rect x="40" y="6" width="80" height="12" rx="6" style="fill:var(--accent)"/><circle cx="122" cy="78" r="18" stroke-width="3" style="fill:var(--surface-2);stroke:var(--ink-1)"/><path d="M114 78l6 6 10-11" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--success)"/></svg></div>
-        <h1 class="disp" style="font-size:var(--text-xl);line-height:1.4"><span data-en="Import the school lunch menu">給食の献立表を取り込みます</span></h1>
-        <p style="margin:6px 0 18px;color:var(--ink-2)"><span data-en="Enter the web address of the monthly menu PDF your school publishes.">園が公開している月間献立表（PDF）のURLを入力してください。</span></p>
-        <div class="field">
-          <label for="url"><span data-en="Menu PDF address (URL)">献立表PDFのURL</span></label>
-          <input class="input" id="url" type="url" inputmode="url" value="https://example.ed.jp/kondate/2026-11.pdf" aria-describedby="url-hint">
-          <p class="hint" id="url-hint"><span data-en="We'll keep this address for next month.">次の月からも同じURLを使えます。</span></p>
-        </div>
-        <div class="or"><span data-en="or">または</span></div>
-        <button class="btn btn-secondary btn-block" type="button"><svg class="i"><use href="#i-upload"/></svg><span data-en="Choose a PDF file">PDFファイルを選ぶ</span></button>
-        <div class="privacy">
-          <h3><svg class="i" style="width:16px;height:16px"><use href="#i-lock"/></svg><span data-en="What we send to the AI">AIに送る内容</span></h3>
-          <p><span data-en="Only the menu PDF. Nothing about Hana&#39;s profile or preferences. You&#39;ll be asked to agree before the first reading.">献立表のPDFだけを送ります。はなちゃんのプロフィールや好みは送りません。最初の読み取りの前に、同意を確認します。</span></p>
-          <p><span data-en="On the free AI plan, what you send may be used by the provider to improve its services.">無料プランのAIサービスでは、送った内容が提供元のサービス改善に使われる場合があります。</span></p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-cta"><button class="btn btn-primary btn-block" type="button"><span data-en="Import">取り込む</span></button></div>
   </div>
-  <div class="state-card">
-    <span class="lbl"><span data-en="State example: the PDF couldn't be fetched">状態の例：PDFを取得できなかったとき</span></span>
-    <div class="field">
-      <label for="url2"><span data-en="Menu PDF address (URL)">献立表PDFのURL</span></label>
-      <input class="input err" id="url2" type="url" value="https://example.ed.jp/kondate/2026-11.pdf" aria-invalid="true" aria-describedby="url2-err">
-      <p class="errtext" id="url2-err"><svg class="i"><use href="#i-warn"/></svg><span data-en="We couldn&#39;t get the file from this address. Please upload the PDF.">URLから取得できませんでした。PDFをアップロードしてください。</span></p>
-    </div>
-    <button class="btn btn-primary btn-block" type="button" style="margin-top:12px"><svg class="i"><use href="#i-upload"/></svg><span data-en="Choose a PDF file">PDFファイルを選ぶ</span></button>
-  </div>
+  <p class="slot-note"><span data-en="Card 2 omitted. The flagged recipe ranks after every recipe with complete data and appears only because the child has no known allergens (US-E6-02/AC5).">2位のカードは省略。アレルゲン情報が不完全なレシピは、情報がそろったレシピのあとに並び、登録したアレルギーがない場合だけ表示されます（US-E6-02/AC5）。</span></p>
 </section>
 
 </main>
 
 <script>
-/* Preview-only: swap ja/en strings and theme. */
+/* Preview-only: sample calendar renderer, ja/en swap, theme and week-start toggles. Not production code. */
 (function(){
-  var html=document.documentElement, lang='ja';
+  var html=document.documentElement, lang='ja', weekStart='monday';
+  var WD={ja:['日','月','火','水','木','金','土'],en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
+  var WDL={ja:['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']};
+  var ST={likely:{ja:'たのしめそう',en:'likely to enjoy',icon:'i-enjoy'},mixed:{ja:'どちらとも',en:'hard to say',icon:'i-mixed'},low:{ja:'苦手かも',en:'might not enjoy',icon:'i-suggest'},none:{ja:'未判定',en:'not assessed',icon:'i-dash'}};
+  // Sample month: November 2026, today = 17. kind: school | nolunch | bentoday | outside
+  var D={
+    1:{k:'outside'},2:{k:'school',a:'likely'},3:{k:'outside',hol:{ja:'文化の日',en:'Culture Day'}},
+    4:{k:'school',a:'low',d:'planned',r:{ja:'くまさん<br>弁当',en:'Bear bento',fja:'くまさんおにぎり弁当',fen:'Bear onigiri bento'}},
+    5:{k:'school',a:'mixed'},6:{k:'school',a:'likely'},9:{k:'school',a:'mixed'},10:{k:'school',a:'low'},
+    11:{k:'outside',dormant:true},12:{k:'school',a:'likely'},13:{k:'school',a:'none'},16:{k:'school',a:'likely'},17:{k:'school',a:'likely'},
+    18:{k:'school',a:'low',ovr:true,d:'planned',r:{ja:'ほしの<br>オムレツ',en:'Star omelette',fja:'ほしのオムレツ弁当',fen:'Star omelette bento'}},
+    19:{k:'school',a:'low'},20:{k:'bentoday'},23:{k:'outside',hol:{ja:'勤労感謝の日',en:'Labour Thanksgiving Day'}},
+    24:{k:'school',a:'mixed',d:'nc'},
+    25:{k:'nolunch',t:'午前保育（給食なし）',d:'planned',flag:true,r:{ja:'ほし<br>バーグ',en:'Star burger',fja:'星のミニハンバーグ弁当',fen:'Star mini hamburg bento'}},
+    26:{k:'school',a:'low'},27:{k:'nolunch',t:'午前保育（給食なし）'},30:{k:'school',a:'likely'}
+  };
+  var TODAY=17, FIRST_WD=0 /* 2026-11-01 is a Sunday */, DAYS=30;
+  function wdOf(d){return (FIRST_WD+d-1)%7;}
+  function dateLabel(d){var w=wdOf(d);return lang==='ja'?('11月'+d+'日（'+WD.ja[w]+'）'):(WD.en[w]+', Nov '+d);}
+  function svg(id,cls){return '<svg class="'+(cls||'mk')+'" aria-hidden="true"><use href="#'+id+'"/></svg>';}
+  function cellHtml(d){
+    var x=D[d]||{k:'outside'}, w=wdOf(d), cls=['cell'], parts=[], inner='', aria='';
+    var past=d<TODAY, today=d===TODAY;
+    if(w===6)cls.push('satc'); if(w===0)cls.push('sunc'); if(x.hol)cls.push('holc');
+    if(past)cls.push('past'); if(today)cls.push('today');
+    var dl=dateLabel(d), sep=lang==='ja'?'、':', ';
+    if(x.k==='outside'){
+      cls.push('outside');
+      inner='<span class="ctop"><span class="num">'+d+'</span></span>'+(x.hol?'<span class="hol">'+(lang==='ja'?'祝':'Hol')+'</span>':'');
+      aria=dl+(x.hol?sep+x.hol[lang]:'')+sep+(lang==='ja'?'献立に記載なし':'not on the menu');
+    } else if(x.k==='bentoday' && !x.d){
+      cls.push('nolunch','bentoday');
+      inner='<span class="ctop"><span class="num">'+d+'</span></span>'+svg('i-bento','ic')+'<span class="clab">'+(lang==='ja'?'お弁当<br>の日':'Bento day')+'</span>';
+      aria=dl+sep+(lang==='ja'?'お弁当の日、未計画':'bento day, not planned');
+    } else if(x.k==='nolunch' && !x.d){
+      cls.push('nolunch');
+      inner='<span class="ctop"><span class="num">'+d+'</span></span><span class="clab">'+(lang==='ja'?'給食<br>なし':'No lunch')+'</span>';
+      aria=dl+sep+(lang==='ja'?('給食なし（'+x.t+'）'):('no school lunch ('+x.t+')'));
+    } else {
+      var st=x.a?ST[x.a]:null, mark='', body='', dec='';
+      if(st){ mark='<span class="mkw'+(x.ovr?' ovr':'')+'" style="color:'+(x.a==='low'?'var(--accent-ink)':'var(--ink-2)')+'">'+svg(st.icon,'mk'+(x.a==='low'?' low':''))+'</span>'; }
+      if(x.d==='planned'){ cls.push('planned'); body=svg('i-bento-fill','ic')+'<span class="clab">'+x.r[lang]+'</span>'; dec=(lang==='ja'?'手作りお弁当：':'homemade bento: ')+(lang==='ja'?x.r.fja:x.r.fen); }
+      else if(x.d==='nc'){ cls.push('nc'); body=svg('i-bento','ic')+'<span class="clab">'+(lang==='ja'?'未定':'TBD')+'</span>'; dec=lang==='ja'?'未定':'not decided'; }
+      else { cls.push('school'); if(x.a==='low')cls.push('sug'); body='<span class="clab">'+(lang==='ja'?'給食':'Lunch')+'</span>'; dec=lang==='ja'?'給食':'school lunch'; }
+      inner='<span class="ctop"><span class="num">'+d+'</span>'+mark+'</span>'+body+(x.flag?'<span class="badge" aria-hidden="true">!</span>':'');
+      var ass=st?(lang==='ja'?st.ja:st.en):(lang==='ja'?'給食なし':'no school lunch');
+      aria=dl+sep+ass+sep+dec+(x.ovr?(lang==='ja'?'、手動で変更':', changed by you'):'')+(x.flag?(lang==='ja'?'、献立が変わりました':', menu changed'):'');
+    }
+    if(past)aria+=(lang==='ja'?'、過去の日':', past day');
+    if(today)aria=(lang==='ja'?'今日、':'Today, ')+aria;
+    return '<div role="gridcell"><button class="'+cls.join(' ')+'" type="button" tabindex="'+(today?0:-1)+'"'+(today?' aria-current="date"':'')+' aria-label="'+aria+'" data-testid="cal-cell-2026-11-'+(d<10?'0':'')+d+'">'+inner+'</button></div>';
+  }
+  function renderCal(){
+    var order=weekStart==='monday'?[1,2,3,4,5,6,0]:[0,1,2,3,4,5,6], gcls='cal-grid '+(weekStart==='monday'?'mon':'sun');
+    var h='<div class="'+gcls+'" role="row">'+order.map(function(w){return '<div class="dow'+(w===6?' sat':'')+(w===0?' su':'')+'" role="columnheader" aria-label="'+WDL[lang][w]+'">'+WD[lang][w]+'</div>';}).join('')+'</div>';
+    var cells=[], lead=order.indexOf(FIRST_WD); for(var i=0;i<lead;i++)cells.push(null); for(var d=1;d<=DAYS;d++)cells.push(d); while(cells.length%7)cells.push(null);
+    for(var r=0;r<cells.length;r+=7){var row=cells.slice(r,r+7), hasBox=row.some(function(d){return d&&D[d]&&D[d].k!=='outside';});
+      h+='<div class="'+gcls+(hasBox?'':' compact')+'" role="row">'+row.map(function(d){return d?cellHtml(d):'<div class="cell pad" role="gridcell" aria-hidden="true"></div>';}).join('')+'</div>';}
+    document.getElementById('cal').innerHTML=h;
+  }
+  var sw=[['surface-1','#FFFFFF'],['surface-2','#FFFDF8'],['surface-3','#F2EADB'],['ink-1','#1B2A4A'],['accent','#D2574F'],['accent-strong','#B8443C'],['accent-ink','#A83A33'],['accent-soft','#F8E1DC'],['navy-fill','#1B2A4A'],['planned-edge','#D2574F'],['warning','#7A4E00'],['warning-soft','#FFF0D1'],['danger','#A3271F'],['info-soft','#E3ECF8'],['focus-ring','#1F5FBF'],['debug-surface','#2A1145']];
+  document.getElementById('swatches').innerHTML=sw.map(function(s){return '<div><div class="sw" style="background:var(--'+s[0]+')"></div><div class="sw-l">'+s[0]+'<br>'+s[1]+'</div></div>';}).join('');
   function setLang(l){
     lang=l; html.lang=l;
     document.querySelectorAll('[data-en]').forEach(function(e){ if(e.dataset.ja===undefined) e.dataset.ja=e.innerHTML; e.innerHTML = l==='en' ? e.dataset.en : e.dataset.ja; });
     document.querySelectorAll('[data-en-aria]').forEach(function(e){ if(e.dataset.jaAria===undefined) e.dataset.jaAria=e.getAttribute('aria-label'); e.setAttribute('aria-label', l==='en' ? e.dataset.enAria : e.dataset.jaAria); });
     document.getElementById('langToggle').textContent = l==='en' ? '日本語' : 'EN';
+    renderCal();
   }
   document.querySelectorAll('#langToggle,.langbtn').forEach(function(b){ b.addEventListener('click',function(){ setLang(lang==='ja'?'en':'ja'); }); });
   var tt=document.getElementById('themeToggle');
-  tt.addEventListener('click',function(){ var d=html.getAttribute('data-theme')!=='dark'; html.setAttribute('data-theme', d?'dark':'light'); var s=tt.querySelector('span'); s.dataset.ja = d?'ライト':'ダーク'; s.dataset.en = d?'Light':'Dark'; s.textContent = lang==='en'?s.dataset.en:s.dataset.ja; });
-  var m=document.getElementById('monthA'), sc=m.closest('.scroll'); sc.scrollTop = m.getBoundingClientRect().top - sc.getBoundingClientRect().top - 4;
+  tt.addEventListener('click',function(){ var d=html.getAttribute('data-theme')!=='dark'; html.setAttribute('data-theme', d?'dark':'light'); var s=tt.querySelector('span'); s.dataset.ja = d?'ライト':'ダーク'; s.dataset.en = d?'Light':'Dark'; s.innerHTML = lang==='en'?s.dataset.en:s.dataset.ja; });
+  var wt=document.getElementById('weekToggle');
+  wt.addEventListener('click',function(){ weekStart=weekStart==='monday'?'sunday':'monday'; var s=wt.querySelector('span'); s.dataset.ja = weekStart==='monday'?'週：日曜始まり':'週：月曜始まり'; s.dataset.en = weekStart==='monday'?'Week: Sunday start':'Week: Monday start'; s.innerHTML = lang==='en'?s.dataset.en:s.dataset.ja; renderCal(); });
+  renderCal();
+  var m=document.getElementById('monthA'), sc=document.getElementById('scrollA'); sc.scrollTop = m.getBoundingClientRect().top - sc.getBoundingClientRect().top - 4;
   var q=new URLSearchParams(location.search);
   if(q.get('theme')==='dark') tt.click();
   if(q.get('lang')==='en') setLang('en');
+  if(q.get('week')==='sunday') wt.click();
 })();
 </script>
 </body>

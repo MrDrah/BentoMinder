@@ -1,14 +1,14 @@
 # Data contract — BentoMinder
 
-Semantics: BA · Format, JSON Schema (`data/schema/`) and validator: Developer · 2026-10-24 · Contract version **v1** · Status: draft for PO review (H1)
+Semantics: BA · Format, JSON Schema (`data/schema/`) and validator: Developer · 2026-10-24 · Contract version **v1** · Status: **H1 final** (PO answers, R-1…R-3 and the H1 fix-round rulings B1, B2, B4–B7, B10, B14 of 2026-10-24 applied; changes listed in §8)
 
-Stories: `docs/ba/user-stories.md` · Terms and ids: `docs/ba/domain-dictionary.md` · Proposed rules: `docs/ba/open-questions.md` (BR-xx)
+Stories: `docs/ba/user-stories.md` · Terms and ids: `docs/ba/domain-dictionary.md` · Rules: approved BR table in `docs/PLAN.md` §3 (BR-xx). **This contract is the source of entity, field and state names** (R-2): code, ADRs, tests and copy keys use these identifiers.
 
 ## 1. Definitions of valid
 
 **Correctly extracted menu.** An extracted menu is correct when, compared with the hand-made answer key of its fixture PDF, every date the PDF lists maps to the same ISO date with the same set of dish texts (after NFKC normalisation and whitespace trimming), every no-lunch day is listed with the right reason, no dish, ingredient or allergen that the PDF does not print is present, and every field the answer key marks as hard to read carries `verification.status = "uncertain"`.
 
-**Authentic recipe.** A recipe is authentic when its dish, every ingredient with its quantity, its steps and its time can be traced to at least one cited source page that was fetched and that belongs to an approved publisher in `docs/ba/research-brief.md`, every change for a child portion is recorded in `adaptations`, its own-words text passes `validate.mjs overlap`, and every allergen that its ingredients carry according to the dictionary is listed.
+**Authentic recipe.** A recipe is authentic when its dish, every ingredient with its quantity, its steps and its time can be traced to at least one cited source page that was fetched and that belongs to an approved publisher in `docs/ba/research-brief.md`, every change for a child portion is recorded in `adaptations`, its own-words text passes `validate.mjs overlap`, and every allergen that its ingredients carry according to the dictionary is listed (an ingredient whose product allergens could not be established from a cited source is marked `allergenInfo = "unknown"`, which makes the recipe `allergenDataComplete = false`; it is never presented as allergen-free), and every ingredient carries the animal-origin tags the dictionary gives it (an ingredient whose animal origin is unknown and not established by a cited source makes the recipe `dietDataComplete = false`).
 
 **Valid store.** The local store is valid when it parses as JSON, `schemaVersion` is a version this build knows, every entity below passes its field rules and cross-field rules, and every id reference resolves (dictionary ids, recipe ids, extraction ids).
 
@@ -23,6 +23,7 @@ Stories: `docs/ba/user-stories.md` · Terms and ids: `docs/ba/domain-dictionary.
 | Ids | kebab-case ASCII `[a-z0-9]+(-[a-z0-9]+)*`, with the prefix of their kind (see dictionary), stable, never reused. | `id-format` |
 | Unknown fields | Rejected in the store and in AI output (`additionalProperties: false`). | `unknown-field` |
 | Strings | Stored NFC; leading/trailing whitespace trimmed; matching uses NFKC + katakana→hiragana folding (dictionary §1). | `string-untrimmed` |
+| Record metadata | Every stored record of kind ChildProfile, MenuMonth, AssessmentOverride, DayDecision and Settings carries `ownerId` (string, `local` in the MVP; v1: the family id), `createdAt` and `updatedAt` (timestamps, `updatedAt ≥ createdAt`). Seam for v1 sync (PLAN §1, ADR 003). Not repeated in the entity tables below. | `meta-owner`, `meta-timestamps` |
 | Allergen scheme | Allergen ids come from the dictionary's allergen list for scheme `caa-2026-04` (9 mandatory + 20 recommended items). Retired ids (e.g. `alg-matsutake`) are accepted when reading old data, never written. | `allergen-unknown`, `allergen-retired` |
 
 ## 3. Entities
@@ -30,6 +31,7 @@ Stories: `docs/ba/user-stories.md` · Terms and ids: `docs/ba/domain-dictionary.
 ### 3.1 Root store `BentoMinderStore` (one per device, local storage)
 | Field | Type | Req. | Allowed values / rule | Example |
 |-------|------|------|------------------------|---------|
+| `deviceId` | string | ✔ | random UUID v4 created at first launch; never sent anywhere | |
 | `schemaVersion` | integer | ✔ | `1` for this contract. Lower → migrate (with backup); higher → read-only (US-E10-02). | `1` |
 | `createdAt` / `updatedAt` | timestamp | ✔ | `updatedAt ≥ createdAt` | |
 | `settings` | `Settings` | ✔ | §3.9 | |
@@ -38,8 +40,8 @@ Stories: `docs/ba/user-stories.md` · Terms and ids: `docs/ba/domain-dictionary.
 | `overrides` | object map `YYYY-MM-DD → AssessmentOverride` | ✔ | key equals `.date` | |
 | `decisions` | object map `YYYY-MM-DD → DayDecision` | ✔ | key equals `.date`; only parent-created records (BR-02) | |
 | `reminderLog` | `ReminderLogEntry[]` | ✔ | unique `key`; entries older than 60 days may be pruned | |
-| `consent` | `{ aiNoticeVersion: integer ≥ 1, consentedAt: timestamp }` \| null | ✔ | null until the parent consents (US-E2-08) | |
-| `aiUsage` | object map `YYYY-MM → integer ≥ 0` | ✔ | number of provider calls made per Tokyo month | `{ "2026-11": 1 }` |
+| `consent` | `{ aiNoticeVersion: integer ≥ 1, consentedAt: timestamp }` \| null | ✔ | null until the parent consents (US-E2-08). Notice version **1** = the free-tier facts of US-E2-08/AC4; any change to those facts raises the version and asks again (US-E2-08/AC3) | |
+| `aiUsage` | object map `YYYY-MM → integer ≥ 0` | ✔ | number of provider calls made per Tokyo month (repair retries and fallback calls count 1 each; cache hits count 0) | `{ "2026-11": 1 }` |
 
 `MenuMonth`: `{ month: YYYY-MM, sourceUrl?: string, extractions: ExtractedMenu[] (≤ 3, newest last), confirmed: ConfirmedMenu | null, pendingReviewExtractionId?: string }`.
 
@@ -78,7 +80,7 @@ The adapter asks the model for exactly this shape (structured output). Anything 
 | `source` | `MenuSource` | ✔ | below | |
 | `days` | `ExtractedDay[]` | ✔ | 0–31 entries, unique `date`, sorted ascending | |
 | `noLunchDays` | `NoLunchDay[]` | ✔ | unique `date`; disjoint from `days[].date` | |
-| `outOfMonthDays` | `ExtractedDay[]` | ✔ | days the model returned outside `targetMonth`; never imported (US-E2-05/AC4) | `[]` |
+| `outOfMonthDays` | `OutOfMonthEntry[]` | ✔ | lunch days **and no-lunch days** the model returned outside `targetMonth`, moved here by the validator; never imported, listed on review (US-E2-05/AC4). Unique by `date` + `kind`, sorted by date | `[]` |
 | `warnings` | enum[] | ✔ | `month-mismatch`, `pages-unreadable`, `layout-unrecognised`, `partial-extraction` | `[]` |
 | `extractedAt` | timestamp | ✔ | | |
 
@@ -86,12 +88,12 @@ The adapter asks the model for exactly this shape (structured output). Anything 
 | Field | Type | Req. | Rule | Example |
 |-------|------|------|------|---------|
 | `kind` | enum | ✔ | `url` \| `upload` \| `manual` \| `fixture` | `url` |
-| `url` | string | if kind=url | http/https, ≤ 2048 chars (BR-14) | `https://example-kinder.test/menu/2026-11.pdf` |
+| `url` | string | if kind=url | https only (port 443), ≤ 2048 chars (BR-14, tightened at H1) | `https://example-kinder.test/menu/2026-11.pdf` |
 | `filename` | string | if kind=upload | ≤ 255 chars | `11gatsu-kondate.pdf` |
 | `sha256` | string | ✔ unless manual | 64 lowercase hex chars of the PDF bytes | |
 | `byteSize` | integer | ✔ unless manual | 1 … 10,485,760 (BR-14) | `389120` |
 | `fetchedAt` | timestamp | ✔ | when the bytes were obtained | |
-| `model` | string | ✔ unless manual | provider model id as reported by the adapter | (set at runtime) |
+| `model` | string | ✔ unless manual | provider model id of the call whose output was used: the primary model, or the fallback model when call 2 went to it (BR-10, US-E2-06/AC5) | (set at runtime) |
 | `promptVersion` | integer | ✔ unless manual | version of the fixed extraction prompt | `1` |
 
 `ExtractedDay`:
@@ -107,6 +109,8 @@ The adapter asks the model for exactly this shape (structured output). Anything 
 | `notes` | string[] | ✔ | 0–5 notes as printed (e.g. 「誕生会」「行事食」), ≤ 100 chars each | `["誕生会"]` |
 | `verification` | `Verification` | ✔ | day-level status (date/weekday problems) | |
 
+`OutOfMonthEntry` (H1, QA FX-Q3): `{ kind: "lunch-day", day: ExtractedDay } | { kind: "no-lunch-day", noLunchDay: NoLunchDay }` (discriminated by `kind`; the inner record keeps its own `date`, which is outside `targetMonth`). Rule `out-of-month-entry`: the inner date is a valid date not in `targetMonth`.
+
 `MenuItem`: `{ text: string 1–40 chars as printed, kind: "staple" | "main" | "side" | "soup" | "drink" | "dessert" | "snack" | "unknown", verification: Verification, resolvedIds?: string[] (set on review for ambiguity choices) }`. Items of kind `snack` (おやつ) are shown but not assessed (OQ-07).
 
 `MenuIngredient`: `{ text: string 1–30 chars as printed, foodGroup: "red" | "yellow" | "green" | null, verification: Verification }`. `foodGroup` is only set when the PDF prints the 三色食品群 grouping (赤・黄・緑); never inferred.
@@ -121,7 +125,7 @@ The adapter asks the model for exactly this shape (structured output). Anything 
 
 Rule `allergen-absence-not-inferred` (BR-08): `declared-none` is only valid when `rawText` is non-null (the PDF said so). The app treats `not-declared` and `unreadable` as "unknown", never as "none".
 
-`NoLunchDay`: `{ date, reason: "bento-day" | "no-lunch" | "closed" | "unknown", originalText: string 1–60 chars, verification }`. `bento-day` = everyone brings a bento (お弁当の日); `no-lunch` = school open without lunch (午前保育, 短縮保育); `closed` = no school (休園, 行事の振替休日).
+`NoLunchDay`: `{ date (inside `targetMonth`, else moved to `outOfMonthDays` as kind `no-lunch-day`), reason: "bento-day" | "no-lunch" | "closed" | "unknown", originalText: string 1–60 chars, verification }`. `bento-day` = everyone brings a bento (お弁当の日); `no-lunch` = school open without lunch (午前保育, 短縮保育); `closed` = no school (休園, 行事の振替休日).
 
 `Verification`: `{ status, reason?, note? }`
 | `status` | Set by | Meaning |
@@ -142,7 +146,9 @@ The model may only emit `ok` or `uncertain` (`verification-status-source`).
 | `confirmedAt` | timestamp | ✔ | | |
 | `days` | `ExtractedDay[]` | ✔ | same shape; no `uncertain` left (each is fixed → `parent-edited`, or `uncertain-accepted`) | |
 | `noLunchDays` | `NoLunchDay[]` | ✔ | disjoint from `days` | |
-| `changedDatesSincePrevious` | date[] | ✔ | dates whose items differ from version − 1 (used for override/decision conflict notices) | `["2026-11-18"]` |
+| `changedDatesSincePrevious` | date[] | ✔ | dates of the month whose entry differs from version − 1: items changed, no-lunch reason changed, moved between `days` and `noLunchDays`, added, or removed (no longer listed). `[]` for version 1. Used for the 「献立が変わりました」 flags and the needs-review list | `["2026-11-18"]` |
+
+**Needs-review list** (derived after a refresh is confirmed, US-E3-05/AC9, AC11, AC12): the dates in `changedDatesSincePrevious` (incl. removed dates) that carry an `AssessmentOverride` or a stored `homemade-bento-planned` or `not-confirmed` `DayDecision`; a `school-lunch-planned` record alone never lists a date (S10). Shown once after the confirm and reachable from the flagged days; never stored, never changes a record.
 
 Cross-field rules: `confirmed-no-uncertain`; `confirmed-days-in-month`; `confirmed-days-disjoint`; at least one day or no-lunch day (`confirmed-not-empty`).
 
@@ -156,19 +162,35 @@ Cross-field rules: `confirmed-no-uncertain`; `confirmed-days-in-month`; `confirm
 | `state` | enum | `override.state` if an override exists, else `calculatedState` | |
 | `explanationKey` | string | one of `assess.likely`, `assess.mixedOne`, `assess.mixedUnknown`, `assess.mixedNeutral`, `assess.low`, `assess.notAssessed`, `assess.noLunch`, `assess.override` | `assess.low` |
 | `explanationParams` | object | `{ weekday: 0–6, dislikedCount, likedCount, dislikedLabels: string[] ≤ 3, likedLabels ≤ 3, unmatched ≤ 3 }` | `{ "weekday": 3, "dislikedCount": 2, "dislikedLabels": ["ピーマン","なす"] }` |
-| `matched` | object | `{ likedIds[], dislikedIds[], unmatchedItems[], ambiguousItems[] }` for QA and the explanation | |
+| `matched` | object | `{ likedIds[], dislikedIds[], unmatchedItems[], ambiguousItems[] }` for QA and the explanation. `likedIds` / `dislikedIds` are the found ids with that verdict (D = `dislikedIds.length`, L = `likedIds.length`); `unmatchedItems` + `ambiguousItems` are the non-snack items counted in U (an item in `ambiguousItems` may also have contributed found ids) | |
 | `menuVersion` | integer | `ConfirmedMenu.version` used | `1` |
 | `override` | `AssessmentOverride` \| null | | |
+
+**Counting D, L, U** (H1 rulings B1, B2, B5, follow-ups and "OQ-16 overruled"; the full rule with a worked example is the E4 paragraph of `user-stories.md`): *found ids* are the distinct dictionary ids found in the day's non-snack items and listed ingredients (plus parent-chosen `resolvedIds`), seasonings left out unless the profile names them. Found ids collapse into **foods** (rule `assessment-food-collapse`, never transitive): within one lunch item a matched dish and its dictionary `definingIngredientId` are one food represented by the dish (an identical id found elsewhere that day counts through that dish); other ingredients named in the dish are separate foods; a found ingredient that is a dictionary ancestor of another found id folds into each found descendant (siblings stay separate); nothing else merges, and two dishes are never merged with each other. Each food gets one verdict, checked level by level (H1 closing rulings): (1) the food's ingredient ids (incl. a folded ancestor), (2) their dictionary parent ingredients, (3) the dish id, (4) categories, then ancestor categories, nearest first; i.e. ingredient → dish → category; at the deciding level a dislike beats a like. A defining-ingredient link never takes part in a cross-item collapse (O-3). D = disliked foods, L = liked foods. `matched.likedIds` / `dislikedIds` hold the representative id of each counted food. U = items without any match or with ≥ 1 unresolved ambiguity ÷ non-snack items.
+
+**Explanation key by case** (rule `assessment-explanation-key`, B4):
+| Case | `explanationKey` |
+|------|------------------|
+| override present | `assess.override` (the calculated state's explanation is shown under it) |
+| no-lunch day | `assess.noLunch` |
+| no likes and no dislikes in the profile | `assess.notAssessed` |
+| `low-preference` (D ≥ 2, or D = 1 and L = 0) | `assess.low` |
+| `likely-enjoyable` | `assess.likely` |
+| `mixed-uncertain`, D = 1 and L ≥ 1 | `assess.mixedOne` |
+| `mixed-uncertain`, D = 0 and U > 50% (whatever L) | `assess.mixedUnknown` |
+| `mixed-uncertain`, D = 0, L = 0 and U ≤ 50% | `assess.mixedNeutral` |
 
 `AssessmentOverride` (stored):
 | Field | Type | Req. | Rule | Example |
 |-------|------|------|------|---------|
-| `date` | date | ✔ | must be a school day when set (`override-school-day-only`); kept even if a later refresh changes that (shown with a notice) | `2026-11-12` |
+| `date` | date | ✔ | must be a school day when set (`override-school-day-only`). If a later refresh makes the date a no-lunch day or removes it, the override is kept but **dormant**: not applied, not shown, the day shows `no-school-lunch` (or nothing when unlisted), and the date is in the needs-review list; it applies again if a later refresh makes the date a school day (`override-dormant`, B6, US-E3-05/AC8) | `2026-11-12` |
 | `state` | enum | ✔ | `likely-enjoyable` \| `mixed-uncertain` \| `low-preference` | `low-preference` |
 | `setAt` | timestamp | ✔ | | |
 | `menuVersionAtSet` | integer | ✔ | if the date is in `changedDatesSincePrevious` of a newer version, show 「献立が変わりました」 (US-E3-05/AC3) | `1` |
 
 ### 3.6 `DayDecision` (stored only after a parent action, BR-02)
+State identifiers (R-2, binding for code, ADR 004, tests and copy keys): `school-lunch-planned`, `homemade-bento-planned`, `not-confirmed`, `no-school-lunch`. The names `school_lunch`, `bento_pending`, `bento_planned`, `no_school_lunch` are retired and must not appear.
+
 Displayed decision for a date = stored `DayDecision.state` if present, else derived: school day → `school-lunch-planned`, no-lunch day → `no-school-lunch`.
 
 | Field | Type | Req. | Allowed values / rule | Example |
@@ -177,20 +199,29 @@ Displayed decision for a date = stored `DayDecision.state` if present, else deri
 | `state` | enum | ✔ | stored: `school-lunch-planned` \| `homemade-bento-planned` \| `not-confirmed`. `no-school-lunch` is display-only and never stored (`decision-no-lunch-not-stored`). | `homemade-bento-planned` |
 | `recipeId` | string | iff bento | resolves to a library recipe when written (`decision-bento-requires-recipe`, `decision-recipe-resolves`); may stop resolving after a library change (US-E6-06) | `rcp-kuma-onigiri` |
 | `recipeNameSnapshot` | localized text | iff bento | copy of the recipe name at decision time | `{ "ja": "くまさんおにぎり弁当" }` |
+| `recipeShortNameSnapshot` | `{ ja: string, en: string }` | iff bento | copy of the recipe's `shortNameJa` / `shortNameEn` at decision time (1–8 characters each, `recipe-short-name`), shown in the calendar cell when the recipe no longer resolves (US-E5-01/AC4, US-E6-06) | `{ "ja": "くまおにぎり", "en": "Bear oni" }` |
 | `reservationDoneExternally` | boolean | ✔ | may be `true` only when `state = school-lunch-planned` (`decision-reservation-flag`); it is the parent's own record, the app does nothing with the school | `false` |
-| `decidedAt` | timestamp | ✔ | | |
+| `decidedAt` | timestamp | ✔ | time of the last write of this record | |
+| `plannedAt` | timestamp | iff bento | set when the state becomes `homemade-bento-planned` from any other state (first CONFIRM_RECIPE); **unchanged** by CHANGE_RECIPE and KEEP_PLAN; removed when the state leaves `homemade-bento-planned` (`decision-planned-at`, B10). Used only for day-before suppression (§3.9) | `2026-11-01T10:12:00+09:00` |
+| `acknowledgedMenuVersion` | integer | – | set by the parent event KEEP_PLAN (「このまま」) on a refresh conflict to the current `ConfirmedMenu.version`; the conflict leaves the upcoming summary while it equals the current version. State, recipe, `plannedAt` and reminder are unchanged by KEEP_PLAN (US-E3-05/AC7) | `2` |
 | `history` | `{ state, recipeId?, at }[]` | ✔ | last 5 changes, for debug and conflict display | |
 
 Cross-field rules:
 - `decision-transition`: a change from the previous state must be allowed by the state machine in `user-stories.md` §E5.
 - `decision-no-past-write`: no write with `date` < today (Asia/Tokyo) (US-E5-02/AC3).
+- `decision-bento-day-remove`: on a `bento-day` date the parent cancels a plan by removing the stored decision (displayed state returns to `no-school-lunch`); no parent action writes `school-lunch-planned` or `not-confirmed` for a no-lunch date (US-E5-08/AC3); a stored decision that a later menu refresh puts on a no-lunch date is kept and flagged (BR-13).
 - `decision-bento-day-only`: `homemade-bento-planned` on a no-lunch day only when its reason is `bento-day`. A conflict that arises from a menu refresh is kept and flagged, not rejected (US-E3-05/AC2).
+- `decision-refresh-conflict` (B7): a stored `homemade-bento-planned` decision whose date a refresh turns into a no-lunch day with reason ≠ `bento-day`, or removes from the menu, is kept unchanged (BR-13), flagged 「献立が変わりました」 (the explanation sentence of US-E3-05/AC2 or AC6 may follow), and accepts only KEEP_PLAN or CLEAR_PLAN (remove the stored decision, after a confirm dialog); its day-before reminder stays until it is cleared. A refresh that turns the date into a `bento-day` is not a conflict and is not flagged (BR-25).
+- `decision-dormant-replaced` (U5): an explicit CONFIRM_RECIPE on an お弁当の日 that carries a dormant record replaces that record with the new `homemade-bento-planned` decision (the old state stays only in `history`).
+- `decision-dormant` (B6 follow-up, S10): a stored `not-confirmed` or `school-lunch-planned` record whose date a refresh turns into a no-lunch day or removes is kept byte-for-byte (dormant): the day displays `no-school-lunch` (or nothing when unlisted), offers no decision action, and (only when `not-confirmed`) is in the needs-review list; the record is displayed unchanged again if a later refresh makes the date a school day (US-E3-05/AC12).
 
 ### 3.7 `Recipe` (`data/_research/batch-*.json` → merged `data/library.json`, generated)
 | Field | Type | Req. | Allowed values / rule | Example |
 |-------|------|------|------------------------|---------|
 | `id` | string | ✔ | `rcp-` + kebab-case; unique across all batches; never reused | `rcp-kuma-onigiri` |
 | `name` | localized text | ✔ | `ja` required; `en` required unless the dish is only known by its Japanese name (then `en` = romanised name + short gloss) | `{ "ja": "くまさんおにぎり弁当", "en": "Bear onigiri bento" }` |
+| `shortNameJa` | string | ✔ | 1–8 characters (Unicode code points, after NFC and trim), shown in calendar cells (US-E5-01/AC4); a curated short form written by the BA, not a mechanical cut of `name.ja`; no spaces at either end; unique across the library (`recipe-short-name`, `recipe-short-name-unique`) | `くまおにぎり` |
+| `shortNameEn` | string | ✔ | 1–8 characters (`recipe-short-name`), curated from `name.en`, shown in cells when the language is en; uniqueness not required | `Bear oni` |
 | `nameKana` | string | ✔ | hiragana reading for sorting | `くまさんおにぎりべんとう` |
 | `style` | enum | ✔ | `japanese` \| `western-inspired` \| `other` | `japanese` |
 | `themeId` | string \| null | ✔ | `theme-` id or null | `theme-animals` |
@@ -202,9 +233,12 @@ Cross-field rules:
 | `steps` | localized text[] | ✔ | 2–12 steps, each ≤ 120 chars (ja); own words | |
 | `storage` | localized text[] | ✔ | ≥ 1; recipe-specific handling from a cited source; the general MAFF notes are added by the app (US-E6-04/AC2) | |
 | `allergenIds` | string[] | ✔ | union of `ingredients[].allergenIds` (`recipe-allergen-union`) | `["alg-wheat","alg-soybean"]` |
-| `mayContainAllergenIds` | string[] | ✔ | union of `ingredients[].possibleAllergenIds` of varies-by-product ingredients | `["alg-egg","alg-milk"]` |
+| `mayContainAllergenIds` | string[] | ✔ | union of `ingredients[].possibleAllergenIds` of varies-by-product ingredients (`recipe-may-contain-union`) | `["alg-egg","alg-milk"]` |
+| `allergenDataComplete` | boolean | ✔ | `false` iff any ingredient has `allergenInfo = "unknown"`; derived and checked by the validator (`recipe-allergen-complete-derived`). Drives the R-3 rule in §4 `ranking-incomplete-allergen` | `true` |
 | `allergenScheme` | string | ✔ | `caa-2026-04` | |
-| `dietOk` | enum[] | ✔ | diets this recipe satisfies; must equal the set the validator derives from ingredient categories (`recipe-diet-derived`) | `["no-beef","no-seafood"]` |
+| `animalOrigin` | string[] | ✔ | union of `ingredients[].animalOrigin` (`recipe-animal-origin-union`) | `["egg","fish-seafood"]` |
+| `dietDataComplete` | boolean | ✔ | `false` iff any ingredient has `animalOriginKnown = false`; derived and checked (`recipe-diet-complete-derived`) | `true` |
+| `dietOk` | enum[] | ✔ | diets this recipe satisfies: empty when `dietDataComplete = false`, else every diet of §3.8 whose forbidden tags are disjoint from `animalOrigin`; must equal the derived set (`recipe-diet-derived`) | `["no-beef","no-seafood"]` |
 | `adaptations` | localized text[] | ✔ | changes made vs the source (e.g. halved for a child portion); `[]` if none | |
 | `sources` | `Source[]` | ✔ | ≥ 1; the first is the primary recipe source | |
 | `reviewedBy` | string | ✔ | `ba-research` until the verifier passes; then `verifier` | |
@@ -217,21 +251,28 @@ Cross-field rules:
 | `quantity` | number \| null | ✔ | > 0, ≤ 2 decimals; null only with unit `to-taste` or `small-amount` | `120` |
 | `unit` | enum | ✔ | `g`, `ml`, `piece` (個), `slice` (枚), `stick` (本), `tbsp` (大さじ), `tsp` (小さじ), `cup` (カップ 200 ml), `sheet` (枚・のり), `to-taste` (適量), `small-amount` (少々) | `g` |
 | `optional` | boolean | ✔ | | `false` |
-| `allergenInfo` | enum | ✔ | `known` (the food itself defines its allergens, e.g. 卵) \| `varies-by-product` (processed food: ウインナー, カレールー, パン…) | `known` |
+| `allergenInfo` | enum | ✔ | `known` (the food itself defines its allergens, e.g. 卵) \| `varies-by-product` (processed food: ウインナー, カレールー, パン…; typical label allergens cited in `possibleAllergenIds`) \| `unknown` (processed food whose label allergens no cited source establishes) | `known` |
 | `allergenIds` | string[] | ✔ | must include the dictionary's `inherentAllergenIds` for that ingredient (`recipe-ingredient-inherent-allergen`) | `["alg-egg"]` |
-| `possibleAllergenIds` | string[] | ✔ | non-empty iff `varies-by-product`; from the source or typical product labels, cited | `["alg-pork","alg-milk","alg-soybean"]` |
+| `possibleAllergenIds` | string[] | ✔ | non-empty iff `varies-by-product`; empty for `known` and `unknown`; from the source or typical product labels, cited (`recipe-possible-allergens`) | `["alg-pork","alg-milk","alg-soybean"]` |
+| `animalOrigin` | string[] | ✔ | animal-origin tags (§3.8) of this ingredient; must include every tag the dictionary lists for the `ingredientId` (`recipe-ingredient-animal-origin`); tags may be added from the cited source, never removed | `["fish-seafood"]` |
+| `animalOriginKnown` | boolean | ✔ | `true` if the dictionary's `animalOrigin` for the id is fully known; if the dictionary marks it `?` (unknown), `true` only when a cited source (`usedFor` includes `"recipe"` or `"allergen"`) states the product's ingredients, else `false` (`recipe-animal-origin-known`) | `true` |
 
 `Source`: `{ id: "src-…", publisher: string, title: string, url: http(s), accessed: date, language: "ja" | "en", usedFor: ("recipe" | "storage" | "allergen")[] }`. `url` must be on the approved list (`source-publisher-approved`).
 
-### 3.8 Diet meaning (used by the hard filter, BR-06)
-| Diet | Recipe is excluded if any ingredient (or a varies-by-product ingredient's possible content) belongs to |
+### 3.8 Diet meaning (used by the hard filter, BR-06; H1 ruling B14)
+Diets are evaluated **only on ingredient-level animal-origin tags** (`animalOrigin`, dictionary §4): never on allergen ids and never through categories. Tags: `meat` (meat whose species is not stated or varies, incl. sheep casings), `pork`, `beef`, `chicken`, `fish-seafood` (fish, shellfish, other seafood, fish-paste products, fish-based stock), `egg`, `dairy`, `gelatin`. The dictionary lists, per ingredient, every tag the food has or that its common products contain (hidden sources: だし → `fish-seafood` + `?`; かつお節・煮干し → `fish-seafood`; コンソメ/ブイヨン → `beef`, `chicken`, `pork` + `?`; カレールウ/シチュールウ → `meat`, `pork`, `beef`, `chicken`, `dairy` + `?`; ウインナー・ハム → `meat`, `pork`; ベーコン → `pork`; ちくわ・かまぼこ → `fish-seafood`; マヨネーズ → `egg`; バター → `dairy`…), or `?` when the animal origin of the food's products cannot be bounded.
+
+| Diet | Forbidden tags (a recipe with any of them in `animalOrigin` is excluded) |
 |------|------|
-| `vegetarian` | `cat-meat` (all meat), `cat-fish`, `cat-seafood`, `ing-gelatin`, `cat-meat-processed`, `cat-fish-processed` |
-| `pescatarian` | `cat-meat`, `cat-meat-processed`, `ing-gelatin` |
-| `no-pork` | `cat-pork` or allergen `alg-pork` (including `possibleAllergenIds`), `ing-gelatin` |
-| `no-beef` | `cat-beef` or allergen `alg-beef` (including `possibleAllergenIds`) |
-| `no-seafood` | `cat-fish`, `cat-seafood`, `cat-fish-processed` |
-Gelatin is excluded for vegetarian, pescatarian and no-pork because its animal origin is not stated on most products (flag for PO in OQ-11).
+| `vegetarian` (lacto-ovo) | `meat`, `pork`, `beef`, `chicken`, `fish-seafood`, `gelatin` |
+| `pescatarian` | `meat`, `pork`, `beef`, `chicken`, `gelatin` |
+| `no-pork` | `pork`, `meat`, `gelatin` |
+| `no-beef` | `beef`, `meat` |
+| `no-seafood` | `fish-seafood` |
+
+- `meat` is forbidden by every meat-restricting diet because its species is not known. Gelatin is forbidden for vegetarian, pescatarian and no-pork because its animal origin is rarely stated (OQ-11, decided 2026-10-24).
+- **Unknown origin** (`ranking-diet-incomplete`): a recipe with `dietDataComplete = false` is excluded for **every** selected diet, with reason `diet-incomplete` (shown in the library, US-E6-02/AC8); with no diet selected it is not affected. There is no fallback through categories or allergens.
+- `egg` and `dairy` are recorded for completeness (display, a future vegan diet); no MVP diet forbids them.
 
 ### 3.9 `Settings` and `ReminderSettings`
 | Field | Type | Req. | Allowed values / rule | Default |
@@ -244,9 +285,11 @@ Gelatin is excluded for vegetarian, pescatarian and no-pork because its animal o
 | `settings.reminders.dayBefore.enabled` | boolean | ✔ | | `true` |
 | `settings.reminders.dayBefore.time` | time | ✔ | 15-minute steps | `17:30` |
 | `settings.reminders.reservation` | `{ enabled, time }` | – | v1 only (US-E7-08); must be absent or disabled in MVP builds | absent |
-| `settings.nextMonthPromptFromDay` | integer | ✔ | 1–28 (US-E3-06/AC2) | `20` |
+| `settings.nextMonthPromptFromDay` | integer | ✔ | 1–28 (US-E3-06/AC2, OQ-15) | `20` |
+| `settings.weekStartsOn` | enum | ✔ | `monday` \| `sunday`; display only, never changes dates, reminders or assessments (US-E5-01/AC2, AC8; PO 2026-10-24) | `monday` |
+| `settings.theme` | enum | ✔ | `auto` \| `light` \| `dark` (US-E8-05) | `auto` |
 
-`ReminderLogEntry`: `{ key: "weekly:<date>" | "day-before:<date>", type: "weekly" | "day-before", dueAt: timestamp, expiresAt: timestamp, shownAt?: timestamp, dismissedAt?: timestamp, debug?: boolean }`. Rules: `reminder-key-unique`; `expiresAt > dueAt`; day-before `expiresAt` = 00:00 JST of the target date; weekly `expiresAt` = 24:00 JST of the last covered date.
+`ReminderLogEntry`: `{ key: "weekly:<date>" | "day-before:<date>", type: "weekly" | "day-before", dueAt: timestamp, expiresAt: timestamp, shownAt?: timestamp, dismissedAt?: timestamp, debug?: boolean }`. Rules: `reminder-key-unique`; `expiresAt > dueAt`; `reminder-shown-until-dismissed` (N3 = OQ-20): an entry with `shownAt` and no `dismissedAt` is shown again on every open until it is dismissed or expires; `reminder-day-before-suppressed` (B10): no day-before reminder exists for date D when `decisions[D].plannedAt ≥ dueAt`; a CHANGE_RECIPE never removes or suppresses a pending reminder (it only updates its target), and a refresh conflict keeps it until CLEAR_PLAN (US-E7-02/AC5–AC8, US-E3-05/AC2); day-before `expiresAt` = 00:00 JST of the target date; weekly `expiresAt` = 24:00 JST of the last covered date.
 
 ## 4. Cross-entity rules
 | Rule id | Rule |
@@ -256,6 +299,11 @@ Gelatin is excluded for vegetarian, pescatarian and no-pork because its animal o
 | `assessment-independent` | Assessment computation reads `profile`, `menus[].confirmed` and `overrides` only; it never reads or writes `decisions` (BR-01). |
 | `decision-parent-only` | `decisions` changes only through UI actions listed in the state machine (BR-02); import, refresh, assessment, reminders and time never write it. |
 | `ai-payload-allowlist` | The adapter request has exactly: `pdf` (bytes or URL), `targetMonth`, `promptVersion`, `schemaVersion` (BR-10). |
+| `ranking-hard-filter` | A recipe is excluded from suggestions, 「ほかのレシピ」 and planning if any `allergenIds` or `mayContainAllergenIds` id is in `knownAllergenIds`, any ingredient (or dictionary parent/category) is in `excludedIngredientIds`, or its `animalOrigin` contains a tag forbidden by a selected diet (§3.8) (BR-06, OQ-13, B14). |
+| `ranking-diet-incomplete` | A recipe with `dietDataComplete = false` is excluded like the above when at least one diet is selected, with reason `diet-incomplete` (§3.8, US-E6-02/AC8). |
+| `ranking-liked-ids` | BR-09's "per liked id" / "per disliked id" count the recipe's foods (its ingredient ids collapsed by ancestor/descendant) with the same verdict rule as D and L (§3.5 Counting). |
+| `ranking-incomplete-allergen` | A recipe with `allergenDataComplete = false` is excluded like the above when `knownAllergenIds` is non-empty; otherwise it stays, flagged, ordered after every recipe with complete data (R-3, US-E6-02/AC5–AC6). |
+| `ai-call-budget` | One import action makes at most 2 provider calls: call 1 primary model; call 2 either one repair retry on the primary (malformed output) or one call to the fallback model on **429, 408/timeout, 5xx**, never both; 400/403/404 are never retried; 0 calls when `source.sha256` already has an extraction (BR-10, R-1). |
 | `export-roundtrip` | An export file re-validates as a `BentoMinderStore` of the same `schemaVersion` (US-E10-03). |
 
 ## 5. Fixtures required (synthetic, never presented as a real school's menu)
@@ -265,6 +313,8 @@ Gelatin is excluded for vegetarian, pescatarian and no-pork because its animal o
 `scripts/validate-data.mjs` (Developer) enforces every rule id above for the library and for exported stores; the app runs the same schema on every store write (US-E10-05) and on AI output (US-E2-05). Each message names its rule id. The BA reviews the rule list before H3. Note for the Orchestrator: `quality-gate.json → overlap.fields` still lists template fields (`shortDescription`, `history`, `tasteProfile`); for this project it should be `description`, `steps`, `storage`, `adaptations`.
 
 ## 7. v1: ownership and persistence
+Record metadata (`ownerId`, `createdAt`, `updatedAt`, §2) exists from v1 of the contract so that sync needs no migration of meaning; tombstones (`deletedAt`) and `updatedBy` are added with the v1 sync contract, not in the MVP.
+
 | Entity | Owned by a user? | Moves to a server in v1? | Personal data? | Retention |
 |--------|------------------|--------------------------|----------------|-----------|
 | ChildProfile | v1: family (owner + members) | Only with synced family planning; needs auth and a privacy notice | Yes (child preferences, allergies = health-related, APPI 要配慮個人情報 risk) | until deleted by parent |
@@ -273,3 +323,25 @@ Gelatin is excluded for vegetarian, pescatarian and no-pork because its animal o
 | ReminderSettings, ReminderLog | device | settings yes, log no | No | log 60 days |
 | Recipe library | app | static, shipped with the app | No | versioned with releases |
 | Consent | device / user | yes | Yes (consent record) | while the account exists |
+
+## 8. H1 changes (2026-10-24)
+| Change | Why |
+|--------|-----|
+| Status final; this contract named the source of all entity, field and state names | R-2 |
+| `§2 Record metadata` (`ownerId`, `createdAt`, `updatedAt`) and root `deviceId` | PLAN §1 identity seam, ADR 003 |
+| `DayDecision`: retired ADR 004 state names listed; rule `decision-bento-day-remove` | R-2; US-E5-08/AC3 |
+| `Recipe.shortNameJa` / `shortNameEn` (1–8 chars, curated; `shortNameJa` unique), rules `recipe-short-name`, `recipe-short-name-unique` | Designer gap (direction.md §11 item 5) |
+| `RecipeIngredient.allergenInfo` gains `unknown`; `Recipe.allergenDataComplete` (derived) | R-3 |
+| `settings.weekStartsOn` (default `monday`), `settings.theme` (default `auto`) | PO 2026-10-24; Designer gap |
+| `consent.aiNoticeVersion` 1 defined as the facts in US-E2-08/AC4; `aiUsage` and `source.model` follow the 2-call budget | PO 2026-10-24 (free tier, Japan); R-1 |
+| §4 rules `ranking-hard-filter`, `ranking-incomplete-allergen`, `ai-call-budget` | BR-06, BR-10, R-1, R-3 |
+| §3.8 gelatin note: OQ-11 decided | PO 2026-10-24 |
+| H1 fix round: §3.5 counting of D, L, U (found ids, most specific entry wins, same-level tie → dislike, ambiguous item counts in U) and the explanation-key table (`assessment-explanation-key`) | B1, B2, B4, B5, follow-up |
+| H1 fix round: `override-dormant`; `changedDatesSincePrevious` covers added/removed/moved dates; derived needs-review list | B6 |
+| H1 fix round: `DayDecision.plannedAt`, `acknowledgedMenuVersion` (KEEP_PLAN), `recipeShortNameSnapshot`; rules `decision-planned-at`, `decision-refresh-conflict`, `decision-dormant`, `reminder-day-before-suppressed` | B7, B10, developer items, follow-ups |
+| H1 fix round: §3.8 rewritten on ingredient-level animal-origin tags; `RecipeIngredient.animalOrigin`, `animalOriginKnown`; `Recipe.animalOrigin`, `dietDataComplete`; `dietOk` re-derived; rules `ranking-diet-incomplete`, `recipe-animal-origin-*` | B14 |
+| H1 fix round: `outOfMonthDays` holds `OutOfMonthEntry` (lunch and no-lunch days) | QA FX-Q3 |
+| H1 fix round: `ai-call-budget` lists 429, 408/timeout, 5xx like BR-10; `MenuSource.url` https only | BR-10, BR-14 |
+| H1 fix round: `ranking-liked-ids` | B1 (ranking K18) |
+| §3.5 food collapse (`assessment-food-collapse`): dish + its `definingIngredientId` within one item; ancestor folds into each descendant; never transitive | OQ-16 overruled, narrowed; collapse detail (PLAN §7) |
+| H1 closing rulings: verdict levels ingredient → dish → category; O-3 no cross-item defining-ingredient collapse; needs-review list (overrides, homemade-bento-planned, not-confirmed; removed dates included); `decision-dormant-replaced`; `reminder-shown-until-dismissed` | PLAN §7 "H1 closing rulings" (A57, A61, S10, O-3, U5, N3) |

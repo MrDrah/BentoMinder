@@ -1,0 +1,3 @@
+| S09 | Menu refresh turns 2026-11-04 (HB) into an `other-no-lunch` day | HB kept with recipe; flag 「献立が変わりました」 (the longer US-E3-05/AC2 sentence may follow it); listed in the upcoming summary; conflict day (G4: only `KEEP`/`CLEAR`); day-before reminder **still planned** until `CLEAR_OK` | US-E3-05/AC2, B7 |
+| S10 | Menu refresh removes 2026-11-11 (NC) from the menu entirely | NC record byte-identical (asserted, BR-13). Displayed state and allowed actions: `todo: depends on U4` | BR-13; **U4 open** |
+| S11 | Menu refresh turns 2026-11-20 (bento-day, HB) into a school day | HB kept, not flagged; normal school HB row afterwards | `decision-bento-day-only` keeps conflicts |

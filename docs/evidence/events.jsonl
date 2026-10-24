@@ -14,3 +14,27 @@
 {"v":1,"at":"2026-10-24T08:28:01.973Z","type":"product-decision","summary":"PO accepted the design direction: Monday week start (Sunday setting), Sat blue / Sun red numbers, Zen Maru Gothic + system fonts, no tab bar","by":"product-owner"}
 {"v":1,"at":"2026-10-24T08:30:01.453Z","type":"product-decision","summary":"PO: AI menu import used from Japan only; Gemini free tier, no billing account","by":"product-owner"}
 {"v":1,"at":"2026-10-24T08:30:01.703Z","type":"product-decision","summary":"PO accepted all 15 BA open-question defaults OQ-01..OQ-15","by":"product-owner"}
+{"v":1,"at":"2026-10-24T08:32:05.978Z","by":"orchestrator","type":"task-start","task":"h1-ba","summary":"Task h1-ba dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T08:32:06.111Z","by":"orchestrator","type":"task-start","task":"h1-dev","summary":"Task h1-dev dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T08:32:06.240Z","by":"orchestrator","type":"task-start","task":"h1-qa","summary":"Task h1-qa dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T08:42:52.044Z","type":"product-decision","summary":"H1: BR-06/09/10 restated with resolved R-1/R-3 rules; BR-14 tightened to https-only import URLs (security default)","by":"orchestrator"}
+{"v":1,"at":"2026-10-24T08:53:35.332Z","type":"product-decision","summary":"H1 rulings on 8 QA blockers (B1 B2 B4 B5 B6 B7 B10 B14) and 5 non-blocking items, logged in PLAN section 7","by":"orchestrator"}
+{"v":1,"at":"2026-10-24T08:53:35.845Z","by":"orchestrator","type":"task-start","task":"h1-fix-ba","summary":"Task h1-fix-ba dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T08:53:35.972Z","by":"orchestrator","type":"task-start","task":"h1-fix-dev","summary":"Task h1-fix-dev dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T08:53:36.100Z","by":"orchestrator","type":"task-start","task":"h1-fix-qa","summary":"Task h1-fix-qa dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T08:53:47.979Z","type":"task-end","summary":"H1 h1-ba integrated; files within allow-list (union check)","task":"h1-ba","outcome":"success"}
+{"v":1,"at":"2026-10-24T08:53:48.113Z","type":"task-end","summary":"H1 h1-dev integrated; files within allow-list (union check)","task":"h1-dev","outcome":"success"}
+{"v":1,"at":"2026-10-24T08:53:48.225Z","type":"task-end","summary":"H1 h1-qa integrated; files within allow-list (union check)","task":"h1-qa","outcome":"success"}
+{"v":1,"at":"2026-10-24T08:59:18.835Z","type":"product-decision","summary":"H1 follow-ups: bento-day refresh not flagged, dislike wins ties, dormant decisions on no-lunch dates, KEEP_PLAN acknowledgement","by":"orchestrator"}
+{"v":1,"at":"2026-10-24T09:04:48.815Z","type":"technical-correction","summary":"Orchestrator overruled BA default OQ-16: related dictionary ids (dish/ingredient, parent/child) count as one food in D/L","by":"orchestrator","task":"h1-fix-ba"}
+{"v":1,"at":"2026-10-24T09:31:45.172Z","type":"interruption","summary":"Usage limit hit mid H1 fix round; BA, developer and QA agents stopped early with work saved"}
+{"v":1,"at":"2026-10-24T09:31:45.281Z","type":"resume","summary":"Resumed H1 fix round after the usage limit reset; agents continued from saved state via SendMessage","outcome":"success"}
+{"v":1,"at":"2026-10-24T09:32:10.842Z","type":"task-end","summary":"H1 fix round developer: ADR 001-005 aligned with rulings B1-B14 and OQ-16; precedence order accepted","task":"h1-fix-dev","outcome":"success"}
+{"v":1,"at":"2026-10-24T09:32:39.327Z","type":"technical-correction","summary":"Orchestrator narrowed the BA's transitive food-collapse wording: dish merges only with its defining ingredient; no chaining across items","by":"orchestrator","task":"h1-fix-ba"}
+{"v":1,"at":"2026-10-24T09:35:31.229Z","type":"task-end","summary":"H1 fix round BA: 73 stories, 282 active ACs; rulings B1-B14, OQ-16 collapse, definingIngredientId applied","task":"h1-fix-ba","outcome":"success"}
+{"v":1,"at":"2026-10-24T09:36:43.345Z","type":"product-decision","summary":"H1 closing rulings A57 S10 O-3 U5 RU1 N3 and AC15 precedence, logged in PLAN section 7","by":"orchestrator"}
+{"v":1,"at":"2026-10-24T09:38:47.958Z","type":"task-end","summary":"H1 fix round QA: oracles 65+15 / 56+23 / 30 / 43 cases, no todo assertions, H1 oracle-ready","task":"h1-fix-qa","outcome":"success"}
+{"v":1,"at":"2026-10-24T09:38:48.080Z","type":"verification","summary":"H1 gate closed: 73 stories/287 ACs, contract v1, ADRs accepted, oracles ready; all changes within allow-lists (union check)","task":"h1","outcome":"success"}
+{"v":1,"at":"2026-10-24T09:39:01.194Z","by":"orchestrator","type":"task-start","task":"h2-design","summary":"Task h2-design dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-24T10:06:47.975Z","by":"orchestrator","type":"task-end","task":"h2-design","outcome":"success","summary":"diff-guard: 19 changed files, all allowed"}
+{"v":1,"at":"2026-10-24T10:07:16.017Z","type":"verification","summary":"H2 closed: diff-guard PASS (19 files in design/), contrast 0/136 fails re-checked independently, 0 banned phrases in 561 copy rows","task":"h2-design","outcome":"success"}

@@ -1,6 +1,8 @@
-/* BentoMinder design tokens v0.1 (direction preview, 2026-10-24)
-   Source of truth: design/tokens.json. Light is default; dark via
-   [data-theme="dark"] or the OS preference when no explicit theme is set. */
+/* BentoMinder design tokens v1.0.0 (H2 final, 2026-10-24)
+   GENERATED from design/tokens.json by design/_scratch/build-tokens.mjs. Edit the JSON, then regenerate.
+   Light is the default. Dark applies with [data-theme="dark"] (settings.theme = "dark")
+   or, when settings.theme = "auto" (no data-theme attribute), with prefers-color-scheme: dark.
+   settings.theme = "light" sets [data-theme="light"], which blocks the OS dark preference. */
 
 :root {
   color-scheme: light;
@@ -21,6 +23,7 @@
   --accent-ink: #A83A33;
   --accent-soft: #F8E1DC;
   --navy-fill: #1B2A4A;
+  --planned-edge: #D2574F;
   --saturday: #2F5C9A;
   --sunday: #A83A33;
   --info: #2F5C9A;
@@ -31,11 +34,19 @@
   --warning-soft: #FFF0D1;
   --danger: #A3271F;
   --danger-soft: #FBE3E0;
+  --danger-strong: #A3271F;
+  --danger-strong-hover: #86201A;
   --focus-ring: #1F5FBF;
+  --focus-halo: #FFFFFF;
+  --link: #2F5C9A;
   --stripe-a: #1B2A4A;
   --stripe-b: #D2574F;
   --scrim: rgba(27, 42, 74, 0.45);
-  /* Illustration only (decorative) */
+  --skeleton: #F2EADB;
+  --skeleton-highlight: #FFFDF8;
+  --debug-surface: #2A1145;
+  --debug-ink: #F5EDFF;
+  --debug-accent: #D8B4FE;
   --illus-rice: #FFFFFF;
   --illus-egg: #F2C14E;
   --illus-green: #7FA86A;
@@ -46,6 +57,7 @@
   /* Typography */
   --font-display: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
   --font-body: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "BIZ UDGothic", monospace;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 700;
@@ -62,7 +74,7 @@
   --tracking-body: 0.02em;
   --tracking-heading: 0.04em;
 
-  /* Spacing: 4px scale */
+  /* Spacing: 4 px scale */
   --space-0: 0px;
   --space-1: 4px;
   --space-2: 8px;
@@ -79,32 +91,69 @@
   --touch-min: 44px;
   --touch-comfy: 52px;
   --cell-min-height: 68px;
-  --content-max: 480px;
+  --cell-row-compact: 44px;
+  --weekend-col-ratio: 0.62;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --content-max: 560px;
+  --panel-width: 440px;
+  --dialog-max: 480px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
 
   /* Radii */
+  --radius-xs: 4px;
   --radius-sm: 8px;
+  --radius-cell: 10px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 24px;
   --radius-pill: 999px;
 
   /* Elevation */
+  --elevation-0: none;
   --elevation-1: 0 1px 2px rgba(27, 42, 74, 0.06), 0 1px 1px rgba(27, 42, 74, 0.04);
   --elevation-2: 0 4px 12px rgba(27, 42, 74, 0.08), 0 1px 3px rgba(27, 42, 74, 0.06);
   --elevation-3: 0 -8px 28px rgba(27, 42, 74, 0.14);
+  --elevation-4: 0 12px 40px rgba(27, 42, 74, 0.22);
 
   /* Motion */
+  --duration-instant: 0ms;
   --duration-fast: 120ms;
   --duration-base: 200ms;
   --duration-slow: 320ms;
+  --duration-shimmer: 1400ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
   --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --sheet-offset: 24px;
+
+  /* Layers */
+  --z-base: 0;
+  --z-appbar: 10;
+  --z-banner: 20;
+  --z-sheet: 40;
+  --z-dialog: 50;
+  --z-toast: 60;
+  --z-debug: 90;
+
+  /* Breakpoints (for reference in JS; CSS media queries use the literal values) */
+  --bp-xs: 360px;
+  --bp-sm: 390px;
+  --bp-md: 768px;
+  --bp-lg: 1280px;
 
   /* Patterns */
-  --stripe-band: repeating-linear-gradient(180deg, var(--stripe-a) 0 3px, transparent 3px 7px);
-  --stripe-band-red: repeating-linear-gradient(180deg, var(--stripe-b) 0 3px, transparent 3px 7px);
+  --stripe-band: repeating-linear-gradient(180deg, var(--stripe-a) 0 2px, transparent 2px 5px);
+  --stripe-band-red: repeating-linear-gradient(180deg, var(--stripe-b) 0 3px, transparent 3px 6px);
   --hatch: repeating-linear-gradient(135deg, var(--line-1) 0 2px, transparent 2px 7px);
+  --debug-hatch: repeating-linear-gradient(45deg, var(--debug-accent) 0 6px, var(--debug-surface) 6px 12px);
+}
+
+html[lang="en"] {
+  --tracking-body: 0;
+  --tracking-heading: 0;
 }
 
 [data-theme="dark"] {
@@ -113,7 +162,7 @@
   --surface-2: #1C2539;
   --surface-3: #253049;
   --line-1: #2F3A54;
-  --line-ui: #7D7A72;
+  --line-ui: #8A877E;
   --ink-1: #F6EFE2;
   --ink-2: #CDC6B8;
   --ink-3: #A7A398;
@@ -124,6 +173,7 @@
   --accent-ink: #F4A097;
   --accent-soft: #3A2429;
   --navy-fill: #F6EFE2;
+  --planned-edge: #B8443C;
   --saturday: #8FB4F0;
   --sunday: #F4A097;
   --info: #8FB4F0;
@@ -134,25 +184,39 @@
   --warning-soft: #3A3020;
   --danger: #FF9C92;
   --danger-soft: #40242A;
+  --danger-strong: #FF9C92;
+  --danger-strong-hover: #FFB8B0;
   --focus-ring: #8FB4F0;
+  --focus-halo: #141B2B;
+  --link: #8FB4F0;
   --stripe-a: #F6EFE2;
   --stripe-b: #F08A80;
   --scrim: rgba(0, 0, 0, 0.6);
+  --skeleton: #253049;
+  --skeleton-highlight: #2F3A54;
+  --debug-surface: #2A1145;
+  --debug-ink: #F5EDFF;
+  --debug-accent: #D8B4FE;
   --illus-rice: #F6EFE2;
+  --illus-egg: #F2C14E;
+  --illus-green: #7FA86A;
+  --illus-brown: #9A6544;
   --illus-nori: #141B2B;
+  --illus-pink: #F4B6AE;
   --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
   --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
   --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+  --elevation-4: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme]) {
     color-scheme: dark;
     --surface-1: #141B2B;
     --surface-2: #1C2539;
     --surface-3: #253049;
     --line-1: #2F3A54;
-    --line-ui: #7D7A72;
+    --line-ui: #8A877E;
     --ink-1: #F6EFE2;
     --ink-2: #CDC6B8;
     --ink-3: #A7A398;
@@ -163,6 +227,7 @@
     --accent-ink: #F4A097;
     --accent-soft: #3A2429;
     --navy-fill: #F6EFE2;
+    --planned-edge: #B8443C;
     --saturday: #8FB4F0;
     --sunday: #F4A097;
     --info: #8FB4F0;
@@ -173,15 +238,29 @@
     --warning-soft: #3A3020;
     --danger: #FF9C92;
     --danger-soft: #40242A;
+    --danger-strong: #FF9C92;
+    --danger-strong-hover: #FFB8B0;
     --focus-ring: #8FB4F0;
+    --focus-halo: #141B2B;
+    --link: #8FB4F0;
     --stripe-a: #F6EFE2;
     --stripe-b: #F08A80;
     --scrim: rgba(0, 0, 0, 0.6);
-  --illus-rice: #F6EFE2;
-  --illus-nori: #141B2B;
+    --skeleton: #253049;
+    --skeleton-highlight: #2F3A54;
+    --debug-surface: #2A1145;
+    --debug-ink: #F5EDFF;
+    --debug-accent: #D8B4FE;
+    --illus-rice: #F6EFE2;
+    --illus-egg: #F2C14E;
+    --illus-green: #7FA86A;
+    --illus-brown: #9A6544;
+    --illus-nori: #141B2B;
+    --illus-pink: #F4B6AE;
     --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
     --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
     --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+    --elevation-4: 0 12px 40px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -190,5 +269,14 @@
     --duration-fast: 0ms;
     --duration-base: 0ms;
     --duration-slow: 0ms;
+    --duration-shimmer: 0ms;
+    --sheet-offset: 0px;
   }
+}
+
+/* Focus: one rule for every focusable element (a11y-responsive.md §4). */
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  box-shadow: 0 0 0 var(--focus-offset) var(--focus-halo);
 }

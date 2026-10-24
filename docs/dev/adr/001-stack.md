@@ -1,6 +1,6 @@
 # ADR-001: Client stack, i18n, dates, routing and the local AI proxy
 
-Status: proposed · 2026-10-24 · Owner: Developer
+Status: **accepted** · 2026-10-24 · Owner: Developer
 
 ## Context
 BentoMinder is a Japanese-first, mobile-first family app (PO brief §3, §12). It must:
@@ -10,7 +10,7 @@ BentoMinder is a Japanese-first, mobile-first family app (PO brief §3, §12). I
 - show every string in 日本語 (default) or English with a visible toggle (§3), in Japanese date formats and Asia/Tokyo time regardless of the device's timezone (§3, §11, §16);
 - stay inside the framework budget: **400 KB gzip JS**, 50 KB gzip CSS, usable in < 2.5 s on a mid-range phone on 4G (PROJECT_BRIEF §9).
 
-Related: ADR 002 (AI extraction provider, in progress), ADR 003 (local data), ADR 004 (domain engines), ADR 005 (notifications / Android, in progress).
+Related: ADR 002 (AI extraction), ADR 003 (local data), ADR 004 (domain engines), ADR 005 (notifications / Android).
 
 ## Decision
 **One npm package**: React 19 + TypeScript (strict) + Vite, a single runtime dependency besides React (**zod** for schemas), a **typed in-house dictionary** for i18n, **no date library** (a ~100-line `jst` module over `Intl`), a **~60-line hash router**, Vitest + Testing Library for unit/component tests, Playwright + axe for e2e, and a **dependency-free Node HTTP proxy in `server/`** (Node's built-in type stripping, no Express) that Vite proxies `/api/*` to during development.
@@ -18,7 +18,7 @@ Related: ADR 002 (AI extraction provider, in progress), ADR 003 (local data), AD
 | Concern | Choice |
 |---------|--------|
 | Build / UI | Vite 7, React 19, TypeScript 5.x strict, `erasableSyntaxOnly` (so the same `.ts` files run in Node without a compiler) |
-| Runtime deps | `react`, `react-dom`, `zod` (v4). Android adds Capacitor packages in M6 (ADR 005) |
+| Runtime deps | `react`, `react-dom`, `zod` (v4), plus the font asset package `@fontsource/zen-maru-gothic` (CSS + woff2 only, no JS). Android adds Capacitor packages in M6 (ADR 005) |
 | State | React context + `useReducer` around the domain store; no Redux/Zustand |
 | Routing | `src/ui/router.ts`: typed hash routes (`#/calendar/2026-11`, `#/day/2026-11-05`, `#/recipe/<id>`, `#/settings`, `#/onboarding/<step>`) |
 | i18n | `src/i18n/{ja,en}.ts` typed dictionaries, `t(key, params)`; `ja` is the source of truth for keys |
@@ -27,7 +27,8 @@ Related: ADR 002 (AI extraction provider, in progress), ADR 003 (local data), AD
 | Unit tests | Vitest + `@vitest/coverage-v8` (≥ 90 % on `src/domain`), Testing Library + jsdom for components |
 | E2E | Playwright (Chromium mobile 390×844 and desktop 1280×800) + `@axe-core/playwright`, against the production build, extractor mocked with `page.route`, time via `page.clock` |
 | Dev proxy | `server/index.ts` on `node:http`, port 8787, run with `node --env-file=.env server/index.ts` (Node ≥ 22.18 strips types natively) |
-| Fonts | System Japanese fonts (Hiragino / Noto Sans CJK JP / Yu Gothic) via the token stack; no web-font download (a JP web font is 1–2 MB) |
+| Fonts | Body: system Japanese fonts via the token stack (no download). Display (headings, calendar numerals, buttons): **Zen Maru Gothic** 500/700 (SIL OFL), **self-hosted** as unicode-range woff2 slices with `font-display: swap` (design direction, accepted 2026-10-24; see "Fonts" below) |
+| Calendar | Week start **Monday** by default, **Sunday** as a setting (`settings.weekStartsOn`, design decision 2026-10-24); affects the calendar grid only (see "Week start" below) |
 
 ### Why each choice
 
@@ -38,6 +39,12 @@ Related: ADR 002 (AI extraction provider, in progress), ADR 003 (local data), AD
 **Dates: no library.** All the app's time logic is "a civil date in Japan" or "a wall-clock time in Japan". Japan has had a fixed UTC+09:00 offset with no DST since 1951, so converting `2026-11-04 17:30 JST` to an instant is `Date.UTC(2026, 10, 4, 17, 30) − 9 h`, independent of the device's timezone. A `LocalDate` string type avoids the classic bug where `new Date('2026-11-05')` becomes Nov 4 in a negative-offset device timezone. Display uses `Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', month: 'long', day: 'numeric', weekday: 'short' })` → `11月5日(木)`, and the `en` equivalent. Alternatives cost bytes for features we don't need: `date-fns` + `@date-fns/tz` (~6–10 KB for our subset), `dayjs` + tz plugin (~7 KB, mutable-plugin model), Temporal polyfill (~50 KB; native Temporal is not in every Android WebView we must support). The module is pure and gets exhaustive tests (month ends, leap years, year boundary, device TZ set to `America/Los_Angeles` and `Pacific/Kiritimati` via `TZ=` in a test project).
 
 **Japanese era (令和).** Not used for display: Japanese parents read 西暦 calendars daily and mobile calendar apps show `2026年11月`. School menus often head the page with `令和8年11月`; converting that to an ISO month is the **extractor's** job (ADR 002) and the review screen shows the Gregorian month for the parent to confirm. The domain keeps a tiny `reiwaToGregorian()` helper only to cross-check the extractor's output (Reiwa 1 = 2019). Revisit if the designer or BA finds parents expect 令和 on screen.
+
+**Week start: a grid concern only.** The PO accepted Monday as the default first column with a Sunday option (design direction). `settings.weekStartsOn` (`monday` | `sunday`, default `monday`, data contract §3.9) is a display setting read only by `src/domain/time`'s `monthGrid(month, weekStartsOn)` and the weekday header. It never changes domain rules: the weekly reminder's day and its 7 covered days come from `settings.reminders.weekly` (BR-16), "next 7 days" summaries count from today, and Saturday-blue / Sunday-red colouring follows the date, not the column. The contract states the same: display only, never changes dates, reminders or assessments (US-E5-01/AC2, AC8). `settings.theme` (`auto` | `light` | `dark`, US-E8-05) is the other display-only setting; it switches the token set (`data-theme` on `<html>`).
+
+**Recipe short names.** Calendar cells show a recipe name of at most 8 characters (US-E5-01/AC4). The Recipe contract has curated `shortNameJa` / `shortNameEn` (1–8 code points, `shortNameJa` unique; rules `recipe-short-name`, `recipe-short-name-unique`), so the UI never truncates mechanically: cells show the short name of the current language, the day sheet the full `name`. The data validator enforces both rules. A plan whose recipe left the library (US-E6-06) still shows its short name: `DayDecision.recipeShortNameSnapshot { ja, en }` sits next to `recipeNameSnapshot` (PLAN §7 "H1 non-blocking"; ADR 004 §2).
+
+**Fonts.** The design uses Zen Maru Gothic for display text. We **self-host** it via `@fontsource/zen-maru-gothic` (OFL; ships the woff2 unicode-range slices and their `@font-face` CSS, imported for weights 500 and 700 only, bundled by Vite) instead of loading Google Fonts: no third-party request from the app (the privacy promise is that only the menu PDF leaves the device), it works offline, and the same files ship in the Capacitor build. A screen downloads only the slices it uses (expected a few hundred KB for two weights, cached after first load); body text never waits for it (`swap`, system fallback). Font files are not part of the JS/CSS budgets; M0 measures the first-screen font transfer and records it here. If it exceeds ~400 KB on the calendar screen, we subset to the glyphs the catalogs and recipe names use.
 
 **Routing: tiny hash router.** Capacitor serves the app from `https://localhost/index.html`; path routing works there but breaks on reload of a deep URL in other static hosts, and notification taps must deep-link (`#/day/2026-11-05`, `#/recipe/<id>`). We have ~8 routes; React Router (~20 KB gzip) is not justified. A typed `Route` union + `parseHash()`/`toHash()` is pure and unit-tested; screen state that should survive reload lives in the hash (`implementation` skill §5).
 
@@ -69,7 +76,7 @@ Related: ADR 002 (AI extraction provider, in progress), ADR 003 (local data), AD
 
 ## Consequences
 - **Bundle estimate**: React + ReactDOM ~60 KB, zod ~13 KB, app code + two dictionaries ~60–90 KB → **~140–170 KB gzip**, well under 400 KB. Recipes JSON (`data/library.json`, 20 recipes × 2 languages) is imported statically (~15 KB gzip).
-- **Node version**: the proxy needs Node ≥ 22.18 (native type stripping). Node 20 reached end of life in April 2026, so we recommend `preflight.nodeMajor: 22` (see `docs/dev/architecture.md` §8).
+- **Node version**: the proxy needs Node ≥ 22.18 (native type stripping). Node 20 reached end of life in April 2026, so `preflight.nodeMajor: 22` (agreed; applied in M0, `docs/dev/architecture.md` §11).
 - `erasableSyntaxOnly` forbids TS `enum`s and parameter properties; we use string-literal unions instead (better for JSON anyway).
 - Every new string needs a `ja` and an `en` entry or the build fails. That is intended.
 - We own ~200 lines of infrastructure (router, jst, i18n) that libraries would otherwise provide. Each is pure and covered by unit tests.
@@ -81,3 +88,10 @@ Related: ADR 002 (AI extraction provider, in progress), ADR 003 (local data), AD
 - More than ~15 routes or nested layouts → React Router.
 - JS bundle passes 250 KB gzip → audit before it becomes a budget problem.
 - The proxy needs auth, persistence or more than ~5 endpoints (v1 hosted adapter) → pick a framework in that ADR.
+- First-screen font transfer > ~400 KB, or Zen Maru Gothic renders poorly on Android WebView → subset to used glyphs, or fall back to M PLUS Rounded 1c / system fonts (design direction).
+
+## Change log
+- 2026-10-24 · proposed (kick-off).
+- 2026-10-24 · **accepted** at H1. Added: Monday week start by default with a Sunday setting (design decision; `settings.weekStartsOn`, calendar grid only) and `settings.theme`; recipe short names (`shortNameJa/En`, 1–8 characters, curated in the Recipe contract, no mechanical truncation); Zen Maru Gothic display font self-hosted via `@fontsource` instead of "system fonts only" (design direction accepted by the PO); `preflight.nodeMajor: 22` agreed.
+- 2026-10-24 · H1 fix round (Developer): short-name open point closed: `DayDecision` snapshots `shortNameJa/En` (PLAN §7 "H1 non-blocking").
+- 2026-10-24 · H1 late ruling (Developer): short-name snapshot named `DayDecision.recipeShortNameSnapshot { ja, en }` per data contract §3.6.

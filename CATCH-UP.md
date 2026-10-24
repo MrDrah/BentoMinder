@@ -22,15 +22,18 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 |------|-------------|-----------|
 | Scaffold | Project created with `new-project.mjs --content-app`, local git, first commit | `.claude/`, `quality-gate.json` |
 | Brief | PO brief saved verbatim; structured brief with proposed defaults | `docs/ba/po-brief-2026-10-24.md`, `docs/PROJECT_BRIEF.md` |
+| Kick-off | Approved by the PO: architecture, BR-01…27, design direction, OQ-01…15 | `docs/PLAN.md` |
+| H2 | Final tokens, 64 component specs, flows, a11y spec, ja/en copy (561 rows), preview v1.0 | `design/` |
+| H1 | 73 stories / 287 ACs, data contract v1, dictionary, ADR 001–005, QA strategy + 4 oracles; ~30 rulings in PLAN §7 | `docs/ba/`, `docs/dev/`, `tests/plan/`, `tests/oracle/` |
 
 ### In progress 🔄
-Nothing running. Kick-off **approved** on 2026-10-24 (architecture, BR-01…27, design direction, OQ-01…15, AI from Japan only on the free tier). Kick-off docs committed locally.
+Nothing running. H1 and H2 are closed (2026-10-24) but **not committed**: ask the PO.
 
 ### Next 📋
-1. **H1:** BA updates stories to the PO's answers (US-E5-01/AC2 → Monday week start, OQ answers); Developer updates ADR 002 (retry policy R-1, region closed) and ADR 004 (state names R-2, unknown-allergen handling R-3). QA drafts the test strategy and oracle plan.
-2. **H2:** designer completes component states, a11y/responsive spec and the full ja/en copy sheet.
-3. **M0** skeleton (developer, own worktree) once H1 is green. Apply the agreed `quality-gate.json` changes (architecture §8) in M0.
-4. Recipe research (BA, content-research skill) in parallel with M2/M3.
+1. Commit H1 + H2 locally (PO approval).
+2. **M0** skeleton (developer, own worktree) from `docs/dev/architecture.md` §11; apply the agreed `quality-gate.json` changes.
+3. M1 (BA side): amend US-E1-01/AC5, US-E3-02/AC3, US-E9-01/AC3 to the designer's accepted readings; curate recipe short names; define the ~60 strings listed at the end of `design/copy.md`.
+4. Recipe research (BA) alongside M2/M3; verify the 農林水産省 sentences in US-E6-04/AC2.
 
 ## 4. Key decisions (summary; the full log is in docs/PLAN.md §7)
 - Local git only; no push, deploy or paid services without PO approval.

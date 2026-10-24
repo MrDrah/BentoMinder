@@ -50,6 +50,9 @@ Candidate-list agent: verify each domain's recipe pages (title matches, page is 
 ## 4. Record format
 One record per recipe in `data/_research/batch-<letter>.json`, exactly the fields of the Recipe contract (`docs/ba/data-contract.md` §3.7), `reviewedBy: "ba-research"`, `allergenScheme: "caa-2026-04"`. Overlap fields (for `quality-gate.json → overlap.fields`): `description`, `steps`, `storage`, `adaptations`.
 
+## 4a. Ingredients of unknown animal origin (H1, OQ-18 accepted)
+Recipes using an ingredient whose dictionary `animalOrigin` ends in `?` (`ing-dashi` だし, `ing-bread` パン, `ing-bread-crumbs` パン粉, `ing-consomme` コンソメ, `ing-curry-roux` カレールウ, `ing-stew-roux` シチュールウ, `ing-worcester-sauce` ソース) are excluded for every selected diet unless the cited source states that product's ingredients (`animalOriginKnown`, data contract §3.7–§3.8). When choosing candidates, prefer recipes that avoid these or that specify them: e.g. 昆布だし (`ing-kombu`) or かつおだし made from `ing-bonito-flakes` instead of plain だし, rice instead of bread. Record `animalOrigin` for every ingredient and report each recipe that ends with `dietDataComplete = false`.
+
 ## 5. Batch plan
 | Step | Who | Output | Size |
 |------|-----|--------|------|

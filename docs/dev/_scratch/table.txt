@@ -1,0 +1,9 @@
+**Allowed transitions** (user-stories §E5, plus the refresh-conflict row from PLAN §7 B7 / US-E3-05/AC2; anything not listed → `INVALID_TRANSITION`):
+
+| From (displayed) \ Event | CONFIRM_RECIPE | DEFER | SET_SCHOOL_LUNCH | CHANGE_RECIPE | CLEAR_PLAN | KEEP_PLAN | MARK_RESERVATION |
+|---|---|---|---|---|---|---|---|
+| `school-lunch-planned` | → `homemade-bento-planned` | → `not-confirmed` | — | — | — | — | → `school-lunch-planned` (flag set/cleared, record stored) |
+| `not-confirmed` (school day only ²) | → `homemade-bento-planned` | — | → `school-lunch-planned` | — | — | — | — |
+| `homemade-bento-planned` (school day or bento-day) | — | school day only → `not-confirmed` ² | school day only → `school-lunch-planned` | → `homemade-bento-planned` (new `recipeId`, new snapshots, `plannedAt` kept) | bento-day only → record deleted ² | — | — |
+| `homemade-bento-planned` on `other-no-lunch` or `not-in-menu` (refresh conflict ³) | — | — | — | — | → record deleted | → unchanged, `acknowledgedMenuVersion` set | — |
+| `no-school-lunch` | bento-day only → `homemade-bento-planned` (BR-25, OQ-03) | — | — | — | — | — | — |

@@ -1,4 +1,6 @@
-# BentoMinder: microcopy draft v0.2 (direction preview)
+# BentoMinder: microcopy draft v0.2 (direction preview) — SUPERSEDED
+
+> **Superseded on 2026-10-24 by `design/copy.md` (H2 final).** Kept for history only; do not import strings from this file. Several draft strings changed (state labels now follow US-E4-04/AC2, the reservation en label avoids "booked", fetch errors use the US-E2-02/AC1 wording).
 
 > Status: **draft for the direction review**, 2026-10-24. Covers the screens in `design/preview/index.html` plus the honest disclaimers. Strings marked **AC** are fixed by an acceptance criterion in `docs/ba/user-stories.md` and must stay verbatim (QA asserts on them). The full verbatim sheet (`design/copy.md`) follows once the PO approves the direction.
 >

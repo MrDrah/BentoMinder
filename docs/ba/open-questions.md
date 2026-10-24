@@ -1,9 +1,9 @@
 # Open questions and proposed business rules — BentoMinder
 
-Owner: BA · 2026-10-24 · Status: for PO review (H1). The Orchestrator copies the BR table into `docs/PLAN.md` §3 once the PO agrees, and logs every answer below in §7.
+Owner: BA · 2026-10-24 · Status: **closed at H1**; H1 fix-round points OQ-16…OQ-20 have defaults applied (section at the end) · BR table approved by the PO on 2026-10-24; all 15 open questions decided by the PO on 2026-10-24 (default accepted). Answers are logged in `docs/PLAN.md` §7. No question is open.
 
-## Proposed business rules
-One testable rule per row. Stories cite these ids; the Orchestrator owns the final numbering.
+## Business rules: Approved 2026-10-24 (PO)
+The binding text is `docs/PLAN.md` §3; only the Orchestrator changes it. This is the BA's proposal as approved, kept for history. Where the two differ, PLAN §3 wins, together with the H1 reconciliations noted after the table.
 
 | ID | Rule |
 |----|------|
@@ -35,29 +35,54 @@ One testable rule per row. Stories cite these ids; the Orchestrator owns the fin
 | **BR-26** | The recipe library ships 15–20 recipes, each with ≥ 1 fetched source from the approved list, valid against the Recipe contract and passing the overlap check. |
 | **BR-27** | Dates before today (Asia/Tokyo) are read-only: their decisions and overrides cannot change. |
 
-## Open questions
-Recommendation first. Only questions that change what gets built.
+H1 reconciliations (PLAN §7, applied in the stories and the data contract):
+- **R-1 (BR-10):** at most 2 provider calls per import action: call 1 primary model; call 2 = one repair retry on malformed output **or** the fallback model on rate limit / 5xx / timeout; then stop and offer retry later, upload or manual entry. This supersedes the "0 automatic retries on rate limit" wording in the BR-10 row above (US-E2-05, US-E2-06, US-E2-07).
+- **R-2:** decision state names are the data contract's (`school-lunch-planned`, `homemade-bento-planned`, `not-confirmed`, `no-school-lunch`).
+- **R-3 (BR-06, OQ-13):** a recipe is excluded on any match of its allergens or may-contain allergens; a recipe with incomplete allergen data is excluded when the child has known allergens, and otherwise shown flagged and ranked last (US-E6-02/AC5–AC6, data contract §4).
+- **R-4:** closed by OQ-14 (in-app reminders only on the web).
 
-| # | Question | Proposed default | Impact |
-|---|----------|------------------|--------|
-| OQ-01 | What counts as a "school day"? | **A date the confirmed menu lists with ≥ 1 non-snack lunch item** (BR-25). The national holiday calendar never decides it. Alternative: every Mon–Fri except holidays (needs a school calendar we don't have). | Assessment, decisions, reminders, today view. |
-| OQ-02 | Is 「未定」 (`not-confirmed`) a real state, and who sets it? | **Yes, set only by the parent via 「あとで決める」.** Low-preference days stay `school-lunch-planned` until the parent acts. Alternative: low-preference days start as `not-confirmed` (conflicts with the core rule that the app never changes a decision itself). | State machine, BR-02, weekly reminder content. |
-| OQ-03 | Does the kindergarten have 「お弁当の日」 (everyone brings a bento), and should those be planned in the app? | **Yes: extracted as no-lunch reason `bento-day`, and the parent can plan a recipe for them** (US-E5-08). Day-before reminders then apply. | Data contract, state machine, US-E5-08. |
-| OQ-04 | Which fields does the real kindergarten PDF have (dates with 曜日, dishes, 材料 by 赤・黄・緑, allergen line, おやつ, kcal, year/era)? | **Assume the fields in data contract §3.3. The PO shares one real PDF for local calibration only (not committed, not sent to AI without the PO's say-so); test fixtures stay synthetic.** | Extraction prompt and schema, fixtures, US-E2-04 accuracy. |
-| OQ-05 | Is the 「園で予約済み」 checkbox MVP, and is the reservation reminder v1? | **Checkbox in MVP (Should, US-E5-07/AC3); reminder at the school's cut-off in v1 (US-E7-08).** We need the school's cut-off time for v1. | Scope of E5/E7. |
-| OQ-06 | How far ahead does the weekly reminder look? | **The 7 days starting the day after the reminder (with the Sunday default: Mon–Sun).** Alternative: 2 weeks (longer message, more planning pressure). | BR-16, US-E7-01. |
-| OQ-07 | Should おやつ (snacks) on the menu count in the assessment? | **No: shown on the day, not assessed** (lunch is what the bento replaces). | BR-25, assessment fixtures. |
-| OQ-08 | Are the assessment thresholds right (2 disliked, or 1 disliked with nothing liked → 苦手かも)? | **Yes for the MVP (BR-04)**; the PO can tune them after the first real month. | BR-04, QA oracle. |
-| OQ-09 | Is a "recipe" one dish or a whole bento box? | **One bento as the source presents it (centrepiece plus the simple sides the source shows)**, so every ingredient is known for the allergen filter. Alternative: single dishes combined by the app (more flexible, needs a composition rule and more recipes). | Recipe contract, research scope, ranking. |
-| OQ-10 | Show Japanese public holidays on the calendar? | **Could-have (US-E8-04): yes if cheap, from the Cabinet Office (内閣府) holiday list, bundled for 2026–2028.** Holidays never decide school days. | E8, one more sourced data file. |
-| OQ-11 | Gelatin and diets: exclude gelatin for vegetarian, pescatarian and no-pork? | **Yes, exclude** (its animal origin is rarely stated). | Diet filter (contract §3.8). |
-| OQ-12 | Does the age range change anything in the MVP? | **No: stored and shown only (seam for portion sizes later).** Age ranges offered: 3歳未満 … 小学校高学年. Alternative: drop the elementary ranges (the brief mentions elementary-school children too). | Profile form, recipes. |
-| OQ-13 | Recipes with processed foods whose allergens vary (ウインナー, ちくわ, カレールウ): exclude when a possible allergen matches, or only warn? | **Exclude** (BR-06); always show 「表示を確認」 on such recipes. Alternative: warn only (more suggestions for allergic children, higher risk). | BR-06, library coverage for allergic children. |
-| OQ-14 | Web reminders: in-app only, or also browser notifications while the tab is open? | **In-app only for the MVP** (honest and simple; Android v1 brings real notifications). Alternative: Notification API while the tab is open (permission prompt, still no background). | BR-18, E7. |
-| OQ-15 | When should the app prompt for next month's menu? | **From the 20th of the month (setting `nextMonthPromptFromDay`, 1–28)**, as menus are usually published before the month starts. Alternative: from the 25th. | US-E3-06/AC2, settings. |
+## Open questions (all decided)
+Recommendation first. Only questions that change what gets built. Each decided default is now written into the stories as a definitive AC; the "Alternative" texts are kept for history only.
 
-## Deferred (proposed for §7 as "deferred to v1")
+| # | Question | Proposed default | Impact | Decision |
+|---|----------|------------------|--------|----------|
+| OQ-01 | What counts as a "school day"? | **A date the confirmed menu lists with ≥ 1 non-snack lunch item** (BR-25). The national holiday calendar never decides it. Alternative: every Mon–Fri except holidays (needs a school calendar we don't have). | Assessment, decisions, reminders, today view. | Decided 2026-10-24 (PO): default accepted |
+| OQ-02 | Is 「未定」 (`not-confirmed`) a real state, and who sets it? | **Yes, set only by the parent via 「あとで決める」.** Low-preference days stay `school-lunch-planned` until the parent acts. Alternative: low-preference days start as `not-confirmed` (conflicts with the core rule that the app never changes a decision itself). | State machine, BR-02, weekly reminder content. | Decided 2026-10-24 (PO): default accepted |
+| OQ-03 | Does the kindergarten have 「お弁当の日」 (everyone brings a bento), and should those be planned in the app? | **Yes: extracted as no-lunch reason `bento-day`, and the parent can plan a recipe for them** (US-E5-08). Day-before reminders then apply. | Data contract, state machine, US-E5-08. | Decided 2026-10-24 (PO): default accepted |
+| OQ-04 | Which fields does the real kindergarten PDF have (dates with 曜日, dishes, 材料 by 赤・黄・緑, allergen line, おやつ, kcal, year/era)? | **Assume the fields in data contract §3.3. The PO shares one real PDF for local calibration only (not committed, not sent to AI without the PO's say-so); test fixtures stay synthetic.** | Extraction prompt and schema, fixtures, US-E2-04 accuracy. | Decided 2026-10-24 (PO): default accepted |
+| OQ-05 | Is the 「園で予約済み」 checkbox MVP, and is the reservation reminder v1? | **Checkbox in MVP (Should, US-E5-07/AC3); reminder at the school's cut-off in v1 (US-E7-08).** We need the school's cut-off time for v1. | Scope of E5/E7. | Decided 2026-10-24 (PO): default accepted |
+| OQ-06 | How far ahead does the weekly reminder look? | **The 7 days starting the day after the reminder (with the Sunday default: Mon–Sun).** Alternative: 2 weeks (longer message, more planning pressure). | BR-16, US-E7-01. | Decided 2026-10-24 (PO): default accepted |
+| OQ-07 | Should おやつ (snacks) on the menu count in the assessment? | **No: shown on the day, not assessed** (lunch is what the bento replaces). | BR-25, assessment fixtures. | Decided 2026-10-24 (PO): default accepted |
+| OQ-08 | Are the assessment thresholds right (2 disliked, or 1 disliked with nothing liked → 苦手かも)? | **Yes for the MVP (BR-04)**; the PO can tune them after the first real month. | BR-04, QA oracle. | Decided 2026-10-24 (PO): default accepted |
+| OQ-09 | Is a "recipe" one dish or a whole bento box? | **One bento as the source presents it (centrepiece plus the simple sides the source shows)**, so every ingredient is known for the allergen filter. Alternative: single dishes combined by the app (more flexible, needs a composition rule and more recipes). | Recipe contract, research scope, ranking. | Decided 2026-10-24 (PO): default accepted |
+| OQ-10 | Show Japanese public holidays on the calendar? | **Could-have (US-E8-04): yes if cheap, from the Cabinet Office (内閣府) holiday list, bundled for 2026–2028.** Holidays never decide school days. | E8, one more sourced data file. | Decided 2026-10-24 (PO): default accepted |
+| OQ-11 | Gelatin and diets: exclude gelatin for vegetarian, pescatarian and no-pork? | **Yes, exclude** (its animal origin is rarely stated). | Diet filter (contract §3.8). | Decided 2026-10-24 (PO): default accepted |
+| OQ-12 | Does the age range change anything in the MVP? | **No: stored and shown only (seam for portion sizes later).** Age ranges offered: 3歳未満 … 小学校高学年. Alternative: drop the elementary ranges (the brief mentions elementary-school children too). | Profile form, recipes. | Decided 2026-10-24 (PO): default accepted |
+| OQ-13 | Recipes with processed foods whose allergens vary (ウインナー, ちくわ, カレールウ): exclude when a possible allergen matches, or only warn? | **Exclude** (BR-06); always show 「表示を確認」 on such recipes. Alternative: warn only (more suggestions for allergic children, higher risk). | BR-06, library coverage for allergic children. | Decided 2026-10-24 (PO): default accepted |
+| OQ-14 | Web reminders: in-app only, or also browser notifications while the tab is open? | **In-app only for the MVP** (honest and simple; Android v1 brings real notifications). Alternative: Notification API while the tab is open (permission prompt, still no background). | BR-18, E7. | Decided 2026-10-24 (PO): default accepted |
+| OQ-15 | When should the app prompt for next month's menu? | **From the 20th of the month (setting `nextMonthPromptFromDay`, 1–28)**, as menus are usually published before the month starts. Alternative: from the 25th. | US-E3-06/AC2, settings. | Decided 2026-10-24 (PO): default accepted |
+
+## Deferred to v1 (scope approved with the plan, PLAN §1)
 - Synced family planning across devices (accounts, roles): MVP shares text only (US-E9).
 - Detecting an updated PDF at the saved URL with a change list (US-E3-06/AC4).
 - Reservation reminder at the school's cut-off (US-E7-08).
 - Android test build with scheduled local notifications (US-E12-02 … 04).
+
+## Still to verify (not questions for the PO; safe defaults apply)
+| Item | Default in force | Owner |
+|------|------------------|-------|
+| Whether the CAA 大豆 item covers 枝豆, and the オレンジ item covers みかん (dictionary §4.2 note) | Conservative: `ing-edamame` carries `alg-soybean` and `ing-mandarin` carries `alg-orange` as inherent allergens, so such recipes are excluded for a child with that allergy | BA, during recipe research |
+| Real free-tier rate limits of the two Gemini models (only visible in AI Studio) | 2-call budget per import plus the proxy's own caps (ADR 002) | Developer, when the key is created |
+| The school's reservation cut-off time | Needed only for US-E7-08 (v1) | PO, before v1 |
+
+## Raised in the H1 fix round (2026-10-24): proposed defaults for the Orchestrator to confirm or log
+The rulings B1, B2, B4–B7, B10, B14 and the "H1 follow-ups confirmed" row (PLAN §7) are applied in the stories, the contract and the dictionary. Applying them literally raised these points. Each has a default already written into the documents; nothing here blocks H1.
+
+| # | Point | Default applied | Impact |
+|---|-------|-----------------|--------|
+| OQ-16 (**Overruled 2026-10-24 (Orchestrator)**: same food counts once; a dish with its name ingredients and ancestor/descendant ids collapse to the most specific id, see user-stories E4) | B1 counts distinct found ids, so a dish id and an ingredient named in it are two foods when the profile covers both (dislikes `dish-saba-miso` and `ing-mackerel` → D = 2 from 「さばのみそ煮」), and so are a parent and a child id found on one day (鶏肉 and 鶏もも肉 → 2) | Literal B1: both count. Alternative: fold a child id into its parent and a dish into its named ingredients when both are covered (more "one food = one count", more complex) | Assessment oracle, explanation labels |
+| OQ-17 (**Accepted** 2026-10-24) | Animal rennet in チーズ: vegetarians who avoid it would need a tag the B14 list doesn't have | `ing-cheese` = `dairy` only (lacto-ovo convention); revisit if the PO wants strict vegetarian | Diet filter, recipes with cheese |
+| OQ-18 (**Accepted** 2026-10-24; research brief §4a) | Seven ingredients have unknown animal origin (`?`): パン, パン粉, ソース, カレールウ, シチュールウ, だし, コンソメ. Any recipe using them is excluded for every selected diet until its cited source states the product's ingredients | Keep `?` (B14: unknown → excluded); the recipe research cites product labels where it can | Library coverage for children with a diet |
+| OQ-19 (**Accepted** 2026-10-24) | BR-18 phrases ("even when closed", "push notification") are not in `data/banned-phrases.json`, which covers BR-07, BR-19 and judging words only | Keep BR-18 checks in US-E7-06/AC2 (web build only), since Android v1 may legitimately say "notification" | QA string-catalog test |
+| OQ-20 (**Accepted** 2026-10-24) | QA N3: a reminder shown but not dismissed: shown again on the next open? | Yes, until it is dismissed or expires (BR-17 "shown on next open until it expires"); to be written as an AC at M4 | US-E7-05, reminder oracle |
+| — | QA FX-Q1 (range bands) and FX-Q2 (merged cells): fixture answer-key conventions | Deferred to M1 with QA's proposals (weekdays only; item on each spanned day, `ok` or `uncertain/other` accepted) | Fixtures only |
