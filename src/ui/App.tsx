@@ -37,7 +37,8 @@ export function App() {
     const start = startScreen(state.store);
     let target: Route | null = null;
     if (start === 'onboarding-1' && !(route.name === 'onboarding' && route.step === 1)) target = { name: 'onboarding', step: 1, month: null, manual: false };
-    else if (start === 'onboarding-2' && route.name !== 'onboarding') target = { name: 'onboarding', step: 2, month: null, manual: false };
+    // A deep link to the import or a pending review is honoured once a profile exists.
+    else if (start === 'onboarding-2' && route.name !== 'onboarding' && route.name !== 'review' && route.name !== 'import') target = { name: 'onboarding', step: 2, month: null, manual: false };
     if (target !== null) setRedirect(target);
   }
   useEffect(() => {
@@ -85,7 +86,7 @@ function Screen({ route }: { route: Route }) {
       );
     case 'review':
       return (
-        <div className="screen">
+        <div className="screen" data-testid="screen-review-page">
           <TopBar title={t('ob.step3.name')} />
           <main id="main" className="page">
             <ReviewScreen key={`${route.month}-${route.manual}`} month={route.month} manual={route.manual} onboarding={false} />

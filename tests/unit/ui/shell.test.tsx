@@ -24,7 +24,7 @@ async function renderApp(storage: Storage = seeded(), hash = '') {
       <App />
     </AppProvider>,
   );
-  await screen.findByTestId(/^screen-(calendar|newer-data|corrupt-data|not-found|day|recipe|recipes|settings|onboarding|profile|import-page)$/);
+  await screen.findByTestId(/^screen-(calendar|newer-data|corrupt-data|not-found|day|recipe|recipes|settings|onboarding|profile|import-page|review-page)$/);
   return utils;
 }
 
@@ -36,6 +36,8 @@ function visibleJapanese(root: HTMLElement): string[] {
   for (let n = walker.nextNode(); n !== null; n = walker.nextNode()) {
     const text = n.textContent ?? '';
     const lang = n.parentElement?.closest('[lang]')?.getAttribute('lang');
+    // A textarea's text is what the parent typed (data, not UI).
+    if (n.parentElement?.tagName === 'TEXTAREA') continue;
     if (JAPANESE.test(text) && lang !== 'ja') texts.push(text);
   }
   const labels = [...root.querySelectorAll('[aria-label]')]
@@ -98,7 +100,7 @@ describe('US-E8-01 Japanese by default, one-tap English', () => {
 });
 
 describe('US-E8-02/AC2 no hard-coded strings', () => {
-  it.each(['', '#/calendar/2027-01', '#/settings', '#/recipes', '#/day/2026-11-05', '#/onboarding/2', '#/nowhere'])(
+  it.each(['', '#/calendar/2027-01', '#/settings', '#/recipes', '#/day/2026-11-05', '#/onboarding/1', '#/onboarding/2', '#/import', '#/profile', '#/review/2026-12?manual=1', '#/nowhere'])(
     'US-E8-02/AC2 in EN, %s shows no Japanese except the 日本語 toggle label',
     async (hash) => {
       const user = userEvent.setup();

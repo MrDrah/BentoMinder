@@ -82,6 +82,7 @@ export function ReviewScreen({ month, manual, onboarding }: { month: YearMonth; 
   const [leaveTarget, setLeaveTarget] = useState<Route | null>(null);
   const [busy, setBusy] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const cursor = useRef<string | null>(null);
 
   useEffect(() => {
     if (flash.sameFile === true) setFlash({});
@@ -108,9 +109,10 @@ export function ReviewScreen({ month, manual, onboarding }: { month: YearMonth; 
   const update = (next: ReviewDraft) => setDraft(next);
   const nextUncertain = () => {
     const ids = uncertain.map((f) => f.id);
-    const active = document.activeElement?.closest('[data-field]')?.getAttribute('data-field') ?? null;
+    const active = document.activeElement?.closest('[data-field]')?.getAttribute('data-field') ?? cursor.current;
     const at = active === null ? -1 : ids.indexOf(active);
     const target = ids[(at + 1) % ids.length];
+    cursor.current = target ?? null;
     if (target !== undefined) document.querySelector<HTMLElement>(`[data-field="${target}"] input, [data-field="${target}"] button`)?.focus();
   };
 
