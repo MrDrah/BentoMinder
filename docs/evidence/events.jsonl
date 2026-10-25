@@ -91,3 +91,5 @@
 {"v":1,"at":"2026-10-25T00:29:13.261Z","type":"technical-correction","summary":"Developer relaxed two lint rules for QA test files only to unblock the gate; accepted temporarily, QA to clean up and restore in M2","task":"m1-fix"}
 {"v":1,"at":"2026-10-25T00:29:13.398Z","type":"task-end","summary":"M1 fix round integrated: dev gate and QA suite green on main","task":"m1-fix","outcome":"success"}
 {"v":1,"at":"2026-10-25T07:57:27.173Z","type":"approval","summary":"PO approved committing the M1 fixes and M2 prep, and starting M2 with recipe research in parallel","by":"product-owner"}
+{"v":1,"at":"2026-10-25T14:35:39.594Z","by":"orchestrator","type":"task-start","task":"m2-finish","summary":"Task m2-finish dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-25T14:35:43.485Z","by":"orchestrator","type":"task-start","task":"m2-finish","summary":"Task m2-finish dispatched (1 allowed globs)"}

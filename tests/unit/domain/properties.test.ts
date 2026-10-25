@@ -139,7 +139,10 @@ const clockArb = fc.constantFrom('2026-11-02T01:00:00Z', '2026-11-04T23:30:00Z',
 describe('BR-02 every decision change comes from an accepted parent event', () => {
   it('BR-02 over random event sequences: a rejected event changes nothing, only the targeted date changes, no past write, every record satisfies the contract', () => {
     fc.assert(
-      fc.property(fc.array(fc.tuple(dateArb, eventArb, clockArb), { minLength: 1, maxLength: 30 }), (steps) => {
+      fc.property(fc.array(fc.tuple(dateArb, eventArb, clockArb), { minLength: 1, maxLength: 30 }), (raw) => {
+        // the clock only moves forward: a record's updatedAt may not precede its createdAt (schema rule meta-timestamps)
+        const clocks = raw.map(([, , iso]) => iso).sort();
+        const steps = raw.map(([date, event], i) => [date, event, clocks[i] as string] as const);
         let store = baseStore();
         for (const [date, event, iso] of steps) {
           const now = Date.parse(iso) as Instant;
