@@ -112,3 +112,4 @@
 {"v":1,"at":"2026-10-25T13:57:37.743Z","type":"task-end","summary":"M2 paused at WIP commit 96ef9fc: core domain and UI built, gate re-run and ADRs left (not merged)","task":"m2-build","outcome":"success"}
 {"v":1,"at":"2026-10-25T13:57:37.845Z","type":"task-end","summary":"Label round paused before any record edit; resume order in pause notes","task":"research-labels","outcome":"success"}
 {"v":1,"at":"2026-10-25T14:17:07.587Z","type":"approval","summary":"PO approved committing main locally before the break; the M2 branch stays unmerged","by":"product-owner"}
+{"v":1,"at":"2026-10-25T14:27:36.840Z","type":"product-decision","summary":"Lean orchestration applied on branch chore/lean-orchestration: Sonnet default, Opus only with PO approval, BA scope narrowed, 2-cycle fix limit; baseline recorded"}

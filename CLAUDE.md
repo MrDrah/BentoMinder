@@ -81,6 +81,23 @@ Two gate stages, so the Dev → QA handoff doesn't depend on tests QA hasn't wri
 
 <!-- Everything below this line belongs to the project, not the framework. -->
 
-### Agent models (product owner, 2026-10-24)
-`developer` and `qa` agents run on **Sonnet** (`model: sonnet` in `.claude/agents/developer.md` and `qa.md`). The Orchestrator, `ba`, `verifier` and `metrics` stay on Opus. Don't override this per dispatch unless the product owner asks. Never switch an agent that is mid-task: let it finish on its current model.
-Note: the two agent files are framework-owned, so a framework `--upgrade` reports them as CONFLICT and leaves them alone; re-apply the `model:` line if you ever upgrade with `--force`.
+### Lean orchestration (product owner, 2026-10-25; supersedes "Agent models" of 2026-10-24)
+Goal: cut model usage without lowering quality. This section overrides any looser wording earlier in this file.
+
+**Models.** Sonnet is the default for the Orchestrator and all agents (`model: sonnet` in `.claude/settings.json` and every `.claude/agents/*.md`). **Never use Opus without the product owner's explicit approval**, whether by dispatch override, `/model` or a new agent file. Never switch an agent mid-task. The agent files are framework-owned, so a framework `--upgrade` reports CONFLICT and leaves them alone; re-apply the `model:` lines if you ever upgrade with `--force`.
+
+**Who is dispatched when.**
+- `ba`: initial requirements, genuinely unresolved product decisions, content research, milestone acceptance. Not for routine implementation. Approved stories, ACs, BR-xx and §7 rulings are authoritative; the developer builds from them directly and never asks the BA to re-confirm. A real gap or contradiction goes to the Orchestrator (options + recommendation); only the Orchestrator decides whether it needs the BA or the product owner.
+- `developer`: one bounded, independently testable task per dispatch: named stories/ACs, named files, a stopping point ("done when…"). Split anything larger (the M1 build was one 21-glob task) into slices that each end in a green targeted test and a short report.
+- `qa`: independent pass for each meaningful feature change (new behaviour, a changed rule, a milestone), scoped to the changed feature plus the regression suites that touch it. Not needed for docs, copy or refactors the gate already covers. QA derives tests from stories, ACs and oracles, never from the developer's report.
+- `designer`, `verifier`, `metrics`: as in §1; the 10% verifier spot-check and the milestone evidence flow are unchanged.
+
+**Context and handoffs.** Prompts name the exact files to read; agents do not re-read all of `docs/PLAN.md` or all stories when the task names its ACs. Pass summaries and file paths, not logs or pasted analyses; reports are counts, file references and the first failing error. Start a fresh session (or fresh agent) at each boundary below instead of letting one context grow past ~150k tokens.
+
+**Correction loops.** Developer ↔ QA fix cycles stop after two. If a defect is still open after the second cycle, stop and escalate to the product owner with the defect, what was tried and options. No third automatic loop.
+
+**Kept unchanged.** Security/privacy review, hooks, `gate --stage dev|release`, diff-guard, the overlap/source audit, independent QA, H1–H5 and milestone evidence (§2.7). Targeted checks run during development; the full gate runs at the end of a task and before any commit.
+
+**CATCH-UP.md** is updated at each boundary: a task or slice integrated, a milestone gate, a pause, a decision that changes the plan.
+
+**Measuring.** The baseline and the per-feature measurements are in `docs/dev/lean-orchestration-baseline.md`. Do not claim savings until a feature has been measured against that baseline.
