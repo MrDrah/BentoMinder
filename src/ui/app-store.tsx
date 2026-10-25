@@ -10,7 +10,7 @@ import type { Clock, FileExport, MenuExtractor, PdfSource } from '../domain/port
 import type { Dictionary } from '../domain/schema/dictionary.ts';
 import type { BentoMinderStore } from '../domain/schema/store.ts';
 import { createEmptyStore } from '../domain/storage/defaults.ts';
-import type { LoadResult, Repository } from '../domain/storage/repository.ts';
+import { StoreConflictError, type LoadResult, type Repository } from '../domain/storage/repository.ts';
 import { toJstTimestamp, todayJst, type Instant, type LocalDate } from '../domain/time/jst.ts';
 import { createTranslator, type Language, type Translate } from '../i18n/index.ts';
 import { shippedDictionary } from './dictionary.ts';
@@ -27,6 +27,8 @@ export type AppAction =
   | { type: 'reset'; store: BentoMinderStore }
   | { type: 'language-changed'; language: Language }
   | { type: 'save-result'; ok: boolean };
+
+type SaveOutcome = 'saved' | 'failed' | 'conflict';
 
 export function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
@@ -78,6 +80,11 @@ interface AppContextValue {
   setLanguage: (language: Language) => void;
   /** Validates and writes; true when stored. The screen updates only on success. */
   commit: (store: BentoMinderStore) => Promise<boolean>;
+  /** The toast for a commit that returned false: names the other tab when that was the cause. */
+  showSaveFailed: () => void;
+  /** True after this tab reloaded because another tab saved (ADR 003 change log 2026-10-25). */
+  updatedElsewhere: boolean;
+  dismissUpdatedElsewhere: () => void;
   /** US-E10-04/AC1, US-E10-02/AC7: removes every app key and starts over in Japanese. */
   startOver: () => Promise<void>;
   /** US-E10-03/AC3: replaces the stored data with an imported store. */
@@ -105,6 +112,8 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   const [state, dispatch] = useReducer(appReducer, { phase: 'loading', language: 'ja' });
   const [toast, setToast] = useState<string | null>(null);
   const [flash, setFlash] = useState<Flash>({});
+  const [updatedElsewhere, setUpdatedElsewhere] = useState(false);
+  const lastOutcome = useRef<SaveOutcome>('saved');
   const stateRef = useRef(state);
   stateRef.current = state;
   const services = useMemo<AppServices>(
@@ -127,6 +136,16 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       cancelled = true;
     };
   }, [repository, clock, newDeviceId]);
+
+  // Another tab saved: drop the in-memory copy and read what is stored, so this tab never
+  // writes from a stale copy (ADR 003 change log 2026-10-25, D-M1-06).
+  const reloadFromStorage = useCallback(async () => {
+    const result = await repository.load();
+    dispatch({ type: 'loaded', result, fresh: createEmptyStore({ deviceId: newDeviceId(), now: clock.now() }) });
+    setUpdatedElsewhere(true);
+  }, [repository, clock, newDeviceId]);
+
+  useEffect(() => repository.onExternalChange(() => void reloadFromStorage()), [repository, reloadFromStorage]);
 
   const setLanguage = useCallback(
     (language: Language) => {
@@ -155,14 +174,22 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
     async (store: BentoMinderStore) => {
       try {
         await repository.save(store);
-      } catch {
+      } catch (err) {
+        if (err instanceof StoreConflictError) {
+          // Nothing was written. Show what the other tab saved instead of this tab's copy.
+          lastOutcome.current = 'conflict';
+          await reloadFromStorage();
+          return false;
+        }
+        lastOutcome.current = 'failed';
         dispatch({ type: 'save-result', ok: false });
         return false;
       }
+      lastOutcome.current = 'saved';
       dispatch({ type: 'store-changed', store, persisted: true });
       return true;
     },
-    [repository],
+    [repository, reloadFromStorage],
   );
 
   const startOver = useCallback(async () => {
@@ -173,7 +200,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   const replaceStore = useCallback(
     async (store: BentoMinderStore) => {
       try {
-        await repository.save(store);
+        await repository.save(store, { force: true });
       } catch {
         dispatch({ type: 'save-result', ok: false });
         return false;
@@ -212,9 +239,14 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
     else document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  const showSaveFailed = useCallback(() => {
+    showToast(t(lastOutcome.current === 'conflict' ? 'toast.updatedElsewhere' : 'toast.saveFailed'));
+  }, [showToast, t]);
+  const dismissUpdatedElsewhere = useCallback(() => setUpdatedElsewhere(false), []);
+
   const value = useMemo(
-    () => ({ state, t, today, now, services, repository, setLanguage, commit, startOver, replaceStore, toast, showToast, flash, setFlash }),
-    [state, t, today, now, services, repository, setLanguage, commit, startOver, replaceStore, toast, showToast, flash],
+    () => ({ state, t, today, now, services, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash, setFlash }),
+    [state, t, today, now, services, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash],
   );
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

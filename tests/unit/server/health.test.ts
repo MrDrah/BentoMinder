@@ -79,6 +79,10 @@ describe('local proxy', () => {
     expect(defaultDeps({}).primaryModel).toBe('gemini-3.8-flash');
     expect(defaultDeps({}).fallbackModel).toBe('gemini-3.5-flash-lite');
     expect(() => defaultDeps({ PROXY_EXTRACT_PER_HOUR: '-1' })).toThrow(RangeError);
+    // D-M1-09: the scenario header is honoured only when explicitly switched on.
+    expect(defaultDeps({}).allowScenarios).toBe(false);
+    expect(defaultDeps({ PROXY_MOCK_SCENARIOS: '0' }).allowScenarios).toBe(false);
+    expect(defaultDeps({ PROXY_MOCK_SCENARIOS: '1' }).allowScenarios).toBe(true);
     expect(defaultDeps({}).fixtures.known.size).toBeGreaterThan(0);
     expect(typeof createHandler(deps)).toBe('function');
   });

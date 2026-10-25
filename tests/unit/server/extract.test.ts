@@ -7,6 +7,7 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   memoryCache,
   runExtraction,
+  sha256Hex,
   windowCap,
   type ExtractDeps,
   type ProviderReply,
@@ -170,6 +171,15 @@ describe('US-E2-06 rate limits and outages', () => {
     expect(await setup([VALID], { cap, bypassCache: true }).run()).toMatchObject({ error: 'RATE_LIMITED' });
     now = 86_400_001 + 3_600_001;
     expect((await setup([VALID], { cap, bypassCache: true }).run()).ok).toBe(true);
+  });
+
+  it('US-E2-07/AC1 D-M1-09 a scenario-driven (bypassCache) extraction never writes to the cache', async () => {
+    const a = setup([VALID], { bypassCache: true });
+    expect((await a.run()).ok).toBe(true);
+    expect(a.deps.cache.get(sha256Hex(PDF))).toBeUndefined();
+    const b = setup([VALID]);
+    expect((await b.run()).ok).toBe(true);
+    expect(b.deps.cache.get(sha256Hex(PDF))).toBeDefined();
   });
 
   it('US-E2-04/AC8 a stopped import makes no further provider call', async () => {

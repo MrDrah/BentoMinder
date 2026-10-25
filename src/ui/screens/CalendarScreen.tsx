@@ -62,7 +62,7 @@ export function CalendarScreen({ month: requested }: { month: YearMonth | null }
           </section>
         )}
 
-        <nav className="monthnav" aria-label={t('cal.grid.label', { month: title })}>
+        <nav className="monthnav" aria-label={t('cal.nav.label')}>
           <button type="button" className="iconbtn" data-testid="cal-prev" aria-label={t('cal.prevMonth')} onClick={() => go(addMonths(month, -1))}>
             <Icon name="chevronLeft" />
           </button>

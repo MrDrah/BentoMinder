@@ -166,7 +166,7 @@ test('boundaries: the calendar at the extremes of the year range does not crash 
 });
 
 // D-M1-06 (P2): a tab holding a stale in-memory store overwrites the whole store on its next save (no storage event, no merge).
-test.fixme('BR-22 US-E10-01/AC1 D-M1-06 two tabs: a tab that loaded before the other finished must not erase the other tab’s confirmed menu', async ({ context }) => {
+test('BR-22 US-E10-01/AC1 D-M1-06 two tabs: a tab that loaded before the other finished must not erase the other tab’s confirmed menu', async ({ context }) => {
   const a = await context.newPage();
   const b = await context.newPage();
   for (const p of [a, b]) await freezeClock(p);

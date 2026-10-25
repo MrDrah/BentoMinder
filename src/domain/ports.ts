@@ -15,6 +15,11 @@ export interface Storage {
   read(key: StorageKey): Promise<string | null>;
   write(key: StorageKey, value: string): Promise<void>;
   remove(key: StorageKey): Promise<void>;
+  /**
+   * Optional: calls `handler` when another tab, window or process changed a stored key (not for
+   * this instance's own writes). Returns the unsubscribe function. ADR 003 change log 2026-10-25.
+   */
+  onExternalChange?(handler: () => void): () => void;
 }
 
 export type PdfBytes = Uint8Array;

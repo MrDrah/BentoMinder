@@ -28,7 +28,7 @@ export default defineConfig({
       url: 'http://127.0.0.1:8787/api/health',
       reuseExistingServer: true,
       timeout: 30_000,
-      env: { PROXY_EXTRACT_PER_HOUR: '1000', PROXY_EXTRACT_PER_DAY: '1000', PROXY_FETCH_PER_HOUR: '1000' },
+      env: { PROXY_MOCK_SCENARIOS: '1', PROXY_EXTRACT_PER_HOUR: '1000', PROXY_EXTRACT_PER_DAY: '1000', PROXY_FETCH_PER_HOUR: '1000' },
     },
   ],
   projects: [

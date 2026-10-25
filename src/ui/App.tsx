@@ -5,7 +5,7 @@ import { startScreen } from '../domain/menu/store-ops.ts';
 import { formatMonth } from '../i18n/format.ts';
 import { monthOf } from '../domain/time/jst.ts';
 import { useApp } from './app-store.tsx';
-import { Toast } from './components/Controls.tsx';
+import { Banner, Toast } from './components/Controls.tsx';
 import { navigate, toHash, useRoute, type Route } from './router.ts';
 import { CalendarScreen } from './screens/CalendarScreen.tsx';
 import { ImportScreen } from './screens/ImportScreen.tsx';
@@ -16,7 +16,7 @@ import { ProfileEditScreen, SettingsScreen } from './screens/SettingsScreen.tsx'
 import { TopBar } from './components/Bars.tsx';
 
 export function App() {
-  const { state, t, today } = useApp();
+  const { state, t, today, updatedElsewhere, dismissUpdatedElsewhere } = useApp();
   const route = useRoute();
   const gated = useRef(false);
 
@@ -61,6 +61,16 @@ export function App() {
           <strong>{t('storage.unavailable')}</strong>
           <span>{t('storage.unavailable.body')}</span>
         </div>
+      )}
+      {updatedElsewhere && (
+        <Banner variant="info" testId="banner-updated-elsewhere" title={t('sync.updatedElsewhere')}>
+          <p className="banner__body">{t('sync.updatedElsewhere.body')}</p>
+          <div className="banner__actions">
+            <button type="button" className="btn btn--text btn--small" data-testid="banner-updated-elsewhere-dismiss" onClick={dismissUpdatedElsewhere}>
+              {t('common.close')}
+            </button>
+          </div>
+        </Banner>
       )}
       <Screen route={shown} />
       <Toast />

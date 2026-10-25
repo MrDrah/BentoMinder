@@ -14,7 +14,7 @@ import { ProfileForm } from './ProfileForm.tsx';
 import { ReviewScreen } from './ReviewScreen.tsx';
 
 export function OnboardingScreen({ step, month, manual }: { step: OnboardingStep; month: YearMonth | null; manual: boolean }) {
-  const { t, now, commit, showToast } = useApp();
+  const { t, now, commit, showSaveFailed } = useApp();
   const store = useStore();
   const title = t(step === 1 ? 'ob.step1.name' : step === 2 ? 'ob.step2.name' : 'ob.step3.name');
   const reviewMonth = month ?? (pendingReview(store)?.month as YearMonth | undefined) ?? null;
@@ -55,7 +55,7 @@ export function OnboardingScreen({ step, month, manual }: { step: OnboardingStep
                   // US-E1-06/AC3: with a confirmed menu already stored, the menu is not imported again.
                   const hasMenu = Object.values(store.menus).some((m) => m.confirmed !== null);
                   navigate(hasMenu ? { name: 'calendar', month: null } : { name: 'onboarding', step: 2, month: null, manual: false });
-                } else showToast(t('toast.saveFailed'));
+                } else showSaveFailed();
               }}
             />
           </>

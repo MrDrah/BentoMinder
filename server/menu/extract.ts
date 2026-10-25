@@ -151,7 +151,7 @@ export async function runExtraction(input: ExtractInput, deps: ExtractDeps, sign
   const accept = (r: { kind: 'ok'; text: string }, model: string, final: boolean): ServerExtractResult | { malformed: string[] } => {
     const out = parseModelReply(r.text, ctx(model));
     if (out.kind === 'ok') {
-      deps.cache.set(sha256, { text: r.text, model });
+      if (deps.bypassCache !== true) deps.cache.set(sha256, { text: r.text, model });
       return { ok: true, menu: out.menu, meta: meta(model, false, calls) };
     }
     if (out.kind === 'not-a-menu') return fail('NOT_A_MENU');

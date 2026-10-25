@@ -10,8 +10,8 @@ export function AppBar() {
     <header className="appbar" data-testid="appbar">
       <div className="appbar__inner">
         <span className="appbar__brand">
-          <span className="appbar__logo" aria-hidden="true" />
-          <span className="appbar__name">{t('app.name')}</span>
+          <span className="appbar__logo" role="img" aria-label={t('app.name')} />
+          <span className="appbar__name" aria-hidden="true">{t('app.name')}</span>
         </span>
         <div className="appbar__controls">
           <div data-testid="appbar-lang">

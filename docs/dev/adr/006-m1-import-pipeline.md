@@ -31,7 +31,7 @@ M1 ships the import end to end without a Gemini key: the proxy's real `POST /api
 
 ## Consequences
 - Rule id `weekday-mismatch` is still reported by the strict day schema (QA's fixtures expect it) but is not in contract §6.1; raised with the BA (`RULES_NOT_IN_CONTRACT`).
-- The scenario header is honoured unless `PROXY_MOCK_SCENARIOS=0`; a hosted proxy (v1) must turn it off. The e2e run raises the caps with `PROXY_EXTRACT_PER_HOUR/PER_DAY`, `PROXY_FETCH_PER_HOUR` (to document in the env example file).
+- The scenario header is honoured only when `PROXY_MOCK_SCENARIOS=1` (default off; the Playwright configs set it; changed in the M1 fix round, D-M1-09, which also stops scenario replies being cached). A hosted proxy needs no extra step. The e2e run raises the caps with `PROXY_EXTRACT_PER_HOUR/PER_DAY`, `PROXY_FETCH_PER_HOUR` (to document in the env example file).
 - 「中止する」 (US-E2-04/AC8) counts 1 provider call: the client can't know whether the proxy had reached call 2, and the proxy stops at the next step once the client leaves.
 
 ## Revisit when

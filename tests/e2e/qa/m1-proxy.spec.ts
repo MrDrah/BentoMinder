@@ -30,7 +30,7 @@ const post = (port: number, path: string, body: BodyInit, headers: Record<string
   fetch(`http://127.0.0.1:${port}${path}`, { method: 'POST', body, headers });
 const fetchPdf = (port: number, url: unknown) => post(port, '/api/menu/fetch-pdf', JSON.stringify({ url }), { 'content-type': 'application/json' });
 const Q = 'targetMonth=2026-11&promptVersion=1&schemaVersion=1';
-const extract = (port: number, pdf: Uint8Array, scenario?: string) => post(port, `/api/menu/extract?${Q}`, pdf, scenario ? { 'x-bm-mock-scenario': scenario } : {});
+const extract = (port: number, pdf: Uint8Array, scenario?: string) => post(port, `/api/menu/extract?${Q}`, pdf as unknown as BodyInit, scenario ? { 'x-bm-mock-scenario': scenario } : {});
 
 test.describe.configure({ mode: 'serial' });
 
@@ -236,7 +236,7 @@ test.describe('extract allow-list, cache and caps', () => {
 // D-M1-09 (P3): a scenario-driven extraction (bypassCache) still WRITES its result to the proxy cache
 // (server/menu/extract.ts, line "deps.cache.set" is unconditional), so a later normal request for the same PDF
 // is answered with the scenario's reading instead of the PDF's own recorded one.
-test.fixme('US-E2-07/AC1 BR-10 D-M1-09 a scenario reply must not be cached for later requests of the same PDF', async () => {
+test('US-E2-07/AC1 BR-10 D-M1-09 a scenario reply must not be cached for later requests of the same PDF', async () => {
   const proxy = await startProxy(18798);
   try {
     const pdf = readFileSync(FX01);
