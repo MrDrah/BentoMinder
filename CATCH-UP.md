@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-10-25 (paused until next weekend) · Repo: local only (no remote yet, by PO instruction) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-10-25 (paused until next weekend; lean orchestration applied on branch `chore/lean-orchestration`, not merged) · Repo: local only (no remote yet, by PO instruction) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -30,11 +30,12 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 ### In progress 🔄 — PAUSED 2026-10-25 by the PO (resume next weekend)
 Two tasks were stopped at a safe point; each wrote pause notes:
 - **M2 build** (developer, Sonnet): worktree branch `worktree-agent-a04d875d3e81d2b8f` (`.claude/worktrees/agent-a04d875d3e81d2b8f/`), last commit **96ef9fc (WIP)**, tree clean, not merged. Done: matcher + ambiguity, assessment, overrides, decision state machine, refresh review, date move, the M2-prep code items, calendar grid + keyboard, day sheet, decision actions, refresh list, date-fix sheet, ambiguity chooser, settings in onboarding; unit/property tests + 22 e2e; QA M1 suite 446 passed. **Left:** re-run `gate --stage dev` (green before the last 2 edits), write ADR 007 + ADR 004 change log (decision edits on a refused save: reload + toast, no re-apply), one flaky UI unit test to identify. Not built by design: holidays (no sourced list yet), amb-soba review flag (no copy), recommendations (M3 placeholder: 「手作りお弁当にする」 writes nothing yet), date-picker popover (dialog used). Open questions for BA/PO are in `docs/dev/_scratch/m2-pause-notes.md` on that branch.
-- **Recipe label round** (BA, Opus): **not started on any record** (batches untouched). Order to resume: 2b ketchup/curry-powder → `varies-by-product` (8 rows, 7 recipes, no fetching), then 2a curry-chahan, 2c quesadilla, 2d storage note, 2e pistachio, then maker labels (ham + sausage first: 7 recipes), dictionary sources + matsutake, contract §3.7/§6.1/§3.10 + brief §3. Notes: `docs/ba/_scratch/research-labels/pause-notes.md`.
+- **Recipe label round** (BA, Sonnet from now on): **not started on any record** (batches untouched). Order to resume: 2b ketchup/curry-powder → `varies-by-product` (8 rows, 7 recipes, no fetching), then 2a curry-chahan, 2c quesadilla, 2d storage note, 2e pistachio, then maker labels (ham + sausage first: 7 recipes), dictionary sources + matsutake, contract §3.7/§6.1/§3.10 + brief §3. Notes: `docs/ba/_scratch/research-labels/pause-notes.md`.
 
 **Main is committed** (bea84df, dev gate green): recipe research, dictionary ids, schema change, copy fix, docs. Only the M2 worktree branch is unmerged.
 
-### How to resume (new session in this folder; developer/QA on Sonnet per CLAUDE.md §6)
+### How to resume (new session in this folder; everything on Sonnet, Opus only with PO approval, per CLAUDE.md §6 "Lean orchestration")
+0. **Branch first:** `chore/lean-orchestration` holds the orchestration changes (CLAUDE.md §6, six agent files `model: sonnet`, `.claude/settings.json`, PLAN §7 row, `docs/dev/lean-orchestration-baseline.md`). Rollback point: tag `checkpoint/pre-lean-orchestration-2026-10-25` (main 456f7df). The PO approves, then it is merged to main before resuming.
 1. Read this file, PLAN §7 (latest rows), and both pause notes. Run preflight; log `evidence.mjs event resume`. Consider logging it as `recovery-test` (a fresh session restoring from CATCH-UP alone is the evidence package's recovery check).
 2. **Label round:** re-dispatch a `ba` agent with "continue the label round from pause-notes.md" (baseline `research-labels`). Then: add the new maker hosts to `APPROVED_HOSTS` in `scripts/validate-data.mjs`, `npm run merge:research`, `validate.mjs overlap --fetch` (must be 0 FAIL, 0 UNVERIFIED), quick verifier re-check of the 2 failed records.
 3. **M2:** re-dispatch the `developer` (Sonnet) in the same worktree with "continue M2 from m2-pause-notes.md". Then merge locally, `diff-guard --task m2-build`, **gate + QA suite on main before any commit** (FL-15).
@@ -50,7 +51,7 @@ See "How to resume".
 - AI: Gemini free tier, `gemini-3.8-flash` + `gemini-3.5-flash-lite` fallback; import used from Japan only; only the public PDF is sent.
 - Design: white page background (`surface-1` #FFFFFF), navy type, soft-red accents, Monday week start, no tab bar.
 - All 15 open-question defaults accepted.
-- **Agent models (PO, 2026-10-24):** dispatch `developer` and `qa` agents with `model: "sonnet"`; Orchestrator, `ba` and `verifier` stay on Opus.
+- **Lean orchestration (PO, 2026-10-25; replaces the 2026-10-24 model rule):** Sonnet for the Orchestrator and all agents, Opus only with explicit PO approval; BA only for initial requirements, unresolved decisions, research and milestone acceptance; developer gets bounded tasks with a stopping point; Developer/QA fix loops stop after two cycles; QA stays independent. Baseline and measurements: `docs/dev/lean-orchestration-baseline.md`.
 
 ## 5. How to work in this repo
 ```bash
