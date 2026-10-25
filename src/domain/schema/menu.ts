@@ -45,6 +45,13 @@ export const confirmedMenuSchema = obj({
   const dates = [...c.days.map((d) => d.date), ...c.noLunchDays.map((d) => d.date)];
   if (dates.some((d) => monthOf(d as LocalDate) !== c.month)) issue(ctx, 'confirmed-days-in-month', ['days']);
   if (!isSortedUnique(c.days.map((d) => d.date))) issue(ctx, 'days-unique-sorted', ['days']);
+  // Contract §3.4: noLunchDays and changedDatesSincePrevious are unique and ascending too, and
+  // every changed date (also a removed one) lies inside the month.
+  if (!isSortedUnique(c.noLunchDays.map((d) => d.date))) issue(ctx, 'days-unique-sorted', ['noLunchDays']);
+  if (!isSortedUnique(c.changedDatesSincePrevious)) issue(ctx, 'days-unique-sorted', ['changedDatesSincePrevious']);
+  if (c.changedDatesSincePrevious.some((d) => monthOf(d as LocalDate) !== c.month)) {
+    issue(ctx, 'confirmed-days-in-month', ['changedDatesSincePrevious']);
+  }
   const daySet = new Set(c.days.map((d) => d.date));
   if (c.noLunchDays.some((d) => daySet.has(d.date))) issue(ctx, 'confirmed-days-disjoint', ['noLunchDays']);
   if (dates.length === 0) issue(ctx, 'confirmed-not-empty', ['days']);

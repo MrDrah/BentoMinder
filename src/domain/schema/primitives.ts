@@ -5,13 +5,11 @@
 import { z } from 'zod';
 import { isLocalDate, isYearMonth } from '../time/jst.ts';
 
-// M1: the contract's §6.1 now lists every id the M0 code used (2 renamed, `consent-invalid`
-// dropped). One id is still missing there: `weekday-mismatch`, reported by the strict
-// ExtractedDay schema when a printed weekday disagrees with the date and the day isn't flagged
-// (contract §3.3 states the rule, QA's fixtures expect the id). After normalisation
-// (src/domain/menu/normalize.ts) model output never reaches the schema in that state, so the id
-// only appears for hand-written data. Raised with the BA for §6.1.
-export const RULES_NOT_IN_CONTRACT = ['weekday-mismatch'] as const;
+// Contract §6.1 is the complete rule list (M2 prep: `weekday-mismatch` and the three M2 rules
+// `resolved-ids-candidates`, `review-date-correction`, `override-no-past-write` are rows there
+// now), so every id this code reports has a contract row and this list is empty. A rule id with
+// no contract row is added there by the BA first; a unit test keeps this list empty.
+export const RULES_NOT_IN_CONTRACT: readonly string[] = [];
 
 export const codePoints = (s: string): number => [...s].length;
 
