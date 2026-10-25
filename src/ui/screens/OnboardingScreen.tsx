@@ -9,6 +9,7 @@ import { LangToggle } from '../components/LangToggle.tsx';
 import { Icon } from '../components/Icon.tsx';
 import { Stepper } from '../components/Controls.tsx';
 import { navigate, toHash, type OnboardingStep } from '../router.ts';
+import { getProfileDraft, setProfileDraft } from '../session.ts';
 import { ImportScreen } from './ImportScreen.tsx';
 import { ProfileForm } from './ProfileForm.tsx';
 import { ReviewScreen } from './ReviewScreen.tsx';
@@ -33,6 +34,11 @@ export function OnboardingScreen({ step, month, manual }: { step: OnboardingStep
             {title}
           </h1>
           <LangToggle />
+          {/* US-E1-01/AC6: settings (export, delete all) from every input step, the same entry as the calendar's app bar */}
+          <a className="iconbtn" href={toHash({ name: 'settings', from: step })} data-testid="topbar-settings" aria-label={t('nav.settings')}>
+            <Icon name="gear" />
+            <span className="iconbtn__label">{t('nav.settings')}</span>
+          </a>
         </div>
         <div className="appbar__inner">
           <Stepper step={step} />
@@ -44,7 +50,8 @@ export function OnboardingScreen({ step, month, manual }: { step: OnboardingStep
             <p className="hero">{t('ob.welcome.title')}</p>
             <p>{t('ob.welcome.lead')}</p>
             <ProfileForm
-              initial={store.profile === null ? emptyProfileForm() : profileToForm(store.profile)}
+              initial={getProfileDraft() ?? (store.profile === null ? emptyProfileForm() : profileToForm(store.profile))}
+              onChange={setProfileDraft}
               submitLabel={t('common.next')}
               submitTestId="ob-next"
               footerNote={<p className="field__hint">{t('ob.privacy.local')}</p>}
@@ -52,6 +59,7 @@ export function OnboardingScreen({ step, month, manual }: { step: OnboardingStep
                 const r = formToProfile(form, now(), store.profile);
                 if (!r.ok) return;
                 if (await commit(saveProfile(store, r.profile, now()))) {
+                  setProfileDraft(null);
                   // US-E1-06/AC3: with a confirmed menu already stored, the menu is not imported again.
                   const hasMenu = Object.values(store.menus).some((m) => m.confirmed !== null);
                   navigate(hasMenu ? { name: 'calendar', month: null } : { name: 'onboarding', step: 2, month: null, manual: false });

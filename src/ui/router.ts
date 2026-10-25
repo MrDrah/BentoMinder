@@ -1,5 +1,5 @@
 // Typed hash router (ADR 001): `#/calendar/<YYYY-MM>`, `#/day/<date>`, `#/recipe/<id>`,
-// `#/recipes` (library, US-E6-05), `#/settings`, `#/profile` (edit), `#/import`,
+// `#/recipes` (library, US-E6-05), `#/settings[?from=<onboarding step>]`, `#/profile` (edit), `#/recommend/<date>` (M3), `#/refresh-review/<YYYY-MM>[?fresh=1]`, `#/import`,
 // `#/review/<YYYY-MM>[?manual=1]`, `#/onboarding/<1|2|3>[?month=YYYY-MM&manual=1]`.
 // Pure parse/format; the hook listens to hashchange. A leave guard lets a screen hold the
 // parent on it (US-E3-03/AC5: leaving the review asks first).
@@ -13,7 +13,9 @@ export type Route =
   | { name: 'day'; date: LocalDate }
   | { name: 'recipe'; id: string; date: LocalDate | null }
   | { name: 'recipes' }
-  | { name: 'settings' }
+  | { name: 'settings'; from?: OnboardingStep }
+  | { name: 'recommend'; date: LocalDate }
+  | { name: 'refresh-review'; month: YearMonth; fresh: boolean }
   | { name: 'profile' }
   | { name: 'import' }
   | { name: 'review'; month: YearMonth; manual: boolean }
@@ -42,8 +44,16 @@ export function parseHash(hash: string): Route {
       const date = params.get('date');
       return { name: 'recipe', id: arg, date: date !== null && isLocalDate(date) ? date : null };
     }
+    case 'settings': {
+      if (arg !== undefined) return { name: 'not-found' };
+      const from = Number(params.get('from'));
+      return from === 1 || from === 2 || from === 3 ? { name: 'settings', from } : { name: 'settings' };
+    }
+    case 'recommend':
+      return arg !== undefined && isLocalDate(arg) ? { name: 'recommend', date: arg } : { name: 'not-found' };
+    case 'refresh-review':
+      return arg !== undefined && isYearMonth(arg) ? { name: 'refresh-review', month: arg, fresh: params.get('fresh') === '1' } : { name: 'not-found' };
     case 'recipes':
-    case 'settings':
     case 'profile':
     case 'import':
       return arg === undefined ? { name: head } : { name: 'not-found' };
@@ -68,8 +78,13 @@ export function toHash(route: Route): string {
       return `#/day/${route.date}`;
     case 'recipe':
       return route.date === null ? `#/recipe/${route.id}` : `#/recipe/${route.id}?date=${route.date}`;
-    case 'recipes':
     case 'settings':
+      return route.from === undefined ? '#/settings' : `#/settings?from=${route.from}`;
+    case 'recommend':
+      return `#/recommend/${route.date}`;
+    case 'refresh-review':
+      return `#/refresh-review/${route.month}${route.fresh ? '?fresh=1' : ''}`;
+    case 'recipes':
     case 'profile':
     case 'import':
       return `#/${route.name}`;

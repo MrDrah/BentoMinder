@@ -14,6 +14,7 @@ import { StoreConflictError, type LoadResult, type Repository } from '../domain/
 import { toJstTimestamp, todayJst, type Instant, type LocalDate } from '../domain/time/jst.ts';
 import { createTranslator, type Language, type Translate } from '../i18n/index.ts';
 import { shippedDictionary } from './dictionary.ts';
+import { setProfileDraft } from './session.ts';
 
 export type AppState =
   | { phase: 'loading'; language: Language }
@@ -194,6 +195,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
 
   const startOver = useCallback(async () => {
     await repository.deleteAll();
+    setProfileDraft(null); // typed-but-unsaved step-1 answers go too (BR-22: nothing of the family's stays)
     dispatch({ type: 'reset', store: createEmptyStore({ deviceId: newDeviceId(), now: clock.now() }) });
   }, [repository, newDeviceId, clock]);
 
