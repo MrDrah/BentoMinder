@@ -163,9 +163,14 @@ describe('recipe record rules (contract §3.7)', () => {
     r3.ingredients[0]!.quantity = null;
     r3.ingredients[0]!.unit = 'to-taste';
     expect(rules(recipeSchema, r3)).toEqual([]);
+    // A processed food whose cited label declares no allergens stays varies-by-product (never "known: none").
     const r4 = syntheticRecipe();
     r4.ingredients[0]!.allergenInfo = 'varies-by-product';
-    expect(rules(recipeSchema, r4)).toContain('recipe-possible-allergens');
+    expect(rules(recipeSchema, r4)).not.toContain('recipe-possible-allergens');
+    const r5 = syntheticRecipe();
+    r5.ingredients[0]!.allergenInfo = 'known';
+    r5.ingredients[0]!.possibleAllergenIds = ['alg-wheat'];
+    expect(rules(recipeSchema, r5)).toContain('recipe-possible-allergens');
   });
 
   it('checks the derived allergen, origin and diet fields', () => {

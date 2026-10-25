@@ -25,3 +25,6 @@ data/_research/.cache/
 
 # agent worktrees (Claude Code Agent isolation)
 .claude/worktrees/
+
+# research scratch: saved source pages (copyrighted, never committed; the overlap cache is .cache/)
+docs/ba/_scratch/**/*.html

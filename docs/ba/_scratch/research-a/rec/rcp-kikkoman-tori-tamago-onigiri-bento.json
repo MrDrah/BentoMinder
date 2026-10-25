@@ -1,0 +1,298 @@
+{
+  "id": "rcp-kikkoman-tori-tamago-onigiri-bento",
+  "name": {
+    "ja": "鶏と卵のおにぎり弁当",
+    "en": "Chicken and egg rice ball bento"
+  },
+  "shortNameJa": "とりたまおにぎり",
+  "shortNameEn": "Onigiri",
+  "nameKana": "とりとたまごのおにぎりべんとう",
+  "style": "japanese",
+  "themeId": null,
+  "description": {
+    "ja": "いり卵と鶏そぼろを具にして、ラップで丸くにぎったおにぎり2個。ぽろぽろしがちなそぼろもまとまって食べやすくなります。きゅうりのしょうゆ漬けを添えます。",
+    "en": "Two round rice balls filled with scrambled egg and chicken soboro, shaped in cling film so the crumbly fillings hold together and are easy to eat. Served with soy-pickled cucumber."
+  },
+  "yield": {
+    "ja": "幼児1人分",
+    "en": "1 child portion"
+  },
+  "minutes": 30,
+  "makeAhead": null,
+  "ingredients": [
+    {
+      "ingredientId": "ing-rice",
+      "label": {
+        "ja": "ご飯（温かいもの）",
+        "en": "warm cooked rice"
+      },
+      "quantity": 100,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-egg",
+      "label": {
+        "ja": "卵",
+        "en": "egg"
+      },
+      "quantity": 0.5,
+      "unit": "piece",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-egg"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-salt",
+      "label": {
+        "ja": "塩",
+        "en": "salt"
+      },
+      "quantity": null,
+      "unit": "small-amount",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-sugar",
+      "label": {
+        "ja": "砂糖（いり卵用）",
+        "en": "sugar (for the egg)"
+      },
+      "quantity": null,
+      "unit": "small-amount",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-ground-chicken",
+      "label": {
+        "ja": "鶏ひき肉",
+        "en": "minced chicken"
+      },
+      "quantity": 20,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-chicken"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-soy-sauce",
+      "label": {
+        "ja": "しょうゆ（そぼろ用）",
+        "en": "soy sauce (for the soboro)"
+      },
+      "quantity": 0.5,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "varies-by-product",
+      "allergenIds": [],
+      "possibleAllergenIds": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-sugar",
+      "label": {
+        "ja": "砂糖（そぼろ用）",
+        "en": "sugar (for the soboro)"
+      },
+      "quantity": 0.5,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-cucumber",
+      "label": {
+        "ja": "きゅうり（5cm）",
+        "en": "cucumber (a 5 cm piece)"
+      },
+      "quantity": 1,
+      "unit": "piece",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-soy-sauce",
+      "label": {
+        "ja": "しょうゆ（漬け用）",
+        "en": "soy sauce (for the pickle)"
+      },
+      "quantity": 0.5,
+      "unit": "tbsp",
+      "optional": false,
+      "allergenInfo": "varies-by-product",
+      "allergenIds": [],
+      "possibleAllergenIds": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    }
+  ],
+  "steps": [
+    {
+      "ja": "小鍋に卵、塩少々、砂糖少々を入れて混ぜ、かき混ぜながら加熱していり卵にする。",
+      "en": "Mix the egg with a pinch each of salt and sugar in a small pan and cook, stirring, into scrambled egg."
+    },
+    {
+      "ja": "別の小鍋に鶏ひき肉、しょうゆと砂糖を小さじ1/2ずつ入れ、混ぜながら火を通してそぼろにする。",
+      "en": "In another small pan, cook the minced chicken with 1/2 tsp each of soy sauce and sugar, stirring, into a fine crumble."
+    },
+    {
+      "ja": "ラップを広げて中央にいり卵とそぼろを半量ずつ置き、ご飯の半量を上に重ねる。ラップごと包み込み、しっかり力を入れて丸いおにぎりにする。",
+      "en": "Spread out a sheet of cling film, put half the egg and half the soboro in the centre and half the rice on top. Wrap it up and press firmly into a round rice ball."
+    },
+    {
+      "ja": "残りの材料で、もう1個同じように作る。",
+      "en": "Make a second one the same way with the rest."
+    },
+    {
+      "ja": "きゅうりに1～2mm間隔の切り込みを、底を残して入れてから、1cmずつに切り分ける。",
+      "en": "Make cuts 1–2 mm apart in the cucumber without slicing all the way through, then cut it into 1 cm pieces."
+    },
+    {
+      "ja": "しょうゆ大さじ1/2をまぶしておき、やわらかくなったら漬け汁を捨てる。",
+      "en": "Coat with 1/2 tbsp soy sauce, and when the cucumber has softened, pour off the liquid."
+    }
+  ],
+  "storage": [
+    {
+      "ja": "いり卵とそぼろは、中までしっかり火を通します。",
+      "en": "Cook the scrambled egg and the soboro all the way through."
+    },
+    {
+      "ja": "きゅうりのしょうゆ漬けは、汁気をよくきってから詰めます。",
+      "en": "Drain the soy-pickled cucumber well before packing it."
+    }
+  ],
+  "allergenIds": [
+    "alg-egg",
+    "alg-chicken"
+  ],
+  "mayContainAllergenIds": [
+    "alg-wheat",
+    "alg-soybean"
+  ],
+  "allergenDataComplete": true,
+  "allergenScheme": "caa-2026-04",
+  "animalOrigin": [
+    "egg",
+    "chicken"
+  ],
+  "dietDataComplete": true,
+  "dietOk": [
+    "no-pork",
+    "no-beef",
+    "no-seafood"
+  ],
+  "adaptations": [
+    {
+      "ja": "分量は元のレシピ（幼稚園児1人分）のままです。調理時間は2品の時間（20分＋10分）を合計しました。",
+      "en": "Amounts are as in the source (one kindergarten child). The time is the sum of the two dishes (20 + 10 minutes)."
+    },
+    {
+      "ja": "銘柄指定のしょうゆは一般的なしょうゆとして記載しました。「きゅうり 5cm」は5cm分の1切れとして記録しています。",
+      "en": "The branded soy sauce is listed as ordinary soy sauce. \"5 cm of cucumber\" is recorded as one 5 cm piece."
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-kikkoman-tori-tamago-onigiri-bento",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "鶏と卵のおにぎり弁当 | キッコーマン | ホームクッキング",
+      "url": "https://www.kikkoman.co.jp/homecook/lunch/enji/toritamago.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe"
+      ]
+    },
+    {
+      "id": "src-kikkoman-tori-tamago-wrap-onigiri",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "鶏と卵のラップおにぎり（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00002947/",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe"
+      ]
+    },
+    {
+      "id": "src-kikkoman-kyuri-shoyuzuke",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "きゅうりのしょうゆ漬け（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00002948/",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe",
+        "storage"
+      ]
+    },
+    {
+      "id": "src-kikkoman-tokusen-marudaizu-label",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "キッコーマン 特選 丸大豆しょうゆ",
+      "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "allergen"
+      ]
+    },
+    {
+      "id": "src-maff-lunchbox",
+      "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+      "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+      "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "storage"
+      ]
+    }
+  ],
+  "reviewedBy": "ba-research"
+}

@@ -1,0 +1,341 @@
+{
+  "id": "rcp-delish-penguin-onigirazu-bento",
+  "name": {
+    "ja": "ペンギンおにぎらず弁当",
+    "en": "Penguin onigirazu bento"
+  },
+  "shortNameJa": "ペンギン弁当",
+  "shortNameEn": "Penguin",
+  "nameKana": "ぺんぎんおにぎらずべんとう",
+  "style": "japanese",
+  "themeId": "theme-sea",
+  "description": {
+    "ja": "レンジで作る卵をはさんだおにぎらずを半分に切り、のりの目とケチャップのほっぺでペンギンの顔に。コーンを留めた花形ウインナーと、かぼちゃのごまあえを添えます。",
+    "en": "An onigirazu (folded rice sandwich) filled with microwave omelette, cut in half and given penguin faces with nori eyes and ketchup cheeks. With flower-cut sausages holding corn kernels and pumpkin dressed with ground sesame."
+  },
+  "yield": {
+    "ja": "1人分（元のレシピの量）",
+    "en": "1 serving (source amounts)"
+  },
+  "minutes": 15,
+  "makeAhead": null,
+  "ingredients": [
+    {
+      "ingredientId": "ing-rice",
+      "label": {
+        "ja": "白ごはん（どんぶり1杯）",
+        "en": "cooked white rice (1 large bowl)"
+      },
+      "quantity": 200,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-egg",
+      "label": {
+        "ja": "卵",
+        "en": "egg"
+      },
+      "quantity": 1,
+      "unit": "piece",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-egg"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-milk",
+      "label": {
+        "ja": "牛乳",
+        "en": "milk"
+      },
+      "quantity": 1,
+      "unit": "tbsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-milk"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-mayonnaise",
+      "label": {
+        "ja": "マヨネーズ",
+        "en": "mayonnaise"
+      },
+      "quantity": 0.5,
+      "unit": "tbsp",
+      "optional": false,
+      "allergenInfo": "varies-by-product",
+      "allergenIds": [],
+      "possibleAllergenIds": [
+        "alg-egg",
+        "alg-soybean"
+      ],
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-nori",
+      "label": {
+        "ja": "のり",
+        "en": "nori"
+      },
+      "quantity": 1,
+      "unit": "sheet",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-ketchup",
+      "label": {
+        "ja": "ケチャップ",
+        "en": "tomato ketchup"
+      },
+      "quantity": null,
+      "unit": "small-amount",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-sausage",
+      "label": {
+        "ja": "ウインナー",
+        "en": "wiener sausages"
+      },
+      "quantity": 3,
+      "unit": "stick",
+      "optional": false,
+      "allergenInfo": "unknown",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "meat",
+        "pork"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-corn",
+      "label": {
+        "ja": "コーン（冷凍）",
+        "en": "frozen sweetcorn kernels"
+      },
+      "quantity": 6,
+      "unit": "piece",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-pumpkin",
+      "label": {
+        "ja": "かぼちゃ（角切り4個）",
+        "en": "kabocha squash (4 cubes)"
+      },
+      "quantity": 80,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-sugar",
+      "label": {
+        "ja": "砂糖",
+        "en": "sugar"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-salt",
+      "label": {
+        "ja": "塩（ひとつまみ）",
+        "en": "salt (a pinch)"
+      },
+      "quantity": null,
+      "unit": "small-amount",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-sesame",
+      "label": {
+        "ja": "白すりごま",
+        "en": "ground white sesame seeds"
+      },
+      "quantity": 1,
+      "unit": "tbsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-sesame"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    }
+  ],
+  "steps": [
+    {
+      "ja": "深さのある四角い耐熱容器で卵を溶き、牛乳とマヨネーズをよく混ぜ込む。600Wのレンジで1分（500Wなら1分30秒）加熱する。",
+      "en": "Beat the egg in a deep, square heatproof container and mix in the milk and mayonnaise thoroughly. Microwave at 600 W for 1 minute (1 1/2 minutes at 500 W)."
+    },
+    {
+      "ja": "卵をラップの上に出してきっちり包み、2～3分そのままおいて形をなじませる。",
+      "en": "Turn the egg out onto cling film, wrap it tightly and leave it for 2–3 minutes to settle into shape."
+    },
+    {
+      "ja": "のりの端を切り取り、その切れ端で目を作る。",
+      "en": "Trim a strip off the edge of the nori and cut the eyes from it."
+    },
+    {
+      "ja": "ラップにのりを置き、ごはんの半量、卵、残りのごはんの順に重ねて包む。形を整えて5分ほどおき、半分に切る。",
+      "en": "Lay the nori on cling film and stack half the rice, the egg and the rest of the rice on it, then fold it up. Shape it, leave it for about 5 minutes and cut it in half."
+    },
+    {
+      "ja": "切り口に目をつけ、ほっぺの位置にケチャップを少しのせてペンギンにする。",
+      "en": "Stick the eyes on the cut faces and dab on a little ketchup for cheeks to make two penguins."
+    },
+    {
+      "ja": "ウインナーとコーンを耐熱皿にのせてラップをふんわりかけ、600Wで1分30秒（500Wなら2分）加熱する。",
+      "en": "Put the sausages and corn on a heatproof plate, cover loosely with cling film and microwave at 600 W for 1 1/2 minutes (2 minutes at 500 W)."
+    },
+    {
+      "ja": "ウインナーを半分に切り、切り口に放射状の切り込みを3本入れて、中心にコーンをはさむ。",
+      "en": "Cut each sausage in half, make three crossing cuts in the cut end like a star and tuck a corn kernel into the centre."
+    },
+    {
+      "ja": "かぼちゃを耐熱容器に入れてラップをふんわりかけ、600Wで4分（500Wなら5分）加熱する。砂糖、塩ひとつまみ、すりごまを加えて混ぜる。",
+      "en": "Put the squash in a heatproof container, cover loosely and microwave at 600 W for 4 minutes (5 minutes at 500 W). Mix in the sugar, a pinch of salt and the ground sesame."
+    }
+  ],
+  "storage": [
+    {
+      "ja": "卵は中まで固まっていることを確かめてから、ごはんにはさみます。",
+      "en": "Check that the egg is set all the way through before putting it in the rice."
+    },
+    {
+      "ja": "小さな子どもが食べるときは、のどに詰まらせないよう、落ち着いて食べることに集中させましょう。",
+      "en": "When small children eat this, have them sit calmly and focus on eating so they do not choke."
+    }
+  ],
+  "allergenIds": [
+    "alg-egg",
+    "alg-milk",
+    "alg-sesame"
+  ],
+  "mayContainAllergenIds": [
+    "alg-egg",
+    "alg-soybean"
+  ],
+  "allergenDataComplete": false,
+  "allergenScheme": "caa-2026-04",
+  "animalOrigin": [
+    "egg",
+    "dairy",
+    "meat",
+    "pork"
+  ],
+  "dietDataComplete": true,
+  "dietOk": [
+    "no-seafood"
+  ],
+  "adaptations": [
+    {
+      "ja": "分量は元のレシピの1人分のままです（ごはん200g）。電子レンジの加熱時間がこの分量で書かれているため、減らしていません。",
+      "en": "Amounts are the source's single serving (200 g rice). They are not reduced because the microwave times are given for these amounts."
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-delish-penguin-onigirazu-bento",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "title": "お子さま大喜び！ ペンギンおにぎらず弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "url": "https://delishkitchen.tv/recipes/159623626746757523",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe",
+        "storage"
+      ]
+    },
+    {
+      "id": "src-ajinomoto-pureselect-mayo-label",
+      "publisher": "味の素株式会社（味の素パーク）",
+      "title": "【味の素KK】「ピュアセレクト」｜新鮮キープボトル",
+      "url": "https://www.ajinomoto.co.jp/pureselect/products/shinsenkeep/",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "allergen"
+      ]
+    },
+    {
+      "id": "src-kikkoman-delmonte-ketchup-label",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "デルモンテ トマトケチャップ",
+      "url": "https://www.kikkoman.co.jp/products/K45/detail/K451000.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "allergen"
+      ]
+    },
+    {
+      "id": "src-maff-lunchbox",
+      "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+      "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+      "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "storage"
+      ]
+    }
+  ],
+  "reviewedBy": "ba-research"
+}

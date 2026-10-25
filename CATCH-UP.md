@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-10-24 · Repo: local only (no remote yet, by PO instruction) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-10-25 (paused until next weekend) · Repo: local only (no remote yet, by PO instruction) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -27,14 +27,22 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 | H2 | Final tokens, 64 component specs, flows, a11y spec, ja/en copy (561 rows), preview v1.0 | `design/` |
 | H1 | 73 stories / 287 ACs, data contract v1, dictionary, ADR 001–005, QA strategy + 4 oracles; ~30 rulings in PLAN §7 | `docs/ba/`, `docs/dev/`, `tests/plan/`, `tests/oracle/` |
 
-### In progress 🔄
-Nothing running. M1 fix round merged (d058fa8): dev gate and QA suite green on main. M2 prep (BA + designer) done. **Uncommitted:** M2 prep docs, regenerated dictionary, plan/catch-up/lessons/event log — ask the PO.
+### In progress 🔄 — PAUSED 2026-10-25 by the PO (resume next weekend)
+Two tasks were stopped at a safe point; each wrote pause notes:
+- **M2 build** (developer, Sonnet): worktree branch `worktree-agent-a04d875d3e81d2b8f` (`.claude/worktrees/agent-a04d875d3e81d2b8f/`), last commit **96ef9fc (WIP)**, tree clean, not merged. Done: matcher + ambiguity, assessment, overrides, decision state machine, refresh review, date move, the M2-prep code items, calendar grid + keyboard, day sheet, decision actions, refresh list, date-fix sheet, ambiguity chooser, settings in onboarding; unit/property tests + 22 e2e; QA M1 suite 446 passed. **Left:** re-run `gate --stage dev` (green before the last 2 edits), write ADR 007 + ADR 004 change log (decision edits on a refused save: reload + toast, no re-apply), one flaky UI unit test to identify. Not built by design: holidays (no sourced list yet), amb-soba review flag (no copy), recommendations (M3 placeholder: 「手作りお弁当にする」 writes nothing yet), date-picker popover (dialog used). Open questions for BA/PO are in `docs/dev/_scratch/m2-pause-notes.md` on that branch.
+- **Recipe label round** (BA, Opus): **not started on any record** (batches untouched). Order to resume: 2b ketchup/curry-powder → `varies-by-product` (8 rows, 7 recipes, no fetching), then 2a curry-chahan, 2c quesadilla, 2d storage note, 2e pistachio, then maker labels (ham + sausage first: 7 recipes), dictionary sources + matsutake, contract §3.7/§6.1/§3.10 + brief §3. Notes: `docs/ba/_scratch/research-labels/pause-notes.md`.
+
+**Uncommitted on main** (since d005a43): recipe research (candidates, batches a/b, merged `data/library.json`), 10 new dictionary ids, `recipe-possible-allergens` schema change + test, 農林水産省 copy fix, `.gitignore` (saved source HTML), PLAN/CATCH-UP/events/usage. The PO decides whether to commit.
+
+### How to resume (new session in this folder; developer/QA on Sonnet per CLAUDE.md §6)
+1. Read this file, PLAN §7 (latest rows), and both pause notes. Run preflight; log `evidence.mjs event resume`. Consider logging it as `recovery-test` (a fresh session restoring from CATCH-UP alone is the evidence package's recovery check).
+2. **Label round:** re-dispatch a `ba` agent with "continue the label round from pause-notes.md" (baseline `research-labels`). Then: add the new maker hosts to `APPROVED_HOSTS` in `scripts/validate-data.mjs`, `npm run merge:research`, `validate.mjs overlap --fetch` (must be 0 FAIL, 0 UNVERIFIED), quick verifier re-check of the 2 failed records.
+3. **M2:** re-dispatch the `developer` (Sonnet) in the same worktree with "continue M2 from m2-pause-notes.md". Then merge locally, `diff-guard --task m2-build`, **gate + QA suite on main before any commit** (FL-15).
+4. M2 QA (Sonnet): oracles as executable tests (0 diffs); clean up `tests/e2e/qa/**` lint and restore the two rules.
+5. Then M3 (recipe suggestions), M4 (reminders, today, share, debug, full e2e), M5 (real Gemini: PO creates the key and writes `.env` + the env example file), M6 (Android report, can wait), H4, MVP evidence package.
 
 ### Next 📋
-1. Commit (PO).
-2. **M2** (developer, Sonnet, worktree): assessment + overrides, calendar grid (role=grid), day sheet, decision state machine, menu refresh E3-05/06, review date correction, ambiguity chooser, settings during onboarding; the code-side items in PLAN §7 "M2 prep (BA) done"; oracles become executable tests (QA writes them from `tests/oracle/*`).
-3. **M2 QA** (Sonnet): oracles 0 diffs, transitions, month boundaries; clean up `tests/e2e/qa/**` lint and restore the rules.
-4. Recipe research (BA, Opus) can start in parallel with M2.
+See "How to resume".
 
 ## 4. Key decisions (summary; the full log is in docs/PLAN.md §7)
 - Local git only; no push, deploy or paid services without PO approval.

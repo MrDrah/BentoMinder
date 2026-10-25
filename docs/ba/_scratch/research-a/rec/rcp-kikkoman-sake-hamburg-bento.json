@@ -1,0 +1,378 @@
+{
+  "id": "rcp-kikkoman-sake-hamburg-bento",
+  "name": {
+    "ja": "鮭ハンバーグ弁当",
+    "en": "Salmon patty bento"
+  },
+  "shortNameJa": "鮭バーグ",
+  "shortNameEn": "Salmon",
+  "nameKana": "さけはんばーぐべんとう",
+  "style": "japanese",
+  "themeId": null,
+  "description": {
+    "ja": "たたいた鮭にすりおろしたにんじんを混ぜて焼く、ごまの目がついた小さなハンバーグ。電子レンジで火を通したじゃがいも・にんじん・玉ねぎを、ケチャップとしょうゆで味つけした副菜と組み合わせます。",
+    "en": "Little salmon patties mixed with grated carrot, with sesame-seed faces. On the side: potato, carrot and onion cooked in the microwave and seasoned with ketchup and soy sauce."
+  },
+  "yield": {
+    "ja": "幼児1人分",
+    "en": "1 child portion"
+  },
+  "minutes": 30,
+  "makeAhead": null,
+  "ingredients": [
+    {
+      "ingredientId": "ing-salmon",
+      "label": {
+        "ja": "生鮭（切り身）",
+        "en": "fresh salmon (fillet)"
+      },
+      "quantity": 0.5,
+      "unit": "piece",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-salmon"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-carrot",
+      "label": {
+        "ja": "にんじん（ハンバーグ用）",
+        "en": "carrot (for the patties)"
+      },
+      "quantity": 30,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-soy-sauce",
+      "label": {
+        "ja": "しょうゆ（ハンバーグ用）",
+        "en": "soy sauce (for the patties)"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "varies-by-product",
+      "allergenIds": [],
+      "possibleAllergenIds": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-mirin",
+      "label": {
+        "ja": "みりん",
+        "en": "mirin"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-sesame",
+      "label": {
+        "ja": "いりごま",
+        "en": "toasted sesame seeds"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-sesame"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-paprika",
+      "label": {
+        "ja": "パプリカ（赤）",
+        "en": "red bell pepper"
+      },
+      "quantity": null,
+      "unit": "small-amount",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-oil",
+      "label": {
+        "ja": "サラダ油",
+        "en": "vegetable oil"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-lettuce",
+      "label": {
+        "ja": "サニーレタス",
+        "en": "red leaf lettuce"
+      },
+      "quantity": 1,
+      "unit": "slice",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-potato",
+      "label": {
+        "ja": "じゃがいも",
+        "en": "potato"
+      },
+      "quantity": 0.5,
+      "unit": "piece",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-carrot",
+      "label": {
+        "ja": "にんじん（副菜用）",
+        "en": "carrot (for the side dish)"
+      },
+      "quantity": 20,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-onion",
+      "label": {
+        "ja": "玉ねぎ",
+        "en": "onion"
+      },
+      "quantity": 20,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-ketchup",
+      "label": {
+        "ja": "トマトケチャップ",
+        "en": "tomato ketchup"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-soy-sauce",
+      "label": {
+        "ja": "しょうゆ（副菜用）",
+        "en": "soy sauce (for the side dish)"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "varies-by-product",
+      "allergenIds": [],
+      "possibleAllergenIds": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    }
+  ],
+  "steps": [
+    {
+      "ja": "皮をはずした鮭を包丁でたたいてミンチ状にし、ボウルに移す。",
+      "en": "Remove the skin from the salmon, chop it finely with a knife until minced and put it in a bowl."
+    },
+    {
+      "ja": "ハンバーグ用のにんじんをすりおろし、水気をしっかりしぼって鮭に加える。しょうゆ小さじ1とみりん小さじ1も入れて、よく混ぜる。",
+      "en": "Grate the carrot for the patties, squeeze out the liquid well and add it to the salmon with 1 tsp soy sauce and 1 tsp mirin. Mix well."
+    },
+    {
+      "ja": "3つに分けて丸くまとめ、いりごまとパプリカで目や口をつけて顔にする。",
+      "en": "Shape into three round patties and give each a face with sesame seeds and bits of red pepper."
+    },
+    {
+      "ja": "油を温めたフライパンに顔を上にして並べ、焼き色がついたらふたをして、中まで火を通す。",
+      "en": "Heat the oil in a frying pan, put in the patties face up, and once browned underneath cover with a lid and cook through."
+    },
+    {
+      "ja": "副菜を作る。じゃがいもは皮をむいて一口大に切り、にんじんと玉ねぎはそれよりやや小さく切る。",
+      "en": "For the side dish, peel the potato and cut it into bite-size pieces; cut the carrot and onion slightly smaller."
+    },
+    {
+      "ja": "野菜を耐熱容器に入れてラップをかけ、500Wのレンジで2分温めてやわらかくする。",
+      "en": "Put the vegetables in a heatproof container, cover with cling film and microwave at 500 W for 2 minutes until tender."
+    },
+    {
+      "ja": "ケチャップ、しょうゆ、水を小さじ1ずつ合わせて加え、もう30秒加熱してから全体を混ぜる。",
+      "en": "Add 1 tsp each of ketchup, soy sauce and water, mixed together, microwave for another 30 seconds and stir everything."
+    },
+    {
+      "ja": "お弁当箱にサニーレタスを敷いてハンバーグをのせ、冷ました副菜を詰める。",
+      "en": "Line the box with the lettuce leaf, set the patties on it and add the cooled side dish."
+    }
+  ],
+  "storage": [
+    {
+      "ja": "ハンバーグはふたをして中心まで火を通してから詰めます。",
+      "en": "Cook the patties through to the centre, with the lid on, before packing."
+    },
+    {
+      "ja": "敷き用のサニーレタスは生のまま使うので、よく洗って水気をしっかりふき取ってから入れます。",
+      "en": "The lettuce leaf goes in raw, so wash it well and pat it completely dry before using it."
+    }
+  ],
+  "allergenIds": [
+    "alg-salmon",
+    "alg-sesame"
+  ],
+  "mayContainAllergenIds": [
+    "alg-wheat",
+    "alg-soybean"
+  ],
+  "allergenDataComplete": true,
+  "allergenScheme": "caa-2026-04",
+  "animalOrigin": [
+    "fish-seafood"
+  ],
+  "dietDataComplete": true,
+  "dietOk": [
+    "pescatarian",
+    "no-pork",
+    "no-beef"
+  ],
+  "adaptations": [
+    {
+      "ja": "分量は元のレシピ（幼稚園児1人分）のままです。調理時間は2品の時間（20分＋10分）を合計しました。",
+      "en": "Amounts are as in the source (one kindergarten child). The time is the sum of the two dishes (20 + 10 minutes)."
+    },
+    {
+      "ja": "銘柄指定のしょうゆ・みりん・ケチャップは、一般的なしょうゆ・みりん・トマトケチャップとして記載しました。",
+      "en": "The branded soy sauce, mirin and ketchup in the source are listed as ordinary soy sauce, mirin and tomato ketchup."
+    },
+    {
+      "ja": "元の作り方では敷く葉が「サラダ菜」となっていますが、材料表どおりサニーレタスにしました。水小さじ1は手順に記載しています。",
+      "en": "The source method says to line the box with butterhead lettuce, but its ingredient list has red leaf lettuce; the ingredient list is followed. The 1 tsp water is given in the steps."
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-kikkoman-sake-hamburg-bento",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "鮭ハンバーグ弁当 | キッコーマン | ホームクッキング",
+      "url": "https://www.kikkoman.co.jp/homecook/lunch/enji/sakehamberg.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe"
+      ]
+    },
+    {
+      "id": "src-kikkoman-sake-hamburg",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "鮭ハンバーグ（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003012/",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe",
+        "storage"
+      ]
+    },
+    {
+      "id": "src-kikkoman-jagaimo-ninjin-ketchup-ni",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "じゃがいもとにんじんのケチャップ煮（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003014/",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe"
+      ]
+    },
+    {
+      "id": "src-kikkoman-tokusen-marudaizu-label",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "キッコーマン 特選 丸大豆しょうゆ",
+      "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "allergen"
+      ]
+    },
+    {
+      "id": "src-kikkoman-delmonte-ketchup-label",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "デルモンテ トマトケチャップ",
+      "url": "https://www.kikkoman.co.jp/products/K45/detail/K451000.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "allergen"
+      ]
+    },
+    {
+      "id": "src-maff-lunchbox",
+      "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+      "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+      "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "storage"
+      ]
+    }
+  ],
+  "reviewedBy": "ba-research"
+}

@@ -1,10 +1,10 @@
 # Domain dictionary — BentoMinder
 
-Owner: BA · 2026-10-24 · Version **v1 (expandable)** · Status: **H1 final** (2026-10-24; ids are stable from here on, new terms by proposal only; H1 fix round: `animalOrigin` column (ruling B14), 2 new ingredients, verdict rule B2; M1 prep 2026-10-24: categories are labels only, new ambiguity group `amb-imo`; M2 prep 2026-10-25: amb-momo candidate id, non-food readings, picker kind labels, §8)
+Owner: BA · 2026-10-24 · Version **v1 (expandable)** · Status: **H1 final** (2026-10-24; ids are stable from here on, new terms by proposal only; H1 fix round: `animalOrigin` column (ruling B14), 2 new ingredients, verdict rule B2; M1 prep 2026-10-24: categories are labels only, new ambiguity group `amb-imo`; M2 prep 2026-10-25: amb-momo candidate id, non-food readings, picker kind labels, §8; research phase 2 prep 2026-10-25: 10 ingredients, §8)
 
 Used by: preference assessment (BR-04, US-E4-01), profile pickers (US-E1-02), allergen and diet filters (BR-06), recipe validation (`docs/ba/data-contract.md` §3.7). `scripts/build-dictionary.mjs` converts these tables into `data/dictionary.json` (generated: one record per row, same ids; never edited by hand). This file is the source: changes go through the BA here, then `npm run build:dictionary`.
 
-Scope: v1 covers the dishes and ingredients typical of Japanese kindergarten 給食 menus and of children's bentos: 30 categories and sub-categories, 29 current allergens (+1 retired), 171 ingredients, 55 dishes (226 food terms), 8 themes, 10 ambiguity groups. New terms are added by proposal (id, 表記, よみ, English, category, synonyms) and never by changing an existing id.
+Scope: v1 covers the dishes and ingredients typical of Japanese kindergarten 給食 menus and of children's bentos: 30 categories and sub-categories, 29 current allergens (+1 retired), 181 ingredients, 55 dishes (236 food terms), 8 themes, 10 ambiguity groups. New terms are added by proposal (id, 表記, よみ, English, category, synonyms) and never by changing an existing id.
 
 ## 1. Matching rules (deterministic)
 1. **Normalise** both the menu text and every surface form: Unicode NFKC (full/half-width), katakana → hiragana, remove spaces, 「・」 and brackets; keep 「ー」.
@@ -20,7 +20,7 @@ Scope: v1 covers the dishes and ingredients typical of Japanese kindergarten 給
 
 Column meaning: **inherent allergens** = the food is itself that allergen item (卵 → alg-egg). **info** = `known` (single food) or `varies` (processed food whose allergens depend on the product; recipes must record the label's allergens as `possibleAllergenIds`). **animalOrigin** (H1 ruling B14; used only by the diet filter, data contract §3.8) = the animal-origin tags the food has or that its common products contain, from `meat` (species not stated or varying), `pork`, `beef`, `chicken`, `fish-seafood`, `egg`, `dairy`, `gelatin`; `–` = no animal origin; a trailing `?` = the animal origin of the food's products cannot be bounded (JSON: `animalOrigin` array + `animalOriginKnown: false`). A recipe ingredient copies these tags (it may add tags, never remove them); a `?` ingredient makes the recipe `dietDataComplete = false`, and so excluded for every selected diet, unless the recipe's cited source states that product's ingredients.
 
-**animalOrigin coverage (H1):** 171 of 171 ingredients carry a value: 61 with at least one tag, 110 `–`. Unknown (`?`, 7): `ing-bread`, `ing-bread-crumbs` (milk, butter or egg are common; other animal-derived fats or additives cannot be ruled out across products), `ing-worcester-sauce` (some products may use animal extracts; not established), `ing-curry-roux`, `ing-stew-roux` (typically contain meat extracts and fats and milk; exact species vary), `ing-dashi` (fish-based; granulated 和風だし may contain other extracts), `ing-consomme` (beef, chicken and pork extracts or fats are common; varies). Hidden sources tagged without `?`: かつおぶし, 煮干し (`fish-seafood`), ウインナー, ハム (`meat`, `pork`), ベーコン (`pork`), ちくわ, かまぼこ, はんぺん, さつま揚げ, カニカマ (`fish-seafood`), マヨネーズ (`egg`), バター and other dairy (`dairy`), ヨーグルト (`dairy`, `gelatin`: some products contain gelatin), ひき肉 with species not stated (`meat`). Still to verify: animal rennet in チーズ (tagged `dairy` only; see `open-questions.md`).
+**animalOrigin coverage (H1; research phase 2 prep):** 181 of 181 ingredients carry a value: 65 with at least one tag or `?`, 116 `–`. Unknown (`?`, 8): `ing-bread`, `ing-bread-crumbs` (milk, butter or egg are common; other animal-derived fats or additives cannot be ruled out across products), `ing-worcester-sauce` (some products may use animal extracts; not established), `ing-curry-roux`, `ing-stew-roux` (typically contain meat extracts and fats and milk; exact species vary), `ing-dashi` (fish-based; granulated 和風だし may contain other extracts), `ing-consomme` (beef, chicken and pork extracts or fats are common; varies), `ing-tortilla` (flour tortillas are made with a fat that may be vegetable oil, shortening or lard depending on the product; not established, so no tag is asserted). Hidden sources tagged without `?`: かつおぶし, 煮干し (`fish-seafood`), ウインナー, ハム (`meat`, `pork`), ベーコン (`pork`), ちくわ, かまぼこ, はんぺん, さつま揚げ, カニカマ, 桜でんぶ, たらこ, 鮭フレーク (`fish-seafood`), マヨネーズ (`egg`), バター and other dairy (`dairy`), ヨーグルト (`dairy`, `gelatin`: some products contain gelatin), ひき肉 with species not stated (`meat`). Still to verify: animal rennet in チーズ (tagged `dairy` only; see `open-questions.md`).
 
 ## 2. Categories
 | id | 表記 | よみ | English | parent |
@@ -114,6 +114,7 @@ Allergen synonyms are used only to map **declared** allergen lines of the menu P
 | ing-bread | パン | ぱん | Bread | cat-grain | 食パン, ロールパン, コッペパン | – | varies | dairy, egg, ? |
 | ing-wheat-flour | 小麦粉 | こむぎこ | Wheat flour | cat-grain | 薄力粉, 強力粉 | alg-wheat | known | – |
 | ing-bread-crumbs | パン粉 | ぱんこ | Bread crumbs | cat-grain | – | – | varies | dairy, egg, ? |
+| ing-tortilla | トルティーヤ | とるてぃーや | Wheat flour tortilla | cat-grain | トルティーア, トルティア, フラワートルティーヤ | alg-wheat | varies | ? |
 | ing-udon | うどん | うどん | Udon noodles | cat-noodle | ウドン, 饂飩 | alg-wheat | varies | – |
 | ing-soba | そば（蕎麦） | そば | Buckwheat noodles | cat-noodle | 蕎麦, 日本そば | alg-buckwheat | varies | – |
 | ing-chinese-noodles | 中華めん | ちゅうかめん | Chinese-style wheat noodles | cat-noodle | 中華麺, ラーメン, 焼きそばめん | – | varies | egg |
@@ -160,6 +161,7 @@ Allergen synonyms are used only to map **declared** allergen lines of the menu P
 | ing-corn | とうもろこし | とうもろこし | Corn | cat-vegetable | コーン, スイートコーン, トウモロコシ | – | known | – |
 | ing-edamame | えだまめ | えだまめ | Edamame | cat-vegetable | 枝豆, エダマメ | alg-soybean (conservative, see note) | known | – |
 | ing-green-peas | グリーンピース | ぐりーんぴーす | Green peas | cat-vegetable | グリンピース, えんどう豆 | – | known | – |
+| ing-black-beans | 黒いんげん豆 | くろいんげんまめ | Black beans (black kidney beans; not 黒豆 black soybeans) | cat-vegetable | 黒インゲン豆, 黒いんげん, ブラックビーンズ, ブラックビーン | – | known | – |
 | ing-green-beans | いんげん | いんげん | Green beans | cat-green-vegetable | さやいんげん, インゲン | – | known | – |
 | ing-snow-peas | きぬさや | きぬさや | Snow peas | cat-green-vegetable | 絹さや, さやえんどう | – | known | – |
 | ing-okra | オクラ | おくら | Okra | cat-green-vegetable | – | – | known | – |
@@ -170,7 +172,12 @@ Allergen synonyms are used only to map **declared** allergen lines of the menu P
 | ing-bamboo-shoot | たけのこ | たけのこ | Bamboo shoot | cat-vegetable | 筍, タケノコ | – | known | – |
 | ing-garlic | にんにく | にんにく | Garlic | cat-vegetable | ニンニク, 大蒜 | – | known | – |
 | ing-ginger | しょうが | しょうが | Ginger | cat-vegetable | 生姜, ショウガ | – | known | – |
+| ing-shiso | 青じそ | あおじそ | Green shiso (perilla leaf) | cat-leafy-vegetable | 大葉, おおば, オオバ, 青ジソ, 青紫蘇, しそ, シソ, 紫蘇 | – | known | – |
+| ing-coriander-leaf | パクチー | ぱくちー | Coriander leaf (cilantro) | cat-leafy-vegetable | 香菜, シャンツァイ, コリアンダーの葉, コリアンダーリーフ | – | known | – |
+| ing-radish | ラディッシュ | らでぃっしゅ | Radish (small red) | cat-vegetable | 二十日大根, はつかだいこん, ハツカダイコン | – | known | – |
 | ing-mixed-vegetables | ミックスベジタブル | みっくすべじたぶる | Frozen mixed vegetables | cat-vegetable | – | – | varies | – |
+
+Note on new vegetables (research phase 2 prep): 黒いんげん豆 (`ing-black-beans`) is a kidney-bean variety, not a soybean, so it has no `alg-soybean`; 「黒豆」 (black soybeans) is deliberately **not** a form of it and has no entry yet (propose `ing-black-soybean` with `alg-soybean` when needed). 「しそ」 maps to `ing-shiso` (green shiso is what bento and menu text mean; red shiso appears as ゆかり or in 梅干し, which are not entries). Bare 「コリアンダー」 is not a form of `ing-coriander-leaf`, because in Japanese spice lists it usually means the seed; only 「コリアンダーの葉」「コリアンダーリーフ」 map. 「二十日大根」 beats 「大根」 by longest match. 「黒いんげん豆」 beats 「いんげん」 likewise.
 
 Note on ing-edamame and ing-mandarin (decided default, H1): edamame are immature soybeans, and みかん is a citrus close to the CAA オレンジ item. Whether the CAA 大豆 and オレンジ items cover them has not been confirmed from a CAA source. Until it is, both carry the allergen as an **inherent** allergen (`alg-soybean`, `alg-orange`), so recipes list it in `allergenIds` and the hard filter (BR-06) excludes them for a child with that allergy. This errs on the side of excluding. If the CAA source shows an item is not covered, the BA removes the inherent allergen by proposal and cites the source (open-questions.md, "Still to verify").
 
@@ -244,6 +251,8 @@ Note on ing-edamame and ing-mandarin (decided default, H1): edamame are immature
 | ing-bonito-flakes | かつおぶし | かつおぶし | Bonito flakes | cat-fish | かつお節, 鰹節, おかか, 削り節 | – | known | fish-seafood |
 | ing-niboshi | 煮干し | にぼし | Dried baby sardines (for stock) | cat-fish | にぼし, いりこ | – | known | fish-seafood |
 | ing-salmon-roe | いくら | いくら | Salmon roe | cat-fish | イクラ | alg-salmon-roe | known | fish-seafood |
+| ing-salmon-flakes | 鮭フレーク | さけふれーく | Salmon flakes (child of ing-salmon) | cat-fish | さけフレーク, しゃけフレーク, サケフレーク, サーモンフレーク | alg-salmon | varies | fish-seafood |
+| ing-tarako | たらこ | たらこ | Pollock roe (tarako) | cat-fish | 鱈子, タラコ | – | varies | fish-seafood |
 | ing-shrimp | えび | えび | Shrimp | cat-seafood | エビ, 海老, むきえび, 桜えび | alg-shrimp | known | fish-seafood |
 | ing-crab | かに | かに | Crab | cat-seafood | カニ, 蟹 | alg-crab | known | fish-seafood |
 | ing-squid | いか | いか | Squid | cat-seafood | イカ, 烏賊 | alg-squid | known | fish-seafood |
@@ -256,6 +265,9 @@ Note on ing-edamame and ing-mandarin (decided default, H1): edamame are immature
 | ing-hanpen | はんぺん | はんぺん | Hanpen fish cake | cat-fish-processed | – | – | varies | fish-seafood, egg |
 | ing-satsuma-age | さつま揚げ | さつまあげ | Fried fish cake | cat-fish-processed | さつまあげ, 薩摩揚げ | – | varies | fish-seafood |
 | ing-crab-stick | カニカマ | かにかま | Crab-flavoured fish stick | cat-fish-processed | かにかま, かに風味かまぼこ | – | varies | fish-seafood |
+| ing-sakura-denbu | 桜でんぶ | さくらでんぶ | Sweet pink fish flakes (sakura denbu) | cat-fish-processed | さくらでんぶ, 桜田麩, でんぶ, 田麩 | – | varies | fish-seafood |
+
+Note (research phase 2 prep): `ing-tarako` たらこ is the roe of walleye pollock (スケトウダラ). It is neither いくら (`alg-salmon-roe`) nor さけ, and たら/たらこ are not on the CAA list, so it has no inherent allergen; 明太子 (spiced, a different product) is not a form. It is not a child of `ing-cod`: disliking a cod fillet says nothing about roe. 「たらこ」 beats 「たら」 by longest match. `ing-salmon-flakes` is a child of `ing-salmon` and carries `alg-salmon`; 「鮭フレーク」「さけフレーク」 beat 「鮭」 and the amb-sake form 「さけ」 by longest match. `ing-sakura-denbu` (white fish, typically cod, flaked and sweetened) sits in `cat-fish-processed` like ちくわ, for the same reason (many fish-averse children eat it); 「でんぶ」 alone maps to it.
 
 `ing-chicken-thigh` etc. are children of `ing-chicken`: a child who dislikes 鶏肉 also dislikes 鶏もも肉; an exclusion of `ing-chicken` also excludes its children (BR-06).
 
@@ -304,6 +316,8 @@ Note: 「カキ」 in katakana belongs to the ambiguity group amb-kaki (§7), no
 | ing-curry-roux | カレールウ | かれーるう | Curry roux | cat-seasoning | カレールー | – | varies | meat, pork, beef, chicken, dairy, ? |
 | ing-stew-roux | シチュールウ | しちゅーるう | Stew roux | cat-seasoning | シチュールー | – | varies | meat, pork, beef, chicken, dairy, ? |
 | ing-curry-powder | カレー粉 | かれーこ | Curry powder | cat-seasoning | カレーパウダー | – | varies | – |
+| ing-cumin | クミン | くみん | Cumin | cat-seasoning | クミンシード, クミンパウダー | – | known | – |
+| ing-dried-herbs | 乾燥ハーブ | かんそうはーぶ | Dried herbs | cat-seasoning | ドライハーブ | – | varies | – |
 | ing-dashi | だし | だし | Dashi stock | cat-seasoning | 出汁, かつおだし, 和風だし | – | varies | fish-seafood, ? |
 | ing-consomme | コンソメ | こんそめ | Consommé stock | cat-seasoning | ブイヨン, 洋風だし | – | varies | beef, chicken, pork, ? |
 | ing-potato-starch | 片栗粉 | かたくりこ | Potato starch | cat-seasoning | かたくり粉 | – | known | – |
@@ -311,6 +325,8 @@ Note: 「カキ」 in katakana belongs to the ambiguity group amb-kaki (§7), no
 | ing-jam | ジャム | じゃむ | Jam | cat-sweets | いちごジャム | – | varies | – |
 | ing-honey | はちみつ | はちみつ | Honey | cat-sweets | 蜂蜜, ハチミツ | – | known | – |
 | ing-barley-tea | 麦茶 | むぎちゃ | Barley tea | cat-drink | むぎちゃ | – | known | – |
+
+Cumin and dried herbs are seasonings (rule 8). 「ハーブ」 alone is not a form of `ing-dried-herbs` (it may be fresh herbs); it stays unmatched. `ing-tortilla` carries `alg-wheat` (flour tortilla, as used in children's wrap bentos); corn tortillas are not covered by this entry.
 
 Honey: 厚生労働省 advises against honey for infants under 1 year, which is below every age range offered (OQ-12), so the MVP has no honey filter. The research agent cites the MHLW page if a recipe uses honey.
 
@@ -416,3 +432,4 @@ No licensed characters (copyright): themes are generic.
 - H1 fix round additions (BA, 2026-10-24): `ing-niboshi` 煮干し (B14 hidden source, stock fish) and `ing-stew-roux` シチュールウ (B14 hidden source). Note: in a menu *item* the dish pass matches 「シチュー」 (dish-stew) first, so 「シチュールウ」 is recognised in listed ingredients and recipes, not inside dish names.
 - M1 prep changes (BA, 2026-10-24; Developer item in PLAN §7 "M0 done"): categories are **labels only**, with no surface forms (§1 rules 2, 5, 7; §2 note), so `dict-synonym-unique` holds for 鶏肉, 豚肉, 牛肉, たまご and さかな, which stay forms of `ing-chicken`, `ing-pork`, `ing-beef`, `ing-egg` and `ing-fish`. The one category-level form that had no entry, 「いも」, moves to the new ambiguity group `amb-imo` (with 「芋」「おいも」). `dict-id-format` merged into `id-format`. No id changed.
 - M2 prep changes (BA, 2026-10-25): amb-momo's third candidate is written as the id `ing-pork` (豚もも); it was the words "pork thigh", which `build-dictionary` cannot turn into an id, so `candidateIds` lacked it. §7 states how review asks and how the non-food readings of amb-aji and amb-nashi are stored. §7 also fixes the picker kind labels. No id added, changed or retired. **`npm run build:dictionary` must be re-run** (generated `data/dictionary.json`).
+- Research phase 2 prep (BA, 2026-10-25; requested by the Organisator for recipe research phase 2): 10 new ingredients, no id changed or retired. `ing-tortilla` (4.1, `alg-wheat`, animalOrigin `?`); `ing-black-beans`, `ing-shiso`, `ing-coriander-leaf`, `ing-radish` (4.2); `ing-salmon-flakes` (child of `ing-salmon`, `alg-salmon`), `ing-tarako`, `ing-sakura-denbu` (4.5, `fish-seafood`); `ing-cumin`, `ing-dried-herbs` (4.7, seasonings). Forms left out on purpose to keep one form → one id: 「黒豆」 (black soybean, a different food), bare 「コリアンダー」 (usually the seed spice), 「ハーブ」 (fresh or dried), 「明太子」 (different product), 「トルティージャ」 (also the Spanish omelette). **`npm run build:dictionary` must be re-run.**

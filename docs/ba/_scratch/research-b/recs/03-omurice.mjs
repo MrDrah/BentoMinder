@@ -1,0 +1,68 @@
+// rank 3: kikkoman-enji-omurice-bento
+const A = '2026-10-25';
+const kikkoman = 'キッコーマン株式会社（ホームクッキング）';
+const soy = { info: 'varies-by-product', possible: ['alg-wheat', 'alg-soybean'] };
+export default {
+  id: 'rcp-kikkoman-omurice-bento',
+  name: { ja: 'オムライス弁当', en: 'Omurice bento' },
+  shortNameJa: 'オムライス',
+  shortNameEn: 'Omurice',
+  nameKana: 'おむらいすべんとう',
+  style: 'western-inspired',
+  themeId: null,
+  description: {
+    ja: 'ケチャップ味のチキンライスの上に小ぶりのオムレツを重ねた園児向けのお弁当。じゃこ入りのコーンサラダとキウイを添えます。',
+    en: 'A kindergarten-size box: ketchup chicken rice topped with a small omelette, with a corn salad with tiny dried fish and some kiwi.',
+  },
+  minutes: 30,
+  ingredients: [
+    ['ing-chicken-thigh', '鶏もも肉（皮を除く）', 'chicken thigh, skin removed', 0.13, 'slice'],
+    ['ing-rice', 'ごはん', 'cooked rice', 110, 'g'],
+    ['ing-oil', 'サラダ油', 'vegetable oil', 0.5, 'tsp'],
+    ['ing-butter', 'バター', 'butter', 1, 'tsp'],
+    ['ing-onion', '玉ねぎ（みじん切り）', 'onion, finely chopped', 2, 'tbsp'],
+    ['ing-edamame', '枝豆（ゆでてさやから出したもの）', 'edamame, boiled and shelled', 1, 'tbsp'],
+    ['ing-ketchup', 'トマトケチャップ', 'tomato ketchup', 2, 'tsp', { info: 'known' }],
+    ['ing-soy-sauce', 'しょうゆ（チキンライス用）', 'soy sauce (for the rice)', 0.5, 'tsp', soy],
+    ['ing-egg', '卵', 'egg', 1, 'piece'],
+    ['ing-sugar', '砂糖', 'sugar', 0.5, 'tsp'],
+    ['ing-salt', '塩（オムレツ用）', 'salt (for the omelette)', null, 'small-amount'],
+    ['ing-corn', 'ホールコーン（缶詰）', 'canned sweetcorn kernels', 40, 'g'],
+    ['ing-cucumber', 'きゅうり', 'cucumber', 0.25, 'stick'],
+    ['ing-radish', 'ラディッシュ', 'radish', 1, 'piece'],
+    ['ing-whitebait', 'ちりめんじゃこ', 'chirimen jako (small dried fish)', 1, 'tbsp'],
+    ['ing-soy-sauce', 'しょうゆ（サラダ用）', 'soy sauce (for the salad)', 1, 'tsp', soy],
+    ['ing-vinegar', '酢', 'vinegar', 1, 'tsp', { info: 'varies-by-product', possible: ['alg-wheat'] }],
+    ['ing-sesame-oil', 'ごま油', 'sesame oil', 1, 'tsp'],
+    ['ing-salt', '塩（サラダ用）', 'salt (for the salad)', null, 'small-amount'],
+    ['ing-kiwi', 'キウイフルーツ', 'kiwi fruit', null, 'to-taste'],
+  ],
+  steps: [
+    { ja: '鶏もも肉は皮をはずし、さいの目（約1cm）に切ります。', en: 'Take the skin off the chicken and dice it into roughly 1 cm cubes.' },
+    { ja: 'フライパンにサラダ油を入れて中火にかけ、鶏肉をほぼ火が通るまで炒めます。玉ねぎと枝豆を加えてさらに炒め、ケチャップとしょうゆで味つけします。', en: 'Heat the oil in a frying pan over medium heat and fry the chicken until it is nearly done. Add the onion and edamame, cook them through, then season with the ketchup and soy sauce.' },
+    { ja: 'ごはんを加え、むらがないように混ぜながら炒めてチキンライスにし、お弁当箱に詰めます。', en: 'Stir in the rice and keep tossing until it is evenly coloured, then put this chicken rice into the lunchbox.' },
+    { ja: '卵に砂糖と塩を混ぜておきます。フライパンを中火にしてバターを溶かし、卵液で小ぶりのオムレツを焼いて、チキンライスにのせます。', en: 'Beat the egg with the sugar and salt. Melt the butter in the pan over medium heat, cook a small omelette and lay it on the chicken rice.' },
+    { ja: 'コーンは汁けをよくきります。きゅうりは板ずりして洗い、すりこぎで軽くたたいてから一口大に割ります。ラディッシュは薄い輪切りにします。', en: 'Drain the corn well. Rub the cucumber with salt, rinse it, bash it lightly with a rolling pin and break it into bite-size pieces. Slice the radish thinly.' },
+    { ja: 'じゃこを油なしのフライパンに入れ、温まるまで軽く煎ります。', en: 'Toast the dried fish in a dry pan just until it is hot.' },
+    { ja: 'しょうゆ、酢、ごま油、塩を合わせ、コーン、きゅうり、ラディッシュ、じゃこをあえて詰めます。キウイフルーツを添えます。', en: 'Mix the soy sauce, vinegar, sesame oil and salt, toss the corn, cucumber, radish and fish in it and pack the salad. Add the kiwi alongside.' },
+  ],
+  storage: [
+    { ja: 'お弁当に入れるオムレツは、卵の中までしっかり火を通してください。夏は特に注意します。', en: 'For a lunchbox, cook the omelette until the egg is set all the way through, especially in summer.' },
+    { ja: 'オムレツは冷めてからお弁当箱に詰めます。', en: 'Let the omelette cool before you close the lunchbox.' },
+  ],
+  adaptations: [
+    { ja: '元のレシピがもともと幼児1人分（大人の約半量）なので、分量はそのままです。鶏もも肉は元の表記で1/8枚です。', en: 'The source is already written for one young child (about half an adult portion), so amounts are unchanged. The chicken is 1/8 of a thigh in the source.' },
+    { ja: '元のレシピで指定されたメーカー品（デルモンテのケチャップとコーン缶、キッコーマンのしょうゆ）は一般的な食材名にしました。', en: 'Branded products in the source (Del Monte ketchup, Kikkoman soy sauce, Del Monte whole corn) are listed as generic ingredients.' },
+    { ja: 'キウイフルーツは添えると書かれているだけで量の記載がないため、適量としました。', en: 'The source only says kiwi is added on the side, with no amount, so it is listed as "to taste".' },
+    { ja: 'しょうゆと酢は製品によって原材料が違います。アレルギーがある場合は表示を確認してください。ケチャップのアレルゲンは参照した製品表示によります。', en: 'Soy sauce and vinegar ingredients vary by product; check the label if your child has allergies. The ketchup allergen data come from the product label cited.' },
+    { ja: '調理時間はオムライス（20分）とサラダ（10分）の合計です。', en: 'The time is the sum of the omurice (20 min) and the salad (10 min).' },
+  ],
+  sources: [
+    { id: 'src-kikkoman-omurice-bento', publisher: kikkoman, title: 'オムライス弁当 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/lunch/enji/omurice.html', accessed: A, language: 'ja', usedFor: ['recipe', 'storage'] },
+    { id: 'src-kikkoman-omurice-enji', publisher: kikkoman, title: 'オムライス（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/search/recipe/00002912/', accessed: A, language: 'ja', usedFor: ['recipe', 'storage'] },
+    { id: 'src-kikkoman-jako-corn-salad-enji', publisher: kikkoman, title: 'じゃこ入りコーンサラダ（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/search/recipe/00002913/', accessed: A, language: 'ja', usedFor: ['recipe'] },
+    { id: 'src-kikkoman-delmonte-ketchup', publisher: 'キッコーマン株式会社（ホームクッキング）', title: 'デルモンテ トマトケチャップ | キッコーマン株式会社', url: 'https://www.kikkoman.co.jp/products/K45/detail/K451000.html', accessed: A, language: 'ja', usedFor: ['allergen'] },
+    { id: 'src-kikkoman-marudaizu-shoyu', publisher: 'キッコーマン株式会社（ホームクッキング）', title: 'キッコーマン 特選 丸大豆しょうゆ | キッコーマン株式会社', url: 'https://www.kikkoman.co.jp/products/K05/detail/K051005.html', accessed: A, language: 'ja', usedFor: ['allergen'] },
+    { id: 'src-mizkan-kokumotsu-su', publisher: 'ミツカン（ミツカングループ「おうちレシピ」）', title: '穀物酢 | 商品情報 | ミツカングループ', url: 'https://www.mizkan.co.jp/product/group/?gid=01001', accessed: A, language: 'ja', usedFor: ['allergen'] },
+  ],
+};

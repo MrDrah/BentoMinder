@@ -1,0 +1,284 @@
+{
+  "id": "rcp-delish-yaki-oyakodon-bento",
+  "name": {
+    "ja": "焼き親子丼弁当",
+    "en": "Pan-fried oyakodon bento"
+  },
+  "shortNameJa": "焼き親子丼",
+  "shortNameEn": "Oyakodon",
+  "nameKana": "やきおやこどんべんとう",
+  "style": "japanese",
+  "themeId": null,
+  "description": {
+    "ja": "鶏肉と玉ねぎを甘辛く炒め、角切りにした卵焼きと一緒に、刻みのりを敷いたごはんにのせる焼き親子丼。卵焼き器ひとつで15分ほどで作れます。",
+    "en": "Chicken and onion stir-fried in a sweet soy glaze, served with cubes of omelette over rice lined with shredded nori. Made in one omelette pan in about 15 minutes."
+  },
+  "yield": {
+    "ja": "幼児1人分",
+    "en": "1 child portion"
+  },
+  "minutes": 15,
+  "makeAhead": null,
+  "ingredients": [
+    {
+      "ingredientId": "ing-rice",
+      "label": {
+        "ja": "ごはん",
+        "en": "cooked rice"
+      },
+      "quantity": 75,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-chicken-thigh",
+      "label": {
+        "ja": "鶏もも肉",
+        "en": "chicken thigh"
+      },
+      "quantity": 50,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-chicken"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-egg",
+      "label": {
+        "ja": "溶き卵",
+        "en": "beaten egg"
+      },
+      "quantity": 0.5,
+      "unit": "piece",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [
+        "alg-egg"
+      ],
+      "possibleAllergenIds": [],
+      "animalOrigin": [
+        "egg"
+      ],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-onion",
+      "label": {
+        "ja": "玉ねぎ",
+        "en": "onion"
+      },
+      "quantity": 25,
+      "unit": "g",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-oil",
+      "label": {
+        "ja": "サラダ油",
+        "en": "vegetable oil"
+      },
+      "quantity": 1,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-nori",
+      "label": {
+        "ja": "刻みのり",
+        "en": "shredded nori"
+      },
+      "quantity": null,
+      "unit": "to-taste",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-cooking-sake",
+      "label": {
+        "ja": "酒",
+        "en": "sake"
+      },
+      "quantity": 0.75,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-mirin",
+      "label": {
+        "ja": "みりん",
+        "en": "mirin"
+      },
+      "quantity": 0.75,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "known",
+      "allergenIds": [],
+      "possibleAllergenIds": [],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    },
+    {
+      "ingredientId": "ing-soy-sauce",
+      "label": {
+        "ja": "しょうゆ",
+        "en": "soy sauce"
+      },
+      "quantity": 0.75,
+      "unit": "tsp",
+      "optional": false,
+      "allergenInfo": "varies-by-product",
+      "allergenIds": [],
+      "possibleAllergenIds": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "animalOrigin": [],
+      "animalOriginKnown": true
+    }
+  ],
+  "steps": [
+    {
+      "ja": "鶏肉を2cm角に切り、玉ねぎは薄くスライスする。",
+      "en": "Cut the chicken into 2 cm cubes and slice the onion thinly."
+    },
+    {
+      "ja": "卵焼き器に油小さじ1/2を入れて温め、溶き卵を流し入れる。弱めの中火で半熟になったら端に寄せて形を整え、中まで火が通るまで焼く。",
+      "en": "Heat 1/2 tsp oil in an omelette pan and pour in the egg. Over medium-low heat, when it is half set push it to one side, shape it and cook until set right through."
+    },
+    {
+      "ja": "焼けた卵はいったん皿に移し、冷めたら1cmくらいの角切りにする。",
+      "en": "Take the egg out, let it cool and cut it into roughly 1 cm cubes."
+    },
+    {
+      "ja": "同じ卵焼き器で残りの油小さじ1/2を温め、鶏肉を弱めの中火で色が変わるまで炒める。",
+      "en": "Heat the remaining 1/2 tsp oil in the same pan and fry the chicken over medium-low heat until it changes colour."
+    },
+    {
+      "ja": "玉ねぎを加え、しんなりして鶏肉に火が通るまで炒め合わせる。",
+      "en": "Add the onion and keep frying until it is soft and the chicken is cooked through."
+    },
+    {
+      "ja": "酒・みりん・しょうゆを小さじ3/4ずつ加えて煮からめ、とろみが出たら火を止めて冷ます。",
+      "en": "Add 3/4 tsp each of sake, mirin and soy sauce and toss until the sauce thickens, then take off the heat and let it cool."
+    },
+    {
+      "ja": "ごはんを詰めたら上に刻みのりを散らし、角切りの卵と鶏肉を並べる。",
+      "en": "Pack the rice, scatter the shredded nori over it and top with the egg cubes and the chicken."
+    }
+  ],
+  "storage": [
+    {
+      "ja": "卵は半熟で止めず、中まで火が通るまで焼いてから切ります。",
+      "en": "Do not stop at half-set: cook the egg right through before cutting it."
+    },
+    {
+      "ja": "鶏肉は中まで火が通ったことを確かめてから味をからめ、冷ましてから詰めます。",
+      "en": "Make sure the chicken is cooked through before adding the sauce, and let it cool before packing."
+    }
+  ],
+  "allergenIds": [
+    "alg-chicken",
+    "alg-egg"
+  ],
+  "mayContainAllergenIds": [
+    "alg-wheat",
+    "alg-soybean"
+  ],
+  "allergenDataComplete": true,
+  "allergenScheme": "caa-2026-04",
+  "animalOrigin": [
+    "chicken",
+    "egg"
+  ],
+  "dietDataComplete": true,
+  "dietOk": [
+    "no-pork",
+    "no-beef",
+    "no-seafood"
+  ],
+  "adaptations": [
+    {
+      "ja": "元のレシピ（1人分）はごはん150g・鶏もも肉100gのおとなの量です。幼稚園児の1人分はおとなの約半分（キッコーマン「園児のお弁当」）なので、すべて半量にしました（玉ねぎ1/4個50g→25g、調味料各大さじ1/2→小さじ3/4、油小さじ2→小さじ1）。",
+      "en": "The source (1 serving: 150 g rice, 100 g chicken thigh) is an adult portion. A kindergarten portion is about half an adult one (Kikkoman kindergarten bento series), so everything is halved (onion 1/4 = 50 g → 25 g, each seasoning 1/2 tbsp → 3/4 tsp, oil 2 tsp → 1 tsp)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-delish-yaki-oyakodon-bento",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "title": "忙しい朝でも簡単♪ 焼き親子丼弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "url": "https://delishkitchen.tv/recipes/279503143937508563",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe",
+        "storage"
+      ]
+    },
+    {
+      "id": "src-kikkoman-enji-portion",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "鮭ハンバーグ（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003012/",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "recipe"
+      ]
+    },
+    {
+      "id": "src-kikkoman-tokusen-marudaizu-label",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "title": "キッコーマン 特選 丸大豆しょうゆ",
+      "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "allergen"
+      ]
+    },
+    {
+      "id": "src-maff-lunchbox",
+      "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+      "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+      "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+      "accessed": "2026-10-25",
+      "language": "ja",
+      "usedFor": [
+        "storage"
+      ]
+    }
+  ],
+  "reviewedBy": "ba-research"
+}

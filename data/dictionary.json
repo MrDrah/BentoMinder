@@ -645,6 +645,30 @@
       "note": null
     },
     {
+      "id": "ing-tortilla",
+      "ja": "トルティーヤ",
+      "kana": "とるてぃーや",
+      "en": "Wheat flour tortilla",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "トルティーヤ",
+        "トルティーア",
+        "トルティア",
+        "フラワートルティーヤ"
+      ],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": false,
+      "seasoning": false,
+      "note": null
+    },
+    {
       "id": "ing-udon",
       "ja": "うどん",
       "kana": "うどん",
@@ -1474,6 +1498,28 @@
       "note": null
     },
     {
+      "id": "ing-black-beans",
+      "ja": "黒いんげん豆",
+      "kana": "くろいんげんまめ",
+      "en": "Black beans (black kidney beans; not 黒豆 black soybeans)",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "黒いんげん豆",
+        "黒いんげん",
+        "ブラックビーンズ",
+        "ブラックビーン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
       "id": "ing-green-beans",
       "ja": "いんげん",
       "kana": "いんげん",
@@ -1663,6 +1709,74 @@
       "forms": [
         "しょうが",
         "生姜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shiso",
+      "ja": "青じそ",
+      "kana": "あおじそ",
+      "en": "Green shiso (perilla leaf)",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "青じそ",
+        "大葉",
+        "おおば",
+        "青紫蘇",
+        "しそ",
+        "紫蘇"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-coriander-leaf",
+      "ja": "パクチー",
+      "kana": "ぱくちー",
+      "en": "Coriander leaf (cilantro)",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "パクチー",
+        "香菜",
+        "シャンツァイ",
+        "コリアンダーの葉",
+        "コリアンダーリーフ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-radish",
+      "ja": "ラディッシュ",
+      "kana": "らでぃっしゅ",
+      "en": "Radish (small red)",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ラディッシュ",
+        "二十日大根",
+        "はつかだいこん"
       ],
       "inherentAllergenIds": [],
       "info": "known",
@@ -3048,6 +3162,54 @@
       "note": null
     },
     {
+      "id": "ing-salmon-flakes",
+      "ja": "鮭フレーク",
+      "kana": "さけふれーく",
+      "en": "Salmon flakes",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": "ing-salmon",
+      "forms": [
+        "鮭フレーク",
+        "さけフレーク",
+        "しゃけフレーク",
+        "サーモンフレーク"
+      ],
+      "inherentAllergenIds": [
+        "alg-salmon"
+      ],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-tarako",
+      "ja": "たらこ",
+      "kana": "たらこ",
+      "en": "Pollock roe (tarako)",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "たらこ",
+        "鱈子"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
       "id": "ing-shrimp",
       "ja": "えび",
       "kana": "えび",
@@ -3309,6 +3471,31 @@
       "forms": [
         "カニカマ",
         "かに風味かまぼこ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-sakura-denbu",
+      "ja": "桜でんぶ",
+      "kana": "さくらでんぶ",
+      "en": "Sweet pink fish flakes (sakura denbu)",
+      "categoryIds": [
+        "cat-fish-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "桜でんぶ",
+        "さくらでんぶ",
+        "桜田麩",
+        "でんぶ",
+        "田麩"
       ],
       "inherentAllergenIds": [],
       "info": "varies",
@@ -4085,6 +4272,47 @@
       "forms": [
         "カレー粉",
         "カレーパウダー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-cumin",
+      "ja": "クミン",
+      "kana": "くみん",
+      "en": "Cumin",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "クミン",
+        "クミンシード",
+        "クミンパウダー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-dried-herbs",
+      "ja": "乾燥ハーブ",
+      "kana": "かんそうはーぶ",
+      "en": "Dried herbs",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "乾燥ハーブ",
+        "ドライハーブ"
       ],
       "inherentAllergenIds": [],
       "info": "varies",

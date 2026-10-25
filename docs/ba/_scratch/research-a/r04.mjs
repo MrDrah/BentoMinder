@@ -1,0 +1,61 @@
+import { i, run, S, SOY } from './lib.mjs';
+
+const KIK = 'キッコーマン株式会社（ホームクッキング）';
+run({
+  id: 'rcp-kikkoman-sake-hamburg-bento',
+  name: { ja: '鮭ハンバーグ弁当', en: 'Salmon patty bento' },
+  shortNameJa: '鮭バーグ',
+  shortNameEn: 'Salmon',
+  nameKana: 'さけはんばーぐべんとう',
+  style: 'japanese',
+  themeId: null,
+  description: {
+    ja: 'たたいた鮭にすりおろしたにんじんを混ぜて焼く、ごまの目がついた小さなハンバーグ。電子レンジで火を通したじゃがいも・にんじん・玉ねぎを、ケチャップとしょうゆで味つけした副菜と組み合わせます。',
+    en: 'Little salmon patties mixed with grated carrot, with sesame-seed faces. On the side: potato, carrot and onion cooked in the microwave and seasoned with ketchup and soy sauce.',
+  },
+  yield: { ja: '幼児1人分', en: '1 child portion' },
+  minutes: 30,
+  makeAhead: null,
+  ingredients: [
+    i('ing-salmon', '生鮭（切り身）', 'fresh salmon (fillet)', 0.5, 'piece'),
+    i('ing-carrot', 'にんじん（ハンバーグ用）', 'carrot (for the patties)', 30, 'g'),
+    SOY('しょうゆ（ハンバーグ用）', 'soy sauce (for the patties)', 1, 'tsp'),
+    i('ing-mirin', 'みりん', 'mirin', 1, 'tsp'),
+    i('ing-sesame', 'いりごま', 'toasted sesame seeds', 1, 'tsp'),
+    i('ing-paprika', 'パプリカ（赤）', 'red bell pepper', null, 'small-amount'),
+    i('ing-oil', 'サラダ油', 'vegetable oil', 1, 'tsp'),
+    i('ing-lettuce', 'サニーレタス', 'red leaf lettuce', 1, 'slice'),
+    i('ing-potato', 'じゃがいも', 'potato', 0.5, 'piece'),
+    i('ing-carrot', 'にんじん（副菜用）', 'carrot (for the side dish)', 20, 'g'),
+    i('ing-onion', '玉ねぎ', 'onion', 20, 'g'),
+    i('ing-ketchup', 'トマトケチャップ', 'tomato ketchup', 1, 'tsp'),
+    SOY('しょうゆ（副菜用）', 'soy sauce (for the side dish)', 1, 'tsp'),
+  ],
+  steps: [
+    { ja: '皮をはずした鮭を包丁でたたいてミンチ状にし、ボウルに移す。', en: 'Remove the skin from the salmon, chop it finely with a knife until minced and put it in a bowl.' },
+    { ja: 'ハンバーグ用のにんじんをすりおろし、水気をしっかりしぼって鮭に加える。しょうゆ小さじ1とみりん小さじ1も入れて、よく混ぜる。', en: 'Grate the carrot for the patties, squeeze out the liquid well and add it to the salmon with 1 tsp soy sauce and 1 tsp mirin. Mix well.' },
+    { ja: '3つに分けて丸くまとめ、いりごまとパプリカで目や口をつけて顔にする。', en: 'Shape into three round patties and give each a face with sesame seeds and bits of red pepper.' },
+    { ja: '油を温めたフライパンに顔を上にして並べ、焼き色がついたらふたをして、中まで火を通す。', en: 'Heat the oil in a frying pan, put in the patties face up, and once browned underneath cover with a lid and cook through.' },
+    { ja: '副菜を作る。じゃがいもは皮をむいて一口大に切り、にんじんと玉ねぎはそれよりやや小さく切る。', en: 'For the side dish, peel the potato and cut it into bite-size pieces; cut the carrot and onion slightly smaller.' },
+    { ja: '野菜を耐熱容器に入れてラップをかけ、500Wのレンジで2分温めてやわらかくする。', en: 'Put the vegetables in a heatproof container, cover with cling film and microwave at 500 W for 2 minutes until tender.' },
+    { ja: 'ケチャップ、しょうゆ、水を小さじ1ずつ合わせて加え、もう30秒加熱してから全体を混ぜる。', en: 'Add 1 tsp each of ketchup, soy sauce and water, mixed together, microwave for another 30 seconds and stir everything.' },
+    { ja: 'お弁当箱にサニーレタスを敷いてハンバーグをのせ、冷ました副菜を詰める。', en: 'Line the box with the lettuce leaf, set the patties on it and add the cooled side dish.' },
+  ],
+  storage: [
+    { ja: 'ハンバーグはふたをして中心まで火を通してから詰めます。', en: 'Cook the patties through to the centre, with the lid on, before packing.' },
+    { ja: '敷き用のサニーレタスは生のまま使うので、よく洗って水気をしっかりふき取ってから入れます。', en: 'The lettuce leaf goes in raw, so wash it well and pat it completely dry before using it.' },
+  ],
+  adaptations: [
+    { ja: '分量は元のレシピ（幼稚園児1人分）のままです。調理時間は2品の時間（20分＋10分）を合計しました。', en: 'Amounts are as in the source (one kindergarten child). The time is the sum of the two dishes (20 + 10 minutes).' },
+    { ja: '銘柄指定のしょうゆ・みりん・ケチャップは、一般的なしょうゆ・みりん・トマトケチャップとして記載しました。', en: 'The branded soy sauce, mirin and ketchup in the source are listed as ordinary soy sauce, mirin and tomato ketchup.' },
+    { ja: '元の作り方では敷く葉が「サラダ菜」となっていますが、材料表どおりサニーレタスにしました。水小さじ1は手順に記載しています。', en: 'The source method says to line the box with butterhead lettuce, but its ingredient list has red leaf lettuce; the ingredient list is followed. The 1 tsp water is given in the steps.' },
+  ],
+  sources: [
+    { id: 'src-kikkoman-sake-hamburg-bento', publisher: KIK, title: '鮭ハンバーグ弁当 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/lunch/enji/sakehamberg.html', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe'] },
+    { id: 'src-kikkoman-sake-hamburg', publisher: KIK, title: '鮭ハンバーグ（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/search/recipe/00003012/', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe', 'storage'] },
+    { id: 'src-kikkoman-jagaimo-ninjin-ketchup-ni', publisher: KIK, title: 'じゃがいもとにんじんのケチャップ煮（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/search/recipe/00003014/', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe'] },
+    S.soy,
+    S.ketchup,
+    S.maff,
+  ],
+});

@@ -1,0 +1,1698 @@
+{
+  "version": 1,
+  "phase": "candidates (content-research §1)",
+  "generatedBy": "ba (candidate agent)",
+  "generatedOn": "2026-10-25",
+  "notes": [
+    "sourceTitle is the <title> of the page as fetched on 2026-10-25 (curl, ~3 s between requests); every verified and rejected URL returned HTTP 200 with a title matching the dish.",
+    "expectedAllergens = inherent allergens of the ingredients seen in the source (dictionary ids, provisional); expectedMayContain = typical label allergens of processed ingredients (soy sauce, ham, sausage…), provisional until phase 2 cites labels.",
+    "estMinutes is provisional: the source total time, or the sum of component times for キッコーマン 園児のお弁当 menus.",
+    "nameJa keeps the source dish name (taglines before the name dropped); for English-only sources nameJa is a BA translation and flagged in notes.",
+    "sourceFormat: \"bento\" = the page presents a whole box; \"dish\" = a single dish the source presents for lunchboxes (OQ-09 allows one bento as the source presents it).",
+    "Ranks 1-18 alone meet every mix target of research-brief §1 (see mix.ranks1to18); ranks 19-20 are extra library slots; 21-30 reserves; rejected entries have rank null."
+  ],
+  "mix": {
+    "ranks1to18": {
+      "count": 18,
+      "japanese": 11,
+      "westernInspired": 7,
+      "other": 0,
+      "minutesLe20": 10,
+      "themed": 6,
+      "noMandatoryAllergenIngredient": [
+        4,
+        5,
+        6,
+        9,
+        13
+      ],
+      "vegetarian": [
+        6,
+        7,
+        17,
+        18
+      ],
+      "fishFree": 10,
+      "noPorkOk": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        13,
+        14,
+        16,
+        17,
+        18
+      ]
+    },
+    "ranks1to20": {
+      "count": 20,
+      "japanese": 12,
+      "westernInspired": 7,
+      "other": 1,
+      "minutesLe20": 12,
+      "themed": 6,
+      "noMandatoryAllergenIngredient": [
+        4,
+        5,
+        6,
+        9,
+        13,
+        19
+      ],
+      "vegetarian": [
+        6,
+        7,
+        17,
+        18
+      ],
+      "fishFree": 11,
+      "noPorkOk": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        13,
+        14,
+        16,
+        17,
+        18
+      ]
+    }
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "candidateId": "nhk-sake-teriyaki-bento",
+      "nameJa": "鮭の照り焼き弁当 幼児向け",
+      "nameEn": "Teriyaki salmon bento (for small children)",
+      "sourceUrl": "https://www.kyounoryouri.jp/recipe/1474_%E9%AE%AD%E3%81%AE%E7%85%A7%E3%82%8A%E7%84%BC%E3%81%8D%E5%BC%81%E5%BD%93%20%E5%B9%BC%E5%85%90%E5%90%91%E3%81%91.html",
+      "sourceTitle": "鮭の照り焼き弁当 幼児向け レシピ 藤井 恵さん｜みんなのきょうの料理",
+      "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Japanese fish bento written for 幼児 portions by a named cook (藤井恵); quick fish option.",
+      "expectedAllergens": [
+        "alg-salmon",
+        "alg-milk"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [
+        "ing-tarako (たらこ)"
+      ],
+      "dietNotes": "pescatarian, no-pork, no-beef OK; not vegetarian or no-seafood. Soy sauce: しょうゆ (ing-soy-sauce, varies-by-product).",
+      "estMinutes": 10,
+      "minutesBasis": "page 調理時間 10分",
+      "variety": {
+        "protein": [
+          "fish"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Butter amount not given in the ingredient list (phase 2: check the page, else small-amount).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 2,
+      "candidateId": "sirogohan-sanshoku-soborodon",
+      "nameJa": "卵と鶏の三色そぼろ丼",
+      "nameEn": "Three-colour chicken and egg soboro rice bowl",
+      "sourceUrl": "https://www.sirogohan.com/recipe/soborodon/",
+      "sourceTitle": "卵と鶏の三色そぼろ丼のレシピ/作り方：白ごはん.com",
+      "publisher": "白ごはん.com（冨田ただすけ）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Classic Japanese bento rice bowl; page says it suits お弁当; chicken + egg, no dashi.",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "no-pork, no-beef, no-seafood OK.",
+      "estMinutes": 20,
+      "minutesBasis": "page 調理時間 20分 (2-3 servings; scale to 1 child)",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Single dish presented as suitable for bento (OQ-09: one bento as presented).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 3,
+      "candidateId": "kikkoman-enji-omurice-bento",
+      "nameJa": "オムライス弁当",
+      "nameEn": "Omurice bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/omurice.html",
+      "sourceTitle": "オムライス弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00002912/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00002913/"
+      ],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Kindergarten-portion (園児のお弁当用) omurice; Western-inspired staple without consomme.",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-milk",
+        "alg-egg",
+        "alg-soybean"
+      ],
+      "expectedMayContain": [
+        "alg-wheat"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [
+        "ing-radish (ラディッシュ)"
+      ],
+      "dietNotes": "no-pork, no-beef OK; side salad has ちりめんじゃこ (fish) so not no-seafood unless the side is swapped.",
+      "estMinutes": 30,
+      "minutesBasis": "component times 20 + 10 min",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Brand items (デルモンテ ketchup, キッコーマン soy sauce) become generic (brief rule 9).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 4,
+      "candidateId": "kikkoman-enji-sake-hamberg-bento",
+      "nameJa": "鮭ハンバーグ弁当",
+      "nameEn": "Salmon patty bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/sakehamberg.html",
+      "sourceTitle": "鮭ハンバーグ弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003012/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003014/"
+      ],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Kindergarten portion; no egg, milk or wheat ingredient (soy sauce only may contain wheat): allergy-friendly fish bento.",
+      "expectedAllergens": [
+        "alg-salmon",
+        "alg-sesame"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "pescatarian, no-pork, no-beef OK.",
+      "estMinutes": 30,
+      "minutesBasis": "component times 20 + 10 min",
+      "variety": {
+        "protein": [
+          "fish"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 5,
+      "candidateId": "kikkoman-enji-buta-ketchup-bento",
+      "nameJa": "豚肉のケチャップ炒め弁当",
+      "nameEn": "Pork and ketchup stir-fry bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/butaketchup.html",
+      "sourceTitle": "豚肉のケチャップ炒め弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003261/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003263/"
+      ],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Kindergarten portion; pork option with no egg, milk or wheat ingredient; 洋食-style ketchup flavour.",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-apple"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "no-beef, no-seafood OK; not no-pork.",
+      "estMinutes": 25,
+      "minutesBasis": "component times 15 + 10 min",
+      "variety": {
+        "protein": [
+          "pork"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Style could also be read as japanese (soy sauce + ketchup); BA proposes western-inspired.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 6,
+      "candidateId": "delish-niwatori-hiyoko-onigiri",
+      "nameJa": "にわとりとひよこのおにぎり",
+      "nameEn": "Hen and chick rice balls",
+      "sourceUrl": "https://delishkitchen.tv/recipes/153570755777397005",
+      "sourceTitle": "お弁当にぴったり！ にわとりとひよこのおにぎりのレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "japanese",
+      "themeId": "theme-animals",
+      "whyIncluded": "Animal-themed bento rice balls with no animal products and none of the 9 mandatory allergens: covers vegetarian + allergy at once.",
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "Meat-, fish-, egg- and dairy-free: OK for every MVP diet.",
+      "estMinutes": 30,
+      "minutesBasis": "JSON-LD totalTime PT1800S",
+      "variety": {
+        "protein": [
+          "none (rice)"
+        ],
+        "cuisine": "japanese",
+        "theme": "animals"
+      },
+      "reserveFor": null,
+      "notes": "Rice-ball only (no side dishes on the page); recipe credited to a named DELISH creator (なかだみか). Curry powder is info: varies; phase 2 needs a label source or keeps it known-spice.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 7,
+      "candidateId": "bbc-easy-kids-omelette",
+      "nameJa": "かんたんキッズオムレツ",
+      "nameEn": "Easy kids' omelette",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/kids-omelette",
+      "sourceTitle": "Easy kids’ omelette recipe | Good Food",
+      "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Quick vegetarian, wheat-free Western option from BBC Good Food's kids' lunchbox collection.",
+      "expectedAllergens": [
+        "alg-egg",
+        "alg-milk"
+      ],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [
+        "ing-dried-herbs (oregano)"
+      ],
+      "dietNotes": "vegetarian (lacto-ovo) and all MVP diets OK.",
+      "estMinutes": 10,
+      "minutesBasis": "JSON-LD prep 5 + cook 5 min",
+      "variety": {
+        "protein": [
+          "egg",
+          "dairy"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "nameJa is a BA translation (source is English-only); JSON-LD yield reads \"6\" — check on the page. Listed in the collection \"75 Kids' Lunchbox Recipes\" (bbcgoodfood.com/recipes/collection/school-lunch-recipes).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 8,
+      "candidateId": "kikkoman-enji-tuna-tamago-soboro-bento",
+      "nameJa": "ツナと卵のそぼろご飯弁当",
+      "nameEn": "Tuna and egg soboro rice bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/tunatamagosoboro.html",
+      "sourceTitle": "ツナと卵のそぼろご飯弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003042/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003043/"
+      ],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Quick (15 min) kindergarten bento using canned tuna; different protein from the chicken soboro.",
+      "expectedAllergens": [
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean",
+        "alg-pork",
+        "alg-milk"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "no-beef OK; side ハム = pork (not no-pork); tuna = fish.",
+      "estMinutes": 15,
+      "minutesBasis": "component times 10 + 5 min",
+      "variety": {
+        "protein": [
+          "fish",
+          "egg",
+          "pork (ham)"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 9,
+      "candidateId": "delish-himawari-bento",
+      "nameJa": "ひまわり弁当",
+      "nameEn": "Sunflower bento",
+      "sourceUrl": "https://delishkitchen.tv/recipes/152838397549871567",
+      "sourceTitle": "夏カワイイ♪ ひまわり弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": "theme-flowers",
+      "whyIncluded": "Flower-themed, 10-minute bento with no egg, milk or wheat ingredient.",
+      "expectedAllergens": [
+        "alg-salmon",
+        "alg-sesame",
+        "alg-soybean"
+      ],
+      "expectedMayContain": [
+        "alg-pork",
+        "alg-milk",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [
+        "ing-salmon-flakes (鮭フレーク)",
+        "ing-shiso (大葉)"
+      ],
+      "dietNotes": "Sausage (pork) + salmon: only no-beef OK.",
+      "estMinutes": 10,
+      "minutesBasis": "JSON-LD totalTime PT600S",
+      "variety": {
+        "protein": [
+          "fish",
+          "pork (sausage)"
+        ],
+        "cuisine": "japanese",
+        "theme": "flowers"
+      },
+      "reserveFor": null,
+      "notes": "Recipe credited to a named DELISH creator (荒谷未来). Sausage/salmon flakes need a typical label source in phase 2.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 10,
+      "candidateId": "nhk-juicy-hamberg-bento",
+      "nameJa": "ジューシーハンバーグ弁当",
+      "nameEn": "Juicy hamburger steak bento",
+      "sourceUrl": "https://www.kyounoryouri.jp/recipe/7844_%E3%82%B8%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%BC%E3%83%8F%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B0%E5%BC%81%E5%BD%93.html",
+      "sourceTitle": "ジューシーハンバーグ弁当 レシピ 上田 淳子さん｜みんなのきょうの料理",
+      "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Kids' hamburger-steak bento (NHK こども弁当, 上田淳子): Western-inspired, mixed minced meat.",
+      "expectedAllergens": [
+        "alg-beef",
+        "alg-pork",
+        "alg-milk"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-egg",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [
+        "ing-bread-crumbs (パン粉)"
+      ],
+      "proposedNewIds": [],
+      "dietNotes": "Beef + pork + かつお節: no MVP diet OK; dietDataComplete=false unless a panko label is cited.",
+      "estMinutes": 30,
+      "minutesBasis": "page 調理時間 30分",
+      "variety": {
+        "protein": [
+          "beef",
+          "pork"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Contains はちみつ (fine from age 1; not for infants).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 11,
+      "candidateId": "nhk-ohanabatake-bento",
+      "nameJa": "お花畑弁当",
+      "nameEn": "Flower garden bento",
+      "sourceUrl": "https://www.kyounoryouri.jp/recipe/10254_%E3%81%8A%E8%8A%B1%E7%95%91%E5%BC%81%E5%BD%93.html",
+      "sourceTitle": "お花畑弁当 レシピ 上田 淳子さん｜みんなのきょうの料理",
+      "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": "theme-flowers",
+      "whyIncluded": "NHK こども弁当 with a flower theme in 15 minutes; chicken miso soboro.",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-wheat",
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-soybean",
+        "alg-pork",
+        "alg-milk"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "Ham = pork: no-beef, no-seafood OK.",
+      "estMinutes": 15,
+      "minutesBasis": "page 調理時間 15分",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg",
+          "pork (ham)"
+        ],
+        "cuisine": "japanese",
+        "theme": "flowers"
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 12,
+      "candidateId": "kikkoman-enji-youfuu-makizushi-bento",
+      "nameJa": "速攻15分！ 簡単洋風巻きずし弁当",
+      "nameEn": "15-minute Western-style sushi roll bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/youhuumakizusi.html",
+      "sourceTitle": "速攻15分！ 簡単洋風巻きずし弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003117/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003118/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003119/"
+      ],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Quick (stated 15 min) kindergarten bento; ham-and-cheese roll is a Western twist on 巻きずし.",
+      "expectedAllergens": [
+        "alg-milk",
+        "alg-chicken"
+      ],
+      "expectedMayContain": [
+        "alg-pork",
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "Ham (pork) + chicken: no-beef, no-seafood OK.",
+      "estMinutes": 15,
+      "minutesBasis": "page title 速攻15分",
+      "variety": {
+        "protein": [
+          "pork (ham)",
+          "chicken",
+          "dairy"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Style could be japanese (巻きずし); the source calls it 洋風.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 13,
+      "candidateId": "delish-penguin-seiretsu-bento",
+      "nameJa": "ペンギンさん整列弁当",
+      "nameEn": "Penguins-in-a-row bento",
+      "sourceUrl": "https://delishkitchen.tv/recipes/254879160311218449",
+      "sourceTitle": "かわいいがいっぱい♪ ペンギンさん整列弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": "theme-sea",
+      "whyIncluded": "Sea-creature theme, 10 minutes, none of the 9 mandatory allergens.",
+      "expectedAllergens": [
+        "alg-sesame"
+      ],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [
+        "ing-sakura-denbu (桜でんぶ)"
+      ],
+      "dietNotes": "桜でんぶ is fish-based: pescatarian, no-pork, no-beef OK.",
+      "estMinutes": 10,
+      "minutesBasis": "JSON-LD totalTime PT600S",
+      "variety": {
+        "protein": [
+          "fish (denbu)"
+        ],
+        "cuisine": "japanese",
+        "theme": "sea"
+      },
+      "reserveFor": null,
+      "notes": "Yield 1 roll (12 pieces, 300 g rice): scale to one child portion.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 14,
+      "candidateId": "kikkoman-enji-niku-yasaimaki-bento",
+      "nameJa": "肉の野菜巻き弁当",
+      "nameEn": "Beef-wrapped vegetable bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/nikuyasaimaki.html",
+      "sourceTitle": "肉の野菜巻き弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00002988/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00002989/"
+      ],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Only beef main in the library; kindergarten portion; 肉巻き is a bento staple.",
+      "expectedAllergens": [
+        "alg-beef",
+        "alg-milk"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "no-pork, no-seafood OK.",
+      "estMinutes": 30,
+      "minutesBasis": "component times 20 + 10 min",
+      "variety": {
+        "protein": [
+          "beef",
+          "dairy"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 15,
+      "candidateId": "delish-kuma-usagi-sandwich",
+      "nameJa": "くまとうさぎのサンドイッチ",
+      "nameEn": "Bear and bunny sandwiches",
+      "sourceUrl": "https://delishkitchen.tv/recipes/160803623310197139",
+      "sourceTitle": "見た目が可愛い♪ くまとうさぎのサンドイッチのレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "western-inspired",
+      "themeId": "theme-animals",
+      "whyIncluded": "Animal-themed Western sandwich lunch (roll bread + sausage).",
+      "expectedAllergens": [
+        "alg-milk"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-egg",
+        "alg-milk",
+        "alg-pork",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [
+        "ing-bread (ロールパン)"
+      ],
+      "proposedNewIds": [],
+      "dietNotes": "Sausage = pork; bread origin unknown → dietDataComplete=false unless a label is cited.",
+      "estMinutes": 30,
+      "minutesBasis": "JSON-LD totalTime PT1800S",
+      "variety": {
+        "protein": [
+          "pork (sausage)"
+        ],
+        "cuisine": "western-inspired",
+        "theme": "animals"
+      },
+      "reserveFor": null,
+      "notes": "Recipe credited to a named DELISH creator (谷村せな).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 16,
+      "candidateId": "delish-yaki-oyakodon-bento",
+      "nameJa": "焼き親子丼弁当",
+      "nameEn": "Pan-fried oyakodon bento",
+      "sourceUrl": "https://delishkitchen.tv/recipes/279503143937508563",
+      "sourceTitle": "忙しい朝でも簡単♪ 焼き親子丼弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "15-minute chicken-and-egg rice bento seasoned with soy/mirin/sake only (no dashi); egg fully cooked.",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "no-pork, no-beef, no-seafood OK.",
+      "estMinutes": 15,
+      "minutesBasis": "JSON-LD totalTime PT900S",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Recipe credited to a named DELISH creator (山あさ子).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 17,
+      "candidateId": "delish-aka-chan-penguin-onigiri",
+      "nameJa": "赤ちゃんペンギンのおにぎり",
+      "nameEn": "Baby penguin rice balls",
+      "sourceUrl": "https://delishkitchen.tv/recipes/163680009196667372",
+      "sourceTitle": "双子ちゃん♪ 赤ちゃんペンギンのおにぎりのレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "japanese",
+      "themeId": "theme-sea",
+      "whyIncluded": "Vegetarian, sea-themed rice balls in 15 minutes (cheese + nori decoration).",
+      "expectedAllergens": [
+        "alg-milk"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "vegetarian and all MVP diets OK.",
+      "estMinutes": 15,
+      "minutesBasis": "JSON-LD totalTime PT900S",
+      "variety": {
+        "protein": [
+          "dairy"
+        ],
+        "cuisine": "japanese",
+        "theme": "sea"
+      },
+      "reserveFor": null,
+      "notes": "Rice-ball only; rice quantity is 適量 on the page — phase 2 must confirm a quantity or skip.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 18,
+      "candidateId": "bbc-cheesy-black-bean-quesadillas",
+      "nameJa": "チーズとブラックビーンズのケサディーヤ",
+      "nameEn": "Cheesy black bean quesadillas",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/cheesy-black-bean-quesadillas",
+      "sourceTitle": "Cheesy black bean quesadillas recipe | Good Food",
+      "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Vegetarian bean-protein Western lunch from the kids' lunchbox collection; egg-free.",
+      "expectedAllergens": [
+        "alg-milk"
+      ],
+      "expectedMayContain": [
+        "alg-wheat"
+      ],
+      "unknownOriginIngredients": [
+        "tortilla wraps (no id yet)"
+      ],
+      "proposedNewIds": [
+        "ing-black-beans (ブラックビーンズ)",
+        "ing-tortilla (トルティーヤ)",
+        "ing-coriander-leaf (パクチー)",
+        "ing-cumin (クミン)"
+      ],
+      "dietNotes": "vegetarian; tortilla origin must be stated or dietDataComplete=false.",
+      "estMinutes": 25,
+      "minutesBasis": "JSON-LD prep 15 + cook 10 min",
+      "variety": {
+        "protein": [
+          "beans",
+          "dairy"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "nameJa is a BA translation. Needs 4 new dictionary ids before phase 2.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 19,
+      "candidateId": "house-hajimete-curry-chahan",
+      "nameJa": "＜特定原材料８品目不使用＞はじめて食べるカレーチャーハン",
+      "nameEn": "First curry fried rice (made without the 8 specified allergens)",
+      "sourceUrl": "https://housefoods.jp/recipe/rcp_00020456.html",
+      "sourceTitle": "＜特定原材料８品目不使用＞はじめて食べるカレーチャーハン | レシピ | ハウス食品",
+      "publisher": "ハウス食品株式会社",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "other",
+      "themeId": null,
+      "whyIncluded": "Allergy-friendly rice dish built on a roux sold without the 8 specified allergens; mild, aimed at small children.",
+      "expectedAllergens": [
+        "alg-pork"
+      ],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [
+        "ing-curry-roux (allergen-free roux; product page must state ingredients)"
+      ],
+      "proposedNewIds": [],
+      "dietNotes": "Pork: no-beef, no-seafood OK if the roux label shows no beef/seafood.",
+      "estMinutes": 15,
+      "minutesBasis": "JSON-LD totalTime PT15M (3 servings)",
+      "variety": {
+        "protein": [
+          "pork"
+        ],
+        "cuisine": "other",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": "Phase 2 must cite the housefoods.jp product page for the roux: check cashew (9th mandatory item since caa-2026-04) and animal origin.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 20,
+      "candidateId": "kikkoman-enji-sanshoku-mini-onigiri-bento",
+      "nameJa": "速攻15分！ 3色ミニおにぎり弁当",
+      "nameEn": "15-minute three-colour mini rice ball bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/syokuminionigiri.html",
+      "sourceTitle": "速攻15分！ 3色ミニおにぎり弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003143/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003144/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003145/"
+      ],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Quick (stated 15 min) kindergarten onigiri bento with three fillings.",
+      "expectedAllergens": [
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean",
+        "alg-pork",
+        "alg-milk"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [
+        "ing-tarako (たらこ)"
+      ],
+      "dietNotes": "たらこ/しらす (fish) + wiener (pork): only no-beef OK.",
+      "estMinutes": 15,
+      "minutesBasis": "page title 速攻15分",
+      "variety": {
+        "protein": [
+          "fish",
+          "egg",
+          "pork (sausage)"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 21,
+      "candidateId": "kikkoman-enji-tori-tamago-onigiri-bento",
+      "nameJa": "鶏と卵のおにぎり弁当",
+      "nameEn": "Chicken and egg rice ball bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/toritamago.html",
+      "sourceTitle": "鶏と卵のおにぎり弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00002947/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00002948/"
+      ],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Reserve: kindergarten chicken+egg onigiri bento.",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "no-pork, no-beef, no-seafood OK.",
+      "estMinutes": 30,
+      "minutesBasis": "component times 20 + 10 min",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": "any japanese rank (1-20); closest to rank 2",
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 22,
+      "candidateId": "ajinomoto-nishoku-soboro-bento",
+      "nameJa": "秒速　甘くな～い２色そぼろ弁当",
+      "nameEn": "Speedy not-sweet two-colour soboro bento",
+      "sourceUrl": "https://park.ajinomoto.co.jp/recipe/card/800180/",
+      "sourceTitle": "秒速　甘くな～い２色そぼろ弁当の作り方 | レシピ |【味の素パーク】",
+      "publisher": "味の素株式会社（味の素パーク）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Reserve: 8-minute soboro bento tagged as popular with children.",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-egg",
+        "alg-sesame"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [
+        "ing-dashi (「ほんだし」)",
+        "branded garlic/ginger paste (Cook Do 香味ペースト)"
+      ],
+      "proposedNewIds": [
+        "ing-umeboshi (梅干し)"
+      ],
+      "dietNotes": "Dashi product: dietDataComplete=false unless its ingredients are cited.",
+      "estMinutes": 8,
+      "minutesBasis": "JSON-LD totalTime PT8M",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": "rank 2 (same dish family: soboro)",
+      "notes": "Two branded products → generic (rule 9); 梅干し pit is a choking hazard for small children (cite CAA/CFA if kept).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 23,
+      "candidateId": "kikkoman-enji-takenoko-tsukune-bento",
+      "nameJa": "たけのこ入りつくね弁当",
+      "nameEn": "Chicken patty with bamboo shoot bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/takenokoiritukune.html",
+      "sourceTitle": "たけのこ入りつくね弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003089/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003090/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003091/"
+      ],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": "Reserve: kindergarten chicken tsukune bento.",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-soybean",
+        "alg-pork",
+        "alg-milk"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "Ham + しらす: only no-beef OK.",
+      "estMinutes": 35,
+      "minutesBasis": "component times 15 + 10 + 10 min",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg"
+        ],
+        "cuisine": "japanese",
+        "theme": null
+      },
+      "reserveFor": "any japanese rank",
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 24,
+      "candidateId": "delish-tsuyu-charaben",
+      "nameJa": "梅雨キャラ弁当",
+      "nameEn": "Rainy-season character bento",
+      "sourceUrl": "https://delishkitchen.tv/recipes/202514334285300116",
+      "sourceTitle": "愛らしい見た目に心が晴れる♪ 梅雨キャラ弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": "theme-seasonal",
+      "whyIncluded": "Reserve: seasonal theme (梅雨).",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-egg",
+        "alg-soybean",
+        "alg-sesame"
+      ],
+      "expectedMayContain": [
+        "alg-wheat"
+      ],
+      "unknownOriginIngredients": [
+        "めんつゆ (dashi-based; no id yet)"
+      ],
+      "proposedNewIds": [
+        "ing-mentsuyu (めんつゆ)"
+      ],
+      "dietNotes": "めんつゆ origin unknown → dietDataComplete=false unless cited.",
+      "estMinutes": 30,
+      "minutesBasis": "JSON-LD totalTime PT1800S",
+      "variety": {
+        "protein": [
+          "chicken",
+          "egg"
+        ],
+        "cuisine": "japanese",
+        "theme": "seasonal"
+      },
+      "reserveFor": "themed japanese ranks (9, 11, 13, 17)",
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 25,
+      "candidateId": "delish-shirousagi-omurice-bento",
+      "nameJa": "白うさぎのオムライス弁当",
+      "nameEn": "White bunny omurice bento",
+      "sourceUrl": "https://delishkitchen.tv/recipes/158593716271972844",
+      "sourceTitle": "お弁当にぴったり♪ 白うさぎのオムライス弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": "theme-animals",
+      "whyIncluded": "Reserve: themed omurice.",
+      "expectedAllergens": [
+        "alg-egg",
+        "alg-milk"
+      ],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [
+        "ing-consomme (コンソメ)"
+      ],
+      "proposedNewIds": [],
+      "dietNotes": "Consomme origin unknown → dietDataComplete=false unless cited.",
+      "estMinutes": 30,
+      "minutesBasis": "JSON-LD totalTime PT1800S",
+      "variety": {
+        "protein": [
+          "egg"
+        ],
+        "cuisine": "western-inspired",
+        "theme": "animals"
+      },
+      "reserveFor": "rank 3 (same dish: omurice) or rank 15 (animal theme)",
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 26,
+      "candidateId": "kikkoman-hikiniku-cornball-bento",
+      "nameJa": "ひき肉入りコーンボール弁当",
+      "nameEn": "Pork and corn ball bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/cornball.html",
+      "sourceTitle": "ひき肉入りコーンボール弁当 | キッコーマン | ホームクッキング",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-10-25",
+      "componentUrls": [
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003664/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003666/",
+        "https://www.kikkoman.co.jp/homecook/search/recipe/00003665/"
+      ],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Reserve: Western-style minced-pork bento.",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-milk"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-egg",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [
+        "ing-bread-crumbs (パン粉)"
+      ],
+      "proposedNewIds": [],
+      "dietNotes": "Pork; panko origin unknown.",
+      "estMinutes": 40,
+      "minutesBasis": "component times 20 + 10 + 10 min (components yield 2 servings)",
+      "variety": {
+        "protein": [
+          "pork",
+          "dairy"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": "rank 10 (minced-meat Western main)",
+      "notes": "Listed in 園児のお弁当 but its component pages are general recipes (2人分), not 園児 portions.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 27,
+      "candidateId": "joc-egg-salad-sandwich-bento",
+      "nameJa": "たまごサンド弁当",
+      "nameEn": "Egg Salad Sandwich Bento",
+      "sourceUrl": "https://www.justonecookbook.com/egg-salad-sandwich-bento/",
+      "sourceTitle": "Egg Salad Sandwich たまごサンド弁当 • Just One Cookbook",
+      "publisher": "Just One Cookbook (Namiko Chen)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Reserve: 10-minute vegetarian sandwich bento with an English source.",
+      "expectedAllergens": [
+        "alg-egg"
+      ],
+      "expectedMayContain": [
+        "alg-wheat",
+        "alg-milk",
+        "alg-egg",
+        "alg-soybean"
+      ],
+      "unknownOriginIngredients": [
+        "ing-bread (パン)"
+      ],
+      "proposedNewIds": [],
+      "dietNotes": "Vegetarian if the bread is; bread origin unknown → dietDataComplete=false unless cited.",
+      "estMinutes": 10,
+      "minutesBasis": "JSON-LD prep 10 min",
+      "variety": {
+        "protein": [
+          "egg"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": "western ranks 7, 15, 18 (quick / vegetarian)",
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 28,
+      "candidateId": "bbc-chickpea-fritters",
+      "nameJa": "ひよこ豆のフリッター",
+      "nameEn": "Chickpea fritters",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/chickpea-fritters",
+      "sourceTitle": "Chickpea fritters recipe | Good Food",
+      "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Reserve: vegetarian legume protein, 20 minutes.",
+      "expectedAllergens": [
+        "alg-wheat",
+        "alg-egg",
+        "alg-milk"
+      ],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [
+        "ing-chickpea (ひよこ豆)",
+        "ing-garam-masala",
+        "ing-cumin",
+        "ing-coriander-leaf"
+      ],
+      "dietNotes": "vegetarian.",
+      "estMinutes": 20,
+      "minutesBasis": "JSON-LD prep 10 + cook 10 min (batch of 12)",
+      "variety": {
+        "protein": [
+          "beans",
+          "egg"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": "rank 18 (vegetarian Western)",
+      "notes": "nameJa is a BA translation.",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 29,
+      "candidateId": "delish-penguin-onigirazu-bento",
+      "nameJa": "ペンギンおにぎらず弁当",
+      "nameEn": "Penguin onigirazu bento",
+      "sourceUrl": "https://delishkitchen.tv/recipes/159623626746757523",
+      "sourceTitle": "お子さま大喜び！ ペンギンおにぎらず弁当のレシピ動画・作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": "theme-sea",
+      "whyIncluded": "Reserve: 15-minute sea-themed bento.",
+      "expectedAllergens": [
+        "alg-egg",
+        "alg-milk",
+        "alg-sesame"
+      ],
+      "expectedMayContain": [
+        "alg-pork",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": "Wiener = pork: no-beef, no-seafood OK.",
+      "estMinutes": 15,
+      "minutesBasis": "JSON-LD totalTime PT900S",
+      "variety": {
+        "protein": [
+          "egg",
+          "pork (sausage)"
+        ],
+        "cuisine": "japanese",
+        "theme": "sea"
+      },
+      "reserveFor": "themed japanese ranks (9, 11, 13, 17)",
+      "notes": null,
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": 30,
+      "candidateId": "house-chicken-rice-8-free",
+      "nameJa": "＜特定原材料８品目不使用＞チキンライス",
+      "nameEn": "Chicken rice (made without the 8 specified allergens)",
+      "sourceUrl": "https://housefoods.jp/recipe/rcp_00026679.html",
+      "sourceTitle": "＜特定原材料８品目不使用＞チキンライス | レシピ | ハウス食品",
+      "publisher": "ハウス食品株式会社",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "dish",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": "Reserve: allergy-friendly chicken rice, 15 minutes.",
+      "expectedAllergens": [
+        "alg-chicken"
+      ],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [
+        "allergen-free hayashi sauce (no id yet)"
+      ],
+      "proposedNewIds": [
+        "ing-hayashi-roux (ハヤシライスソース)"
+      ],
+      "dietNotes": "no-pork, no-beef, no-seafood if the sauce label confirms.",
+      "estMinutes": 15,
+      "minutesBasis": "JSON-LD totalTime PT15M (2 servings)",
+      "variety": {
+        "protein": [
+          "chicken"
+        ],
+        "cuisine": "western-inspired",
+        "theme": null
+      },
+      "reserveFor": "rank 19 (allergy-friendly rice) or rank 3",
+      "notes": "Phase 2 must cite the housefoods.jp product page for the sauce (cashew, animal origin).",
+      "status": "verified",
+      "rejectReason": null
+    },
+    {
+      "rank": null,
+      "candidateId": "lettuceclub-kobuta-onigirazu-bento",
+      "nameJa": "子豚のおにぎらず弁当",
+      "nameEn": "Piglet onigirazu bento",
+      "sourceUrl": "https://www.lettuceclub.net/recipe/dish/22911/",
+      "sourceTitle": "子豚のおにぎらず弁当のレシピ・作り方【簡単＆時短】 - レタスクラブ",
+      "publisher": "レタスクラブ (KADOKAWA LifeDesign)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "No cooking time on the page (only kcal/salt); brief rule 5 forbids estimating a time."
+    },
+    {
+      "rank": null,
+      "candidateId": "lettuceclub-mix-pocket-sand-bento",
+      "nameJa": "ミックスポケットサンド弁当",
+      "nameEn": "Mixed pocket sandwich bento",
+      "sourceUrl": "https://www.lettuceclub.net/recipe/dish/22929/",
+      "sourceTitle": "ミックスポケットサンド弁当のレシピ・作り方【簡単＆時短】 - レタスクラブ",
+      "publisher": "レタスクラブ (KADOKAWA LifeDesign)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "No cooking time on the page; several ingredients without quantities (マヨネーズ, 塩, こしょう, 粒マスタード)."
+    },
+    {
+      "rank": null,
+      "candidateId": "orangepage-jack-o-lantern-omurice-bento",
+      "nameJa": "ジャックオーランタンのオムライス弁当",
+      "nameEn": "Jack-o'-lantern omurice bento",
+      "sourceUrl": "https://www.orangepage.net/opeditor/theme/321432",
+      "sourceTitle": "【ハロウィン】子どもウケばっちり！ジャックオーランタンのオムライス弁当＆詰め方 | 今日、何作った？ | オレンジページnet",
+      "publisher": "オレンジページ (The Orangepage Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": "theme-seasonal",
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "Editor blog post (今日、何作った？), no total time; consomme and 中濃ソース of unknown origin. Use DELISH reserves for themed omurice instead."
+    },
+    {
+      "rank": null,
+      "candidateId": "joc-teriyaki-salmon-bento",
+      "nameJa": "照り焼きサーモン弁当",
+      "nameEn": "Teriyaki Salmon Bento",
+      "sourceUrl": "https://www.justonecookbook.com/teriyaki-salmon-bento/",
+      "sourceTitle": "Teriyaki Salmon Bento 照り焼きサーモン弁当 • Just One Cookbook",
+      "publisher": "Just One Cookbook (Namiko Chen)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "Assembly page: components listed without quantities (point to other recipes); duplicates rank 1."
+    },
+    {
+      "rank": null,
+      "candidateId": "joc-chicken-meatball-bento",
+      "nameJa": "豆腐ハンバーグ弁当",
+      "nameEn": "Chicken Meatball Bento",
+      "sourceUrl": "https://www.justonecookbook.com/chicken-meatball-bento/",
+      "sourceTitle": "Chicken Meatball Bento 豆腐ハンバーグ弁当 • Just One Cookbook",
+      "publisher": "Just One Cookbook (Namiko Chen)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "Assembly page: components listed without quantities (incl. kani salad and fruit)."
+    },
+    {
+      "rank": null,
+      "candidateId": "joc-cute-octopus-sausage-bento",
+      "nameJa": "たこソーセージ弁当",
+      "nameEn": "Cute Octopus Sausage Bento",
+      "sourceUrl": "https://www.justonecookbook.com/cute-octopus-sausage-bento/",
+      "sourceTitle": "Cute Octopus Sausage Bento たこソーセージ弁当 • Just One Cookbook",
+      "publisher": "Just One Cookbook (Namiko Chen)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "Assembly page without quantities; whole grapes and cherry tomatoes would need a cited choking note."
+    },
+    {
+      "rank": null,
+      "candidateId": "nhk-hijiki-burg-bento",
+      "nameJa": "ひじきバーグ弁当（子ども弁当）",
+      "nameEn": "Hijiki burger bento (kids)",
+      "sourceUrl": "https://www.kyounoryouri.jp/recipe/20734_%E3%81%B2%E3%81%98%E3%81%8D%E3%83%90%E3%83%BC%E3%82%B0%E5%BC%81%E5%BD%93%EF%BC%88%E5%AD%90%E3%81%A9%E3%82%82%E5%BC%81%E5%BD%93%EF%BC%89.html",
+      "sourceTitle": "ひじきバーグ弁当（子ども弁当） レシピ 滝村 雅晴さん｜みんなのきょうの料理",
+      "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "All components given as 適量 (separate sub-recipes); no time on the page."
+    },
+    {
+      "rank": null,
+      "candidateId": "nhk-tarako-spaghetti-bento",
+      "nameJa": "たらこスパゲッティ弁当 幼児向け",
+      "nameEn": "Cod roe spaghetti bento (for small children)",
+      "sourceUrl": "https://www.kyounoryouri.jp/recipe/17_%E3%81%9F%E3%82%89%E3%81%93%E3%82%B9%E3%83%91%E3%82%B2%E3%83%83%E3%83%86%E3%82%A3%E5%BC%81%E5%BD%93%20%E5%B9%BC%E5%85%90%E5%90%91%E3%81%91.html",
+      "sourceTitle": "たらこスパゲッティ弁当 幼児向け レシピ 河野 雅子さん｜みんなのきょうの料理",
+      "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "Main and sides given as 適量 (sub-recipes); no total time."
+    },
+    {
+      "rank": null,
+      "candidateId": "ajinomoto-pilaf-inari-bento",
+      "nameJa": "びっくり！ピラフいなり弁当",
+      "nameEn": "Surprise pilaf inari bento",
+      "sourceUrl": "https://park.ajinomoto.co.jp/recipe/card/701031/",
+      "sourceTitle": "びっくり！ピラフいなり弁当の作り方 | レシピ |【味の素パーク】",
+      "publisher": "味の素株式会社（味の素パーク）",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "Built on two branded frozen products (shrimp pilaf, shrimp shumai) that have no generic equivalent; adult-oriented."
+    },
+    {
+      "rank": null,
+      "candidateId": "delish-teiban-noriben",
+      "nameJa": "定番のり弁",
+      "nameEn": "Classic nori bento",
+      "sourceUrl": "https://delishkitchen.tv/recipes/409518151697433782",
+      "sourceTitle": "コツを押さえて失敗しない！定番のり弁の作り方 | デリッシュキッチン",
+      "publisher": "デリッシュキッチン (every, Inc.)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "japanese",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "Packing guide: fried fish, chikuwa isobe-age, kinpira etc. listed as finished items (1個, 適量) without recipes."
+    },
+    {
+      "rank": null,
+      "candidateId": "bbc-hummus-snack-packs",
+      "nameJa": "フムスのスナックパック",
+      "nameEn": "Hummus snack packs",
+      "sourceUrl": "https://www.bbcgoodfood.com/recipes/hummus-snack-packs",
+      "sourceTitle": "Hummus snack packs recipe | Good Food",
+      "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+      "accessed": "2026-10-25",
+      "componentUrls": [],
+      "sourceFormat": "bento",
+      "style": "western-inspired",
+      "themeId": null,
+      "whyIncluded": null,
+      "expectedAllergens": [],
+      "expectedMayContain": [],
+      "unknownOriginIngredients": [],
+      "proposedNewIds": [],
+      "dietNotes": null,
+      "estMinutes": null,
+      "minutesBasis": null,
+      "variety": {
+        "protein": [],
+        "cuisine": null,
+        "theme": null
+      },
+      "reserveFor": null,
+      "notes": null,
+      "status": "rejected",
+      "rejectReason": "A snack, not a lunch; raw carrot sticks for 3-6-year-olds would need a cited choking note. Kept out; vegetarian/allergen-free need is met by ranks 6 and 17."
+    }
+  ]
+}

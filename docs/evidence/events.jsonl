@@ -91,3 +91,24 @@
 {"v":1,"at":"2026-10-25T00:29:13.261Z","type":"technical-correction","summary":"Developer relaxed two lint rules for QA test files only to unblock the gate; accepted temporarily, QA to clean up and restore in M2","task":"m1-fix"}
 {"v":1,"at":"2026-10-25T00:29:13.398Z","type":"task-end","summary":"M1 fix round integrated: dev gate and QA suite green on main","task":"m1-fix","outcome":"success"}
 {"v":1,"at":"2026-10-25T07:57:27.173Z","type":"approval","summary":"PO approved committing the M1 fixes and M2 prep, and starting M2 with recipe research in parallel","by":"product-owner"}
+{"v":1,"at":"2026-10-25T07:57:36.494Z","by":"orchestrator","type":"task-start","task":"m2-build","summary":"Task m2-build dispatched (17 allowed globs)"}
+{"v":1,"at":"2026-10-25T07:57:36.649Z","by":"orchestrator","type":"task-start","task":"research-candidates","summary":"Task research-candidates dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-10-25T08:25:15.617Z","by":"orchestrator","type":"task-end","task":"research-candidates","outcome":"failure","summary":"diff-guard: 1 files outside the allow-list"}
+{"v":1,"at":"2026-10-25T08:25:36.302Z","type":"task-end","summary":"30 verified recipe candidates integrated; defaults accepted; 10 dictionary ids to add before phase 2","task":"research-candidates","outcome":"success"}
+{"v":1,"at":"2026-10-25T08:25:36.438Z","by":"orchestrator","type":"task-start","task":"research-dict","summary":"Task research-dict dispatched (3 allowed globs)"}
+{"v":1,"at":"2026-10-25T08:27:39.683Z","type":"task-end","summary":"10 dictionary ids added; build:dictionary and validate:data pass","task":"research-dict","outcome":"success"}
+{"v":1,"at":"2026-10-25T08:27:39.809Z","by":"orchestrator","type":"task-start","task":"research-a","summary":"Task research-a dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-10-25T08:27:39.956Z","by":"orchestrator","type":"task-start","task":"research-b","summary":"Task research-b dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-10-25T08:44:54.893Z","type":"product-decision","summary":"Research: unlabelled processed foods keep allergenInfo unknown (R-3) instead of skipping; stated source times win; House curry label checked for cashew","by":"orchestrator"}
+{"v":1,"at":"2026-10-25T08:44:55.820Z","by":"orchestrator","type":"task-end","task":"research-b","outcome":"failure","summary":"diff-guard: 16 files outside the allow-list"}
+{"v":1,"at":"2026-10-25T08:56:35.361Z","type":"verification","summary":"MAFF bento food-safety page checked; two copy sentences corrected to match it (cool before packing; ice pack or cool bag for long carries)","task":"research-a","outcome":"success"}
+{"v":1,"at":"2026-10-25T13:47:44.223Z","type":"interruption","summary":"Usage limit hit: M2 developer and recipe verifier stopped with work saved"}
+{"v":1,"at":"2026-10-25T13:47:44.346Z","type":"resume","summary":"Resumed M2 developer and recipe verifier from saved state after the limit reset","outcome":"success"}
+{"v":1,"at":"2026-10-25T13:47:44.472Z","type":"product-decision","summary":"PO: cite manufacturer labels for processed foods (ham, sausage, tuna, cheese, miso, bread) so allergen filtering is precise instead of unknown","by":"product-owner"}
+{"v":1,"at":"2026-10-25T13:49:28.510Z","type":"manual-implementation","summary":"Orchestrator relaxed recipe-possible-allergens: varies-by-product may cite a label with no allergens, so processed foods are never recorded as known-none (verifier finding)"}
+{"v":1,"at":"2026-10-25T13:49:56.229Z","type":"verification","summary":"Verifier spot-check: 2 of 4 recipes must be fixed (invented quantity; processed foods recorded as allergen-free); fixes go to the label round","task":"research-a","outcome":"failure"}
+{"v":1,"at":"2026-10-25T13:49:56.379Z","by":"orchestrator","type":"task-start","task":"research-labels","summary":"Task research-labels dispatched (7 allowed globs)"}
+{"v":1,"at":"2026-10-25T13:50:49.951Z","type":"interruption","summary":"PO paused the project until next weekend; M2 developer and label-round BA asked to stop at a safe point and write pause notes"}
+{"v":1,"at":"2026-10-25T13:57:37.743Z","type":"task-end","summary":"M2 paused at WIP commit 96ef9fc: core domain and UI built, gate re-run and ADRs left (not merged)","task":"m2-build","outcome":"success"}
+{"v":1,"at":"2026-10-25T13:57:37.845Z","type":"task-end","summary":"Label round paused before any record edit; resume order in pause notes","task":"research-labels","outcome":"success"}
+{"v":1,"at":"2026-10-25T14:17:07.587Z","type":"approval","summary":"PO approved committing main locally before the break; the M2 branch stays unmerged","by":"product-owner"}

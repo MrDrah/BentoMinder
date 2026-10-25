@@ -1,0 +1,56 @@
+import { i, run, S, SOY } from './lib.mjs';
+
+run({
+  id: 'rcp-nhk-ohanabatake-bento',
+  name: { ja: 'お花畑弁当', en: 'Flower garden bento' },
+  shortNameJa: 'お花畑弁当',
+  shortNameEn: 'Flowers',
+  nameKana: 'おはなばたけべんとう',
+  style: 'japanese',
+  themeId: 'theme-flowers',
+  description: {
+    ja: 'みそ味のしっとりした鶏そぼろを、ブロッコリーご飯といり卵ご飯ではさんだ子ども弁当。上には、花の形に抜いたハムと、ブロッコリーの茎の花を飾ります。',
+    en: 'A children\'s bento with moist miso chicken soboro layered between broccoli rice and egg rice, topped with flowers cut from ham and broccoli stem.',
+  },
+  yield: { ja: '幼児1人分', en: '1 child portion' },
+  minutes: 15,
+  makeAhead: null,
+  ingredients: [
+    i('ing-ground-chicken', '鶏ももひき肉', 'minced chicken thigh', 50, 'g'),
+    i('ing-miso', 'みそ', 'miso', 0.5, 'tbsp', { info: 'unknown' }),
+    i('ing-sugar', '砂糖', 'sugar', 0.5, 'tsp'),
+    SOY('しょうゆ', 'soy sauce', 0.5, 'tsp'),
+    i('ing-wheat-flour', '小麦粉', 'plain flour', 0.5, 'tsp'),
+    i('ing-mirin', 'みりん', 'mirin', 1, 'tsp'),
+    i('ing-egg', '卵', 'egg', 0.5, 'piece'),
+    i('ing-broccoli', 'ブロッコリーの茎（3cm分）', 'broccoli stem (a 3 cm piece)', 1, 'piece'),
+    i('ing-broccoli', 'ブロッコリー（1房）', 'broccoli (1 floret)', 20, 'g'),
+    i('ing-ham', 'ハム', 'ham', 1, 'slice', { info: 'unknown' }),
+    i('ing-rice', 'ご飯（茶わん軽く1杯分）', 'cooked rice (1 small rice bowl)', 120, 'g'),
+    i('ing-salt', '塩', 'salt', null, 'small-amount'),
+    i('ing-oil', 'サラダ油', 'vegetable oil', null, 'small-amount'),
+  ],
+  steps: [
+    { ja: 'そぼろを作る。ひき肉、みそ、砂糖、しょうゆ、小麦粉、みりんと水小さじ1を耐熱ボウルに合わせ、よく混ぜる。', en: 'Make the soboro: in a heatproof bowl, mix the mince well with the miso, sugar, soy sauce, flour, mirin and 1 tsp water.' },
+    { ja: 'ラップをふんわりかけて500Wのレンジで2分加熱し、すばやく全体を混ぜる。再びラップをして、さらに1分加熱する。', en: 'Cover loosely with cling film, microwave at 500 W for 2 minutes and stir quickly. Cover again and microwave for 1 more minute.' },
+    { ja: '卵を溶いて塩少々を加える。サラダ油少々を中火で温めたフライパンを傾け、火の当たる角に卵液を流し、手早く混ぜて細かいいり卵にする。', en: 'Beat the egg with a pinch of salt. Heat a little oil in a frying pan over medium heat, tilt the pan so the egg pools in the heated corner, and stir fast into fine scrambled egg.' },
+    { ja: 'いり卵をご飯の半分に混ぜる。', en: 'Mix the egg into half of the rice.' },
+    { ja: 'ブロッコリーの茎を厚さ2mmに切り、花の抜き型で抜いて、塩を入れた湯でさっとゆでる。', en: 'Slice the broccoli stem 2 mm thick, cut out flowers with a cutter and blanch them briefly in salted water.' },
+    { ja: 'ブロッコリーはやわらかくゆでて水気をよくきり、細かく刻んで、もう半分のご飯に混ぜ込む。ハムも花の型で抜く。', en: 'Boil the broccoli floret until soft, drain it well, chop it finely and mix it into the other half of the rice. Cut flowers out of the ham as well.' },
+    { ja: 'お弁当箱の底にブロッコリーご飯を入れ、そぼろ、卵ご飯の順に重ねる。最後に、花形のハムと茎の花を上に散らす。', en: 'Put the broccoli rice in the bottom of the box, then a layer of soboro, then the egg rice. Decorate with the ham and broccoli-stem flowers.' },
+  ],
+  storage: [
+    { ja: 'いり卵は半熟を残さず、しっかり固まるまで火を通します。', en: 'Cook the scrambled egg until fully set, with no soft parts.' },
+    { ja: 'ハムは型で抜いて生のまま飾るレシピです。農林水産省は、そのまま食べられるハムなども、できるだけ加熱して使うようすすめています。', en: 'The ham is used raw as a decoration here. Japan\'s Ministry of Agriculture advises heating even ready-to-eat foods such as ham for bentos where possible.' },
+    { ja: 'ゆでたブロッコリーは水気をよくきってから、ご飯に混ぜます。', en: 'Drain the boiled broccoli well before mixing it into the rice.' },
+  ],
+  adaptations: [
+    { ja: '元のレシピは子ども弁当の1人分なので、分量はそのままです。水小さじ1は手順に記載しています。', en: 'The source is one child\'s bento, so amounts are unchanged. The 1 tsp water is given in the steps.' },
+    { ja: '「ブロッコリーの茎 3cm」は3cm分の1切れとして記録しました。', en: '"3 cm of broccoli stem" is recorded as one 3 cm piece.' },
+  ],
+  sources: [
+    { id: 'src-nhk-ohanabatake-bento', publisher: 'NHKエデュケーショナル（みんなのきょうの料理）', title: 'お花畑弁当 レシピ 上田 淳子さん｜みんなのきょうの料理', url: 'https://www.kyounoryouri.jp/recipe/10254_%E3%81%8A%E8%8A%B1%E7%95%91%E5%BC%81%E5%BD%93.html', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe', 'storage'] },
+    S.soy,
+    S.maff,
+  ],
+});

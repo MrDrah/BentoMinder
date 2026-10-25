@@ -503,8 +503,8 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | recipe.steps | 作り方 | Steps | Heading | US-E6-04/AC1 |
 | recipe.step.label | 手順{n} | Step {n} | Step accessible label | |
 | recipe.storage | 保存と衛生 | Storage and food safety | Heading | US-E6-04/AC1, AC2 |
-| recipe.safety.cool | ごはんやおかずは、よく冷ましてからふたをしましょう。 | Let rice and side dishes cool fully before closing the lid. | General note | US-E6-04/AC2 (**text to be verified by the BA against the 農林水産省 source before release**) |
-| recipe.safety.carry | 持ち運ぶときは、保冷剤などで涼しく保ちましょう。 | Keep the bento cool while carrying it, for example with an ice pack. | General note | US-E6-04/AC2 (same verification) |
+| recipe.safety.cool | ごはんやおかずは、よく冷ましてから詰めましょう。 | Let rice and side dishes cool fully before packing them. | General note | US-E6-04/AC2 (verified 2026-10-25 against 農林水産省 「お弁当を作るときの注意点」, page updated 2022-10-18) |
+| recipe.safety.carry | 長い時間持ち運ぶときは、保冷剤や保冷バッグを使って涼しく保ちましょう。 | When carrying the bento for a long time, keep it cool with an ice pack or a cool bag. | General note | US-E6-04/AC2 (verified 2026-10-25 against the same 農林水産省 page) |
 | recipe.safety.credit | 出典：農林水産省 | Source: Ministry of Agriculture, Forestry and Fisheries (Japan) | Credit line, linked | US-E6-04/AC2 |
 | recipe.sources | 出典 | Sources | Heading for recipe sources (publisher, title, link) | US-E6-04/AC1, BR-26 |
 | recipe.source.accessed | {date}に確認 | Checked {date} | Source meta | |

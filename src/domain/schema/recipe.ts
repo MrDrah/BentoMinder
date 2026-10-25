@@ -41,7 +41,9 @@ export const recipeIngredientSchema = obj({
   const q = i.quantity;
   const quantityOk = q === null ? vague : q > 0 && Math.round(q * 100) === q * 100;
   if (!quantityOk) issue(ctx, 'recipe-quantity', ['quantity']);
-  if ((i.allergenInfo === 'varies-by-product') !== (i.possibleAllergenIds.length > 0)) {
+  // Only varies-by-product may list possible allergens; it may also list none when the cited label
+  // declares none (PLAN §7 2026-10-25: a processed food is never recorded as "known: none").
+  if (i.allergenInfo !== 'varies-by-product' && i.possibleAllergenIds.length > 0) {
     issue(ctx, 'recipe-possible-allergens', ['possibleAllergenIds']);
   }
 });

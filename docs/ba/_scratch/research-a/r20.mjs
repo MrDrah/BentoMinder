@@ -1,0 +1,63 @@
+import { i, run, S, SOY } from './lib.mjs';
+
+const KIK = 'キッコーマン株式会社（ホームクッキング）';
+run({
+  id: 'rcp-kikkoman-sanshoku-mini-onigiri-bento',
+  name: { ja: '速攻15分！ 3色ミニおにぎり弁当', en: '15-minute three-colour mini rice ball bento' },
+  shortNameJa: '3色おにぎり',
+  shortNameEn: 'Mini oni',
+  nameKana: 'そっこうじゅうごふんさんしょくみにおにぎりべんとう',
+  style: 'japanese',
+  themeId: null,
+  description: {
+    ja: 'しらす、たらこ、いり卵の3種類の小さな三角おにぎりに、薄く切ったれんこんのきんぴらとキャベツのウインナ炒めを添えたお弁当。段取りよく進めれば15分で詰め終わります。',
+    en: 'Three kinds of small triangle rice balls (whitebait, cod roe and scrambled egg) with thin-sliced lotus root kinpira and cabbage stir-fried with a sausage. With good planning it is packed in 15 minutes.',
+  },
+  yield: { ja: '幼児1人分', en: '1 child portion' },
+  minutes: 15,
+  makeAhead: null,
+  ingredients: [
+    i('ing-rice', 'ご飯（温かいもの）', 'warm cooked rice', 150, 'g'),
+    i('ing-tarako', 'たらこ', 'salted cod roe', 10, 'g', { info: 'unknown' }),
+    i('ing-egg', '卵', 'egg', 1, 'piece'),
+    i('ing-sugar', '砂糖（いり卵用）', 'sugar (for the egg)', 2, 'tsp'),
+    i('ing-salt', '塩', 'salt', null, 'small-amount'),
+    i('ing-whitebait', 'しらす干し', 'dried whitebait (shirasu)', 1, 'tsp'),
+    i('ing-nori', '焼きのり', 'toasted nori', null, 'small-amount'),
+    i('ing-lotus-root', 'れんこん', 'lotus root', 50, 'g'),
+    i('ing-sesame-oil', 'ごま油', 'sesame oil', 1, 'tsp'),
+    SOY('しょうゆ（きんぴら用）', 'soy sauce (for the kinpira)', 0.5, 'tbsp'),
+    i('ing-mirin', 'みりん', 'mirin', 0.5, 'tbsp'),
+    i('ing-sugar', '砂糖（きんぴら用）', 'sugar (for the kinpira)', 0.5, 'tsp'),
+    i('ing-cabbage', 'キャベツ', 'cabbage', 50, 'g'),
+    i('ing-sausage', 'ウインナソーセージ', 'wiener sausage', 1, 'stick', { info: 'unknown' }),
+    i('ing-oil', 'サラダ油', 'vegetable oil', 0.5, 'tbsp'),
+    SOY('しょうゆ（炒め用）', 'soy sauce (for the stir-fry)', null, 'small-amount'),
+  ],
+  steps: [
+    { ja: 'たらこを小皿にのせてラップをかけ、500Wのレンジで1分加熱する。目の細かいこし器に移し、スプーンの背で押してぱらぱらにする。', en: 'Put the cod roe on a small plate, cover with cling film and microwave at 500 W for 1 minute. Press it through a fine sieve with the back of a spoon so it falls apart into grains.' },
+    { ja: '卵に砂糖小さじ2と塩少々を混ぜ、ラップをして500Wで30秒加熱する。一度混ぜてもう30秒加熱し、よく混ぜていり卵にする。', en: 'Beat the egg with 2 tsp sugar and a pinch of salt, cover and microwave at 500 W for 30 seconds. Stir, microwave another 30 seconds and stir well into scrambled egg.' },
+    { ja: 'れんこんは皮をむき、薄く輪切りにして水にさらし、ざるで水気をきる。キャベツは太い葉脈をそいでざく切りに、ウインナは両面に斜めの格子の切り込みを入れて3つに切る。', en: 'Peel the lotus root, slice it into thin rounds, soak in water and drain. Shave off the thick cabbage ribs and cut the leaves roughly; score both sides of the sausage in a diagonal criss-cross and cut it in three.' },
+    { ja: 'ご飯を3つに分ける。1つ目にしらす干しとちぎったのりを混ぜ、塩を少しつけた手で小ぶりの三角ににぎる。', en: 'Divide the rice into three. Mix the whitebait and crumbled nori into the first portion and, with lightly salted hands, shape it into a small triangle.' },
+    { ja: '2つ目も同じ形ににぎり、ほぐしたたらこを全体にまぶす。3つ目はいり卵大さじ1を混ぜてからにぎる。', en: 'Shape the second portion the same way and coat it with the cod roe. Mix 1 tbsp of the scrambled egg into the third portion and shape it.' },
+    { ja: 'フライパンで油大さじ1/2を温めてウインナを炒め、キャベツも加えて火を通し、しょうゆ少々で味をつける。', en: 'Heat 1/2 tbsp oil in a frying pan, fry the sausage, add the cabbage and cook it through, then season with a dash of soy sauce.' },
+    { ja: 'ごま油小さじ1を温めたフライパンで、れんこんを中火で炒める。水大さじ2、しょうゆとみりん各大さじ1/2、砂糖小さじ1/2を合わせて加え、2分ほど混ぜつつ炒め煮にし、しゃきっとした歯ごたえが残るうちに火を止める。', en: 'Fry the lotus root in 1 tsp sesame oil over medium heat. Add 2 tbsp water, 1/2 tbsp each of soy sauce and mirin and 1/2 tsp sugar, mixed together, and simmer-fry for about 2 minutes, stirring, until still crisp.' },
+    { ja: 'おにぎりとおかずを冷ましてから、お弁当箱に詰める。', en: 'Let the rice balls and side dishes cool, then pack them.' },
+  ],
+  storage: [
+    { ja: 'いり卵は半熟の部分が残らないよう、しっかり固まるまで加熱します。', en: 'Cook the scrambled egg until completely set, with no soft parts.' },
+    { ja: '余ったいり卵は容器に移して冷蔵庫へ入れ、次の日のうちに食べ終えます。', en: 'Put leftover scrambled egg in a container in the fridge and finish it by the next day.' },
+  ],
+  adaptations: [
+    { ja: '分量は元のレシピ（幼稚園児1人分）のままです。いり卵は卵1個分を作り、おにぎりには大さじ1だけ使います。', en: 'Amounts are as in the source (one kindergarten child). The whole egg is scrambled but only 1 tbsp goes into the rice ball.' },
+    { ja: '調理時間はお弁当ページの段取り（合計15分）によります。3品の個別の時間を足すと20分です。銘柄指定のしょうゆ・みりんは一般的なものとして記載しました。水大さじ2は手順に記載しています。', en: 'The time follows the bento page\'s plan (15 minutes in total); the three dishes\' own times add up to 20 minutes. The branded soy sauce and mirin are listed as ordinary ones. The 2 tbsp water is given in the steps.' },
+  ],
+  sources: [
+    { id: 'src-kikkoman-sanshoku-mini-onigiri-bento', publisher: KIK, title: '速攻15分！ 3色ミニおにぎり弁当 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/lunch/enji/syokuminionigiri.html', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe'] },
+    { id: 'src-kikkoman-sanshoku-mini-onigiri', publisher: KIK, title: '３色ミニおにぎり（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/search/recipe/00003143/', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe', 'storage'] },
+    { id: 'src-kikkoman-usugiri-renkon-kinpira', publisher: KIK, title: '薄切りれんこんのきんぴら（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/search/recipe/00003144/', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe'] },
+    { id: 'src-kikkoman-cabbage-wiener-saute', publisher: KIK, title: 'キャベツとウインナのソテー（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング', url: 'https://www.kikkoman.co.jp/homecook/search/recipe/00003145/', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe'] },
+    S.soy,
+    S.maff,
+  ],
+});

@@ -1,0 +1,87 @@
+import { i, run, S, SOY } from './lib.mjs';
+
+run({
+  id: 'rcp-nhk-sake-teriyaki-bento',
+  name: { ja: '鮭の照り焼き弁当 幼児向け', en: 'Teriyaki salmon bento (for small children)' },
+  shortNameJa: 'さけのてりやき',
+  shortNameEn: 'Teriyaki',
+  nameKana: 'さけのてりやきべんとうようじむけ',
+  style: 'japanese',
+  themeId: null,
+  description: {
+    ja: 'フライパンひとつで、ブロッコリーをゆで、たらこ入りのにんじんいためを作り、最後に鮭を焼き上げる小さな子ども向けのお弁当。のりを貼った一口おにぎりを3つ添えます。',
+    en: 'A bento for small children cooked in a single frying pan: blanch the broccoli, sauté carrot with cod roe, then glaze the salmon. Three bite-size rice balls with nori stripes complete the box.',
+  },
+  yield: { ja: '幼児1人分', en: '1 child portion' },
+  minutes: 10,
+  makeAhead: {
+    ja: '前の晩に鮭をそぎ切りで2～3切れにし、しょうゆ・酒・みりん・しょうが汁を合わせたたれに漬けて、冷蔵庫でひと晩ねかせます。',
+    en: 'The night before, slice the salmon on the diagonal into 2–3 pieces, soak it in the soy sauce, sake, mirin and ginger juice mixture and leave it in the fridge overnight.',
+  },
+  ingredients: [
+    i('ing-salmon', '生ざけ（切り身）', 'fresh salmon (fillet)', 50, 'g'),
+    SOY('しょうゆ', 'soy sauce', 0.67, 'tsp'),
+    i('ing-cooking-sake', '酒', 'sake', 0.33, 'tsp'),
+    i('ing-mirin', 'みりん', 'mirin', 0.33, 'tsp'),
+    i('ing-ginger', 'しょうが汁', 'ginger juice', null, 'small-amount'),
+    i('ing-oil', 'サラダ油', 'vegetable oil', 0.5, 'tsp'),
+    i('ing-carrot', 'にんじん', 'carrot', 20, 'g'),
+    i('ing-tarako', 'たらこ（薄皮を除く）', 'salted cod roe (skin removed)', 1, 'tsp', { info: 'unknown' }),
+    i('ing-butter', 'バター', 'butter', 0.25, 'tsp'),
+    i('ing-broccoli', 'ブロッコリー（小房）', 'broccoli (florets)', 2, 'piece'),
+    i('ing-salt', '塩', 'salt', null, 'small-amount'),
+    i('ing-rice', 'ご飯', 'cooked rice', 100, 'g'),
+    i('ing-nori', 'のり', 'nori', null, 'to-taste'),
+  ],
+  steps: [
+    {
+      ja: 'にんじんは長さ4cmの細切りにする。ご飯100gを3つに分けて丸くにぎり、のりを幅5mmの帯に切って、おにぎりに放射状にのせ、お弁当箱に詰める。',
+      en: 'Cut the carrot into 4 cm matchsticks. Divide the 100 g of rice into three round balls, cut the nori into 5 mm strips, lay them across each ball like spokes and pack the balls into the box.',
+    },
+    {
+      ja: 'まずフライパンでお湯をわかし、塩を少し入れる。ブロッコリーを30～40秒ゆでたら、ざるにとって冷ましておく。',
+      en: 'Bring water to the boil in the frying pan and add a little salt. Blanch the broccoli for 30–40 seconds, then drain it in a sieve and let it cool.',
+    },
+    {
+      ja: 'フライパンの湯を捨て、にんじんとたらこを入れる。水大さじ1、塩少々、バター（小さじ1/4）も加えてざっと混ぜ、中火にかける。',
+      en: 'Pour the water out of the pan and add the carrot and cod roe with 1 tbsp water, a pinch of salt and 1/4 tsp butter. Stir briefly and set over medium heat.',
+    },
+    {
+      ja: '混ぜながら、にんじんがしんなりやわらかくなるまで火を通す。',
+      en: 'Keep stirring until the carrot is soft.',
+    },
+    {
+      ja: 'フライパンをペーパータオルでふいてたらこの粒を取り、サラダ油（小さじ1/2）を入れて温める。たれをきった鮭を並べ、中火で両面がうっすら色づくまで焼く。',
+      en: 'Wipe the pan with kitchen paper to remove the roe grains, add 1/2 tsp oil and heat it. Lay in the salmon, drained of its marinade, and cook over medium heat until both sides are lightly coloured.',
+    },
+    {
+      ja: '残ったたれを流し入れ、鮭にからめながら汁けがなくなるまで煮詰めてつやを出す。冷ましてから、ブロッコリー、にんじんのいため煮と一緒に詰める。',
+      en: 'Pour in the rest of the marinade and reduce it, coating the salmon, until no liquid is left and the fish is glossy. Let everything cool, then pack it with the broccoli and the carrot.',
+    },
+  ],
+  storage: [
+    {
+      ja: '鮭をたれに漬けておく間は冷蔵庫に入れておきます。',
+      en: 'Keep the salmon in the fridge while it marinates.',
+    },
+    {
+      ja: '鮭は中までしっかり火を通し、たれは汁けが残らないように煮詰めてから詰めます。汁けは傷みの原因になります。',
+      en: 'Cook the salmon right through and reduce the glaze until no liquid remains before packing; moisture makes food spoil faster.',
+    },
+  ],
+  adaptations: [
+    {
+      ja: '元のレシピは幼児1人分なので分量はそのままです。材料表に量のないバターとサラダ油は、作り方に書かれた量（小さじ1/4、小さじ1/2）を記載しました。',
+      en: 'The source recipe is already one small-child portion, so amounts are unchanged. Butter and oil have no amount in the source ingredient list; the amounts given in its method (1/4 tsp, 1/2 tsp) are used.',
+    },
+    {
+      ja: '「ブロッコリ 2房」は小房2個として記録しました。塩は2か所で少々ずつ使います。',
+      en: '"2 florets of broccoli" is recorded as 2 pieces. Salt is used twice, a pinch each time.',
+    },
+  ],
+  sources: [
+    { id: 'src-nhk-sake-teriyaki-bento', publisher: 'NHKエデュケーショナル（みんなのきょうの料理）', title: '鮭の照り焼き弁当 幼児向け レシピ 藤井 恵さん｜みんなのきょうの料理', url: 'https://www.kyounoryouri.jp/recipe/1474_%E9%AE%AD%E3%81%AE%E7%85%A7%E3%82%8A%E7%84%BC%E3%81%8D%E5%BC%81%E5%BD%93%20%E5%B9%BC%E5%85%90%E5%90%91%E3%81%91.html', accessed: '2026-10-25', language: 'ja', usedFor: ['recipe', 'storage'] },
+    S.soy,
+    S.maff,
+  ],
+});
