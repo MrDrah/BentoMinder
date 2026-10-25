@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-10-25 (paused until next weekend; lean orchestration applied on branch `chore/lean-orchestration`, not merged) · Repo: local only (no remote yet, by PO instruction) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-10-25 (paused until next weekend; lean orchestration merged to main 7a70e23) · Repo: local only (no remote yet, by PO instruction) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -35,7 +35,7 @@ Two tasks were stopped at a safe point; each wrote pause notes:
 **Main is committed** (bea84df, dev gate green): recipe research, dictionary ids, schema change, copy fix, docs. Only the M2 worktree branch is unmerged.
 
 ### How to resume (new session in this folder; everything on Sonnet, Opus only with PO approval, per CLAUDE.md §6 "Lean orchestration")
-0. **Branch first:** `chore/lean-orchestration` holds the orchestration changes (CLAUDE.md §6, six agent files `model: sonnet`, `.claude/settings.json`, PLAN §7 row, `docs/dev/lean-orchestration-baseline.md`). Rollback point: tag `checkpoint/pre-lean-orchestration-2026-10-25` (main 456f7df). The PO approves, then it is merged to main before resuming.
+0. **Lean orchestration (merged to main, 7a70e23)** holds the orchestration changes (CLAUDE.md §6, six agent files `model: sonnet`, `.claude/settings.json`, PLAN §7 row, `docs/dev/lean-orchestration-baseline.md`). Rollback point: tag `checkpoint/pre-lean-orchestration-2026-10-25` (main 456f7df)..
 1. Read this file, PLAN §7 (latest rows), and both pause notes. Run preflight; log `evidence.mjs event resume`. Consider logging it as `recovery-test` (a fresh session restoring from CATCH-UP alone is the evidence package's recovery check).
 2. **Label round:** re-dispatch a `ba` agent with "continue the label round from pause-notes.md" (baseline `research-labels`). Then: add the new maker hosts to `APPROVED_HOSTS` in `scripts/validate-data.mjs`, `npm run merge:research`, `validate.mjs overlap --fetch` (must be 0 FAIL, 0 UNVERIFIED), quick verifier re-check of the 2 failed records.
 3. **M2:** re-dispatch the `developer` (Sonnet) in the same worktree with "continue M2 from m2-pause-notes.md". Then merge locally, `diff-guard --task m2-build`, **gate + QA suite on main before any commit** (FL-15).
