@@ -184,6 +184,17 @@ export function searchFoods(dict: Dictionary, query: string, limit = 12, kinds: 
   return scored.sort((a, b) => a.score - b.score || a.option.id.localeCompare(b.option.id)).slice(0, limit).map((s) => s.option);
 }
 
+/** US-E1-02/AC8: the kind of a pickable food (an id with no entry has none). */
+export function foodKind(dict: Dictionary, id: string): FoodOption['kind'] | null {
+  if (id.startsWith('ing-')) return dict.ingredients.some((i) => i.id === id) ? 'ingredient' : null;
+  if (id.startsWith('cat-')) return dict.categories.some((c) => c.id === id) ? 'category' : null;
+  if (id.startsWith('dish-')) return dict.dishes.some((x) => x.id === id) ? 'dish' : null;
+  return null;
+}
+
+/** US-E1-02/AC8, components §6.3: result groups in the fixed order 食材 → 料理 → 種類, empty groups left out. */
+export const FOOD_KIND_ORDER: readonly FoodOption['kind'][] = ['ingredient', 'dish', 'category'];
+
 export function foodLabel(dict: Dictionary, id: string, lang: 'ja' | 'en'): string {
   const all: { id: string; ja: string; en: string }[] = [...dict.ingredients, ...dict.categories, ...dict.dishes, ...dict.allergens, ...dict.themes];
   const hit = all.find((x) => x.id === id);

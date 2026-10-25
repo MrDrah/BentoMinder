@@ -179,10 +179,12 @@ export interface ChipProps {
   mode: 'radio' | 'pressed';
   disabledLook?: boolean;
   lang?: string;
+  /** The accessible name when it differs from the visible text (e.g. the kind of food, US-E1-02/AC8). */
+  ariaLabel?: string;
 }
 
 /** §1.6 choice chip: selected = navy fill + check icon + aria state (not colour alone). */
-export function Chip({ testId, label, selected, onToggle, mode, disabledLook = false, lang }: ChipProps) {
+export function Chip({ testId, label, selected, onToggle, mode, disabledLook = false, lang, ariaLabel }: ChipProps) {
   const aria = mode === 'radio' ? { role: 'radio', 'aria-checked': selected } : { 'aria-pressed': selected };
   return (
     <button
@@ -192,6 +194,7 @@ export function Chip({ testId, label, selected, onToggle, mode, disabledLook = f
       onClick={onToggle}
       lang={lang}
       aria-disabled={disabledLook || undefined}
+      aria-label={ariaLabel}
       {...aria}
     >
       {selected && (

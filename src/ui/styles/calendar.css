@@ -193,6 +193,13 @@
   border-radius: var(--radius-pill);
   background: var(--surface-2);
 }
+.bento-icon {
+  --bento-line: var(--surface-2);
+}
+.cell.is-planned .bento-icon,
+.upcoming__swatch--planned .bento-icon {
+  --bento-line: var(--navy-fill);
+}
 .flag-badge {
   position: absolute;
   right: 2px;
@@ -445,7 +452,9 @@
     align-items: start;
   }
   .cal-layout > .page {
+    width: 100%;
     max-width: none;
+    margin: 0;
     padding: 0;
   }
   .sheet--panel {

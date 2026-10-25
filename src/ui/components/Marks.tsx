@@ -47,7 +47,7 @@ export function BentoIcon({ filled, size = 16 }: { filled: boolean; size?: numbe
   return (
     <svg className="bento-icon" viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false">
       <rect x="3" y="6" width="18" height="13" rx="3" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" />
-      <path d="M12 6v13M3 12.5h18" stroke={filled ? 'var(--bento-line, var(--navy-fill))' : 'currentColor'} strokeWidth="1.6" fill="none" />
+      <path d="M12 6v13M3 12.5h18" stroke={filled ? 'var(--bento-line)' : 'currentColor'} strokeWidth="1.6" fill="none" />
     </svg>
   );
 }

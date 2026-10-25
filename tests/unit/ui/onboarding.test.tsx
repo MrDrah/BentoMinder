@@ -83,7 +83,7 @@ describe('US-E1-02 create the child profile (BR-20)', () => {
     expect(screen.getByTestId('profile-notice')).toHaveTextContent('「ピーマン」を苦手から好きに移しました');
     expect(screen.getByTestId('picker-likes-chip-ing-green-pepper')).toBeInTheDocument();
     expect(screen.queryByTestId('picker-dislikes-chip-ing-green-pepper')).toBeNull();
-    await user.click(within(screen.getByTestId('picker-likes-chip-ing-green-pepper')).getByRole('button', { name: '「ピーマン」を外す' }));
+    await user.click(within(screen.getByTestId('picker-likes-chip-ing-green-pepper')).getByRole('button', { name: '「ピーマン（食材）」を外す' }));
     expect(screen.queryByTestId('picker-likes-chip-ing-green-pepper')).toBeNull();
   });
 
