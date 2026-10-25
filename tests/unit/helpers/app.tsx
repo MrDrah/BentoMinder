@@ -50,10 +50,10 @@ export interface Rendered {
   stored: () => BentoMinderStore;
 }
 
-export async function renderApp(options: { store?: BentoMinderStore | null; raw?: string; hash?: string; services?: Partial<Rendered['services']>; online?: boolean } = {}): Promise<Rendered> {
+export async function renderApp(options: { store?: BentoMinderStore | null; raw?: string; hash?: string; services?: Partial<Rendered['services']>; online?: boolean; now?: string } = {}): Promise<Rendered> {
   const initial = options.raw ?? (options.store ? JSON.stringify(options.store) : undefined);
   const storage = memoryStorage(initial === undefined ? {} : { 'bentominder.state': initial });
-  const clock = fixedClock(NOW_ISO);
+  const clock = fixedClock(options.now ?? NOW_ISO);
   const services = {
     pdfSource: fakePdfSource(),
     extractor: fakeExtractor(),

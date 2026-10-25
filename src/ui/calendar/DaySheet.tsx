@@ -284,7 +284,7 @@ function AssessmentSection({ v }: { v: DayView }) {
                 <legend>{t('override.legend')}</legend>
                 {OVERRIDE_STATES.map((s) => (
                   <label key={s} className={`override-radio${a.state === s && overridden ? ' is-checked' : ''}`}>
-                    <input type="radio" name="override" checked={overridden && a.state === s} onChange={() => void choose(s)} data-testid={`override-option-${s}`} />
+                    <input type="radio" name="override" checked={overridden && a.state === s} readOnly onChange={() => undefined} onClick={() => void choose(s)} data-testid={`override-option-${s}`} />
                     <AssessMark state={s} />
                     {t(OVERRIDE_KEYS[s])}
                   </label>
