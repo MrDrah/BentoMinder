@@ -36,6 +36,23 @@ export class StoreValidationError extends Error {
   }
 }
 
+/**
+ * Thrown by `save` when the stored document is no longer the one this repository last read or
+ * wrote (another tab or window saved in between). Nothing is written; the caller reloads
+ * (ADR 003 change log, 2026-10-25: compare-and-swap on save).
+ */
+export class StoreConflictError extends Error {
+  constructor() {
+    super('the stored data changed since it was loaded');
+    this.name = 'StoreConflictError';
+  }
+}
+
+export interface SaveOptions {
+  /** Skips the conflict check: only for a deliberate whole-store replacement (import). */
+  force?: boolean;
+}
+
 export interface RepositoryOptions {
   migrations?: MigrationMap;
   currentVersion?: number;
@@ -43,11 +60,13 @@ export interface RepositoryOptions {
 
 export interface Repository {
   load(): Promise<LoadResult>;
-  save(state: BentoMinderStore): Promise<void>;
+  save(state: BentoMinderStore, options?: SaveOptions): Promise<void>;
   exportJson(state: BentoMinderStore): string;
   exportFileName(): string;
   importJson(text: string): ImportResult;
   deleteAll(): Promise<void>;
+  /** Another tab changed the stored data (when the Storage adapter can tell); returns unsubscribe. */
+  onExternalChange(handler: () => void): () => void;
 }
 
 export function validateStore(doc: unknown): { ok: true; state: BentoMinderStore } | { ok: false; issues: RuleIssue[] } {
@@ -60,6 +79,17 @@ const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'obj
 export function createRepository(storage: Storage, clock: Clock, options: RepositoryOptions = {}): Repository {
   const map = options.migrations ?? shippedMigrations;
   const current = options.currentVersion ?? CURRENT_SCHEMA_VERSION;
+  // The compare-and-swap token: the exact stored text this repository last read or wrote
+  // (null = nothing stored, undefined = never loaded, so no check yet). Content, not a counter,
+  // so the data contract needs no new field and any Storage adapter works.
+  let known: string | null | undefined;
+  // Storage operations run one at a time so read-compare-write cannot interleave within a tab.
+  let queue: Promise<unknown> = Promise.resolve();
+  const serial = <T,>(task: () => Promise<T>): Promise<T> => {
+    const run = queue.then(task, task);
+    queue = run.catch(() => undefined);
+    return run;
+  };
 
   function decodeDoc(doc: unknown): ImportResult {
     if (!isRecord(doc) || typeof doc['schemaVersion'] !== 'number' || typeof doc['deviceId'] !== 'string') {
@@ -94,34 +124,50 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
   const reasonOf = (r: Extract<ImportResult, { ok: false }>): CorruptReason =>
     r.error === 'json-parse' || r.error === 'migration-failed' ? r.error : 'schema-invalid';
 
-  return {
-    async load() {
+  async function loadNow(): Promise<LoadResult> {
+    {
       const raw = await storage.read('bentominder.state');
-      if (raw === null) return { kind: 'empty' };
+      if (raw === null) {
+        known = null;
+        return { kind: 'empty' };
+      }
       const result = decode(raw);
       if (result.ok) {
         if (result.migratedFrom !== undefined) {
           // US-E10-02/AC2: keep the original as the backup copy, then store the migrated document.
           await storage.write('bentominder.state.prev', raw);
-          await storage.write('bentominder.state', JSON.stringify(result.state));
+          const migratedText = JSON.stringify(result.state);
+          await storage.write('bentominder.state', migratedText);
+          known = migratedText;
           return { kind: 'ok', state: result.state, migratedFrom: result.migratedFrom };
         }
+        known = raw;
         return { kind: 'ok', state: result.state };
       }
+      known = raw;
       if (result.error === 'too-new') return { kind: 'too-new', version: result.version, raw };
       const reason = reasonOf(result);
       const prevRaw = await storage.read('bentominder.state.prev');
       const prev = prevRaw === null ? null : decode(prevRaw);
       if (prev?.ok === true) return { kind: 'recovered-from-prev', state: prev.state, reason };
       return { kind: 'corrupt', raw, reason };
-    },
+    }
+  }
 
-    async save(state) {
-      const checked = validateStore(state);
-      if (!checked.ok) throw new StoreValidationError(checked.issues);
-      const existing = await storage.read('bentominder.state');
-      if (existing !== null && decode(existing).ok) await storage.write('bentominder.state.prev', existing);
-      await storage.write('bentominder.state', JSON.stringify(checked.state));
+  return {
+    load: () => serial(loadNow),
+
+    save(state, saveOptions) {
+      return serial(async () => {
+        const checked = validateStore(state);
+        if (!checked.ok) throw new StoreValidationError(checked.issues);
+        const existing = await storage.read('bentominder.state');
+        if (saveOptions?.force !== true && known !== undefined && existing !== known) throw new StoreConflictError();
+        if (existing !== null && decode(existing).ok) await storage.write('bentominder.state.prev', existing);
+        const text = JSON.stringify(checked.state);
+        await storage.write('bentominder.state', text);
+        known = text;
+      });
     },
 
     exportJson(state) {
@@ -138,8 +184,13 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
       return decode(text);
     },
 
-    async deleteAll() {
-      for (const key of STORAGE_KEYS) await storage.remove(key);
+    onExternalChange: (handler) => storage.onExternalChange?.(handler) ?? (() => undefined),
+
+    deleteAll() {
+      return serial(async () => {
+        for (const key of STORAGE_KEYS) await storage.remove(key);
+        known = null;
+      });
     },
   };
 }

@@ -51,7 +51,7 @@ test('US-NF-02/AC3 at 360 px every touch target on the M1 screens is at least 44
 });
 
 // D-M1-08 (P2): the 日本語 / EN toggle on every screen is 66x36 and 48x36 px.
-test.fixme('US-NF-02/AC3 D-M1-08 the language toggle is at least 44 x 44 CSS px at 360 px', async ({ page }) => {
+test('US-NF-02/AC3 D-M1-08 the language toggle is at least 44 x 44 CSS px at 360 px', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto('./');
   expect((await smallTargets(page)).filter((t) => /^lang-toggle/.test(t.id))).toEqual([]);

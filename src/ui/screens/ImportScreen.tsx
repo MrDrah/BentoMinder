@@ -297,7 +297,11 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
           inputMode="url"
           value={url}
           placeholder={t('import.url.placeholder')}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => {
+            setUrl(e.target.value);
+            // Clear the error as soon as the text is valid, so the button never moves under a tap that follows (D-M1-02).
+            if (urlError && isValidMenuUrl(e.target.value.trim())) setUrlError(false);
+          }}
           onBlur={() => urlError && setUrlError(!isValidMenuUrl(url.trim()))}
           aria-invalid={urlError || undefined}
           aria-describedby={urlError ? 'import-url-hint import-url-error' : 'import-url-hint'}

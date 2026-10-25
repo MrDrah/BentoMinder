@@ -326,7 +326,7 @@ test('US-E2-01/AC3 URL length boundary 2048 accepted (reaches the proxy), 2049 r
 
 // D-M1-02 (P3): after an invalid-URL error, correcting the URL and tapping 取り込む straight away does nothing:
 // the input's blur removes the error line, the button moves up ~32 px and the tap misses it.
-test.fixme('US-E2-01/AC2 D-M1-02 correcting an invalid URL and tapping 取り込む once starts the import', async ({ page }) => {
+test('US-E2-01/AC2 D-M1-02 correcting an invalid URL and tapping 取り込む once starts the import', async ({ page }) => {
   let fetches = 0;
   await page.route('**/api/menu/fetch-pdf', (route) => {
     fetches += 1;

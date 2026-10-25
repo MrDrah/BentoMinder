@@ -199,7 +199,8 @@ export function defaultDeps(env: NodeJS.ProcessEnv = process.env): ProxyDeps {
     fetchCap: windowCap({ perHour: envInt(env, 'PROXY_FETCH_PER_HOUR', 30), perDay: Number.MAX_SAFE_INTEGER }, nowMs),
     primaryModel: env['GEMINI_MODEL_PRIMARY'] || 'gemini-3.8-flash',
     fallbackModel: env['GEMINI_MODEL_FALLBACK'] || 'gemini-3.5-flash-lite',
-    allowScenarios: env['PROXY_MOCK_SCENARIOS'] !== '0',
+    // Off unless PROXY_MOCK_SCENARIOS=1: only the test runs set it (D-M1-09).
+    allowScenarios: env['PROXY_MOCK_SCENARIOS'] === '1',
     nowMs,
     sleep: (ms) => new Promise((r) => setTimeout(r, ms)),
     log: (m) => console.log(m),

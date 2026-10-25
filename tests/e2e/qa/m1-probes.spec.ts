@@ -232,7 +232,7 @@ test('BR-24 US-NF-05 the production bundle has no debug UI, no secret, no source
 
 // D-M1-05 (P3): the PDF's own allergen line (Japanese) is shown on the review screen without lang="ja",
 // so in the English UI it is announced with the wrong voice (WCAG 3.1.2 Language of Parts, AA).
-test.fixme('US-NF-02/AC1 US-E8-02/AC2 D-M1-05 the PDF allergen line on the review screen carries lang="ja" in the English UI', async ({ page }) => {
+test('US-NF-02/AC1 US-E8-02/AC2 D-M1-05 the PDF allergen line on the review screen carries lang="ja" in the English UI', async ({ page }) => {
   await page.goto('./');
   await page.getByTestId('lang-toggle-en').click();
   await fillProfile(page);

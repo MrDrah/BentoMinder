@@ -63,6 +63,11 @@ export default tseslint.config(
     rules: { '@typescript-eslint/no-non-null-assertion': 'off' },
   },
   {
+    // QA's suite reads untyped JSON from the app and the proxy; typed access would only add noise.
+    files: ['tests/e2e/qa/**'],
+    rules: { '@typescript-eslint/no-explicit-any': 'off', '@typescript-eslint/no-unused-vars': 'off' },
+  },
+  {
     files: ['src/**/*.{ts,tsx}'],
     plugins: { react, 'react-hooks': reactHooks },
     settings: { react: { version: 'detect' } },

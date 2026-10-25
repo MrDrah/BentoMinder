@@ -15,7 +15,7 @@ declare const __APP_VERSION__: string;
 const VERSION = typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '0.0.0';
 
 export function SettingsScreen() {
-  const { t, state, now, commit, startOver, replaceStore, repository, services, showToast } = useApp();
+  const { t, state, now, commit, startOver, replaceStore, repository, services, showToast, showSaveFailed } = useApp();
   const store = useStore();
   const persisted = state.phase === 'ready' && state.persisted;
   const [dialog, setDialog] = useState<'delete-profile' | 'delete-all' | 'import-data' | 'consent' | null>(null);
@@ -141,7 +141,7 @@ export function SettingsScreen() {
               if (await commit(deleteProfile(store, now()))) {
                 setDialog(null);
                 navigate({ name: 'onboarding', step: 1, month: null, manual: false });
-              } else showToast(t('toast.saveFailed'));
+              } else showSaveFailed();
             })();
           }}
           onCancel={() => setDialog(null)}
@@ -173,7 +173,7 @@ export function SettingsScreen() {
             void replaceStore(incoming).then((ok) => {
               setDialog(null);
               if (ok) navigate({ name: 'calendar', month: null });
-              else showToast(t('toast.saveFailed'));
+              else showSaveFailed();
             });
           }}
           onCancel={() => {
@@ -191,7 +191,7 @@ const sameForm = (a: Form, b: Form) => JSON.stringify(a) === JSON.stringify(b);
 
 /** US-E1-05: edit the profile; 「キャンセル」 or leaving with changes asks first (AC3). */
 export function ProfileEditScreen() {
-  const { t, now, commit, showToast } = useApp();
+  const { t, now, commit, showToast, showSaveFailed } = useApp();
   const store = useStore();
   const initial = store.profile === null ? null : profileToForm(store.profile);
   const current = useRef<Form | null>(initial);
@@ -247,7 +247,7 @@ export function ProfileEditScreen() {
               setLeaveGuard(null);
               showToast(t('profileEdit.saved'));
               navigate(settings, { force: true });
-            } else showToast(t('toast.saveFailed'));
+            } else showSaveFailed();
           }}
         />
       </main>

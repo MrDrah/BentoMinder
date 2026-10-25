@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { STORAGE_KEYS } from '../../../src/domain/ports.ts';
 import { createEmptyStore, defaultSettings } from '../../../src/domain/storage/defaults.ts';
 import { migrate, MigrationError, migrations } from '../../../src/domain/storage/migrations/index.ts';
-import { createRepository, StoreValidationError, validateStore } from '../../../src/domain/storage/repository.ts';
+import { createRepository, StoreConflictError, StoreValidationError, validateStore } from '../../../src/domain/storage/repository.ts';
 import type { Instant } from '../../../src/domain/time/jst.ts';
 import { clone, storeV1 } from '../helpers/fixtures.ts';
 import { fixedClock, memoryStorage } from '../helpers/memory-storage.ts';
@@ -184,5 +184,100 @@ describe('first-launch defaults (contract §3.9, BR-16, BR-23)', () => {
     });
     expect(store.createdAt).toBe('2026-10-28T20:15:00+09:00');
     expect(defaultSettings(now).ownerId).toBe('local');
+  });
+});
+
+describe('BR-22 US-E10-01/AC1 D-M1-06 a stale copy never overwrites another tab’s save (compare-and-swap)', () => {
+  it('US-E10-01/AC1 a save after another instance wrote is refused and writes nothing', async () => {
+    const storage = memoryStorage();
+    const a = createRepository(storage, clock);
+    const b = createRepository(storage, clock);
+    expect(await a.load()).toEqual({ kind: 'empty' });
+    expect(await b.load()).toEqual({ kind: 'empty' });
+    await a.save(storeV1());
+    const before = storage.data.get('bentominder.state');
+    await expect(b.save(createEmptyStore({ deviceId: '3f1c9a52-7d4e-4b8a-9c21-5e6f7a8b9c0d', now: clock.now() }))).rejects.toBeInstanceOf(StoreConflictError);
+    expect(storage.data.get('bentominder.state')).toBe(before);
+  });
+
+  it('US-E10-01/AC1 after the refused save, a reload makes the next save work and keeps the other tab’s data', async () => {
+    const storage = memoryStorage();
+    const a = createRepository(storage, clock);
+    const b = createRepository(storage, clock);
+    await a.load();
+    await b.load();
+    await a.save(storeV1());
+    await expect(b.save(storeV1())).rejects.toBeInstanceOf(StoreConflictError);
+    const reloaded = await b.load();
+    expect(reloaded.kind).toBe('ok');
+    if (reloaded.kind !== 'ok') return;
+    await b.save({ ...reloaded.state, aiUsage: { '2026-11': 1 } });
+    expect(JSON.parse(storage.data.get('bentominder.state')!).aiUsage).toEqual({ '2026-11': 1 });
+  });
+
+  it('US-E10-01/AC1 consecutive saves from one instance never conflict with themselves', async () => {
+    const storage = memoryStorage();
+    const repo = createRepository(storage, clock);
+    await repo.load();
+    await repo.save(storeV1());
+    await repo.save({ ...storeV1(), aiUsage: { '2026-11': 1 } });
+    await repo.save({ ...storeV1(), aiUsage: { '2026-11': 2 } });
+    expect(JSON.parse(storage.data.get('bentominder.state')!).aiUsage).toEqual({ '2026-11': 2 });
+  });
+
+  it('US-E10-01/AC1 two saves started together run one after the other', async () => {
+    const storage = memoryStorage();
+    const repo = createRepository(storage, clock);
+    await repo.load();
+    await Promise.all([repo.save(storeV1()), repo.save({ ...storeV1(), aiUsage: { '2026-11': 1 } })]);
+    expect(JSON.parse(storage.data.get('bentominder.state')!).aiUsage).toEqual({ '2026-11': 1 });
+  });
+
+  it('US-E10-01/AC1 a store written by another tab after “nothing stored” is a conflict, not a silent overwrite', async () => {
+    const storage = memoryStorage();
+    const repo = createRepository(storage, clock);
+    await repo.load();
+    storage.data.set('bentominder.state', raw(storeV1()));
+    await expect(repo.save(storeV1())).rejects.toBeInstanceOf(StoreConflictError);
+  });
+
+  it('US-E10-01/AC1 a deliberate whole-store replacement (import) can bypass the check', async () => {
+    const storage = memoryStorage();
+    const repo = createRepository(storage, clock);
+    await repo.load();
+    storage.data.set('bentominder.state', raw(storeV1()));
+    await repo.save({ ...storeV1(), aiUsage: { '2026-11': 2 } }, { force: true });
+    expect(JSON.parse(storage.data.get('bentominder.state')!).aiUsage).toEqual({ '2026-11': 2 });
+  });
+
+  it('US-E10-04/AC1 delete all leaves nothing stored, so the next save is not a conflict', async () => {
+    const storage = memoryStorage();
+    const repo = createRepository(storage, clock);
+    await repo.load();
+    await repo.save(storeV1());
+    await repo.deleteAll();
+    await repo.save(storeV1());
+    expect(storage.data.has('bentominder.state')).toBe(true);
+  });
+
+  it('US-E10-01/AC1 the repository forwards the storage’s external-change signal and its unsubscribe', () => {
+    let handler: (() => void) | undefined;
+    const storage = {
+      ...memoryStorage(),
+      onExternalChange: (h: () => void) => {
+        handler = h;
+        return () => {
+          handler = undefined;
+        };
+      },
+    };
+    const repo = createRepository(storage, clock);
+    let calls = 0;
+    const off = repo.onExternalChange(() => calls++);
+    handler?.();
+    off();
+    expect(calls).toBe(1);
+    expect(handler).toBeUndefined();
+    expect(createRepository(memoryStorage(), clock).onExternalChange(() => undefined)).toBeTypeOf('function');
   });
 });

@@ -45,6 +45,7 @@ export const en = {
   'cal.nextMonth': 'Next month',
   'cal.today': 'Today',
   'cal.grid.label': 'Calendar for {month}',
+  'cal.nav.label': 'Change month',
   'cell.aria.today': 'Today, ',
   'cell.aria.outside': '{date}, not on the menu',
   'cell.aria.noMenu': '{date}, menu not imported',
@@ -282,6 +283,9 @@ export const en = {
   'storage.corrupt.resetTitle': 'Start over with empty data?',
   'storage.corrupt.resetBody': 'The unreadable data is removed and setup starts again.',
   'storage.migrated': 'Your data was updated to the new format (a backup copy is kept).',
+  'sync.updatedElsewhere': 'Updated in another tab',
+  'sync.updatedElsewhere.body': "You're now seeing what was saved most recently. Changes made in this tab weren't saved, so enter them again if you still need them.",
+  'toast.updatedElsewhere': "Not saved: another tab had updated your data.",
   'toast.saveFailed': 'Couldn\'t save. Please try again.',
   'live.formErrors': '{n, plural, one {# entry needs fixing} other {# entries need fixing}}',
 } satisfies Catalog;

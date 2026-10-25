@@ -1,7 +1,7 @@
 // Menu review / manual entry (design/components.md §6.8, flows F3; US-E3-01…E3-04, US-E2-05/AC4–AC6).
 // The draft is in memory only: leaving asks first and discards edits (OQ-23); confirming stores
 // the ConfirmedMenu (BR-12). All rules are in src/domain/menu/review.ts.
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   acceptField,
   addItem,
@@ -71,7 +71,7 @@ function reasonKey(reason: Verification['reason']): MessageKey {
 }
 
 export function ReviewScreen({ month, manual, onboarding }: { month: YearMonth; manual: boolean; onboarding: boolean }) {
-  const { t, state, now, commit, showToast, flash, setFlash } = useApp();
+  const { t, state, now, commit, showToast, showSaveFailed, flash, setFlash } = useApp();
   const store = useStore();
   const lang = state.language;
   const menuMonth = store.menus[month];
@@ -128,7 +128,7 @@ export function ReviewScreen({ month, manual, onboarding }: { month: YearMonth; 
     setBusy(false);
     if (!ok) {
       setSaveError(t('toast.saveFailed'));
-      showToast(t('toast.saveFailed'));
+      showSaveFailed();
       return;
     }
     setConfirmAsk(false);
@@ -461,11 +461,23 @@ function DayRow({ date, day, draft, update, uncertain, errors }: RowProps) {
   );
 }
 
-function allergenText(day: DraftDay, t: ReturnType<typeof useApp>['t']): string {
+const QUOTE_MARK = '\u0000';
+
+/** Text quoted from the PDF is Japanese whatever the UI language (WCAG 3.1.2, D-M1-05). */
+function allergenText(day: DraftDay, t: ReturnType<typeof useApp>['t']): ReactNode {
   const a = day.allergenDeclaration;
   // BR-08: never summarised as "none"; declared-none quotes the sheet.
-  if (a.status === 'declared') return a.rawText ?? a.allergenIds.join('、');
-  if (a.status === 'declared-none') return t('review.allergens.declaredNone', { raw: a.rawText ?? '' });
+  if (a.status === 'declared') return a.rawText === null || a.rawText === undefined ? a.allergenIds.join('、') : <span lang="ja">{a.rawText}</span>;
+  if (a.status === 'declared-none') {
+    const [before = '', after = ''] = t('review.allergens.declaredNone', { raw: QUOTE_MARK }).split(QUOTE_MARK);
+    return (
+      <>
+        {before}
+        <span lang="ja">{a.rawText ?? ''}</span>
+        {after}
+      </>
+    );
+  }
   if (a.status === 'unreadable') return t('review.allergens.unreadable');
   return t('review.allergens.notDeclared');
 }

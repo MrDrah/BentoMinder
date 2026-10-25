@@ -48,6 +48,7 @@ export const ja = {
   'cal.nextMonth': '次の月',
   'cal.today': '今日',
   'cal.grid.label': '{month}のカレンダー',
+  'cal.nav.label': '月の切り替え',
   'cell.aria.today': '今日、',
   'cell.aria.outside': '{date}、献立に記載なし',
   'cell.aria.noMenu': '{date}、献立未取り込み',
@@ -289,6 +290,9 @@ export const ja = {
   'storage.corrupt.resetTitle': 'データを初期化しますか？',
   'storage.corrupt.resetBody': '読み込めなかったデータは消え、はじめての設定から始まります。',
   'storage.migrated': 'データを新しい形式に更新しました（元のデータは控えとして残しています）。',
+  'sync.updatedElsewhere': '別のタブで内容が更新されました',
+  'sync.updatedElsewhere.body': '最新の保存内容を表示しています。このタブでの変更は保存していないので、必要なら入力し直してください。',
+  'toast.updatedElsewhere': '別のタブで更新されていたため、保存しませんでした。',
   'toast.saveFailed': '保存できませんでした。もう一度お試しください。',
   'live.formErrors': '入力内容に{n}件の誤りがあります',
 } as const;
