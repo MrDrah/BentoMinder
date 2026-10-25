@@ -1,6 +1,6 @@
 // The calendar home and the day sheet in jsdom (US-E5-01, US-E5-02, US-E4-03, US-E5-05…E5-08,
 // US-E3-05): grid cells, labels, keyboard model, month navigation, decisions through the sheet.
-import { act, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import type { BentoMinderStore } from '../../../src/domain/schema/index.ts';
@@ -11,7 +11,6 @@ const NOV2 = '2026-11-02T01:00:00Z'; // 2026-11-02 10:00 JST
 const november = () => loadFixture<BentoMinderStore>('state/m2-november.json');
 const cell = (date: string) => screen.getByTestId(`cal-cell-${date}`);
 const button = (date: string) => within(cell(date)).getByRole('button');
-const hashIs = (hash: string) => waitFor(() => expect(window.location.hash).toBe(hash));
 
 async function open(user: ReturnType<typeof userEvent.setup>, date: string) {
   await user.click(button(date));
@@ -377,7 +376,7 @@ describe('US-E3-05 refresh conflicts in the calendar and the sheet (B7)', () => 
     const confirmed = s.menus['2026-11']!.confirmed!;
     confirmed.version = 2;
     confirmed.days = confirmed.days.filter((d) => d.date !== '2026-11-04' && d.date !== '2026-11-25');
-    confirmed.noLunchDays = [...confirmed.noLunchDays, { date: '2026-11-04', reason: 'no-lunch', originalText: '午前保育（給食なし）', verification: { status: 'ok' } }].sort((a, b) => a.date.localeCompare(b.date));
+    confirmed.noLunchDays = [...confirmed.noLunchDays, { date: '2026-11-04', reason: 'no-lunch' as const, originalText: '午前保育（給食なし）', verification: { status: 'ok' as const } }].sort((a, b) => a.date.localeCompare(b.date));
     confirmed.changedDatesSincePrevious = ['2026-11-04', '2026-11-25'];
     s.decisions['2026-11-25'] = { ...s.decisions['2026-11-04']!, date: '2026-11-25', plannedAt: '2026-11-01T10:12:00+09:00' };
     return s;
@@ -471,4 +470,3 @@ describe('US-E3-06 the next-month card', () => {
   });
 });
 
-void act;
