@@ -7,6 +7,7 @@ import {
   bentoMinderStoreSchema,
   childProfileSchema,
   confirmedMenuSchema,
+  RULES_NOT_IN_CONTRACT,
   dayDecisionSchema,
   extractedDaySchema,
   extractedMenuJsonSchema,
@@ -246,6 +247,22 @@ describe('US-E10-05 confirmed menu and menu month (§3.1, §3.4)', () => {
     );
     expect(rules(confirmedMenuSchema, { ...c, changedDatesSincePrevious: ['2026-11-04'] })).toContain('changed-dates-first-version');
     expect(rules(confirmedMenuSchema, { ...c, version: 2, changedDatesSincePrevious: ['2026-11-04'] })).toEqual([]);
+  });
+
+  it('US-E10-05/AC1 noLunchDays and changedDatesSincePrevious are unique, ascending and inside the month (§3.4)', () => {
+    const c = confirmed();
+    const nl = c.noLunchDays[0]!;
+    expect(rules(confirmedMenuSchema, { ...c, noLunchDays: [nl, nl] })).toContain('days-unique-sorted');
+    expect(rules(confirmedMenuSchema, { ...c, noLunchDays: [{ ...nl, date: '2026-11-27' }, { ...nl, date: '2026-11-20' }] })).toContain('days-unique-sorted');
+    const v2 = { ...c, version: 2 };
+    expect(rules(confirmedMenuSchema, { ...v2, changedDatesSincePrevious: ['2026-11-05', '2026-11-04'] })).toContain('days-unique-sorted');
+    expect(rules(confirmedMenuSchema, { ...v2, changedDatesSincePrevious: ['2026-11-04', '2026-11-04'] })).toContain('days-unique-sorted');
+    expect(rules(confirmedMenuSchema, { ...v2, changedDatesSincePrevious: ['2026-12-01'] })).toContain('confirmed-days-in-month');
+    expect(rules(confirmedMenuSchema, { ...v2, changedDatesSincePrevious: ['2026-11-04', '2026-11-05'] })).toEqual([]);
+  });
+
+  it('US-E10-05/AC1 the contract rule list is complete: no rule id outside §6.1 is left in the code', () => {
+    expect(RULES_NOT_IN_CONTRACT).toEqual([]);
   });
 
   it('US-E10-05 extraction ids resolve and months agree', () => {

@@ -1,6 +1,6 @@
 // design/components.md §1.1 App bar (calendar home) and §1.2 Top bar (every other screen).
 import { useApp } from '../app-store.tsx';
-import { toHash } from '../router.ts';
+import { toHash, type Route } from '../router.ts';
 import { Icon } from './Icon.tsx';
 import { LangToggle } from './LangToggle.tsx';
 
@@ -31,13 +31,14 @@ export function AppBar() {
   );
 }
 
-export function TopBar({ title }: { title: string }) {
+/** `back` overrides the default target (the calendar), e.g. settings opened from an onboarding step. */
+export function TopBar({ title, back: target }: { title: string; back?: { route: Route; screen: string } }) {
   const { t } = useApp();
-  const back = t('nav.backTo', { screen: t('nav.calendar') });
+  const back = t('nav.backTo', { screen: target?.screen ?? t('nav.calendar') });
   return (
     <header className="topbar">
       <div className="appbar__inner">
-        <a className="iconbtn" href={toHash({ name: 'calendar', month: null })} data-testid="topbar-back" aria-label={back}>
+        <a className="iconbtn" href={toHash(target?.route ?? { name: 'calendar', month: null })} data-testid="topbar-back" aria-label={back}>
           <Icon name="chevronLeft" />
         </a>
         <h1 className="topbar__title" data-testid="topbar-title">

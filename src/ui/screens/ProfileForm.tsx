@@ -8,6 +8,8 @@ import {
 import { DIETS, type Diet } from '../../domain/schema/primitives.ts';
 import {
   clampCodePoints,
+  FOOD_KIND_ORDER,
+  foodKind,
   foodLabel,
   NICKNAME_MAX,
   NOTE_MAX,
@@ -40,6 +42,7 @@ const DIET_KEYS: Record<Diet, MessageKey> = {
   'no-beef': 'diet.noBeef',
   'no-seafood': 'diet.noSeafood',
 };
+const KIND_KEYS = { ingredient: 'picker.group.ingredient', dish: 'picker.group.dish', category: 'picker.group.category' } as const;
 const ALLERGY_KEYS = { 'none-known': 'allergy.status.none', 'has-known': 'allergy.status.has', unknown: 'allergy.status.unknown' } as const;
 
 function count(text: string): number {
@@ -75,6 +78,14 @@ function FoodPicker({ name, legend, hint, selected, kinds, onPick, showPopular }
   const hintId = useId();
   const results = searchFoods(dict, query, 12, kinds);
   const label = (id: string) => foodLabel(dict, id, lang);
+  // US-E1-02/AC8: every food shows its kind; the kind is part of each chip's accessible name.
+  const kindText = (id: string) => {
+    const kind = foodKind(dict, id);
+    return kind === null ? '' : t(KIND_KEYS[kind]);
+  };
+  const named = (id: string) => t('picker.withKind', { food: label(id), kind: kindText(id) });
+  const searching = query.trim() !== '';
+  const groups = FOOD_KIND_ORDER.map((kind) => ({ kind, items: results.filter((r) => r.kind === kind) })).filter((g) => g.items.length > 0);
   return (
     <fieldset className="field" data-testid={`picker-${name}`} aria-describedby={hint === undefined ? undefined : hintId}>
       <legend className="field__label">{legend}</legend>
@@ -87,9 +98,10 @@ function FoodPicker({ name, legend, hint, selected, kinds, onPick, showPopular }
         {selected.length === 0 && <li className="field__hint">{t('profile.foods.empty')}</li>}
         {selected.map((id) => (
           <li key={id}>
-            <span className="chip is-selected chip--removable" data-testid={`picker-${name}-chip-${id}`}>
-              {label(id)}
-              <button type="button" className="chip__remove" aria-label={t('profile.foods.remove', { food: label(id) })} onClick={() => onPick(id)}>
+            <span className="chip is-selected chip--removable" data-testid={`picker-${name}-chip-${id}`} aria-label={named(id)} role="group">
+              {/* the kind is shown as text only when another chosen chip has the same label (US-E1-02/AC8) */}
+              {selected.some((other) => other !== id && label(other) === label(id)) ? named(id) : label(id)}
+              <button type="button" className="chip__remove" aria-label={t('profile.foods.remove', { food: named(id) })} onClick={() => onPick(id)}>
                 <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
                   <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                 </svg>
@@ -110,13 +122,30 @@ function FoodPicker({ name, legend, hint, selected, kinds, onPick, showPopular }
           autoComplete="off"
         />
       </label>
-      {query.trim() !== '' && results.length === 0 && <p className="field__hint">{t('profile.foods.searchEmpty', { q: query.trim() })}</p>}
-      {query.trim() === '' && showPopular && <p className="field__sublabel">{t('profile.foods.popular')}</p>}
-      <div className="chips">
-        {(query.trim() === '' ? (showPopular ? [...POPULAR_FOOD_IDS] : []) : results.map((r) => r.id)).map((id) => (
-          <Chip key={id} testId={`picker-${name}-option-${id}`} label={label(id)} selected={selected.includes(id)} mode="pressed" onToggle={() => onPick(id)} />
+      {searching && results.length === 0 && <p className="field__hint">{t('profile.foods.searchEmpty', { q: query.trim() })}</p>}
+      {!searching && showPopular && <p className="field__sublabel">{t('profile.foods.popular')}</p>}
+      {!searching && showPopular && (
+        <div className="chips">
+          {[...POPULAR_FOOD_IDS].map((id) => (
+            <Chip key={id} testId={`picker-${name}-option-${id}`} label={label(id)} ariaLabel={named(id)} selected={selected.includes(id)} mode="pressed" onToggle={() => onPick(id)} />
+          ))}
+        </div>
+      )}
+      {searching &&
+        groups.map((g) => (
+          <div key={g.kind} className="picker-group">
+            <p id={`picker-${name}-heading-${g.kind}`} className="picker-group__heading">
+              {t(KIND_KEYS[g.kind])}
+            </p>
+            <ul className="chips" aria-labelledby={`picker-${name}-heading-${g.kind}`} data-testid={`picker-${name}-group-${g.kind}`}>
+              {g.items.map((r) => (
+                <li key={r.id}>
+                  <Chip testId={`picker-${name}-option-${r.id}`} label={label(r.id)} ariaLabel={named(r.id)} selected={selected.includes(r.id)} mode="pressed" onToggle={() => onPick(r.id)} />
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </div>
     </fieldset>
   );
 }

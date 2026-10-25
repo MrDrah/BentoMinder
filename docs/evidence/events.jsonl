@@ -114,3 +114,5 @@
 {"v":1,"at":"2026-10-25T14:17:07.587Z","type":"approval","summary":"PO approved committing main locally before the break; the M2 branch stays unmerged","by":"product-owner"}
 {"v":1,"at":"2026-10-25T14:27:36.840Z","type":"product-decision","summary":"Lean orchestration applied on branch chore/lean-orchestration: Sonnet default, Opus only with PO approval, BA scope narrowed, 2-cycle fix limit; baseline recorded"}
 {"v":1,"at":"2026-10-25T14:34:32.638Z","type":"approval","summary":"PO approved merge of chore/lean-orchestration into main (7a70e23, local, no push)"}
+{"v":1,"at":"2026-10-25T14:35:39.594Z","by":"orchestrator","type":"task-start","task":"m2-finish","summary":"Task m2-finish dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-10-25T14:35:43.485Z","by":"orchestrator","type":"task-start","task":"m2-finish","summary":"Task m2-finish dispatched (1 allowed globs)"}

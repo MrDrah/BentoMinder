@@ -13,6 +13,9 @@ import {
   type Verification,
 } from '../schema/index.ts';
 import { codePoints } from '../schema/primitives.ts';
+import { WEEKDAY_CHARS } from '../schema/extracted-menu.ts';
+import type { Dictionary } from '../schema/dictionary.ts';
+import { resolvedIdsViolation } from '../assessment/ambiguity.ts';
 import { datesOfMonth, weekdayOf, type LocalDate, type YearMonth } from '../time/jst.ts';
 
 export type NoLunchReason = NoLunchDay['reason'];
@@ -50,6 +53,11 @@ export interface DraftDay {
   verification: Verification;
   /** Non-null: the day is a no-lunch day; its items stay hidden and restorable (US-E3-02/AC3). */
   noLunch: DraftNoLunch | null;
+  /**
+   * Set once the day was moved with 「日付を直す」 (US-E2-05/AC7): the date it had on the extraction.
+   * Draft only (never stored); the day stays correctable and the flag never comes back (AC10).
+   */
+  dateFix?: { original: LocalDate };
 }
 
 export interface ReviewDraft {
@@ -181,9 +189,84 @@ export function editItemText(draft: ReviewDraft, date: LocalDate, index: number,
     const item = day.items[index];
     if (item === undefined) return day;
     const verification: Verification = item.verification.status === 'parent-entered' ? ENTERED : { status: 'parent-edited' };
-    day.items[index] = { ...item, text, verification };
+    // An ambiguity choice belongs to the text it was made on: editing the text drops it.
+    const { resolvedIds: _choice, ...rest } = item;
+    void _choice;
+    day.items[index] = { ...rest, text, verification };
     return day;
   });
+}
+
+/**
+ * US-E4-01/AC6, AC21: stores the parent's choice for an item's ambiguous form (`resolvedIds`), `[]`
+ * for the non-food reading, or removes it (「わからない」, `null`). Text and verification stay
+ * as they are. A choice that breaks `resolved-ids-candidates` leaves the draft unchanged.
+ */
+export function chooseAmbiguity(dict: Dictionary, draft: ReviewDraft, date: LocalDate, index: number, choice: readonly string[] | null): ReviewDraft {
+  const item = draft.days.find((d) => d.date === date)?.items[index];
+  if (item === undefined) return draft;
+  if (choice !== null && resolvedIdsViolation(dict, item.text, choice)) return draft;
+  return withDay(draft, date, (day) => {
+    const current = day.items[index];
+    if (current === undefined) return day;
+    const { resolvedIds: _old, ...rest } = current;
+    void _old;
+    day.items[index] = choice === null ? rest : { ...rest, resolvedIds: [...choice] };
+    return day;
+  });
+}
+
+// ---- Date correction on review (US-E2-05/AC5, AC7–AC10; rule `review-date-correction`) ----
+
+const isWeekdayMismatch = (v: Verification): boolean => v.status === 'uncertain' && v.reason === 'weekday-mismatch';
+
+/** 「日付を直す」 is offered on a lunch day flagged weekday-mismatch, or one already corrected here (AC10). */
+export function canFixDate(day: DraftDay | null | undefined): day is DraftDay {
+  return day !== null && day !== undefined && day.noLunch === null && (isWeekdayMismatch(day.verification) || day.dateFix !== undefined);
+}
+
+export interface DateFixCell {
+  date: LocalDate;
+  /** The weekday of this date is the one printed on the sheet (marked 「曜日が一致」, never preselected). */
+  weekdayMatch: boolean;
+  /** The review shows a dish or 給食なし here: it can be seen but never chosen (AC8). */
+  taken: boolean;
+  /** The day's own date now. */
+  current: boolean;
+  free: boolean;
+}
+
+/** Every date of the target month with its marker, for the picker (AC7, AC8). Empty when the day isn't correctable. */
+export function dateFixCells(draft: ReviewDraft, from: LocalDate): DateFixCell[] {
+  const day = draft.days.find((d) => d.date === from);
+  if (!canFixDate(day)) return [];
+  const busy = new Set(draft.days.filter((d) => d.date !== from && (d.noLunch !== null || d.items.length > 0)).map((d) => d.date));
+  return datesOfMonth(draft.month).map((date) => {
+    const current = date === from;
+    const taken = busy.has(date);
+    return {
+      date,
+      weekdayMatch: day.printedWeekday !== null && WEEKDAY_CHARS[weekdayOf(date)] === day.printedWeekday,
+      taken,
+      current,
+      free: !taken && !current,
+    };
+  });
+}
+
+/**
+ * US-E2-05/AC7–AC10: moves the whole day (dishes, ingredients, allergen line, notes) to a free date
+ * of the target month. The day becomes `parent-edited`; the printed date and weekday stay as printed.
+ * A taken date is never overwritten, merged or swapped: a forced attempt returns the same draft.
+ */
+export function moveDay(draft: ReviewDraft, from: LocalDate, to: LocalDate): ReviewDraft {
+  const target = dateFixCells(draft, from).find((c) => c.date === to);
+  if (target === undefined || !target.free) return draft;
+  const day = draft.days.find((d) => d.date === from);
+  if (day === undefined) return draft;
+  const moved: DraftDay = { ...structuredClone(day), date: to, verification: { status: 'parent-edited' }, dateFix: { original: day.dateFix?.original ?? from } };
+  const days = [...draft.days.filter((d) => d.date !== from && d.date !== to), moved].sort((a, b) => a.date.localeCompare(b.date));
+  return { ...draft, days };
 }
 
 export function canAddItem(day: DraftDay | null): boolean {
@@ -319,6 +402,8 @@ export interface ConfirmOptions {
   confirmedAt: string;
   /** The month's current confirmed menu: a refresh gets version + 1 and its changed dates. */
   previous: ConfirmedMenu | null;
+  /** When given, ambiguity choices are checked against it (`resolved-ids-candidates`). */
+  dictionary?: Dictionary;
 }
 
 export type ConfirmResult = { ok: true; menu: ConfirmedMenu } | { ok: false; issues: string[] };
@@ -338,6 +423,15 @@ export function toConfirmedMenu(draft: ReviewDraft, options: ConfirmOptions): Co
   days.sort((a, b) => a.date.localeCompare(b.date));
   noLunchDays.sort((a, b) => a.date.localeCompare(b.date));
   const { previous } = options;
+  if (options.dictionary !== undefined) {
+    for (const d of days) {
+      for (const item of d.items) {
+        if (item.resolvedIds !== undefined && resolvedIdsViolation(options.dictionary, item.text, item.resolvedIds)) {
+          return { ok: false, issues: [`resolved-ids-candidates ${d.date}`] };
+        }
+      }
+    }
+  }
   const candidate = {
     month: draft.month,
     version: previous === null ? 1 : previous.version + 1,

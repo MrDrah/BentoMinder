@@ -591,6 +591,16 @@
 .consent__text p {
   margin: 0 0 var(--space-3);
 }
+/* §6.3 food picker result groups (食材 → 料理 → 種類) */
+.picker-group {
+  margin-top: var(--space-4);
+}
+.picker-group__heading {
+  margin: 0 0 var(--space-2);
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+}
 
 @media (min-width: 1280px) {
   .page--onboarding {

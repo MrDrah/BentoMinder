@@ -27,6 +27,12 @@ export function formatDate(t: Translate, lang: Language, date: LocalDate): strin
     : t('fmt.date', { wdShort: t(wdKey(date)), monShort: englishMonth(month, 'short'), day });
 }
 
+/** ja 「11月4日」, en "Nov 4" (no weekday; dialog titles). */
+export function formatDateNoWeekday(t: Translate, lang: Language, date: LocalDate): string {
+  const { month, day } = dateParts(date);
+  return lang === 'ja' ? t('fmt.dateNoWd', { monthNumber: month, day }) : t('fmt.dateNoWd', { monShort: englishMonth(month, 'short'), day });
+}
+
 /** Times are 'HH:MM' 24-hour in both languages. */
 export function formatTime(time: string): string {
   return time;

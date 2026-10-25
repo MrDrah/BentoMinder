@@ -47,7 +47,7 @@ describe('US-E10-01/AC1 data stays on the device and survives reload (repository
 });
 
 describe('US-E10-02 versioned schema and migrations (repository part)', () => {
-  it('US-E10-02/AC2 an older store is migrated once, with the original kept as a backup, and all decisions preserved', async () => {
+  it('US-E10-02/AC8 an older store is migrated once, with the original kept as a backup, and all decisions preserved', async () => {
     const v1 = storeV1();
     const v0 = { ...clone(v1), schemaVersion: 0, plans: v1.decisions } as Record<string, unknown>;
     delete v0['decisions'];
@@ -88,10 +88,11 @@ describe('US-E10-02 versioned schema and migrations (repository part)', () => {
     expect(storage.writes).toBe(0);
   });
 
-  it('US-E10-02/AC4 a failed migration is reported as corrupt (shipped map has no v0 step)', async () => {
+  it('US-E10-02/AC4 US-E10-02/AC8 a failed migration is reported as corrupt and writes nothing (shipped map has no v0 step)', async () => {
     const storage = memoryStorage({ 'bentominder.state': raw({ ...storeV1(), schemaVersion: 0 }) });
     const result = await createRepository(storage, clock).load();
     expect(result).toMatchObject({ kind: 'corrupt', reason: 'migration-failed' });
+    expect(storage.writes).toBe(0);
   });
 
   it('US-E10-02/AC4 a bad current document recovers from a valid previous copy', async () => {
@@ -106,7 +107,31 @@ describe('US-E10-02 versioned schema and migrations (repository part)', () => {
     await expect(createRepository(storage, clock).save(storeV1())).rejects.toThrow('QuotaExceededError');
   });
 
-  it('migrations run in order, stamp the version, and fail on a gap or a throwing step', () => {
+  it('US-E10-02/AC8 the frozen v1 fixture opens without any migration, writes nothing and every record equals the fixture', async () => {
+    const storage = memoryStorage({ 'bentominder.state': raw(storeV1()) });
+    expect(await createRepository(storage, clock).load()).toEqual({ kind: 'ok', state: storeV1() });
+    expect(storage.writes).toBe(0);
+    expect(storage.data.has('bentominder.state.prev')).toBe(false);
+  });
+
+  it('US-E10-02/AC8 a throwing or missing step stops the load with migration-failed: nothing is written, the stored text stays byte-for-byte', async () => {
+    const original = raw({ ...storeV1(), schemaVersion: 0 });
+    const throwing = {
+      0: () => {
+        throw new Error('boom');
+      },
+    };
+    for (const map of [throwing, {}]) {
+      const storage = memoryStorage({ 'bentominder.state': original });
+      const result = await createRepository(storage, clock, { migrations: map }).load();
+      expect(result).toMatchObject({ kind: 'corrupt', reason: 'migration-failed' });
+      expect(storage.writes).toBe(0);
+      expect(storage.data.get('bentominder.state')).toBe(original);
+      expect(storage.data.has('bentominder.state.prev')).toBe(false);
+    }
+  });
+
+  it('US-E10-02/AC8 migrations run in order, stamp the version, and fail on a gap or a throwing step', () => {
     expect(migrations).toEqual({});
     const map = { 0: (d: Record<string, unknown>) => ({ ...d, a: 1 }), 1: (d: Record<string, unknown>) => ({ ...d, b: 2 }) };
     expect(migrate({ schemaVersion: 0 }, 0, 2, map)).toEqual({ schemaVersion: 2, a: 1, b: 2 });

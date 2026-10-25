@@ -11,12 +11,16 @@ import type { Route } from '../router.ts';
 import { navigate, toHash } from '../router.ts';
 
 type TitledRoute = Exclude<Route, { name: 'calendar' } | { name: 'not-found' }>;
-export type PlaceholderRoute = Extract<Route, { name: 'day' | 'recipe' | 'recipes' }>;
+export type PlaceholderRoute = Extract<Route, { name: 'recipe' | 'recipes' }>;
 
 export function screenTitle(route: TitledRoute, t: Translate, lang: Language): string {
   switch (route.name) {
     case 'day':
       return formatDate(t, lang, route.date);
+    case 'recommend':
+      return t('rec.title');
+    case 'refresh-review':
+      return t('refresh.review.title');
     case 'recipe':
     case 'recipes':
       return t('library.title');

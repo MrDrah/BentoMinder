@@ -188,7 +188,7 @@ test('US-E10-02/AC3 newer-version store stays untouched when the user tampers wi
 // D-M1-04 (P4, spec gap): schema v1 is the first shape, so no real schemaVersion-0 fixture exists and the migration
 // map is empty. A v1 fixture with only schemaVersion changed is (correctly) treated as unreadable. AC2 is verified
 // only by the developer's unit test of migrate(); there is nothing to run end to end until a v2 exists.
-test.fixme('US-E10-02/AC2 D-M1-04 an older store is migrated once with a backup, nothing lost (needs a real v0 fixture)', async ({ page }) => {
+test.fixme('US-E10-02/AC8 D-M1-04 an older store is migrated once with a backup, nothing lost (needs a real v0 fixture)', async ({ page }) => {
   await page.goto('./');
 });
 

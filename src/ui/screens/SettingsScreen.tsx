@@ -1,28 +1,52 @@
-// Settings (design/components.md §9), M1 sections: menu (saved URL, import), profile (edit,
-// delete), data (export, import, delete all) and about. Reminders and display arrive in M4.
-// Profile edit screen (§6.2 edit variant, US-E1-05).
+// Settings (design/components.md §9): display (week start), menu (saved URL, import, the days to
+// check after a refresh, the next-month prompt day), profile (edit, delete), data (export, import,
+// delete all) and about. Reminders, language and theme controls arrive in M4. Every change saves
+// at once. Profile edit screen (§6.2 edit variant, US-E1-05).
 import { useEffect, useRef, useState } from 'react';
+import { openReviewMonths } from '../../domain/calendar/day-view.ts';
 import { savedSourceUrl } from '../../domain/menu/store-ops.ts';
 import { deleteProfile, formToProfile, profileToForm, saveProfile, type ProfileForm as Form } from '../../domain/profile/profile.ts';
+import type { Settings } from '../../domain/schema/index.ts';
+import { toJstTimestamp } from '../../domain/time/jst.ts';
 import { useApp, useStore } from '../app-store.tsx';
+import { useDayViewer } from '../calendar/use-day-viewer.ts';
 import { TopBar } from '../components/Bars.tsx';
 import { Dialog } from '../components/Controls.tsx';
-import { navigate, setLeaveGuard, toHash, type Route } from '../router.ts';
+import { navigate, setLeaveGuard, toHash, type OnboardingStep, type Route } from '../router.ts';
 import { ConsentDialog } from './ImportScreen.tsx';
 import { ProfileForm } from './ProfileForm.tsx';
 
 declare const __APP_VERSION__: string;
 const VERSION = typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '0.0.0';
 
-export function SettingsScreen() {
-  const { t, state, now, commit, startOver, replaceStore, repository, services, showToast, showSaveFailed } = useApp();
+const STEP_NAME_KEYS = { 1: 'ob.step1.name', 2: 'ob.step2.name', 3: 'ob.step3.name' } as const;
+
+/**
+ * `from`: the onboarding step the parent came from (US-E1-01/AC6): back returns to it. The profile
+ * and menu sections need a profile, so they are left out until one exists (D-M1-03 ruling).
+ */
+export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }) {
+  const { t, state, today, now, commit, startOver, replaceStore, repository, services, showToast, showSaveFailed } = useApp();
   const store = useStore();
+  const viewer = useDayViewer();
   const persisted = state.phase === 'ready' && state.persisted;
   const [dialog, setDialog] = useState<'delete-profile' | 'delete-all' | 'import-data' | 'consent' | null>(null);
   const [importError, setImportError] = useState<string | null>(null);
   const [incoming, setIncoming] = useState<Parameters<typeof replaceStore>[0] | null>(null);
+  const [saved, setSaved] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
   const url = savedSourceUrl(store);
+  const hasProfile = store.profile !== null;
+  const open = openReviewMonths(store, today, viewer);
+  const openCount = open.reduce((sum, m) => sum + m.open, 0);
+
+  /** Every change saves at once and is announced (components §9); a failed write leaves the control as it was. */
+  const saveSettings = async (patch: Partial<Settings>) => {
+    const ts = toJstTimestamp(now());
+    const next = { ...store, updatedAt: ts, settings: { ...store.settings, ...patch, updatedAt: ts } };
+    if (await commit(next)) setSaved(t('settings.saved'));
+    else showSaveFailed();
+  };
 
   const exportData = async () => {
     if (!persisted) return;
@@ -41,36 +65,89 @@ export function SettingsScreen() {
 
   return (
     <div className="screen" data-testid="screen-settings">
-      <TopBar title={t('settings.title')} />
+      <TopBar title={t('settings.title')} {...(from === null ? {} : { back: { route: { name: 'onboarding', step: from, month: null, manual: false } as Route, screen: t(STEP_NAME_KEYS[from]) } })} />
       <main id="main" className="page settings">
-        <section className="card" aria-labelledby="settings-menu">
-          <h2 id="settings-menu" className="card__title">
-            {t('settings.menu')}
+        <p className="visually-hidden" role="status" aria-live="polite" data-testid="settings-saved">
+          {saved}
+        </p>
+        <section className="card" aria-labelledby="settings-display">
+          <h2 id="settings-display" className="card__title">
+            {t('settings.display')}
           </h2>
-          <p className="field__sublabel">{t('settings.menu.url')}</p>
-          <p className="readonly" data-testid="settings-menu-url">
-            {url ?? t('settings.menu.urlNone')}
-          </p>
-          <a className="btn btn--secondary" href={toHash({ name: 'import' })} data-testid="settings-menu-import">
-            {t('settings.menu.import')}
-          </a>
+          <fieldset className="field">
+            <legend className="field__label">{t('settings.weekStart')}</legend>
+            <div className="radios">
+              {(['monday', 'sunday'] as const).map((value) => (
+                <label key={value} className={`radio${store.settings.weekStartsOn === value ? ' is-checked' : ''}`}>
+                  <input
+                    type="radio"
+                    name="week-start"
+                    checked={store.settings.weekStartsOn === value}
+                    onChange={() => void saveSettings({ weekStartsOn: value })}
+                    data-testid={`radio-week-start-${value}`}
+                  />
+                  {t(value === 'monday' ? 'settings.weekStart.monday' : 'settings.weekStart.sunday')}
+                </label>
+              ))}
+            </div>
+          </fieldset>
         </section>
 
-        <section className="card" aria-labelledby="settings-profile">
-          <h2 id="settings-profile" className="card__title">
-            {t('settings.profile')}
-          </h2>
-          <div className="stack">
-            <a className="btn btn--secondary" href={toHash({ name: 'profile' })} data-testid="settings-profile-edit">
-              {t('settings.profile.edit')}
-            </a>
-            {store.profile !== null && (
+        {hasProfile && (
+          <section className="card" aria-labelledby="settings-menu">
+            <h2 id="settings-menu" className="card__title">
+              {t('settings.menu')}
+            </h2>
+            <p className="field__sublabel">{t('settings.menu.url')}</p>
+            <p className="readonly" data-testid="settings-menu-url">
+              {url ?? t('settings.menu.urlNone')}
+            </p>
+            <div className="stack">
+              <a className="btn btn--secondary" href={toHash({ name: 'import' })} data-testid="settings-menu-import">
+                {t('settings.menu.import')}
+              </a>
+              {open[0] !== undefined && (
+                <a className="btn btn--secondary" href={toHash({ name: 'refresh-review', month: open[0].month, fresh: false })} data-testid="settings-menu-needs-review">
+                  {t('settings.menu.needsReview', { n: openCount })}
+                </a>
+              )}
+            </div>
+            <div className="field">
+              <label className="field__label" htmlFor="select-prompt-day">
+                {t('settings.menu.promptDay')}
+              </label>
+              <select
+                id="select-prompt-day"
+                className="input"
+                value={store.settings.nextMonthPromptFromDay}
+                onChange={(e) => void saveSettings({ nextMonthPromptFromDay: Number(e.target.value) })}
+                data-testid="select-prompt-day"
+              >
+                {Array.from({ length: 28 }, (_, i) => i + 1).map((n) => (
+                  <option key={n} value={n}>
+                    {t('settings.menu.promptDay.value', { n })}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </section>
+        )}
+
+        {hasProfile && (
+          <section className="card" aria-labelledby="settings-profile">
+            <h2 id="settings-profile" className="card__title">
+              {t('settings.profile')}
+            </h2>
+            <div className="stack">
+              <a className="btn btn--secondary" href={toHash({ name: 'profile' })} data-testid="settings-profile-edit">
+                {t('settings.profile.edit')}
+              </a>
               <button type="button" className="btn btn--destructive-text" data-testid="settings-profile-delete" onClick={() => setDialog('delete-profile')}>
                 {t('settings.profile.delete')}
               </button>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         <section className="card" aria-labelledby="settings-data">
           <h2 id="settings-data" className="card__title">
