@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-10-25 (paused until next weekend; lean orchestration merged to main 7a70e23) · Repo: local only (no remote yet, by PO instruction) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-10-25 (M2 build merged to main 5ded922, dev gate green; QA pass next) · Repo: origin = github.com/MrDrah/BentoMinder (public, empty; nothing pushed yet, awaiting PO go) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -29,7 +29,7 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 
 ### In progress 🔄 — PAUSED 2026-10-25 by the PO (resume next weekend)
 Two tasks were stopped at a safe point; each wrote pause notes:
-- **M2 build** (developer, Sonnet): worktree branch `worktree-agent-a04d875d3e81d2b8f` (`.claude/worktrees/agent-a04d875d3e81d2b8f/`), last commit **96ef9fc (WIP)**, tree clean, not merged. Done: matcher + ambiguity, assessment, overrides, decision state machine, refresh review, date move, the M2-prep code items, calendar grid + keyboard, day sheet, decision actions, refresh list, date-fix sheet, ambiguity chooser, settings in onboarding; unit/property tests + 22 e2e; QA M1 suite 446 passed. **Left:** re-run `gate --stage dev` (green before the last 2 edits), write ADR 007 + ADR 004 change log (decision edits on a refused save: reload + toast, no re-apply), one flaky UI unit test to identify. Not built by design: holidays (no sourced list yet), amb-soba review flag (no copy), recommendations (M3 placeholder: 「手作りお弁当にする」 writes nothing yet), date-picker popover (dialog used). Open questions for BA/PO are in `docs/dev/_scratch/m2-pause-notes.md` on that branch.
+- **M2 build**: DONE and merged to main (5ded922); dev gate green (644 unit, 50 e2e). ADR 007 written. Still open by design: holidays, amb-soba flag, recommendations (M3), popover picker, Today/reminders (M4). Open questions for PO/BA: AC13 empty list after refresh, "next 7 days" = today..+6, lower-cased English food labels, `{wdLongEn}`→`{wdLong}`. **Next: M2 QA (Sonnet), then label round.**
 - **Recipe label round** (BA, Sonnet from now on): **not started on any record** (batches untouched). Order to resume: 2b ketchup/curry-powder → `varies-by-product` (8 rows, 7 recipes, no fetching), then 2a curry-chahan, 2c quesadilla, 2d storage note, 2e pistachio, then maker labels (ham + sausage first: 7 recipes), dictionary sources + matsutake, contract §3.7/§6.1/§3.10 + brief §3. Notes: `docs/ba/_scratch/research-labels/pause-notes.md`.
 
 **Main is committed** (bea84df, dev gate green): recipe research, dictionary ids, schema change, copy fix, docs. Only the M2 worktree branch is unmerged.
