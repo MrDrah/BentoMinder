@@ -38,10 +38,12 @@ export function App() {
     gated.current = true;
     const start = startScreen(state.store);
     let target: Route | null = null;
-    // Settings are reachable from every onboarding step (US-E1-01/AC6, D-M1-03 ruling).
-    if (start === 'onboarding-1' && !(route.name === 'onboarding' && route.step === 1) && route.name !== 'settings') target = { name: 'onboarding', step: 1, month: null, manual: false };
+    // Settings are reachable from every onboarding step (US-E1-01/AC6, D-M1-03 ruling): the top bar's link
+    // carries the step (`?from=`); a bare #/settings typed with nothing set up still opens onboarding, as in M1.
+    const settingsFromStep = route.name === 'settings' && route.from !== undefined;
+    if (start === 'onboarding-1' && !(route.name === 'onboarding' && route.step === 1) && !settingsFromStep) target = { name: 'onboarding', step: 1, month: null, manual: false };
     // A deep link to the import or a pending review is honoured once a profile exists.
-    else if (start === 'onboarding-2' && route.name !== 'onboarding' && route.name !== 'review' && route.name !== 'import' && route.name !== 'settings') target = { name: 'onboarding', step: 2, month: null, manual: false };
+    else if (start === 'onboarding-2' && route.name !== 'onboarding' && route.name !== 'review' && route.name !== 'import' && !settingsFromStep) target = { name: 'onboarding', step: 2, month: null, manual: false };
     if (target !== null) setRedirect(target);
   }
   useEffect(() => {

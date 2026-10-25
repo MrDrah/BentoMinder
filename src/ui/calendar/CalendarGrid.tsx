@@ -7,7 +7,7 @@ import { addDays, addMonths, dateParts, daysInMonth, monthGrid, monthOf, weekday
 import { formatMonth } from '../../i18n/format.ts';
 import type { Language, MessageKey, Translate } from '../../i18n/index.ts';
 import { AssessMark, BentoIcon, FlagBadge } from '../components/Marks.tsx';
-import { cellLabel } from './cell-label.ts';
+import { CellName } from './CellName.tsx';
 import { recipeShortName, splitShortName } from './labels.ts';
 
 export interface CalendarGridProps {
@@ -221,7 +221,7 @@ function DayCell({ t, lang, v, tabbable, selected, onOpen, onFocus }: CellProps)
     >
       <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} onClick={() => onOpen(v.date)} onFocus={() => onFocus(v.date)}>
         {/* The name comes from this sentence, not from an aria-label: the visible words are a short form of it (WCAG 2.5.3 stays satisfied: no label overrides the content) */}
-        <span className="visually-hidden">{cellLabel(t, lang, v)}</span>
+        <CellName t={t} lang={lang} v={v} />
         <span className="cell__top">
           <span className="cell__num" aria-hidden="true">
             {dateParts(v.date).day}

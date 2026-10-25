@@ -6,7 +6,7 @@ import { datesOfMonth, weekdayOf, type LocalDate, type YearMonth } from '../../d
 import { formatDate, formatMonth } from '../../i18n/format.ts';
 import type { Language, Translate } from '../../i18n/index.ts';
 import { AssessMark } from '../components/Marks.tsx';
-import { cellLabel } from './cell-label.ts';
+import { CellName } from './CellName.tsx';
 import { DECISION_KEYS, recipeName, STATE_KEYS } from './labels.ts';
 
 interface AgendaProps {
@@ -69,7 +69,7 @@ function AgendaRow({ t, lang, v, onOpen }: { t: Translate; lang: Language; v: Da
       aria-current={v.isToday ? 'date' : undefined}
     >
       <button type="button" className="cal-agenda__btn" data-date={v.date} onClick={() => onOpen(v.date)}>
-        <span className="visually-hidden">{cellLabel(t, lang, v)}</span>
+        <CellName t={t} lang={lang} v={v} />
         <span className="cal-agenda__date" aria-hidden="true">
           {formatDate(t, lang, v.date)}
         </span>
