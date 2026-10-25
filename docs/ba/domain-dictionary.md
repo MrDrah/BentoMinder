@@ -1,6 +1,6 @@
 # Domain dictionary — BentoMinder
 
-Owner: BA · 2026-10-24 · Version **v1 (expandable)** · Status: **H1 final** (2026-10-24; ids are stable from here on, new terms by proposal only; H1 fix round: `animalOrigin` column (ruling B14), 2 new ingredients, verdict rule B2; M1 prep 2026-10-24: categories are labels only, new ambiguity group `amb-imo`, §8)
+Owner: BA · 2026-10-24 · Version **v1 (expandable)** · Status: **H1 final** (2026-10-24; ids are stable from here on, new terms by proposal only; H1 fix round: `animalOrigin` column (ruling B14), 2 new ingredients, verdict rule B2; M1 prep 2026-10-24: categories are labels only, new ambiguity group `amb-imo`; M2 prep 2026-10-25: amb-momo candidate id, non-food readings, picker kind labels, §8)
 
 Used by: preference assessment (BR-04, US-E4-01), profile pickers (US-E1-02), allergen and diet filters (BR-06), recipe validation (`docs/ba/data-contract.md` §3.7). `scripts/build-dictionary.mjs` converts these tables into `data/dictionary.json` (generated: one record per row, same ids; never edited by hand). This file is the source: changes go through the BA here, then `npm run build:dictionary`.
 
@@ -397,7 +397,7 @@ No licensed characters (copyright): themes are generic.
 |----------|--------------|------------|-----------------------------------|
 | amb-curry | カレー | dish-curry-rice, ing-curry-powder (flavour), ing-curry-roux | Longest match first: 「カレーライス」→dish; 「カレー粉」「カレールウ」→ingredient. Followed by 味/風味/炒め/煮 (「カレー炒め」) → ing-curry-powder. Standalone 「カレー」 → ask. |
 | amb-aji | あじ / アジ | ing-horse-mackerel, 「味」 (taste suffix, not a food) | Preceded by a seasoning or flavour word (「しおあじ」「みそあじ」「カレーあじ」) → taste suffix, ignored. Kanji 鯵 → fish. Else ask. |
-| amb-momo | もも / モモ | ing-peach, ing-chicken-thigh, pork thigh | 「鶏もも」「とりもも」→ ing-chicken-thigh; 「豚もも」→ ing-pork; kanji 桃 → peach. Standalone → ask. |
+| amb-momo | もも / モモ | ing-peach, ing-chicken-thigh, ing-pork (豚もも) | 「鶏もも」「とりもも」→ ing-chicken-thigh; 「豚もも」→ ing-pork; kanji 桃 → peach. Standalone → ask. |
 | amb-nashi | なし | ing-pear, 「無し」 (none) | Directly after a noun (「給食なし」「アレルゲンなし」「〇〇なし」) → "none", ignored as food. Kanji 梨 → pear. Standalone item 「なし」 → ask. |
 | amb-kaki | かき / カキ | ing-persimmon, ing-oyster, dish-kakiage | 「かき揚げ」→ dish-kakiage; kanji 柿 → persimmon; 牡蠣 → oyster. Else ask. |
 | amb-soba | そば | ing-soba (buckwheat), dish-yakisoba / ing-chinese-noodles | 「焼きそば」「中華そば」「ソース焼きそば」→ wheat noodles (longest match). Standalone 「そば」 or 蕎麦 → ing-soba (buckwheat), but flagged on review because it matters for allergies. |
@@ -406,8 +406,13 @@ No licensed characters (copyright): themes are generic.
 | amb-pan | パン | ing-bread, ing-bread-crumbs (パン粉) | Longest match only: 「パン粉」 → bread crumbs; 「フライパン」 is ignored (not a food); else ing-bread. No question needed. |
 | amb-imo | いも / 芋 / おいも | ing-potato, ing-sweet-potato, ing-taro, ing-yam | Longest match first: the ingredient forms in §4.1 (「じゃがいも」「じゃが芋」「さつまいも」「さつま芋」「さといも」「里芋」「やまいも」「山芋」「長いも」…) → that ingredient. Standalone 「いも」「芋」「おいも」 (e.g. 「おいものにもの」) → ask. (M1 prep: replaces the category-level form 「いも」 → `cat-potato`.) |
 
+**Asking on review** (M2 prep, US-E4-01/AC6, AC21; data contract §3.3 `resolvedIds`). For an item with an unresolved form, the review offers the group's candidates by their dictionary labels, plus 「わからない」. Two groups also have a **non-food reading**, which has no id: amb-aji 「味」 (taste suffix) and amb-nashi 「無し」 (none). It is offered as its own option and stored as `resolvedIds: []` (no food; the form no longer counts as unresolved). amb-pan never asks; amb-tako and amb-soba resolve automatically (amb-soba is still shown on review because buckwheat matters for allergies).
+
+**Kind labels in the profile pickers** (M2 prep, US-E1-02/AC8). Each search result shows the kind of its entry: ingredient (§4) 「食材」 / "Ingredient", category (§2) 「種類」 / "Food group", dish (§5) 「料理」 / "Dish". Needed because some labels exist at two levels (鶏肉 = `ing-chicken` and `cat-chicken`; 豚肉, 牛肉 and たまご likewise).
+
 ## 8. Change process
 - Research agents and developers propose new terms in their report (id, 表記, よみ, English, category, synonyms, inherent allergens); the BA adds them here. Ids are never renamed or reused; a retired term keeps its id with `retired: <date>`.
 - Validator rules for the JSON version: `id-format` (the general id rule of data contract §2; the earlier name `dict-id-format` is merged into it, M1 prep), `dict-id-unique`, `dict-synonym-unique`, `dict-parent-resolves`, `dict-category-resolves`, `dict-allergen-resolves`, `dict-ambiguity-candidates-resolve`, `dict-animal-origin-valid` (every `ing-` record has `animalOrigin` ⊆ the 8 tags and a boolean `animalOriginKnown`).
 - H1 fix round additions (BA, 2026-10-24): `ing-niboshi` 煮干し (B14 hidden source, stock fish) and `ing-stew-roux` シチュールウ (B14 hidden source). Note: in a menu *item* the dish pass matches 「シチュー」 (dish-stew) first, so 「シチュールウ」 is recognised in listed ingredients and recipes, not inside dish names.
 - M1 prep changes (BA, 2026-10-24; Developer item in PLAN §7 "M0 done"): categories are **labels only**, with no surface forms (§1 rules 2, 5, 7; §2 note), so `dict-synonym-unique` holds for 鶏肉, 豚肉, 牛肉, たまご and さかな, which stay forms of `ing-chicken`, `ing-pork`, `ing-beef`, `ing-egg` and `ing-fish`. The one category-level form that had no entry, 「いも」, moves to the new ambiguity group `amb-imo` (with 「芋」「おいも」). `dict-id-format` merged into `id-format`. No id changed.
+- M2 prep changes (BA, 2026-10-25): amb-momo's third candidate is written as the id `ing-pork` (豚もも); it was the words "pork thigh", which `build-dictionary` cannot turn into an id, so `candidateIds` lacked it. §7 states how review asks and how the non-food readings of amb-aji and amb-nashi are stored. §7 also fixes the picker kind labels. No id added, changed or retired. **`npm run build:dictionary` must be re-run** (generated `data/dictionary.json`).

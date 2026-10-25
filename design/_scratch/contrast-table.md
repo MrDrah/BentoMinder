@@ -1,15 +1,15 @@
 | # | Foreground on background | Light | Dark | Needs | Used for |
 |---|---|---|---|---|---|
 | P01 | `ink-1` on `surface-1` | 14.22 | 15.03 | 4.5 | Body text on page |
-| P02 | `ink-1` on `surface-2` | 13.99 | 13.37 | 4.5 | Text on cards, sheets, cells |
+| P02 | `ink-1` on `surface-2` | 13.99 | 13.37 | 4.5 | Text on cards, sheets, cells; date-correction grid numerals |
 | P03 | `ink-1` on `surface-3` | 11.90 | 11.49 | 4.5 | Chip text, read-only input, illustration panel caption |
-| P04 | `ink-2` on `surface-1` | 8.71 | 10.12 | 4.5 | Secondary text on page |
-| P05 | `ink-2` on `surface-2` | 8.57 | 9.01 | 4.5 | Secondary text on cards; cell word 給食; marks ○ △ — |
+| P04 | `ink-2` on `surface-1` | 8.71 | 10.12 | 4.5 | Secondary text on page; food-picker group headings |
+| P05 | `ink-2` on `surface-2` | 8.57 | 9.01 | 4.5 | Secondary text on cards; cell word 給食; marks ○ △ —; food-picker group headings and date-correction legend in sheets |
 | P06 | `ink-2` on `surface-3` | 7.29 | 7.74 | 4.5 | Secondary text on sunken areas |
 | P07 | `ink-3` on `surface-1` | 5.56 | 6.82 | 4.5 | Hints, past-day numerals on page |
-| P08 | `ink-3` on `surface-2` | 5.47 | 6.07 | 4.5 | Hints in cards; past numerals in cells |
+| P08 | `ink-3` on `surface-2` | 5.47 | 6.07 | 4.5 | Hints in cards; past numerals in cells; current and taken numerals in the date-correction grid |
 | P09 | `ink-3` on `surface-3` | 4.65 | 5.22 | 4.5 | Disabled button/chip text on disabled fill |
-| P10 | `ink-inverse` on `navy-fill` | 13.20 | 15.03 | 4.5 | Planned cell text and icons; planned banner; selected chip; toast |
+| P10 | `ink-inverse` on `navy-fill` | 13.20 | 15.03 | 4.5 | Planned cell text and icons; planned banner; selected chip; toast; selected date-correction cell (numeral, bar) |
 | P11 | `navy-fill` on `ink-inverse` | 13.20 | 15.03 | 4.5 | Today numeral on a planned cell (inverted circle) |
 | P12 | `surface-2` on `ink-1` | 13.99 | 13.37 | 4.5 | Today numeral (navy circle), step numbers, active toggle side |
 | P13 | `ink-inverse` on `accent-strong` | 4.96 | 7.08 | 4.5 | Primary button label |
@@ -44,9 +44,9 @@
 | P42 | `ink-1` on `danger-soft` | 11.62 | 12.21 | 4.5 | Error banner body |
 | P43 | `ink-2` on `line-1` | 6.29 | 6.67 | 4.5 | Label on hatch (label sits on its own surface-2 pill; worst case) |
 | U01 | `line-ui` on `surface-1` | 3.67 | 4.79 | 3 | Input/checkbox/radio/switch border on page |
-| U02 | `line-ui` on `surface-2` | 3.61 | 4.26 | 3 | Input/checkbox/radio border in cards and sheets |
+| U02 | `line-ui` on `surface-2` | 3.61 | 4.26 | 3 | Input/checkbox/radio border in cards and sheets; dashed current-date cell in the date-correction grid |
 | U03 | `line-ui` on `surface-3` | 3.07 | 3.66 | 3 | Disabled control dashed border on disabled fill |
-| U04 | `ink-1` on `surface-2` | 13.99 | 13.37 | 3 | Secondary button border; not-confirmed cell solid outline |
+| U04 | `ink-1` on `surface-2` | 13.99 | 13.37 | 3 | Secondary button border; not-confirmed cell solid outline; same-weekday bar in the date-correction grid |
 | U05 | `accent` on `surface-1` | 4.03 | 7.08 | 3 | Dashed suggestion outline (low-preference, still school lunch) on page |
 | U06 | `accent` on `surface-2` | 3.96 | 6.30 | 3 | Dashed suggestion outline on cell surface |
 | U07 | `accent-strong` on `surface-1` | 5.34 | 7.08 | 3 | Primary button fill boundary on page |
@@ -61,7 +61,7 @@
 | U16 | `success` on `surface-2` | 6.19 | 8.81 | 3 | Checked checkbox fill; switch on track |
 | U17 | `ink-inverse` on `success` | 5.84 | 9.90 | 3 | Check mark on the checked checkbox / switch knob |
 | U18 | `accent-ink` on `surface-2` | 6.23 | 7.52 | 3 | Low-preference ? mark (icon) |
-| U19 | `ink-2` on `surface-2` | 8.57 | 9.01 | 3 | Assessment marks ○ △ — (icons) |
+| U19 | `ink-2` on `surface-2` | 8.57 | 9.01 | 3 | Assessment marks ○ △ — (icons); taken-date dot in the date-correction grid |
 | U20 | `planned-edge` on `navy-fill` | 3.53 | 4.67 | 3 | Red top edge of a planned cell and planned banner edge |
 | U21 | `accent` on `surface-3` | 3.37 | 5.42 | 3 | Stripe band on illustration panels (decorative) |
 | U22 | `stripe-a` on `surface-1` | 14.22 | 15.03 | 3 | Navy stripe band under the app bar (decorative) |

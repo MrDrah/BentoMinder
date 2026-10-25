@@ -1,6 +1,6 @@
 # BentoMinder: accessibility and responsive spec v1.0
 
-> Status: **H2 final**, 2026-10-24. Target: **WCAG 2.1 AA** on every MVP screen in ja and en, light and dark (US-NF-02, US-E8-05/AC3), verified later by axe in e2e (0 serious/critical) and the keyboard-only E0 journey. Components: `design/components.md`. Strings: `design/copy.md`. Tokens: `design/tokens.json` (source) / `design/tokens.css` (generated).
+> Status: **H2 final**, 2026-10-24. Target: **WCAG 2.1 AA** on every MVP screen in ja and en, light and dark (US-NF-02, US-E8-05/AC3), verified later by axe in e2e (0 serious/critical) and the keyboard-only E0 journey. **Revision 2026-10-25 (M2 prep):** app-bar targets on the element box (§7, D-M1-08), date-correction grid (§3, §5, contrast usages). Components: `design/components.md`. Strings: `design/copy.md`. Tokens: `design/tokens.json` (source) / `design/tokens.css` (generated).
 
 ## 1. Principles that decide disputes
 1. **Meaning never rides on colour alone** (§3). Every state has a shape, an icon or a word.
@@ -21,15 +21,15 @@ Computed with the WCAG 2.1 relative-luminance formula from the hex values in `de
 | # | Foreground on background | Light | Dark | Needs | Used for |
 |---|---|---|---|---|---|
 | P01 | `ink-1` on `surface-1` | 14.22 | 15.03 | 4.5 | Body text on page |
-| P02 | `ink-1` on `surface-2` | 13.99 | 13.37 | 4.5 | Text on cards, sheets, cells |
+| P02 | `ink-1` on `surface-2` | 13.99 | 13.37 | 4.5 | Text on cards, sheets, cells; date-correction grid numerals |
 | P03 | `ink-1` on `surface-3` | 11.90 | 11.49 | 4.5 | Chip text, read-only input, illustration panel caption |
-| P04 | `ink-2` on `surface-1` | 8.71 | 10.12 | 4.5 | Secondary text on page |
-| P05 | `ink-2` on `surface-2` | 8.57 | 9.01 | 4.5 | Secondary text on cards; cell word 給食; marks ○ △ — |
+| P04 | `ink-2` on `surface-1` | 8.71 | 10.12 | 4.5 | Secondary text on page; food-picker group headings |
+| P05 | `ink-2` on `surface-2` | 8.57 | 9.01 | 4.5 | Secondary text on cards; cell word 給食; marks ○ △ —; food-picker group headings and date-correction legend in sheets |
 | P06 | `ink-2` on `surface-3` | 7.29 | 7.74 | 4.5 | Secondary text on sunken areas |
 | P07 | `ink-3` on `surface-1` | 5.56 | 6.82 | 4.5 | Hints, past-day numerals on page |
-| P08 | `ink-3` on `surface-2` | 5.47 | 6.07 | 4.5 | Hints in cards; past numerals in cells |
+| P08 | `ink-3` on `surface-2` | 5.47 | 6.07 | 4.5 | Hints in cards; past numerals in cells; current and taken numerals in the date-correction grid |
 | P09 | `ink-3` on `surface-3` | 4.65 | 5.22 | 4.5 | Disabled button/chip text on disabled fill |
-| P10 | `ink-inverse` on `navy-fill` | 13.20 | 15.03 | 4.5 | Planned cell text and icons; planned banner; selected chip; toast |
+| P10 | `ink-inverse` on `navy-fill` | 13.20 | 15.03 | 4.5 | Planned cell text and icons; planned banner; selected chip; toast; selected date-correction cell (numeral, bar) |
 | P11 | `navy-fill` on `ink-inverse` | 13.20 | 15.03 | 4.5 | Today numeral on a planned cell (inverted circle) |
 | P12 | `surface-2` on `ink-1` | 13.99 | 13.37 | 4.5 | Today numeral (navy circle), step numbers, active toggle side |
 | P13 | `ink-inverse` on `accent-strong` | 4.96 | 7.08 | 4.5 | Primary button label |
@@ -64,9 +64,9 @@ Computed with the WCAG 2.1 relative-luminance formula from the hex values in `de
 | P42 | `ink-1` on `danger-soft` | 11.62 | 12.21 | 4.5 | Error banner body |
 | P43 | `ink-2` on `line-1` | 6.29 | 6.67 | 4.5 | Label on hatch (label sits on its own surface-2 pill; worst case) |
 | U01 | `line-ui` on `surface-1` | 3.67 | 4.79 | 3 | Input/checkbox/radio/switch border on page |
-| U02 | `line-ui` on `surface-2` | 3.61 | 4.26 | 3 | Input/checkbox/radio border in cards and sheets |
+| U02 | `line-ui` on `surface-2` | 3.61 | 4.26 | 3 | Input/checkbox/radio border in cards and sheets; dashed current-date cell in the date-correction grid |
 | U03 | `line-ui` on `surface-3` | 3.07 | 3.66 | 3 | Disabled control dashed border on disabled fill |
-| U04 | `ink-1` on `surface-2` | 13.99 | 13.37 | 3 | Secondary button border; not-confirmed cell solid outline |
+| U04 | `ink-1` on `surface-2` | 13.99 | 13.37 | 3 | Secondary button border; not-confirmed cell solid outline; same-weekday bar in the date-correction grid |
 | U05 | `accent` on `surface-1` | 4.03 | 7.08 | 3 | Dashed suggestion outline (low-preference, still school lunch) on page |
 | U06 | `accent` on `surface-2` | 3.96 | 6.30 | 3 | Dashed suggestion outline on cell surface |
 | U07 | `accent-strong` on `surface-1` | 5.34 | 7.08 | 3 | Primary button fill boundary on page |
@@ -81,7 +81,7 @@ Computed with the WCAG 2.1 relative-luminance formula from the hex values in `de
 | U16 | `success` on `surface-2` | 6.19 | 8.81 | 3 | Checked checkbox fill; switch on track |
 | U17 | `ink-inverse` on `success` | 5.84 | 9.90 | 3 | Check mark on the checked checkbox / switch knob |
 | U18 | `accent-ink` on `surface-2` | 6.23 | 7.52 | 3 | Low-preference ? mark (icon) |
-| U19 | `ink-2` on `surface-2` | 8.57 | 9.01 | 3 | Assessment marks ○ △ — (icons) |
+| U19 | `ink-2` on `surface-2` | 8.57 | 9.01 | 3 | Assessment marks ○ △ — (icons); taken-date dot in the date-correction grid |
 | U20 | `planned-edge` on `navy-fill` | 3.53 | 4.67 | 3 | Red top edge of a planned cell and planned banner edge |
 | U21 | `accent` on `surface-3` | 3.37 | 5.42 | 3 | Stripe band on illustration panels (decorative) |
 | U22 | `stripe-a` on `surface-1` | 14.22 | 15.03 | 3 | Navy stripe band under the app bar (decorative) |
@@ -112,6 +112,7 @@ Computed with the WCAG 2.1 relative-luminance formula from the hex values in `de
 | Past day | ink-3 numeral | Box background removed (transparent) + 「過去の日」 in the accessible name + read-only note in the sheet | US-E5-02/AC3 |
 | Needs review / allergen conflict | warning / danger | "!" badge shape; 「献立が変わりました」/「アレルゲン注意」 in the accessible name and the sheet banner | US-E3-05/AC2, US-E1-05/AC2 |
 | Uncertain review field | warning fill and border | 「要確認」 tag + triangle icon + reason text | US-E3-01/AC2 |
+| Date-correction grid: same weekday / taken / current date / selected | ink-1 bar / ink-2 dot + ink-3 numeral / dashed line-ui / navy fill | Bar, dot, dashed border; visible legend text and accessible-name suffixes 「曜日が一致」「ほかの献立があります」「いまの日付」; status-line text; `aria-disabled`, `aria-selected` | US-E2-05/AC7, AC8 |
 | Disliked menu item | accent wavy underline | Tag 「苦手」 | US-E4-02 |
 | Errors | danger | Triangle icon + message text + `aria-invalid` | all forms |
 | Selected chip / segment | navy fill | Check icon, `aria-checked`/`aria-pressed` | §1.6–1.7 |
@@ -140,7 +141,9 @@ Test: the e2e suite runs the calendar screenshot check in greyscale (`filter: gr
 | S2 Import | back → month select → URL → 取り込む → PDFファイルを選ぶ → くわしく見る → 手入力する → あとで取り込む. After an error: focus moves to the error panel (heading), then its actions |
 | S2c Consent | dialog title → link → 同意しない → 同意して読み取る (initial focus on the title so the text is read first) |
 | S2p Progress | headline (focused, status) → 中止する |
-| S3 Review | back → summary → 次の要確認へ → 元のPDFを見る → day rows in date order (per row: dish inputs → their remove buttons → このままでよい → 料理を追加 → 給食なしの日にする / reason radios → 献立表での書き方) → out-of-month disclosure → この内容で確定 (sticky, last). 次の要確認へ moves focus to the next uncertain field and scrolls it above the footer |
+| S3 Review | back → summary → 次の要確認へ → 元のPDFを見る → day rows in date order (per row: 日付を直す → このままにする (day-level weekday-mismatch flag; a corrected row keeps 日付を直す only) → dish inputs → their remove buttons → このままにする (field flags) → 料理を追加 → 給食なしの日にする / reason radios → 献立表での書き方) → out-of-month disclosure → この内容で確定 (sticky, last). 次の要確認へ moves focus to the next uncertain field and scrolls it above the footer |
+| S3d Date correction | close → grid (one stop; initial focus on the nearest free 曜日が一致 cell, the title is read as the dialog label) → キャンセル → この日にする |
+| Onboarding top bar (S1–S3) | back (not on step 1) → 日本語/EN → 設定 (US-E1-01/AC6) |
 | S3r Needs-review list | title → rows (開く) → カレンダーへ |
 | P1 Settings | back → sections top to bottom; within お知らせ: switch → 曜日 → 時 → 分 → next row; 表示: 言語 → 週のはじまり → テーマ; 献立表; プロフィール; データ; このアプリについて |
 | H1 Share | title → preview (focusable `tabindex="0"` read-only region so it can be read and selected) → 共有する → コピーする → close |
@@ -151,6 +154,7 @@ Test: the e2e suite runs the calendar screenshot check in greyscale (`filter: gr
 
 | Component | Pattern | Keys |
 |---|---|---|
+| Date-correction mini-grid (review, components §6.9) | `dialog` (sheet / dialog / popover, always `aria-modal`) containing `role="grid"` labelled `review.dateFix.gridLabel`; gridcells with one button each, roving tabindex; `aria-selected` on the chosen cell; the current date `aria-disabled` | ←/→ day; ↑/↓ week; Home/End row start/end; PageUp/PageDown nothing (one month); arrows stop at the month edges; Enter/Space select a free date (does not apply) or, on a taken/current date, put the reason in the status line; taken and current cells are `aria-disabled` but focusable; Tab: close → grid → キャンセル → この日にする; Esc = cancel, focus back to 「日付を直す」. Initial focus: nearest free cell with the printed weekday |
 | Calendar grid | `role="grid"` + `gridcell` with one button each, roving tabindex (ARIA APG date-picker grid) | ←/→ previous/next day; ↑/↓ same weekday previous/next week; Home/End first/last day of the week row; PageUp/PageDown previous/next month (focus keeps the day number, clamped); Enter/Space open the day sheet. Moving past a month edge loads the adjacent month. Focus lands on today when the grid is first entered, else on the last focused date |
 | Agenda list (fallback) | `role="list"` of buttons | Tab/Shift+Tab, Enter |
 | Month nav | buttons | Enter/Space |
@@ -180,6 +184,8 @@ Test: the e2e suite runs the calendar screenshot check in greyscale (`filter: gr
 | Override saved, settings saved, toasts | polite | D1, P1, all |
 | Reminder appears | polite (announced once; never steals focus) | C1 |
 | Busy countdown | polite, at start and when the button becomes enabled only | S2 |
+| Date correction status line `review.dateFix.selected` / `.cantChoose` / `.noFree` | polite (`role="status"` in the sheet) | S3d |
+| Date correction applied `review.dateFix.moved` | polite; focus also moves to the moved row legend | S3 |
 | Storage unavailable | assertive, once | all |
 
 ## 6. Screen-reader names for calendar cells
@@ -205,7 +211,7 @@ The planned cell uses the **full** recipe name (US-E5-01/AC4); missing recipe �
 
 ## 7. Touch targets and pointer
 
-- Every interactive element ≥ **44 × 44 CSS px at 360 px width** (US-NF-02/AC3): buttons 52 px tall; icon buttons, chips, checkboxes, radios and switches have 44 px hit areas (padding or a pseudo-element when the visual is smaller, e.g. the 36 px language toggle); calendar weekend columns have `min-width: 44px` and rows ≥ 44 px (compact weekend-only rows are 44 px, never 34 px as in the direction draft).
+- Every interactive element ≥ **44 × 44 CSS px at 360 px width** (US-NF-02/AC3): buttons 52 px tall; icon buttons, chips, checkboxes, radios and switches have 44 px hit areas (padding or a pseudo-element when the visual is smaller). **Exception, D-M1-08 (2026-10-25): the app bar and top bar use no pseudo-element hit areas**; the language toggle options and icon buttons are ≥ 44 × 44 on their own box (components §1.1, §1.7), because a pseudo-element inside an `overflow: hidden` container is clipped and QA measures the element box. Date-correction mini-grid cells are 44 × 44 at 360 px (16 px sheet gutters); calendar weekend columns have `min-width: 44px` and rows ≥ 44 px (compact weekend-only rows are 44 px, never 34 px as in the direction draft).
 - Targets never overlap; at least 4 px between adjacent separate targets, except calendar cells (2 px gap; each cell is ≥ 44 × 44 by itself).
 - No gesture-only actions: the sheet's grab handle is decorative; swipe-to-close is an extra, the close button is always present. No hover-only content (hover reveals nothing that focus/tap doesn't).
 - `touch-action: manipulation` on buttons (no double-tap zoom delay); pinch zoom is never disabled (`user-scalable` not set).

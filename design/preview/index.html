@@ -332,12 +332,37 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .brand-name{font-family:var(--font-display);font-weight:700;font-size:var(--text-lg)}
 .iconbtn{min-width:var(--touch-min);height:var(--touch-min);border-radius:var(--radius-pill);display:inline-grid;place-items:center;color:var(--ink-1)}
 .iconbtn:hover{background:var(--surface-3)}
-.langbtn{height:36px;margin:4px 2px;padding:2px;border-radius:var(--radius-pill);border:2px solid var(--ink-1);font-family:var(--font-display);font-weight:700;font-size:var(--text-xs);position:relative;display:inline-flex;letter-spacing:0}
-.langbtn::before{content:"";position:absolute;inset:-6px -2px}
-.langbtn b{padding:0 8px;border-radius:var(--radius-pill);display:grid;place-items:center}
+.langbtn{height:48px;margin:0 2px;padding:0;overflow:hidden;border-radius:var(--radius-pill);border:2px solid var(--ink-1);font-family:var(--font-display);font-weight:700;font-size:var(--text-xs);position:relative;display:inline-flex;letter-spacing:0}
+.langbtn b{min-width:44px;min-height:44px;padding:0 8px;display:grid;place-items:center;font-size:var(--text-sm)}
 html[lang="ja"] .langbtn .l-ja,html[lang="en"] .langbtn .l-en{background:var(--ink-1);color:var(--surface-2)}
 .topbar{display:flex;align-items:center;gap:4px;padding:2px 8px 8px}
 .topbar h1{font-family:var(--font-display);font-size:var(--text-lg);flex:1;line-height:var(--leading-tight)}
+
+/* Date correction (components §6.9) */
+.df-ctx{font-size:var(--text-sm);color:var(--ink-2);margin:0 0 8px}
+.df-month{font-family:var(--font-display);font-weight:700;text-align:center;margin:4px 0}
+.df-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.df-dow{font-size:var(--text-xs);font-weight:700;color:var(--ink-2);text-align:center;padding:4px 0}
+.df-dow.sat{color:var(--saturday)}.df-dow.su{color:var(--sunday)}
+.dfc{position:relative;width:100%;min-height:44px;border-radius:var(--radius-sm);background:var(--surface-2);display:grid;place-items:center;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink-1)}
+.dfc:hover{background:var(--surface-3)}
+.dfc.sat{color:var(--saturday)}.dfc.su{color:var(--sunday)}
+.dfc.match::after{content:"";position:absolute;bottom:6px;left:50%;width:16px;height:3px;margin-left:-8px;border-radius:2px;background:currentColor}
+.dfc.match:not(.sat):not(.su)::after{background:var(--ink-1)}
+.dfc.taken,.dfc.current{color:var(--ink-3);cursor:not-allowed}
+.dfc.taken:hover,.dfc.current:hover{background:var(--surface-2)}
+.dfc.taken::before{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--ink-2)}
+.dfc.current{border:2px dashed var(--line-ui)}
+.dfc.sel{background:var(--navy-fill);color:var(--ink-inverse)}
+.dfc.sel.match::after{background:var(--ink-inverse)}
+.df-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--text-xs);color:var(--ink-2);margin:10px 0 4px;list-style:none}
+.df-legend li{display:flex;align-items:center;gap:6px}
+.df-legend i{display:inline-block;flex:none}
+.df-legend .lm{width:16px;height:3px;background:var(--ink-1);border-radius:2px}
+.df-legend .lt{width:6px;height:6px;border-radius:50%;background:var(--ink-2)}
+.df-legend .lc{width:14px;height:14px;border:2px dashed var(--line-ui);border-radius:3px}
+.df-status{font-size:var(--text-sm);font-weight:700;margin:6px 0 10px}
+.df-printed{font-size:var(--text-sm);color:var(--ink-2)}
 
 /* Shared */
 .section{padding:12px 16px}
@@ -771,7 +796,7 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
       <fieldset class="rday unc"><legend><span data-en="Wed, Nov 4">11月4日（水）</span><span class="utag"><svg class="i"><use href="#i-warn"/></svg><span data-en="Check">要確認</span></span></legend>
         <p class="reason"><svg class="i"><use href="#i-warn"/></svg><span data-en="The date and weekday don't match (the sheet says &quot;木&quot;)">日付と曜日が合いません（献立表では「木」）</span></p>
         <div class="dish"><input class="input" lang="ja" value="ピーマンとなすのみそ炒め" aria-label="料理名"></div>
-        <button class="btn btn-text" type="button" style="padding:0"><span data-en="It's correct">このままでよい</span></button>
+        <div class="row"><button class="btn btn-secondary btn-sm" type="button" aria-label="11月4日（水）の日付を直す" data-en-aria="Fix the date of Wed, Nov 4"><span data-en="Fix the date">日付を直す</span></button><button class="btn btn-text" type="button"><span data-en="Keep as is">このままにする</span></button></div>
       </fieldset>
       <fieldset class="rday" style="border-left:0;border-right:0;border-top:0"><legend><span data-en="Thu, Nov 5">11月5日（木）</span></legend>
         <div style="display:flex;gap:6px;align-items:center;margin-bottom:2px"><span class="utag"><svg class="i"><use href="#i-warn"/></svg><span data-en="Check">要確認</span></span></div>
@@ -795,6 +820,37 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
     </div>
     <div class="footer-cta"><button class="btn btn-primary btn-block" type="button"><span data-en="Confirm this menu">この内容で確定</span></button></div>
   </div>
+</section>
+
+
+<!-- ===================== (g) DATE CORRECTION ===================== -->
+<section class="slot" aria-labelledby="cap-g">
+  <h2 class="slot-cap" id="cap-g"><b>g</b><span data-en="Menu review: fix a date (weekday mismatch)">献立の確認：日付を直す（曜日の不一致）</span></h2>
+  <div class="phone">
+    <div class="status"><span>20:16</span><span>●●●</span></div>
+    <div class="topbar"><button class="iconbtn" type="button" aria-label="献立の取り込みに戻る" data-en-aria="Back to Import the menu"><svg class="i"><use href="#i-left"/></svg></button><h1><span data-en="Check the November menu">11月の献立を確認</span></h1></div>
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dfh" aria-describedby="dfc" style="top:auto;max-height:calc(100% - 84px)" data-testid="datefix-sheet">
+      <div class="grab" aria-hidden="true"></div>
+      <div class="sheet-head"><h2 id="dfh"><span data-en="Choose the correct date">正しい日付を選んでください</span></h2><button class="iconbtn" type="button" aria-label="閉じる" data-en-aria="Close" data-testid="datefix-close"><svg class="i"><use href="#i-x"/></svg></button></div>
+      <div class="sheet-body" style="padding:0 16px 16px">
+        <p class="df-ctx" id="dfc"><span data-en="The sheet says &quot;&lt;span lang=ja&gt;4日（木）&lt;/span&gt;&quot;. This day is set to Wed, Nov 4 now.">献立表では「4日（木）」です。いまは11月4日（水）になっています。</span></p>
+        <p class="df-month" aria-hidden="true"><span data-en="November 2026">2026年11月</span></p>
+        <div role="grid" aria-label="2026年11月から日付を選ぶ" data-en-aria="Pick a date in November 2026"><div class="df-grid" role="row"><div class="df-dow" role="columnheader" aria-label="月曜日" data-en-aria="Monday"><span data-en="Mon">月</span></div><div class="df-dow" role="columnheader" aria-label="火曜日" data-en-aria="Tuesday"><span data-en="Tue">火</span></div><div class="df-dow" role="columnheader" aria-label="水曜日" data-en-aria="Wednesday"><span data-en="Wed">水</span></div><div class="df-dow" role="columnheader" aria-label="木曜日" data-en-aria="Thursday"><span data-en="Thu">木</span></div><div class="df-dow" role="columnheader" aria-label="金曜日" data-en-aria="Friday"><span data-en="Fri">金</span></div><div class="df-dow sat" role="columnheader" aria-label="土曜日" data-en-aria="Saturday"><span data-en="Sat">土</span></div><div class="df-dow su" role="columnheader" aria-label="日曜日" data-en-aria="Sunday"><span data-en="Sun">日</span></div></div><div class="df-grid" role="row"><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell"><button class="dfc su" type="button" tabindex="-1" aria-label="11月1日（日）" data-en-aria="Sun, Nov 1" data-testid="datefix-cell-2026-11-01">1</button></div></div><div class="df-grid" role="row"><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月2日（月）、ほかの献立があります" data-en-aria="Mon, Nov 2, has another entry" data-testid="datefix-cell-2026-11-02">2</button></div><div role="gridcell"><button class="dfc" type="button" tabindex="-1" aria-label="11月3日（火）" data-en-aria="Tue, Nov 3" data-testid="datefix-cell-2026-11-03">3</button></div><div role="gridcell"><button class="dfc current" type="button" tabindex="-1" aria-disabled="true" aria-label="11月4日（水）、いまの日付" data-en-aria="Wed, Nov 4, current date" data-testid="datefix-cell-2026-11-04">4</button></div><div role="gridcell" aria-selected="true"><button class="dfc match sel" type="button" tabindex="0" aria-label="11月5日（木）、曜日が一致" data-en-aria="Thu, Nov 5, same weekday" data-testid="datefix-cell-2026-11-05">5</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月6日（金）、ほかの献立があります" data-en-aria="Fri, Nov 6, has another entry" data-testid="datefix-cell-2026-11-06">6</button></div><div role="gridcell"><button class="dfc sat" type="button" tabindex="-1" aria-label="11月7日（土）" data-en-aria="Sat, Nov 7" data-testid="datefix-cell-2026-11-07">7</button></div><div role="gridcell"><button class="dfc su" type="button" tabindex="-1" aria-label="11月8日（日）" data-en-aria="Sun, Nov 8" data-testid="datefix-cell-2026-11-08">8</button></div></div><div class="df-grid" role="row"><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月9日（月）、ほかの献立があります" data-en-aria="Mon, Nov 9, has another entry" data-testid="datefix-cell-2026-11-09">9</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月10日（火）、ほかの献立があります" data-en-aria="Tue, Nov 10, has another entry" data-testid="datefix-cell-2026-11-10">10</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月11日（水）、ほかの献立があります" data-en-aria="Wed, Nov 11, has another entry" data-testid="datefix-cell-2026-11-11">11</button></div><div role="gridcell"><button class="dfc match taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月12日（木）、曜日が一致、ほかの献立があります" data-en-aria="Thu, Nov 12, same weekday, has another entry" data-testid="datefix-cell-2026-11-12">12</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月13日（金）、ほかの献立があります" data-en-aria="Fri, Nov 13, has another entry" data-testid="datefix-cell-2026-11-13">13</button></div><div role="gridcell"><button class="dfc sat" type="button" tabindex="-1" aria-label="11月14日（土）" data-en-aria="Sat, Nov 14" data-testid="datefix-cell-2026-11-14">14</button></div><div role="gridcell"><button class="dfc su" type="button" tabindex="-1" aria-label="11月15日（日）" data-en-aria="Sun, Nov 15" data-testid="datefix-cell-2026-11-15">15</button></div></div><div class="df-grid" role="row"><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月16日（月）、ほかの献立があります" data-en-aria="Mon, Nov 16, has another entry" data-testid="datefix-cell-2026-11-16">16</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月17日（火）、ほかの献立があります" data-en-aria="Tue, Nov 17, has another entry" data-testid="datefix-cell-2026-11-17">17</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月18日（水）、ほかの献立があります" data-en-aria="Wed, Nov 18, has another entry" data-testid="datefix-cell-2026-11-18">18</button></div><div role="gridcell"><button class="dfc match taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月19日（木）、曜日が一致、ほかの献立があります" data-en-aria="Thu, Nov 19, same weekday, has another entry" data-testid="datefix-cell-2026-11-19">19</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月20日（金）、ほかの献立があります" data-en-aria="Fri, Nov 20, has another entry" data-testid="datefix-cell-2026-11-20">20</button></div><div role="gridcell"><button class="dfc sat" type="button" tabindex="-1" aria-label="11月21日（土）" data-en-aria="Sat, Nov 21" data-testid="datefix-cell-2026-11-21">21</button></div><div role="gridcell"><button class="dfc su" type="button" tabindex="-1" aria-label="11月22日（日）" data-en-aria="Sun, Nov 22" data-testid="datefix-cell-2026-11-22">22</button></div></div><div class="df-grid" role="row"><div role="gridcell"><button class="dfc" type="button" tabindex="-1" aria-label="11月23日（月）" data-en-aria="Mon, Nov 23" data-testid="datefix-cell-2026-11-23">23</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月24日（火）、ほかの献立があります" data-en-aria="Tue, Nov 24, has another entry" data-testid="datefix-cell-2026-11-24">24</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月25日（水）、ほかの献立があります" data-en-aria="Wed, Nov 25, has another entry" data-testid="datefix-cell-2026-11-25">25</button></div><div role="gridcell"><button class="dfc match taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月26日（木）、曜日が一致、ほかの献立があります" data-en-aria="Thu, Nov 26, same weekday, has another entry" data-testid="datefix-cell-2026-11-26">26</button></div><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月27日（金）、ほかの献立があります" data-en-aria="Fri, Nov 27, has another entry" data-testid="datefix-cell-2026-11-27">27</button></div><div role="gridcell"><button class="dfc sat" type="button" tabindex="-1" aria-label="11月28日（土）" data-en-aria="Sat, Nov 28" data-testid="datefix-cell-2026-11-28">28</button></div><div role="gridcell"><button class="dfc su" type="button" tabindex="-1" aria-label="11月29日（日）" data-en-aria="Sun, Nov 29" data-testid="datefix-cell-2026-11-29">29</button></div></div><div class="df-grid" role="row"><div role="gridcell"><button class="dfc taken" type="button" tabindex="-1" aria-disabled="true" aria-label="11月30日（月）、ほかの献立があります" data-en-aria="Mon, Nov 30, has another entry" data-testid="datefix-cell-2026-11-30">30</button></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div><div role="gridcell" aria-hidden="true"></div></div></div>
+        <ul class="df-legend">
+          <li><i class="lm" aria-hidden="true"></i><span data-en="Same weekday">曜日が一致</span></li>
+          <li><i class="lt" aria-hidden="true"></i><span data-en="Has another entry">ほかの献立があります</span></li>
+          <li><i class="lc" aria-hidden="true"></i><span data-en="Current date">いまの日付</span></li>
+        </ul>
+        <p class="df-status" role="status" data-testid="datefix-status"><span data-en="Moving to Thu, Nov 5">11月5日（木）に移します</span></p>
+        <div class="stack">
+          <button class="btn btn-primary btn-block" type="button" data-testid="datefix-apply"><span data-en="Use this date">この日にする</span></button>
+          <button class="btn btn-secondary btn-block" type="button" data-testid="datefix-cancel"><span data-en="Cancel">キャンセル</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="slot-note"><span data-en="Taken dates (dot) are listed but can't be chosen; nothing is ever overwritten, merged or swapped (US-E2-05/AC8). After 「この日にする」 the row shows 「献立表の表記：4日（木）」 and can be corrected again (AC9, AC10).">点のある日は表示されますが選べません。上書き・まとめる・入れ替えはしません（US-E2-05/AC8）。「この日にする」のあと、行には「献立表の表記：4日（木）」が出て、もう一度直せます（AC9、AC10）。</span></p>
 </section>
 
 <!-- ===================== (e) SETTINGS ===================== -->

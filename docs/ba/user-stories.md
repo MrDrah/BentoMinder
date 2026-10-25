@@ -1,6 +1,6 @@
 # User stories — BentoMinder
 
-Owner: BA · 2026-10-24 · Status: **H1 final** (PO answers of 2026-10-24 applied; reconciliations R-1, R-2, R-3 applied; H1 fix round of 2026-10-24 applied: rulings B1, B2, B4–B7, B10, B14 and follow-ups; M1 prep of 2026-10-24 applied, see "M1 prep" below) · Rules: approved BR table in `docs/PLAN.md` §3 · Decisions: `docs/PLAN.md` §7 · Data: `docs/ba/data-contract.md` (source of all state and field names) · Terms: `docs/ba/domain-dictionary.md` · QA traces tests to these IDs (`validate.mjs trace`).
+Owner: BA · 2026-10-24 · Status: **H1 final** (PO answers of 2026-10-24 applied; reconciliations R-1, R-2, R-3 applied; H1 fix round of 2026-10-24 applied: rulings B1, B2, B4–B7, B10, B14 and follow-ups; M1 prep of 2026-10-24 applied, see "M1 prep" below; M2 prep of 2026-10-25 applied, see "M2 prep" below) · Rules: approved BR table in `docs/PLAN.md` §3 · Decisions: `docs/PLAN.md` §7 · Data: `docs/ba/data-contract.md` (source of all state and field names) · Terms: `docs/ba/domain-dictionary.md` · QA traces tests to these IDs (`validate.mjs trace`).
 
 ## H1 changes (since the kick-off draft of 2026-10-24: 72 stories / 245 ACs → 73 / 264 at the first H1 pass → 73 / 287 after the H1 fix round and closing rulings)
 No AC was renumbered. Added ACs take the next free number; a retired AC stays in its story as a comment.
@@ -40,6 +40,22 @@ Items from PLAN §7 "H2 gate closed." and "M0 done.". No AC was renumbered; no t
 | US-E10-03/AC1 vs `export-roundtrip`: `exportedAt` dropped, the date stays in the file name (data contract §4) | | US-E10-03/AC4 | US-E10-03/AC1 (→ AC4) |
 | Strings in `design/copy.md` that carry a rule but had no AC | | US-E2-01/AC5 (target month, OQ-21); US-E2-04/AC8 (stop an import); US-E2-06/AC9 (retry countdown); US-E3-01/AC4 (warnings); US-E3-02/AC6 (no-lunch reason and wording, OQ-22); US-E3-03/AC4 (accept one field), AC5 (leave review, OQ-23); US-E3-05/AC13 (nothing to review); US-E3-06/AC6 (hide the next-month card, OQ-24), AC7 (prompt-day setting); US-E5-02/AC4 (month without a menu); US-E6-01/AC7 (quick reason); US-E6-05/AC3, AC4 (date picker); US-E7-03/AC4, AC5 (today card); US-E7-05/AC5 (several reminders); US-E9-01/AC4 (copy fails); US-E10-02/AC6 (save failure), AC7 (start over); US-E10-03/AC5, AC6 (Could: import errors) | |
 
+### M2 prep (2026-10-25: 73 / 310 → 73 / 320)
+Items from PLAN §7 "M1 merged locally" and "M1 QA" (`tests/reports/m1-qa-report.md`, D-M1-03, D-M1-04), and a readiness pass of E3-05/06, E4 and E5 against the data contract, ADR 004 and `src/domain/schema/`. No AC was renumbered. Changed ACs keep their outcome unless the row says otherwise; tests that name a retired AC move to its replacement.
+
+| Why | Changed | Added | Retired |
+|-----|---------|-------|---------|
+| US-E2-05/AC5 "confirm or correct the date": only 「このままにする」 existed; date correction rules (free dates of the month only, a taken date is never overwritten, merged or swapped, the flag clears, the printed date stays visible) | US-E2-05/AC5 (Then names the two ways; outcome unchanged) | US-E2-05/AC7, AC8, AC9, AC10 | |
+| Food-picker kind labels 食材 / 種類 / 料理 (identical labels such as 鶏肉 exist as an ingredient and a category) | | US-E1-02/AC8 | |
+| D-M1-03: settings (export, delete all) unreachable before onboarding step 2. Ruling: settings reachable from every onboarding step | US-E10-03/AC2 (Given made explicit, the way to reach it named; outcome unchanged) | US-E1-01/AC6 | |
+| D-M1-04: no v0 shape exists, so a v0 → v1 migration can't be exercised. Ruling: prove the path with the frozen v1 fixture and synthetic versions | | US-E10-02/AC8 | US-E10-02/AC2 (→ AC8) |
+| Readiness: amb-curry has 3 candidates, not 2; non-food readings (amb-aji, amb-nashi) need a stored choice (data contract §3.3 `resolvedIds`) | US-E4-01/AC6 (all candidates + 「わからない」; outcome unchanged) | US-E4-01/AC21 | |
+| Readiness: explanation labels hold ≤ 3 (contract §3.5) but the worked example named 4 | E4 worked example (explanation wording) | | |
+| Readiness: an assessment is never stored (contract §3.5), only the override | US-E4-03/AC1 (Then reworded; outcome unchanged) | | |
+| Readiness: BR-27 had no AC for overrides; the 「献立が変わりました。評価を見直してください。」 line had no end | | US-E4-03/AC6, AC7 | |
+| Readiness: a kept refresh conflict must not come back after a later refresh that doesn't touch the date (contract §3.6, ADR 004 `needsAck`) | | US-E3-05/AC14 | |
+| Readiness: event ids (contract §3.6) in the state-machine table; `decidedAt` and `history` as in the contract | E5 state-machine table (header with event ids; new paragraph for KEEP_PLAN and MARK_RESERVATION), E5 timestamp note | | |
+
 Acceptance criteria are numbered per story: `Scenario: AC1 …` has the full ID `US-E1-01/AC1`. Tests name the full AC ID; milestone evidence counts an AC as verified only when an executed test that names it passed. Never renumber an AC once a test names it; retire it and add a new number.
 
 Priority: **M**ust / **S**hould / **C**ould / **W**on't (MoSCoW) · Size: S / M / L · `(v1)` in a title means the story is out of the MVP and must not be built before the PO approves v1.
@@ -59,10 +75,10 @@ Counts are active ACs (retired ACs are kept as comments and not counted). `(v1)`
 | Epic | Stories | # stories | # ACs (of which v1) | Scope |
 |------|---------|-----------|---------------------|-------|
 | E0 End-to-end journey | US-E0-01 | 1 | 3 | MVP |
-| E1 Onboarding & profile | US-E1-01 … 06 | 6 | 28 | MVP |
-| E2 Menu import & AI extraction | US-E2-01 … 08 | 8 | 42 | MVP |
-| E3 Menu review, confirm & refresh | US-E3-01 … 06 | 6 | 36 (1) | MVP; US-E3-06/AC4 is v1 |
-| E4 Preference assessment & overrides | US-E4-01 … 05 | 5 | 33 | MVP |
+| E1 Onboarding & profile | US-E1-01 … 06 | 6 | 30 | MVP |
+| E2 Menu import & AI extraction | US-E2-01 … 08 | 8 | 46 | MVP |
+| E3 Menu review, confirm & refresh | US-E3-01 … 06 | 6 | 37 (1) | MVP; US-E3-06/AC4 is v1 |
+| E4 Preference assessment & overrides | US-E4-01 … 05 | 5 | 36 | MVP |
 | E5 Calendar & family decisions | US-E5-01 … 08 | 8 | 33 | MVP |
 | E6 Bento recommendations & recipes | US-E6-01 … 07 | 7 | 31 | MVP |
 | E7 Reminders & today view | US-E7-01 … 08 | 8 | 33 (1) | MVP; US-E7-08 is v1 |
@@ -72,7 +88,7 @@ Counts are active ACs (retired ACs are kept as comments and not counted). `(v1)`
 | E11 Debug panel | US-E11-01 … 03 | 3 | 8 | MVP (development builds only) |
 | E12 Android | US-E12-01 … 04 | 4 | 9 (8) | MVP: US-E12-01 only; US-E12-02 … 04 are v1 |
 | NF Non-functional | US-NF-01 … 05 | 5 | 15 | MVP |
-| **Total** | | **73** | **310 (10 v1)** | |
+| **Total** | | **73** | **320 (10 v1)** | |
 
 ---
 
@@ -154,6 +170,16 @@ Scenario: AC5 Skipping the menu shows an empty calendar with a clear next step
   Then the calendar is shown with no assessments
   And an empty-state card 「今月の献立がまだありません」 offers 「献立を取り込む」
   # M1 prep (H2 design reading accepted): the generic 「今月の…」 wording is used only while no menu has ever been confirmed; in every other case a month without a menu uses the month-named wording of US-E3-06/AC1 (rule: US-E3-06/AC5).
+
+Scenario: AC6 Settings can be opened from every onboarding step (BR-22)
+  Given onboarding is shown at input step 1, 2 or 3 (also on a fresh device with nothing stored)
+  Then the top bar offers 「設定」 (the same entry as the calendar's app bar) next to the language toggle
+  When the parent opens it
+  Then the settings screen opens; its プロフィール and 献立 sections are shown only once a profile exists, every other section is shown
+  And 「データを書き出す」 (US-E10-03) and 「すべてのデータを削除」 (US-E10-04) work as they do after onboarding
+  When the parent goes back
+  Then the same onboarding step is shown, and step-1 answers typed so far are still filled in (they are stored only by 「次へ」, as before)
+  # M2 prep (D-M1-03 ruling): makes US-E10-03/AC2 reachable, and lets a parent whose profile was deleted (US-E1-06/AC3: menus and plans remain, onboarding step 1 opens) export or delete everything without creating a new profile first.
 ```
 
 ### US-E1-02 Create the child profile · M · M
@@ -201,6 +227,15 @@ Scenario: AC7 Free-text note is optional and never used for filtering (BR-10, BR
   Then the note is saved
   And the note is not used by assessment, ranking or filtering
   And the note is never sent to the AI adapter
+
+Scenario: AC8 Each search result says what kind of food it is (BR-20)
+  Given the likes, dislikes or 「その他の食材」 food picker
+  When the parent searches 「とりにく」
+  Then the results include 「鶏肉」 marked 「食材」 (ing-chicken) and 「鶏肉」 marked 「種類」 (cat-chicken), and a dish result such as 「鶏のから揚げ」 would be marked 「料理」
+  And every result shows exactly one kind label: ingredient 「食材」, category 「種類」, dish 「料理」 (en: "Ingredient", "Food group", "Dish"), as text in the option row or as the heading of a group of results, never by colour or icon alone
+  And the kind is part of each result's accessible name (ja 「鶏肉（種類）」, en "Chicken (Food group)")
+  And a chosen chip carries its kind in its accessible name, and shows it as text whenever another chosen chip has the same label
+  # M2 prep: the strings are fixed here; the Designer chooses between row labels and group headings (design/components.md §6.3 currently shows the kind on each row). Group order, if grouped: 食材, 料理, 種類.
 ```
 
 ### US-E1-03 Record allergies, or explicitly record that they are unknown · M · M
@@ -490,11 +525,54 @@ Scenario: AC4 Dates outside the target month are rejected (BR-11)
 Scenario: AC5 Weekday mismatch is flagged, not silently fixed (BR-11)
   Given the PDF printed 「4日（木）」 and the extraction says date 2026-11-04 with printedWeekday "木"
   Then the day is flagged verification "uncertain" with reason "weekday-mismatch" (2026-11-04 is a Wednesday)
-  And the parent must confirm or correct the date on review
+  And on review the parent either keeps the date with 「このままにする」 (US-E3-03/AC4) or corrects it with 「日付を直す」 (AC7–AC10); the flag counts as unresolved until one of the two is done
+  # The model's output is never rejected for this: the app sets the flag (data contract §6.1 `weekday-mismatch`).
 
 Scenario: AC6 Duplicate dates are merged for review, not dropped (BR-11)
   Given the extraction lists 2026-11-05 twice
   Then the review screen shows one 2026-11-05 entry containing all items from both, flagged "uncertain" with reason "duplicate-date"
+
+Scenario: AC7 Correct a flagged date by picking a date of the month (BR-11)
+  Given the review for 2026-11 shows 2026-11-04 flagged "weekday-mismatch" (printed 「4日（木）」, printedWeekday "木")
+  And on this review 2026-11-05 (Thu) shows 「献立に記載なし」
+  When the parent taps 「日付を直す」 on 2026-11-04
+  Then a choice of every date of November 2026 (2026-11-01 … 2026-11-30) opens, each shown with its weekday (「11月5日（木）」)
+  And 2026-11-04 is marked as the current date and cannot be chosen
+  And the dates whose weekday is the printed one, 木 (2026-11-05, 11-12, 11-19, 11-26), are marked 「曜日が一致」 in text; they are not preselected and other free dates can be chosen too
+  When the parent chooses 2026-11-05
+  Then the whole day (dishes, ingredients, allergen line, notes) is listed under 2026-11-05 and the rows stay in date order
+  And 2026-11-04 shows 「献立に記載なし」
+  And the moved day has verification "parent-edited" and no 「要確認」 tag, and 「確認が必要な項目」 is 1 lower
+  And days without a weekday-mismatch flag, and no-lunch days, offer no 「日付を直す」
+  # M2 prep. Past dates of the month are offered too: the review records what the PDF printed; BR-27 governs plans (OQ-28).
+
+Scenario: AC8 A date that already has a menu cannot be chosen (BR-11, BR-13)
+  Given 2026-11-04 is flagged "weekday-mismatch"
+  And on this review 2026-11-12 (Thu) shows dishes and 2026-11-19 (Thu) is marked 給食なし
+  When the parent opens 「日付を直す」 on 2026-11-04
+  Then 2026-11-12 and 2026-11-19 are listed but cannot be chosen, each with the text 「ほかの献立があります」
+  And no correction ever overwrites, merges or swaps two days: a forced attempt (e.g. a crafted event) leaves the review unchanged
+  When the parent removes every dish of 2026-11-12 (or 2026-11-12 shows 「献立に記載なし」 for another reason)
+  Then 2026-11-12 can be chosen
+  Given every date of the month other than 2026-11-04 shows dishes or is marked 給食なし
+  Then the choice says 「移せる日がありません」 and 「このままにする」 stays available on 2026-11-04
+
+Scenario: AC9 The printed date stays visible and is kept on confirm (BR-11, BR-12)
+  Given 2026-11-04 was corrected to 2026-11-05 (AC7)
+  Then the 2026-11-05 row shows 「献立表の表記：4日（木）」 (the printed date text, unchanged)
+  When the parent confirms the menu (US-E3-03/AC1)
+  Then the ConfirmedMenu has a day 2026-11-05 with printedDateText 「4日（木）」, printedWeekday "木" and verification "parent-edited", and no entry for 2026-11-04
+  And the calendar, the assessment and decisions use 2026-11-05
+
+Scenario: AC10 A correction can be changed or abandoned (BR-11, BR-12)
+  Given 2026-11-04 was corrected to 2026-11-05
+  When the parent opens 「日付を直す」 on 2026-11-05 and chooses 2026-11-04
+  Then the day is listed under 2026-11-04 again, still "parent-edited" (the flag does not come back)
+  When the parent opens the choice and closes it without choosing
+  Then nothing changes
+  When the parent leaves the review with 「中断する」 (US-E3-03/AC5)
+  Then the corrections are discarded with the other edits and the pending extraction still shows 2026-11-04 flagged
+  And on a flagged day 「このままにする」 instead keeps the date and stores the day as "uncertain-accepted" (US-E3-03/AC4)
 ```
 
 ### US-E2-06 Rate limits and service outages · M · M
@@ -861,6 +939,15 @@ Scenario: AC13 A refresh with nothing to review says so (BR-13)
   When the parent confirms the refresh
   Then the 「確認が必要な日」 screen says 「確認が必要な日はありません」 and offers 「カレンダーへ」
   And no stored decision or override is changed
+
+Scenario: AC14 A kept conflict stays kept until the menu changes that date again (BR-02, BR-13)
+  Given 2026-11-04 is in the refresh conflict of AC2 (menu version 2) and the parent tapped 「このまま」 (acknowledgedMenuVersion 2)
+  When the parent confirms a version 3 whose changedDatesSincePrevious does not contain 2026-11-04 (it is still a no-lunch day)
+  Then 2026-11-04 is not in the upcoming summary, and still carries 「献立が変わりました」 with only 「このまま」 and 「計画を取り消す」
+  When the parent confirms a version 4 whose changedDatesSincePrevious contains 2026-11-04 and the date is still a no-lunch day or unlisted
+  Then the conflict is in the upcoming summary again until the parent taps 「このまま」 (acknowledgedMenuVersion 4) or clears the plan
+  And no refresh changed the stored decision, its recipe, plannedAt or its day-before reminder
+  # M2 prep: data contract §3.6 acknowledgedMenuVersion (as ADR 004 needsAck).
 ```
 
 ### US-E3-06 Detect that the menu is outdated or missing · M · S
@@ -927,7 +1014,7 @@ Assessment rule (BR-04, applied per school day of a confirmed menu, deterministi
 4. **`D` = number of disliked foods; `L` = number of liked foods.** So D counts different foods a parent would recognise, not profile entries and not ids: 「さけのしおやき」 and 「さばのみそ煮」 give D = 2 for a child who only dislikes `cat-fish`; 鶏肉 and 鶏もも肉 on one day are one food. The explanation names each counted food by the label of the id whose profile entry decided (さば, not さばのみそ煮, when the dislike is `cat-fish`).
 5. **`U`** = (number of the day's non-snack items that have no dictionary match at all, or that contain at least one unresolved ambiguity) ÷ (number of the day's non-snack items). An item with a match *and* an unresolved ambiguity (「カレーうどん」: `ing-udon` found, 「カレー」 unresolved) counts towards U, and its foods still count towards D and L.
 
-*Worked example* (sample child: dislikes `ing-green-pepper`, `ing-eggplant`, `cat-fish`; likes `ing-chicken`, `ing-egg`, `ing-corn`; plus, for this example only, likes `ing-salmon` and dislikes `ing-ginger`). A day lists the items 「ピーマンとなすのみそ炒め」「さけのしおやき」「さばのみそ煮」「豚のしょうが焼き」「とりももの照り焼き風」「鶏むね肉のソテー」「カレーうどん」「ごはん」 and the ingredients ピーマン, なす, 鮭, さば, 豚肉, しょうが, 鶏肉, みそ, うどん (kanji 鮭 resolves to `ing-salmon`; kana 「さけ」 in an ingredient list could trigger amb-sake). Found ids, seasonings (`ing-miso`, `ing-salt`) left out: `ing-green-pepper`, `ing-eggplant`, `dish-salted-salmon`, `ing-salmon`, `dish-saba-miso`, `ing-mackerel`, `dish-ginger-pork`, `ing-pork`, `ing-ginger`, `ing-chicken-thigh` (「とりもも」, amb-momo rule), `ing-chicken-breast`, `ing-chicken`, `ing-udon`, `ing-rice`. Foods (10): ピーマン; なす (each once although found in a dish name and in the ingredient list); {`dish-salted-salmon` + defining `ing-salmon`} (鮭 in the ingredient list counts through it); {`dish-saba-miso` + defining `ing-mackerel`}; {`dish-ginger-pork` + defining `ing-pork`}; しょうが (named in the dish but not its defining ingredient: a separate food); `ing-chicken-thigh` and `ing-chicken-breast` (siblings: 2 foods; the found ancestor 鶏肉 folds into each and is not a food of its own); うどん; ごはん. Verdicts: ピーマン, なす disliked (level 1); the salmon food liked (level 1 like on `ing-salmon` beats the level-3 dislike of `cat-fish`: B2); the mackerel food disliked (level 3, `cat-fish`); the ginger-pork food no verdict; しょうが disliked (level 1); もも and むね liked (level 1, the folded ancestor `ing-chicken` is a member of each); うどん, ごはん no verdict. So D = 4, L = 3. Items: 8 non-snack; only 「カレーうどん」 has an unresolved 「カレー」 (amb-curry) → U = 1/8 = 12.5%. Rule 3 applies: `low-preference`, explanation 「苦手な食材が4つ」 (ピーマン, なす, さば, しょうが).
+*Worked example* (sample child: dislikes `ing-green-pepper`, `ing-eggplant`, `cat-fish`; likes `ing-chicken`, `ing-egg`, `ing-corn`; plus, for this example only, likes `ing-salmon` and dislikes `ing-ginger`). A day lists the items 「ピーマンとなすのみそ炒め」「さけのしおやき」「さばのみそ煮」「豚のしょうが焼き」「とりももの照り焼き風」「鶏むね肉のソテー」「カレーうどん」「ごはん」 and the ingredients ピーマン, なす, 鮭, さば, 豚肉, しょうが, 鶏肉, みそ, うどん (kanji 鮭 resolves to `ing-salmon`; kana 「さけ」 in an ingredient list could trigger amb-sake). Found ids, seasonings (`ing-miso`, `ing-salt`) left out: `ing-green-pepper`, `ing-eggplant`, `dish-salted-salmon`, `ing-salmon`, `dish-saba-miso`, `ing-mackerel`, `dish-ginger-pork`, `ing-pork`, `ing-ginger`, `ing-chicken-thigh` (「とりもも」, amb-momo rule), `ing-chicken-breast`, `ing-chicken`, `ing-udon`, `ing-rice`. Foods (10): ピーマン; なす (each once although found in a dish name and in the ingredient list); {`dish-salted-salmon` + defining `ing-salmon`} (鮭 in the ingredient list counts through it); {`dish-saba-miso` + defining `ing-mackerel`}; {`dish-ginger-pork` + defining `ing-pork`}; しょうが (named in the dish but not its defining ingredient: a separate food); `ing-chicken-thigh` and `ing-chicken-breast` (siblings: 2 foods; the found ancestor 鶏肉 folds into each and is not a food of its own); うどん; ごはん. Verdicts: ピーマン, なす disliked (level 1); the salmon food liked (level 1 like on `ing-salmon` beats the level-3 dislike of `cat-fish`: B2); the mackerel food disliked (level 3, `cat-fish`); the ginger-pork food no verdict; しょうが disliked (level 1); もも and むね liked (level 1, the folded ancestor `ing-chicken` is a member of each); うどん, ごはん no verdict. So D = 4, L = 3. Items: 8 non-snack; only 「カレーうどん」 has an unresolved 「カレー」 (amb-curry) → U = 1/8 = 12.5%. Rule 3 applies: `low-preference`, explanation 「苦手な食材が4つ」 naming the first 3 in order of appearance (ピーマン, なす, さば) and saying there is one more (しょうが is counted, not named; data contract §3.5 `explanationParams`, M2 prep).
 
 1. Day is a no-lunch day → `no-school-lunch`. 2. No profile, or profile with 0 likes and 0 dislikes → `not-assessed`. 3. `D ≥ 2` → `low-preference`. 4. `D = 1` and `L = 0` → `low-preference`. 5. `D = 1` and `L ≥ 1` → `mixed-uncertain`. 6. `D = 0`, `L ≥ 1` and `U ≤ 50%` → `likely-enjoyable`. 7. Otherwise → `mixed-uncertain`.
 
@@ -973,7 +1060,8 @@ Scenario: AC5 Longest match wins inside a dish name (BR-04)
 Scenario: AC6 Ambiguous words never decide the state (BR-04)
   Given a day lists only 「カレー」 with no other context
   Then 「カレー」 is treated as unresolved (amb-curry) and counts towards U
-  And the review screen lets the parent choose 「カレーライス（料理）」 or 「カレー粉（調味料）」, and the choice is stored for that item
+  And the review screen lets the parent choose 「カレーライス（料理）」, 「カレー粉（調味料）」, 「カレールウ（調味料）」 or 「わからない」, and a choice other than 「わからない」 is stored for that item (resolvedIds, data contract §3.3)
+  # M2 prep: amb-curry has three candidates (dictionary §7); 「わからない」 leaves the item unresolved (AC13).
 
 Scenario: AC7 Reproducible (BR-04, BR-15)
   Given the same profile and the same confirmed menu
@@ -1060,6 +1148,18 @@ Scenario: AC20 A defining-ingredient link never crosses items (BR-04)
   And a school day lists 「鶏のから揚げ」 and 「鶏もも肉のてりやき」 (no ingredient list)
   Then {dish-karaage + ing-chicken} is one food and ing-chicken-thigh is a second food: ing-chicken does not fold into the thigh across items
   And D = 2, so the day is low-preference
+
+Scenario: AC21 An ambiguity choice on review is stored and used; a non-food reading adds nothing (BR-04)
+  Given a profile that likes ing-peach and dislikes ing-horse-mackerel
+  And the review of 2026-11 lists on 2026-11-16 the items 「もも」 and 「あじ」 (standalone forms the dictionary asks about: amb-momo, amb-aji)
+  Then each item offers its group's candidates plus 「わからない」; amb-aji also offers its non-food reading 「味（食べものではない）」
+  And neither chooser counts in 「確認が必要な項目」 and neither blocks 「この内容で確定」
+  When the parent chooses 「もも（果物）」 (ing-peach) for 「もも」, leaves 「あじ」 unanswered and confirms
+  Then the 「もも」 item is stored with resolvedIds ["ing-peach"], its text and verification unchanged, and ing-peach counts towards L
+  And 「あじ」 has no resolvedIds and counts towards U, so D = 0, L = 1, U = 1/2 and the day is likely-enjoyable
+  Given instead the parent chose the non-food reading for 「あじ」
+  Then the 「あじ」 item is stored with resolvedIds [], adds no food and does not count towards U (U = 0/2)
+  # M2 prep: data contract §3.3 resolvedIds and rule resolved-ids-candidates; option wording by the Designer (copy amb.*).
 ```
 
 ### US-E4-02 Explain every assessment · M · S
@@ -1100,7 +1200,8 @@ Scenario: AC1 Set an override (BR-05)
   Given 2026-11-12 is likely-enjoyable
   When the parent sets 「苦手かも」 (low-preference) on 2026-11-12
   Then the day shows low-preference with the label 「手動で変更」
-  And the stored assessment keeps both the calculated state and the override
+  And an AssessmentOverride { date 2026-11-12, state low-preference, menuVersionAtSet = the current menu version } is stored, and the day still shows the calculated state (likely-enjoyable) as the app's assessment under the label
+  # M2 prep: an Assessment is computed, never stored; only the override is (data contract §3.5). Outcome unchanged.
 
 Scenario: AC2 Override persists across reload, profile edits, reassessment and menu refresh (BR-05)
   Given an override on 2026-11-12
@@ -1119,6 +1220,22 @@ Scenario: AC5 An override never changes the decision (BR-01)
   Given 2026-11-12 has decision school-lunch-planned
   When the parent overrides it to low-preference
   Then the decision is still school-lunch-planned
+
+Scenario: AC6 Past days offer no override change (BR-27)
+  Given today is 2026-11-10 JST, 2026-11-09 has an override low-preference and 2026-11-06 has none
+  When the parent opens 2026-11-09 and 2026-11-06
+  Then both show their assessment (2026-11-09 with 「手動で変更」) but offer neither 「判定を変更」 nor 「自動判定に戻す」
+  And a forced override write for either date is refused and storage is unchanged (override-no-past-write)
+  And today 2026-11-10 can still be overridden
+
+Scenario: AC7 Setting the override again after a menu change ends the "menu changed" line (BR-05)
+  Given 2026-11-18 has an override set at menu version 1 and version 2 changed the dishes of 2026-11-18, so the day shows 「献立が変わりました。評価を見直してください。」 (US-E3-05/AC3)
+  When the parent sets the override again, to the same or another state
+  Then menuVersionAtSet is 2 and the line is no longer shown
+  When instead the parent taps 「自動判定に戻す」
+  Then the override is removed and the line is no longer shown
+  And a later version 3 that does not change 2026-11-18 does not show the line either
+  # M2 prep: data contract §3.5 menuVersionAtSet.
 ```
 
 ### US-E4-04 Neutral, non-judgmental wording · M · S
@@ -1157,7 +1274,7 @@ Scenario: AC3 The allergen notice never changes the assessment or the decision (
 
 Decision state machine (BR-02, BR-03, BR-25, BR-27; state names from data contract §3.6, R-2). A stored decision exists only after a parent action; without one, the displayed decision is derived: school day → `school-lunch-planned`, no-lunch day → `no-school-lunch`. Only dates from today (Asia/Tokyo) onward can change (BR-27).
 
-| From \ parent action | 「手作りお弁当にする」 + confirm recipe | 「あとで決める」 | 「給食に戻す」 | change recipe | 「計画を取り消す」 |
+| From \ parent action (event, data contract §3.6) | 「手作りお弁当にする」 + confirm recipe (`CONFIRM_RECIPE`) | 「あとで決める」 (`DEFER`) | 「給食に戻す」 (`SET_SCHOOL_LUNCH`) | change recipe (`CHANGE_RECIPE`) | 「計画を取り消す」 (`CLEAR_PLAN`) |
 |---|---|---|---|---|---|
 | school-lunch-planned | homemade-bento-planned | not-confirmed | — | — | — |
 | not-confirmed | homemade-bento-planned | — | school-lunch-planned | — | — |
@@ -1168,7 +1285,9 @@ Decision state machine (BR-02, BR-03, BR-25, BR-27; state names from data contra
 | homemade-bento-planned on a date that a refresh made a no-lunch day (reason ≠ `bento-day`) or removed from the menu (refresh conflict, BR-13) | — | — | — | — | stored decision removed (after confirm dialog); 「このまま」 = KEEP_PLAN sets `acknowledgedMenuVersion`, state unchanged (US-E3-05/AC2, AC6, AC7) |
 | stored not-confirmed / school-lunch-planned on such a date | dormant: kept unchanged, displays no-school-lunch (or nothing when unlisted), no actions; shown again unchanged if the date becomes a school day (US-E3-05/AC12) | | | | |
 
-Timestamps: `decidedAt` is set on every write; `plannedAt` is set when the state becomes homemade-bento-planned from any other state (first confirm), kept unchanged by 「レシピを変更」 and by KEEP_PLAN, and removed when the state leaves homemade-bento-planned (data contract §3.6).
+Two more events: 「このまま」 on a refresh conflict is `KEEP_PLAN` (last rows); 「園で予約済み（自分で記録）」 is `MARK_RESERVATION`, allowed only where the displayed decision is school-lunch-planned on a school day from today on (it stores a school-lunch-planned record with the flag; any change to another state clears the flag, US-E5-07/AC3). Opening or closing the recommendation view and cancelling a dialog are not events and write nothing.
+
+Timestamps: `decidedAt` is set by every accepted event that changes the state, the recipe or the reservation flag (not by `KEEP_PLAN`); `history` gets one entry, the state and recipe after the change, per state or recipe change (at most 5; data contract §3.6, M2 prep); `plannedAt` is set when the state becomes homemade-bento-planned from any other state (first confirm), kept unchanged by 「レシピを変更」 and by KEEP_PLAN, and removed when the state leaves homemade-bento-planned (data contract §3.6).
 
 ### US-E5-01 Calendar is the home screen · M · M
 As a parent I want the month at a glance so that I see school lunch and bento days in seconds.
@@ -1950,10 +2069,7 @@ As the developer I want a versioned store so that updates never lose a family's 
 Scenario: AC1 Store carries a schema version (BR-22)
   Then the root store has schemaVersion 1 and validates against the v1 contract
 
-Scenario: AC2 Older version is migrated once, with a backup (BR-22)
-  Given a store with schemaVersion 0 (fixture)
-  When the app opens
-  Then a backup copy is kept, the store is migrated to 1, and all decisions are preserved
+  # AC2 retired at M2 prep (D-M1-04): it needed a real schemaVersion 0 store, and no v0 shape ever existed (v1 is the first shipped shape). Replaced by AC8, which proves the same path with the frozen v1 fixture and synthetic versions.
 
 Scenario: AC3 Newer version is not overwritten (BR-22)
   Given a store with schemaVersion 99
@@ -1983,6 +2099,21 @@ Scenario: AC7 Starting over from the recovery screen asks first (BR-22)
   Then storage is unchanged and the recovery screen is still shown
   When the parent taps 「初期化する」 again and confirms
   Then the unreadable store is removed, and onboarding opens in Japanese at step 1 with no profile, menu or decision
+
+Scenario: AC8 The migration path is proven with the frozen v1 fixture and synthetic versions (BR-22)
+  Given the frozen fixture tests/fixtures/state/v1.json
+  When the shipped build loads it
+  Then it opens without any migration and every record equals the fixture (so a change to the v1 shape without a new schemaVersion fails this test)
+  Given a synthetic predecessor made from that fixture (schemaVersion 0, one field renamed or removed) and a test-only migration 0 → 1 given to the repository
+  When the store is loaded
+  Then the original text is written as the backup copy before the migrated store, the migrated store validates as v1, its profile, menus, overrides and decisions equal the fixture's, and a second load runs no migration
+  Given test-only migrations 0 → 1 and 1 → 2 (a synthetic v2 shape)
+  When the migration chain runs from 0 to 2
+  Then each step runs once, in order, and schemaVersion is stamped after each step
+  And a missing or throwing step stops the load with migration-failed: no migrated document is written, the stored text stays byte-for-byte, and the app handles it as in AC4
+  Given the shipped build (no migration steps) and a stored schemaVersion 0
+  Then the load reports migration-failed, writes nothing and is handled as in AC4
+  # M2 prep (D-M1-04 ruling), replaces AC2. Unit level (repository and migrate() with injected steps). When a real v2 ships, its migration ships with this fixture and a frozen v2 fixture, and the synthetic steps give way to the real one (ADR 003).
 ```
 
 ### US-E10-03 Export my data · M · S
@@ -1992,8 +2123,10 @@ As a parent I want to download my data so that I have a copy or can move it.
   # AC1 retired at M1 prep: it required an exportedAt field in the file, which the root store contract rejects (unknown-field). Replaced by AC4: the export date is in the file name only (data contract §4 export-roundtrip).
 
 Scenario: AC2 Export with no data
-  Given nothing is stored
-  Then the export button is disabled with 「書き出すデータがありません」
+  Given no BentoMinder store has been saved on this device (a fresh device, or right after 「すべてのデータを削除」)
+  When the parent opens 設定 from onboarding step 1 (US-E1-01/AC6)
+  Then 「データを書き出す」 is disabled with 「書き出すデータがありません」
+  # M2 prep (D-M1-03): Given made explicit and the way to reach it named; outcome unchanged. Once a store is saved (e.g. by 「次へ」 on step 1) export is enabled.
 
 Scenario: AC3 (Could) Import an export
   Given a valid export file with schemaVersion ≤ the app's version

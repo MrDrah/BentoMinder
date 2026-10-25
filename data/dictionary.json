@@ -5307,9 +5307,10 @@
       ],
       "candidateIds": [
         "ing-peach",
-        "ing-chicken-thigh"
+        "ing-chicken-thigh",
+        "ing-pork"
       ],
-      "candidatesNote": "ing-peach, ing-chicken-thigh, pork thigh",
+      "candidatesNote": "ing-peach, ing-chicken-thigh, ing-pork (豚もも)",
       "resolution": "「鶏もも」「とりもも」→ ing-chicken-thigh; 「豚もも」→ ing-pork; kanji 桃 → peach. Standalone → ask."
     },
     {

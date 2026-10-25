@@ -1,6 +1,6 @@
 # Data contract — BentoMinder
 
-Semantics: BA · Format, JSON Schema (`data/schema/`) and validator: Developer · 2026-10-24 · Contract version **v1** · Status: **H1 final + M1 prep** (PO answers, R-1…R-3 and the H1 fix-round rulings B1, B2, B4–B7, B10, B14 of 2026-10-24 applied; M1 prep of 2026-10-24: export decision, full rule-id list in §6, approved recipe sources in §3.10; changes listed in §8)
+Semantics: BA · Format, JSON Schema (`data/schema/`) and validator: Developer · 2026-10-24 · Contract version **v1** · Status: **H1 final + M1 prep** (PO answers, R-1…R-3 and the H1 fix-round rulings B1, B2, B4–B7, B10, B14 of 2026-10-24 applied; M1 prep of 2026-10-24: export decision, full rule-id list in §6, approved recipe sources in §3.10; M2 prep of 2026-10-25: decision events, date correction on review, ambiguity choices, M2 readiness fixes; changes listed in §8–§10)
 
 Stories: `docs/ba/user-stories.md` · Terms and ids: `docs/ba/domain-dictionary.md` · Rules: approved BR table in `docs/PLAN.md` §3 (BR-xx). **This contract is the source of entity, field and state names** (R-2): code, ADRs, tests and copy keys use these identifiers.
 
@@ -48,7 +48,7 @@ Stories: `docs/ba/user-stories.md` · Terms and ids: `docs/ba/domain-dictionary.
 | `nextMonthCardHiddenOn` | date \| null | ✔ | the Tokyo date on which the parent tapped 「今日は表示しない」 on the next-month card; the card stays hidden while today equals this date (US-E3-06/AC6, OQ-24). Default `null` | `"2026-11-20"` |
 | `aiUsage` | object map `YYYY-MM → integer ≥ 0` | ✔ | number of provider calls made per Tokyo month (repair retries and fallback calls count 1 each; cache hits count 0) | `{ "2026-11": 1 }` |
 
-`MenuMonth`: `{ month: YYYY-MM, sourceUrl?: string, extractions: ExtractedMenu[] (≤ 3, newest last), confirmed: ConfirmedMenu | null, pendingReviewExtractionId?: string }`. Every extraction's `targetMonth` and `confirmed.month` equal `month` (`menu-month-mismatch`); `confirmed.extractionId` (when not null) and `pendingReviewExtractionId` resolve to an id in `extractions` (`extraction-resolves`).
+`MenuMonth`: `{ month: YYYY-MM, sourceUrl?: string, extractions: ExtractedMenu[] (≤ 3, newest last), confirmed: ConfirmedMenu | null, pendingReviewExtractionId?: string }`. Every extraction's `targetMonth` and `confirmed.month` equal `month` (`menu-month-mismatch`); `confirmed.extractionId` (when not null) and `pendingReviewExtractionId` resolve to an id in `extractions` (`extraction-resolves`). When a new extraction would make 4, the oldest extraction that `confirmed.extractionId` does not name is dropped (M2 prep: states the M1 code's rule); a dropped extraction's `sha256` no longer counts as "already extracted" (US-E2-07), so importing that PDF again costs a provider call.
 
 ### 3.2 `ChildProfile`
 No birthdate, gender, height, weight, photo, real name, school, class or address: these fields do not exist and unknown fields are rejected (BR-20).
@@ -107,8 +107,8 @@ A field marked "if kind=…" or "✔ unless manual" that is missing for its kind
 | Field | Type | Req. | Allowed values / rule | Example |
 |-------|------|------|------------------------|---------|
 | `date` | date | ✔ | inside `targetMonth` (else moved to `outOfMonthDays`) | `2026-11-04` |
-| `printedDateText` | string \| null | ✔ | the date as printed, if readable | `4日（水）` |
-| `printedWeekday` | enum \| null | ✔ | `日月火水木金土` single char, as printed; if it disagrees with `date`, `verification` must be `uncertain/weekday-mismatch` | `水` |
+| `printedDateText` | string \| null | ✔ | the date as printed, if readable; never changed by a date correction on review, so the printed form stays visible next to the corrected date (US-E2-05/AC7) | `4日（水）` |
+| `printedWeekday` | enum \| null | ✔ | `日月火水木金土` single char, as printed; if it disagrees with `date`, `verification` must be `uncertain/weekday-mismatch` until the parent resolves it on review (`parent-edited`, `parent-entered` or `uncertain-accepted` also pass) (`weekday-mismatch`). Model output that breaks this is flagged by the app, never rejected (§6.1). Never changed by a date correction (US-E2-05/AC7) | `水` |
 | `items` | `MenuItem[]` | ✔ | 1–12 | |
 | `ingredientsStatus` | enum | ✔ | `listed` \| `not-listed` \| `unreadable` | `listed` |
 | `ingredients` | `MenuIngredient[]` | if listed | 1–40; present iff `ingredientsStatus = listed` (`ingredients-listed-only`). Never inferred from dish names (BR-11). | |
@@ -118,7 +118,11 @@ A field marked "if kind=…" or "✔ unless manual" that is missing for its kind
 
 `OutOfMonthEntry` (H1, QA FX-Q3): `{ kind: "lunch-day", day: ExtractedDay } | { kind: "no-lunch-day", noLunchDay: NoLunchDay }` (discriminated by `kind`; the inner record keeps its own `date`, which is outside `targetMonth`). Rule `out-of-month-entry`: the inner date is a valid date not in `targetMonth`.
 
+**Date correction on review** (M2 prep, US-E2-05/AC7–AC10; rule `review-date-correction`). Offered only on a lunch day whose day-level `verification` is `uncertain` with reason `weekday-mismatch`. The new date is any date of `targetMonth` that is *free*: on the review at that moment it shows no dish and is not marked 給食なし (a weekday shown as 「献立に記載なし」 and a date the review doesn't list are free; the day's own current date is not offered as a change). The whole day (items, ingredients, allergen declaration, notes) moves to the new date; its `verification` becomes `{ status: "parent-edited" }` (the weekday-mismatch flag clears), `printedDateText` and `printedWeekday` stay as printed. The old date becomes free. A taken date is never overwritten, merged or swapped. In the stored `ConfirmedMenu` a corrected day is an ordinary `parent-edited` day; `changedDatesSincePrevious` compares by date as usual.
+
 `MenuItem`: `{ text: string 1–40 chars as printed, kind: "staple" | "main" | "side" | "soup" | "drink" | "dessert" | "snack" | "unknown", verification: Verification, resolvedIds?: string[] (set on review for ambiguity choices) }`. Items of kind `snack` (おやつ) are shown but not assessed (OQ-07).
+
+`resolvedIds` (M2 prep, US-E4-01/AC6, AC21): absent = no choice made, so every ambiguity-group form the app's matcher finds in the item (dictionary §1 rule 6, §7) stays unresolved and the item counts towards U. Present = the parent's choice for the item's ambiguous form: the chosen candidate id(s) of that group (rule `resolved-ids-candidates`: every id is a `candidateIds` member of an ambiguity group whose form occurs, unresolved, in the item's text), or `[]` when the parent chose the group's non-food reading (「味」 for amb-aji, 「無し」 for amb-nashi); `[]` adds no id and the form is no longer unresolved. 「わからない」 leaves the field absent. Choosing never changes `text` or `verification`: the chooser is not an uncertain field and does not count in 「確認が必要な項目」 (only a model-set `uncertain/ambiguous-term` does). A refresh starts from the new extraction, so choices are asked again there.
 
 `MenuIngredient`: `{ text: string 1–30 chars as printed, foodGroup: "red" | "yellow" | "green" | null, verification: Verification }`. `foodGroup` is only set when the PDF prints the 三色食品群 grouping (赤・黄・緑); never inferred.
 
@@ -153,11 +157,11 @@ The model may only emit `ok` or `uncertain` (`verification-status-source`).
 | `confirmedAt` | timestamp | ✔ | | |
 | `days` | `ExtractedDay[]` | ✔ | same shape; no `uncertain` left (each is fixed → `parent-edited`, or `uncertain-accepted`) | |
 | `noLunchDays` | `NoLunchDay[]` | ✔ | disjoint from `days` | |
-| `changedDatesSincePrevious` | date[] | ✔ | dates of the month whose entry differs from version − 1: items changed, no-lunch reason changed, moved between `days` and `noLunchDays`, added, or removed (no longer listed). `[]` for version 1 (`changed-dates-first-version`). Used for the 「献立が変わりました」 flags and the needs-review list | `["2026-11-18"]` |
+| `changedDatesSincePrevious` | date[] | ✔ | dates of the month whose entry differs from version − 1: items changed (the ordered list of item `text` + `kind`), no-lunch reason changed, moved between `days` and `noLunchDays`, added, or removed (no longer listed). Changes only to ingredients, allergen declaration, notes, `originalText`, `resolvedIds` or verification statuses do **not** make a date changed (M2 prep: states the M1 code's rule). Unique, ascending, inside `month` (`days-unique-sorted`, `confirmed-days-in-month`). `[]` for version 1 (`changed-dates-first-version`). Used for the 「献立が変わりました」 flags and the needs-review list | `["2026-11-18"]` |
 
-**Needs-review list** (derived after a refresh is confirmed, US-E3-05/AC9, AC11, AC12): the dates in `changedDatesSincePrevious` (incl. removed dates) that carry an `AssessmentOverride` or a stored `homemade-bento-planned` or `not-confirmed` `DayDecision`; a `school-lunch-planned` record alone never lists a date (S10). Shown once after the confirm and reachable from the flagged days; never stored, never changes a record.
+**Needs-review list** (derived after a refresh is confirmed, US-E3-05/AC9, AC11, AC12): the dates in `changedDatesSincePrevious` (incl. removed dates) that carry an `AssessmentOverride` or a stored `homemade-bento-planned` or `not-confirmed` `DayDecision`; a `school-lunch-planned` record alone never lists a date (S10). Shown once after the confirm and reachable from the flagged days; never stored, never changes a record. (M2 prep: because nothing is stored, any "already opened" marking is for the current screen only, and a link to the list elsewhere, e.g. in settings, is shown while the list computed for the current version is non-empty, not "until every date was opened".)
 
-Cross-field rules: `confirmed-no-uncertain`; `confirmed-days-in-month`; `confirmed-days-disjoint`; `days` unique and sorted (`days-unique-sorted`); at least one day or no-lunch day (`confirmed-not-empty`).
+Cross-field rules: `confirmed-no-uncertain`; `confirmed-days-in-month`; `confirmed-days-disjoint`; `days` unique and sorted, `noLunchDays` unique and sorted, `changedDatesSincePrevious` unique and sorted (`days-unique-sorted`); at least one day or no-lunch day (`confirmed-not-empty`).
 
 **School day** (BR-25): a date that appears in `ConfirmedMenu.days` with ≥ 1 non-snack item. Dates in `noLunchDays` are no-lunch days. All other dates (weekends, holidays, unlisted weekdays) are not school days and get no assessment or decision.
 
@@ -168,7 +172,7 @@ Cross-field rules: `confirmed-no-uncertain`; `confirmed-days-in-month`; `confirm
 | `calculatedState` | enum | `likely-enjoyable` \| `mixed-uncertain` \| `low-preference` \| `not-assessed` \| `no-school-lunch`, by BR-04 | `low-preference` |
 | `state` | enum | `override.state` if an override exists, else `calculatedState` | |
 | `explanationKey` | string | one of `assess.likely`, `assess.mixedOne`, `assess.mixedUnknown`, `assess.mixedNeutral`, `assess.low`, `assess.notAssessed`, `assess.noLunch`, `assess.override` | `assess.low` |
-| `explanationParams` | object | `{ weekday: 0–6, dislikedCount, likedCount, dislikedLabels: string[] ≤ 3, likedLabels ≤ 3, unmatched ≤ 3 }` | `{ "weekday": 3, "dislikedCount": 2, "dislikedLabels": ["ピーマン","なす"] }` |
+| `explanationParams` | object | `{ weekday: 0–6, dislikedCount, likedCount, dislikedLabels: string[] ≤ 3, likedLabels ≤ 3, unmatched ≤ 3 }`. Labels and unmatched dish names are in order of first appearance on the day (items in menu order, then the listed ingredients); when a count is larger than its list (D = 4, 3 labels), the explanation shows the 3 and says that there are more (M2 prep; copy by the Designer). The counts are always the full D and L | `{ "weekday": 3, "dislikedCount": 2, "dislikedLabels": ["ピーマン","なす"] }` |
 | `matched` | object | `{ likedIds[], dislikedIds[], unmatchedItems[], ambiguousItems[] }` for QA and the explanation. `likedIds` / `dislikedIds` are the found ids with that verdict (D = `dislikedIds.length`, L = `likedIds.length`); `unmatchedItems` + `ambiguousItems` are the non-snack items counted in U (an item in `ambiguousItems` may also have contributed found ids) | |
 | `menuVersion` | integer | `ConfirmedMenu.version` used | `1` |
 | `override` | `AssessmentOverride` \| null | | |
@@ -193,12 +197,28 @@ Cross-field rules: `confirmed-no-uncertain`; `confirmed-days-in-month`; `confirm
 | `date` | date | ✔ | must be a school day when set (`override-school-day-only`). If a later refresh makes the date a no-lunch day or removes it, the override is kept but **dormant**: not applied, not shown, the day shows `no-school-lunch` (or nothing when unlisted), and the date is in the needs-review list; it applies again if a later refresh makes the date a school day (`override-dormant`, B6, US-E3-05/AC8) | `2026-11-12` |
 | `state` | enum | ✔ | `likely-enjoyable` \| `mixed-uncertain` \| `low-preference` | `low-preference` |
 | `setAt` | timestamp | ✔ | | |
-| `menuVersionAtSet` | integer | ✔ | if the date is in `changedDatesSincePrevious` of a newer version, show 「献立が変わりました」 (US-E3-05/AC3) | `1` |
+| `menuVersionAtSet` | integer | ✔ | the date's `ConfirmedMenu.version` when the parent last set the override. The day shows 「献立が変わりました。評価を見直してください。」 while the date is in the **current** version's `changedDatesSincePrevious` and `menuVersionAtSet` < the current version (US-E3-05/AC3, AC8). Setting the override again (any state, the same one included) sets `menuVersionAtSet` to the current version and ends the message; clearing the override removes it (US-E4-03/AC7) | `1` |
+
+Override writes (M2 prep): only a parent action sets, changes or clears an override; no write for a date before today in Asia/Tokyo (`override-no-past-write`, BR-27, US-E4-03/AC6); the profile deletion of US-E1-06/AC2 removes all overrides as the parent's explicit clearing action.
 
 ### 3.6 `DayDecision` (stored only after a parent action, BR-02)
 State identifiers (R-2, binding for code, ADR 004, tests and copy keys): `school-lunch-planned`, `homemade-bento-planned`, `not-confirmed`, `no-school-lunch`. The names `school_lunch`, `bento_pending`, `bento_planned`, `no_school_lunch` are retired and must not appear.
 
 Displayed decision for a date = stored `DayDecision.state` if present, else derived: school day → `school-lunch-planned`, no-lunch day → `no-school-lunch`.
+
+**Parent events** (M2 prep: the event ids of ADR 004 §2 adopted as contract names; the only writers of `decisions`, BR-02; which event is allowed from which state is the table in `user-stories.md` §E5):
+
+| Event | Parent action (copy) | Effect on the record |
+|-------|----------------------|----------------------|
+| `CONFIRM_RECIPE` (recipeId) | 「手作りお弁当にする」 / 「お弁当を計画する」 → choose → 「この日に決定」. Opening and closing the recommendation view is navigation, not an event (US-E5-03/AC1, AC3) | state `homemade-bento-planned`, `recipeId`, both snapshots, new `plannedAt`; replaces a dormant record on an お弁当の日 |
+| `CHANGE_RECIPE` (recipeId) | 「レシピを変更」 → choose → 「この日に決定」 | new `recipeId` and snapshots; `plannedAt` kept |
+| `DEFER` | 「あとで決める」 | state `not-confirmed`; `plannedAt`, recipe and snapshots removed |
+| `SET_SCHOOL_LUNCH` | 「給食に戻す」 (after the confirm dialog when leaving a plan) | state `school-lunch-planned`; `plannedAt`, recipe and snapshots removed |
+| `CLEAR_PLAN` | 「計画を取り消す」 (after the confirm dialog) | record deleted (bento day or refresh conflict) |
+| `KEEP_PLAN` | 「このまま」 on a refresh conflict | only `acknowledgedMenuVersion` (and `updatedAt`) |
+| `MARK_RESERVATION` (done) | 「園で予約済み（自分で記録）」 on or off | state `school-lunch-planned` stored, `reservationDoneExternally` = done |
+
+Dialog steps (cancel, confirm) are UI, not events: a cancelled dialog sends no event. Older shorthand (`CONFIRM`, `CHANGE`, `LATER`, `TO_SCHOOL`, `CLEAR`, `KEEP`) in test oracles means the event of the same row.
 
 | Field | Type | Req. | Allowed values / rule | Example |
 |-------|------|------|------------------------|---------|
@@ -208,13 +228,13 @@ Displayed decision for a date = stored `DayDecision.state` if present, else deri
 | `recipeNameSnapshot` | localized text | iff bento | copy of the recipe name at decision time; this field and `recipeShortNameSnapshot` are present iff the state is `homemade-bento-planned` (`decision-bento-snapshot`) | `{ "ja": "くまさんおにぎり弁当" }` |
 | `recipeShortNameSnapshot` | `{ ja: string, en: string }` | iff bento | copy of the recipe's `shortNameJa` / `shortNameEn` at decision time (1–8 characters each, `recipe-short-name`), shown in the calendar cell when the recipe no longer resolves (US-E5-01/AC4, US-E6-06) | `{ "ja": "くまおにぎり", "en": "Bear oni" }` |
 | `reservationDoneExternally` | boolean | ✔ | may be `true` only when `state = school-lunch-planned` (`decision-reservation-flag`); it is the parent's own record, the app does nothing with the school | `false` |
-| `decidedAt` | timestamp | ✔ | time of the last write of this record | |
+| `decidedAt` | timestamp | ✔ | time of the last accepted parent event that changed the state, the recipe or `reservationDoneExternally`; **not** changed by KEEP_PLAN, which only acknowledges (M2 prep, as ADR 004 §2; `updatedAt` records every write) | |
 | `plannedAt` | timestamp | iff bento | set when the state becomes `homemade-bento-planned` from any other state (first CONFIRM_RECIPE); **unchanged** by CHANGE_RECIPE and KEEP_PLAN; removed when the state leaves `homemade-bento-planned` (`decision-planned-at`, B10). Used only for day-before suppression (§3.9) | `2026-11-01T10:12:00+09:00` |
-| `acknowledgedMenuVersion` | integer | – | set by the parent event KEEP_PLAN (「このまま」) on a refresh conflict to the current `ConfirmedMenu.version`; the conflict leaves the upcoming summary while it equals the current version. State, recipe, `plannedAt` and reminder are unchanged by KEEP_PLAN (US-E3-05/AC7) | `2` |
-| `history` | `{ state, recipeId?, at }[]` | ✔ | last 5 changes, for debug and conflict display | |
+| `acknowledgedMenuVersion` | integer | – | set by the parent event KEEP_PLAN (「このまま」) on a refresh conflict to the current `ConfirmedMenu.version`. The conflict **needs acknowledgement** (stays in the upcoming summary, today view and weekly reminder content) while `acknowledgedMenuVersion` is absent, or the date is in the current version's `changedDatesSincePrevious` and `acknowledgedMenuVersion` < the current version; so a later refresh that does not change this date does not bring the conflict back, and one that changes it again does (M2 prep, as ADR 004 `needsAck`). State, recipe, `plannedAt` and reminder are unchanged by KEEP_PLAN (US-E3-05/AC7, AC14) | `2` |
+| `history` | `{ state, recipeId?, at }[]` | ✔ | at most 5 entries, oldest first; one entry per accepted event that changed the state or the recipe, holding the state and `recipeId` **after** that change and its time (the 6th change drops the oldest). KEEP_PLAN and MARK_RESERVATION add none. For debug and conflict display | |
 
 Cross-field rules:
-- `decision-transition`: a change from the previous state must be allowed by the state machine in `user-stories.md` §E5.
+- `decision-transition`: a change from the previous state must be allowed by the state machine in `user-stories.md` §E5 (events above).
 - `decision-no-past-write`: no write with `date` < today (Asia/Tokyo) (US-E5-02/AC3).
 - `decision-bento-day-remove`: on a `bento-day` date the parent cancels a plan by removing the stored decision (displayed state returns to `no-school-lunch`); no parent action writes `school-lunch-planned` or `not-confirmed` for a no-lunch date (US-E5-08/AC3); a stored decision that a later menu refresh puts on a no-lunch date is kept and flagged (BR-13).
 - `decision-bento-day-only`: `homemade-bento-planned` on a no-lunch day only when its reason is `bento-day`. A conflict that arises from a menu refresh is kept and flagged, not rejected (US-E3-05/AC2).
@@ -346,7 +366,7 @@ No host in `APPROVED_HOSTS` belongs to a different publisher than the brief inte
 `scripts/validate-data.mjs` (Developer) enforces every rule id above for the library and for exported stores; the app runs the same schema on every store write (US-E10-05) and on AI output (US-E2-05). Each message names its rule id. The BA reviews the rule list before H3. Note for the Orchestrator: `quality-gate.json → overlap.fields` still lists template fields (`shortDescription`, `history`, `tasteProfile`); for this project it should be `description`, `steps`, `storage`, `adaptations`.
 
 ### 6.1 Rule ids (complete list, M1 prep 2026-10-24)
-This table is the full list of rule ids. Code reports only these ids; a check without a row here is either added here by the BA or removed from the code. Reviewed against `RULES_NOT_IN_CONTRACT` in `src/domain/schema/primitives.ts`: 22 of its 25 ids are adopted unchanged, 2 are renamed (`source-field-required` → `menu-source-field-required`, `source-url-https` → `menu-source-url-https`, so that `source-…` means the recipe `Source` only), and 1 is dropped (`consent-invalid`: no code reports it; consent errors already report `number-range`, `timestamp-invalid` or `unknown-field`). After the Developer's alignment `RULES_NOT_IN_CONTRACT` should be empty.
+This table is the full list of rule ids. Code reports only these ids; a check without a row here is either added here by the BA or removed from the code. Reviewed against `RULES_NOT_IN_CONTRACT` in `src/domain/schema/primitives.ts`: 22 of its 25 ids are adopted unchanged, 2 are renamed (`source-field-required` → `menu-source-field-required`, `source-url-https` → `menu-source-url-https`, so that `source-…` means the recipe `Source` only), and 1 is dropped (`consent-invalid`: no code reports it; consent errors already report `number-range`, `timestamp-invalid` or `unknown-field`). After the Developer's alignment `RULES_NOT_IN_CONTRACT` should be empty. M2 prep (2026-10-25): the last id it held, `weekday-mismatch`, is now a row below, and three ids are new for M2 (`resolved-ids-candidates`, `review-date-correction`, `override-no-past-write`); the Developer empties `RULES_NOT_IN_CONTRACT` and implements the three new ones.
 
 **Where:** S = zod schema (every store write, AI output, `validate-data` on fixtures and exports) · L = library check in `validate-data` (across recipes and batches) · D = dictionary check · E = domain engine / UI behaviour (proved by unit and e2e tests, not by a data file) · P = proxy / adapter.
 
@@ -383,6 +403,9 @@ This table is the full list of rule ids. Code reports only these ids; a check wi
 | `allergen-ids-declared-only` | S | `allergenDeclaration.allergenIds` is non-empty only when `status = declared`. |
 | `allergen-absence-not-inferred` | S | `declared-none` only with a non-null `rawText` (BR-08). |
 | `verification-reason-required` | S | `uncertain` carries a `reason`. |
+| `weekday-mismatch` | S, E | An `ExtractedDay` whose `printedWeekday` disagrees with its `date` carries `uncertain` / reason `weekday-mismatch` unless the parent resolved it (`parent-edited`, `parent-entered`, `uncertain-accepted`). Model output in that state is **not** a failure: the app sets the flag before the strict parse, so the parent sees a review flag (US-E2-05/AC5); the schema reports the id only for hand-written data (fixtures, store files). The same string is also a `Verification.reason` value. **Added** M2 prep. |
+| `resolved-ids-candidates` | S, E | Every id in `MenuItem.resolvedIds` is a candidate of an ambiguity group whose form occurs unresolved in the item's text; `[]` only for a group with a non-food reading (§3.3). **Added** M2 prep. |
+| `review-date-correction` | E | A date correction on review moves a `weekday-mismatch` day only to a free date of the target month, never onto a day that shows a dish or is marked 給食なし; the day becomes `parent-edited`; printed date and weekday are kept (§3.3, US-E2-05/AC7–AC10). **Added** M2 prep. |
 | `verification-status-source` | S | AI output carries only `ok` or `uncertain`. |
 | `menu-month-mismatch` | S | Each extraction's `targetMonth` and `confirmed.month` equal the `MenuMonth.month` (not to be confused with the review warning value `month-mismatch`). |
 | `extraction-resolves` | S | `confirmed.extractionId` (when not null) and `pendingReviewExtractionId` name an extraction in the same `MenuMonth`. |
@@ -396,6 +419,7 @@ This table is the full list of rule ids. Code reports only these ids; a check wi
 | `assessment-independent` | E | Assessment reads only profile, confirmed menus and overrides (BR-01). |
 | `override-school-day-only` | S, E | An override is set only on a school day. |
 | `override-dormant` | E | An override on a date a refresh made no-lunch or removed is kept, not applied, and listed for review. |
+| `override-no-past-write` | E | No override is set, changed or cleared for a date before today (Tokyo) by a parent action (BR-27, US-E4-03/AC6); profile deletion is the one bulk removal. **Added** M2 prep. |
 | `decision-no-lunch-not-stored` | S | `no-school-lunch` is never a stored decision state. |
 | `decision-bento-requires-recipe` | S | `homemade-bento-planned` has a `recipeId`, and only that state has one. |
 | `decision-recipe-resolves` | S (on write) | A written `recipeId` resolves in the library. |
@@ -496,3 +520,20 @@ Record metadata (`ownerId`, `createdAt`, `updatedAt`, §2) exists from v1 of the
 | `MenuSource.url` may also be present with kind `upload` (US-E2-02/AC2), under the same rules | Consistency with US-E2-02/AC2 |
 | `dict-synonym-unique` now states that categories carry no surface forms (dictionary §1, §2) | Developer item (PLAN §7 "M0 done") |
 | Root store field `nextMonthCardHiddenOn` (date \| null, default null) | US-E3-06/AC6 (OQ-24): 「今日は表示しない」 must survive a reload. New required field in `schemaVersion` 1 (no store has shipped yet); the Developer adds it to the schema, the defaults and the state fixtures |
+
+## 10. M2 prep changes (2026-10-25)
+Items from PLAN §7 "M1 merged locally" and "M1 QA" (`tests/reports/m1-qa-report.md`), plus a readiness pass of E3-05/06, E4 and E5 against `src/domain/schema/` and ADR 004. No field was added, removed or renamed: the store shape of `schemaVersion` 1 is unchanged.
+
+| Change | Why |
+|--------|-----|
+| §6.1 row `weekday-mismatch` (schema id for hand-written data; for model output a review flag, never a failure) | M1 code and QA fixtures use it; it was the last id in `RULES_NOT_IN_CONTRACT` |
+| §3.3 date correction on review (free dates of the target month only, `parent-edited`, printed date kept); rule `review-date-correction` | US-E2-05/AC5 "confirm or correct the date": only 「このままにする」 was built in M1 |
+| §3.3 `resolvedIds` semantics (absent / candidate ids / `[]` for a non-food reading; not an uncertain field); rule `resolved-ids-candidates` | M2 builds the ambiguity chooser (US-E4-01/AC6); amb-aji and amb-nashi have non-food readings with no id |
+| §3.6 parent-event table (`CONFIRM_RECIPE`, `CHANGE_RECIPE`, `DEFER`, `SET_SCHOOL_LUNCH`, `CLEAR_PLAN`, `KEEP_PLAN`, `MARK_RESERVATION`), adopted from ADR 004 | The contract named only 4 of the 7 events; the QA oracle uses shorthand |
+| §3.6 `decidedAt` not changed by KEEP_PLAN; `history` holds the state after each state/recipe change | Contract said "last write", ADR 004 said "state or recipe change", the oracle said "every accepted event" |
+| §3.6 `acknowledgedMenuVersion`: when a conflict needs acknowledgement, as ADR 004 `needsAck` | The contract's "while it equals the current version" would re-raise a kept conflict after any later refresh, even one that didn't touch the date |
+| §3.5 `menuVersionAtSet`: when the 「献立が変わりました。評価を見直してください。」 line shows and how it ends; override writes: `override-no-past-write` (BR-27) | No rule ended the line; BR-27 was stated for decisions only |
+| §3.5 explanation labels: order of first appearance, at most 3, "and more" when the count is larger | The E4 worked example named 4 labels while `dislikedLabels` holds ≤ 3 |
+| §3.4 `changedDatesSincePrevious`: "changed" = item text + kind, reason, moved, added, removed; unique, sorted, in month; `noLunchDays` unique and sorted | States the M1 code's comparison; the schema did not check these lists |
+| §3.1 extraction eviction rule (oldest not confirmed dropped at 4) | States the M1 code's rule (`recordExtraction`) |
+| §3.4 needs-review list: nothing "opened" is stored | `design/components.md` §6.8 (refresh review list) says the list stays reachable "until every listed date was opened once", which needs stored state |

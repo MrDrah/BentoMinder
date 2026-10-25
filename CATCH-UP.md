@@ -28,13 +28,13 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 | H1 | 73 stories / 287 ACs, data contract v1, dictionary, ADR 001–005, QA strategy + 4 oracles; ~30 rulings in PLAN §7 | `docs/ba/`, `docs/dev/`, `tests/plan/`, `tests/oracle/` |
 
 ### In progress 🔄
-Nothing running. **M1 merged locally (25eb8bc), dev gate green on main, independent QA: GO with conditions** (`tests/reports/m1-qa-report.md`). Not yet committed on main: QA suite + report, Orchestrator edits (agent models, gate command, Playwright testIgnore, docs). Ask the PO before committing.
+Nothing running. M1 fix round merged (d058fa8): dev gate and QA suite green on main. M2 prep (BA + designer) done. **Uncommitted:** M2 prep docs, regenerated dictionary, plan/catch-up/lessons/event log — ask the PO.
 
 ### Next 📋
-1. **M1 fix round** (developer, Sonnet, worktree): D-M1-06 (cross-tab store safety, before any M2 decision write), D-M1-08, D-M1-02, D-M1-09, D-M1-05; mock-scenario header off by default outside tests. Remove the matching `test.fixme` and re-run the QA suite (`npx playwright test -c tests/e2e/qa/playwright.qa.config.ts`).
-2. **M2 prep** (BA + designer, Opus): `weekday-mismatch` into contract §6.1; date correction in review (US-E2-05/AC5) design + copy; food-picker kind labels; rule on D-M1-03 and D-M1-04.
-3. **M2** (developer, Sonnet): assessment + overrides, calendar grid, decision state machine, menu refresh (E3-05/06); QA oracles become executable tests.
-4. Recipe research (BA) alongside M2.
+1. Commit (PO).
+2. **M2** (developer, Sonnet, worktree): assessment + overrides, calendar grid (role=grid), day sheet, decision state machine, menu refresh E3-05/06, review date correction, ambiguity chooser, settings during onboarding; the code-side items in PLAN §7 "M2 prep (BA) done"; oracles become executable tests (QA writes them from `tests/oracle/*`).
+3. **M2 QA** (Sonnet): oracles 0 diffs, transitions, month boundaries; clean up `tests/e2e/qa/**` lint and restore the rules.
+4. Recipe research (BA, Opus) can start in parallel with M2.
 
 ## 4. Key decisions (summary; the full log is in docs/PLAN.md §7)
 - Local git only; no push, deploy or paid services without PO approval.

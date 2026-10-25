@@ -1,6 +1,6 @@
 # BentoMinder: microcopy sheet (ja / en) v1.0
 
-> Status: **H2 final**, 2026-10-24. Supersedes `design/copy-draft.md`. Owner: Designer. The developer imports these strings into the `ja` and `en` catalogs **verbatim, by key**; QA asserts on keys (and on the literal where the story says "exact" or quotes the string).
+> Status: **H2 final**, 2026-10-24; **revised 2026-10-25 (M2 prep)**: `picker.group.*` (§3) and `review.dateFix.*` (§7), see the note at the end. Supersedes `design/copy-draft.md`. Owner: Designer. The developer imports these strings into the `ja` and `en` catalogs **verbatim, by key**; QA asserts on keys (and on the literal where the story says "exact" or quotes the string).
 >
 > **Banned-phrase check: done.** Every ja and en value in this sheet was checked against `data/banned-phrases.json` (v1, 23 ja + 20 en phrases) with the US-E6-03/AC2 matching rule (NFKC + case-fold; ja as substring, en as whole words/word sequences) by `design/_scratch/check-copy.mjs`: **0 matches**, with **0 exemptions used** (the US-E5-07/AC2 exemption for the reservation checkbox is not needed: its en label avoids "reserved"). Assessment strings (`assess.*`, `state.*`) were also checked for 「よくない」, "unsuitable", "avoid" (US-E4-04/AC1): 0 matches. Strings were also checked against the US-E7-06/AC2 examples (「閉じていても通知」, "even when closed", "push notification") and the US-E9-02/AC2 sync claim: 0 matches.
 
@@ -44,6 +44,7 @@
 | common.optional | 任意 | optional | Field label suffix | |
 | common.required | 必須 | required | Field label suffix | |
 | common.andMore | ほか{n}つ | and {n} more | Shortened lists | |
+| assess.labels.more | {list}、ほか{n, select, 1 {1つ} 2 {2つ} 3 {3つ} 4 {4つ} 5 {5つ} 6 {6つ} 7 {7つ} 8 {8つ} 9 {9つ} other {{n}個}} | {list} and {n} more | The `{labels}` / `{liked}` / `{disliked}` / `{unmatched}` value of an `assess.*` explanation when the count is larger than the 3 names given: `{list}` = the 3 names joined with 「、」 / ", "; `{n}` = count − 3. e.g. 「ピーマン、なす、にんじん、ほか2つ」 / "green pepper, eggplant, carrot and 2 more". The sentence count stays the full D or L (contract §3.5 `explanationParams`, M2 prep) | US-E4-02/AC1 |
 | common.selected | 選択中 | selected | Screen-reader suffix on chips | |
 | common.error.generic | うまくいきませんでした。もう一度お試しください。 | Something went wrong. Please try again. | Unexpected error fallback | |
 | common.newWindow | （新しいタブで開きます） | (opens in a new tab) | Suffix on external links | |
@@ -100,6 +101,10 @@
 | profile.foods.moved.toDislikes | 「{food}」を好きから苦手に移しました | Moved "{food}" from likes to dislikes | Polite live-region notice | US-E1-02/AC3 |
 | profile.foods.remove | 「{food}」を外す | Remove "{food}" | Accessible name of a selected chip's remove button | |
 | profile.foods.empty | まだ選んでいません | Nothing chosen yet | Empty selection | |
+| picker.group.ingredient | 食材 | Ingredient | Result-group heading, kind `ingredient` (group 1) | US-E1-02/AC8 (verbatim, ja + en) |
+| picker.group.dish | 料理 | Dish | Result-group heading, kind `dish` (group 2) | US-E1-02/AC8 (verbatim, ja + en) |
+| picker.group.category | 種類 | Food group | Result-group heading, kind `category`, e.g. 「さかな」 (group 3) | US-E1-02/AC8 (verbatim, ja + en) |
+| picker.withKind | {food}（{kind}） | {food} ({kind}) | Accessible name of every result, popular and selected chip; visible on a selected chip only when another selected chip has the same label. `{kind}` = the `picker.group.*` text | US-E1-02/AC8 (verbatim pattern) |
 | profile.note.label | メモ | Note | Field label (+ common.optional) | US-E1-02/AC7 |
 | profile.note.placeholder | 例：野菜は細かく切ると食べます | e.g. Eats vegetables when they're chopped small | Placeholder | US-E1-02/AC7 |
 | profile.note.hint | 判定やレシピ選びには使いません。どこにも送られません（200文字まで）。 | Not used for assessments or recipes, and never sent anywhere (up to 200 characters). | Field hint | US-E1-02/AC7 |
@@ -261,6 +266,29 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | review.leave.stay | 確認を続ける | Keep checking | Dialog secondary | US-E3-03/AC5 (verbatim) |
 | review.done | {m}月の献立を確定しました | The {m} menu is confirmed | Toast after a successful write | US-E3-03/AC1 |
 
+### Date correction (weekday mismatch; added 2026-10-25, components §6.9)
+`{date}` uses `fmt.date`; `{printedDate}` is the day's `printedDateText` and `{printed}` its printed weekday character (both as printed, Japanese, `lang="ja"` in EN). ja strings quoted by US-E2-05/AC7–AC9 are verbatim; the en strings are designer copy.
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| review.dateFix.open | 日付を直す | Fix the date | Secondary small button on a day flagged weekday-mismatch (and on a corrected day), next to `review.accept` | US-E2-05/AC5, AC7 (verbatim), AC10 |
+| review.dateFix.openAria | {date}の日付を直す | Fix the date of {date} | Accessible name of that button | US-E2-05/AC7 |
+| review.dateFix.title | 正しい日付を選んでください | Choose the correct date | Sheet/popover title | US-E2-05/AC7 |
+| review.dateFix.context | 献立表では「{printedDate}」です。いまは{date}になっています。 | The sheet says "{printedDate}". This day is set to {date} now. | Context line under the title | US-E2-05/AC7 |
+| review.dateFix.contextWeekday | 献立表の曜日は「{printed}」です。いまは{date}になっています。 | The sheet shows "{printed}" as the weekday. This day is set to {date} now. | Context line when printedDateText is null | US-E2-05/AC7 |
+| review.dateFix.gridLabel | {month}から日付を選ぶ | Pick a date in {month} | `aria-label` of the mini-grid | US-E2-05/AC7 |
+| review.dateFix.cell.match | 曜日が一致 | Same weekday | Legend item + cell accessible-name suffix (bar marker) | US-E2-05/AC7 (verbatim) |
+| review.dateFix.cell.taken | ほかの献立があります | Has another entry | Legend item + suffix of a date that can't be chosen (dot marker) | US-E2-05/AC8 (verbatim) |
+| review.dateFix.cell.current | いまの日付 | Current date | Legend item + suffix of the day's own date (dashed marker) | US-E2-05/AC7 |
+| review.dateFix.selected | {date}に移します | Moving to {date} | Status line after selecting a free date (polite) | US-E2-05/AC7 |
+| review.dateFix.otherWeekday | 献立表の曜日（{printed}）とは違う曜日です。この日でよければ、そのまま進めてください。 | This isn't the weekday on the sheet ({printed}). If this date is right, go ahead. | Info line when the selected weekday differs | US-E2-05/AC7 |
+| review.dateFix.cantChoose | {date}は選べません：{reason} | {date} can't be chosen: {reason} | Status line when a taken or current date is activated; `{reason}` = `cell.taken` / `cell.current` text | US-E2-05/AC8 |
+| review.dateFix.noFree | 移せる日がありません | There's no free date to move to | Status line when no date of the month is free | US-E2-05/AC8 (verbatim) |
+| review.dateFix.apply | この日にする | Use this date | Primary | US-E2-05/AC7 |
+| review.dateFix.applyHint | 移す日を選んでください | Choose a date first | Hint while apply is disabled | US-E2-05/AC7 |
+| review.dateFix.moved | {from}の献立を{to}に移しました | Moved the {from} entry to {to} | Polite live message after apply (`{from}`, `{to}` = `fmt.date`) | US-E2-05/AC7 |
+| review.dateFix.printed | 献立表の表記：{printedDate} | On the sheet: {printedDate} | Line on a corrected row | US-E2-05/AC9 (verbatim) |
+
 ### Ambiguity chooser
 
 | key | ja | en | where | story/AC |
@@ -271,6 +299,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | amb.curry.roux | カレールウ（調味料） | Curry roux (seasoning) | Option | dictionary §7 |
 | amb.unsure | わからない | Not sure | Option: leaves it unresolved (counts towards U) | US-E4-01/AC13 |
 | amb.option | {label} | {label} | Other groups: options use the dictionary labels | dictionary §7 |
+| amb.nonFood | {reading}（食べものではない） | "{reading}" (not a food) | Option for a group's non-food reading: amb-aji → 「味（食べものではない）」, amb-nashi → 「無し（食べものではない）」; `{reading}` is Japanese (`lang="ja"` in EN); choosing it stores `resolvedIds: []` (M2 prep) | US-E4-01/AC21 (verbatim ja) |
 
 ### Refresh: needs-review list (after confirming a replacement menu)
 
@@ -285,7 +314,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | refresh.review.item.nowNoLunch | 給食なしの日になりました | It's now a no-lunch day | Row sub-line | US-E3-05/AC2, AC8 |
 | refresh.review.open | 開く | Open | Row action (accessible name: refresh.review.openDay) | US-E3-05/AC9 |
 | refresh.review.openDay | {date}を開く | Open {date} | Accessible name | |
-| refresh.review.visited | 確認済み | checked | Visually hidden suffix on a visited row | US-E3-05/AC9 |
+| refresh.review.visited | 確認済み | checked | Visually hidden suffix on a resolved row (no open needs-review flag left; derived, not stored) | US-E3-05/AC9 |
 | refresh.review.empty | 確認が必要な日はありません | No days need checking | Empty state | US-E3-05/AC13 (verbatim) |
 | refresh.review.done | カレンダーへ | Go to the calendar | Primary | US-E3-05/AC13 (verbatim) |
 
@@ -297,6 +326,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | cal.nextMonth | 次の月 | Next month | Icon button name | US-E5-01/AC5 (verbatim) |
 | cal.today | 今日 | Today | Button | US-E5-01/AC5 (verbatim) |
 | cal.grid.label | {month}のカレンダー | Calendar for {month} | Grid accessible name | |
+| cal.nav.label | 月の切り替え | Change month | `aria-label` of the month-navigation `nav` (must differ from the grid name; added M2 prep) | |
 | cal.agenda.label | {month}の予定一覧 | {month} as a list | Heading of the list layout used when the grid can't fit (narrow or 200% text) | a11y-responsive.md §6 |
 | cell.word.school | 給食 | Lunch | Cell decision word | US-E5-01/AC4 (verbatim) |
 | cell.word.notConfirmed | 未定 | TBD | Cell decision word | US-E5-05/AC1 (verbatim) |
@@ -561,6 +591,7 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | settings.menu.url | 保存しているURL | Saved address | Read-only value | US-E2-01/AC4 |
 | settings.menu.urlNone | まだ保存していません | None saved yet | Empty value | |
 | settings.menu.import | 献立を取り込む | Import the menu | Button | US-E2-01/AC4 (verbatim) |
+| settings.menu.needsReview | 確認が必要な日（{n}件） | Days to check ({n}) | Settings link to the refresh needs-review list, shown only while ≥ 1 listed date has an open needs-review flag (M2 prep ruling) | US-E3-05/AC9 |
 | settings.menu.review | 献立を確認・修正 | Check or fix the menu | Button (opens review of the shown month; re-confirm = refresh) | US-E3-05 |
 | settings.menu.promptDay | 来月の献立のお知らせ | Next month's menu reminder | Select label (1–28) | US-E3-06/AC7 (verbatim), OQ-15 |
 | settings.menu.promptDay.value | 毎月{n}日から | From the {n, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} of each month | Option label | US-E3-06/AC7 (verbatim pattern) |
@@ -719,3 +750,5 @@ All rows without a story marker above are designer copy. The ones that are **loa
 `import.month.label` (how the target month is chosen), `import.progress.cancel`, `review.accept`, all `review.reason.*` except the reasons themselves, `review.warn.*` (the 4 `warnings[]` values), `review.noLunch.*` reasons and `review.noLunch.text`, `review.leave.*`, `amb.unsure`, `refresh.review.*` (except the title), `menuCard.dismiss`, `upcoming.notConfirmed`, `upcoming.conflict`, `reminder.weekly.notConfirmed`, `reminder.missedAt`, `reminder.more`, `today.nextUnknown`, `today.cta.plan`, `day.snackOnly`, `day.noMenu`, `day.past`, `day.clear.*`, `day.conflict.kept`, `day.saved.*`, `override.note`, `assess.likely`, `assess.mixedOne`, `assess.notAssessed`, `assess.noLunch`, `assess.override.calc`, `rec.reason.quick`, `rec.mayContain`, `recipe.planPick.*`, `library.conflict.diet`, `settings.menu.promptDay*`, `share.sheet.*` (except the note), `share.copyFailed`, `data.import.*` messages, `storage.corrupt.title/body/reset*`, `toast.saveFailed`, `common.retryIn`.
 
 **BA review (M1 prep, 2026-10-24).** Every key above was checked for natural ja/en and against `data/banned-phrases.json` (0 matches). Fixed, with the reason: `review.accept` (「このままにする」 / "Keep as is": the parent keeps the reading without claiming it is correct), `review.reason.duplicateDate` (a date can appear more than twice), `review.noLunch.hiddenDishes` (en "is … them" disagreed in number; ja names the day), `review.leave.body` (the review keeps no draft, so it no longer promises to continue where the parent left off; OQ-23), `refresh.review.lead` (assessments are recalculated on refresh; only plans and manual overrides are kept, BR-13), `day.saved.later` (en "TBD" → "undecided", as elsewhere), `share.copyFailed` (no "long-press" on desktop). The keys that carry a rule are now quoted by an AC (story/AC column updated): US-E2-01/AC5, US-E2-04/AC8, US-E2-06/AC9, US-E3-01/AC4, US-E3-02/AC3, AC6, US-E3-03/AC4, AC5, US-E3-05/AC13, US-E3-06/AC6, AC7, US-E5-02/AC4, US-E6-01/AC7, US-E6-05/AC3, AC4, US-E7-03/AC4, AC5, US-E7-05/AC5, US-E9-01/AC4, US-E10-02/AC6, AC7, US-E10-03/AC5, AC6. The rest are presentational and need no AC: `review.reason.*` texts, `amb.unsure` (rule already in US-E4-01/AC13), `refresh.review.item.*`, `refresh.review.open*`, `refresh.review.visited`, `upcoming.*`, `reminder.weekly.notConfirmed`, `reminder.missedAt` (rule in US-E7-05/AC2), `day.snackOnly`, `day.past`, `day.clear.*`, `day.conflict.kept`, `day.saved.*` other than `bento`, `override.note`, the `assess.*` explanations (keys fixed by US-E4-02), `rec.mayContain`, `library.conflict.diet`, `share.sheet.*`, `data.import.title/body/confirm`, `storage.corrupt.title/body/reset`.
+
+**M2 prep additions (Designer, 2026-10-25).** New keys: `picker.group.ingredient`, `picker.group.dish`, `picker.group.category`, `picker.withKind` (food-picker kind labels, components §6.3; strings fixed by US-E1-02/AC8) , `settings.menu.needsReview` (refresh list re-entry, Orchestrator ruling), `amb.nonFood` (non-food reading, US-E4-01/AC21), `assess.labels.more` (explanations naming more than 3 foods), `cal.nav.label` (month-nav landmark name, distinct from the grid) and 17 `review.dateFix.*` keys (date correction on review, components §6.9; ja strings quoted by US-E2-05/AC7–AC9 are verbatim). Designer copy no AC quotes yet: `review.dateFix.title`, `.context`, `.contextWeekday`, `.selected`, `.otherWeekday`, `.cantChoose`, `.applyHint`, `.moved` and every en value of the dateFix rows. Checked with `check-copy.mjs`: 0 banned-phrase matches.

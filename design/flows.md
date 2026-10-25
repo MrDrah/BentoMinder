@@ -1,6 +1,8 @@
 # BentoMinder: screens and flows v1.0
 
 > Status: **H2 final**, 2026-10-24 (replaces the v0.2 direction draft). Every step cites the story/AC it serves (`docs/ba/user-stories.md`, H1 final). Strings are `design/copy.md` keys; components are `design/components.md` sections (§). A flow step without a story would be flagged **[no story]**: there are none left; the designer-only strings are listed at the end of `copy.md`.
+>
+> **Revision 2026-10-25 (M2 prep):** §5.1 F3a date correction on review (US-E2-05/AC5, AC7–AC10; taken dates are never chosen); F3 now names 「このままにする」 (the copy-sheet wording) instead of the draft 「このままでよい」.
 
 ## 1. Screen inventory
 
@@ -11,6 +13,7 @@
 | S2c | AI consent | dialog | §6.7 | US-E2-08, NF-03 |
 | S2p | Reading progress | full screen | §6.6 | US-E2-01/AC1, E2-04, E2-05, E2-06, E2-07, NF-04/AC3 |
 | S3 | Onboarding step 3/3 「献立の確認」 (also refresh review, manual entry) | editable list | §6.8 | US-E3-01–E3-04, E2-04/AC2–AC5, E2-05/AC4–AC6, E4-01/AC6 |
+| S3d | 「正しい日付を選んでください」 date correction (weekday mismatch) | bottom sheet < 768, dialog 768–1279, popover ≥ 1280 | §6.9 | US-E2-05/AC5, AC7–AC10 |
 | S3r | 「確認が必要な日」 (refresh needs-review list) | list | §7 | US-E3-05/AC8, AC9, AC11, AC12 |
 | C1 | Calendar home (reminders, today card, menu cards, upcoming, grid, legend, share) | home | §2, §8 | US-E5-01, E5-04, E5-05, E7-01–E7-03, E7-05, E3-03/AC3, E3-06, E8-04, E9-01 |
 | D1 | Day sheet (bottom sheet < 768, dialog 768–1279, side panel ≥ 1280) | sheet/panel | §3 | US-E5-02–E5-08, E4-02, E4-03, E4-05, E3-05/AC2–AC3, AC6–AC8, E6-06, E1-05/AC2 |
@@ -77,6 +80,8 @@ flowchart TD
   S2 -->|手入力する| S3m[S3 manual  US-E3-04/AC1]
   F2 --> S3[S3 review]
   S3 -->|この内容で確定| C1m[C1 on the confirmed month  US-E3-03/AC1]
+  S1 & S2 & S3 -->|設定 in the top bar| P1o[P1 settings; profile and menu sections only once a profile exists  US-E1-01/AC6]
+  P1o -->|back| Sx[same onboarding step; unsaved step-1 answers still filled in]
 ```
 
 | Frame | What the parent sees | Story |
@@ -88,6 +93,7 @@ flowchart TD
 | S1 unknown | Choosing 「わからない・未確認」 previews the warning banner shown later on recipe screens | US-E1-03/AC5 |
 | Reload on S2 | S2 is shown, S1 answers kept | US-E1-01/AC4 |
 | Back from S2 | S1 with saved answers (editing is allowed) | US-E1-01/AC4 |
+| Settings during onboarding | 設定 icon in the top bar on every step (components §1.2); export and delete-all work; back returns to the same step (M2 prep, D-M1-03 ruling) | US-E1-01/AC6, US-E10-03/AC2, US-E10-04 |
 
 ---
 
@@ -153,7 +159,8 @@ flowchart TD
 flowchart TD
   S3[S3: summary 確認が必要な項目：n件, day rows] --> N[次の要確認へ → focus next uncertain field  E3-01/AC2]
   S3 --> Ed[Edit dish → parent-edited  E3-02/AC1]
-  S3 --> Acc[このままでよい → uncertain-accepted]
+  S3 --> Acc[このままにする → uncertain-accepted  E3-03/AC4, E2-05/AC5]
+  S3 --> DF[日付を直す → date-correction picker, see 5.1  E2-05/AC5, AC7]
   S3 --> Amb[Choose カレーライス（料理） / カレー粉（調味料） / わからない  E4-01/AC6]
   S3 --> Add[料理を追加 ≤ 12 / remove  E3-02/AC2, AC5]
   S3 --> NL[給食なしの日にする: reason + 献立表での書き方; restorable  E3-02/AC3]
@@ -182,6 +189,37 @@ flowchart TD
 | Manual entry | Same screen, every Mon–Fri empty, entries stored as `parent-entered`, source `manual` | US-E3-04/AC1 |
 | Not confirmed | Nothing reaches C1 until confirmed; card 「確認待ちの献立があります」 reopens S3 | US-E3-03/AC3, BR-12 |
 | After confirm | 0 homemade-bento days created | US-E5-04/AC2 |
+
+### 5.1 F3a: correct a date (weekday mismatch) (US-E2-05/AC5, AC7–AC10)
+Added 2026-10-25 (M2 prep). Everything happens in the review draft; nothing is stored before 「この内容で確定」. BA rule `review-date-correction` (contract §3.3): only free dates of the target month can be chosen; **a taken date is never overwritten, merged or swapped**.
+
+```mermaid
+flowchart TD
+  R[S3 row 11月4日（水） 要確認: 日付と曜日が合いません（献立表では「木」）] -->|このままにする| K[uncertain-accepted; date unchanged  E3-03/AC4, E2-05/AC10]
+  R -->|日付を直す| P[S3d: month mini-grid; focus on nearest free 曜日が一致 cell; nothing preselected  E2-05/AC7]
+  P -->|Esc / キャンセル / 閉じる / click outside| R0[nothing changes  E2-05/AC10]
+  P -->|activate taken or current date| T[status: 11月12日（木）は選べません：ほかの献立があります  E2-05/AC8]
+  T --> P
+  P -->|no free date in the month| NF[status: 移せる日がありません; このままにする stays on the row  E2-05/AC8]
+  P -->|select free date, other weekday| OW[info: 献立表の曜日（木）とは違う曜日です… still allowed]
+  OW --> A
+  P -->|select free date| A[この日にする]
+  A --> M[day moves; rows in date order; 11月4日 → 献立に記載なし; parent-edited; summary − 1; live 11月4日の献立を11月5日に移しました  E2-05/AC7]
+  M --> C[corrected row: 献立表の表記：4日（木） + 日付を直す still offered  E2-05/AC9, AC10]
+  C -->|日付を直す again, e.g. back to 11月4日| P
+  C -->|この内容で確定| W[ConfirmedMenu: 2026-11-05 parent-edited, printedDateText kept  E2-05/AC9]
+  C -->|back → 中断する| X[corrections discarded; pending extraction still flagged  E2-05/AC10, E3-03/AC5]
+```
+
+| Frame | Shows | Error / fallback | Story |
+|---|---|---|---|
+| Row (before) | Day-level warning, 「要確認」 tag, reason with printed weekday, actions 「日付を直す」 · 「このままにする」; no-lunch and unflagged days have no 「日付を直す」 | — | US-E2-05/AC5, AC7, US-E3-01/AC2 |
+| Picker | Title, context 「献立表では「4日（木）」です。いまは11月4日（水）になっています。」, target-month grid only (past dates included), markers + visible legend 「曜日が一致」「ほかの献立があります」「いまの日付」, status line | Apply disabled until a free date is chosen (「移す日を選んでください」); taken/current dates say why in the status line; a weekday different from the sheet only informs | US-E2-05/AC7, AC8 |
+| No free date | Grid with every date disabled, 「移せる日がありません」, only cancel/close | 「このままにする」 on the row is the way out | US-E2-05/AC8 |
+| Corrected | Row in its new place, 「献立表の表記：4日（木）」, 「日付を直す」 still there; old weekday shows 「献立に記載なし」; summary count − 1 | Move again (also back to the original date; the flag does not return) | US-E2-05/AC7, AC9, AC10, US-E3-01/AC1 |
+| Whole week one day off | Fix from the free end first (e.g. Friday → free Saturday or next free date), then each previous day becomes free | No swap by design (BA rule) | US-E2-05/AC8 |
+| Reload / back during the picker | The review keeps no draft (OQ-23): back opens 「確認を中断しますか？」 as for any review edit; a reload restarts the review from the extraction, flags included | — | US-E2-05/AC10, US-E3-03/AC5 |
+| Manual entry, refresh review | Same screen; manual entries are never weekday-flagged, so 「日付を直す」 only appears on extracted days with `weekday-mismatch` (or corrected in this review) | — | US-E3-04, US-E3-05 |
 
 ---
 
@@ -216,6 +254,7 @@ flowchart TD
 | Reminder during a conflict | The day-before reminder still fires until the plan is cleared | US-E3-05/AC2, AC6, BR-17 |
 | Planning a bento day that holds a dormant record | 「お弁当を計画する」 → R1 → confirm replaces the dormant record | US-E5-08/AC5 |
 | Empty list | The S3r step is skipped; C1 opens | US-E3-05/AC9 |
+| Coming back later | Settings 献立表 shows 「確認が必要な日（n件）」 while any listed date still has an open needs-review flag (derived from stored data, no new field; Orchestrator ruling M2 prep); resolved rows show a check; when none is open the link disappears and the route redirects to C1 | US-E3-05/AC9, AC7 |
 
 ---
 
@@ -398,7 +437,7 @@ Settings → 「プロフィールを編集」 → P2 (same fields as S1) → �
 | US-E2-02 | F2 | US-E5-04 | F0, F3 | US-E8-01 | F15 |
 | US-E2-03 | F0, F2 | US-E5-05 | F6, F10 | US-E8-02 | F15 |
 | US-E2-04 | F0, F2, F3 | US-E5-06 | F6, F8 | US-E8-03 | F15 |
-| US-E2-05 | F2, F3 | US-E5-07 | F6, F11 | US-E8-04 | F5 |
+| US-E2-05 | F2, F3, F3a | US-E5-07 | F6, F11 | US-E8-04 | F5 |
 | US-E2-06 | F2 | US-E5-08 | F4, F6, F10 | US-E8-05 | F12, F15 |
 | US-E2-07 | F2, F16 | US-E6-01 | F0, F8 | US-E9-01 | F13 |
 | US-E2-08 | F0, F2 | US-E6-02 | F8, F9 | US-E9-02 | F13 |

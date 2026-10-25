@@ -1,6 +1,8 @@
 # BentoMinder: component specs v1.0
 
 > Status: **H2 final**, 2026-10-24. Inputs: `design/direction.md` (accepted), `docs/PLAN.md` §3 and §7, `docs/ba/user-stories.md` (H1 final), `docs/ba/data-contract.md` (state names). Tokens: `design/tokens.css` (generated from `tokens.json`). Strings: `design/copy.md` (keys in `code`; never hard-code text). Accessibility details and the contrast audit: `design/a11y-responsive.md`. Visual reference: `design/preview/index.html`.
+>
+> **Revision 2026-10-25 (M2 prep):** §1.1, §1.2, §1.7 app bar and language toggle at 44 × 44 on the element box (D-M1-08); §6.3 food-picker results grouped by kind with headings (`picker.group.*`), chip pattern as built; §6.8 + new §6.9 date correction on review (US-E2-05/AC5, AC7–AC10; BA rule `review-date-correction`: taken dates are never chosen).
 
 ## 0. How to read this file
 
@@ -35,16 +37,30 @@ Anatomy: logo (36 px, decorative) · brand 「BentoMinder」 (`app.name`, `text-
 
 | | 390 | Desktop |
 |---|---|---|
-| Height | 56 px + 8 px stripe | 64 px + 8 px stripe |
-| Layout | brand flex 1; controls right; 4 px gaps | brand left; controls right; max width 1280 centred |
-| Icon buttons | 44 × 44 hit area, 24 px icon, label visually hidden | 44 × 44 + visible text label after the icon |
+| Height | 56 px + 8 px stripe (icon buttons 44 px, toggle 48 px, centred) | 64 px + 8 px stripe |
+| Layout | brand flex 1, `min-width: 0`; controls right; 4 px gaps; padding 16 px left, 8 px right | brand left; controls right; max width 1280 centred |
+| Icon buttons | 44 × 44 box, 24 px icon, label visually hidden | 44 px high + visible text label after the icon |
+| Language toggle | §1.7: 48 px high (44 px options + 2 px border), about 106 px wide | same |
+
+**Width budget (D-M1-08, revised 2026-10-25).** Every control is **≥ 44 × 44 CSS px measured on the element's own box** at 360 px (no pseudo-element hit areas in the app bar; QA measures `getBoundingClientRect()`). Controls row = toggle 106 + 4 + 44 + 4 + 44 = **202 px**.
+
+| Viewport | Padding | Logo | Brand text | Controls | Total | Fits |
+|---|---|---|---|---|---|---|
+| 320 | 24 | 36 | hidden | 202 + 4 gap | 266 | yes |
+| 360 | 24 | 36 | hidden | 206 | 266 | yes |
+| 390 | 24 | 36 | hidden | 206 | 266 | yes |
+| 400–1279 | 24 | 36 + 8 gap | shown (about 115 px at `text-lg` display font) | 206 | about 393 | yes (brand box absorbs the rest) |
+| ≥ 1280 | 24 | 36 + 8 | shown | 106 + labelled icon buttons (about 96 + 76) | < 400 | yes |
+
+The brand text 「BentoMinder」 is **visually hidden below 400 px** (`@media (max-width: 399px)`, was 360 px): with the 44 px toggle the 390 px bar would need 389 px of 390, which any fallback font breaks. The logo keeps `app.name` as its accessible name, so nothing is lost for screen readers. Nothing in the bar ever truncates, wraps or overlaps; if the font is larger than expected (200 % text), the brand text is the only thing that gives way (`overflow: hidden` on the brand box, never on the controls).
 
 States: default; hover (icon buttons `surface-3` circle); focus-visible (ring); active (`surface-3`); disabled n/a (always available); loading n/a; error n/a; empty n/a.
-At 360 px the brand text is hidden visually (`app.name` stays as the logo's accessible name) so the toggle and both icons keep 44 px targets.
 Test ids: `appbar`, `appbar-lang`, `appbar-recipes`, `appbar-settings`. Stories: US-E8-01/AC2 (toggle within 1 tap), US-E6-05, US-E7-04.
 
 ### 1.2 Top bar (every other screen)
-Anatomy: back button (44 px, chevron, accessible name `nav.backTo`) · screen title (`text-lg`, h1) · language toggle (right). Onboarding adds the stepper (§1.15) below.
+Anatomy: back button (44 × 44, chevron, accessible name `nav.backTo`) · screen title (`text-lg`, h1, flex 1, `min-width: 0`) · language toggle (right, §1.7, 48 px high with 44 px options). Onboarding adds the stepper (§1.15) below.
+Width at 360 px: 24 padding + 44 back + 4 + title + 4 + 106 toggle → the title gets **178 px** (9 Japanese characters at 18 px per line). Longer titles (「11月の献立を確認」 fits; 「確認が必要な日」 fits; English "Check the November menu" does not) **wrap to a second line** and the bar grows (min-height 56 px); titles are never truncated or ellipsised.
+**Onboarding top bar** (US-E1-01/AC6, D-M1-03 ruling, M2 prep): adds the 設定 icon button (`nav.settings`, gear, 44 × 44, same as the app bar's; test id `topbar-settings`) to the right of the language toggle, on every input step. Width at 360 px: step 1 (no back) 24 + title + 4 + 106 + 4 + 44 → title **178 px**; steps 2–3 (with back) 24 + 44 + 4 + title + 4 + 106 + 4 + 44 → title **134 px** (7 Japanese characters per line: 「お子さまのこと」 and 「献立の取り込み」 fit, 「献立の確認」 fits; anything longer wraps). Desktop shows the label after the icon as in the app bar.
 States as 1.1. Test ids: `topbar-back`, `topbar-title`. Stories: US-E8-01/AC2 (toggle on every screen).
 
 ### 1.3 Buttons
@@ -124,10 +140,11 @@ Native `<select>`, 52 px, same skin and states as 1.4 (custom chevron icon, `app
 Sizes: 390 wraps in rows, 8 px gaps; desktop same, max 560 px wide groups. Test ids: `chip-<group>-<id>` (e.g. `chip-age-age-4-5`, `chip-allergen-alg-egg`).
 
 ### 1.7 Segmented control (language 日本語 / EN; settings language; override control on desktop)
-Anatomy: pill container 2 px `ink-1`; options equal width; active option `ink-1` fill with `surface-2` text (13.99:1). 36 px visual height with a 44 px hit area (pseudo-element), labels `text-xs`–`text-sm` 700.
+Anatomy: pill container 2 px `ink-1`, `overflow: hidden`; active option `ink-1` fill with `surface-2` text (13.99:1). **Each option is a button of at least 44 × 44 CSS px on its own box** at every width (revised 2026-10-25 for D-M1-08: the former 36 px visual + pseudo-element hit area was clipped by the container and measured 36 px high). Option padding 0 8 px (`space-2`), labels `text-sm` 700, `letter-spacing: 0`, `white-space: nowrap`. Widths: 「日本語」 about 58 px, 「EN」 44 px (the minimum), container about 106 × 48 px including its 2 px border. Options may differ in width (content width, min 44); equal width is not required.
+The same component in settings (language) and on desktop (override control) uses the same 44 px height.
 ARIA: `role="radiogroup"` with `aria-label` = `lang.toggle.aria`; options `role="radio"`; arrows move and select; the option label carries `lang` (`lang="ja"` on 日本語, `lang="en"` on EN).
 States: default; hover (inactive option `surface-3`); focus-visible (ring on the group's checked option); active (`surface-3`); disabled n/a; loading n/a (switch is instant, no reload); error n/a; empty n/a; selected = filled side.
-Test ids: `lang-toggle`, `lang-toggle-ja`, `lang-toggle-en`. Stories: US-E8-01/AC2–AC3.
+Test ids: `lang-toggle`, `lang-toggle-ja`, `lang-toggle-en`. Stories: US-E8-01/AC2–AC3, US-NF-02/AC3 (D-M1-08: `lang-toggle-ja` and `lang-toggle-en` each ≥ 44 × 44 at 360 px).
 
 ### 1.8 Checkbox and switch
 - **Checkbox** (reservation record): 24 px box, 2 px `line-ui`, inside a 52 px row with the label; checked = `success` fill + `ink-inverse` check (5.84:1). Hint under the label.
@@ -216,6 +233,7 @@ Test id `screen-calendar`. Stories: US-E5-01, US-E7-03, US-E3-06, US-E1-01/AC2, 
 ### 2.2 Month navigation
 Anatomy: 「前の月」 chevron (44 px) · month title (h2, `text-xl`, `fmt.month`) · 「次の月」 chevron · 「今日」 secondary small button (44 px), shown only when the visible month isn't the current Tokyo month.
 States: default; hover (chevrons `surface-3`); focus-visible; active; disabled n/a (no month limit; any month renders, US-E5-01/AC5–AC6); loading n/a; error n/a; empty n/a (months without a menu still render).
+Wrapper: `<nav aria-label>` = `cal.nav.label` (M2 prep: the M1 build reuses `cal.grid.label` here, which gives the nav and the grid the same name; the grid keeps `cal.grid.label`).
 After navigation: `live.monthChanged` in a polite live region; focus stays on the pressed chevron.
 Test ids: `cal-prev`, `cal-next`, `cal-today`, `cal-title`. Stories: US-E5-01/AC5, AC6.
 
@@ -489,11 +507,11 @@ States: default; selected (radio); loading (confirm busy); error (`toast.saveFai
 ## 6. Onboarding and import
 
 ### 6.1 Onboarding frame
-Top bar (no back on step 1) · stepper (§1.15) · content · sticky footer (primary action; text actions above it). Desktop: centred card max 640 px on `surface-1` with the stripe band above it. Steps: 1 `ob.step1.name`, 2 `ob.step2.name`, 3 `ob.step3.name`; then the calendar (not a step, US-E1-01/AC1). Reload resumes the step with saved answers (US-E1-01/AC3–AC4).
+Top bar (no back on step 1; 設定 on every step, §1.2, US-E1-01/AC6) · stepper (§1.15) · content · sticky footer (primary action; text actions above it). Desktop: centred card max 640 px on `surface-1` with the stripe band above it. Steps: 1 `ob.step1.name`, 2 `ob.step2.name`, 3 `ob.step3.name`; then the calendar (not a step, US-E1-01/AC1). Reload resumes the step with saved answers (US-E1-01/AC3–AC4).
 Test ids: `screen-onboarding`, `ob-step-<n>`.
 
 ### 6.2 Step 1: profile (also the profile-edit screen)
-Fields in order: `profile.nickname` (text) · `profile.age` (single-choice chips, required) · `profile.likes` and `profile.dislikes` (food pickers, §6.3) · `allergy` (radio group with three options, none preselected, required, §6.4) · `diet` (multi chips) · `theme` (multi chips, max 3) · `profile.note` (textarea) · `ob.privacy.local` note · footer `common.next`.
+Fields in order: `profile.nickname.label` (text) · `profile.age.label` (single-choice chips, required) · `profile.likes.label` and `profile.dislikes.label` (food pickers, §6.3) · `allergy` (radio group with three options, none preselected, required, §6.4) · `diet` (multi chips) · `theme` (multi chips, max 3) · `profile.note.label` (textarea) · `ob.privacy.local` note · footer `common.next`.
 No birthdate, gender, height, weight, photo, real name or school field (US-E1-02/AC6, BR-20).
 Validation on 「次へ」: age missing → `profile.age.error`; allergy status missing → `allergy.status.error`; has-known with nothing → `allergy.pick.error`. Errors show inline at each group; an error summary is announced (`live.formErrors`, assertive) and **focus moves to the first invalid group** (US-E1-02/AC4).
 Profile edit (from settings): same fields, title `profileEdit.title`, note `profileEdit.keepsPlans`, footer `profileEdit.save` + `profileEdit.cancel`; leaving with changes → dialog `profileEdit.discard.*`.
@@ -510,10 +528,28 @@ Profile edit (from settings): same fields, title `profileEdit.title`, note `prof
 390: single column; desktop: centred 640 px card, chips wrap wider. Test ids: `input-nickname`, `group-age`, `picker-likes`, `picker-dislikes`, `group-allergy`, `picker-allergens`, `picker-other-foods`, `group-diet`, `group-theme`, `input-note`, `ob-next`. Stories: US-E1-02/AC1–AC7, US-E1-03/AC1–AC4, AC6, US-E1-04/AC1–AC4, US-E1-05/AC1, AC3.
 
 ### 6.3 Food picker (likes / dislikes / other foods)
-Anatomy: legend + hint · selected chips (navy, removable) · search input (`profile.foods.search`, combobox pattern: `role="combobox"`, listbox of matches showing dictionary label + kind 「食材」/「種類」/「料理」 in `ink-2`) · `profile.foods.popular` chips (12 common ids) when the search is empty.
+Anatomy (revised 2026-10-25 to match the M1 build, which passed axe and the keyboard journey): legend + hint · selected chips (navy, removable) · search input (`profile.foods.search`, `type="search"`) · **results as toggle chips grouped by kind** while the search has text · `profile.foods.popular` chips (12 common ids, not grouped) while the search is empty. The earlier combobox + listbox pattern is retired: chips with `aria-pressed` are simpler, work with touch and need no `aria-activedescendant`.
+
+**Result groups** (dictionary `kind`; US-E1-02/AC8: every result shows exactly one kind label, here as the group heading, never by colour or icon alone):
+
+| Order | Kind | Heading key | ja (US-E1-02/AC8, exact) | en (US-E1-02/AC8, exact) | Shown in |
+|---|---|---|---|---|---|
+| 1 | `ingredient` | `picker.group.ingredient` | 食材 | Ingredient | likes, dislikes, other foods (allergy) |
+| 2 | `dish` | `picker.group.dish` | 料理 | Dish | likes, dislikes (the allergy "other foods" picker searches ingredients and categories only) |
+| 3 | `category` | `picker.group.category` | 種類 | Food group | likes, dislikes, other foods (allergy) |
+
+- Each group: heading (`text-xs` 700, `ink-2` on `surface-1`/`surface-2`, P04/P05; a `<p>` with an id, **not** an `h*` element, so the form's heading outline stays flat) followed by a `ul` of chips with `aria-labelledby` = the heading id. Group order is fixed (食材 → 料理 → 種類, US-E1-02/AC8), matches keep the search's ranking inside each group.
+- A group with no match is **not rendered** (no empty heading). If only one group has matches, its heading still shows (it tells the parent what kind of thing the chip is, e.g. that 「さかな」 is a whole group).
+- The 12-result cap applies to the total across groups, as built (`searchFoods(…, 12, kinds)`).
+- **Result chip accessible name includes the kind** (AC8): `aria-label` = `picker.withKind` 「{food}（{kind}）」, e.g. 「鶏肉（種類）」 / "Chicken (Food group)"; the visible text stays the label (the heading shows the kind). The list also has `aria-labelledby` = heading, so screen readers announce 「種類、リスト、2項目」 on entering a group.
+- **Popular chips** (empty search, not grouped): visible label + kind in the accessible name the same way.
+- **Selected chips**: accessible name always `picker.withKind`; the **visible** text adds the kind (「鶏肉（種類）」) only when another selected chip in the same picker has the same label (AC8, e.g. 鶏肉 the ingredient and 鶏肉 the group). The remove button name `profile.foods.remove` uses the same `{food}` string (with kind).
+- 16 px space between groups, 8 px between heading and chips.
+
 Behaviour: selecting an id that is in the other list moves it and announces `profile.foods.moved.*` (polite, US-E1-02/AC3); 31st item refused with `profile.foods.limit`.
-States: default; hover (option row `surface-3`); focus-visible (active option via `aria-activedescendant`, row ring); active; disabled (all options when 30 are chosen, with the limit text); loading n/a (local dictionary); error (limit notice, polite); empty (search no match: `profile.foods.searchEmpty`; no selection: `profile.foods.empty`).
-Test ids: `picker-<name>-search`, `picker-<name>-option-<id>`, `picker-<name>-chip-<id>`.
+States: default; hover (chip border `ink-1`); focus-visible (ring on the chip); active (`surface-3`); selected (navy + check, `aria-pressed="true"`); disabled (all unselected chips when 30 are chosen, with the limit text); loading n/a (local dictionary); error (limit notice, polite); empty (search no match: `profile.foods.searchEmpty`, no group headings; no selection: `profile.foods.empty`).
+390: groups stack, chips wrap; desktop: same, max 560 px wide.
+Test ids: `picker-<name>-search`, `picker-<name>-group-<kind>` (the `ul`), `picker-<name>-option-<id>`, `picker-<name>-chip-<id>`. Stories: US-E1-02/AC2–AC3, AC8, US-E1-03/AC2 (other foods).
 
 ### 6.4 Allergy status and allergen picker
 Radio group `allergy.label` + `allergy.helper` (always visible, US-E1-03/AC6) with `allergy.status.none`, `allergy.status.has`, `allergy.status.unknown` (none preselected).
@@ -591,6 +627,8 @@ Anatomy:
 | Actions | edit the value (→ `parent-edited`, the flag clears) or press the `review.accept` text button (→ `uncertain-accepted`). Either way the tag and the warning styling disappear and the summary count drops by 1 |
 | Ambiguity | for `ambiguous-term`: chooser `amb.title` with radio options (`amb.curry.*`, dictionary labels for other groups, `amb.unsure`) |
 | Day-level (weekday mismatch, duplicate date) | the whole day row gets the warning border and the tag next to the legend |
+| Weekday mismatch: two answers | the reason line `review.reason.weekdayMismatch` is followed by **two** actions in one row (wrapping at 360 px): secondary small button `review.dateFix.open` 「日付を直す」 (opens §6.9) and text button `review.accept` 「このままにする」 (the date is right, the printed weekday was the mistake). Both clear the flag; together they satisfy "confirm or correct the date" (US-E2-05/AC5). Only rows flagged `weekday-mismatch` (and rows already corrected, AC10) get 「日付を直す」; no-lunch days and unflagged days never do (AC7) |
+| Corrected day (after §6.9) | no warning styling (`parent-edited`); `ink-2` line under the legend `review.dateFix.printed` 「献立表の表記：4日（木）」 (US-E2-05/AC9) + 「日付を直す」 still offered (AC10) |
 | a11y | field `aria-describedby` = reason id; `aria-invalid` is **not** used (it isn't an error) |
 
 | State (row / field) | Treatment |
@@ -612,13 +650,70 @@ Leaving the review (back) → dialog `review.leave.*`; the extraction stays pend
 | Rows | stacked cards, dish inputs full width | table-like rows: date column 140 px, dishes column, side column (ingredients, allergens, notes) 320 px |
 | PDF | `review.openPdf` opens a new view/tab | opens in a split view (PDF left 50 %, review right) when space allows |
 
-Test ids: `screen-review`, `review-summary`, `review-next-uncertain`, `review-open-pdf`, `review-day-<date>`, `review-dish-<date>-<i>`, `review-dish-<date>-<i>-uncertain`, `review-accept-<fieldId>`, `review-add-<date>`, `review-nolunch-<date>`, `review-out-of-month`, `review-confirm`. Stories: US-E3-01/AC1–AC3, US-E3-02/AC1–AC5, US-E3-03/AC1–AC3, US-E3-04/AC1–AC2, US-E2-04/AC2–AC5, US-E2-05/AC4–AC6, US-E2-07/AC1, US-E4-01/AC6.
+Test ids: `screen-review`, `review-summary`, `review-next-uncertain`, `review-open-pdf`, `review-day-<date>`, `review-dish-<date>-<i>`, `review-dish-<date>-<i>-uncertain`, `review-accept-<fieldId>`, `review-fixdate-<date>`, `review-printed-<date>`, `review-add-<date>`, `review-nolunch-<date>`, `review-out-of-month`, `review-confirm`. Stories: US-E3-01/AC1–AC3, US-E3-02/AC1–AC5, US-E3-03/AC1–AC3, US-E3-04/AC1–AC2, US-E2-04/AC2–AC5, US-E2-05/AC4–AC6, US-E2-07/AC1, US-E4-01/AC6.
+
+### 6.9 Date-correction picker (review → 「日付を直す」)
+Added 2026-10-25 (M2 prep) for US-E2-05/AC5, AC7–AC10 and contract §3.3 rule `review-date-correction`. Works on the **review draft only**: nothing is stored until 「この内容で確定」; 「中断する」 discards corrections with every other edit (AC10).
+**Rule (BA):** offered only on a lunch day whose day-level flag is `uncertain` / `weekday-mismatch`, or on a day already corrected this way (AC10: it can be corrected again). The new date is any **free** date of the target month: a date that shows no dish and is not marked 給食なし on the review at that moment. **A taken date is shown but cannot be chosen; nothing is ever overwritten, merged or swapped** (AC8). No-lunch days and unflagged days have no 「日付を直す」 (AC7).
+
+**Container**
+
+| | 390 (and < 768) | 768–1279 | ≥ 1280 |
+|---|---|---|---|
+| Form | bottom sheet (§1.12), height = content (max: top at `--sheet-offset`), `surface-2` | centred dialog, max 400 px | **popover** anchored under the 「日付を直す」 button, 344 px wide, `surface-2`, `radius-lg`, `elevation-3`, no scrim; flips above the button when there are < 480 px below it |
+| Gutters | 16 px, so 7 columns of 44 px fit at 360 px: (360 − 32 − 6 × 2 gaps) / 7 = 45.1 | 20 px | 16 px |
+
+ARIA: `role="dialog"`, `aria-modal="true"` in every form (the popover too: focus is trapped, a click outside = cancel), `aria-labelledby` = title, `aria-describedby` = context line.
+
+**Anatomy**, top to bottom:
+1. Header: title `review.dateFix.title` (h2, `text-lg`) + close icon button (44 px, `common.close`).
+2. Context line (`text-sm`, `ink-2`): `review.dateFix.context` 「献立表では「4日（木）」です。いまは11月4日（水）になっています。」; when `printedDateText` is null, `review.dateFix.contextWeekday` (printed weekday only). Printed text carries `lang="ja"` in EN.
+3. Month caption `fmt.month` (`text-md` 700, centred, `aria-hidden`: the grid label says it). **No month navigation**: only dates of the target month can be chosen (AC7; other months are never imported, AC4). Past dates of the month are offered (AC7 note, OQ-28).
+4. Mini-grid (below), `aria-label` = `review.dateFix.gridLabel`.
+5. Legend, visible text (`text-xs`, `ink-2`), each item drawn with its marker: bar + `review.dateFix.cell.match` 「曜日が一致」 · dot + `review.dateFix.cell.taken` 「ほかの献立があります」 · dashed box + `review.dateFix.cell.current` 「いまの日付」.
+6. Status line (`role="status"`, polite, `text-sm` 700), the visible text of the last cell activated:
+   - free date selected: `review.dateFix.selected` 「11月5日（木）に移します」, plus, if its weekday is not the printed one, an info line (info icon + `review.dateFix.otherWeekday`): allowed, it is the parent's call (AC7: other free dates can be chosen).
+   - taken or current date activated: `review.dateFix.cantChoose` 「11月12日（木）は選べません：ほかの献立があります」 (reason = the cell's `taken` or `current` text). Selection does not change.
+   - no free date in the month: `review.dateFix.noFree` 「移せる日がありません」 shown on open, grid still shown (every cell disabled), apply hidden, only 「閉じる」/`common.cancel`; 「このままにする」 stays on the row (AC8).
+7. Footer: secondary `common.cancel` · primary `review.dateFix.apply` 「この日にする」 (stacked full width at 390, primary on top; inline right-aligned on desktop). `aria-disabled` until a free date is selected, hint `review.dateFix.applyHint` linked by `aria-describedby`.
+
+**Mini-grid cell** (one per date; leading/trailing pad cells are empty `gridcell`s with `aria-hidden`):
+
+| Part / state | Treatment | Non-colour signal |
+|---|---|---|
+| Box | 44 × 44 at ≥ 360 px viewport (40 × 40 allowed below 360, still ≥ 24 px WCAG 2.2), `radius-sm`, `surface-2`, no border; numeral `text-md` 700 tabular, centred; Sat `saturday`, Sun/holiday `sunday`, else `ink-1` | — |
+| Weekday header | `wd.short.*`, `text-xs` 700, order from the store field `settings.weekStartsOn` (as the calendar, §2.3); `columnheader` with the long weekday as `aria-label`, so every date is announced with its weekday (AC7) | — |
+| **match** (weekday = printed weekday; free or taken) | 3 × 16 px bar under the numeral, `ink-1` (U04) | bar + 「曜日が一致」 in the accessible name and legend |
+| **taken** (the review shows ≥ 1 dish or 給食なし on that date) | 6 px dot top-right `ink-2` (U19) + numeral `ink-3` (P08), `aria-disabled="true"`, focusable; activation only updates the status line | dot + 「ほかの献立があります」 in the accessible name, legend and status line |
+| **current** (the day's date now) | 2 px dashed `line-ui` border (U02), numeral `ink-3` (P08), `aria-disabled="true"`, focusable | dashed border + 「いまの日付」 in the accessible name, legend and status line |
+| hover | `surface-3` fill (free cells only) | — |
+| focus-visible | ring + halo (global), on every cell including disabled ones | ring |
+| active | `surface-3` (free cells) | — |
+| **selected** | `navy-fill` + `ink-inverse` numeral and bar (P10), `aria-selected="true"`; only free cells can be selected | fill + status line text |
+| disabled | taken and current (above); all cells when no date is free | as above |
+| loading / error / empty | n/a: local draft data, nothing can fail before apply; "empty" = no free date (status line `review.dateFix.noFree`) | — |
+
+Accessible name of a cell button = `fmt.date` + suffixes in the order match, taken, current, joined with 「、」 / ", " (e.g. 「11月12日（木）、曜日が一致、ほかの献立があります」). Matches are never preselected (AC7).
+
+Initial focus: the **nearest free match cell** to the current date (the likely answer, e.g. 4 (Wed) → 5 (Thu)); else the nearest free cell; else (no free date) the status line's `noFree` text (`tabindex="-1"`).
+
+Keyboard (ARIA APG date-picker grid, one month): ←/→ previous/next day; ↑/↓ same weekday previous/next week; Home/End first/last day of the row; PageUp/PageDown do nothing; arrows stop at the first/last date of the month; Enter/Space select a free cell (does not apply) or announce why a disabled one can't be chosen; Tab: close → grid (one tab stop, roving tabindex) → cancel → apply; Esc = cancel. Closing without choosing changes nothing (AC10); focus returns to the 「日付を直す」 button.
+
+**Apply:** the container closes; the whole day (dishes, ingredients, allergen line, notes) moves to the chosen date and the rows re-sort into date order; the old date shows `review.day.empty` (weekday) or disappears (unlisted weekend). The day becomes `parent-edited`, loses the 「要確認」 tag and warning styling, and the summary count drops by 1; field-level flags inside the day (e.g. low legibility on a dish) stay (AC7). Focus moves to the moved row's legend (`tabindex="-1"`); polite live `review.dateFix.moved`.
+
+**Corrected row (review screen, after apply):** no warning styling; under the legend a `ink-2` line `review.dateFix.printed` 「献立表の表記：4日（木）」 (`lang="ja"` on the printed text in EN; AC9) and the secondary small button `review.dateFix.open` still offered, so the parent can move it again, including back to its original date (AC10: the flag does not come back). There is no separate undo.
+
+**Chained shifts.** Because taken dates can't be chosen, a whole week printed one day off is fixed from its free end (e.g. move Friday to the free Saturday/next free weekday first). The legend makes this discoverable; the BA's rule accepts it (no swap).
+
+**States summary (container):** default (nothing selected); hover/focus-visible/active per control; disabled (apply until a free date is selected; taken and current cells); loading n/a (synchronous draft edit); error n/a (nothing is written here; a failed write can only happen on 「この内容で確定」, which keeps `toast.saveFailed`); empty = no free date (`review.dateFix.noFree`).
+
+Test ids: `datefix-sheet` (also on the popover), `datefix-close`, `datefix-cell-<date>`, `datefix-status`, `datefix-apply`, `datefix-cancel`, `datefix-nofree`; on the review row `review-fixdate-<date>`, `review-printed-<date>`. Stories: US-E2-05/AC5, AC7, AC8, AC9, AC10; US-E3-01/AC1–AC2 (rows in date order, summary count); US-E3-03/AC4–AC5; US-NF-02/AC3.
 
 ---
 
 ## 7. Refresh review list (「確認が必要な日」)
-Shown after confirming a replacement menu when the list is non-empty (also reachable again from settings → 献立を確認・修正 until every listed date was opened once). Anatomy: title `refresh.review.title` · lead `refresh.review.lead` · list rows (64 px): date, reason (`refresh.review.item.planned` / `.notConfirmed` / `.override`), sub-line (`refresh.review.item.removed` / `.nowNoLunch`, or nothing when only the dishes changed), button `refresh.review.open` (name `refresh.review.openDay`) → that day's sheet over the calendar · footer `refresh.review.done`.
-Which dates are listed (US-E3-05/AC9, AC11, AC12; contract `changedDatesSincePrevious`): changed dates that carry an override, a stored `homemade-bento-planned` or a stored `not-confirmed` decision; never school-lunch records. A row is marked visited (check icon + `refresh.review.visited` as visually hidden text) after its sheet was opened.
+Shown after confirming a replacement menu when the list is non-empty. **Reachable again while any listed date still has an open needs-review flag** (Orchestrator ruling, M2 prep: derived from stored data, **no new stored field**; a date is open while its calendar cell would show the needs-review badge, §2.4 layer 4): settings 献立表 section shows the link `settings.menu.needsReview` 「確認が必要な日（2件）」 (count = open dates) and the calendar's needs-review badges stay. When every listed date is resolved the link disappears and the route redirects to the calendar. Anatomy: title `refresh.review.title` · lead `refresh.review.lead` · list rows (64 px): date, reason (`refresh.review.item.planned` / `.notConfirmed` / `.override`), sub-line (`refresh.review.item.removed` / `.nowNoLunch`, or nothing when only the dishes changed), button `refresh.review.open` (name `refresh.review.openDay`) → that day's sheet over the calendar · footer `refresh.review.done`.
+Which dates are listed (US-E3-05/AC9, AC11, AC12; contract `changedDatesSincePrevious`): changed dates that carry an override, a stored `homemade-bento-planned` or a stored `not-confirmed` decision; never school-lunch records. A row whose date is no longer open is marked resolved (check icon + `refresh.review.visited` as visually hidden text) and stays in the list until the list is closed; the list is computed from the latest refresh's `changedDatesSincePrevious` and the current decisions/overrides each time it opens (nothing remembers "opened").
 States: default; hover (row `surface-1`); focus-visible; active; disabled n/a; loading n/a; error n/a; empty `refresh.review.empty` (normally not shown: the screen is skipped when empty).
 390 list; desktop list max 760 px with the side panel opening to the right. Test ids: `refresh-review`, `refresh-review-row-<date>`. Stories: US-E3-05/AC2, AC6, AC8, AC9, AC11, AC12, BR-13.
 
@@ -735,7 +830,7 @@ Test ids: `debug-open`, `debug-panel`, `debug-clock-input`, `debug-clock-set`, `
 | Day sheet | 3 (structure, assessment + override, plan actions: 11 state rows) | yes |
 | Recommendations | 3 (screen, card with 4 domain states, more list) | yes |
 | Recipes | 3 (detail with 6 contexts, library, plan-date picker) | yes |
-| Onboarding / import | 8 (frame, profile, food picker, allergy, menu source + 15-row error table, progress, consent, review with uncertain states) | yes |
+| Onboarding / import | 9 (frame, profile, food picker with kind groups, allergy, menu source + 15-row error table, progress, consent, review with uncertain states, date-correction picker) | yes |
 | Refresh review | 1 | yes |
 | Reminders | 2 (banner ×2 types, list) | yes |
 | Settings | 2 (screen, time picker) | yes |
