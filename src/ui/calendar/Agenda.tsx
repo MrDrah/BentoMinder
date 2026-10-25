@@ -68,7 +68,8 @@ function AgendaRow({ t, lang, v, onOpen }: { t: Translate; lang: Language; v: Da
       data-override={v.assessment?.override?.state}
       aria-current={v.isToday ? 'date' : undefined}
     >
-      <button type="button" className="cal-agenda__btn" aria-label={cellLabel(t, lang, v)} data-date={v.date} onClick={() => onOpen(v.date)}>
+      <button type="button" className="cal-agenda__btn" data-date={v.date} onClick={() => onOpen(v.date)}>
+        <span className="visually-hidden">{cellLabel(t, lang, v)}</span>
         <span className="cal-agenda__date" aria-hidden="true">
           {formatDate(t, lang, v.date)}
         </span>

@@ -219,7 +219,9 @@ function DayCell({ t, lang, v, tabbable, selected, onOpen, onFocus }: CellProps)
       aria-current={v.isToday ? 'date' : undefined}
       aria-selected={selected ? true : undefined}
     >
-      <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} aria-label={cellLabel(t, lang, v)} onClick={() => onOpen(v.date)} onFocus={() => onFocus(v.date)}>
+      <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} onClick={() => onOpen(v.date)} onFocus={() => onFocus(v.date)}>
+        {/* The name comes from this sentence, not from an aria-label: the visible words are a short form of it (WCAG 2.5.3 stays satisfied: no label overrides the content) */}
+        <span className="visually-hidden">{cellLabel(t, lang, v)}</span>
         <span className="cell__top">
           <span className="cell__num" aria-hidden="true">
             {dateParts(v.date).day}
