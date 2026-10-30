@@ -542,7 +542,7 @@
         "quantity": 1,
         "unit": "tsp",
         "optional": false,
-        "allergenInfo": "known",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
         "possibleAllergenIds": [],
         "animalOrigin": [],
@@ -605,10 +605,6 @@
       {
         "ja": "ハンバーグはふたをして中心まで火を通してから詰めます。",
         "en": "Cook the patties through to the centre, with the lid on, before packing."
-      },
-      {
-        "ja": "敷き用のサニーレタスは生のまま使うので、よく洗って水気をしっかりふき取ってから入れます。",
-        "en": "The lettuce leaf goes in raw, so wash it well and pat it completely dry before using it."
       }
     ],
     "allergenIds": [
@@ -642,6 +638,10 @@
       {
         "ja": "元の作り方では敷く葉が「サラダ菜」となっていますが、材料表どおりサニーレタスにしました。水小さじ1は手順に記載しています。",
         "en": "The source method says to line the box with butterhead lettuce, but its ingredient list has red leaf lettuce; the ingredient list is followed. The 1 tsp water is given in the steps."
+      },
+      {
+        "ja": "ケチャップは製品によって原材料が違います。参照した製品（デルモンテ トマトケチャップ）の表示ではアレルゲンの表示はありませんが、使う製品の表示を確認してください。",
+        "en": "Ketchup ingredients vary by product. The product label cited (Del Monte tomato ketchup) lists no allergens, but check the label of the product you use."
       }
     ],
     "sources": [
@@ -699,17 +699,6 @@
         "language": "ja",
         "usedFor": [
           "allergen"
-        ]
-      },
-      {
-        "id": "src-maff-lunchbox",
-        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
-        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
-        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
-        "accessed": "2026-10-25",
-        "language": "ja",
-        "usedFor": [
-          "storage"
         ]
       }
     ],
@@ -776,7 +765,7 @@
         "quantity": null,
         "unit": "small-amount",
         "optional": false,
-        "allergenInfo": "known",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
         "possibleAllergenIds": [],
         "animalOrigin": [],
@@ -881,6 +870,10 @@
       {
         "ja": "カレー粉は香辛料だけの製品を使います。調味料入りの「味付けカレーパウダー」には小麦・乳成分・大豆・豚肉を含む製品があります。",
         "en": "Use a plain spice-only curry powder. Seasoned curry powders can contain wheat, milk, soy and pork."
+      },
+      {
+        "ja": "カレー粉は製品によって原材料が違います。参照した香辛料だけの製品の表示ではアレルゲンの表示はありませんが、使う製品の表示を確認してください。",
+        "en": "Curry powder ingredients vary by product. The spice-only products cited list no allergens, but check the label of the product you use."
       }
     ],
     "sources": [
@@ -1128,9 +1121,14 @@
         "quantity": 1,
         "unit": "slice",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-egg",
+          "alg-milk",
+          "alg-soybean",
+          "alg-pork"
+        ],
         "animalOrigin": [
           "meat",
           "pork"
@@ -1187,7 +1185,10 @@
     ],
     "mayContainAllergenIds": [
       "alg-wheat",
-      "alg-soybean"
+      "alg-soybean",
+      "alg-egg",
+      "alg-milk",
+      "alg-pork"
     ],
     "allergenDataComplete": false,
     "allergenScheme": "caa-2026-04",
@@ -1207,6 +1208,10 @@
       {
         "ja": "銘柄指定のしょうゆは一般的なしょうゆとして記載しました。ツナ缶（小）1/2缶は「0.5個」として記録しています。",
         "en": "The branded soy sauce is listed as ordinary soy sauce. Half a small can of tuna is recorded as 0.5 piece."
+      },
+      {
+        "ja": "ハムは製品によって原材料が違います。参照した製品（日本ハム「彩りキッチン ロースハム」）の表示では、卵・乳・大豆・豚肉が表示されています。使う製品の表示を確認してください。",
+        "en": "Ham ingredients vary by product. The label cited (Nippon Ham Irodori Kitchen roast ham) declares egg, milk, soy and pork. Check the label of the product you use."
       }
     ],
     "sources": [
@@ -1265,6 +1270,17 @@
         "language": "ja",
         "usedFor": [
           "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-irodori-roast-ham-label",
+        "publisher": "日本ハム株式会社",
+        "title": "彩りキッチン® ロースハム - ハム | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/ham/roast/2106/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
         ]
       }
     ],
@@ -1382,9 +1398,11 @@
         "quantity": 1,
         "unit": "stick",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork"
+        ],
         "animalOrigin": [
           "meat",
           "pork"
@@ -1472,7 +1490,9 @@
       "alg-sesame",
       "alg-soybean"
     ],
-    "mayContainAllergenIds": [],
+    "mayContainAllergenIds": [
+      "alg-pork"
+    ],
     "allergenDataComplete": false,
     "allergenScheme": "caa-2026-04",
     "animalOrigin": [
@@ -1486,6 +1506,10 @@
       {
         "ja": "元のレシピが1人分でごはん100gのため、分量はそのままです。",
         "en": "The source serves one with 100 g of rice, so amounts are unchanged."
+      },
+      {
+        "ja": "ソーセージ（ウインナー）は製品によって原材料が違います。参照した製品（日本ハム「シャウエッセン」）の表示では、豚肉が表示されています。チーズ入りなど他の製品は違うので、使う製品の表示を確認してください。",
+        "en": "Sausage ingredients vary by product. The label cited (Nippon Ham Schauessen) declares pork. Other products, such as cheese-filled ones, differ, so check the label of the product you use."
       }
     ],
     "sources": [
@@ -1499,6 +1523,17 @@
         "usedFor": [
           "recipe",
           "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-schauessen-label",
+        "publisher": "日本ハム株式会社",
+        "title": "シャウエッセン® - ソーセージ | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/sausages/win/2125/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
         ]
       }
     ],
@@ -1683,9 +1718,14 @@
         "quantity": 1,
         "unit": "slice",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-egg",
+          "alg-milk",
+          "alg-soybean",
+          "alg-pork"
+        ],
         "animalOrigin": [
           "meat",
           "pork"
@@ -1789,7 +1829,10 @@
     ],
     "mayContainAllergenIds": [
       "alg-wheat",
-      "alg-soybean"
+      "alg-soybean",
+      "alg-egg",
+      "alg-milk",
+      "alg-pork"
     ],
     "allergenDataComplete": false,
     "allergenScheme": "caa-2026-04",
@@ -1811,6 +1854,10 @@
       {
         "ja": "「ブロッコリーの茎 3cm」は3cm分の1切れとして記録しました。",
         "en": "\"3 cm of broccoli stem\" is recorded as one 3 cm piece."
+      },
+      {
+        "ja": "ハムは製品によって原材料が違います。参照した製品（日本ハム「彩りキッチン ロースハム」）の表示では、卵・乳・大豆・豚肉が表示されています。使う製品の表示を確認してください。",
+        "en": "Ham ingredients vary by product. The label cited (Nippon Ham Irodori Kitchen roast ham) declares egg, milk, soy and pork. Check the label of the product you use."
       }
     ],
     "sources": [
@@ -1846,6 +1893,17 @@
         "language": "ja",
         "usedFor": [
           "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-irodori-roast-ham-label",
+        "publisher": "日本ハム株式会社",
+        "title": "彩りキッチン® ロースハム - ハム | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/ham/roast/2106/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
         ]
       }
     ],
@@ -2892,9 +2950,11 @@
         "quantity": 1,
         "unit": "stick",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork"
+        ],
         "animalOrigin": [
           "meat",
           "pork"
@@ -2985,7 +3045,8 @@
     ],
     "mayContainAllergenIds": [
       "alg-wheat",
-      "alg-soybean"
+      "alg-soybean",
+      "alg-pork"
     ],
     "allergenDataComplete": false,
     "allergenScheme": "caa-2026-04",
@@ -3005,6 +3066,10 @@
       {
         "ja": "調理時間はお弁当ページの段取り（合計15分）によります。3品の個別の時間を足すと20分です。銘柄指定のしょうゆ・みりんは一般的なものとして記載しました。水大さじ2は手順に記載しています。",
         "en": "The time follows the bento page's plan (15 minutes in total); the three dishes' own times add up to 20 minutes. The branded soy sauce and mirin are listed as ordinary ones. The 2 tbsp water is given in the steps."
+      },
+      {
+        "ja": "ソーセージ（ウインナー）は製品によって原材料が違います。参照した製品（日本ハム「シャウエッセン」）の表示では、豚肉が表示されています。チーズ入りなど他の製品は違うので、使う製品の表示を確認してください。",
+        "en": "Sausage ingredients vary by product. The label cited (Nippon Ham Schauessen) declares pork. Other products, such as cheese-filled ones, differ, so check the label of the product you use."
       }
     ],
     "sources": [
@@ -3073,6 +3138,17 @@
         "language": "ja",
         "usedFor": [
           "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-schauessen-label",
+        "publisher": "日本ハム株式会社",
+        "title": "シャウエッセン® - ソーセージ | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/sausages/win/2125/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
         ]
       }
     ],
@@ -3495,7 +3571,7 @@
         "quantity": null,
         "unit": "small-amount",
         "optional": false,
-        "allergenInfo": "known",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
         "possibleAllergenIds": [],
         "animalOrigin": [],
@@ -3510,9 +3586,11 @@
         "quantity": 3,
         "unit": "stick",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork"
+        ],
         "animalOrigin": [
           "meat",
           "pork"
@@ -3648,9 +3726,10 @@
     ],
     "mayContainAllergenIds": [
       "alg-egg",
-      "alg-soybean"
+      "alg-soybean",
+      "alg-pork"
     ],
-    "allergenDataComplete": false,
+    "allergenDataComplete": true,
     "allergenScheme": "caa-2026-04",
     "animalOrigin": [
       "egg",
@@ -3666,6 +3745,14 @@
       {
         "ja": "分量は元のレシピの1人分のままです（ごはん200g）。電子レンジの加熱時間がこの分量で書かれているため、減らしていません。",
         "en": "Amounts are the source's single serving (200 g rice). They are not reduced because the microwave times are given for these amounts."
+      },
+      {
+        "ja": "ケチャップは製品によって原材料が違います。参照した製品（デルモンテ トマトケチャップ）の表示ではアレルゲンの表示はありませんが、使う製品の表示を確認してください。",
+        "en": "Ketchup ingredients vary by product. The product label cited (Del Monte tomato ketchup) lists no allergens, but check the label of the product you use."
+      },
+      {
+        "ja": "ソーセージ（ウインナー）は製品によって原材料が違います。参照した製品（日本ハム「シャウエッセン」）の表示では、豚肉が表示されています。チーズ入りなど他の製品は違うので、使う製品の表示を確認してください。",
+        "en": "Sausage ingredients vary by product. The label cited (Nippon Ham Schauessen) declares pork. Other products, such as cheese-filled ones, differ, so check the label of the product you use."
       }
     ],
     "sources": [
@@ -3712,6 +3799,17 @@
         "language": "ja",
         "usedFor": [
           "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-schauessen-label",
+        "publisher": "日本ハム株式会社",
+        "title": "シャウエッセン® - ソーセージ | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/sausages/win/2125/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
         ]
       }
     ],
