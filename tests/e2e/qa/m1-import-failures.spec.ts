@@ -4,7 +4,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { FX01, fillProfile, freezeClock, readStore, ROOT, trackProviderCalls, useScenario } from './helpers.ts';
+import { FX01, fillProfile, freezeClock, readStore, ROOT, trackProviderCalls, useScenario, type Json } from './helpers.ts';
 
 const NOT_A_PDF = join(ROOT, 'tests', 'fixtures', 'pdf', 'not-a-pdf.pdf');
 const FX = 'fixture-menu-2026-11';
@@ -227,7 +227,7 @@ test('US-E2-05/AC4 US-E2-05/AC6 US-E3-01/AC1 out-of-month day is listed aside; d
   await page.getByTestId('review-confirm').click();
   await page.getByTestId('dialog-uncertain-confirm').click();
   const s = await readStore(page);
-  expect(s.menus['2026-11'].confirmed.days.some((d: any) => d.date.startsWith('2026-12'))).toBe(false);
+  expect(s.menus['2026-11'].confirmed.days.some((d: Json) => d.date.startsWith('2026-12'))).toBe(false);
 
   const p2 = await page.context().newPage();
   await freezeClock(p2);

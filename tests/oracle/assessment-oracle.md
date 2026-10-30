@@ -167,8 +167,8 @@ These pin the matching rules that the decision table relies on. Expected = the s
 | M03 | 「切り干し大根の煮物」 | dish-kiriboshi-nimono, ing-dried-daikon (not ing-daikon) | longest match |
 | M04 | 「ごま油」 in listed ingredients | ing-sesame-oil (not ing-sesame) | longest match |
 | M05 | 「カニカマ」 | ing-crab-stick (not ing-crab) | longest match |
-| M06 | 「さけのしおやき」 / 「さけ」 alone in a list of seasonings | dish-salted-salmon + ing-salmon / unresolved amb-sake | dictionary §7 amb-sake |
-| M07 | 「しおあじ」 | (taste suffix, no food id) | amb-aji rule |
+| M06 | 「さけのしおやき」 / 「さけ」 alone in a list of seasonings | dish-salted-salmon + ing-salmon + ing-salt (name ingredient, A14) / unresolved amb-sake | dictionary §7 amb-sake (M2 QA: ing-salt added, a bare 「さけ」 menu item is a dish name = salmon) |
+| M07 | 「しおあじ」 | ing-salt only (「あじ」 = taste suffix, no fish id) | amb-aji rule (M2 QA: 「しお」 itself is found) |
 | M08 | 「たこさんウインナー」 | dish-octopus-sausage, ing-sausage (no ing-octopus) | amb-tako |
 | M09 | 「フライパン」 | nothing | amb-pan rule |
 | M10 | 「給食なし」 | no food id (「なし」 = none) | amb-nashi |

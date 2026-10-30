@@ -29,7 +29,7 @@ const noArgDate = {
 };
 
 export default tseslint.config(
-  { ignores: ['dist/**', 'coverage/**', 'reports/**', 'node_modules/**', 'playwright-report/**', 'test-results/**', '.claude/**', 'design/**', 'docs/**', '**/_scratch/**'] },
+  { ignores: ['dist/**', 'coverage/**', 'reports/**', 'node_modules/**', 'playwright-report/**', 'test-results/**', '.claude/**', '.agents/**', '.codex/**', 'design/**', 'docs/**', '**/_scratch/**'] },
   js.configs.recommended,
   ...tseslint.configs.strict,
   {
@@ -61,11 +61,6 @@ export default tseslint.config(
     // Tests index fixtures they just built or loaded; a missing entry fails the test anyway.
     files: ['tests/**'],
     rules: { '@typescript-eslint/no-non-null-assertion': 'off' },
-  },
-  {
-    // QA's suite reads untyped JSON from the app and the proxy; typed access would only add noise.
-    files: ['tests/e2e/qa/**'],
-    rules: { '@typescript-eslint/no-explicit-any': 'off', '@typescript-eslint/no-unused-vars': 'off' },
   },
   {
     files: ['src/**/*.{ts,tsx}'],

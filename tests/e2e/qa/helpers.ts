@@ -4,6 +4,10 @@ import { expect, type Page, type Request } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+// Untyped JSON read from the app store and the proxy: the one documented, scoped exception to no-explicit-any.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Json = any;
+
 export const ROOT = process.cwd();
 export const KEY = 'bentominder.state';
 export const FX = (id: string, file = 'menu.pdf') => join(ROOT, 'tests', 'fixtures', 'menus', id, file);
@@ -38,7 +42,7 @@ export async function axeSerious(page: Page, label: string) {
   expect(serious.map((v) => `${label} ${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual([]);
 }
 
-export async function readStore(page: Page): Promise<any> {
+export async function readStore(page: Page): Promise<Json> {
   return page.evaluate((k) => JSON.parse(window.localStorage.getItem(k) ?? 'null'), KEY);
 }
 
@@ -69,7 +73,7 @@ export async function fillProfile(page: Page, p: ProfileInput = {}) {
 
 /** Tracks the sum of providerCalls reported by the proxy for /api/menu/extract. */
 export function trackProviderCalls(page: Page) {
-  const state = { extractRequests: 0, providerCalls: 0, replies: [] as any[] };
+  const state = { extractRequests: 0, providerCalls: 0, replies: [] as Json[] };
   page.on('response', async (resp) => {
     if (new URL(resp.url()).pathname === '/api/menu/extract') {
       state.extractRequests += 1;

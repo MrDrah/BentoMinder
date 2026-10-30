@@ -6,7 +6,7 @@ import { expect, test } from '@playwright/test';
 import { spawn, type ChildProcess } from 'node:child_process';
 import { createServer, type Server } from 'node:net';
 import { readFileSync } from 'node:fs';
-import { FX, ROOT } from './helpers.ts';
+import { FX, ROOT, type Json } from './helpers.ts';
 
 const FX01 = FX('fixture-menu-2026-11');
 const OK = 'fixture-menu-2026-11/hand-1';
@@ -176,7 +176,7 @@ test.describe('extract allow-list, cache and caps', () => {
   test('US-E2-06/AC8 BR-10 proxy cap: 5 per hour, then 0 provider calls and RATE_LIMITED; failures count toward the cap', async () => {
     const proxy = await startProxy(18794);
     try {
-      const results: any[] = [];
+      const results: Json[] = [];
       for (let i = 0; i < 7; i++) {
         const pdf = Buffer.concat([Buffer.from('%PDF-1.4\n'), Buffer.from(`unique-${i}`)]);
         results.push(await (await extract(18794, pdf, OK)).json());

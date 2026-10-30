@@ -1,7 +1,7 @@
 // QA M1: review/edit boundaries (US-E3-02, US-E3-03, US-E3-04), URL/back-button state, offline,
 // double actions. Uses the FX-01 stand-in through the real proxy.
 import { expect, test, type Page } from '@playwright/test';
-import { FX01, fillProfile, freezeClock, pinHand1, readStore } from './helpers.ts';
+import { FX01, fillProfile, freezeClock, pinHand1, readStore, type Json } from './helpers.ts';
 
 test.beforeEach(async ({ page }) => {
   await freezeClock(page);
@@ -61,7 +61,7 @@ test('US-E3-02/AC4 hostile dish text (markup, emoji, 4-byte, RTL) is stored verb
   await page.getByTestId('review-dish-2026-11-04-0').fill('‮evil‬ ｱｲｳ');
   await confirmAll(page);
   const s = await readStore(page);
-  const day = s.menus['2026-11'].confirmed.days.find((d: any) => d.date === '2026-11-02');
+  const day = s.menus['2026-11'].confirmed.days.find((d: Json) => d.date === '2026-11-02');
   expect(day.items[0].text).toBe(evil);
   await page.goto('./#/review/2026-11');
   expect(dialogs).toEqual([]);
@@ -81,8 +81,8 @@ test('US-E3-02/AC2 US-E3-03/AC1 add and remove dishes; the confirmed menu reflec
   await confirmAll(page);
   const s = await readStore(page);
   const days = s.menus['2026-11'].confirmed.days;
-  const d12 = days.find((d: any) => d.date === '2026-11-12');
-  const d13 = days.find((d: any) => d.date === '2026-11-13');
+  const d12 = days.find((d: Json) => d.date === '2026-11-12');
+  const d13 = days.find((d: Json) => d.date === '2026-11-13');
   expect(d12.items.at(-1)).toMatchObject({ text: 'ポテトサラダ', verification: { status: 'parent-entered' } });
   expect(d13.items).toHaveLength(n13 - 1);
 });
@@ -142,8 +142,8 @@ test('US-E3-02/AC3 US-E3-02/AC6 no-lunch day: default reason, wording follows th
   await text.fill('行事');
   await confirmAll(page);
   const cm = (await readStore(page)).menus['2026-11'].confirmed;
-  expect(cm.noLunchDays.find((n: any) => n.date === date)).toMatchObject({ reason: 'no-lunch', originalText: '行事' });
-  expect(cm.days.some((d: any) => d.date === date)).toBe(false);
+  expect(cm.noLunchDays.find((n: Json) => n.date === date)).toMatchObject({ reason: 'no-lunch', originalText: '行事' });
+  expect(cm.days.some((d: Json) => d.date === date)).toBe(false);
 });
 
 test('US-E3-04/AC1 US-E3-04/AC2 manual entry: empty cannot be confirmed; a typed dish is parent-entered, source manual', async ({ page }) => {
@@ -164,7 +164,7 @@ test('US-E3-04/AC1 US-E3-04/AC2 manual entry: empty cannot be confirmed; a typed
   const s = await readStore(page);
   const m = s.menus['2026-11'];
   expect(m.confirmed.days[0].items[0]).toMatchObject({ text: '手入力のカレー', verification: { status: 'parent-entered' } });
-  expect(m.extractions.every((e: any) => e.source.kind === 'manual') || m.confirmed.source?.kind === 'manual' || JSON.stringify(m).includes('"kind":"manual"')).toBe(true);
+  expect(m.extractions.every((e: Json) => e.source.kind === 'manual') || m.confirmed.source?.kind === 'manual' || JSON.stringify(m).includes('"kind":"manual"')).toBe(true);
 });
 
 test('US-E3-04/AC1 a no-lunch day alone is enough to confirm a manual menu', async ({ page }) => {

@@ -1,7 +1,7 @@
 // QA M1 journey: first launch -> profile (boundaries, hostile input) -> upload FX-01 -> review ->
 // confirm -> calendar -> reload. Runs in both projects (Asia/Tokyo ja-JP, Pacific/Honolulu en-US).
 import { expect, test } from '@playwright/test';
-import { axeSerious, FX01, fillProfile, freezeClock, pinHand1, readStore, recordAll, requestText, trackProviderCalls } from './helpers.ts';
+import { axeSerious, FX01, fillProfile, freezeClock, pinHand1, readStore, recordAll, requestText, trackProviderCalls, type Json } from './helpers.ts';
 
 test.beforeEach(async ({ page }) => {
   await freezeClock(page);
@@ -222,7 +222,7 @@ test('US-E1-01/AC2 US-E2-03/AC1 US-E2-08/AC1 US-E3-01/AC1 US-E3-01/AC2 US-E3-02/
   const s = await readStore(page);
   const cm = s.menus['2026-11'].confirmed;
   expect(cm.version).toBe(1);
-  const statuses = cm.days.flatMap((d: any) => d.items.map((i: any) => i.verification.status));
+  const statuses = cm.days.flatMap((d: Json) => d.items.map((i: Json) => i.verification.status));
   expect(statuses).toContain('parent-edited');
   expect(statuses).toContain('uncertain-accepted');
   expect(cm.confirmedAt).toMatch(/\+09:00$/);

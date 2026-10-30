@@ -3,14 +3,14 @@
 import { expect, test, type Page } from '@playwright/test';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { FX01, fillProfile, freezeClock, readStore } from './helpers.ts';
+import { FX01, fillProfile, freezeClock, readStore, type Json } from './helpers.ts';
 
 test.beforeEach(async ({ page }) => {
   await freezeClock(page);
 });
 
 /** Lets the real proxy answer, then rewrites its JSON body. */
-async function mutateExtract(page: Page, mutate: (j: any) => any) {
+async function mutateExtract(page: Page, mutate: (j: Json) => Json) {
   await page.route('**/api/menu/extract**', async (route) => {
     const resp = await route.fetch({ headers: { ...route.request().headers(), 'x-bm-mock-scenario': 'fixture-menu-2026-11/hand-1' } });
     const json = await resp.json();
@@ -44,17 +44,17 @@ test('US-E2-05 BR-11 a dish name carrying markup from the service is rendered as
 
 test('US-E2-05/AC2 BR-11 service output that breaks the contract (unknown field, 5000-char dish, bad date) is refused, nothing stored', async ({ page }) => {
   for (const [label, mutate] of [
-    ['unknown top-level field', (j: any) => ((j.menu.profile = { nickname: 'x' }), j)],
-    ['5000-char dish', (j: any) => ((j.menu.days[0].items[0].text = 'あ'.repeat(5000)), j)],
-    ['impossible date', (j: any) => ((j.menu.days[0].date = '2026-11-31'), j)],
-    ['days is not an array', (j: any) => ((j.menu.days = 'x'), j)],
-    ['menu is null', (j: any) => ((j.menu = null), j)],
-    ['ok true without menu', (j: any) => ({ ok: true }) as unknown as typeof j],
+    ['unknown top-level field', (j: Json) => ((j.menu.profile = { nickname: 'x' }), j)],
+    ['5000-char dish', (j: Json) => ((j.menu.days[0].items[0].text = 'あ'.repeat(5000)), j)],
+    ['impossible date', (j: Json) => ((j.menu.days[0].date = '2026-11-31'), j)],
+    ['days is not an array', (j: Json) => ((j.menu.days = 'x'), j)],
+    ['menu is null', (j: Json) => ((j.menu = null), j)],
+    ['ok true without menu', () => ({ ok: true }) as unknown as Json],
     ['html instead of json', () => '<html>' as unknown as object],
   ] as const) {
     const p = await page.context().newPage();
     await freezeClock(p);
-    await mutateExtract(p, mutate as (j: any) => any);
+    await mutateExtract(p, mutate as (j: Json) => Json);
     await p.addInitScript(() => sessionStorage.getItem('c') === null && (localStorage.clear(), sessionStorage.setItem('c', '1')));
     await upload(p);
     const outcome = p.getByTestId('import-error').or(p.getByTestId('screen-review'));

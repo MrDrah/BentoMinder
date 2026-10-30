@@ -25,7 +25,6 @@ const named = new Map();
 for (const f of files) {
   const text = readFileSync(f, 'utf8');
   const qa = f.split('\\').join('/').includes('tests/e2e/qa/');
-  const fixmeLines = new Set();
   for (const m of text.matchAll(/US-[A-Z0-9]+(?:-\d+)?\/AC\d+/g)) {
     const e = named.get(m[0]) ?? { qa: 0, other: 0 };
     if (qa) e.qa++;
