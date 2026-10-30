@@ -1,7 +1,7 @@
 // Day sheet (design/components.md §1.12, §3): the menu, the assessment with its explanation and
 // the manual override, and the plan with exactly the actions the state machine allows (BR-02).
 // Choosing homemade bento opens the recommendation view and writes nothing (US-E5-03/AC1).
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { OVERRIDE_STATES } from '../../domain/schema/menu.ts';
 import { clearOverride, setOverride, type OverrideState } from '../../domain/assessment/override.ts';
 import type { DayAction, DayView } from '../../domain/calendar/day-view.ts';
@@ -76,9 +76,9 @@ export function DaySheet({ date, mode, onClose }: { date: LocalDate; mode: Sheet
   );
 }
 
-function Section({ testId, heading, children }: { testId?: string; heading?: string; children: ReactNode }) {
+function Section({ testId, heading, children, innerRef }: { testId?: string; heading?: string; children: ReactNode; innerRef?: RefObject<HTMLElement | null> }) {
   return (
-    <section className="sheet__section" data-testid={testId}>
+    <section ref={innerRef} className="sheet__section" data-testid={testId}>
       {heading !== undefined && <h3 className="sheet__heading">{heading}</h3>}
       {children}
     </section>
@@ -324,8 +324,19 @@ function PlanSection({ v }: { v: DayView }) {
   const none = v.actions.length === 0 && !v.reservationOffered;
   const record = v.record;
   const date = formatDate(t, lang, v.date);
+  const planRef = useRef<HTMLElement>(null);
 
-  const run = async (event: DecisionEvent, saved: MessageKey | null): Promise<boolean> => {
+  // A disabled or replaced button drops focus to BODY, where Escape no longer reaches the sheet
+  // (US-E5-01/AC3, US-NF-02/AC1). When the save settles with focus lost, return it to the sheet header.
+  useEffect(() => {
+    if (busy) return;
+    const active = document.activeElement;
+    if (active !== null && active !== document.body) return;
+    const sheet = planRef.current?.closest('[data-testid="day-sheet"]');
+    sheet?.querySelector<HTMLElement>('[data-testid="day-sheet-title"]')?.focus();
+  }, [busy, shown]);
+
+  const run =async (event: DecisionEvent, saved: MessageKey | null): Promise<boolean> => {
     if (busy) return false;
     const r = applyDecisionEvent(store, v.date, event, { today, now: now(), recipe: () => undefined });
     if (!r.ok) return false;
@@ -388,7 +399,7 @@ function PlanSection({ v }: { v: DayView }) {
   if (v.type.type !== 'school' && v.type.type !== 'bento-day' && !planned) return null;
 
   return (
-    <Section testId="day-plan" heading={t('day.decision.heading')}>
+    <Section innerRef={planRef} testId="day-plan" heading={t('day.decision.heading')}>
       <p className="plan-status" data-testid="day-status" data-decision={shown ?? 'none'}>
         {planned ? <BentoIcon filled size={20} /> : shown === 'not-confirmed' ? <BentoIcon filled={false} size={20} /> : null}
         {t('day.decision.current', { decision: decisionLabel })}

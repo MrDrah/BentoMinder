@@ -162,8 +162,7 @@ test.describe('read-only past and hostile menu text (BR-27, US-E5-02/AC3, US-NF-
     await expect.poll(async () => (await readStore(page)).decisions['2026-11-18']?.state).toBe('not-confirmed');
   });
 
-  test('US-E5-01/AC3 US-NF-02/AC1 [M2-D01 open P3, expected to fail until fixed] after a keyboard action the focus stays in the sheet and Escape closes it', async ({ page }) => {
-    test.fail(true, 'M2-D01: the activated button is removed and focus falls to BODY, so Escape no longer closes the sheet');
+  test('US-E5-01/AC3 US-NF-02/AC1 [M2-D01 fixed] after a keyboard action the focus stays in the sheet and Escape closes it', async ({ page }) => {
     await seed(page, STATE);
     await page.goto('./');
     await cell(page, '2026-11-18').getByRole('button').focus();

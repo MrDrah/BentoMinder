@@ -94,7 +94,8 @@ describe('US-E8-01 Japanese by default, one-tap English', () => {
     first.unmount();
     document.documentElement.lang = 'ja';
     await renderApp(storage);
-    expect(document.documentElement.lang).toBe('en');
+    // <html lang> is set in an effect after the render that shows the calendar; wait for it.
+    await vi.waitFor(() => expect(document.documentElement.lang).toBe('en'));
     expect(screen.getByTestId('cal-title')).toHaveTextContent('November 2026');
   });
 });
