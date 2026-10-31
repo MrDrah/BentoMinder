@@ -318,3 +318,13 @@ describe('US-E2-06/AC4 wiring in defaultDeps', () => {
     expect(defaultDeps({ GEMINI_API_KEY: KEY }).provider).not.toBeNull();
   });
 });
+
+describe('Gemini prompt (first live eval, 2026-10-31)', () => {
+  it('US-E2-06/AC1 the prompt pins the contract id and the ingredients and out-of-month rules the live model got wrong', async () => {
+    const { buildPrompt } = await import('../../../server/menu/gemini-prompt.ts');
+    const p = buildPrompt('2026-11');
+    expect(p).toContain('"extracted-menu/1"');
+    expect(p).toContain('never an empty array');
+    expect(p).toContain('leave outOfMonthDays as an empty array');
+  });
+});

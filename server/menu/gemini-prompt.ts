@@ -24,10 +24,11 @@ export function buildPrompt(targetMonth: string, repairErrors?: string[]): strin
     '- Transcribe what is printed. Do not infer, translate, correct or add anything the PDF does not show.',
     '- One entry per printed date. Keep the printed date text and weekday exactly as printed (printedDateText, printedWeekday).',
     '- Days marked as bento day (お弁当の日), no lunch (給食なし, 午前保育 etc.) go to noLunchDays with the original text.',
-    '- If a field is not printed (for example ingredients), leave it out; never guess it from the dish name.',
+    '- The contract field must be exactly "extracted-menu/1".',
+    '- If a field is not printed (for example ingredients), leave it out; never guess it from the dish name. When ingredientsStatus is not "listed", omit the ingredients key entirely (never an empty array).',
     '- Do not invent allergens. If the PDF lists no allergen information for a day, report the allergen declaration as not declared. Only say "declared none" when the PDF explicitly says so (例: アレルゲンなし).',
     '- If a reading is doubtful (blurry, partly legible, ambiguous), still give your best reading but set that field verification status to "uncertain" with a short reason. Otherwise use "ok". No other statuses.',
-    '- Dates that are not in the target month go to outOfMonthDays.',
+    '- Put every printed date, in any month, in days or noLunchDays (even an odd one such as a Saturday or a weekday that does not match) and leave outOfMonthDays as an empty array: the app sorts out-of-month dates itself.',
     '- If the document is not a lunch menu, return the schema with no days and no noLunchDays.',
     '- Answer with JSON only.',
   ];

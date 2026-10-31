@@ -9,6 +9,7 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseModelReply } from '../src/domain/menu/extraction.ts';
 import { memoryCache, runExtraction, windowCap } from '../server/menu/extract.ts';
 import { createGeminiTransport } from '../server/menu/gemini-transport.ts';
 
@@ -20,10 +21,33 @@ if (apiKey === undefined || apiKey.trim() === '') {
   process.exit(1);
 }
 
+// EVAL_DEBUG=1: per call print model, HTTP status, finishReason, token counts, the raw candidate
+// text (first 2,000 chars; synthetic fixtures only) and the validation issues; the full raw text of
+// the last reply goes to reports/ (git-ignored). Wraps fetch only: no key, header or request body.
+const debug = process.env.EVAL_DEBUG === '1';
+let lastRaw = null;
+const debugFetch = async (url, init) => {
+  const res = await globalThis.fetch(url, init);
+  const model = /models\/([^:]+):/.exec(String(url))?.[1] ?? '?';
+  const body = await res.clone().json().catch(() => null);
+  const cand = body?.candidates?.[0];
+  const text = (cand?.content?.parts ?? []).filter((p) => p.thought !== true && typeof p.text === 'string').map((p) => p.text).join('');
+  const u = body?.usageMetadata ?? {};
+  console.log(`  [debug] model=${model} status=${res.status} finishReason=${cand?.finishReason ?? '-'} promptTokens=${u.promptTokenCount ?? '-'} candidateTokens=${u.candidatesTokenCount ?? '-'} thoughtTokens=${u.thoughtsTokenCount ?? '-'}`);
+  if (!res.ok) console.log(`  [debug] error=${JSON.stringify(body?.error ?? null).slice(0, 1000)}`);
+  if (res.ok) {
+    lastRaw = text;
+    console.log(`  [debug] raw(first 2000)=${text.slice(0, 2000)}`);
+    const out = parseModelReply(text, { targetMonth: '2026-11', sha256: 'x'.repeat(64), byteSize: 1, model, promptVersion: 1, at: new Date().toISOString() });
+    console.log(`  [debug] parse=${out.kind}${out.kind === 'malformed' ? ' issues=' + JSON.stringify(out.issues) : ''}`);
+  }
+  return res;
+};
+
 const usage = [];
 const transport = createGeminiTransport({
   apiKey,
-  fetch: globalThis.fetch,
+  fetch: debug ? debugFetch : globalThis.fetch,
   ...(process.env.AI_ALLOW_PAID_MODELS === 'true' ? { allowedModels: null } : {}),
   log: (m) => console.log(`  [log] ${m}`),
   onUsage: (model, u) => usage.push({ model, ...u }),
@@ -78,4 +102,5 @@ for (const id of ids) {
 mkdirSync(join(root, 'reports'), { recursive: true });
 const file = join(root, 'reports', `eval-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
 writeFileSync(file, JSON.stringify({ at: new Date().toISOString(), results }, null, 2));
+if (debug && lastRaw !== null) writeFileSync(file.replace(/\.json$/, '.raw.txt'), lastRaw);
 console.log(`Wrote ${file}. Total provider calls: ${results.reduce((n, r) => n + r.providerCalls, 0)}.`);
