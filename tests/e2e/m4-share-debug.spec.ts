@@ -236,7 +236,7 @@ test.describe('debug panel on the development server', () => {
     await expect.poll(() => page.evaluate(() => window.localStorage.getItem('bentominder.state'))).toBeNull();
   });
 
-  test('US-E11-03/AC2 the panel selects a failure mode and shows this month's AI call count (the mode-to-result mapping is unit-tested)', async ({ page, dev }) => {
+  test('US-E11-03/AC2 the panel selects a failure mode and shows the AI call count of this month (the mode-to-result mapping is unit-tested)', async ({ page, dev }) => {
     await open(page, SUNDAY, dev.url);
     await page.getByTestId('debug-open').click();
     await page.getByTestId('debug-ai-mode').selectOption('rate-limited');
