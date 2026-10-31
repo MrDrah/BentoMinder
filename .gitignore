@@ -28,3 +28,6 @@ data/_research/.cache/
 
 # research scratch: saved source pages (copyrighted, never committed; the overlap cache is .cache/)
 docs/ba/_scratch/**/*.html
+
+# real school documents used as local mocks; never commit (public repo)
+local-mocks/
