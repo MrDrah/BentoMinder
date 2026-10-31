@@ -26,3 +26,5 @@ export * from './decision/decision.ts';
 export * from './decision/apply.ts';
 export * from './calendar/day-view.ts';
 export * from './recommend/index.ts';
+export * from './reminders/index.ts';
+export * from './calendar/reminder-days.ts';
