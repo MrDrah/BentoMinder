@@ -27,6 +27,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Fetch cited recipe sources (copyrighted text is never committed; the overlap audit needs it)
+        run: node .claude/skills/quality-gate/scripts/validate.mjs overlap --fetch
+        env:
+          NO_COLOR: '1'
       - name: Release gate
         # Everything that reaches main passes the full release stage. The lighter "dev" stage is for
         # the local Dev → QA handoff only.
