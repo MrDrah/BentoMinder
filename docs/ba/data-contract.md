@@ -466,7 +466,7 @@ This table is the full list of rule ids. Code reports only these ids; a check wi
 | `reminder-key-format` | S | `key` is `<type>:<date>` matching the entry's `type` and a valid date. |
 | `reminder-expiry-after-due` | S | `expiresAt` is after `dueAt`. |
 | `reminder-shown-until-dismissed` | E | A shown, undismissed reminder shows again on each open until dismissed or expired. |
-| `reminder-day-before-suppressed` | E | No day-before reminder for a date planned after its due time (`plannedAt ≥ dueAt`). |
+| `reminder-day-before-suppressed` | E | No day-before reminder for a date planned after its due time (`plannedAt > dueAt`; equal still creates it, US-E7-02/AC5). |
 | `ref-dictionary` | S, L | Every dictionary id in the store or library resolves. |
 | `ref-recipe` | E | An unresolved `recipeId` on read is reported, never deleted. |
 | `ai-payload-allowlist` | P | The adapter request has exactly `pdf`, `targetMonth`, `promptVersion`, `schemaVersion`. |

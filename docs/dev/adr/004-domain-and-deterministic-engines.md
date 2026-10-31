@@ -249,7 +249,7 @@ function diffSchedule(current: { key: string; contentHash: string }[], desired: 
 - **Settings changes (US-E7-04/AC2):** new times apply to future jobs; a key already in `reminderLog` as shown is not shown again.
 - **Locale:** content is keys + params; rendering happens at display (web) or schedule time (Android); a locale change changes `contentHash` on Android only.
 
-Tests: key stability; idempotent diff; expired dropped; due-on-open; `plannedAt ≥ dueAt` skip, and a recipe change after `dueAt` on a day planned before it keeps the job with new content (B10); a conflicting plan keeps its job until `CLEAR_PLAN` (B7); month and year boundaries (2027-01-29/2027-02-01 → 2027-01-28 and 2027-01-31 17:30 JST; 2028-02-29/03-01; weekly on 2026-11-29 covering 11-30 … 12-06); device TZ ≠ JST (`TZ=Europe/Paris`, `America/Los_Angeles` test project).
+Tests: key stability; idempotent diff; expired dropped; due-on-open; `plannedAt > dueAt` skip (equality still creates it, US-E7-02/AC5), and a recipe change after `dueAt` on a day planned before it keeps the job with new content (B10); a conflicting plan keeps its job until `CLEAR_PLAN` (B7); month and year boundaries (2027-01-29/2027-02-01 → 2027-01-28 and 2027-01-31 17:30 JST; 2028-02-29/03-01; weekly on 2026-11-29 covering 11-30 … 12-06); device TZ ≠ JST (`TZ=Europe/Paris`, `America/Los_Angeles` test project).
 
 ## 5. Module boundaries
 ```
