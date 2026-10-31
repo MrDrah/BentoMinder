@@ -10,7 +10,9 @@ import { navigate, toHash, useRoute, type Route } from './router.ts';
 import { CalendarScreen } from './screens/CalendarScreen.tsx';
 import { ImportScreen } from './screens/ImportScreen.tsx';
 import { OnboardingScreen } from './screens/OnboardingScreen.tsx';
-import { LoadingScreen, NotFoundScreen, PlaceholderScreen, RecoveryScreen, screenTitle } from './screens/OtherScreens.tsx';
+import { LibraryScreen } from './screens/LibraryScreen.tsx';
+import { LoadingScreen, NotFoundScreen, RecoveryScreen, screenTitle } from './screens/OtherScreens.tsx';
+import { RecipeScreen } from './screens/RecipeScreen.tsx';
 import { RecommendScreen } from './screens/RecommendScreen.tsx';
 import { RefreshReviewScreen } from './screens/RefreshReviewScreen.tsx';
 import { ReviewScreen } from './screens/ReviewScreen.tsx';
@@ -18,13 +20,17 @@ import { ProfileEditScreen, SettingsScreen } from './screens/SettingsScreen.tsx'
 import { TopBar } from './components/Bars.tsx';
 
 export function App() {
-  const { state, t, today, updatedElsewhere, dismissUpdatedElsewhere } = useApp();
+  const { state, t, today, services, updatedElsewhere, dismissUpdatedElsewhere } = useApp();
   const route = useRoute();
   const gated = useRef(false);
 
   const docScreen = (r: Route): string => {
     if (r.name === 'calendar') return formatMonth(t, state.language, r.month ?? monthOf(today));
     if (r.name === 'not-found') return t('notFound.title');
+    if (r.name === 'recipe') {
+      const recipe = services.library.find((x) => x.id === r.id);
+      return recipe === undefined ? t('recipe.notFound') : state.language === 'en' ? (recipe.name.en ?? recipe.name.ja) : recipe.name.ja;
+    }
     return screenTitle(r, t, state.language);
   };
   const docTitle = t('app.docTitle', { screen: docScreen(route) });
@@ -92,6 +98,10 @@ function Screen({ route }: { route: Route }) {
       return <CalendarScreen month={null} openDate={route.date} />;
     case 'recommend':
       return <RecommendScreen date={route.date} />;
+    case 'recipe':
+      return <RecipeScreen id={route.id} date={route.date} />;
+    case 'recipes':
+      return <LibraryScreen />;
     case 'refresh-review':
       return <RefreshReviewScreen month={route.month} fresh={route.fresh} />;
     case 'onboarding':
@@ -120,7 +130,5 @@ function Screen({ route }: { route: Route }) {
       return <ProfileEditScreen />;
     case 'not-found':
       return <NotFoundScreen />;
-    default:
-      return <PlaceholderScreen route={route} />;
   }
 }

@@ -5,6 +5,7 @@
 @import '../../../design/tokens.css';
 @import './forms.css';
 @import './calendar.css';
+@import './recommend.css';
 
 *,
 *::before,

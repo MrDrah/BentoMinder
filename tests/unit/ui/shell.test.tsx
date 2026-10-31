@@ -24,7 +24,7 @@ async function renderApp(storage: Storage = seeded(), hash = '') {
       <App />
     </AppProvider>,
   );
-  await screen.findByTestId(/^screen-(calendar|newer-data|corrupt-data|not-found|day|recipe|recipes|settings|onboarding|profile|import-page|review-page)$/);
+  await screen.findByTestId(/^screen-(calendar|newer-data|corrupt-data|not-found|day|recipe|recipes|library|recommend|settings|onboarding|profile|import-page|review-page)$/);
   return utils;
 }
 

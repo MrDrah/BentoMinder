@@ -8,12 +8,14 @@ import { createWebFileExport, webIsOnline } from '../adapters/web/file-export.ts
 import { createWebPdfSource } from '../adapters/web/pdf-source.ts';
 import type { Clock, FileExport, MenuExtractor, PdfSource } from '../domain/ports.ts';
 import type { Dictionary } from '../domain/schema/dictionary.ts';
+import type { Recipe } from '../domain/schema/recipe.ts';
 import type { BentoMinderStore } from '../domain/schema/store.ts';
 import { createEmptyStore } from '../domain/storage/defaults.ts';
 import { StoreConflictError, type LoadResult, type Repository } from '../domain/storage/repository.ts';
 import { toJstTimestamp, todayJst, type Instant, type LocalDate } from '../domain/time/jst.ts';
 import { createTranslator, type Language, type Translate } from '../i18n/index.ts';
 import { shippedDictionary } from './dictionary.ts';
+import { shippedLibrary } from './library.ts';
 import { setProfileDraft } from './session.ts';
 
 export type AppState =
@@ -64,6 +66,7 @@ export interface AppServices {
   fileExport: FileExport;
   isOnline: () => boolean;
   dictionary: Dictionary;
+  library: readonly Recipe[];
 }
 
 /** One-shot notes passed from the import screen to the review screen (in memory only). */
@@ -124,6 +127,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       fileExport: given?.fileExport ?? createWebFileExport(),
       isOnline: given?.isOnline ?? webIsOnline,
       dictionary: given?.dictionary ?? shippedDictionary,
+      library: given?.library ?? shippedLibrary,
     }),
     [given],
   );

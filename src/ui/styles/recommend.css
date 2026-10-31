@@ -1,0 +1,363 @@
+/* M3: recommendation cards, recipe detail, library, plan-date picker (design/components.md 4, 5). */
+.page--wide {
+  max-width: var(--content-max);
+}
+@media (min-width: 1280px) {
+  .page--wide {
+    max-width: 1200px;
+  }
+}
+
+.rec-grid,
+.rec-rows {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+@media (min-width: 1280px) {
+  .rec-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.rec-more {
+  margin-top: var(--space-4);
+}
+.rec-empty {
+  margin-bottom: var(--space-4);
+}
+
+.rec-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.rec-card:hover {
+  box-shadow: var(--elevation-2);
+}
+.rec-card--row {
+  flex-direction: row;
+}
+.rec-card__art {
+  position: relative;
+}
+.rec-card__rank {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--navy-fill);
+  color: var(--ink-inverse);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+.rec-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  min-width: 0;
+}
+.rec-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+}
+.rec-card__other {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+.rec-card__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.rec-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.rec-reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tag--ok {
+  background: var(--success-soft);
+  color: var(--success);
+}
+.rec-line {
+  display: block;
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.rec-allergens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.rec-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0;
+}
+.rec-warn .banner__icon {
+  flex: none;
+  color: var(--warning);
+}
+
+.recipe-art {
+  position: relative;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.recipe-art--card {
+  height: 112px;
+}
+.recipe-art--thumb {
+  width: 64px;
+  height: 100%;
+  min-height: 64px;
+}
+.recipe-art--hero {
+  height: 150px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+}
+.recipe-art__stripe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  background: var(--stripe-band-red, var(--accent));
+}
+.recipe-art--hero .recipe-art__stripe {
+  background: var(--navy-fill);
+}
+
+/* Recipe detail */
+.recipe__cols {
+  display: grid;
+  gap: var(--space-4);
+}
+@media (min-width: 1280px) {
+  .recipe__cols {
+    grid-template-columns: 400px 1fr;
+    align-items: start;
+  }
+}
+.recipe__left,
+.recipe__right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.recipe__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+}
+.recipe__h {
+  margin: var(--space-3) 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
+.recipe__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.recipe__table th,
+.recipe__table td {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--line-1);
+  font-weight: var(--weight-regular);
+  text-align: left;
+  vertical-align: top;
+}
+.recipe__table td {
+  text-align: right;
+  white-space: nowrap;
+  padding-left: var(--space-3);
+}
+.recipe__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: var(--leading-relaxed);
+}
+.recipe__steps li {
+  display: flex;
+  gap: var(--space-3);
+}
+.recipe__step-n {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--navy-fill);
+  color: var(--ink-inverse);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+}
+.recipe__notes,
+.recipe__sources {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+.recipe__sources {
+  list-style: none;
+  padding: 0;
+}
+.recipe__sources li + li {
+  margin-top: var(--space-3);
+}
+.recipe__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.recipe__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+@media (max-width: 1279px) {
+  .recipe__footer:not(:empty) {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--z-banner);
+    padding: var(--space-3) 0;
+    background: var(--surface-1);
+  }
+}
+
+/* Library */
+.library-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 1280px) {
+  .library-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.library-row {
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.library-row:hover {
+  background: var(--surface-1);
+}
+.library-row.is-blocked {
+  background: var(--surface-3);
+}
+.library-row.is-blocked .rec-card__meta,
+.library-row.is-blocked .rec-line {
+  color: var(--ink-3);
+}
+.library-row__link {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
+  color: var(--ink-1);
+  text-decoration: none;
+}
+.library-row__link .recipe-art--thumb {
+  width: 72px;
+  flex: none;
+}
+.library-row__link > .icon {
+  align-self: center;
+  margin-right: var(--space-3);
+  flex: none;
+}
+.library-row__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  min-width: 0;
+}
+.library-row__name {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+}
+.library-row__reason {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Plan-date picker */
+.picker {
+  position: fixed;
+  z-index: calc(var(--z-sheet) + 1);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--space-5);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--surface-2);
+  box-shadow: var(--elevation-3);
+}
+@media (min-width: 768px) {
+  .picker {
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    width: min(480px, 92vw);
+    transform: translate(-50%, -50%);
+    border-radius: var(--radius-xl);
+  }
+}
+.picker__title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+.picker__list {
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  border: 0;
+}
+.picker__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

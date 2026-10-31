@@ -38,7 +38,7 @@ export function recipeShortName(record: Pick<DayDecision, 'recipeShortNameSnapsh
 const joiner = (lang: Language) => (lang === 'ja' ? '、' : ', ');
 
 /** English dictionary labels start with a capital; inside a sentence they are lower case. */
-const inSentence = (label: string, lang: Language) => (lang === 'en' ? label.charAt(0).toLowerCase() + label.slice(1) : label);
+export const inSentence = (label: string, lang: Language) => (lang === 'en' ? label.charAt(0).toLowerCase() + label.slice(1) : label);
 
 /** `{list}` of an explanation: up to 3 names, then 「ほか{n}つ」 / "and {n} more" when the count is larger. */
 function nameList(t: Translate, lang: Language, names: string[], count: number): string {

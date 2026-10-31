@@ -1,5 +1,4 @@
-// Placeholders for routes whose screens arrive in later milestones, plus the not-found and
-// stored-data recovery screens (design/components.md §12). Every string comes from the catalog.
+// Screen titles for the document title, plus the not-found and stored-data recovery screens (design/components.md §12). Every string comes from the catalog.
 import { useState } from 'react';
 import { formatDate } from '../../i18n/format.ts';
 import type { Language, MessageKey, Translate } from '../../i18n/index.ts';
@@ -11,14 +10,13 @@ import type { Route } from '../router.ts';
 import { navigate, toHash } from '../router.ts';
 
 type TitledRoute = Exclude<Route, { name: 'calendar' } | { name: 'not-found' }>;
-export type PlaceholderRoute = Extract<Route, { name: 'recipe' | 'recipes' }>;
 
 export function screenTitle(route: TitledRoute, t: Translate, lang: Language): string {
   switch (route.name) {
     case 'day':
       return formatDate(t, lang, route.date);
     case 'recommend':
-      return t('rec.title');
+      return t('rec.title', { date: formatDate(t, lang, route.date) });
     case 'refresh-review':
       return t('refresh.review.title');
     case 'recipe':
@@ -35,17 +33,6 @@ export function screenTitle(route: TitledRoute, t: Translate, lang: Language): s
     case 'onboarding':
       return t(`ob.step${route.step}.name` as MessageKey);
   }
-}
-
-export function PlaceholderScreen({ route }: { route: PlaceholderRoute }) {
-  const { state, t } = useApp();
-  const title = screenTitle(route, t, state.language);
-  return (
-    <div className="screen" data-testid={`screen-${route.name}`}>
-      <TopBar title={title} />
-      <main id="main" className="page" />
-    </div>
-  );
 }
 
 export function NotFoundScreen() {

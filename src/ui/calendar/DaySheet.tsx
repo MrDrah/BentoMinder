@@ -315,7 +315,7 @@ const SAVED_KEYS = {
 } as const;
 
 function PlanSection({ v }: { v: DayView }) {
-  const { t, state, today, now, commit, showToast, showSaveFailed } = useApp();
+  const { t, state, today, now, commit, showToast, showSaveFailed, services } = useApp();
   const store = useStore();
   const lang = state.language;
   const [ask, setAsk] = useState<'cancel-plan' | 'clear-plan' | null>(null);
@@ -390,6 +390,13 @@ function PlanSection({ v }: { v: DayView }) {
     keep: 'day-action-keep',
   };
   const primary: DayAction[] = ['bento', 'plan-bento-day', 'view-recipe'];
+  // US-E6-06/AC1: the planned recipe is no longer in the library; the plan stays as stored.
+  const missing = shown === 'homemade-bento-planned' && record?.recipeId !== undefined && !services.library.some((r) => r.id === record.recipeId);
+  if (missing) {
+    label['change-recipe'] = 'day.recipeMissing.action';
+    primary.push('change-recipe');
+  }
+  const actions = missing ? v.actions.filter((a) => a !== 'view-recipe') : v.actions;
   const dangerous: DayAction[] = ['back-to-school', 'clear-plan'];
 
   if (shown === null && none) return null;
@@ -407,10 +414,15 @@ function PlanSection({ v }: { v: DayView }) {
       {planned && record !== undefined && (
         <div className="recipe-card" data-testid="day-recipe-card">
           <span>{t('recipe.plannedFor', { date: formatDateNoWeekday(t, lang, v.date) })}</span>
-          <span className="recipe-card__name" lang={lang === 'en' && record.recipeNameSnapshot?.en !== undefined ? 'en' : 'ja'}>
+          <span className="recipe-card__name" lang={lang === 'en' && record.recipeNameSnapshot?.en !== undefined ? 'en' : 'ja'} data-testid="day-recipe-name">
             {recipeName(record, lang)}
           </span>
         </div>
+      )}
+      {missing && (
+        <p className="note-row note-row--warning" data-testid="day-recipe-missing">
+          {t('day.recipeMissing')}
+        </p>
       )}
       {shown === 'school-lunch-planned' && (
         <p className="note-row" data-testid="day-reservation-note">
@@ -435,9 +447,9 @@ function PlanSection({ v }: { v: DayView }) {
         </label>
       )}
       {v.past && v.reservationDone && <p className="card__body">{t('day.reservation.check')}</p>}
-      {v.actions.length > 0 && (
+      {actions.length > 0 && (
         <div className="plan-actions">
-          {v.actions.map((action) => (
+          {actions.map((action) => (
             <button
               key={action}
               type="button"
