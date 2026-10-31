@@ -702,7 +702,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-niwatori-hiyoko-onigiri",
@@ -1301,7 +1301,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-himawari-bento",
@@ -1319,8 +1319,8 @@
       "en": "Rice mixed with salmon flakes, shiso and sesame, topped with a sunflower: a pan-fried sausage in the middle and corn kernels as petals. Ready in about 10 minutes."
     },
     "yield": {
-      "ja": "幼児1人分",
-      "en": "1 child portion"
+      "ja": "1人分",
+      "en": "1 portion"
     },
     "minutes": 10,
     "makeAhead": null,
@@ -1572,7 +1572,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-nhk-ohanabatake-bento",
@@ -1590,8 +1590,8 @@
       "en": "A children's bento with moist miso chicken soboro layered between broccoli rice and egg rice, topped with flowers cut from ham and broccoli stem."
     },
     "yield": {
-      "ja": "幼児1人分",
-      "en": "1 child portion"
+      "ja": "1人分",
+      "en": "1 portion"
     },
     "minutes": 15,
     "makeAhead": null,
@@ -1959,7 +1959,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-penguin-seiretsu-bento",
@@ -2492,7 +2492,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-yaki-oyakodon-bento",
