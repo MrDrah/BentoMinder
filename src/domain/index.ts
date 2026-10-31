@@ -25,3 +25,4 @@ export * from './assessment/override.ts';
 export * from './decision/decision.ts';
 export * from './decision/apply.ts';
 export * from './calendar/day-view.ts';
+export * from './recommend/index.ts';

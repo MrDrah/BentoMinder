@@ -1,0 +1,71 @@
+{
+  "synthetic": true,
+  "animalOrigin": {
+    "ing-egg": [
+      "egg"
+    ],
+    "ing-chicken-thigh": [
+      "chicken"
+    ],
+    "ing-salmon": [
+      "fish-seafood"
+    ],
+    "ing-shrimp": [
+      "fish-seafood"
+    ],
+    "ing-bread": [
+      "dairy",
+      "egg"
+    ],
+    "ing-bread-crumbs": [
+      "dairy",
+      "egg"
+    ],
+    "ing-sausage": [
+      "meat",
+      "pork"
+    ],
+    "ing-ham": [
+      "meat",
+      "pork"
+    ],
+    "ing-ground-mixed": [
+      "beef",
+      "pork"
+    ],
+    "ing-pork": [
+      "pork"
+    ],
+    "ing-cheese": [
+      "dairy"
+    ],
+    "ing-gelatin": [
+      "gelatin"
+    ],
+    "ing-chikuwa": [
+      "fish-seafood"
+    ],
+    "ing-dashi": [
+      "fish-seafood"
+    ],
+    "ing-curry-roux": [
+      "meat",
+      "pork",
+      "beef",
+      "chicken",
+      "dairy"
+    ],
+    "ing-consomme": [
+      "beef",
+      "chicken",
+      "pork"
+    ]
+  },
+  "animalOriginUnknown": [
+    "ing-bread",
+    "ing-bread-crumbs",
+    "ing-consomme",
+    "ing-curry-roux",
+    "ing-dashi"
+  ]
+}

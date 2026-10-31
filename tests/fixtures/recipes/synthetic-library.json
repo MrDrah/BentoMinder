@@ -1,0 +1,1790 @@
+[
+  {
+    "synthetic": true,
+    "id": "rcp-syn-a-tamago",
+    "name": {
+      "ja": "テスト用 A",
+      "en": "Synthetic A"
+    },
+    "shortNameJa": "テストA",
+    "shortNameEn": "Syn A",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": null,
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 15,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "ing-egg（テスト）",
+          "en": "ing-egg"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "ing-sugar（テスト）",
+          "en": "ing-sugar"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-spinach",
+        "label": {
+          "ja": "ing-spinach（テスト）",
+          "en": "ing-spinach"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-egg"
+    ],
+    "mayContainAllergenIds": [],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "egg"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "vegetarian",
+      "pescatarian",
+      "no-pork",
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-b-karaage",
+    "name": {
+      "ja": "テスト用 B",
+      "en": "Synthetic B"
+    },
+    "shortNameJa": "テストB",
+    "shortNameEn": "Syn B",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-animals",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 25,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-chicken-thigh",
+        "label": {
+          "ja": "ing-chicken-thigh（テスト）",
+          "en": "ing-chicken-thigh"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-chicken"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "chicken"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-wheat-flour",
+        "label": {
+          "ja": "ing-wheat-flour（テスト）",
+          "en": "ing-wheat-flour"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-wheat"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ginger",
+        "label": {
+          "ja": "ing-ginger（テスト）",
+          "en": "ing-ginger"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "ing-soy-sauce（テスト）",
+          "en": "ing-soy-sauce"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-chicken",
+      "alg-wheat"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "chicken"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-pork",
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-c-salmon",
+    "name": {
+      "ja": "テスト用 C",
+      "en": "Synthetic C"
+    },
+    "shortNameJa": "テストC",
+    "shortNameEn": "Syn C",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-sea",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 20,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salmon",
+        "label": {
+          "ja": "ing-salmon（テスト）",
+          "en": "ing-salmon"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-salmon"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-broccoli",
+        "label": {
+          "ja": "ing-broccoli（テスト）",
+          "en": "ing-broccoli"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sesame",
+        "label": {
+          "ja": "ing-sesame（テスト）",
+          "en": "ing-sesame"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-sesame"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-salmon",
+      "alg-sesame"
+    ],
+    "mayContainAllergenIds": [],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "fish-seafood"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "pescatarian",
+      "no-pork",
+      "no-beef"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-d-sausage",
+    "name": {
+      "ja": "テスト用 D",
+      "en": "Synthetic D"
+    },
+    "shortNameJa": "テストD",
+    "shortNameEn": "Syn D",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-vehicles",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 10,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-bread",
+        "label": {
+          "ja": "ing-bread（テスト）",
+          "en": "ing-bread"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-milk",
+          "alg-egg",
+          "alg-soybean"
+        ],
+        "animalOrigin": [
+          "dairy",
+          "egg"
+        ],
+        "animalOriginKnown": false
+      },
+      {
+        "ingredientId": "ing-sausage",
+        "label": {
+          "ja": "ing-sausage（テスト）",
+          "en": "ing-sausage"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork",
+          "alg-milk",
+          "alg-soybean"
+        ],
+        "animalOrigin": [
+          "meat",
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cherry-tomato",
+        "label": {
+          "ja": "ing-cherry-tomato（テスト）",
+          "en": "ing-cherry-tomato"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-lettuce",
+        "label": {
+          "ja": "ing-lettuce（テスト）",
+          "en": "ing-lettuce"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-milk",
+      "alg-egg",
+      "alg-soybean",
+      "alg-pork"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "dairy",
+      "egg",
+      "meat",
+      "pork"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-e-veggie",
+    "name": {
+      "ja": "テスト用 E",
+      "en": "Synthetic E"
+    },
+    "shortNameJa": "テストE",
+    "shortNameEn": "Syn E",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-flowers",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 10,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-corn",
+        "label": {
+          "ja": "ing-corn（テスト）",
+          "en": "ing-corn"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-carrot",
+        "label": {
+          "ja": "ing-carrot（テスト）",
+          "en": "ing-carrot"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-nori",
+        "label": {
+          "ja": "ing-nori（テスト）",
+          "en": "ing-nori"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "ing-salt（テスト）",
+          "en": "ing-salt"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [],
+    "mayContainAllergenIds": [],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [],
+    "dietDataComplete": true,
+    "dietOk": [
+      "vegetarian",
+      "pescatarian",
+      "no-pork",
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-f-hamburg",
+    "name": {
+      "ja": "テスト用 F",
+      "en": "Synthetic F"
+    },
+    "shortNameJa": "テストF",
+    "shortNameEn": "Syn F",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-stars",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 30,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-ground-mixed",
+        "label": {
+          "ja": "ing-ground-mixed（テスト）",
+          "en": "ing-ground-mixed"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-beef",
+          "alg-pork"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "beef",
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-onion",
+        "label": {
+          "ja": "ing-onion（テスト）",
+          "en": "ing-onion"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-bread-crumbs",
+        "label": {
+          "ja": "ing-bread-crumbs（テスト）",
+          "en": "ing-bread-crumbs"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat"
+        ],
+        "animalOrigin": [
+          "dairy",
+          "egg"
+        ],
+        "animalOriginKnown": false
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "ing-egg（テスト）",
+          "en": "ing-egg"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ketchup",
+        "label": {
+          "ja": "ing-ketchup（テスト）",
+          "en": "ing-ketchup"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-apple"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-beef",
+      "alg-pork",
+      "alg-egg"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-apple"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "beef",
+      "pork",
+      "dairy",
+      "egg"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-g-tofu",
+    "name": {
+      "ja": "テスト用 G",
+      "en": "Synthetic G"
+    },
+    "shortNameJa": "テストG",
+    "shortNameEn": "Syn G",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": null,
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 20,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-tofu",
+        "label": {
+          "ja": "ing-tofu（テスト）",
+          "en": "ing-tofu"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-soybean"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-carrot",
+        "label": {
+          "ja": "ing-carrot（テスト）",
+          "en": "ing-carrot"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-green-pepper",
+        "label": {
+          "ja": "ing-green-pepper（テスト）",
+          "en": "ing-green-pepper"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-dashi",
+        "label": {
+          "ja": "ing-dashi（テスト）",
+          "en": "ing-dashi"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-soybean",
+          "alg-wheat"
+        ],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": false
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-soybean"
+    ],
+    "mayContainAllergenIds": [
+      "alg-soybean",
+      "alg-wheat"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "fish-seafood"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-h-pork",
+    "name": {
+      "ja": "テスト用 H",
+      "en": "Synthetic H"
+    },
+    "shortNameJa": "テストH",
+    "shortNameEn": "Syn H",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": null,
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 20,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-pork",
+        "label": {
+          "ja": "ing-pork（テスト）",
+          "en": "ing-pork"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-pork"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ginger",
+        "label": {
+          "ja": "ing-ginger（テスト）",
+          "en": "ing-ginger"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cabbage",
+        "label": {
+          "ja": "ing-cabbage（テスト）",
+          "en": "ing-cabbage"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "ing-soy-sauce（テスト）",
+          "en": "ing-soy-sauce"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-pork"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "pork"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-i-shrimp",
+    "name": {
+      "ja": "テスト用 I",
+      "en": "Synthetic I"
+    },
+    "shortNameJa": "テストI",
+    "shortNameEn": "Syn I",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-sea",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 35,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-shrimp",
+        "label": {
+          "ja": "ing-shrimp（テスト）",
+          "en": "ing-shrimp"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-shrimp"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-wheat-flour",
+        "label": {
+          "ja": "ing-wheat-flour（テスト）",
+          "en": "ing-wheat-flour"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-wheat"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "ing-egg（テスト）",
+          "en": "ing-egg"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-bread-crumbs",
+        "label": {
+          "ja": "ing-bread-crumbs（テスト）",
+          "en": "ing-bread-crumbs"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-milk"
+        ],
+        "animalOrigin": [
+          "dairy",
+          "egg"
+        ],
+        "animalOriginKnown": false
+      },
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-shrimp",
+      "alg-wheat",
+      "alg-egg"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-milk"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "fish-seafood",
+      "egg",
+      "dairy"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-j-macaroni",
+    "name": {
+      "ja": "テスト用 J",
+      "en": "Synthetic J"
+    },
+    "shortNameJa": "テストJ",
+    "shortNameEn": "Syn J",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-rainbow",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 15,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-macaroni",
+        "label": {
+          "ja": "ing-macaroni（テスト）",
+          "en": "ing-macaroni"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [
+          "alg-wheat"
+        ],
+        "possibleAllergenIds": [
+          "alg-egg"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cheese",
+        "label": {
+          "ja": "ing-cheese（テスト）",
+          "en": "ing-cheese"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [
+          "alg-milk"
+        ],
+        "possibleAllergenIds": [
+          "alg-milk"
+        ],
+        "animalOrigin": [
+          "dairy"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ham",
+        "label": {
+          "ja": "ing-ham（テスト）",
+          "en": "ing-ham"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork",
+          "alg-milk",
+          "alg-soybean"
+        ],
+        "animalOrigin": [
+          "meat",
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-broccoli",
+        "label": {
+          "ja": "ing-broccoli（テスト）",
+          "en": "ing-broccoli"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-wheat",
+      "alg-milk"
+    ],
+    "mayContainAllergenIds": [
+      "alg-egg",
+      "alg-milk",
+      "alg-pork",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "dairy",
+      "meat",
+      "pork"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-seafood"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-k-jelly",
+    "name": {
+      "ja": "テスト用 K",
+      "en": "Synthetic K"
+    },
+    "shortNameJa": "テストK",
+    "shortNameEn": "Syn K",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-seasonal",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 10,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-nori",
+        "label": {
+          "ja": "ing-nori（テスト）",
+          "en": "ing-nori"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-gelatin",
+        "label": {
+          "ja": "ing-gelatin（テスト）",
+          "en": "ing-gelatin"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-gelatin"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "gelatin"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-mandarin",
+        "label": {
+          "ja": "ing-mandarin（テスト）",
+          "en": "ing-mandarin"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-orange"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "ing-sugar（テスト）",
+          "en": "ing-sugar"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [
+      "alg-gelatin",
+      "alg-orange"
+    ],
+    "mayContainAllergenIds": [],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "gelatin"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-l-chikuwa",
+    "name": {
+      "ja": "テスト用 L",
+      "en": "Synthetic L"
+    },
+    "shortNameJa": "テストL",
+    "shortNameEn": "Syn L",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-vehicles",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 10,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-chikuwa",
+        "label": {
+          "ja": "ing-chikuwa（テスト）",
+          "en": "ing-chikuwa"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-egg"
+        ],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cucumber",
+        "label": {
+          "ja": "ing-cucumber（テスト）",
+          "en": "ing-cucumber"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-nori",
+        "label": {
+          "ja": "ing-nori（テスト）",
+          "en": "ing-nori"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-egg"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "fish-seafood"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "pescatarian",
+      "no-pork",
+      "no-beef"
+    ],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "synthetic": true,
+    "id": "rcp-syn-m-corn-curry",
+    "name": {
+      "ja": "テスト用 M",
+      "en": "Synthetic M"
+    },
+    "shortNameJa": "テストM",
+    "shortNameEn": "Syn M",
+    "nameKana": "てすと",
+    "style": "other",
+    "themeId": "theme-animals",
+    "description": {
+      "ja": "ランキングの試験にだけ使う架空のレシピです。実在のレシピではありません。",
+      "en": "Made-up recipe used only to test ranking."
+    },
+    "yield": {
+      "ja": "1人分",
+      "en": "1 serving"
+    },
+    "minutes": 15,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ing-rice（テスト）",
+          "en": "ing-rice"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-corn",
+        "label": {
+          "ja": "ing-corn（テスト）",
+          "en": "ing-corn"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-potato",
+        "label": {
+          "ja": "ing-potato（テスト）",
+          "en": "ing-potato"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-curry-roux",
+        "label": {
+          "ja": "ing-curry-roux（テスト）",
+          "en": "ing-curry-roux"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "meat",
+          "pork",
+          "beef",
+          "chicken",
+          "dairy"
+        ],
+        "animalOriginKnown": false
+      }
+    ],
+    "steps": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      },
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "storage": [
+      {
+        "ja": "テスト",
+        "en": "test"
+      }
+    ],
+    "allergenIds": [],
+    "mayContainAllergenIds": [],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "meat",
+      "pork",
+      "beef",
+      "chicken",
+      "dairy"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [],
+    "sources": [],
+    "reviewedBy": "ba-research"
+  }
+]
