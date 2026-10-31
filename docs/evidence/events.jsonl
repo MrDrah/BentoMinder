@@ -141,3 +141,5 @@
 {"v":1,"at":"2026-10-31T08:34:42.500Z","by":"orchestrator","type":"task-end","task":"m4-share-debug","outcome":"success","summary":"diff-guard: 23 changed files, all allowed"}
 {"v":1,"at":"2026-10-31T08:53:51.444Z","by":"orchestrator","type":"task-start","task":"m4-qa","summary":"Task m4-qa dispatched (2 allowed globs)"}
 {"v":1,"at":"2026-10-31T09:14:10.806Z","by":"orchestrator","type":"task-end","task":"m4-qa","outcome":"success","summary":"diff-guard: 6 changed files, all allowed"}
+{"v":1,"at":"2026-10-31T09:20:12.876Z","by":"orchestrator","type":"task-start","task":"h4-trace","summary":"Task h4-trace dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-10-31T09:35:12.475Z","by":"orchestrator","type":"task-end","task":"h4-trace","outcome":"failure","summary":"diff-guard: 1 files outside the allow-list"}

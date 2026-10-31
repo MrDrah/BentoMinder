@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-10-31 (M4 built + QA GO) · Repo: origin = github.com/MrDrah/BentoMinder (public, empty; nothing pushed yet, awaiting PO go) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-10-31 (M4 built + QA GO) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
