@@ -125,3 +125,9 @@
 {"v":1,"at":"2026-10-30T14:33:54.346Z","by":"orchestrator","type":"task-start","task":"label-round-2","summary":"Task label-round-2 dispatched (5 allowed globs)"}
 {"v":1,"at":"2026-10-30T14:34:04.392Z","by":"orchestrator","type":"task-start","task":"label-round-2","summary":"Task label-round-2 dispatched (5 allowed globs)"}
 {"v":1,"at":"2026-10-31T02:15:03.226Z","by":"orchestrator","type":"task-end","task":"label-round-2","outcome":"success","summary":"diff-guard: 10 changed files, all allowed"}
+{"v":1,"at":"2026-10-31T02:45:09.961Z","by":"orchestrator","type":"task-start","task":"m3-ranking","summary":"Task m3-ranking dispatched (7 allowed globs)"}
+{"v":1,"at":"2026-10-31T02:49:54.329Z","by":"orchestrator","type":"task-end","task":"m3-ranking","outcome":"success","summary":"diff-guard: 11 changed files, all allowed"}
+{"v":1,"at":"2026-10-31T02:50:22.574Z","by":"orchestrator","type":"task-start","task":"m3-ui","summary":"Task m3-ui dispatched (6 allowed globs)"}
+{"v":1,"at":"2026-10-31T03:03:10.865Z","by":"orchestrator","type":"task-end","task":"m3-ui","outcome":"failure","summary":"diff-guard: 1 files outside the allow-list"}
+{"v":1,"at":"2026-10-31T03:05:16.911Z","by":"orchestrator","type":"task-start","task":"m3-qa","summary":"Task m3-qa dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-10-31T03:22:13.014Z","by":"orchestrator","type":"task-end","task":"m3-qa","outcome":"success","summary":"diff-guard: 5 changed files, all allowed"}
