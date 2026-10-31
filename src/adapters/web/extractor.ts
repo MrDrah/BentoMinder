@@ -15,20 +15,34 @@ export function extractUrl(targetMonth: string): string {
   return `/api/menu/extract?${q.toString()}`;
 }
 
-export function createWebExtractor(fetchImpl: typeof fetch = (...args) => fetch(...args)): MenuExtractor {
+/** US-NF-04/AC3: a request still unanswered after this long is abandoned and shown as unavailable. */
+export const EXTRACT_TIMEOUT_MS = 60_000;
+
+export function createWebExtractor(fetchImpl: typeof fetch = (...args) => fetch(...args), timeoutMs: number = EXTRACT_TIMEOUT_MS): MenuExtractor {
   return {
-    async extract({ pdf, targetMonth }, signal) {
+    async extract({ pdf, targetMonth }, callerSignal) {
       let body: unknown;
+      // One internal controller: aborted by the timer or by the caller's signal.
+      const ctl = new AbortController();
+      const signal = ctl.signal;
+      const onCaller = () => ctl.abort();
+      if (callerSignal?.aborted === true) ctl.abort();
+      else callerSignal?.addEventListener('abort', onCaller, { once: true });
+      const timer = setTimeout(() => ctl.abort(), timeoutMs);
       try {
         const res = await fetchImpl(extractUrl(targetMonth), {
           method: 'POST',
           headers: { 'content-type': 'application/pdf' },
           body: new Uint8Array(pdf),
-          ...(signal === undefined ? {} : { signal }),
+          signal,
         });
         body = await res.json();
       } catch {
+        // Timeout, network failure and caller abort all end here; no provider call is counted.
         return { ok: false, error: 'NETWORK', providerCalls: 0 };
+      } finally {
+        clearTimeout(timer);
+        callerSignal?.removeEventListener('abort', onCaller);
       }
       const r = body as { ok?: unknown; menu?: unknown; meta?: Record<string, unknown>; error?: unknown; retryAfterSec?: unknown; providerCalls?: unknown };
       if (r.ok === true) {

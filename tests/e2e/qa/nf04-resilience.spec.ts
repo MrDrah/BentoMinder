@@ -79,8 +79,8 @@ test('US-NF-04/AC1 with the adapter down, importing says the service is unavaila
 
 // D-H4-01: no 60 s extraction timeout exists on the client (the web extractor only forwards the caller's signal; the import
 // screen sets no timer) or in the server transport. A hanging adapter leaves the import spinning forever.
-// Expected failure (test.fail) until it is built; it turns red when fixed so the marker is removed then.
-test.fail('US-NF-04/AC3 D-H4-01 an extraction request that hangs is abandoned after 60 s and shown as unavailable', async ({ page }) => {
+// Fixed: client-side 60 s timeout in the web extractor.
+test('US-NF-04/AC3 D-H4-01 an extraction request that hangs is abandoned after 60 s and shown as unavailable', async ({ page }) => {
   await page.clock.install({ time: new Date(jst('2026-10-28', '10:00')) });
   await page.route('**/api/menu/extract**', () => new Promise(() => undefined)); // never answers
   await page.goto('./');
