@@ -1,8 +1,8 @@
 // Local dev proxy (ADR 001, ADR 002). Node ≥ 22.18 runs this file directly (type stripping).
 // Routes: GET /api/health · POST /api/menu/fetch-pdf { url } · POST /api/menu/extract
 // (body = PDF bytes, query = targetMonth, promptVersion, schemaVersion: nothing else is
-// accepted, contract `ai-payload-allowlist`). Binds to 127.0.0.1 only. M1 extracts with the
-// recorded-fixture transport; the Gemini transport and its key (read from .env) arrive in M5.
+// accepted, contract `ai-payload-allowlist`). Binds to 127.0.0.1 only. With GEMINI_API_KEY set
+// (and no PROXY_MOCK_SCENARIOS) extraction uses the Gemini transport; otherwise recorded fixtures.
 import { readFileSync } from 'node:fs';
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
 import { dirname, join } from 'node:path';
@@ -10,8 +10,9 @@ import { fileURLToPath } from 'node:url';
 import { EXTRACTION_SCHEMA_VERSION, PROMPT_VERSION } from '../src/domain/menu/extraction.ts';
 import { MAX_PDF_BYTES } from '../src/domain/schema/extracted-menu.ts';
 import { isYearMonth, toJstTimestamp, type Instant } from '../src/domain/time/jst.ts';
-import { memoryCache, runExtraction, sha256Hex, windowCap, type CallCap, type ExtractDeps, type ExtractionCache } from './menu/extract.ts';
+import { memoryCache, runExtraction, sha256Hex, windowCap, type CallCap, type ExtractDeps, type ExtractionCache, type ProviderTransport } from './menu/extract.ts';
 import { fetchPdf, type Requester, type Resolver } from './menu/fetch-pdf.ts';
+import { createGeminiTransport } from './menu/gemini-transport.ts';
 import { createFixtureTransports, SCENARIO_HEADER, type FixtureTransports } from './menu/mock-transport.ts';
 import { nodeRequester, nodeResolver } from './menu/node-net.ts';
 
@@ -60,6 +61,8 @@ export interface ProxyDeps {
   resolve: Resolver;
   request: Requester;
   fixtures: FixtureTransports;
+  /** The real Gemini transport (M5); null/absent = recorded fixtures in tests, NOT_CONFIGURED otherwise. */
+  provider?: ProviderTransport | null;
   cache: ExtractionCache;
   extractCap: CallCap;
   fetchCap: CallCap;
@@ -130,7 +133,7 @@ async function handleExtract(req: IncomingMessage, res: ServerResponse, url: URL
   const scenario = deps.allowScenarios && typeof header === 'string' ? header : undefined;
   const bytes = new Uint8Array(pdf.buffer, pdf.byteOffset, pdf.byteLength);
   const extractDeps: ExtractDeps = {
-    transport: deps.fixtures.forRequest(sha256Hex(bytes), scenario),
+    transport: scenario === undefined && deps.provider ? deps.provider : deps.fixtures.forRequest(sha256Hex(bytes), scenario),
     primaryModel: deps.primaryModel,
     fallbackModel: deps.fallbackModel,
     cache: deps.cache,
@@ -185,14 +188,27 @@ function envInt(env: NodeJS.ProcessEnv, name: string, fallback: number): number 
   return n;
 }
 
-/** Production wiring of the proxy from the environment (no secrets are read in M1). */
-export function defaultDeps(env: NodeJS.ProcessEnv = process.env): ProxyDeps {
+/** Production wiring of the proxy from the environment (GEMINI_API_KEY is read here and nowhere else). */
+export function defaultDeps(env: NodeJS.ProcessEnv = process.env, fetchImpl: typeof fetch = globalThis.fetch): ProxyDeps {
   const nowMs = () => Date.now();
+  const log = (m: string) => console.log(m);
+  // Mock scenarios (the e2e runs) never get a real transport.
+  const apiKey = env['GEMINI_API_KEY'];
+  const useReal = apiKey !== undefined && apiKey.trim() !== '' && env['PROXY_MOCK_SCENARIOS'] !== '1';
   return {
     version: appVersion(),
     resolve: nodeResolver,
     request: nodeRequester,
     fixtures: createFixtureTransports(join(here, '..', 'tests', 'fixtures', 'menus')),
+    provider: useReal
+      ? createGeminiTransport({
+          apiKey,
+          fetch: fetchImpl,
+          ...(env['AI_ALLOW_PAID_MODELS'] === 'true' ? { allowedModels: null } : {}),
+          log,
+          onUsage: (model, u) => log(`usage ${model} in=${u.inputTokens} out=${u.outputTokens}`),
+        })
+      : null,
     cache: memoryCache(),
     // ADR 002 §2: extract ≤ 5/hour and ≤ 20/day; fetch-pdf ≤ 30/hour. Raised only for the e2e run.
     extractCap: windowCap({ perHour: envInt(env, 'PROXY_EXTRACT_PER_HOUR', 5), perDay: envInt(env, 'PROXY_EXTRACT_PER_DAY', 20) }, nowMs),
@@ -203,7 +219,7 @@ export function defaultDeps(env: NodeJS.ProcessEnv = process.env): ProxyDeps {
     allowScenarios: env['PROXY_MOCK_SCENARIOS'] === '1',
     nowMs,
     sleep: (ms) => new Promise((r) => setTimeout(r, ms)),
-    log: (m) => console.log(m),
+    log,
   };
 }
 
