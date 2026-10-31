@@ -122,7 +122,7 @@ function WeeklyBody({ job }: { job: ReminderJob }) {
   );
 }
 
-function ReminderBanner({ r, onDismiss }: { r: ShownReminder; onDismiss: (key: string) => void }) {
+export function ReminderBanner({ r, onDismiss }: { r: ShownReminder; onDismiss: (key: string) => void }) {
   const { t } = useApp();
   const suffix = r.job.key.split(':')[1] ?? '';
   const type = r.job.type;

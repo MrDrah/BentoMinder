@@ -88,5 +88,10 @@ export interface NotificationScheduler {
 }
 
 export interface Share {
+  /** True when the platform has a native share sheet (the 「共有する」 button is hidden otherwise). */
+  canShare(): boolean;
+  /** Native sheet first; if it is missing or rejects, the clipboard. 'cancelled': neither delivered the text. */
   share(text: string): Promise<'shared' | 'copied' | 'cancelled'>;
+  /** Clipboard only; false when the clipboard is blocked. */
+  copy(text: string): Promise<boolean>;
 }

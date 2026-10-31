@@ -576,6 +576,22 @@ export const ja = {
   'settings.theme.light': 'ライト',
   'settings.theme.dark': 'ダーク',
   'settings.theme.autoHint': '端末の設定に合わせます。',
+  // M4 (added from design/copy.md by key)
+  'share.button': '今週の予定を共有',
+  'share.sheet.title': '今週の予定を共有',
+  'share.sheet.preview': '送る内容',
+  'share.sheet.note': '共有した時点の予定です。自動では同期されません。',
+  'share.sheet.privacy': 'お子さまのプロフィールは含まれません。',
+  'share.sheet.share': '共有する',
+  'share.sheet.copy': 'コピーする',
+  'share.copied': 'コピーしました',
+  'share.copyFailed': 'コピーできませんでした。下の文章を選んでコピーしてください。',
+  'share.text.header': '【BentoMinder】{range}のお弁当予定',
+  'share.text.bento': '{date}手作りお弁当：{recipe}',
+  'share.text.notConfirmed': '{date}未定',
+  'share.text.others': 'ほかの日は給食（または給食なし）です。',
+  'share.text.reservation': '※給食の予約は園の方法で行ってください。',
+  'share.text.empty': '今週は手作りお弁当の予定はありません。',
 } as const;
 
 export type MessageKey = keyof typeof ja;

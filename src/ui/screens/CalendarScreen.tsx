@@ -13,6 +13,7 @@ import { Icon } from '../components/Icon.tsx';
 import { Agenda } from '../calendar/Agenda.tsx';
 import { CalendarGrid } from '../calendar/CalendarGrid.tsx';
 import { DaySheet } from '../calendar/DaySheet.tsx';
+import { ShareSheet } from '../calendar/ShareSheet.tsx';
 import { TodayCard } from '../calendar/TodayCard.tsx';
 import { Legend, UpcomingSummaryCard } from '../calendar/Upcoming.tsx';
 import { useDayViewer } from '../calendar/use-day-viewer.ts';
@@ -152,6 +153,7 @@ export function CalendarScreen({ month: requested, openDate }: { month: YearMont
           </div>
 
           <Legend anyPlanned={anyPlanned} />
+          <ShareSheet />
         </main>
         {mode === 'panel' && openDate === null && <aside className="sheet-empty">{t('day.panel.empty')}</aside>}
         {mode === 'panel' && openDate !== null && <DaySheet date={openDate} mode={mode} onClose={close} />}

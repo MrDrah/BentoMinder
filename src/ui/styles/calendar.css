@@ -874,3 +874,26 @@
   align-items: center;
   gap: var(--space-2);
 }
+
+/* §10 Share sheet */
+.share-button {
+  margin-top: var(--space-3);
+}
+.share-sheet__label {
+  margin: 0 0 var(--space-2);
+  font-weight: 700;
+}
+.share-sheet__preview {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--surface-3);
+  color: var(--ink-1);
+  white-space: pre-wrap;
+  user-select: text;
+  overflow-wrap: anywhere;
+}
+.share-sheet__note {
+  margin: var(--space-2) 0 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}

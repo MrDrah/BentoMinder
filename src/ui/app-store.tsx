@@ -5,9 +5,10 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react';
 import { createWebExtractor } from '../adapters/web/extractor.ts';
 import { createWebFileExport, webIsOnline } from '../adapters/web/file-export.ts';
+import { createWebShare } from '../adapters/web/share.ts';
 import { createWebNotifications, type WebNotifications } from '../adapters/web/notifications.ts';
 import { createWebPdfSource } from '../adapters/web/pdf-source.ts';
-import type { Clock, FileExport, MenuExtractor, PdfSource } from '../domain/ports.ts';
+import type { Clock, FileExport, MenuExtractor, PdfSource, Share } from '../domain/ports.ts';
 import type { Dictionary } from '../domain/schema/dictionary.ts';
 import type { Recipe } from '../domain/schema/recipe.ts';
 import type { BentoMinderStore } from '../domain/schema/store.ts';
@@ -65,6 +66,7 @@ export interface AppServices {
   pdfSource: PdfSource;
   extractor: MenuExtractor;
   fileExport: FileExport;
+  share: Share;
   notifications: WebNotifications;
   isOnline: () => boolean;
   dictionary: Dictionary;
@@ -128,6 +130,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       pdfSource: given?.pdfSource ?? createWebPdfSource(),
       extractor: given?.extractor ?? createWebExtractor(),
       fileExport: given?.fileExport ?? createWebFileExport(),
+      share: given?.share ?? createWebShare(),
       notifications: given?.notifications ?? fallbackNotifications,
       isOnline: given?.isOnline ?? webIsOnline,
       dictionary: given?.dictionary ?? shippedDictionary,
