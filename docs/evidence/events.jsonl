@@ -146,3 +146,4 @@
 {"v":1,"at":"2026-10-31T10:37:01.807Z","by":"orchestrator","type":"task-start","task":"h4-timeout","summary":"Task h4-timeout dispatched (7 allowed globs)"}
 {"v":1,"at":"2026-10-31T10:59:23.372Z","by":"orchestrator","type":"task-start","task":"m5-gemini","summary":"Task m5-gemini dispatched (8 allowed globs)"}
 {"v":1,"at":"2026-10-31T11:09:55.796Z","by":"orchestrator","type":"task-end","task":"m5-gemini","outcome":"success","summary":"diff-guard: 6 changed files, all allowed"}
+{"v":1,"at":"2026-10-31T11:35:14.075Z","by":"orchestrator","type":"task-end","task":"m5-gemini","outcome":"failure","summary":"diff-guard: 3 files outside the allow-list"}
