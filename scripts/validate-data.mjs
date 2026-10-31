@@ -31,6 +31,10 @@ const rel = (p) => relative(root, p).replaceAll('\\', '/');
 export const APPROVED_HOSTS = [
   'maff.go.jp',
   'nipponham.co.jp',
+  'hagoromofoods.co.jp',
+  'marukome.co.jp',
+  'nissui.co.jp',
+  'meg-snow.com',
   'pref.kyoto.jp',
   'city.sendai.jp',
   'caa.go.jp',

@@ -36,6 +36,7 @@ The one thing the product must **never** do: **claim allergy safety, or suggest 
 ## 5. Data
 - **Menu:** imported from the school's public PDF by the parent; extracted by AI, then confirmed by the parent. Belongs to the family (local).
 - **Recipes:** researched from public, trusted Japanese and English recipe sources (e.g. recipe publishers, food-safety guidance from MAFF / 厚生労働省 / 農林水産省 for bento handling), written in our own words with source references. Must be real and sourced. 15–20 at launch, maybe 50 in a year.
+- **Processed-food allergens:** for processed ingredients (ham, sausage, ketchup, miso, canned tuna…) a recipe records the allergens printed on one cited maker label and tells the parent to check the label of the product they use (`varies-by-product`). Where no label could be fetched the ingredient stays `unknown`, and the recipe is shown as allergen data incomplete, never as allergen-free.
 - **Child profile and plans:** typed by the parent, stored only on the device.
 - **Sample menu fixtures:** realistic but **synthetic** Japanese kindergarten menus written for tests (marked as such; never presented as a real school's menu).
 

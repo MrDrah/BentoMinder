@@ -298,11 +298,13 @@
         "quantity": 1,
         "unit": "tbsp",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [
           "alg-salmon"
         ],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-soybean"
+        ],
         "animalOrigin": [
           "fish-seafood"
         ],
@@ -457,9 +459,10 @@
       "alg-soybean"
     ],
     "mayContainAllergenIds": [
+      "alg-soybean",
       "alg-pork"
     ],
-    "allergenDataComplete": false,
+    "allergenDataComplete": true,
     "allergenScheme": "caa-2026-04",
     "animalOrigin": [
       "fish-seafood",
@@ -476,6 +479,10 @@
       {
         "ja": "ソーセージ（ウインナー）は製品によって原材料が違います。参照した製品（日本ハム「シャウエッセン」）の表示では、豚肉が表示されています。チーズ入りなど他の製品は違うので、使う製品の表示を確認してください。",
         "en": "Sausage ingredients vary by product. The label cited (Nippon Ham Schauessen) declares pork. Other products, such as cheese-filled ones, differ, so check the label of the product you use."
+      },
+      {
+        "ja": "鮭フレークは製品によって原材料が違います。参照した製品（ニッスイ「焼さけあらほぐし」）の表示では、さけと大豆が表示されています。使う製品の表示を確認してください。",
+        "en": "Salmon flakes vary by product. The label cited (Nissui roasted salmon flakes) declares salmon and soy. Check the label of the product you use."
       }
     ],
     "sources": [
@@ -496,6 +503,17 @@
         "publisher": "日本ハム株式会社",
         "title": "シャウエッセン® - ソーセージ | 日本ハム",
         "url": "https://www.nipponham.co.jp/products/ham_sausages/sausages/win/2125/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-nissui-yakisake-arahogushi-label",
+        "publisher": "株式会社ニッスイ",
+        "title": "焼さけあらほぐし | 商品情報 | ニッスイ",
+        "url": "https://www.nissui.co.jp/product/00046.html",
         "accessed": "2026-10-30",
         "language": "ja",
         "usedFor": [
@@ -2737,7 +2755,7 @@
         "quantity": 10,
         "unit": "g",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [
           "alg-milk"
         ],
@@ -2941,7 +2959,7 @@
       "alg-wheat",
       "alg-soybean"
     ],
-    "allergenDataComplete": false,
+    "allergenDataComplete": true,
     "allergenScheme": "caa-2026-04",
     "animalOrigin": [
       "beef",
@@ -2960,6 +2978,10 @@
       {
         "ja": "銘柄指定のしょうゆ・みりんは、一般的なしょうゆ・みりんとして記載しました。水大さじ1は手順に記載しています。",
         "en": "The branded soy sauce and mirin are listed as ordinary soy sauce and mirin. The 1 tbsp water is given in the steps."
+      },
+      {
+        "ja": "プロセスチーズは製品によって原材料が違います。参照した製品（雪印メグミルク「６Ｐチーズ」）の表示では、乳成分のみが表示されています。使う製品の表示を確認してください。",
+        "en": "Processed cheese varies by product. The label cited (Snow Brand Megmilk 6P cheese) declares milk only. Check the label of the product you use."
       }
     ],
     "sources": [
@@ -3018,6 +3040,17 @@
         "language": "ja",
         "usedFor": [
           "storage"
+        ]
+      },
+      {
+        "id": "src-meg-snow-6p-cheese-label",
+        "publisher": "雪印メグミルク株式会社",
+        "title": "６Ｐチーズ | 商品のご案内 | 雪印メグミルク",
+        "url": "https://www.meg-snow.com/products/detail.php?p=6P",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
         ]
       }
     ],
@@ -4676,9 +4709,11 @@
         "quantity": 0.5,
         "unit": "piece",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-soybean"
+        ],
         "animalOrigin": [
           "fish-seafood"
         ],
@@ -4883,13 +4918,13 @@
       "alg-egg"
     ],
     "mayContainAllergenIds": [
-      "alg-wheat",
       "alg-soybean",
+      "alg-wheat",
       "alg-egg",
       "alg-milk",
       "alg-pork"
     ],
-    "allergenDataComplete": false,
+    "allergenDataComplete": true,
     "allergenScheme": "caa-2026-04",
     "animalOrigin": [
       "fish-seafood",
@@ -4911,6 +4946,10 @@
       {
         "ja": "ハムは製品によって原材料が違います。参照した製品（日本ハム「彩りキッチン ロースハム」）の表示では、卵・乳・大豆・豚肉が表示されています。使う製品の表示を確認してください。",
         "en": "Ham ingredients vary by product. The label cited (Nippon Ham Irodori Kitchen roast ham) declares egg, milk, soy and pork. Check the label of the product you use."
+      },
+      {
+        "ja": "ツナ缶は製品によって原材料が違います。参照した製品（はごろもフーズ「シーチキンＬフレーク」）の表示では、大豆（大豆油）が表示されています。使う製品の表示を確認してください。",
+        "en": "Canned tuna ingredients vary by product. The label cited (Hagoromo Sea Chicken L flakes) declares soy (soybean oil). Check the label of the product you use."
       }
     ],
     "sources": [
@@ -4976,6 +5015,17 @@
         "publisher": "日本ハム株式会社",
         "title": "彩りキッチン® ロースハム - ハム | 日本ハム",
         "url": "https://www.nipponham.co.jp/products/ham_sausages/ham/roast/2106/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-hagoromo-seachicken-l-flake-label",
+        "publisher": "はごろもフーズ株式会社",
+        "title": "シーチキンＬフレーク（140g） | 家庭用商品 | はごろもフーズ株式会社",
+        "url": "https://www.hagoromofoods.co.jp/products/detail/250.html",
         "accessed": "2026-10-30",
         "language": "ja",
         "usedFor": [
@@ -5915,9 +5965,11 @@
         "quantity": 0.5,
         "unit": "tbsp",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "varies-by-product",
         "allergenIds": [],
-        "possibleAllergenIds": [],
+        "possibleAllergenIds": [
+          "alg-soybean"
+        ],
         "animalOrigin": [],
         "animalOriginKnown": true
       },
@@ -6154,13 +6206,13 @@
       "alg-egg"
     ],
     "mayContainAllergenIds": [
-      "alg-wheat",
       "alg-soybean",
+      "alg-wheat",
       "alg-egg",
       "alg-milk",
       "alg-pork"
     ],
-    "allergenDataComplete": false,
+    "allergenDataComplete": true,
     "allergenScheme": "caa-2026-04",
     "animalOrigin": [
       "chicken",
@@ -6184,6 +6236,10 @@
       {
         "ja": "ハムは製品によって原材料が違います。参照した製品（日本ハム「彩りキッチン ロースハム」）の表示では、卵・乳・大豆・豚肉が表示されています。使う製品の表示を確認してください。",
         "en": "Ham ingredients vary by product. The label cited (Nippon Ham Irodori Kitchen roast ham) declares egg, milk, soy and pork. Check the label of the product you use."
+      },
+      {
+        "ja": "みそは製品によって原材料が違います（麦みそや、だし入りなど）。参照した製品（マルコメ「料亭の味 生みそ」）の表示では、大豆が表示されています。使う製品の表示を確認してください。",
+        "en": "Miso varies by product (for example barley miso or miso with dashi added). The label cited (Marukome Ryotei no Aji nama miso) declares soy. Check the label of the product you use."
       }
     ],
     "sources": [
@@ -6226,6 +6282,17 @@
         "publisher": "日本ハム株式会社",
         "title": "彩りキッチン® ロースハム - ハム | 日本ハム",
         "url": "https://www.nipponham.co.jp/products/ham_sausages/ham/roast/2106/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-marukome-ryotei-nama-miso-label",
+        "publisher": "マルコメ株式会社",
+        "title": "料亭の味 生みそ｜マルコメ",
+        "url": "https://www.marukome.co.jp/product/detail/miso_025/",
         "accessed": "2026-10-30",
         "language": "ja",
         "usedFor": [

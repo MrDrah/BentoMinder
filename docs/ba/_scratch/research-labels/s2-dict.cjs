@@ -1,0 +1,14 @@
+const fs=require('fs');const p='docs/ba/domain-dictionary.md';let t=fs.readFileSync(p,'utf8');
+const a='`ing-sakura-denbu` (white fish, typically cod, flaked and sweetened) sits in `cat-fish-processed`';
+if(!t.includes(a))throw 'x';
+const add=' Sources (accessed 2026-10-30): sakura denbu is flaked, sweetened fish meat, mainly sea bream or cod, coloured pink with food colouring (デリッシュキッチン, https://delishkitchen.tv/articles/1482). A Nissui roasted salmon-flake label (https://www.nissui.co.jp/product/00046.html) lists さけ among its allergens, which supports `alg-salmon` on `ing-salmon-flakes`. For `ing-tarako` (pollock roe) and `ing-tortilla` no fetched source could be confirmed in the label round, so their notes stay unsourced (not asserted by a citation).';
+const i=t.indexOf(a);const end=t.indexOf('\n',i);
+t=t.slice(0,end)+add+t.slice(end);
+const b='「黒豆」 (black soybeans) is deliberately **not** a form of it';
+if(!t.includes(b))throw 'y';
+const j=t.indexOf('\n',t.indexOf(b));
+t=t.slice(0,j)+' Source (accessed 2026-10-30): MAFF lists いんげん豆 and 大豆 as separate bean crops and names 黒大豆 as a colour of soybean (https://www.maff.go.jp/j/pr/aff/2102/spe1_01.html), so black kidney beans and 黒豆 are different foods.'+t.slice(j);
+const c='Retired:** `alg-matsutake` まつたけ (removed 2024-03): readable in old data, never offered or written (`allergen-retired`).';
+if(!t.includes(c))throw 'z';
+t=t.replace(c,c+' Checked 2026-10-30 against Sendai City (https://www.city.sendai.jp/sekatsuese-shokuhin/makadamia-matsutake.html): the 2024 amendment removed まつたけ and added マカダミアナッツ on the recommended list; consistent.');
+fs.writeFileSync(p,t);

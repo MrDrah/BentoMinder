@@ -278,9 +278,9 @@ Cross-field rules:
 | `quantity` | number \| null | ✔ | > 0, ≤ 2 decimals; null only with unit `to-taste` or `small-amount` (`recipe-quantity`) | `120` |
 | `unit` | enum | ✔ | `g`, `ml`, `piece` (個), `slice` (枚), `stick` (本), `tbsp` (大さじ), `tsp` (小さじ), `cup` (カップ 200 ml), `sheet` (枚・のり), `to-taste` (適量), `small-amount` (少々) | `g` |
 | `optional` | boolean | ✔ | | `false` |
-| `allergenInfo` | enum | ✔ | `known` (the food itself defines its allergens, e.g. 卵) \| `varies-by-product` (processed food: ウインナー, カレールー, パン…; typical label allergens cited in `possibleAllergenIds`) \| `unknown` (processed food whose label allergens no cited source establishes) | `known` |
+| `allergenInfo` | enum | ✔ | `known` (the food itself defines its allergens, e.g. 卵) \| `varies-by-product` (processed food: ウインナー, カレールー, ケチャップ, みそ…; the allergens of the one maker label the recipe cites, in `allergenIds` when the food itself defines them and otherwise in `possibleAllergenIds`; the recipe adds an adaptation telling the parent to 「表示を確認」, check the label of the product they use) \| `unknown` (processed food for which no label could be fetched or the label is ambiguous; never shown as allergen-free) | `known` |
 | `allergenIds` | string[] | ✔ | must include the dictionary's `inherentAllergenIds` for that ingredient (`recipe-ingredient-inherent-allergen`) | `["alg-egg"]` |
-| `possibleAllergenIds` | string[] | ✔ | non-empty iff `varies-by-product`; empty for `known` and `unknown`; from the source or typical product labels, cited (`recipe-possible-allergens`) | `["alg-pork","alg-milk","alg-soybean"]` |
+| `possibleAllergenIds` | string[] | ✔ | only `varies-by-product` may list entries (empty for `known` and `unknown`); it may be empty when the cited label declares no allergen beyond `allergenIds`; entries come from the cited maker label, never from "typical" products (`recipe-possible-allergens`) | `["alg-pork","alg-milk","alg-soybean"]` |
 | `animalOrigin` | string[] | ✔ | animal-origin tags (§3.8) of this ingredient; must include every tag the dictionary lists for the `ingredientId` (`recipe-ingredient-animal-origin`); tags may be added from the cited source, never removed | `["fish-seafood"]` |
 | `animalOriginKnown` | boolean | ✔ | `true` if the dictionary's `animalOrigin` for the id is fully known; if the dictionary marks it `?` (unknown), `true` only when a cited source (`usedFor` includes `"recipe"` or `"allergen"`) states the product's ingredients, else `false` (`recipe-animal-origin-known`) | `true` |
 
@@ -341,6 +341,16 @@ The authoritative list for `source-publisher-approved` and `scripts/validate-dat
 | `delishkitchen.tv` | デリッシュキッチン (every, Inc.) | Short kids' bentos, editorial pages only | Confirmed: 「デリッシュキッチン \| …」, © every, Inc |
 | `justonecookbook.com` | Just One Cookbook (Namiko Chen) | English Japanese-recipe names and bentos | Confirmed by direct HTTP fetch (the fetch tool got HTTP 403): title 「Just One Cookbook · Japanese Food and Recipe Blog」, © Just One Cookbook, author Namiko Chen |
 | `bbcgoodfood.com` | Immediate Media Company Ltd (BBC Good Food) | Western-inspired lunchbox recipes | Confirmed by direct HTTP fetch (the fetch tool was blocked). **Flag:** the site is "owned and published by Immediate Media Company Limited", the domain is "used under licence from BBC Studios Distribution Limited", and the page title now reads "Good Food"; record the publisher as in this row, not as "BBC" |
+
+Label round (2026-10-30), maker product pages used only for the ingredient label and allergen list of one named product (`usedFor: ["allergen"]`), never for recipes; fetched with HTTP 200 and page titles checked. The Orchestrator mirrors them in `APPROVED_HOSTS` and runs the source/overlap audit:
+
+| Host | Publisher |
+|------|-----------|
+| `nipponham.co.jp` | 日本ハム株式会社 |
+| `hagoromofoods.co.jp` | はごろもフーズ株式会社 |
+| `marukome.co.jp` | マルコメ株式会社 |
+| `nissui.co.jp` | 株式会社ニッスイ |
+| `meg-snow.com` | 雪印メグミルク株式会社 |
 
 No host in `APPROVED_HOSTS` belongs to a different publisher than the brief intends. Hosts not listed here fail `source-publisher-approved`; adding one is a BA change to this table (and the brief), mirrored in `APPROVED_HOSTS` by the Developer.
 
@@ -440,7 +450,7 @@ This table is the full list of rule ids. Code reports only these ids; a check wi
 | `recipe-ingredient-resolves` | L | Every `ingredientId` resolves in the dictionary. |
 | `recipe-quantity` | S | `quantity` > 0 with ≤ 2 decimals, or null only with `to-taste` / `small-amount`. |
 | `recipe-ingredient-inherent-allergen` | L | An ingredient's `allergenIds` include the dictionary's inherent allergens. |
-| `recipe-possible-allergens` | S | `possibleAllergenIds` is non-empty iff `allergenInfo = varies-by-product`. |
+| `recipe-possible-allergens` | S | `possibleAllergenIds` is non-empty only when `allergenInfo = varies-by-product` (it may be empty there when the cited label declares none). |
 | `recipe-allergen-union` | L | `Recipe.allergenIds` = union of its ingredients' `allergenIds`. |
 | `recipe-may-contain-union` | L | `mayContainAllergenIds` = union of the varies-by-product ingredients' `possibleAllergenIds`. |
 | `recipe-allergen-complete-derived` | L | `allergenDataComplete` is false iff an ingredient has `allergenInfo = unknown`. |
