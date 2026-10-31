@@ -107,8 +107,10 @@ describe('US-E8-02/AC2 no hard-coded strings', () => {
       const user = userEvent.setup();
       const { container } = await renderApp(seeded(), hash);
       await user.click(screen.getByTestId('lang-toggle-en'));
-      expect(visibleJapanese(container)).toEqual([]);
-      expect(document.title).not.toMatch(JAPANESE);
+      await vi.waitFor(() => {
+        expect(visibleJapanese(container)).toEqual([]);
+        expect(document.title).not.toMatch(JAPANESE);
+      });
     },
   );
 });
