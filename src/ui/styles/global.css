@@ -6,6 +6,7 @@
 @import './forms.css';
 @import './calendar.css';
 @import './recommend.css';
+@import './reminders.css';
 
 *,
 *::before,

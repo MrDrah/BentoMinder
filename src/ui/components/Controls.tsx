@@ -215,3 +215,16 @@ export function FieldError({ id, text, testId }: { id: string; text: string; tes
     </p>
   );
 }
+
+/** §1.8 Switch: role="switch" with the state word beside it (not colour only). */
+export function Switch({ labelledBy, checked, onChange, testId }: { labelledBy: string; checked: boolean; onChange: (next: boolean) => void; testId: string }) {
+  const { t } = useApp();
+  return (
+    <button type="button" role="switch" aria-checked={checked} aria-labelledby={labelledBy} className={`switch${checked ? ' is-on' : ''}`} data-testid={testId} onClick={() => onChange(!checked)}>
+      <span className="switch__track" aria-hidden="true">
+        <span className="switch__knob" />
+      </span>
+      <span className="switch__state">{t(checked ? 'settings.switch.on' : 'settings.switch.off')}</span>
+    </button>
+  );
+}

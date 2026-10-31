@@ -18,6 +18,7 @@ import { RefreshReviewScreen } from './screens/RefreshReviewScreen.tsx';
 import { ReviewScreen } from './screens/ReviewScreen.tsx';
 import { ProfileEditScreen, SettingsScreen } from './screens/SettingsScreen.tsx';
 import { TopBar } from './components/Bars.tsx';
+import { RemindersProvider } from './reminders/use-reminders.tsx';
 
 export function App() {
   const { state, t, today, services, updatedElsewhere, dismissUpdatedElsewhere } = useApp();
@@ -83,7 +84,9 @@ export function App() {
           </div>
         </Banner>
       )}
-      <Screen route={shown} />
+      <RemindersProvider>
+        <Screen route={shown} />
+      </RemindersProvider>
       <Toast />
     </>
   );

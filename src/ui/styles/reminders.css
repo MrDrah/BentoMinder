@@ -1,0 +1,230 @@
+/* §8 Reminder banners and stack, §2.6 Today card, §1.8 Switch, §9.1 Time picker. Tokens only. */
+.reminders {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.reminder {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-2) var(--space-3) var(--space-4);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  overflow: hidden;
+  animation: reminder-in 200ms ease-out;
+}
+.reminder:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reminder {
+    animation: none;
+  }
+}
+@keyframes reminder-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.reminder__stripe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 6px;
+  background: var(--accent);
+}
+.reminder__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+.reminder__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  align-items: flex-start;
+}
+.reminder__title {
+  font-family: var(--font-display);
+}
+.reminder__line,
+.reminder__missed {
+  margin: 0;
+}
+.reminder__missed {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.reminder__items {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.reminder__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.reminder__close {
+  flex: none;
+}
+.reminders__more {
+  justify-self: start;
+}
+
+.today {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--ink-1);
+  text-decoration: none;
+}
+.today--link:hover {
+  background: var(--surface-1);
+}
+.today--link:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.today__eyebrow {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.today__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.today__tile {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--surface-3);
+}
+.today__headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+}
+.today__headline:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.today .btn {
+  align-self: flex-start;
+}
+@media (min-width: 1280px) {
+  .today__headline {
+    font-size: var(--text-2xl);
+  }
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.switch-row__value {
+  margin: 0 0 var(--space-2);
+  color: var(--ink-2);
+}
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-1);
+  font: inherit;
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+}
+.switch__track {
+  position: relative;
+  width: 52px;
+  height: 32px;
+  border: 2px solid var(--line-ui);
+  border-radius: var(--radius-pill);
+  background: var(--surface-3);
+}
+.switch.is-on .switch__track {
+  border-color: var(--success);
+  background: var(--success);
+}
+.switch__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ink-1);
+  transition: transform 120ms ease-out;
+}
+.switch.is-on .switch__knob {
+  background: var(--ink-inverse);
+  transform: translateX(20px);
+}
+.switch:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+@media (prefers-reduced-motion: reduce) {
+  .switch__knob {
+    transition: none;
+  }
+}
+.time-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  border: 0;
+}
+.time-picker:disabled .input {
+  border-style: dashed;
+  color: var(--ink-3);
+}
+.time-picker__part {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}

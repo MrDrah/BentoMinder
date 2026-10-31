@@ -80,6 +80,8 @@ export function AllergenLines({ recipe, testId }: { recipe: Recipe; testId: stri
   const { t, state, services } = useApp();
   const lang = state.language;
   const s = allergenSummary(recipe);
+  // M3-D03: a recipe with no allergens and a varies-by-product ingredient has nothing to list here (its warning is the WarnRow).
+  if (!s.none && s.allergenIds.length === 0 && s.mayContainIds.length === 0) return null;
   return (
     <div className="rec-allergens" data-testid={testId}>
       {s.none && <p className="rec-line">{t('rec.allergensNone')}</p>}

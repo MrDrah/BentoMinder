@@ -108,6 +108,7 @@ describe('US-E5-01 the calendar is the home screen', () => {
     none.decisions = {};
     document.body.innerHTML = '';
     await renderApp({ store: none, now: NOV2 });
+    await screen.findByTestId('upcoming');
     expect(screen.getByTestId('upcoming-empty')).toHaveTextContent('予定している手作りお弁当はありません');
   });
 });
@@ -458,9 +459,11 @@ describe('US-E3-06 the next-month card', () => {
     const s = clone(november());
     s.settings.nextMonthPromptFromDay = 25;
     await renderApp({ store: s, now: '2026-11-24T01:00:00Z' });
+    await screen.findByTestId('upcoming');
     expect(screen.queryByTestId('card-menu-next')).toBeNull();
     document.body.innerHTML = '';
     await renderApp({ store: s, now: '2026-11-25T01:00:00Z' });
+    await screen.findByTestId('upcoming');
     expect(screen.getByTestId('card-menu-next')).toBeInTheDocument();
   });
 

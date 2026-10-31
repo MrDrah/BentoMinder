@@ -181,7 +181,12 @@ describe('US-E3-03 confirm the menu (BR-12)', () => {
     await user.click(screen.getByTestId('topbar-back'));
     await user.click(await screen.findByTestId('dialog-leave-review-confirm'));
     expect(await screen.findByTestId('card-menu-pending')).toHaveTextContent('確認待ちの献立があります');
-    expect(app.storage.data.get('bentominder.state')).toBe(before);
+    // Discarding writes no menu data. The calendar may log a due reminder as shown (M4), so compare the data, not the whole document.
+    const data = (raw: string | undefined) => {
+      const { menus, decisions, overrides, profile } = JSON.parse(raw ?? 'null') as Record<string, unknown>;
+      return { menus, decisions, overrides, profile };
+    };
+    expect(data(app.storage.data.get('bentominder.state'))).toEqual(data(before));
     await user.click(screen.getByTestId('card-menu-pending-action'));
     expect(await screen.findByTestId('review-dish-2026-11-05-0')).toHaveValue('さばのみそに');
   });

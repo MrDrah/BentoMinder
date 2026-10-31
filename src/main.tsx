@@ -12,7 +12,7 @@ import './ui/styles/global.css';
 
 const adapters = selectAdapters();
 const repository = createRepository(adapters.storage, adapters.clock);
-const services = { pdfSource: adapters.pdfSource, extractor: adapters.extractor, fileExport: adapters.fileExport, isOnline: adapters.isOnline };
+const services = { pdfSource: adapters.pdfSource, extractor: adapters.extractor, fileExport: adapters.fileExport, isOnline: adapters.isOnline, notifications: adapters.notifications };
 const warn = import.meta.env.DEV ? (message: string) => console.warn(message) : undefined;
 
 const rootElement = document.getElementById('root');

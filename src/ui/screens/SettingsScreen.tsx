@@ -1,10 +1,11 @@
 // Settings (design/components.md §9): display (week start), menu (saved URL, import, the days to
 // check after a refresh, the next-month prompt day), profile (edit, delete), data (export, import,
-// delete all) and about. Reminders, language and theme controls arrive in M4. Every change saves
+// delete all) and about, plus the reminders (US-E7-04) and the theme (US-E8-05). Every change saves
 // at once. Profile edit screen (§6.2 edit variant, US-E1-05).
 import { useEffect, useRef, useState } from 'react';
 import { openReviewMonths } from '../../domain/calendar/day-view.ts';
 import { savedSourceUrl } from '../../domain/menu/store-ops.ts';
+import { updateReminderSettings, type ReminderSettingsPatch } from '../../domain/reminders/index.ts';
 import { deleteProfile, formToProfile, profileToForm, saveProfile, type ProfileForm as Form } from '../../domain/profile/profile.ts';
 import type { Settings } from '../../domain/schema/index.ts';
 import { toJstTimestamp } from '../../domain/time/jst.ts';
@@ -12,8 +13,10 @@ import { useApp, useStore } from '../app-store.tsx';
 import { useDayViewer } from '../calendar/use-day-viewer.ts';
 import { TopBar } from '../components/Bars.tsx';
 import { Dialog } from '../components/Controls.tsx';
+import type { MessageKey } from '../../i18n/index.ts';
 import { navigate, setLeaveGuard, toHash, type OnboardingStep, type Route } from '../router.ts';
 import { ConsentDialog } from './ImportScreen.tsx';
+import { ReminderSettings } from './ReminderSettings.tsx';
 import { ProfileForm } from './ProfileForm.tsx';
 
 declare const __APP_VERSION__: string;
@@ -48,6 +51,13 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
     else showSaveFailed();
   };
 
+  const saveReminders = async (patch: ReminderSettingsPatch) => {
+    const next = updateReminderSettings(store, patch, now());
+    if (next === null) return;
+    if (await commit(next)) setSaved(t('settings.saved'));
+    else showSaveFailed();
+  };
+
   const exportData = async () => {
     if (!persisted) return;
     await services.fileExport.save(repository.exportFileName(), repository.exportJson(store), 'application/json');
@@ -70,6 +80,8 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
         <p className="visually-hidden" role="status" aria-live="polite" data-testid="settings-saved">
           {saved}
         </p>
+        <ReminderSettings onChange={(patch) => void saveReminders(patch)} />
+
         <section className="card" aria-labelledby="settings-display">
           <h2 id="settings-display" className="card__title">
             {t('settings.display')}
@@ -87,6 +99,24 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
                     data-testid={`radio-week-start-${value}`}
                   />
                   {t(value === 'monday' ? 'settings.weekStart.monday' : 'settings.weekStart.sunday')}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset className="field">
+            <legend className="field__label">{t('settings.theme')}</legend>
+            <div className="radios">
+              {(['auto', 'light', 'dark'] as const).map((value) => (
+                <label key={value} className={`radio${store.settings.theme === value ? ' is-checked' : ''}`}>
+                  <input type="radio" name="theme" checked={store.settings.theme === value} onChange={() => void saveSettings({ theme: value })} data-testid={`radio-theme-${value}`} />
+                  <span>
+                    {t(`settings.theme.${value}` as MessageKey)}
+                    {value === 'auto' && (
+                      <span className="field__hint" style={{ display: 'block' }}>
+                        {t('settings.theme.autoHint')}
+                      </span>
+                    )}
+                  </span>
                 </label>
               ))}
             </div>

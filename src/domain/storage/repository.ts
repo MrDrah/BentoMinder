@@ -11,6 +11,7 @@ import {
 } from '../schema/store.ts';
 import { todayJst } from '../time/jst.ts';
 import { migrate, MigrationError, migrations as shippedMigrations, type MigrationMap } from './migrations/index.ts';
+import { repairReminderTimes } from './repair.ts';
 
 export type CorruptReason = 'json-parse' | 'schema-invalid' | 'migration-failed';
 
@@ -106,7 +107,7 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
         throw err;
       }
     }
-    const checked = validateStore(migrated);
+    const checked = validateStore(repairReminderTimes(migrated));
     if (!checked.ok) return { ok: false, error: 'schema-invalid', issues: checked.issues };
     return version < current ? { ok: true, state: checked.state, migratedFrom: version } : { ok: true, state: checked.state };
   }

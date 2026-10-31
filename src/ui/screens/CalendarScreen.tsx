@@ -13,9 +13,11 @@ import { Icon } from '../components/Icon.tsx';
 import { Agenda } from '../calendar/Agenda.tsx';
 import { CalendarGrid } from '../calendar/CalendarGrid.tsx';
 import { DaySheet } from '../calendar/DaySheet.tsx';
+import { TodayCard } from '../calendar/TodayCard.tsx';
 import { Legend, UpcomingSummaryCard } from '../calendar/Upcoming.tsx';
 import { useDayViewer } from '../calendar/use-day-viewer.ts';
 import { useElementWidth, useSheetMode } from '../hooks.ts';
+import { ReminderList } from '../reminders/ReminderList.tsx';
 import { navigate, toHash } from '../router.ts';
 import { monthLabel } from './ImportScreen.tsx';
 
@@ -86,6 +88,8 @@ export function CalendarScreen({ month: requested, openDate }: { month: YearMont
       <AppBar />
       <div className="cal-layout">
         <main id="main" className="page">
+          <ReminderList />
+          <TodayCard />
           {pending !== null && (
             <section className="card card--warning" data-testid="card-menu-pending">
               <h2 className="card__title">{t('menuCard.pending')}</h2>

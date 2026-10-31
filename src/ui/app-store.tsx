@@ -5,6 +5,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react';
 import { createWebExtractor } from '../adapters/web/extractor.ts';
 import { createWebFileExport, webIsOnline } from '../adapters/web/file-export.ts';
+import { createWebNotifications, type WebNotifications } from '../adapters/web/notifications.ts';
 import { createWebPdfSource } from '../adapters/web/pdf-source.ts';
 import type { Clock, FileExport, MenuExtractor, PdfSource } from '../domain/ports.ts';
 import type { Dictionary } from '../domain/schema/dictionary.ts';
@@ -64,6 +65,7 @@ export interface AppServices {
   pdfSource: PdfSource;
   extractor: MenuExtractor;
   fileExport: FileExport;
+  notifications: WebNotifications;
   isOnline: () => boolean;
   dictionary: Dictionary;
   library: readonly Recipe[];
@@ -120,16 +122,18 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   const lastOutcome = useRef<SaveOutcome>('saved');
   const stateRef = useRef(state);
   stateRef.current = state;
+  const [fallbackNotifications] = useState(() => createWebNotifications());
   const services = useMemo<AppServices>(
     () => ({
       pdfSource: given?.pdfSource ?? createWebPdfSource(),
       extractor: given?.extractor ?? createWebExtractor(),
       fileExport: given?.fileExport ?? createWebFileExport(),
+      notifications: given?.notifications ?? fallbackNotifications,
       isOnline: given?.isOnline ?? webIsOnline,
       dictionary: given?.dictionary ?? shippedDictionary,
       library: given?.library ?? shippedLibrary,
     }),
-    [given],
+    [given, fallbackNotifications],
   );
 
   useEffect(() => {
@@ -233,7 +237,24 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
 
   const t = useMemo(() => createTranslator(state.language, warn ? { warn } : {}), [state.language, warn]);
   const now = useCallback(() => clock.now(), [clock]);
-  const today = todayJst(clock.now());
+  // US-E7-03/AC3: the Tokyo date is re-read every minute and when the tab becomes visible again, so the
+  // calendar and the today card roll over at Tokyo midnight without a reload.
+  const [today, setToday] = useState<LocalDate>(() => todayJst(clock.now()));
+  useEffect(() => {
+    const sync = () => setToday(todayJst(clock.now()));
+    sync();
+    const id = setInterval(sync, 60_000);
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') sync();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('focus', sync);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', sync);
+    };
+  }, [clock]);
 
   useEffect(() => {
     document.documentElement.lang = state.language;
