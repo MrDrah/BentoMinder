@@ -640,8 +640,8 @@
         "en": "The source method says to line the box with butterhead lettuce, but its ingredient list has red leaf lettuce; the ingredient list is followed. The 1 tsp water is given in the steps."
       },
       {
-        "ja": "ケチャップは製品によって原材料が違います。参照した製品（デルモンテ トマトケチャップ）の表示ではアレルゲンの表示はありませんが、使う製品の表示を確認してください。",
-        "en": "Ketchup ingredients vary by product. The product label cited (Del Monte tomato ketchup) lists no allergens, but check the label of the product you use."
+        "ja": "ケチャップは製品によって原材料が違います。参照した製品（デルモンテ トマトケチャップ）の表示にはこの品目のアレルゲン表示が載っていませんが、使う製品の表示を必ず確認してください。",
+        "en": "Ketchup ingredients vary by product. The product label cited (Del Monte tomato ketchup) does not list any allergen declaration for this item; always check the product label of the one you use."
       }
     ],
     "sources": [
@@ -872,8 +872,8 @@
         "en": "Use a plain spice-only curry powder. Seasoned curry powders can contain wheat, milk, soy and pork."
       },
       {
-        "ja": "カレー粉は製品によって原材料が違います。参照した香辛料だけの製品の表示ではアレルゲンの表示はありませんが、使う製品の表示を確認してください。",
-        "en": "Curry powder ingredients vary by product. The spice-only products cited list no allergens, but check the label of the product you use."
+        "ja": "カレー粉は製品によって原材料が違います。参照した香辛料だけの製品の表示にはこの品目のアレルゲン表示が載っていませんが、使う製品の表示を必ず確認してください。",
+        "en": "Curry powder ingredients vary by product. The spice-only products cited do not list any allergen declaration for this item; always check the product label of the one you use."
       }
     ],
     "sources": [
@@ -3814,8 +3814,8 @@
         "en": "Amounts are the source's single serving (200 g rice). They are not reduced because the microwave times are given for these amounts."
       },
       {
-        "ja": "ケチャップは製品によって原材料が違います。参照した製品（デルモンテ トマトケチャップ）の表示ではアレルゲンの表示はありませんが、使う製品の表示を確認してください。",
-        "en": "Ketchup ingredients vary by product. The product label cited (Del Monte tomato ketchup) lists no allergens, but check the label of the product you use."
+        "ja": "ケチャップは製品によって原材料が違います。参照した製品（デルモンテ トマトケチャップ）の表示にはこの品目のアレルゲン表示が載っていませんが、使う製品の表示を必ず確認してください。",
+        "en": "Ketchup ingredients vary by product. The product label cited (Del Monte tomato ketchup) does not list any allergen declaration for this item; always check the product label of the one you use."
       },
       {
         "ja": "ソーセージ（ウインナー）は製品によって原材料が違います。参照した製品（日本ハム「シャウエッセン」）の表示では、豚肉が表示されています。チーズ入りなど他の製品は違うので、使う製品の表示を確認してください。",

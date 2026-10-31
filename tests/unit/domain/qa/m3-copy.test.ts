@@ -37,12 +37,8 @@ describe('QA M3 copy: banned phrases (BR-07)', () => {
         for (const p of banned.en) if (hitEn(s, p)) hits.push(`${r.id}: ${p} in ${s.slice(0, 30)}`);
       }
     }
-    // Defect M3-D01 (P3, open, owner BA/content): 8 recipes carry the en adaptation 'lists no allergens, but check the label',
-    // which matches the banned phrase 'no allergens' under the AC2 matching rule. Pinned so any NEW offender fails this test.
-    const known = hits.filter((h) => h.includes(': no allergens in ')).length;
-    expect(hits.filter((h) => !h.includes(': no allergens in '))).toEqual([]);
-    expect(known).toBe(hits.length);
-    expect(known).toBe(8);
+    // Defect M3-D01 fixed 2026-10-31 (8 en/ja adaptation notes reworded): no offender is allowed any more.
+    expect(hits).toEqual([]);
   });
   it('US-E6-03/AC1 the catalog carries the exact disclaimer in ja and the key strings of AC4/AC5/AC6/AC8 and AC3', () => {
     const all = Object.values(ja);
