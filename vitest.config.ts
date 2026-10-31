@@ -22,6 +22,9 @@ export default defineConfig({
           environment: 'jsdom',
           include: ['tests/unit/ui/**/*.test.{ts,tsx}'],
           setupFiles: ['tests/setup/dom.ts'],
+          // jsdom UI tests type and render a lot; under parallel coverage load the 5 s default flaked (3 recorded cases)
+          testTimeout: 20_000,
+          hookTimeout: 20_000,
         },
       },
       {
