@@ -1,4 +1,5 @@
-// Ranking oracle (tests/oracle/ranking-oracle.md): a deliberately naive re-implementation of BR-06 / BR-07 / BR-09 / R-3.
+// Ranking oracle (tests/oracle/ranking-oracle.md): a deliberately naive re-implementation of BR-06 / BR-07 / BR-09 and the
+// processed-food rule of 2026-11-01 (F1'', warning; F4 and the complete-first tier are retired).
 // Independence rules: imports nothing from src/ and no package; Node built-ins only. Everything is derived from the raw
 // recipe ingredients (animal origin, diet completeness) and the raw dictionary; dates are plain ISO strings.
 import { readFileSync } from 'node:fs';
@@ -6,7 +7,16 @@ import { join } from 'node:path';
 
 export interface RDict {
   categories: { id: string; parentId: string | null }[];
-  ingredients: { id: string; categoryIds: string[]; parentIngredientId: string | null; seasoning: boolean }[];
+  ingredients: {
+    id: string;
+    categoryIds: string[];
+    parentIngredientId: string | null;
+    seasoning: boolean;
+    info: string;
+    inherentAllergenIds: string[];
+    allergenGroupIds: string[];
+  }[];
+  allergenGroups: { id: string; memberAllergenIds: string[] }[];
 }
 export interface RIng {
   ingredientId: string;
@@ -48,7 +58,7 @@ const dayNumber = (iso: string): number => {
   return Date.UTC(y!, m! - 1, d!) / 86400000;
 };
 
-export interface OScored { id: string; score: number }
+export interface OScored { id: string; score: number; warning: { allergenIds: string[]; processedIngredientIds: string[] } | null }
 export interface OOut {
   /** full ordered list (survivors) */
   order: OScored[];
@@ -99,8 +109,13 @@ export class RankOracle {
     const scored: { r: RRecipe; score: number }[] = [];
     for (const r of this.lib) {
       const reasons = new Set<string>();
-      // F1
-      for (const a of new Set([...r.allergenIds, ...r.mayContainAllergenIds])) if (p.knownAllergenIds.includes(a)) reasons.add('allergen:' + a);
+      // F1'': recipe allergenIds (data contract 3.7a: valid data already holds each ingredient's inherent ids) + members of carried groups; label data never read
+      const hit = new Set<string>(r.allergenIds);
+      for (const ing of r.ingredients) {
+        const d = this.ing.get(ing.ingredientId);
+        for (const g of d?.allergenGroupIds ?? []) for (const m of this.dict.allergenGroups.find((q) => q.id === g)?.memberAllergenIds ?? []) hit.add(m);
+      }
+      for (const x of hit) if (p.knownAllergenIds.includes(x)) reasons.add('allergen:' + x);
       // F2
       for (const ing of r.ingredients) {
         const chain = [ing.ingredientId, ...this.parents(ing.ingredientId)];
@@ -117,8 +132,6 @@ export class RankOracle {
         for (const t of origin) if (forbidden.has(t)) reasons.add('diet-tag:' + t);
         if (r.ingredients.some((i) => !i.animalOriginKnown)) reasons.add('diet-incomplete');
       }
-      // F4
-      if (!r.allergenDataComplete && p.knownAllergenIds.length > 0) reasons.add('allergen-incomplete');
       if (reasons.size > 0) {
         excluded.set(r.id, [...reasons].sort());
         continue;
@@ -126,14 +139,18 @@ export class RankOracle {
       scored.push({ r, score: this.score(r, p, decisions, target) });
     }
     scored.sort((a, b) => {
-      const ca = a.r.allergenDataComplete ? 0 : 1;
-      const cb = b.r.allergenDataComplete ? 0 : 1;
-      if (ca !== cb) return ca - cb;
       if (a.score !== b.score) return b.score - a.score;
       if (a.r.minutes !== b.r.minutes) return a.r.minutes - b.r.minutes;
       return a.r.id < b.r.id ? -1 : a.r.id > b.r.id ? 1 : 0;
     });
-    return { order: scored.map((s) => ({ id: s.r.id, score: s.score })), excluded };
+    return { order: scored.map((s) => ({ id: s.r.id, score: s.score, warning: this.warning(s.r, p) })), excluded };
+  }
+
+  /** processed-food warning: only with registered allergens and at least one processed (dictionary info = varies) ingredient */
+  private warning(r: RRecipe, p: RProfile): OScored['warning'] {
+    if (p.knownAllergenIds.length === 0) return null;
+    const ids = [...new Set(r.ingredients.map((i) => i.ingredientId))].filter((i) => this.ing.get(i)?.info === 'varies');
+    return ids.length === 0 ? null : { allergenIds: [...p.knownAllergenIds], processedIngredientIds: ids };
   }
 
   /** foods = distinct ingredient ids; an ancestor present with a descendant folds into each present descendant */

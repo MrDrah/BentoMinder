@@ -238,3 +238,7 @@
 {"v":1,"at":"2026-11-01T12:51:59.555Z","by":"orchestrator","type":"task-end","task":"allergen-rule-ba","outcome":"success","summary":"diff-guard: 13 changed files, all allowed"}
 {"v":1,"at":"2026-11-01T12:51:59.732Z","by":"orchestrator","type":"task-start","task":"allergen-rule-design","summary":"Task allergen-rule-design dispatched (6 allowed globs)"}
 {"v":1,"at":"2026-11-01T12:54:42.685Z","by":"orchestrator","type":"task-start","task":"allergen-rule-dev1","summary":"Task allergen-rule-dev1 dispatched (7 allowed globs)"}
+{"v":1,"at":"2026-11-01T13:00:31.626Z","by":"orchestrator","type":"task-end","task":"allergen-rule-dev1","outcome":"failure","summary":"diff-guard: 18 files outside the allow-list"}
+{"v":1,"at":"2026-11-01T13:00:31.908Z","by":"orchestrator","type":"task-start","task":"allergen-rule-dev2","summary":"Task allergen-rule-dev2 dispatched (6 allowed globs)"}
+{"v":1,"at":"2026-11-01T13:10:40.011Z","by":"orchestrator","type":"task-start","task":"allergen-rule-qa","summary":"Task allergen-rule-qa dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-11-01T13:38:11.114Z","by":"orchestrator","type":"task-end","task":"allergen-rule-qa","outcome":"success","summary":"diff-guard: 8 changed files, all allowed"}

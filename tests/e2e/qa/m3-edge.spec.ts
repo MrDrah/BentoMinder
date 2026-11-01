@@ -7,7 +7,6 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { KEY, readStore, ROOT, type Json } from './helpers.ts';
 import { loadRDict, RankOracle, type RRecipe } from '../../oracle/impl/ranking.ts';
-import { Prng } from '../../oracle/impl/prng.ts';
 
 const STATE = JSON.parse(readFileSync(join(ROOT, 'tests', 'fixtures', 'state', 'm2-november.json'), 'utf8')) as Json;
 const LIB = JSON.parse(readFileSync(join(ROOT, 'data', 'library.json'), 'utf8')) as (RRecipe & { name: { ja: string }; shortNameJa: string; minutes: number; dietDataComplete: boolean })[];
@@ -87,16 +86,26 @@ const seriousAxe = async (page: Page, label: string) => {
 const DICT = JSON.parse(readFileSync(join(ROOT, 'data', 'dictionary.json'), 'utf8')) as Json;
 /** Every allergen known and every top-level category excluded: the oracle confirms 0 survivors. */
 const zeroP = (): P => ({ known: (DICT.allergens as Json[]).filter((a) => !a.retired).map((a) => a.id as string), excl: (DICT.categories as Json[]).filter((c) => c.parentId === null).map((c) => c.id as string) });
-/** Searches (seeded) for a has-known profile whose oracle survivors number exactly `n`. */
-function profileWithSurvivors(n: number, seed0: number): string[] {
-  const allergens = (DICT.allergens as Json[]).filter((a) => !a.retired).map((a) => a.id as string);
-  const rng = new Prng(seed0);
-  for (let i = 0; i < 20000; i++) {
-    const known = [...new Set(Array.from({ length: rng.int(1, 12) }, () => rng.pick(allergens)))];
-    const s = stateWith({ known });
-    if (expected(s, '2026-11-05').order.length === n) return known;
+/** Builds a has-known profile whose oracle survivors number exactly `n` (2026-11-01: processed foods cut deeply, so a few exclusions of foods that only the extra survivors use tune the count). */
+function profileWithSurvivors(n: number, seed0: number): P {
+  void seed0;
+  const known = ['alg-wheat', 'alg-egg', 'alg-milk', 'alg-soybean'];
+  let excl: string[] = [];
+  const order = (): string[] => expected(stateWith({ known, excl }), '2026-11-05').order.map((x) => x.id);
+  const base = order();
+  for (let k = 0; k + n <= base.length; k++) {
+    excl = [];
+    const keep = base.slice(k, k + n);
+    const keepIngs = new Set(keep.flatMap((id) => (LIB.find((r) => r.id === id)!.ingredients as Json[]).map((i) => i.ingredientId as string)));
+    for (const id of base) {
+      if (keep.includes(id)) continue;
+      const r = LIB.find((x) => x.id === id)!;
+      const pick = (r.ingredients as Json[]).map((i) => i.ingredientId as string).find((i) => !keepIngs.has(i));
+      if (pick && !excl.includes(pick)) excl = [...excl, pick];
+    }
+    if (order().length === n) return { known, excl };
   }
-  throw new Error(`no profile with ${n} survivors found`);
+  throw new Error(`could not build a profile with ${n} survivors`);
 }
 
 test.describe('US-E6-01 ranked suggestions, oracle-checked in the browser', () => {
@@ -128,7 +137,7 @@ test.describe('US-E6-01 ranked suggestions, oracle-checked in the browser', () =
       const rec = LIB.find((r) => r.id === want.order[i]!.id)!;
       await expect(row.getByTestId(`rec-row-${i}-name`)).toContainText(rec.name.ja);
       await expect(row.getByTestId(`rec-row-${i}-minutes`)).toContainText(String(rec.minutes));
-      if (rec.allergenIds.length + rec.mayContainAllergenIds.length > 0) await expect(row.getByTestId(`rec-row-${i}-allergens`)).toBeVisible();
+      if (rec.allergenIds.length > 0) await expect(row.getByTestId(`rec-row-${i}-allergens`)).toBeVisible();
       const text = (await row.innerText()) ?? '';
       if (rec.minutes > 20) expect(text, rec.id).not.toContain('20分以内でできます');
       else expect(text, rec.id).toContain('20分以内でできます');
@@ -171,8 +180,7 @@ test.describe('US-E6-01 ranked suggestions, oracle-checked in the browser', () =
   test('US-E6-01/AC4 exactly 2 and exactly 1 survivors: fewer-count text and that many cards', async ({ page }) => {
     await openRecs(page, stateWith());
     for (const n of [2, 1]) {
-      const known = profileWithSurvivors(n, 20261100 + n);
-      await setStore(page, stateWith({ known }));
+      await setStore(page, stateWith(profileWithSurvivors(n, 20261100 + n)));
       await expect(page.getByTestId('recs-fewer')).toHaveText(`条件に合うレシピは${n}件です`);
       await expect(page.locator('[data-testid^="rec-card-"][data-recipe-id]')).toHaveCount(n);
     }
@@ -198,7 +206,7 @@ test.describe('US-E6-01 ranked suggestions, oracle-checked in the browser', () =
   test('US-E6-01/AC6 ruling question: 「ほかのレシピ」 when 3 or fewer recipes pass (button absent vs AC text)', async ({ page }) => {
     // The AC says "When the parent taps 「ほかのレシピ」 ... the full list is shown". It does not say the button hides when the list equals
     // the suggestions. Recorded as M3-D02 (P4, ruling). The test pins the current behaviour so a change is noticed.
-    await openRecs(page, stateWith({ known: profileWithSurvivors(2, 20261102) }));
+    await openRecs(page, stateWith(profileWithSurvivors(2, 20261102)));
     await expect(page.getByTestId('recs-more')).toHaveCount(0);
   });
 });
@@ -230,35 +238,35 @@ test.describe('US-E6-02 filters in the UI', () => {
     await expect(page.getByTestId('recipe-footer-action')).toBeDisabled();
   });
 
-  test('US-E6-02/AC6 incomplete allergen data with a known allergen: greyed with the exact wording, listed last, not plannable', async ({ page }) => {
+  test('US-E6-04/AC6 US-E6-02/AC12 (AC5/AC6 superseded 2026-11-01) incomplete allergen data with a known allergen: neither excluded nor greyed for that reason, plannable, no retired notice', async ({ page }) => {
     const s = stateWith({ known: ['alg-shrimp'] });
     const want = expected(s, '2026-11-05');
-    const inc = LIB.find((r) => want.excluded.get(r.id)?.join() === 'allergen-incomplete')!;
+    const inc = LIB.find((r) => !r.allergenDataComplete && !want.excluded.has(r.id))!;
+    expect(inc, 'an incomplete-data recipe survives a shrimp child').toBeTruthy();
     await seed(page, s);
     await go(page, '/recipes');
-    await expect(page.getByTestId(`library-row-${inc.id}-reason`)).toContainText('アレルゲン情報が不完全なため、登録したアレルギーと照合できません');
+    await expect(page.getByTestId(`library-row-${inc.id}-reason`)).toHaveCount(0);
+    await expect(page.locator('body')).not.toContainText('アレルゲン情報が不完全なため');
     await page.getByTestId(`library-row-${inc.id}-link`).click();
-    await expect(page.getByTestId('recipe-footer-action')).toBeDisabled();
+    await expect(page.getByTestId('recipe-footer-action')).toBeEnabled();
+    await expect(page.locator('body')).not.toContainText('一部の材料のアレルゲン情報がわかりません');
   });
 
-  test('US-E6-02/AC4 US-E6-02/AC5 varies-by-product note and incomplete note on cards; incomplete recipes rank after every complete one (none-known child)', async ({ page }) => {
+  test('US-E6-02/AC12 US-E6-04/AC6 retired notices are gone from the cards and the order is the oracle order (score, minutes, id) with incomplete recipes not last (none-known child)', async ({ page }) => {
     const s = stateWith({ status: 'none-known', known: [], excl: [] });
     const want = expected(s, '2026-11-05');
     await openRecs(page, s);
     await page.getByTestId('recs-more').click();
-    let seenIncomplete = false;
     for (let i = 0; i < want.order.length; i++) {
-      const rec = LIB.find((r) => r.id === want.order[i]!.id)!;
       const row = page.getByTestId(`rec-row-${i}`);
-      const varies = rec.ingredients.some((g) => g.allergenInfo === 'varies-by-product');
-      if (varies) await expect(row.getByTestId(`rec-row-${i}-varies`)).toContainText('市販品は製品によりアレルゲンが異なります。表示を確認してください。');
-      else await expect(row.getByTestId(`rec-row-${i}-varies`)).toHaveCount(0);
-      if (!rec.allergenDataComplete) {
-        seenIncomplete = true;
-        await expect(row.getByTestId(`rec-row-${i}-incomplete`)).toContainText('一部の材料のアレルゲン情報がわかりません。食品の表示を確認してください。');
-      } else expect(seenIncomplete, `${rec.id} complete after an incomplete one`).toBe(false);
+      await expect(row).toHaveAttribute('data-recipe-id', want.order[i]!.id);
+      await expect(row.getByTestId(`rec-row-${i}-varies`)).toHaveCount(0);
+      await expect(row.getByTestId(`rec-row-${i}-incomplete`)).toHaveCount(0);
     }
-    expect(seenIncomplete).toBe(true);
+    await expect(page.locator('body')).not.toContainText('市販品は製品によりアレルゲンが異なります');
+    const complete = want.order.map((x) => LIB.find((r) => r.id === x.id)!.allergenDataComplete);
+    expect(complete.indexOf(false), 'some incomplete recipe is present').toBeGreaterThanOrEqual(0);
+    expect(complete.lastIndexOf(true), 'a complete recipe ranks after an incomplete one (no tier)').toBeGreaterThan(complete.indexOf(false));
   });
 
   test('US-E6-02/AC2 US-E6-02/AC7 excluded ingredient and diet hide the recipes the oracle excludes (cards)', async ({ page }) => {
@@ -382,7 +390,10 @@ test.describe('US-E6-04 recipe detail', () => {
     const links = page.getByTestId('recipe-sources').locator('a');
     expect(await links.count()).toBeGreaterThanOrEqual(1);
     for (const href of await links.evaluateAll((a) => a.map((x) => x.getAttribute('href')))) expect(href).toMatch(/^https?:\/\//);
-    await expect(page.getByTestId('recipe-allergens')).toBeVisible();
+    // US-E6-03/AC3: the badge is guaranteed for allergenIds [] without a processed ingredient and for any recipe with allergens; a recipe with [] and a processed ingredient shows no 'none' badge (never claims none)
+    const procAll = ((DICT.ingredients as Json[]).filter((d) => d.info === 'varies').map((d) => d.id as string));
+    const mustBadge = rec.allergenIds.length > 0 || !rec.ingredients.some((i: Json) => procAll.includes(i.ingredientId));
+    if (mustBadge) await expect(page.getByTestId('recipe-allergens')).toBeVisible();
   });
 
   test('US-E6-04/AC2 food-handling guidance is present on every recipe', async ({ page }) => {
@@ -578,7 +589,7 @@ test.describe('accessibility (axe serious/critical = 0), both colour schemes', (
       await go(page, '/recipes');
       await expect(page.getByTestId('screen-library')).toBeVisible();
       await seriousAxe(page, `${scheme} library`);
-      await go(page, `/recipe/${LIB[1]!.id}`);
+      await go(page, `/recipe/${LIB.find((r) => !r.allergenIds.includes('alg-egg'))!.id}`); // a plannable recipe for this egg child
       await expect(page.getByTestId('screen-recipe')).toBeVisible();
       await seriousAxe(page, `${scheme} recipe`);
       await page.getByTestId('recipe-footer-action').click();

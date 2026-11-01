@@ -83,7 +83,7 @@ test('US-E0-01/AC1 US-E0-01/AC2 US-E0-01/AC3 the main journey from a fresh devic
   for (const id of ids) {
     const r = LIB.find((x) => x.id === id);
     expect(r, `suggested ${id} is in the library`).toBeTruthy();
-    const all = [...r.allergenIds, ...r.mayContainAllergenIds, ...r.ingredients.flatMap((i: Json) => [...i.allergenIds, ...i.possibleAllergenIds])];
+    const all = [...r.allergenIds, ...r.ingredients.flatMap((i: Json) => i.allergenIds)]; // label data (may-contain) is warn-only since 2026-11-01
     expect(all, `${id} must not contain alg-shrimp`).not.toContain('alg-shrimp');
   }
 
