@@ -148,3 +148,10 @@
 {"v":1,"at":"2026-10-31T11:09:55.796Z","by":"orchestrator","type":"task-end","task":"m5-gemini","outcome":"success","summary":"diff-guard: 6 changed files, all allowed"}
 {"v":1,"at":"2026-10-31T11:35:14.075Z","by":"orchestrator","type":"task-end","task":"m5-gemini","outcome":"failure","summary":"diff-guard: 3 files outside the allow-list"}
 {"v":1,"at":"2026-10-31T12:34:49.179Z","by":"orchestrator","type":"task-start","task":"m5-slice-b","summary":"Task m5-slice-b dispatched (9 allowed globs)"}
+{"v":1,"at":"2026-11-01T00:28:43.308Z","by":"orchestrator","type":"task-start","task":"m5-qa","summary":"Task m5-qa dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-11-01T00:57:26.168Z","by":"orchestrator","type":"task-start","task":"m5-eval-fixes","summary":"Task m5-eval-fixes dispatched (9 allowed globs)"}
+{"v":1,"at":"2026-11-01T00:57:26.366Z","by":"orchestrator","type":"task-start","task":"m6-doc","summary":"Task m6-doc dispatched (3 allowed globs)"}
+{"v":1,"at":"2026-11-01T00:58:01.534Z","by":"orchestrator","type":"task-end","task":"m5-qa","outcome":"success","summary":"diff-guard: 7 changed files, all allowed"}
+{"v":1,"at":"2026-11-01T00:59:05.471Z","by":"orchestrator","type":"task-end","task":"m6-doc","outcome":"failure","summary":"diff-guard: 5 files outside the allow-list"}
+{"v":1,"at":"2026-11-01T01:04:00.919Z","by":"orchestrator","type":"task-start","task":"m5-final-fixes","summary":"Task m5-final-fixes dispatched (7 allowed globs)"}
+{"v":1,"at":"2026-11-01T01:07:13.049Z","by":"orchestrator","type":"task-end","task":"m5-final-fixes","outcome":"failure","summary":"diff-guard: 1 files outside the allow-list"}
