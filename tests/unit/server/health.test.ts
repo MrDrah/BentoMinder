@@ -77,8 +77,8 @@ describe('local proxy', () => {
     expect(proxyPort({})).toBe(8787);
     expect(proxyPort({ PROXY_PORT: '9000' })).toBe(9000);
     expect(() => proxyPort({ PROXY_PORT: 'abc' })).toThrow(RangeError);
-    expect(defaultDeps({}).primaryModel).toBe('gemini-3.8-flash');
-    expect(defaultDeps({}).fallbackModel).toBe('gemini-3.5-flash-lite');
+    expect(defaultDeps({}).primaryModel).toBe('gemini-3.5-flash-lite');
+    expect(defaultDeps({}).fallbackModel).toBe('gemini-3.8-flash');
     expect(() => defaultDeps({ PROXY_EXTRACT_PER_HOUR: '-1' })).toThrow(RangeError);
     // D-M1-09: the scenario header is honoured only when explicitly switched on.
     expect(defaultDeps({}).allowScenarios).toBe(false);

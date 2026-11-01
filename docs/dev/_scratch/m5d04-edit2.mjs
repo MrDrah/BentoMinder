@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+const p='tests/e2e/qa/m5-reminder-clock.spec.ts';
+let s=fs.readFileSync(p,'utf8');
+const a="deterministically shows the weekly 10-25 reminder as MISSED once the profile exists (BR-17); this is the banner axe meets";
+if(!s.includes(a)) throw 1;
+s=s.replace(a,"shows NO reminder: the weekly of Sun 10-25 14:00 is due before the profile existed and is never shown, not even as missed (M5-D04)");
+const b="  await expect(page.getByTestId('reminder-weekly-2026-10-26')).toBeVisible();\n  await expect(page.getByTestId('reminder-missed')).toContainText('10月25日（日） 14:00のお知らせ');\n  await expect(page.getByTestId('reminder-list')).toHaveCount(1);";
+if(!s.includes(b)) throw 2;
+s=s.replace(b,"  await expect(page.getByTestId('reminder-weekly-2026-10-26')).toHaveCount(0);\n  await expect(page.getByTestId('reminder-missed')).toHaveCount(0);\n  await expect(page.getByTestId('reminder-list')).toHaveCount(0);");
+fs.writeFileSync(p,s);
+const q='docs/dev/adr/002-ai-menu-extraction.md';
+fs.appendFileSync(q,"\n## Change 2026-11-01: model order swapped (PO: MVP quickly)\n\n- **Decision:** `gemini-3.5-flash-lite` is the default primary, `gemini-3.8-flash` the default fallback (`GEMINI_MODEL_PRIMARY` / `GEMINI_MODEL_FALLBACK` still override). The 25 s first call, remaining-budget second call, free-tier id guard and \"thinkingConfig only for non-lite\" are unchanged. The table above lists the earlier order.\n- **Evidence:** in 17 + 6 live calls `gemini-3.8-flash` timed out at 60 s on 8 of 9 fixtures and answered once; Flash-Lite answered nearly every time inside the budget with 0 invented allergen days.\n- **Revisit:** if 3.8 Flash latency drops (re-run `eval:extraction` with the order swapped back) or Flash-Lite accuracy regresses on a new menu layout.\n");

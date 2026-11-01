@@ -63,5 +63,7 @@ export function planRemindersForStore(
     log: store.reminderLog,
     previous,
     horizonDays: env.horizonDays ?? REMINDER_HORIZON_DAYS.web,
+    // US-E7-05 (M5-D04): nothing due before the profile existed; without a profile record, today's behaviour.
+    notBefore: store.profile !== null ? (Date.parse(store.profile.createdAt) as Instant) : undefined,
   });
 }

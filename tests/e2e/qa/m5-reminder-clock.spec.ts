@@ -62,7 +62,7 @@ test('clock: setFixedTime freezes Date.now (timers still run), so reminder evalu
   expect(await page.evaluate(() => Date.now())).toBe(a);
 });
 
-test('US-E7-05/AC2 US-E1-01 first launch at 2026-10-28 10:00 JST (the m1-import clock) deterministically shows the weekly 10-25 reminder as MISSED once the profile exists (BR-17); this is the banner axe meets', async ({ page }) => {
+test('US-E7-05/AC2 US-E1-01 first launch at 2026-10-28 10:00 JST (the m1-import clock) shows NO reminder: the weekly of Sun 10-25 14:00 is due before the profile existed and is never shown, not even as missed (M5-D04)', async ({ page }) => {
   await page.clock.setFixedTime(new Date('2026-10-28T01:00:00Z'));
   await page.goto('./');
   await page.getByTestId('input-nickname').fill('a');
@@ -74,9 +74,9 @@ test('US-E7-05/AC2 US-E1-01 first launch at 2026-10-28 10:00 JST (the m1-import 
   await page.getByTestId('review-confirm').click();
   await page.getByTestId('dialog-uncertain-confirm').click();
   await expect(page.getByTestId('screen-calendar')).toBeVisible();
-  await expect(page.getByTestId('reminder-weekly-2026-10-26')).toBeVisible();
-  await expect(page.getByTestId('reminder-missed')).toContainText('10月25日（日） 14:00のお知らせ');
-  await expect(page.getByTestId('reminder-list')).toHaveCount(1);
+  await expect(page.getByTestId('reminder-weekly-2026-10-26')).toHaveCount(0);
+  await expect(page.getByTestId('reminder-missed')).toHaveCount(0);
+  await expect(page.getByTestId('reminder-list')).toHaveCount(0);
 });
 
 test('root cause of the intermittent axe failure: the banner fades in over 200 ms (opacity 0 to 1); axe measured mid-fade reports color-contrast, settled it does not', async ({ page }) => {

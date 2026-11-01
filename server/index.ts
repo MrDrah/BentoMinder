@@ -215,8 +215,8 @@ export function defaultDeps(env: NodeJS.ProcessEnv = process.env, fetchImpl: typ
     // ADR 002 §2: extract ≤ 5/hour and ≤ 20/day; fetch-pdf ≤ 30/hour. Raised only for the e2e run.
     extractCap: windowCap({ perHour: envInt(env, 'PROXY_EXTRACT_PER_HOUR', 5), perDay: envInt(env, 'PROXY_EXTRACT_PER_DAY', 20) }, nowMs),
     fetchCap: windowCap({ perHour: envInt(env, 'PROXY_FETCH_PER_HOUR', 30), perDay: Number.MAX_SAFE_INTEGER }, nowMs),
-    primaryModel: env['GEMINI_MODEL_PRIMARY'] || 'gemini-3.8-flash',
-    fallbackModel: env['GEMINI_MODEL_FALLBACK'] || 'gemini-3.5-flash-lite',
+    primaryModel: env['GEMINI_MODEL_PRIMARY'] || 'gemini-3.5-flash-lite',
+    fallbackModel: env['GEMINI_MODEL_FALLBACK'] || 'gemini-3.8-flash',
     // Off unless PROXY_MOCK_SCENARIOS=1: only the test runs set it (D-M1-09).
     allowScenarios: env['PROXY_MOCK_SCENARIOS'] === '1',
     nowMs,

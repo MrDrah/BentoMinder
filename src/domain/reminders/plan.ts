@@ -43,6 +43,8 @@ export interface PlanInput {
   previous?: readonly ScheduledRef[];
   /** Web 8, Android 35 (ADR 004 §4). */
   horizonDays?: number;
+  /** US-E7-05 (M5-D04): reminders due before this instant (the profile's creation) are never planned, not even as missed. */
+  notBefore?: Instant | undefined;
 }
 
 export interface PlanResult {
@@ -191,7 +193,7 @@ export function planReminders(input: PlanInput): PlanResult {
     }
   }
   const wanted = found
-    .filter((j) => j.expiresAt > now && !dismissed.has(j.key))
+    .filter((j) => j.expiresAt > now && !dismissed.has(j.key) && (input.notBefore === undefined || j.dueAt >= input.notBefore))
     .sort((a, b) => a.dueAt - b.dueAt || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
   const jobs = assignIds(wanted);
   return { jobs, diff: diffSchedule(input.previous ?? [], jobs) };

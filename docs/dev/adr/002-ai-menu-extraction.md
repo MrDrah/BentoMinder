@@ -151,3 +151,9 @@ The plain-language text in `ai-provider.md` §A3 goes to the designer's copy she
 - **MALFORMED_OUTPUT, v2:** not reproduced (ok on re-run, 56/56, 18/18; likely model variance). **twocol:** the model returned 2027-01-11 (the blank holiday band) as a day with `items: []` (`list-length days.1.items`); meaning is "nothing printed", so the contract stays (a day has 1-12 items) and the prompt now says to leave out a date with no dish and no reason. Re-run: ok, 15/15 dates, dish recall 41/45 (the merged 今週のデザート cell is the likely miss), 0 extras.
 - **events extras:** 15 "extras" were the おやつ items returned as `おやつ：クッキー` instead of the answer key's `クッキー` (label copied into the text). The prompt now forbids label prefixes and maps おやつ to kind `snack`. Not re-run live (call budget spent); the recall number for events is therefore UNVERIFIED after the fix.
 - `PROMPT_VERSION` 2 to 3. `eval-extraction.mjs` debug now parses with each fixture's own month. Open: v3/events re-measure, a call with the primary actually answering for several fixtures.
+
+## Change 2026-11-01: model order swapped (PO: MVP quickly)
+
+- **Decision:** `gemini-3.5-flash-lite` is the default primary, `gemini-3.8-flash` the default fallback (`GEMINI_MODEL_PRIMARY` / `GEMINI_MODEL_FALLBACK` still override). The 25 s first call, remaining-budget second call, free-tier id guard and "thinkingConfig only for non-lite" are unchanged. The table above lists the earlier order.
+- **Evidence:** in 17 + 6 live calls `gemini-3.8-flash` timed out at 60 s on 8 of 9 fixtures and answered once; Flash-Lite answered nearly every time inside the budget with 0 invented allergen days.
+- **Revisit:** if 3.8 Flash latency drops (re-run `eval:extraction` with the order swapped back) or Flash-Lite accuracy regresses on a new menu layout.
