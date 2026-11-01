@@ -1,0 +1,52 @@
+const { I, SRC, T } = require('../lib.cjs');
+module.exports = {
+  id: 'rcp-delish-kuma-nugget',
+  name: T('くまちゃんナゲット', 'Teddy-bear chicken nuggets'),
+  shortNameJa: 'くまナゲット',
+  shortNameEn: 'Nuggets',
+  nameKana: 'くまちゃんなげっと',
+  style: 'western-inspired',
+  themeId: 'theme-animals',
+  description: T(
+    '鶏むね肉と豆腐で作る小さなナゲットに、ミニソーセージの耳と鼻、のりの目と口をつけて、クマの顔にしたお弁当のおかずです。',
+    'Small nuggets of chicken breast and tofu turned into bears with mini-sausage ears and noses and nori eyes and mouths, as a bento side.',
+  ),
+  yield: T('10個分', '10 pieces'),
+  minutes: 30,
+  ingredients: [
+    I('ing-chicken-breast', '鶏むね肉（皮なし）', 'skinless chicken breast', 150, 'g'),
+    I('ing-tofu', '木綿豆腐', 'firm tofu', 100, 'g'),
+    I('ing-egg', '溶き卵（1/2個分）', 'beaten egg (half an egg)', 0.5, 'piece'),
+    I('ing-bread-crumbs', 'パン粉', 'bread crumbs', 3, 'tbsp'),
+    I('ing-wheat-flour', '薄力粉（打ち粉）', 'cake flour (for dusting)', null, 'to-taste'),
+    I('ing-oil', '揚げ油（サラダ油）', 'frying oil', null, 'to-taste'),
+    I('ing-cooking-sake', '酒', 'cooking sake', 1, 'tbsp'),
+    I('ing-salt', '塩', 'salt', 0.33, 'tsp'),
+    I('ing-pepper', 'こしょう', 'pepper', null, 'small-amount'),
+    I('ing-sausage', 'ミニソーセージ', 'mini sausages', 10, 'piece', { lab: { poss: ['alg-pork'] } }),
+    I('ing-nori', '焼きのり', 'toasted nori', null, 'to-taste'),
+    I('ing-ketchup', 'ケチャップ（ほっぺ用）', 'ketchup (for the cheeks)', null, 'to-taste', { lab: { poss: [] } }),
+  ],
+  steps: [
+    T('湯をわかして豆腐をくずしながら入れ、2分ほどゆでて粗熱をとる。続けてミニソーセージも2分ほどゆでる。', 'Boil water, crumble in the tofu and boil about 2 minutes, then cool it. Boil the mini sausages about 2 minutes too.'),
+    T('鶏肉を細かく刻んで包丁でたたく。', 'Chop the chicken finely and pound it with the knife.'),
+    T('溶き卵にパン粉を浸し、鶏肉、豆腐、酒、塩、こしょうを加えて、粘り気が出るまでよく混ぜ合わせ、10等分にする。', 'Soak the bread crumbs in the beaten egg, add the chicken, tofu, sake, salt and pepper and mix until sticky; divide into 10.'),
+    T('薄力粉を敷いたバットに、スプーンですくったたねを置き、粉をふって楕円形に整える。', 'Spoon the mixture onto flour in a tray, dust with more flour and shape into ovals.'),
+    T('鍋に1cmの深さまで油を入れて170℃にし、返しながらこんがり色づくまで約5分揚げる。', 'Heat oil 1 cm deep to 170 C and fry, turning, about 5 minutes until golden.'),
+    T('ソーセージの粗熱が取れたら両端を耳に切り、真ん中を5mm幅に切って鼻にする。ナゲットにストローで耳の穴をあけて耳を差す。のりで目と鼻と口を貼り、ケチャップで頬を描く。', 'Cut both ends off each sausage for ears and slice the middle 5 mm for noses. Punch ear holes in the nuggets with a straw, insert the ears, add nori features and draw cheeks with ketchup.'),
+  ],
+  storage: [
+    T('夏場や梅雨の時期は避け、保冷剤と保冷バッグを使うか冷蔵庫で保管して、早めに食べます。', 'Avoid the hot, humid season; use an ice pack in a cool bag or the fridge and eat it soon.'),
+    T('ナゲットもソーセージも、しっかり冷めてから弁当箱へ入れます。', 'Let the fried nuggets and sausages cool, and pack them only once fully cool.'),
+  ],
+  adaptations: [
+    T('元のレシピは10個分で、1人分の目安は書かれていません。幼児向けとも書かれていないので、分量は変えていません。', 'The source makes 10 pieces and gives no per-person share, nor does it call itself a child portion; amounts are unchanged.'),
+    T('卵は「1/2個分」の溶き卵、薄力粉・揚げ油・のり・ケチャップは「適量」です。ミニソーセージは10本です。', 'The egg is half a beaten egg; flour, oil, nori and ketchup are "as needed". There are 10 mini sausages.'),
+    T('パン粉はメーカー表示が見つからず、アレルゲンと動物由来を不明として記録しています。ソーセージ・ケチャップは参照した製品の表示にもとづいています。', 'No label was found for the bread crumbs, so their allergens and animal origin are unknown. Sausage and ketchup follow the cited labels; check the labels of the ones you use.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-kuma-nugget', 'かわいさ満点♪ くまちゃんナゲットのレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/237763794774787178'),
+    SRC.sausage(),
+    SRC.ketchup(),
+  ],
+};

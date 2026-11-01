@@ -1,0 +1,52 @@
+const { I, SRC, T } = require('../lib.cjs');
+module.exports = {
+  id: 'rcp-delish-satsumaimo-chicken-bento',
+  name: T('さつまいもと鶏肉のバター炒め弁当', 'Sweet potato and chicken butter-sauté bento'),
+  shortNameJa: 'いも鶏バター',
+  shortNameEn: 'ImoChick',
+  nameKana: 'さつまいもととりにくのばたーいためべんとう',
+  style: 'japanese',
+  themeId: null,
+  description: T(
+    'レンジでやわらかくしたさつまいもと鶏もも肉、ピーマンをバターじょうゆで炒め、塩昆布入りのレンジ卵焼きを添えるおかず弁当です。',
+    'Sweet potato softened in the microwave, chicken thigh and green pepper stir-fried in butter and soy sauce, with a microwave omelette containing shio kombu.',
+  ),
+  yield: T('1人分', '1 serving'),
+  minutes: 30,
+  ingredients: [
+    I('ing-chicken', '鶏もも肉', 'chicken thigh', 100, 'g'),
+    I('ing-sweet-potato', 'さつまいも', 'sweet potato', 100, 'g'),
+    I('ing-green-pepper', 'ピーマン', 'green pepper', 1, 'piece'),
+    I('ing-butter', '有塩バター', 'salted butter', 15, 'g'),
+    I('ing-cooking-sake', '酒', 'cooking sake', 1, 'tbsp'),
+    I('ing-sugar', '砂糖', 'sugar', 0.5, 'tsp'),
+    I('ing-soy-sauce', 'しょうゆ', 'soy sauce', 0.5, 'tbsp', { lab: { poss: ['alg-wheat', 'alg-soybean'] } }),
+    I('ing-egg', '卵', 'egg', 1, 'piece'),
+    I('ing-mayonnaise', 'マヨネーズ', 'mayonnaise', 1, 'tbsp', { lab: { poss: ['alg-egg', 'alg-soybean'] } }),
+    I('ing-kombu', '塩昆布', 'shio kombu (salted kelp)', 0.5, 'tbsp', { unknown: true }),
+  ],
+  steps: [
+    T('さつまいもは乱切りにして水にさらし、水けを切る。ピーマンは縦に半分に割り、へたと種を除いてから同じく乱切りにする。', 'Cut the sweet potato and green pepper into chunks. Soak the sweet potato and drain it. Halve the pepper lengthwise and remove the stem and seeds before cutting.'),
+    T('耐熱皿にさつまいもと水大さじ1を入れ、ラップをして600Wで3分温めて火を通す。', 'Put the sweet potato and 1 tbsp water in a heatproof dish, cover loosely and microwave at 600 W for 3 minutes until soft.'),
+    T('鶏肉を一口大に切る。', 'Cut the chicken into bite-size pieces.'),
+    T('フライパンでバターを溶かし、鶏肉を皮目から焼く。焼き色がついたら返して、中火で中まで火を通す。', 'Melt the butter in a frying pan and cook the chicken skin side down. When it browns, turn it and cook through over medium heat.'),
+    T('鶏肉にさつまいもとピーマンを合わせて炒め、バターが全体になじんだら酒・砂糖・しょうゆで味つけして炒め合わせ、粗熱をとる。', 'Add the sweet potato and pepper and stir-fry; once coated in fat, add the sake, sugar and soy sauce, toss together and let cool a little.'),
+    T('耐熱容器に卵、マヨネーズ、塩昆布を入れて混ぜ、ラップをふんわりかけて600Wで40秒かける。取り出して混ぜ、もう一度40秒かけて卵に火を通す。', 'Mix the egg, mayonnaise and shio kombu in a heatproof dish, cover loosely and microwave at 600 W for 40 seconds. Stir, then microwave 40 seconds more until the egg is cooked.'),
+    T('卵をラップで包んで形を整え、少し冷めてから食べやすい大きさにカットする。', 'Wrap the egg in cling film to shape it, and cut it into pieces once it has cooled slightly.'),
+  ],
+  storage: [
+    T('鶏肉と卵は中までしっかり火を通し、炒めものも卵焼きも冷ましてから詰めます。', 'Cook the chicken and egg through, and cool both the stir-fry and the omelette before packing.'),
+    T('冷蔵庫や涼しい場所で保管し、持ち歩くときは保冷剤か保冷バッグを使って、早めに食べます。', 'Keep it in the fridge or a cool place, use an ice pack or cool bag when carrying it, and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは1人分ですが、幼児向けの量とは書かれていません。分量は変えていません。ごはんはこのレシピに含まれていません。', 'The source is for 1 serving and does not call itself a child portion; amounts are unchanged. Rice is not part of this recipe.'),
+    T('出典では、卵焼きを5cm角の小さな耐熱容器で作っています。卵焼きの形はその容器の大きさで決まります。', 'The source says it uses a 5 x 5 cm heatproof container, which sets the shape of the omelette.'),
+    T('塩昆布は製品によって原材料が違い、参照できる製品表示がないため、アレルゲンは不明として記録しています。しょうゆとマヨネーズは参照した製品表示（キッコーマン、味の素）によります。使う製品の表示を確認してください。', 'Shio kombu ingredients differ by product and no label was cited, so its allergens are recorded as unknown. Soy sauce and mayonnaise follow the cited product labels (Kikkoman, Ajinomoto). Check the labels of your own products.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-satsumaimo-chicken', '彩り豊か！ さつまいもと鶏肉のバター炒め弁当のレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/212543543388931290', ['recipe']),
+    SRC.shoyu(),
+    SRC.mayo(),
+    SRC.maff(),
+  ],
+};

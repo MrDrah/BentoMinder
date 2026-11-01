@@ -1,0 +1,4773 @@
+[
+  {
+    "id": "rcp-delish-soboro-edamame-gohan",
+    "name": {
+      "ja": "甘辛そぼろの枝豆ごはん",
+      "en": "Sweet-savoury soboro and edamame rice"
+    },
+    "shortNameJa": "そぼろ枝豆",
+    "shortNameEn": "Soboro",
+    "nameKana": "あまからそぼろのえだまめごはん",
+    "style": "japanese",
+    "themeId": null,
+    "description": {
+      "ja": "豚ひき肉を調味料と一緒に電子レンジで加熱してそぼろにし、枝豆とあたたかいごはんに混ぜる、火も包丁も使わない混ぜごはんです。",
+      "en": "A no-knife, no-stove mixed rice: pork mince is cooked with seasonings in the microwave, then folded into warm rice with edamame."
+    },
+    "yield": {
+      "ja": "2人分（ごはん300g）",
+      "en": "2 servings (300 g rice)"
+    },
+    "minutes": 10,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ごはん（お茶碗2杯・あたたかいもの）",
+          "en": "warm cooked rice (2 rice bowls)"
+        },
+        "quantity": 300,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ground-pork",
+        "label": {
+          "ja": "豚ひき肉",
+          "en": "pork mince"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-pork"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-edamame",
+        "label": {
+          "ja": "冷凍枝豆（解凍してさやから出す）",
+          "en": "frozen edamame (thawed, shelled)"
+        },
+        "quantity": 60,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-soybean"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cooking-sake",
+        "label": {
+          "ja": "酒",
+          "en": "cooking sake"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖",
+          "en": "sugar"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ",
+          "en": "soy sauce"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ginger",
+        "label": {
+          "ja": "おろししょうが",
+          "en": "grated ginger"
+        },
+        "quantity": 0.33,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sesame",
+        "label": {
+          "ja": "白いりごま",
+          "en": "toasted white sesame seeds"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-sesame"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "解凍した枝豆をさやから出しておく。",
+        "en": "Take the thawed edamame out of their pods."
+      },
+      {
+        "ja": "耐熱容器にひき肉、酒、砂糖、しょうゆ、しょうがを入れ、肉をほぐすように混ぜ合わせる。",
+        "en": "Put the mince, sake, sugar, soy sauce and ginger in a heatproof dish and mix, breaking up the meat."
+      },
+      {
+        "ja": "ふんわりラップをかけ、600Wで2〜3分、ひき肉に火が通るまで温める。ラップを外し、全体を混ぜ合わせる。",
+        "en": "Cover loosely with cling film and microwave at 600 W for 2 to 3 minutes until the meat is cooked through; remove the film and stir."
+      },
+      {
+        "ja": "あたたかいごはんと枝豆を加えてさっくり混ぜ、器に盛ってごまをふる。",
+        "en": "Add the warm rice and edamame, fold lightly, serve and sprinkle with sesame."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "お弁当に詰めるときは、ごはんもおかずも十分に冷ましてから蓋を閉めます。",
+        "en": "For a lunchbox, cool the rice and topping completely before closing the lid."
+      },
+      {
+        "ja": "冷蔵庫か保冷剤を入れた保冷バッグで保管し、早めに食べます。",
+        "en": "Keep it in the fridge or in a cool bag with an ice pack and eat it soon."
+      },
+      {
+        "ja": "ひき肉は中心まで火が通ったことを確かめてから使います。",
+        "en": "Make sure the mince is cooked through to the centre before you use it."
+      }
+    ],
+    "allergenIds": [
+      "alg-pork",
+      "alg-soybean",
+      "alg-sesame"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "pork"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは2人分（ごはんお茶碗2杯・300g）で、幼児向けとは書かれていません。分量は変えずに記録しています。",
+        "en": "The source is for 2 servings (two bowls, 300 g rice) and does not call itself a child portion; amounts are unchanged."
+      },
+      {
+        "ja": "元のレシピは調理時間約10分で、おにぎりにして軽食にもできると紹介しています。お弁当用の特別な手順はありません。",
+        "en": "The source gives about 10 minutes and says the rice can also be shaped into rice balls. It has no bento-specific steps."
+      },
+      {
+        "ja": "白いりごまは元のレシピで「適量」です。生の枝豆を使う場合はゆでてから混ぜるとよいとされています。",
+        "en": "Sesame is \"as needed\" in the source, which adds that fresh edamame should be boiled first."
+      },
+      {
+        "ja": "しょうゆの原材料は製品で違うため、参照した製品の表示（小麦・大豆）にもとづいて記録しています。使う製品の表示を確認してください。",
+        "en": "Soy sauce differs by product; the allergens come from the cited label (wheat, soy), so check the label of the one you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-delish-soboro-edamame",
+        "publisher": "デリッシュキッチン (every, Inc.)",
+        "title": "簡単おいしい！ 甘辛そぼろの枝豆ごはんのレシピ動画・作り方 | デリッシュキッチン",
+        "url": "https://delishkitchen.tv/recipes/303010139479212367",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-maff-lunchbox",
+        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-kikkoman-takenoko-tsukune-bento",
+    "name": {
+      "ja": "たけのこ入りつくね弁当",
+      "en": "Bamboo-shoot chicken tsukune bento"
+    },
+    "shortNameJa": "たけのこつくね",
+    "shortNameEn": "Tsukune",
+    "nameKana": "たけのこいりつくねべんとう",
+    "style": "japanese",
+    "themeId": null,
+    "description": {
+      "ja": "甘辛いたれのたけのこ入り鶏つくねに、ハム入りポテトサラダとしらす入りのスクランブルエッグを合わせた、3品の園児向けお弁当です。",
+      "en": "A three-part kindergarten bento: chicken tsukune with bamboo shoot in a sweet-savoury glaze, a ham potato salad and shirasu scrambled egg."
+    },
+    "yield": {
+      "ja": "幼児1人分（3品・成人の約1/2量）",
+      "en": "1 child portion (3 dishes, about half an adult portion)"
+    },
+    "minutes": 35,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-ground-chicken",
+        "label": {
+          "ja": "鶏ひき肉（つくね）",
+          "en": "chicken mince (tsukune)"
+        },
+        "quantity": 50,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-chicken"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "chicken"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-bamboo-shoot",
+        "label": {
+          "ja": "ゆでたけのこ（つくね）",
+          "en": "boiled bamboo shoot (tsukune)"
+        },
+        "quantity": 30,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cooking-sake",
+        "label": {
+          "ja": "清酒（つくねの下味）",
+          "en": "sake (tsukune seasoning)"
+        },
+        "quantity": 0.25,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（つくねの下味）",
+          "en": "salt (tsukune seasoning)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ginger",
+        "label": {
+          "ja": "しょうがの絞り汁（つくねの下味）",
+          "en": "ginger juice (tsukune seasoning)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-potato-starch",
+        "label": {
+          "ja": "片栗粉（つくね）",
+          "en": "potato starch (tsukune)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-mirin",
+        "label": {
+          "ja": "本みりん（つくねのたれ）",
+          "en": "mirin (tsukune glaze)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（つくねのたれ。サラダと卵には別に少々）",
+          "en": "soy sauce (tsukune glaze; a little more for the salad and egg)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oil",
+        "label": {
+          "ja": "サラダ油（つくねと卵を焼く分）",
+          "en": "cooking oil (for the tsukune and the egg)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-potato",
+        "label": {
+          "ja": "じゃがいも（ポテトサラダ）",
+          "en": "potato (potato salad)"
+        },
+        "quantity": 0.5,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-carrot",
+        "label": {
+          "ja": "にんじん 1cm（ポテトサラダ）",
+          "en": "carrot, 1 cm (potato salad)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-snap-peas",
+        "label": {
+          "ja": "スナップえんどう（ポテトサラダ）",
+          "en": "sugar snap peas (potato salad)"
+        },
+        "quantity": 2,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ham",
+        "label": {
+          "ja": "ハム（ポテトサラダ）",
+          "en": "ham (potato salad)"
+        },
+        "quantity": 0.25,
+        "unit": "slice",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-egg",
+          "alg-milk",
+          "alg-soybean",
+          "alg-pork"
+        ],
+        "animalOrigin": [
+          "meat",
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-vinegar",
+        "label": {
+          "ja": "酢（ポテトサラダ）",
+          "en": "vinegar (potato salad)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-olive-oil",
+        "label": {
+          "ja": "オリーブオイル（ポテトサラダ）",
+          "en": "olive oil (potato salad)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pepper",
+        "label": {
+          "ja": "こしょう（ポテトサラダ）",
+          "en": "pepper (potato salad)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "卵（スクランブルエッグ）",
+          "en": "egg (scrambled egg)"
+        },
+        "quantity": 0.5,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-whitebait",
+        "label": {
+          "ja": "しらす干し（スクランブルエッグ）",
+          "en": "dried whitebait (scrambled egg)"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-green-onion",
+        "label": {
+          "ja": "青ねぎの小口切り（スクランブルエッグ）",
+          "en": "sliced green onion (scrambled egg)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "【つくね】たけのこを7mm角に切る。ボウルにひき肉、酒、塩、しょうが汁、片栗粉を入れてよく混ぜ、たけのこを加えて混ぜる。",
+        "en": "Tsukune: dice the bamboo shoot into 7 mm cubes. Mix the mince, sake, salt, ginger juice and starch well, then mix in the bamboo shoot."
+      },
+      {
+        "ja": "食べやすい小判形にまとめ、油をひいたフライパンで表裏にこんがり色づくまで焼いたら、みりんとしょうゆを加えて絡める。",
+        "en": "Shape bite-size ovals, brown both sides in an oiled pan, then add the mirin and soy sauce and coat."
+      },
+      {
+        "ja": "【ポテトサラダ】じゃがいもは4つに切り分ける。にんじんは縦半分にして3mmの厚さに切り、スナップえんどうは筋をとる。ハムは3〜4cm四方に切る。",
+        "en": "Potato salad: quarter the potato, cut the carrot into 3 mm half-moons, string the snap peas and cut the ham into 3 to 4 cm squares."
+      },
+      {
+        "ja": "小鍋の水でじゃがいもを串がすっと通るまでゆで、続けてにんじん、スナップえんどうもゆでる。スナップえんどうは斜め3〜4等分に切る。",
+        "en": "Boil the potato until a skewer slips in, then the carrot and snap peas in turn; cut the snap peas into 3 or 4 diagonal pieces."
+      },
+      {
+        "ja": "野菜とハムをボウルでざっくり混ぜ、酢、オリーブオイル、しょうゆ、こしょうを加えて和える。",
+        "en": "Lightly mix the vegetables and ham in a bowl and toss with the vinegar, olive oil, soy sauce and pepper."
+      },
+      {
+        "ja": "【スクランブルエッグ】卵を溶き、しらすと青ねぎを混ぜる。油を熱したフライパンに流し、大きく動かしながら火を通す。味が薄ければしょうゆを足す。",
+        "en": "Scrambled egg: beat the egg, add the whitebait and green onion, and cook in a hot oiled pan, stirring in big folds. Add soy sauce if it needs more flavour."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "ごはんやおかずは冷ましてから弁当箱に詰め、蓋を閉めます。",
+        "en": "Let the rice and sides cool before packing, then close the lid."
+      },
+      {
+        "ja": "おかずの汁けはよくきり、卵は半熟にせず、しっかり固まるまで加熱します。",
+        "en": "Drain the sides well and cook the egg until fully set, never soft or runny."
+      },
+      {
+        "ja": "冷蔵庫か涼しい場所に置き、持ち歩くときは保冷剤か保冷バッグを使って、早めに食べます。",
+        "en": "Keep it in the fridge or a cool place, use an ice pack or cool bag to carry it, and eat it soon."
+      }
+    ],
+    "allergenIds": [
+      "alg-chicken",
+      "alg-egg"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean",
+      "alg-egg",
+      "alg-milk",
+      "alg-pork"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "chicken",
+      "meat",
+      "pork",
+      "egg",
+      "fish-seafood"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [],
+    "adaptations": [
+      {
+        "ja": "元のレシピはいずれの品も幼児1人分で、成人の半分ほどの量です。分量は元のままです。",
+        "en": "The source writes each of the three dishes as one kindergarten portion (about half an adult portion); amounts are unchanged."
+      },
+      {
+        "ja": "弁当ページには時間の記載がなく、各品の調理時間は15分・10分・10分です。合計して35分としています。ごはんは含まれていません。",
+        "en": "The set page gives no time; the dishes take 15, 10 and 10 minutes, summed here to 35. Rice is not part of the source set."
+      },
+      {
+        "ja": "元のレシピの清酒・みりん・しょうゆは特定のメーカー品です。ここでは一般的な材料として記録し、メーカー名は出典だけに残しています。",
+        "en": "The source names specific maker products for sake, mirin and soy sauce; they are recorded as generic ingredients and the brands stay in the sources only."
+      },
+      {
+        "ja": "しょうゆは3品に使われます（つくねのたれ大さじ1/2、サラダは少々、卵は適宜）。1行にまとめ、数量はつくねの分です。サラダ油も同様に、つくねと卵の「少々」を1行にまとめています。",
+        "en": "Soy sauce appears in all three dishes (1/2 tbsp for the tsukune, a little for the salad, to taste for the egg) and is merged into one line with the tsukune amount. The oil for the tsukune and egg is merged the same way."
+      },
+      {
+        "ja": "にんじんは元のレシピで「1cm」と長さだけが書かれているため、少量として記録しています。しらすは干したものです。",
+        "en": "The carrot is given only as a 1 cm length, so it is recorded as a small amount. The whitebait is the dried kind."
+      },
+      {
+        "ja": "ハム・しょうゆ・酢の原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。使う製品の表示を確認してください。",
+        "en": "Ham, soy sauce and vinegar differ by product; they follow the cited labels, so check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-kikkoman-takenoko-tsukune-bento",
+        "publisher": "キッコーマン株式会社",
+        "title": "たけのこ入りつくね弁当 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/lunch/enji/takenokoiritukune.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-takenoko-tsukune-enji",
+        "publisher": "キッコーマン株式会社",
+        "title": "たけのこ入りつくね（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003089/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-ham-potato-salad-enji",
+        "publisher": "キッコーマン株式会社",
+        "title": "ハムとスナップえんどうのポテトサラダ（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003090/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-shirasu-scramble-enji",
+        "publisher": "キッコーマン株式会社",
+        "title": "しらす入りスクランブルエッグ（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003091/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-mizkan-kokumotsu-su",
+        "publisher": "ミツカン（ミツカングループ「おうちレシピ」）",
+        "title": "穀物酢 | 商品情報 | ミツカングループ",
+        "url": "https://www.mizkan.co.jp/product/group/?gid=01001",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-maff-lunchbox",
+        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-irodori-roast-ham-label",
+        "publisher": "日本ハム株式会社",
+        "title": "彩りキッチン® ロースハム - ハム | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/ham/roast/2106/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-delish-neko-kinoko-inari",
+    "name": {
+      "ja": "ネコのきのこいなり寿司",
+      "en": "Cat mushroom inari sushi"
+    },
+    "shortNameJa": "ネコいなり",
+    "shortNameEn": "Cat",
+    "nameKana": "ねこのきのこいなりずし",
+    "style": "japanese",
+    "themeId": "theme-animals",
+    "description": {
+      "ja": "甘辛く煮た油揚げに、鶏ひき肉・しめじ・コーン入りの酢飯を詰め、のりでネコの顔を作ったいなり寿司です。キャラ弁にも向きます。",
+      "en": "Inari pouches of sweet-simmered fried tofu stuffed with vinegared rice, chicken mince, shimeji and corn, topped with a nori cat face."
+    },
+    "yield": {
+      "ja": "8個分（ごはん300g）",
+      "en": "8 pieces (300 g rice)"
+    },
+    "minutes": 30,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ごはん（あたたかいもの・お茶碗2杯）",
+          "en": "warm cooked rice (2 rice bowls)"
+        },
+        "quantity": 300,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ground-chicken",
+        "label": {
+          "ja": "鶏ひき肉",
+          "en": "chicken mince"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-chicken"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "chicken"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-fried-tofu",
+        "label": {
+          "ja": "油揚げ（4枚・80g）",
+          "en": "fried tofu pouches (4 sheets, 80 g)"
+        },
+        "quantity": 4,
+        "unit": "sheet",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-soybean"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-shimeji",
+        "label": {
+          "ja": "しめじ（1/2パック）",
+          "en": "shimeji (1/2 pack)"
+        },
+        "quantity": 0.5,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-corn",
+        "label": {
+          "ja": "コーン",
+          "en": "sweetcorn"
+        },
+        "quantity": 20,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-nori",
+        "label": {
+          "ja": "焼きのり（顔のパーツ用）",
+          "en": "toasted nori (for the faces)"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖（酢飯用）",
+          "en": "sugar (for the sushi rice)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（酢飯用）",
+          "en": "salt (for the sushi rice)"
+        },
+        "quantity": 0.33,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-vinegar",
+        "label": {
+          "ja": "酢（酢飯用）",
+          "en": "vinegar (for the sushi rice)"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sesame",
+        "label": {
+          "ja": "白いりごま",
+          "en": "toasted white sesame seeds"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-sesame"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cooking-sake",
+        "label": {
+          "ja": "酒（煮汁用）",
+          "en": "cooking sake (for the simmering liquid)"
+        },
+        "quantity": 3,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖（煮汁用）",
+          "en": "sugar (for the simmering liquid)"
+        },
+        "quantity": 3,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（煮汁用）",
+          "en": "soy sauce (for the simmering liquid)"
+        },
+        "quantity": 3,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "酢、砂糖、塩を混ぜ合わせ、あたたかいごはんとごまにまぜて、しゃもじで切るようになじませて酢飯にする。",
+        "en": "Mix the vinegar, sugar and salt, then cut them into the warm rice with the sesame to make sushi rice."
+      },
+      {
+        "ja": "油揚げの油をペーパーで拭き、箸を転がして開きやすくしてから、半分に切る。",
+        "en": "Blot the oil off the fried tofu, roll a chopstick over it so it opens easily, and cut each sheet in half."
+      },
+      {
+        "ja": "しめじは石づきを落としてほぐす。のりはネコの目・鼻・ひげの形に切り抜く。",
+        "en": "Trim and separate the shimeji. Cut the nori into cat eyes, noses and whiskers."
+      },
+      {
+        "ja": "鍋に酒、砂糖、しょうゆ、水100mlを入れて煮立て、油揚げを加える。落としぶたをのせ、弱火で10分ほど煮含めて取り出す。",
+        "en": "Bring the sake, sugar, soy sauce and 100 ml water to a boil, add the tofu, cover with a drop lid and simmer 10 minutes on low; lift out."
+      },
+      {
+        "ja": "残りの煮汁にひき肉を入れて中火で、ほぐしながら熱し、しめじも加えて火が通るまで炒めて、汁けをきる。",
+        "en": "Add the mince to the remaining liquid over medium heat, breaking it up, then stir in the shimeji until the meat is cooked; drain."
+      },
+      {
+        "ja": "酢飯に炒めた具とコーンを混ぜて8等分にし、油揚げの角まで入れないように詰める。口を閉じて形を整え、のりで顔を作る。",
+        "en": "Mix the filling and corn into the rice, divide into 8, and stuff each pouch without pushing into the corners. Close, shape and add the nori face."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "お弁当にするときは、十分に冷ましてから詰めて蓋を閉めます。",
+        "en": "For a lunchbox, cool the pieces thoroughly before packing and closing the lid."
+      },
+      {
+        "ja": "夏場や梅雨の時期は避け、保冷剤と保冷バッグを使うか冷蔵庫で保管して、早めに食べます。",
+        "en": "Avoid the hot, humid season; keep it with an ice pack in a cool bag or in the fridge, and eat it soon."
+      },
+      {
+        "ja": "小さな子が食べるときは、むせないように食べることに専念させ、落ち着いた状態で食べさせます。",
+        "en": "When small children eat it, let them concentrate on eating and sit calmly so they do not choke."
+      }
+    ],
+    "allergenIds": [
+      "alg-chicken",
+      "alg-soybean",
+      "alg-sesame"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "chicken"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-pork",
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは8個分で、幼児向けの量とは書かれていません。分量は変えていません。",
+        "en": "The source makes 8 pieces and does not call itself a child portion; amounts are unchanged."
+      },
+      {
+        "ja": "しめじは元のレシピで1/2パックのため、1個の半分として入れています。砂糖は酢飯用と煮汁用を別の行にしています。水は100ml（材料欄には入れていません）。",
+        "en": "The shimeji is 1/2 pack, entered as half of one unit. Sugar is on two lines (rice and simmering liquid). The 100 ml of water is in the steps, not the list."
+      },
+      {
+        "ja": "酢・しょうゆの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。使う製品の表示を確認してください。",
+        "en": "Vinegar and soy sauce differ by product; they follow the cited labels, so check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-delish-neko-inari",
+        "publisher": "デリッシュキッチン (every, Inc.)",
+        "title": "キャラ弁に！ ネコのきのこいなり寿司のレシピ動画・作り方 | デリッシュキッチン",
+        "url": "https://delishkitchen.tv/recipes/166854137332367852",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-mizkan-kokumotsu-su",
+        "publisher": "ミツカン（ミツカングループ「おうちレシピ」）",
+        "title": "穀物酢 | 商品情報 | ミツカングループ",
+        "url": "https://www.mizkan.co.jp/product/group/?gid=01001",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-delish-satsumaimo-gohan-bento",
+    "name": {
+      "ja": "さつまいもごはん弁当",
+      "en": "Sweet potato rice bento"
+    },
+    "shortNameJa": "さつまいも飯",
+    "shortNameEn": "Satsuma",
+    "nameKana": "さつまいもごはんべんとう",
+    "style": "japanese",
+    "themeId": null,
+    "description": {
+      "ja": "電子レンジでやわらかくしたさつまいもをごはんに混ぜ、レンジで作る鶏もも肉の照り焼きを添えた、やさしい甘みの1人分のお弁当です。",
+      "en": "A one-serving bento of rice mixed with microwave-softened sweet potato, with a microwave teriyaki chicken thigh alongside."
+    },
+    "yield": {
+      "ja": "1人分（ごはん150g）",
+      "en": "1 serving (150 g rice)"
+    },
+    "minutes": 30,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "白ごはん（お茶碗1杯）",
+          "en": "cooked white rice (1 rice bowl)"
+        },
+        "quantity": 150,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sweet-potato",
+        "label": {
+          "ja": "さつまいも",
+          "en": "sweet potato"
+        },
+        "quantity": 70,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（さつまいもに）",
+          "en": "salt (for the sweet potato)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-chicken-thigh",
+        "label": {
+          "ja": "鶏もも肉",
+          "en": "chicken thigh"
+        },
+        "quantity": 70,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-chicken"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "chicken"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cooking-sake",
+        "label": {
+          "ja": "酒",
+          "en": "cooking sake"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-mirin",
+        "label": {
+          "ja": "みりん",
+          "en": "mirin"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ",
+          "en": "soy sauce"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "さつまいもを1cm角に切って水にさらし、水けをきって耐熱容器に入れ、ふんわりラップをして600Wで1分30秒加熱する。",
+        "en": "Cut the sweet potato into 1 cm cubes, soak, drain, put in a heatproof dish, cover loosely and microwave at 600 W for 1 minute 30 seconds."
+      },
+      {
+        "ja": "さつまいもへ塩をふり、白ごはんにさっくりと混ぜ込む。",
+        "en": "Sprinkle the sweet potato with salt and fold it lightly into the rice."
+      },
+      {
+        "ja": "鶏肉を一口大に切り、耐熱容器に酒、みりん、しょうゆと一緒に入れて混ぜる。",
+        "en": "Cut the chicken into bite-size pieces and mix them in a heatproof dish with the sake, mirin and soy sauce."
+      },
+      {
+        "ja": "ふんわりラップをかけて、600Wで3分加熱する。",
+        "en": "Cover loosely and microwave at 600 W for 3 minutes."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "ごはんも鶏肉も十分に冷ましてから弁当箱に詰めて、蓋を閉めます。",
+        "en": "Cool both the rice and the chicken fully before packing and closing the lid."
+      },
+      {
+        "ja": "鶏肉は中心までしっかり加熱されているか確かめます。冷蔵庫か保冷バッグで保管し、早めに食べます。",
+        "en": "Check that the chicken is cooked through to the centre. Keep it in the fridge or a cool bag and eat it soon."
+      }
+    ],
+    "allergenIds": [
+      "alg-chicken"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "chicken"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-pork",
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは1人分で、幼児向けとは書かれていません。分量は変えていません。",
+        "en": "The source is for 1 serving and does not call itself a child portion; amounts are unchanged."
+      },
+      {
+        "ja": "塩は元のレシピで「ひとつまみ」のため、少量として記録しています。おかずは鶏の照り焼きだけで、詰め方の説明はありません。",
+        "en": "Salt is \"a pinch\" in the source, so it is a small amount. The only side is the teriyaki chicken, and the source gives no packing steps."
+      },
+      {
+        "ja": "しょうゆの原材料は製品で違うため、参照した製品の表示（小麦・大豆）にもとづいて記録しています。",
+        "en": "Soy sauce differs by product; allergens follow the cited label (wheat, soy), so check the label of the one you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-delish-satsumaimo-gohan",
+        "publisher": "デリッシュキッチン (every, Inc.)",
+        "title": "ほっくり優しい甘み！ さつまいもごはん弁当のレシピ動画・作り方 | デリッシュキッチン",
+        "url": "https://delishkitchen.tv/recipes/171938398854971884",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-maff-lunchbox",
+        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-kikkoman-mini-kakiage-bento",
+    "name": {
+      "ja": "ミニかき揚げ弁当",
+      "en": "Mini kakiage tempura bento"
+    },
+    "shortNameJa": "ミニかき揚げ",
+    "shortNameEn": "Kakiage",
+    "nameKana": "みにかきあげべんとう",
+    "style": "japanese",
+    "themeId": null,
+    "description": {
+      "ja": "アスパラと桜えびの小さなかき揚げに、鮭の照り焼きとさつまいものはちみつ煮を合わせた、彩りのよい園児向けの3品お弁当です。",
+      "en": "A colourful three-part kindergarten bento: tiny asparagus and sakura-shrimp kakiage, teriyaki salmon and honey-simmered sweet potato."
+    },
+    "yield": {
+      "ja": "幼児1人分（3品・成人の約1/2量）",
+      "en": "1 child portion (3 dishes, about half an adult portion)"
+    },
+    "minutes": 45,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-asparagus",
+        "label": {
+          "ja": "グリーンアスパラガス（かき揚げ）",
+          "en": "green asparagus (kakiage)"
+        },
+        "quantity": 1,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-shrimp",
+        "label": {
+          "ja": "桜えび（乾）（かき揚げ）",
+          "en": "dried sakura shrimp (kakiage)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-shrimp"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-wheat-flour",
+        "label": {
+          "ja": "小麦粉（かき揚げのころも）",
+          "en": "wheat flour (kakiage batter)"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-wheat"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "溶き卵（かき揚げのころも）",
+          "en": "beaten egg (kakiage batter)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oil",
+        "label": {
+          "ja": "揚げ油（かき揚げ）",
+          "en": "frying oil (kakiage)"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-dashi",
+        "label": {
+          "ja": "かつおだし（天つゆ）",
+          "en": "bonito dashi (dipping sauce)"
+        },
+        "quantity": 0.5,
+        "unit": "cup",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（天つゆ）",
+          "en": "soy sauce (dipping sauce)"
+        },
+        "quantity": 1.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-mirin",
+        "label": {
+          "ja": "本みりん（天つゆ）",
+          "en": "mirin (dipping sauce)"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salmon",
+        "label": {
+          "ja": "生鮭の切り身（照り焼き）",
+          "en": "fresh salmon fillet (teriyaki)"
+        },
+        "quantity": 40,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-salmon"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（鮭の漬け汁）",
+          "en": "soy sauce (salmon marinade)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-mirin",
+        "label": {
+          "ja": "本みりん（鮭の漬け汁）",
+          "en": "mirin (salmon marinade)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖（鮭の照り焼き）",
+          "en": "sugar (teriyaki salmon)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oil",
+        "label": {
+          "ja": "サラダ油（鮭を焼く）",
+          "en": "cooking oil (for the salmon)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sweet-potato",
+        "label": {
+          "ja": "さつまいも（はちみつ煮）",
+          "en": "sweet potato (honey simmer)"
+        },
+        "quantity": 50,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-honey",
+        "label": {
+          "ja": "はちみつ（さつまいも）",
+          "en": "honey (sweet potato)"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖（さつまいも）",
+          "en": "sugar (sweet potato)"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-lemon",
+        "label": {
+          "ja": "レモンの絞り汁（さつまいも）",
+          "en": "lemon juice (sweet potato)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（さつまいも）",
+          "en": "salt (sweet potato)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "【かき揚げ】アスパラの固い根元を除き、4cmに切って縦に2〜4等分にする。小麦粉、水大さじ1、溶き卵を混ぜてころもを作り、アスパラと桜えびを加える。",
+        "en": "Kakiage: trim the asparagus, cut into 4 cm lengths and split lengthwise into 2 to 4. Mix the flour, 1 tbsp water and egg into a batter and stir in the asparagus and shrimp."
+      },
+      {
+        "ja": "170℃の油に、一口分ずつまとめて落とし、2分前後カリッとなるまで揚げる。天つゆの材料は鍋で軽く煮立てて、横に添える。",
+        "en": "Drop bite-size clusters into 170 C oil and fry about 2 minutes until crisp. Bring the dipping-sauce ingredients to a boil in a pan to serve alongside."
+      },
+      {
+        "ja": "【鮭の照り焼き】鮭を2〜3等分のそぎ切りにし、しょうゆとみりんに15分ほど漬ける。",
+        "en": "Teriyaki salmon: slice the salmon into 2 or 3 pieces and soak in the soy sauce and mirin for about 15 minutes."
+      },
+      {
+        "ja": "油をひいたフライパンで、汁けを切った鮭の表裏を焼く。残した漬け汁に、砂糖と小さじ1の水を混ぜて注ぎ、弱火で2分煮たあと、やや強めの火で煮詰めて照りを出す。",
+        "en": "Brown both sides of the drained salmon in an oiled pan. Add the marinade mixed with the sugar and 1 tsp water, simmer 2 minutes on low, then raise the heat to reduce it to a glaze."
+      },
+      {
+        "ja": "【さつまいも】皮をむいた輪切りを水に浸して水けを切る。小鍋にかぶる程度の水と入れ、煮立ったら弱火で5分ほど火を通す。",
+        "en": "Sweet potato: slice into rounds, peel, soak and drain. Simmer in a small pan with water to cover for about 5 minutes after it boils."
+      },
+      {
+        "ja": "砂糖とはちみつを入れ、さらに4〜5分煮る。仕上げにレモン汁と塩で整え、火を止めてそのまま冷まし、味をなじませる。",
+        "en": "Add the sugar and honey, simmer 4 to 5 minutes, season with the lemon juice and salt, then turn off the heat and let it soak up the flavour."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "つゆは小さな容器に分けて持たせるか、つゆにくぐらせる程度に火を通しておくと、冷えてもしっとりします。",
+        "en": "Pack the dipping sauce in a separate container, or briefly simmer the kakiage in the sauce so it stays moist when cold."
+      },
+      {
+        "ja": "十分に冷ましてから詰めて、冷蔵庫か保冷剤を入れた保冷バッグで保管し、早めに食べます。",
+        "en": "Cool everything fully before packing, keep it in the fridge or a cool bag with an ice pack, and eat it soon."
+      },
+      {
+        "ja": "はちみつ入りなので、1歳に満たない赤ちゃんには食べさせないでください。",
+        "en": "This bento contains honey: do not give it to infants under 1 year."
+      }
+    ],
+    "allergenIds": [
+      "alg-shrimp",
+      "alg-wheat",
+      "alg-egg",
+      "alg-salmon"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "fish-seafood",
+      "egg"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "pescatarian",
+      "no-pork",
+      "no-beef"
+    ],
+    "adaptations": [
+      {
+        "ja": "どの品も元のレシピは幼児1人分で、成人の半分ほどの量です。分量は変えていません。天つゆは作りやすい量の表記なので、必要な分だけを容器に入れて添えます。",
+        "en": "All three dishes are written as one child portion (about half an adult portion); amounts are unchanged. The dipping sauce is a convenient batch; pack only what you need."
+      },
+      {
+        "ja": "弁当ページに時間の記載はなく、各品の調理時間は10分・20分・15分です。合計の45分としています。ごはんは元のセットに含まれていません。",
+        "en": "The set page gives no time; the dishes take 10, 20 and 15 minutes, summed to 45. Rice is not part of the source set."
+      },
+      {
+        "ja": "しょうゆとみりんは天つゆと鮭の分を別の行にしています。清酒・みりん・しょうゆはメーカー品ですが、一般的な材料として記録しました。水は材料欄に入れていません。",
+        "en": "Soy sauce and mirin are on separate lines for the dipping sauce and the salmon. Brand products are recorded as generic ingredients, and water is not listed."
+      },
+      {
+        "ja": "天つゆのかつおだしは作り方の指定がなく、アレルゲン情報が確認できないため不明として記録しています（かつおだしなので魚由来）。",
+        "en": "The bonito dashi has no stated preparation and no label, so its allergens are recorded as unknown (fish-derived, as it is bonito stock)."
+      },
+      {
+        "ja": "しょうゆの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。桜えびはえびのアレルゲンとして記録しています。",
+        "en": "Soy sauce differs by product and follows the cited label. Sakura shrimp is recorded as a shrimp allergen."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-kikkoman-mini-kakiage-bento",
+        "publisher": "キッコーマン株式会社",
+        "title": "ミニかき揚げ弁当 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/lunch/enji/minikakiage.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-asparagus-kakiage-enji",
+        "publisher": "キッコーマン株式会社",
+        "title": "アスパラと桜えびのミニかき揚げ（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003146/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-salmon-teriyaki-enji",
+        "publisher": "キッコーマン株式会社",
+        "title": "鮭のひと口てり焼き（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003147/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-satsumaimo-honey-enji",
+        "publisher": "キッコーマン株式会社",
+        "title": "ほっこり、さつまいものはちみつ煮（園児のお弁当用）のレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003148/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-maff-lunchbox",
+        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "storage"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-nhk-napolitan-bento",
+    "name": {
+      "ja": "ナポリタン弁当",
+      "en": "Napolitan spaghetti bento"
+    },
+    "shortNameJa": "ナポリタン",
+    "shortNameEn": "Napoli",
+    "nameKana": "なぽりたんべんとう",
+    "style": "western-inspired",
+    "themeId": null,
+    "description": {
+      "ja": "ソーセージと玉ねぎ、ピーマン、しいたけを炒め、ゆでたスパゲッティにケチャップをからめる、冷めてもおいしい1人分のパスタ弁当です。",
+      "en": "A single-serving pasta bento: sausage, onion, green pepper and shiitake are stir-fried, then tossed with spaghetti and ketchup, good even when cold."
+    },
+    "yield": {
+      "ja": "1人分（スパゲッティ100g）",
+      "en": "1 serving (100 g spaghetti)"
+    },
+    "minutes": 20,
+    "makeAhead": {
+      "ja": "パスタは前夜にゆでて水にさらし、水けをきって密封容器で冷蔵庫に入れておけます。当日は耐熱皿でラップをかけ、600Wで約1分30秒温めてほぐします。",
+      "en": "Boil the pasta the night before, rinse it, drain it and keep it in a sealed container in the fridge. On the day, microwave it covered at 600 W for about 1 minute 30 seconds and loosen it."
+    },
+    "ingredients": [
+      {
+        "ingredientId": "ing-spaghetti",
+        "label": {
+          "ja": "スパゲッティ（1.6mmがあれば）",
+          "en": "spaghetti (1.6 mm if available)"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [
+          "alg-wheat"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sausage",
+        "label": {
+          "ja": "ウインナーソーセージ（2本・30g）",
+          "en": "wiener sausages (2, 30 g)"
+        },
+        "quantity": 2,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork"
+        ],
+        "animalOrigin": [
+          "meat",
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-onion",
+        "label": {
+          "ja": "たまねぎ（1/4個・60g）",
+          "en": "onion (1/4, 60 g)"
+        },
+        "quantity": 60,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-green-pepper",
+        "label": {
+          "ja": "ピーマン（1個・40g）",
+          "en": "green pepper (1, 40 g)"
+        },
+        "quantity": 40,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-shiitake",
+        "label": {
+          "ja": "生しいたけ（2枚・30g）",
+          "en": "fresh shiitake (2, 30 g)"
+        },
+        "quantity": 30,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（スパゲッティをゆでる湯用）",
+          "en": "salt (for the pasta water)"
+        },
+        "quantity": 1.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（仕上げ）",
+          "en": "salt (to finish)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oil",
+        "label": {
+          "ja": "サラダ油",
+          "en": "cooking oil"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ketchup",
+        "label": {
+          "ja": "トマトケチャップ",
+          "en": "tomato ketchup"
+        },
+        "quantity": 2,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pepper",
+        "label": {
+          "ja": "こしょう",
+          "en": "pepper"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "大きめの鍋に水を1リットルほど張って強火にかけ、その間にたまねぎ、ピーマン、しいたけを細切りにし、ソーセージは5mm幅で斜めにスライスする。",
+        "en": "Put about 1 litre of water on high heat. Meanwhile slice the onion, pepper and shiitake thinly and cut the sausages into 5 mm diagonal slices."
+      },
+      {
+        "ja": "湯が沸いたら塩とスパゲッティを入れ、袋の表示どおりにゆでる。",
+        "en": "When it boils, add the salt and spaghetti and boil for the time on the packet."
+      },
+      {
+        "ja": "フライパンに油を熱し、ソーセージを約1分炒める。たまねぎ、続けてピーマンとしいたけを加えて炒め、火を止める。",
+        "en": "Heat the oil in a frying pan and stir-fry the sausage for about 1 minute. Add the onion, then the pepper and shiitake, and turn off the heat."
+      },
+      {
+        "ja": "ゆで上がったスパゲッティの湯を切ってフライパンに移し、中火でさっと炒める。ケチャップ、塩、こしょうを入れて素早くあえる。",
+        "en": "Drain the spaghetti, add it to the pan and toss over medium heat. Quickly mix in the ketchup, salt and pepper."
+      },
+      {
+        "ja": "平らな器に広げて粗熱を取り、弁当箱へ詰める。",
+        "en": "Transfer to a plate to cool, then pack it in the lunchbox."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "炒めたパスタは皿に出して冷まし、十分に冷めてから弁当箱に詰めます。",
+        "en": "Spread the cooked pasta on a plate and pack it only once it is fully cool."
+      },
+      {
+        "ja": "冷蔵庫か涼しい場所で保管し、持ち歩くときは保冷剤か保冷バッグを使って、早めに食べます。",
+        "en": "Keep it in the fridge or a cool place, use an ice pack or cool bag to carry it, and eat it soon."
+      }
+    ],
+    "allergenIds": [
+      "alg-wheat"
+    ],
+    "mayContainAllergenIds": [
+      "alg-pork"
+    ],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "meat",
+      "pork"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-seafood"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは1人分（スパゲッティ100g）で、幼児向けの量とは書かれていません。分量は変えていません。調理時間20分には冷ます時間が含まれません。",
+        "en": "The source is for 1 serving (100 g spaghetti) and does not call itself a child portion; amounts are unchanged. The 20 minutes exclude cooling time."
+      },
+      {
+        "ja": "たまねぎ・ピーマン・しいたけは元のレシピに個数と重さの両方があり、重さで記録しています。塩は、ゆで湯用の小さじ1と1/2と、仕上げの少々です。",
+        "en": "Onion, pepper and shiitake are given by count and weight; weights are used here. Salt is 1 1/2 tsp for the water plus a pinch to finish."
+      },
+      {
+        "ja": "元のレシピは、ソーセージのかわりにハムやベーコンでもよいとしています。ここではソーセージで記録しています。",
+        "en": "The source says ham or bacon can replace the sausage; the sausage version is recorded here."
+      },
+      {
+        "ja": "ソーセージ・ケチャップの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。使う製品の表示を確認してください。",
+        "en": "Sausage and ketchup differ by product; they follow the cited labels, so check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-nhk-napolitan-bento",
+        "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+        "title": "ナポリタン弁当 レシピ 髙城 順子さん｜みんなのきょうの料理",
+        "url": "https://www.kyounoryouri.jp/recipe/17106_ナポリタン弁当.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-schauessen-label",
+        "publisher": "日本ハム株式会社",
+        "title": "シャウエッセン® - ソーセージ | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/sausages/win/2125/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-kikkoman-delmonte-ketchup-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "デルモンテ トマトケチャップ",
+        "url": "https://www.kikkoman.co.jp/products/K45/detail/K451000.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-kikkoman-cornball-bento",
+    "name": {
+      "ja": "ひき肉入りコーンボール弁当",
+      "en": "Corn and mince ball bento"
+    },
+    "shortNameJa": "コーンボール",
+    "shortNameEn": "Cornball",
+    "nameKana": "ひきにくいりこーんぼーるべんとう",
+    "style": "western-inspired",
+    "themeId": null,
+    "description": {
+      "ja": "豚ひき肉のたねにコーンをまぶしてレンジで蒸し、ケチャップ焼きのブロッコリーと、かぼちゃの茶巾絞りを添えた3品のお弁当です。",
+      "en": "A three-dish bento: pork mince balls coated in corn and steamed in the microwave, ketchup-cheese broccoli and kabocha chakin."
+    },
+    "yield": {
+      "ja": "2人分（3品）",
+      "en": "2 servings (3 dishes)"
+    },
+    "minutes": 40,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-ground-pork",
+        "label": {
+          "ja": "豚ひき肉（コーンボール）",
+          "en": "pork mince (corn balls)"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-pork"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-corn",
+        "label": {
+          "ja": "ホールコーン（コーンボール）",
+          "en": "whole-kernel corn (corn balls)"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-onion",
+        "label": {
+          "ja": "玉ねぎ（コーンボール）",
+          "en": "onion (corn balls)"
+        },
+        "quantity": 80,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-butter",
+        "label": {
+          "ja": "バター（玉ねぎを炒める）",
+          "en": "butter (for the onion)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-milk"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-potato-starch",
+        "label": {
+          "ja": "片栗粉（コーンボール）",
+          "en": "potato starch (corn balls)"
+        },
+        "quantity": 2,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-lettuce",
+        "label": {
+          "ja": "レタス（敷く分）",
+          "en": "lettuce (to line the box)"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ketchup",
+        "label": {
+          "ja": "ケチャップ（コーンボールのたね）",
+          "en": "ketchup (meat mixture)"
+        },
+        "quantity": 1.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（コーンボールのたね）",
+          "en": "soy sauce (meat mixture)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（コーンボール）",
+          "en": "salt (corn balls)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pepper",
+        "label": {
+          "ja": "こしょう（コーンボールとブロッコリー）",
+          "en": "pepper (corn balls and broccoli)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-bread-crumbs",
+        "label": {
+          "ja": "生パン粉",
+          "en": "fresh bread crumbs"
+        },
+        "quantity": 3,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy",
+          "egg"
+        ],
+        "animalOriginKnown": false
+      },
+      {
+        "ingredientId": "ing-broccoli",
+        "label": {
+          "ja": "ブロッコリー（正味）",
+          "en": "broccoli (trimmed weight)"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ketchup",
+        "label": {
+          "ja": "ケチャップ（ブロッコリー）",
+          "en": "ketchup (broccoli)"
+        },
+        "quantity": 2,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cheese",
+        "label": {
+          "ja": "ピザ用チーズ",
+          "en": "pizza cheese"
+        },
+        "quantity": 40,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [
+          "alg-milk"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pumpkin",
+        "label": {
+          "ja": "かぼちゃ（皮をむいたもの）",
+          "en": "kabocha, peeled"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-raisin",
+        "label": {
+          "ja": "レーズン",
+          "en": "raisins"
+        },
+        "quantity": 4,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（かぼちゃ）",
+          "en": "soy sauce (kabocha)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖（かぼちゃ）",
+          "en": "sugar (kabocha)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-butter",
+        "label": {
+          "ja": "バター（かぼちゃ）",
+          "en": "butter (kabocha)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-milk"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy"
+        ],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "【コーンボール】玉ねぎをみじん切りにしてバターで炒め、冷ます。ひき肉にケチャップ、しょうゆ、塩、こしょう、パン粉を入れ、粘りが出てくるまでよく練る。",
+        "en": "Corn balls: mince the onion, fry it in butter and cool it. Mix the pork with the ketchup, soy sauce, salt, pepper and bread crumbs until sticky."
+      },
+      {
+        "ja": "炒めた玉ねぎを混ぜ入れて、6個に分けて丸める。水けをふいたコーンに片栗粉を混ぜ、ラップに広げて肉だねをのせ、ぴったり包む。",
+        "en": "Mix in the onion and roll into 6. Dust the dried corn with starch, spread it on cling film, set a ball on it and wrap tightly."
+      },
+      {
+        "ja": "500Wのレンジで4分ほど、中まで火が通るように加熱し、粗熱をとってラップをはずす。レタスを敷いて盛る。",
+        "en": "Microwave at 500 W for about 4 minutes until cooked through, cool slightly and unwrap. Serve on the lettuce."
+      },
+      {
+        "ja": "【ブロッコリー】小房に分けて熱湯でかためにゆで、耐熱容器にケチャップ、こしょう、チーズと一緒に入れ、トースターで5〜6分焼く。",
+        "en": "Broccoli: boil florets until firm, put them in a heatproof dish with ketchup, pepper and cheese, and bake in a toaster oven for 5 to 6 minutes."
+      },
+      {
+        "ja": "【かぼちゃ】ラップに包んで500Wで2分温め、熱々のままつぶして調味料を混ぜる。4つに分けてレーズンを1粒ずつ置き、ラップをひねって茶巾の形にする。",
+        "en": "Kabocha: wrap and microwave at 500 W for 2 minutes, mash while hot and mix in the seasonings. Split into 4, top with raisins and twist in cling film."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "コーンボールは中心まで火を通します。すべてのおかずを十分に冷ましてから詰めます。",
+        "en": "Cook the corn balls through to the centre and cool every dish thoroughly before packing."
+      },
+      {
+        "ja": "冷蔵庫か涼しい場所で保管し、持ち歩くときは保冷剤か保冷バッグを使って、早めに食べます。",
+        "en": "Keep it in the fridge or a cool place, use an ice pack or cool bag to carry it, and eat it soon."
+      }
+    ],
+    "allergenIds": [
+      "alg-pork",
+      "alg-milk"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "pork",
+      "dairy",
+      "egg"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [
+      {
+        "ja": "3品とも元のレシピは2人分で、幼児向けの量とは書かれていません。分量は変えていません。",
+        "en": "All three dishes are written for 2 servings and are not child portions; amounts are unchanged."
+      },
+      {
+        "ja": "弁当ページに時間の記載はなく、各品の調理時間は20分・10分・10分です。合計の40分としています。ごはんは元のセットに含まれていません。",
+        "en": "The set page gives no time; the dishes take 20, 10 and 10 minutes, summed to 40. Rice is not part of the source set."
+      },
+      {
+        "ja": "元のレシピのコーンやケチャップはメーカー品ですが、一般的な材料として記録しました。レーズンは4粒としています。ブロッコリーの量は正味100gです。",
+        "en": "The corn and ketchup are brand products in the source and are recorded as generic. Raisins are 4 pieces; the broccoli is 100 g trimmed weight."
+      },
+      {
+        "ja": "こしょうは2品で使われるため1行にまとめています。ピザ用チーズと生パン粉は、参照できるメーカー表示がないためアレルゲンを不明として記録し、パン粉は動物由来も不明です。",
+        "en": "Pepper is used in two dishes and merged into one line. No label was found for the pizza cheese or fresh bread crumbs, so their allergens are unknown, and the bread crumbs' animal origin is unknown too."
+      },
+      {
+        "ja": "しょうゆ・ケチャップの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。",
+        "en": "Soy sauce and ketchup differ by product and follow the cited labels, so check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-kikkoman-cornball-bento",
+        "publisher": "キッコーマン株式会社",
+        "title": "ひき肉入りコーンボール弁当 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/lunch/enji/cornball.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-cornball",
+        "publisher": "キッコーマン株式会社",
+        "title": "ひき肉入りコーンボールのレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003664/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-broccoli-cheese",
+        "publisher": "キッコーマン株式会社",
+        "title": "ブロッコリーのチーズ焼き【トースターで簡単副菜】のレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003665/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-kabocha-chakin",
+        "publisher": "キッコーマン株式会社",
+        "title": "かぼちゃの茶巾絞りのレシピ・つくり方 | キッコーマン | ホームクッキング",
+        "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003666/",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-kikkoman-delmonte-ketchup-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "デルモンテ トマトケチャップ",
+        "url": "https://www.kikkoman.co.jp/products/K45/detail/K451000.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-maff-lunchbox",
+        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "storage"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-delish-cafe-sandwich-bento",
+    "name": {
+      "ja": "カフェ風サンドイッチお弁当",
+      "en": "Cafe-style sandwich bento"
+    },
+    "shortNameJa": "カフェサンド",
+    "shortNameEn": "Sandwich",
+    "nameKana": "かふぇふうさんどいっちおべんとう",
+    "style": "western-inspired",
+    "themeId": null,
+    "description": {
+      "ja": "電子レンジで作るバジル風味の鶏肉に、甘酢の紫キャベツ、にんじん、ゆで卵を重ねて全粒粉入りの食パンではさみ、いちごとパイナップルを添えます。",
+      "en": "Microwave basil chicken, sweet-sour red cabbage, carrot and boiled egg are layered in wholemeal-blend bread, with strawberries and pineapple on the side."
+    },
+    "yield": {
+      "ja": "1人分（サンドイッチ半分に切って2つ）",
+      "en": "1 serving (one sandwich cut in half)"
+    },
+    "minutes": 40,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-bread",
+        "label": {
+          "ja": "全粒粉入り食パン（8枚切り）",
+          "en": "bread with wholemeal flour (8 slices per loaf)"
+        },
+        "quantity": 2,
+        "unit": "slice",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy",
+          "egg"
+        ],
+        "animalOriginKnown": false
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "ゆで卵",
+          "en": "boiled egg"
+        },
+        "quantity": 1,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-carrot",
+        "label": {
+          "ja": "にんじん（1/4本・35g）",
+          "en": "carrot (1/4, 35 g)"
+        },
+        "quantity": 35,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-lettuce",
+        "label": {
+          "ja": "レタス",
+          "en": "lettuce"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-butter",
+        "label": {
+          "ja": "有塩バター",
+          "en": "salted butter"
+        },
+        "quantity": 10,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-milk"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-mustard",
+        "label": {
+          "ja": "マスタード",
+          "en": "mustard"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-chicken-breast",
+        "label": {
+          "ja": "鶏むね肉（皮なし・1/2枚）",
+          "en": "skinless chicken breast (1/2 piece)"
+        },
+        "quantity": 125,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-chicken"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "chicken"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cooking-sake",
+        "label": {
+          "ja": "酒（バジルチキン用）",
+          "en": "cooking sake (for the chicken)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-dried-basil",
+        "label": {
+          "ja": "乾燥バジル",
+          "en": "dried basil"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-garlic",
+        "label": {
+          "ja": "おろしにんにく",
+          "en": "grated garlic"
+        },
+        "quantity": 0.25,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（バジルチキン用）",
+          "en": "salt (for the chicken)"
+        },
+        "quantity": 0.33,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-red-cabbage",
+        "label": {
+          "ja": "紫キャベツ",
+          "en": "red cabbage"
+        },
+        "quantity": 120,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（紫キャベツ用）",
+          "en": "salt (for the red cabbage)"
+        },
+        "quantity": 0.33,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖（紫キャベツ用）",
+          "en": "sugar (for the red cabbage)"
+        },
+        "quantity": 2,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-vinegar",
+        "label": {
+          "ja": "酢（紫キャベツ用）",
+          "en": "vinegar (for the red cabbage)"
+        },
+        "quantity": 2,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pineapple",
+        "label": {
+          "ja": "カットパイナップル",
+          "en": "cut pineapple"
+        },
+        "quantity": 30,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-strawberry",
+        "label": {
+          "ja": "いちご",
+          "en": "strawberries"
+        },
+        "quantity": 50,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "にんじん、レタス、紫キャベツを切り、ゆで卵は厚さ5mmに切る。いちごはへたを落とす。",
+        "en": "Cut the carrot, lettuce and red cabbage, slice the boiled egg 5 mm thick and hull the strawberries."
+      },
+      {
+        "ja": "【バジルチキン】鶏肉に酒をふってバジル、にんにく、塩をすりこみ、ラップをして600Wで2分、返してさらに2分加熱し、余熱で火を通してほぐす。",
+        "en": "Basil chicken: sprinkle the chicken with sake, rub in basil, garlic and salt, cover and microwave at 600 W for 2 minutes, turn and give 2 more, rest to finish cooking, then shred."
+      },
+      {
+        "ja": "【甘酢キャベツ】紫キャベツを塩でもんでしんなりさせ、水けをしぼる。砂糖と酢を混ぜて和え、5分なじませて汁けをしぼる。",
+        "en": "Sweet-sour cabbage: rub the cabbage with salt until soft and squeeze it dry. Toss it with the sugar and vinegar, rest 5 minutes and squeeze again."
+      },
+      {
+        "ja": "ラップを広げ、1枚目のパンにバターをのばし、レタス半量、甘酢キャベツ、にんじん、チキン、ゆで卵、残りのレタスを順に積む。",
+        "en": "On cling film, butter one slice and layer half the lettuce, cabbage, carrot, chicken, egg and the rest of the lettuce."
+      },
+      {
+        "ja": "もう1枚のパンにマスタードをぬって上に重ね、ぴったりラップで包んで5分なじませ、半分に切る。サンドイッチとフルーツを弁当箱に詰める。",
+        "en": "Spread mustard on the other slice, place it on top, wrap tightly, rest 5 minutes and halve. Pack the sandwich and fruit in the lunchbox."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "すべて粗熱がしっかり取れてから弁当箱に詰め、蓋を閉めます。",
+        "en": "Cool everything fully before packing, then close the lid."
+      },
+      {
+        "ja": "夏場や梅雨の時期は避け、保冷剤と保冷バッグを使うか冷蔵庫で保管して、早めに食べます。",
+        "en": "Avoid the hot, humid season; use an ice pack in a cool bag or the fridge and eat it soon."
+      },
+      {
+        "ja": "生の野菜とフルーツは念入りに洗い、水分をよく切ってから詰めます。",
+        "en": "Wash raw vegetables and fruit well and drain them thoroughly before packing."
+      },
+      {
+        "ja": "厚みのある鶏肉は切れ目を入れておきます。加熱時間は目安なので、中まで火が通ったか確かめ、足りなければ追加で温めます。",
+        "en": "Score thick chicken and treat the time as a guide, adding heat until it is cooked through."
+      }
+    ],
+    "allergenIds": [
+      "alg-egg",
+      "alg-milk",
+      "alg-chicken"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat"
+    ],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "dairy",
+      "egg",
+      "chicken"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [
+      {
+        "ja": "元のレシピは1人分（サンドイッチ1個）で、幼児向けとは書かれていません。分量は変えていません。",
+        "en": "The source is for 1 adult-style serving (one sandwich) and not a child portion; amounts are unchanged."
+      },
+      {
+        "ja": "食パンは元のレシピの「全粒粉入り食パン8枚切り2枚」です。パンの原材料は製品で違い、ラベルが確認できないためアレルゲンと動物由来は不明として記録しています。マスタードも同様に不明です。",
+        "en": "The bread is two 8-slice wholemeal-blend slices. No label was found, so the bread's allergens and animal origin are unknown, and so are the mustard's."
+      },
+      {
+        "ja": "塩は3か所で使うため、バジルチキン用と紫キャベツ用を別の行にしています。にんじんは重さ（35g）で記録しています。",
+        "en": "Salt is used in two dishes and is on two lines. The carrot is recorded by weight (35 g)."
+      },
+      {
+        "ja": "酢の原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。使う製品の表示を確認してください。",
+        "en": "Vinegar differs by product and follows the cited label, so check the label of the one you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-delish-cafe-sandwich",
+        "publisher": "デリッシュキッチン (every, Inc.)",
+        "title": "食べ応え抜群！ カフェ風サンドイッチお弁当のレシピ動画・作り方 | デリッシュキッチン",
+        "url": "https://delishkitchen.tv/recipes/449849323102929939",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-mizkan-kokumotsu-su",
+        "publisher": "ミツカン（ミツカングループ「おうちレシピ」）",
+        "title": "穀物酢 | 商品情報 | ミツカングループ",
+        "url": "https://www.mizkan.co.jp/product/group/?gid=01001",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-delish-hanabatake-lion",
+    "name": {
+      "ja": "お花畑ライオン",
+      "en": "Flower-garden lion bento"
+    },
+    "shortNameJa": "ライオン",
+    "shortNameEn": "Lion",
+    "nameKana": "おはなばたけらいおん",
+    "style": "western-inspired",
+    "themeId": "theme-animals",
+    "description": {
+      "ja": "カレー風味のソーセージごはんを丸くにぎり、ソーセージのたてがみとチーズ・のりの顔でライオンにして、ピーマンの花の目玉焼きを添えます。",
+      "en": "A round curry-flavoured sausage rice ball turned into a lion with a sausage mane and cheese-and-nori face, beside pepper-ring \"flowers\" with quail eggs."
+    },
+    "yield": {
+      "ja": "1人分（ごはん150g）",
+      "en": "1 serving (150 g rice)"
+    },
+    "minutes": 20,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-sausage",
+        "label": {
+          "ja": "ソーセージ",
+          "en": "sausages"
+        },
+        "quantity": 3,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork"
+        ],
+        "animalOrigin": [
+          "meat",
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ごはん（お茶碗1杯）",
+          "en": "cooked rice (1 rice bowl)"
+        },
+        "quantity": 150,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-nori",
+        "label": {
+          "ja": "のり",
+          "en": "nori"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cheese",
+        "label": {
+          "ja": "スライスチーズ",
+          "en": "sliced cheese"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [
+          "alg-milk"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-curry-powder",
+        "label": {
+          "ja": "カレー粉",
+          "en": "curry powder"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ",
+          "en": "soy sauce"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ketchup",
+        "label": {
+          "ja": "ケチャップ",
+          "en": "ketchup"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-green-pepper",
+        "label": {
+          "ja": "ピーマン（輪切り2切れ）",
+          "en": "green pepper (2 rings)"
+        },
+        "quantity": 2,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-quail-egg",
+        "label": {
+          "ja": "うずらの卵",
+          "en": "quail eggs"
+        },
+        "quantity": 2,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oil",
+        "label": {
+          "ja": "サラダ油",
+          "en": "cooking oil"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "ソーセージ1本は両端を落として細かく刻む。ほかの2本には2mm間隔で深めの切れ目を入れる。",
+        "en": "Trim the ends of one sausage and mince it. Cut deep slits 2 mm apart in the other two."
+      },
+      {
+        "ja": "ボウルにごはん、刻んだソーセージ、カレー粉、しょうゆ、ケチャップを入れて混ぜ、ふんわりラップをして600Wで3分温める。",
+        "en": "Mix the rice, minced sausage, curry powder, soy sauce and ketchup, cover loosely and microwave at 600 W for 3 minutes."
+      },
+      {
+        "ja": "ラップに包んで丸くにぎる。",
+        "en": "Wrap in cling film and shape into a round ball."
+      },
+      {
+        "ja": "フライパンに油を薄くのばして熱し、切れ目入りのソーセージとピーマンの輪を並べる。輪のなかへうずら卵を1個ずつ落とし、ふたをかぶせて弱火で火を通す。",
+        "en": "Heat the oil in a pan, spreading it thin, and set the slit sausages and pepper rings in it. Crack a quail egg into each ring, cover and cook on low."
+      },
+      {
+        "ja": "切れ目が開いて卵に火が通ったら弁当箱に詰め、ごはんにチーズとのりを飾ってライオンの顔に仕立てる。",
+        "en": "When the slits open and the eggs are cooked, pack them and decorate the rice with cheese and nori for the lion face."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "お弁当にするときは、卵は半熟にせず、しっかり火を通します。",
+        "en": "For a lunchbox, cook the eggs fully, never soft or runny."
+      },
+      {
+        "ja": "チーズはレンジで20秒ほど（600W）加熱して、粗熱をとってから使います。中心まで十分に温まったか確かめ、時間は加減します。",
+        "en": "Microwave the cheese about 20 seconds at 600 W and let it cool before using; check it is hot in the middle and adjust the time."
+      },
+      {
+        "ja": "十分に冷ましてから詰めます。夏場や梅雨の時期は避け、保冷剤と保冷バッグを使うか冷蔵庫で保管して、早めに食べます。",
+        "en": "Pack only when fully cool. Avoid the hot, humid season; use an ice pack in a cool bag or the fridge and eat it soon."
+      }
+    ],
+    "allergenIds": [
+      "alg-milk",
+      "alg-egg"
+    ],
+    "mayContainAllergenIds": [
+      "alg-pork",
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": true,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "meat",
+      "pork",
+      "dairy",
+      "egg"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-seafood"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは1人分で、幼児向けとは書かれていません。分量は変えていません。",
+        "en": "The source is for 1 serving and does not call itself a child portion; amounts are unchanged."
+      },
+      {
+        "ja": "のりとスライスチーズは元のレシピで「適量」です。ピーマンは輪切り2切れ、ソーセージは3本です。",
+        "en": "Nori and sliced cheese are \"as needed\" in the source. Pepper is 2 rings and sausages are 3."
+      },
+      {
+        "ja": "ソーセージ、カレー粉、しょうゆ、ケチャップ、スライスチーズの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。使う製品の表示を確認してください。",
+        "en": "Sausage, curry powder, soy sauce, ketchup and sliced cheese differ by product; they follow the cited labels, so check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-delish-hanabatake-lion",
+        "publisher": "デリッシュキッチン (every, Inc.)",
+        "title": "初級キャラ弁！ お花畑ライオンのレシピ動画・作り方 | デリッシュキッチン",
+        "url": "https://delishkitchen.tv/recipes/171100703702385132",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-schauessen-label",
+        "publisher": "日本ハム株式会社",
+        "title": "シャウエッセン® - ソーセージ | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/sausages/win/2125/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-house-curry-powder-label",
+        "publisher": "ハウス食品株式会社",
+        "title": "カレーパウダー | 商品カタログトップ | ハウス食品",
+        "url": "https://housefoods.jp/products/catalog/cd_1,090700,spice,curpd,house.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-kikkoman-delmonte-ketchup-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "デルモンテ トマトケチャップ",
+        "url": "https://www.kikkoman.co.jp/products/K45/detail/K451000.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-meg-snow-torokeru-slice-label",
+        "publisher": "雪印メグミルク株式会社",
+        "title": "雪印とろけるスライス（7枚入り） | 商品のご案内 | 雪印メグミルク",
+        "url": "https://www.meg-snow.com/products/detail.php?p=torokeru_slice",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-delish-renchin-khaomangai-bento",
+    "name": {
+      "ja": "ささみでレンチンカオマンガイ風弁当",
+      "en": "Microwave khao-man-gai-style chicken rice bento"
+    },
+    "shortNameJa": "カオマンガイ風",
+    "shortNameEn": "Chicken",
+    "nameKana": "ささみでれんちんかおまんがいふうべんとう",
+    "style": "other",
+    "themeId": null,
+    "description": {
+      "ja": "レンジで蒸したささみの蒸し汁をごはんに混ぜ、ナンプラーとオイスターソースのたれを添える、セロリのピクルスとゆで卵つきのタイ風弁当です。",
+      "en": "A Thai-style bento: microwave-steamed chicken tenderloin on rice mixed with its steaming juices, with a fish-sauce dip, celery pickle and boiled egg."
+    },
+    "yield": {
+      "ja": "1人分（ごはん150g）",
+      "en": "1 serving (150 g rice)"
+    },
+    "minutes": 15,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-rice",
+        "label": {
+          "ja": "ごはん（お茶碗1杯）",
+          "en": "cooked rice (1 rice bowl)"
+        },
+        "quantity": 150,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-chicken-tender",
+        "label": {
+          "ja": "ささみ（筋なし）",
+          "en": "chicken tenderloin, sinew removed"
+        },
+        "quantity": 2,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-chicken"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "chicken"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cooking-sake",
+        "label": {
+          "ja": "酒（ささみ用）",
+          "en": "cooking sake (for the chicken)"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（ささみ用。ピクルスにも少々）",
+          "en": "salt (for the chicken; a pinch more in the pickle)"
+        },
+        "quantity": 0.33,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pepper",
+        "label": {
+          "ja": "こしょう（ささみ用。ピクルスにも少々）",
+          "en": "pepper (for the chicken and the pickle)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ginger",
+        "label": {
+          "ja": "おろししょうが（ささみ用。たれにも少々）",
+          "en": "grated ginger (for the chicken; a little in the dip)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sesame-oil",
+        "label": {
+          "ja": "ごま油（ごはんに混ぜる）",
+          "en": "sesame oil (mixed into the rice)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-sesame"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cherry-tomato",
+        "label": {
+          "ja": "ミニトマト",
+          "en": "cherry tomatoes"
+        },
+        "quantity": 2,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "ゆで卵（1/2個）",
+          "en": "boiled egg (1/2)"
+        },
+        "quantity": 0.5,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-fish-sauce",
+        "label": {
+          "ja": "ナンプラー（たれ）",
+          "en": "fish sauce (dip)"
+        },
+        "quantity": 0.5,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oyster-sauce",
+        "label": {
+          "ja": "オイスターソース（たれ）",
+          "en": "oyster sauce (dip)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-lemon",
+        "label": {
+          "ja": "レモン汁（たれ）",
+          "en": "lemon juice (dip)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sesame-oil",
+        "label": {
+          "ja": "ごま油（たれ）",
+          "en": "sesame oil (dip)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-sesame"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-celery",
+        "label": {
+          "ja": "セロリ（葉付き・1/4本）",
+          "en": "celery with leaves (1/4 stalk)"
+        },
+        "quantity": 0.25,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sugar",
+        "label": {
+          "ja": "砂糖（ピクルス）",
+          "en": "sugar (pickle)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-vinegar",
+        "label": {
+          "ja": "酢（ピクルス）",
+          "en": "vinegar (pickle)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "ささみに切り込みを入れて耐熱皿にのせ、酒、塩、こしょう、しょうがをなじませる。ふんわりラップをして600Wで2分加熱する。",
+        "en": "Slit the tenderloins, put them on a heatproof dish with the sake, salt, pepper and ginger, cover loosely and microwave at 600 W for 2 minutes."
+      },
+      {
+        "ja": "粗熱をとって食べやすく切る。蒸し汁は取っておく。赤みが残ったら追加で加熱する。",
+        "en": "Cool a little and cut into bite-size pieces; keep the juices. If any pink remains, heat longer."
+      },
+      {
+        "ja": "ごはんに蒸し汁とごま油を混ぜる。別のボウルでたれの材料を混ぜる。",
+        "en": "Mix the juices and sesame oil into the rice. Mix the dip ingredients in a separate bowl."
+      },
+      {
+        "ja": "セロリは筋を除いて切り、砂糖・酢・塩・こしょうとあえて、ふんわりラップをかけ600Wで1分温める。",
+        "en": "String and cut the celery, mix with the sugar, vinegar, salt and pepper, cover loosely and microwave at 600 W for 1 minute."
+      },
+      {
+        "ja": "弁当箱にごはんを詰めてささみをのせ、たれを添える。セロリのピクルスとミニトマト、ゆで卵も一緒に詰める。",
+        "en": "Pack the rice, top with the chicken and add the dip. Add the pickle, cherry tomatoes and boiled egg."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "ささみは切って赤みが残っていないか確かめます。残っていれば加熱を足し、中心までしっかり火を通します。",
+        "en": "Cut the chicken to check for pink; if there is any, heat it more so it is cooked through."
+      },
+      {
+        "ja": "お日さまが直接当たらない涼しい所に置きます。梅雨や夏場は保冷剤や保冷バッグを使います。",
+        "en": "Keep it in a cool place out of direct sunlight, and use an ice pack and cool bag in the rainy season and summer."
+      }
+    ],
+    "allergenIds": [
+      "alg-chicken",
+      "alg-sesame",
+      "alg-egg"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "chicken",
+      "egg",
+      "fish-seafood"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-pork",
+      "no-beef"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは1人分（ごはんお茶碗1杯・150g）で、幼児向けとは書かれていません。分量は変えていません。ナンプラーの香りが強いため、幼児向けにはたれの量を調整してください。",
+        "en": "The source is for 1 serving (150 g rice) and is not a child portion; amounts are unchanged. Fish sauce is strong, so adjust the dip for small children."
+      },
+      {
+        "ja": "塩・こしょう・しょうがは、ささみ用に加えて、ピクルスやたれにも少量使います。数量はささみ用の分で、残りは1行にまとめました。",
+        "en": "Salt, pepper and ginger are also used in small amounts in the pickle and dip; each line carries the chicken amount and the extra is merged in."
+      },
+      {
+        "ja": "ナンプラーはメーカー表示を確認できなかったためアレルゲンを不明として記録し、魚由来にしています。オイスターソース・酢は参照した製品の表示にもとづいて記録しています。",
+        "en": "No label was found for the fish sauce, so its allergens are unknown (recorded as fish-derived). Oyster sauce and vinegar follow cited labels; check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-delish-renchin-khaomangai",
+        "publisher": "デリッシュキッチン (every, Inc.)",
+        "title": "レンチンで手軽に！ ささみでレンチンカオマンガイ風弁当のレシピ動画・作り方 | デリッシュキッチン",
+        "url": "https://delishkitchen.tv/recipes/196442185573336145",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-oyster-sauce-label",
+        "publisher": "キッコーマン株式会社",
+        "title": "キッコーマン オイスターソース | キッコーマン株式会社",
+        "url": "https://www.kikkoman.co.jp/products/K40/detail/K400505.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-mizkan-kokumotsu-su",
+        "publisher": "ミツカン（ミツカングループ「おうちレシピ」）",
+        "title": "穀物酢 | 商品情報 | ミツカングループ",
+        "url": "https://www.mizkan.co.jp/product/group/?gid=01001",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-bbc-falafel-lunchbox",
+    "name": {
+      "ja": "ファラフェル・ランチボックス",
+      "en": "Falafel lunchbox"
+    },
+    "shortNameJa": "ファラフェル",
+    "shortNameEn": "Falafel",
+    "nameKana": "ふぁらふぇるらんちぼっくす",
+    "style": "other",
+    "themeId": null,
+    "description": {
+      "ja": "火を使わず、調理済みの雑穀に生野菜、ファラフェル、フムスをのせるだけで作る、ベジタリアン向けのお弁当風サラダです。",
+      "en": "A no-cook, vegetarian bento-style salad: ready-cooked grains topped with raw vegetables, falafel and hummus, packed in separate compartments."
+    },
+    "yield": {
+      "ja": "3人分（大人2人と子ども2人分としても）",
+      "en": "3 servings (or 2 adults and 2 children)"
+    },
+    "minutes": 10,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-quinoa",
+        "label": {
+          "ja": "調理済みの雑穀またはレンズ豆のパウチ（キヌアを使用）",
+          "en": "pouch of cooked grains or lentils (quinoa used)"
+        },
+        "quantity": 250,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-spinach",
+        "label": {
+          "ja": "ベビーほうれんそう",
+          "en": "baby spinach"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cucumber",
+        "label": {
+          "ja": "きゅうり（刻む）",
+          "en": "cucumber, chopped"
+        },
+        "quantity": 0.25,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cherry-tomato",
+        "label": {
+          "ja": "ミニトマト（半分に切る）",
+          "en": "cherry tomatoes, halved"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-carrot",
+        "label": {
+          "ja": "にんじん（すりおろす）",
+          "en": "carrots, grated"
+        },
+        "quantity": 2,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pomegranate",
+        "label": {
+          "ja": "ざくろ（実だけ）",
+          "en": "pomegranate, seeds only"
+        },
+        "quantity": 1,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-olive",
+        "label": {
+          "ja": "オリーブ",
+          "en": "olives"
+        },
+        "quantity": 10,
+        "unit": "piece",
+        "optional": true,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-falafel",
+        "label": {
+          "ja": "ファラフェル（市販品でもよい）",
+          "en": "falafel (shop-bought is fine)"
+        },
+        "quantity": 12,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-hummus",
+        "label": {
+          "ja": "フムス",
+          "en": "hummus"
+        },
+        "quantity": 4,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-olive-oil",
+        "label": {
+          "ja": "オリーブオイル（かける）",
+          "en": "olive oil (drizzle)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": true,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-lemon",
+        "label": {
+          "ja": "レモン（4等分）",
+          "en": "lemon, quartered"
+        },
+        "quantity": 0.5,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "雑穀をお弁当箱3つに分けて入れる。",
+        "en": "Divide the grains between three lunchboxes."
+      },
+      {
+        "ja": "野菜、ファラフェル、フムス、あればオリーブオイルを少々のせる。仕切りのあるお弁当箱なら、材料を区画ごとに分けて詰める。",
+        "en": "Top each with vegetables, falafel, hummus and, if using, a little olive oil; with a compartment box, pack each ingredient in its own section."
+      },
+      {
+        "ja": "食べる直前に絞れるよう、レモンを1切れずつ添える。",
+        "en": "Add a lemon wedge to each box to squeeze just before eating."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "生の野菜は洗って水けをきってから詰めます。冷蔵庫か保冷剤を入れた保冷バッグで保管し、早めに食べます。",
+        "en": "Wash raw vegetables and drain them before packing. Keep the box in the fridge or a cool bag with an ice pack and eat it soon."
+      },
+      {
+        "ja": "温かいものを使った場合は、十分に冷ましてから詰めて蓋を閉めます。",
+        "en": "If any part was warm, cool it fully before packing and closing the lid."
+      }
+    ],
+    "allergenIds": [],
+    "mayContainAllergenIds": [],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [],
+    "dietDataComplete": true,
+    "dietOk": [
+      "vegetarian",
+      "pescatarian",
+      "no-pork",
+      "no-beef",
+      "no-seafood"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは3人分（大人2人と子ども2人でもよい）で、幼児1人分ではありません。分量は変えていません。",
+        "en": "The source serves 3 (or 2 adults and 2 children), not one child; amounts are unchanged."
+      },
+      {
+        "ja": "元のレシピの「ひとつかみ」のベビーほうれんそうとミニトマトは、少量として記録しています。ざくろは1個分の実、レモンは1/2個を4等分です。",
+        "en": "A \"handful\" of baby spinach and cherry tomatoes is recorded as a small amount. The pomegranate is seeds from one fruit; the lemon is half a fruit in quarters."
+      },
+      {
+        "ja": "調理済みの穀物は元のレシピで250gのパウチで、赤と白のキヌアが使われています。ファラフェルとフムスは市販品のため、メーカー表示がなくアレルゲンを不明として記録しています（ごまなどを含む場合があります）。",
+        "en": "The grains are a 250 g pouch of red and white quinoa. No labels were found for the falafel or hummus, so their allergens are unknown (they may contain sesame, for example)."
+      },
+      {
+        "ja": "元のレシピは調理時間なしで準備10分です。",
+        "en": "The source gives 10 minutes of preparation and no cooking."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-bbc-falafel-lunchbox",
+        "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+        "title": "Falafel lunchbox recipe | Good Food",
+        "url": "https://www.bbcgoodfood.com/recipes/falafel-lunchbox",
+        "accessed": "2026-11-01",
+        "language": "en",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-maff-lunchbox",
+        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "storage"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-nhk-buta-enoki-amakara-youji",
+    "name": {
+      "ja": "「豚肉とえのきの甘辛煮弁当」 幼児向け",
+      "en": "Sweet-savoury pork and enoki bento for small children"
+    },
+    "shortNameJa": "豚えのき弁当",
+    "shortNameEn": "Enoki",
+    "nameKana": "ぶたにくとえのきのあまからにべんとうようじむけ",
+    "style": "japanese",
+    "themeId": null,
+    "description": {
+      "ja": "えのきを豚薄切り肉で巻いて甘辛く焼いた主菜に、チーズののり巻き、しらす入り卵焼き、ブロッコリのおかかあえを合わせた4品の幼児向け弁当です。",
+      "en": "A four-dish bento for small children: enoki rolled in thin pork and glazed, a cheese-nori roll, shirasu omelette and broccoli with bonito flakes."
+    },
+    "yield": {
+      "ja": "1人分（幼児向け・4品）",
+      "en": "1 serving (for small children, 4 dishes)"
+    },
+    "minutes": 20,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-enoki",
+        "label": {
+          "ja": "えのきだけ（1/6袋・約20g）",
+          "en": "enoki (1/6 pack, about 20 g)"
+        },
+        "quantity": 20,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pork",
+        "label": {
+          "ja": "豚薄切り肉（1枚・20g）",
+          "en": "thinly sliced pork (1 slice, 20 g)"
+        },
+        "quantity": 20,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-pork"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-wheat-flour",
+        "label": {
+          "ja": "小麦粉",
+          "en": "wheat flour"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-wheat"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oil",
+        "label": {
+          "ja": "サラダ油（豚肉を焼く）",
+          "en": "cooking oil (for the pork)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-mirin",
+        "label": {
+          "ja": "みりん",
+          "en": "mirin"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（豚肉のたれ）",
+          "en": "soy sauce (pork glaze)"
+        },
+        "quantity": 1,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cucumber",
+        "label": {
+          "ja": "きゅうり（せん切り）",
+          "en": "cucumber, julienned"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-carrot",
+        "label": {
+          "ja": "にんじん（せん切り）",
+          "en": "carrot, julienned"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-nori",
+        "label": {
+          "ja": "焼きのり",
+          "en": "toasted nori"
+        },
+        "quantity": 0.25,
+        "unit": "sheet",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cheese",
+        "label": {
+          "ja": "スライスチーズ",
+          "en": "sliced cheese"
+        },
+        "quantity": 1,
+        "unit": "slice",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [
+          "alg-milk"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-umeboshi",
+        "label": {
+          "ja": "梅肉",
+          "en": "umeboshi flesh"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "卵",
+          "en": "egg"
+        },
+        "quantity": 1,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-paprika",
+        "label": {
+          "ja": "赤ピーマン（1/4個）",
+          "en": "red pepper (1/4)"
+        },
+        "quantity": 0.25,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-whitebait",
+        "label": {
+          "ja": "しらす干し",
+          "en": "dried whitebait"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩（卵とブロッコリ）",
+          "en": "salt (egg and broccoli)"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pepper",
+        "label": {
+          "ja": "こしょう",
+          "en": "pepper"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-broccoli",
+        "label": {
+          "ja": "ブロッコリ（小・3〜4房）",
+          "en": "broccoli (small, 3 to 4 florets)"
+        },
+        "quantity": 3,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-bonito-flakes",
+        "label": {
+          "ja": "削り節",
+          "en": "bonito flakes"
+        },
+        "quantity": 2,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "fish-seafood"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-soy-sauce",
+        "label": {
+          "ja": "しょうゆ（ブロッコリ用）",
+          "en": "soy sauce (broccoli)"
+        },
+        "quantity": 0.5,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-wheat",
+          "alg-soybean"
+        ],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "【えのき巻き】えのきの根元を落として半分に切り、広げた豚肉にのせてしっかり巻き、薄く小麦粉をまぶす。油を熱して焼く。",
+        "en": "Pork-enoki rolls: trim and halve the enoki, lay it on the spread pork, roll tightly and dust with flour. Brown in hot oil."
+      },
+      {
+        "ja": "みりんとしょうゆを合わせて回し入れ、肉全体にからめる。火を止めて取り出し、食べやすい大きさにする。",
+        "en": "Add the mirin and soy sauce mixed together, coat the rolls, take off the heat and cut into bite-size pieces."
+      },
+      {
+        "ja": "【のり巻き】きゅうりとにんじんを7〜8cmのせん切りにする。のりにチーズをのせ、梅肉を薄くぬって野菜をのせ、しっかり巻く。",
+        "en": "Nori roll: julienne the cucumber and carrot to 7 to 8 cm. Lay cheese on the nori, spread a thin layer of umeboshi, add the vegetables and roll tightly."
+      },
+      {
+        "ja": "ラップで包み、しばらく置いて形をなじませてから切る。",
+        "en": "Wrap in cling film, leave it to settle, then cut into bite-size pieces."
+      },
+      {
+        "ja": "【卵焼き】赤ピーマンを細かく刻む。溶いた卵に塩、こしょう、ピーマン、しらすを混ぜる。油を熱して流し、大きく混ぜて焼き、巻いて食べやすく切る。",
+        "en": "Omelette: finely chop the pepper. Mix it with the whitebait into the beaten egg with salt and pepper. Cook in hot oil, stirring big, roll up and cut into bite-size pieces."
+      },
+      {
+        "ja": "【ブロッコリ】塩ゆでしたら冷水で冷まし、水分をしっかり拭く。削り節にしょうゆを混ぜて和える。",
+        "en": "Broccoli: blanch in salted boiling water, cool in cold water and dry well. Mix the bonito flakes with the soy sauce and toss with it."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "卵は半熟にせず、完全に固まるまで加熱します。",
+        "en": "Cook the egg until fully set, never soft or runny."
+      },
+      {
+        "ja": "ブロッコリは水けをしっかり拭き取ってから和えます。すべてのおかずを十分に冷ましてから詰めます。",
+        "en": "Dry the broccoli thoroughly before tossing, and let every dish cool fully before packing."
+      },
+      {
+        "ja": "冷蔵庫か涼しい場所で保管し、持ち歩くときは保冷剤か保冷バッグを使って、早めに食べます。",
+        "en": "Keep it in the fridge or a cool place, use an ice pack or cool bag to carry it, and eat it soon."
+      }
+    ],
+    "allergenIds": [
+      "alg-pork",
+      "alg-wheat",
+      "alg-milk",
+      "alg-egg"
+    ],
+    "mayContainAllergenIds": [
+      "alg-wheat",
+      "alg-soybean"
+    ],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "pork",
+      "dairy",
+      "egg",
+      "fish-seafood"
+    ],
+    "dietDataComplete": true,
+    "dietOk": [
+      "no-beef"
+    ],
+    "adaptations": [
+      {
+        "ja": "元のレシピは幼児向けの1人分で、子どもの食べる量に合わせて盛り分けるとされています。分量は元のままです。",
+        "en": "The source is a child-oriented single serving, to be portioned by the child's appetite; amounts are unchanged."
+      },
+      {
+        "ja": "元のレシピでは主菜の調理時間が5分と書かれているだけです。ほかの3品を含めた約20分は、手順からの推定値です。",
+        "en": "The source gives only 5 minutes for the main dish. The roughly 20 minutes for all four dishes is an estimate from the steps."
+      },
+      {
+        "ja": "みりん・しょうゆは元のレシピで「小さじ1弱」のため、小さじ1として記録しています。野菜と小麦粉は「適量」です。ブロッコリは3〜4房のうち3としています。",
+        "en": "Mirin and soy sauce are \"slightly under 1 tsp\" in the source and recorded as 1 tsp. Vegetables and flour are \"as needed\". Broccoli is 3 of the 3 to 4 florets."
+      },
+      {
+        "ja": "元のレシピにあるごはんのおむすび（ごはん40g・好みのふりかけ）は、材料欄に分量がなく、ここには含めていません。梅干しの梅肉は表示が確認できないためアレルゲンを不明として記録しています。",
+        "en": "The rice balls in the source (40 g rice with furikake) are not in its ingredient list and are excluded here. No label was found for the umeboshi, so its allergens are unknown."
+      },
+      {
+        "ja": "しょうゆ・スライスチーズの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。",
+        "en": "Soy sauce and sliced cheese differ by product and follow the cited labels, so check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-nhk-buta-enoki-amakara-youji",
+        "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+        "title": "「豚肉とえのきの甘辛煮弁当」 幼児向け レシピ 河野 雅子さん｜みんなのきょうの料理",
+        "url": "https://www.kyounoryouri.jp/recipe/14_%E3%80%8C%E8%B1%9A%E8%82%89%E3%81%A8%E3%81%88%E3%81%AE%E3%81%8D%E3%81%AE%E7%94%98%E8%BE%9B%E7%85%AE%E5%BC%81%E5%BD%93%E3%80%8D%20%E5%B9%BC%E5%85%90%E5%90%91%E3%81%91.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe"
+        ]
+      },
+      {
+        "id": "src-maff-lunchbox",
+        "publisher": "農林水産省 (Ministry of Agriculture, Forestry and Fisheries)",
+        "title": "お弁当づくりによる食中毒を予防するために：農林水産省",
+        "url": "https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "storage"
+        ]
+      },
+      {
+        "id": "src-kikkoman-tokusen-marudaizu-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "キッコーマン 特選 丸大豆しょうゆ",
+        "url": "https://www.kikkoman.co.jp/products/K05/detail/K051005.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-meg-snow-torokeru-slice-label",
+        "publisher": "雪印メグミルク株式会社",
+        "title": "雪印とろけるスライス（7枚入り） | 商品のご案内 | 雪印メグミルク",
+        "url": "https://www.meg-snow.com/products/detail.php?p=torokeru_slice",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  },
+  {
+    "id": "rcp-delish-kuma-nugget",
+    "name": {
+      "ja": "くまちゃんナゲット",
+      "en": "Teddy-bear chicken nuggets"
+    },
+    "shortNameJa": "くまナゲット",
+    "shortNameEn": "Nuggets",
+    "nameKana": "くまちゃんなげっと",
+    "style": "western-inspired",
+    "themeId": "theme-animals",
+    "description": {
+      "ja": "鶏むね肉と豆腐で作る小さなナゲットに、ミニソーセージの耳と鼻、のりの目と口をつけて、クマの顔にしたお弁当のおかずです。",
+      "en": "Small nuggets of chicken breast and tofu turned into bears with mini-sausage ears and noses and nori eyes and mouths, as a bento side."
+    },
+    "yield": {
+      "ja": "10個分",
+      "en": "10 pieces"
+    },
+    "minutes": 30,
+    "makeAhead": null,
+    "ingredients": [
+      {
+        "ingredientId": "ing-chicken-breast",
+        "label": {
+          "ja": "鶏むね肉（皮なし）",
+          "en": "skinless chicken breast"
+        },
+        "quantity": 150,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-chicken"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "chicken"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-tofu",
+        "label": {
+          "ja": "木綿豆腐",
+          "en": "firm tofu"
+        },
+        "quantity": 100,
+        "unit": "g",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-soybean"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-egg",
+        "label": {
+          "ja": "溶き卵（1/2個分）",
+          "en": "beaten egg (half an egg)"
+        },
+        "quantity": 0.5,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-egg"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "egg"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-bread-crumbs",
+        "label": {
+          "ja": "パン粉",
+          "en": "bread crumbs"
+        },
+        "quantity": 3,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "unknown",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [
+          "dairy",
+          "egg"
+        ],
+        "animalOriginKnown": false
+      },
+      {
+        "ingredientId": "ing-wheat-flour",
+        "label": {
+          "ja": "薄力粉（打ち粉）",
+          "en": "cake flour (for dusting)"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [
+          "alg-wheat"
+        ],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-oil",
+        "label": {
+          "ja": "揚げ油（サラダ油）",
+          "en": "frying oil"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-cooking-sake",
+        "label": {
+          "ja": "酒",
+          "en": "cooking sake"
+        },
+        "quantity": 1,
+        "unit": "tbsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-salt",
+        "label": {
+          "ja": "塩",
+          "en": "salt"
+        },
+        "quantity": 0.33,
+        "unit": "tsp",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-pepper",
+        "label": {
+          "ja": "こしょう",
+          "en": "pepper"
+        },
+        "quantity": null,
+        "unit": "small-amount",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-sausage",
+        "label": {
+          "ja": "ミニソーセージ",
+          "en": "mini sausages"
+        },
+        "quantity": 10,
+        "unit": "piece",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [
+          "alg-pork"
+        ],
+        "animalOrigin": [
+          "meat",
+          "pork"
+        ],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-nori",
+        "label": {
+          "ja": "焼きのり",
+          "en": "toasted nori"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "known",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      },
+      {
+        "ingredientId": "ing-ketchup",
+        "label": {
+          "ja": "ケチャップ（ほっぺ用）",
+          "en": "ketchup (for the cheeks)"
+        },
+        "quantity": null,
+        "unit": "to-taste",
+        "optional": false,
+        "allergenInfo": "varies-by-product",
+        "allergenIds": [],
+        "possibleAllergenIds": [],
+        "animalOrigin": [],
+        "animalOriginKnown": true
+      }
+    ],
+    "steps": [
+      {
+        "ja": "湯をわかして豆腐をくずしながら入れ、2分ほどゆでて粗熱をとる。続けてミニソーセージも2分ほどゆでる。",
+        "en": "Boil water, crumble in the tofu and boil about 2 minutes, then cool it. Boil the mini sausages about 2 minutes too."
+      },
+      {
+        "ja": "鶏肉を細かく刻んで包丁でたたく。",
+        "en": "Chop the chicken finely and pound it with the knife."
+      },
+      {
+        "ja": "溶き卵にパン粉を浸し、鶏肉、豆腐、酒、塩、こしょうを加えて、粘り気が出るまでよく混ぜ合わせ、10等分にする。",
+        "en": "Soak the bread crumbs in the beaten egg, add the chicken, tofu, sake, salt and pepper and mix until sticky; divide into 10."
+      },
+      {
+        "ja": "薄力粉を敷いたバットに、スプーンですくったたねを置き、粉をふって楕円形に整える。",
+        "en": "Spoon the mixture onto flour in a tray, dust with more flour and shape into ovals."
+      },
+      {
+        "ja": "鍋に1cmの深さまで油を入れて170℃にし、返しながらこんがり色づくまで約5分揚げる。",
+        "en": "Heat oil 1 cm deep to 170 C and fry, turning, about 5 minutes until golden."
+      },
+      {
+        "ja": "ソーセージの粗熱が取れたら両端を耳に切り、真ん中を5mm幅に切って鼻にする。ナゲットにストローで耳の穴をあけて耳を差す。のりで目と鼻と口を貼り、ケチャップで頬を描く。",
+        "en": "Cut both ends off each sausage for ears and slice the middle 5 mm for noses. Punch ear holes in the nuggets with a straw, insert the ears, add nori features and draw cheeks with ketchup."
+      }
+    ],
+    "storage": [
+      {
+        "ja": "夏場や梅雨の時期は避け、保冷剤と保冷バッグを使うか冷蔵庫で保管して、早めに食べます。",
+        "en": "Avoid the hot, humid season; use an ice pack in a cool bag or the fridge and eat it soon."
+      },
+      {
+        "ja": "ナゲットもソーセージも、しっかり冷めてから弁当箱へ入れます。",
+        "en": "Let the fried nuggets and sausages cool, and pack them only once fully cool."
+      }
+    ],
+    "allergenIds": [
+      "alg-chicken",
+      "alg-soybean",
+      "alg-egg",
+      "alg-wheat"
+    ],
+    "mayContainAllergenIds": [
+      "alg-pork"
+    ],
+    "allergenDataComplete": false,
+    "allergenScheme": "caa-2026-04",
+    "animalOrigin": [
+      "chicken",
+      "egg",
+      "dairy",
+      "meat",
+      "pork"
+    ],
+    "dietDataComplete": false,
+    "dietOk": [],
+    "adaptations": [
+      {
+        "ja": "元のレシピは10個分で、1人分の目安は書かれていません。幼児向けとも書かれていないので、分量は変えていません。",
+        "en": "The source makes 10 pieces and gives no per-person share, nor does it call itself a child portion; amounts are unchanged."
+      },
+      {
+        "ja": "卵は「1/2個分」の溶き卵、薄力粉・揚げ油・のり・ケチャップは「適量」です。ミニソーセージは10本です。",
+        "en": "The egg is half a beaten egg; flour, oil, nori and ketchup are \"as needed\". There are 10 mini sausages."
+      },
+      {
+        "ja": "パン粉はメーカー表示が見つからず、アレルゲンと動物由来を不明として記録しています。ソーセージ・ケチャップは参照した製品の表示にもとづいています。",
+        "en": "No label was found for the bread crumbs, so their allergens and animal origin are unknown. Sausage and ketchup follow the cited labels; check the labels of the ones you use."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-delish-kuma-nugget",
+        "publisher": "デリッシュキッチン (every, Inc.)",
+        "title": "かわいさ満点♪ くまちゃんナゲットのレシピ動画・作り方 | デリッシュキッチン",
+        "url": "https://delishkitchen.tv/recipes/237763794774787178",
+        "accessed": "2026-11-01",
+        "language": "ja",
+        "usedFor": [
+          "recipe",
+          "storage"
+        ]
+      },
+      {
+        "id": "src-nipponham-schauessen-label",
+        "publisher": "日本ハム株式会社",
+        "title": "シャウエッセン® - ソーセージ | 日本ハム",
+        "url": "https://www.nipponham.co.jp/products/ham_sausages/sausages/win/2125/",
+        "accessed": "2026-10-30",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      },
+      {
+        "id": "src-kikkoman-delmonte-ketchup-label",
+        "publisher": "キッコーマン株式会社（ホームクッキング）",
+        "title": "デルモンテ トマトケチャップ",
+        "url": "https://www.kikkoman.co.jp/products/K45/detail/K451000.html",
+        "accessed": "2026-10-25",
+        "language": "ja",
+        "usedFor": [
+          "allergen"
+        ]
+      }
+    ],
+    "reviewedBy": "ba-research"
+  }
+]

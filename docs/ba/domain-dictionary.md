@@ -464,3 +464,25 @@ Rows appended by the research agents of the library growth batches (c–h): same
 | ing-basil | バジル | ばじる | Basil (fresh leaves) | cat-green-vegetable | バジルの葉, フレッシュバジル | – | known | – |
 | ing-shishito | ししとう | ししとう | Shishito pepper | cat-green-vegetable | しし唐, しし唐辛子, ししとうがらし, 獅子唐 | – | known | – |
 | ing-pesto | バジルペースト | ばじるぺーすと | Basil pesto | cat-seasoning | バジルソース, ジェノベーゼ, ジェノバソース | – | varies | dairy, ? |
+| ing-inari-age | 稲荷揚げ | いなりあげ | Seasoned fried tofu pouch (inari-age) | cat-soy | 味付き油揚げ, 味付油揚げ, いなり揚げ, 稲荷あげ, いなりの皮 | alg-soybean | varies | ? |
+| ing-nanohana | 菜の花 | なのはな | Nanohana (rapeseed blossom) | cat-green-vegetable | 菜花, なばな | – | known | – |
+| ing-sushi-vinegar | すし酢 | すしず | Sushi vinegar (seasoned rice vinegar) | cat-seasoning | 寿司酢 | – | varies | – |
+| ing-chickpea | ひよこ豆 | ひよこまめ | Chickpea | cat-vegetable | ひよこまめ, ヒヨコ豆, ガルバンゾ, チックピー, ひよこ豆（水煮） | – | known | – |
+| ing-swordfish | かじき | かじき | Swordfish (kajiki) | cat-fish | カジキ, かじきまぐろ, メカジキ, めかじき | – | known | fish-seafood |
+| ing-bay-leaf | ローリエ | ろーりえ | Bay leaf | cat-seasoning | 月桂樹の葉, ベイリーフ, ローレル | – | known | – |
+| ing-furikake | ふりかけ | ふりかけ | Furikake (rice seasoning) | cat-seasoning | 振りかけ, ごはんにふりかけ, かつお節のふりかけ, たらこのふりかけ, 赤じそふりかけ | – | varies | fish-seafood, ? |
+| ing-mango-chutney | マンゴーチャツネ | まんごーちゃつねー | Mango chutney | cat-seasoning | チャツネ, マンゴーチャツニー | – | varies | – |
+| ing-red-cabbage | 紫キャベツ | むらさききゃべつ | Red cabbage | cat-leafy-vegetable | 赤キャベツ, レッドキャベツ | – | known | – |
+| ing-mustard | マスタード | ますたーど | Prepared mustard | cat-seasoning | からし, 粒マスタード, フレンチマスタード, 洋がらし | – | varies | – |
+| ing-dried-basil | 乾燥バジル | かんそうばじる | Dried basil | cat-seasoning | ドライバジル, 乾燥バジルリーフ | – | known | – |
+| ing-fish-sauce | ナンプラー | なんぷらー | Fish sauce (nam pla) | cat-seasoning | 魚醤, フィッシュソース, ニョクマム | – | varies | fish-seafood |
+| ing-quinoa | キヌア | きぬあ | Quinoa | cat-grain | キノア, キヌア（調理済み） | – | known | – |
+| ing-falafel | ファラフェル | ふぁらふぇる | Falafel | cat-vegetable | ファラフェル（市販）, ひよこ豆のコロッケ | – | varies | – |
+| ing-hummus | フムス | ふむす | Hummus | cat-seasoning | ホムス, ハムス, ひよこ豆のペースト | – | varies | – |
+| ing-pomegranate | ざくろ | ざくろ | Pomegranate | cat-fruit | ザクロ, 石榴, ポメグラネート | – | known | – |
+| ing-corned-beef | コンビーフ | こんびーふ | Corned beef (canned) | cat-meat-processed | コンビーフ缶, コーンビーフ | alg-beef | varies | beef |
+| ing-couscous | クスクス | くすくす | Couscous | cat-grain | 乾燥クスクス, クスクスパスタ | alg-wheat | known | – |
+| ing-halloumi | ハルーミチーズ | はるーみちーず | Halloumi cheese | cat-dairy | ハロウミ, ハルーミ, ハロウミチーズ | alg-milk | varies | dairy |
+| ing-mint | ミント | みんと | Mint (fresh leaves) | cat-green-vegetable | ミントの葉, フレッシュミント, スペアミント | – | known | – |
+| ing-lime | ライム | らいむ | Lime | cat-fruit | ライム果汁, ライムジュース | – | known | – |
+| ing-vegetable-stock | 野菜ブイヨン | やさいぶいよん | Vegetable stock | cat-seasoning | ベジタブルストック, ベジタブルブイヨン, 野菜スープの素, 野菜だし | – | varies | – |

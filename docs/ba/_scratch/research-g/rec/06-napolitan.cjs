@@ -1,0 +1,51 @@
+const { I, SRC, T } = require('../lib.cjs');
+module.exports = {
+  id: 'rcp-nhk-napolitan-bento',
+  name: T('ナポリタン弁当', 'Napolitan spaghetti bento'),
+  shortNameJa: 'ナポリタン',
+  shortNameEn: 'Napoli',
+  nameKana: 'なぽりたんべんとう',
+  style: 'western-inspired',
+  themeId: null,
+  description: T(
+    'ソーセージと玉ねぎ、ピーマン、しいたけを炒め、ゆでたスパゲッティにケチャップをからめる、冷めてもおいしい1人分のパスタ弁当です。',
+    'A single-serving pasta bento: sausage, onion, green pepper and shiitake are stir-fried, then tossed with spaghetti and ketchup, good even when cold.',
+  ),
+  yield: T('1人分（スパゲッティ100g）', '1 serving (100 g spaghetti)'),
+  minutes: 20,
+  ingredients: [
+    I('ing-spaghetti', 'スパゲッティ（1.6mmがあれば）', 'spaghetti (1.6 mm if available)', 100, 'g'),
+    I('ing-sausage', 'ウインナーソーセージ（2本・30g）', 'wiener sausages (2, 30 g)', 2, 'piece', { lab: { src: 'sausage', poss: ['alg-pork'] } }),
+    I('ing-onion', 'たまねぎ（1/4個・60g）', 'onion (1/4, 60 g)', 60, 'g'),
+    I('ing-green-pepper', 'ピーマン（1個・40g）', 'green pepper (1, 40 g)', 40, 'g'),
+    I('ing-shiitake', '生しいたけ（2枚・30g）', 'fresh shiitake (2, 30 g)', 30, 'g'),
+    I('ing-salt', '塩（スパゲッティをゆでる湯用）', 'salt (for the pasta water)', 1.5, 'tsp'),
+    I('ing-salt', '塩（仕上げ）', 'salt (to finish)', null, 'small-amount'),
+    I('ing-oil', 'サラダ油', 'cooking oil', 0.5, 'tbsp'),
+    I('ing-ketchup', 'トマトケチャップ', 'tomato ketchup', 2, 'tbsp', { lab: { poss: [] } }),
+    I('ing-pepper', 'こしょう', 'pepper', null, 'small-amount'),
+  ],
+  steps: [
+    T('大きめの鍋に水を1リットルほど張って強火にかけ、その間にたまねぎ、ピーマン、しいたけを細切りにし、ソーセージは5mm幅で斜めにスライスする。', 'Put about 1 litre of water on high heat. Meanwhile slice the onion, pepper and shiitake thinly and cut the sausages into 5 mm diagonal slices.'),
+    T('湯が沸いたら塩とスパゲッティを入れ、袋の表示どおりにゆでる。', 'When it boils, add the salt and spaghetti and boil for the time on the packet.'),
+    T('フライパンに油を熱し、ソーセージを約1分炒める。たまねぎ、続けてピーマンとしいたけを加えて炒め、火を止める。', 'Heat the oil in a frying pan and stir-fry the sausage for about 1 minute. Add the onion, then the pepper and shiitake, and turn off the heat.'),
+    T('ゆで上がったスパゲッティの湯を切ってフライパンに移し、中火でさっと炒める。ケチャップ、塩、こしょうを入れて素早くあえる。', 'Drain the spaghetti, add it to the pan and toss over medium heat. Quickly mix in the ketchup, salt and pepper.'),
+    T('平らな器に広げて粗熱を取り、弁当箱へ詰める。', 'Transfer to a plate to cool, then pack it in the lunchbox.'),
+  ],
+  makeAhead: T('パスタは前夜にゆでて水にさらし、水けをきって密封容器で冷蔵庫に入れておけます。当日は耐熱皿でラップをかけ、600Wで約1分30秒温めてほぐします。', 'Boil the pasta the night before, rinse it, drain it and keep it in a sealed container in the fridge. On the day, microwave it covered at 600 W for about 1 minute 30 seconds and loosen it.'),
+  storage: [
+    T('炒めたパスタは皿に出して冷まし、十分に冷めてから弁当箱に詰めます。', 'Spread the cooked pasta on a plate and pack it only once it is fully cool.'),
+    T('冷蔵庫か涼しい場所で保管し、持ち歩くときは保冷剤か保冷バッグを使って、早めに食べます。', 'Keep it in the fridge or a cool place, use an ice pack or cool bag to carry it, and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは1人分（スパゲッティ100g）で、幼児向けの量とは書かれていません。分量は変えていません。調理時間20分には冷ます時間が含まれません。', 'The source is for 1 serving (100 g spaghetti) and does not call itself a child portion; amounts are unchanged. The 20 minutes exclude cooling time.'),
+    T('たまねぎ・ピーマン・しいたけは元のレシピに個数と重さの両方があり、重さで記録しています。塩は、ゆで湯用の小さじ1と1/2と、仕上げの少々です。', 'Onion, pepper and shiitake are given by count and weight; weights are used here. Salt is 1 1/2 tsp for the water plus a pinch to finish.'),
+    T('元のレシピは、ソーセージのかわりにハムやベーコンでもよいとしています。ここではソーセージで記録しています。', 'The source says ham or bacon can replace the sausage; the sausage version is recorded here.'),
+    T('ソーセージ・ケチャップの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。使う製品の表示を確認してください。', 'Sausage and ketchup differ by product; they follow the cited labels, so check the labels of the ones you use.'),
+  ],
+  sources: [
+    SRC.nhk('src-nhk-napolitan-bento', 'ナポリタン弁当 レシピ 髙城 順子さん｜みんなのきょうの料理', 'https://www.kyounoryouri.jp/recipe/17106_ナポリタン弁当.html', ['recipe', 'storage']),
+    SRC.sausage(),
+    SRC.ketchup(),
+  ],
+};

@@ -1,0 +1,55 @@
+const { I, SRC, T } = require('../lib.cjs');
+const SHOYU = { poss: ['alg-wheat', 'alg-soybean'] };
+module.exports = {
+  id: 'rcp-delish-neko-kinoko-inari',
+  name: T('ネコのきのこいなり寿司', 'Cat mushroom inari sushi'),
+  shortNameJa: 'ネコいなり',
+  shortNameEn: 'Cat',
+  nameKana: 'ねこのきのこいなりずし',
+  style: 'japanese',
+  themeId: 'theme-animals',
+  description: T(
+    '甘辛く煮た油揚げに、鶏ひき肉・しめじ・コーン入りの酢飯を詰め、のりでネコの顔を作ったいなり寿司です。キャラ弁にも向きます。',
+    'Inari pouches of sweet-simmered fried tofu stuffed with vinegared rice, chicken mince, shimeji and corn, topped with a nori cat face.',
+  ),
+  yield: T('8個分（ごはん300g）', '8 pieces (300 g rice)'),
+  minutes: 30,
+  ingredients: [
+    I('ing-rice', 'ごはん（あたたかいもの・お茶碗2杯）', 'warm cooked rice (2 rice bowls)', 300, 'g'),
+    I('ing-ground-chicken', '鶏ひき肉', 'chicken mince', 100, 'g'),
+    I('ing-fried-tofu', '油揚げ（4枚・80g）', 'fried tofu pouches (4 sheets, 80 g)', 4, 'sheet'),
+    I('ing-shimeji', 'しめじ（1/2パック）', 'shimeji (1/2 pack)', 0.5, 'piece'),
+    I('ing-corn', 'コーン', 'sweetcorn', 20, 'g'),
+    I('ing-nori', '焼きのり（顔のパーツ用）', 'toasted nori (for the faces)', null, 'to-taste'),
+    I('ing-sugar', '砂糖（酢飯用）', 'sugar (for the sushi rice)', 0.5, 'tbsp'),
+    I('ing-salt', '塩（酢飯用）', 'salt (for the sushi rice)', 0.33, 'tsp'),
+    I('ing-vinegar', '酢（酢飯用）', 'vinegar (for the sushi rice)', 1, 'tbsp', { lab: { poss: ['alg-wheat'] } }),
+    I('ing-sesame', '白いりごま', 'toasted white sesame seeds', 1, 'tbsp'),
+    I('ing-cooking-sake', '酒（煮汁用）', 'cooking sake (for the simmering liquid)', 3, 'tbsp'),
+    I('ing-sugar', '砂糖（煮汁用）', 'sugar (for the simmering liquid)', 3, 'tbsp'),
+    I('ing-soy-sauce', 'しょうゆ（煮汁用）', 'soy sauce (for the simmering liquid)', 3, 'tbsp', { lab: SHOYU }),
+  ],
+  steps: [
+    T('酢、砂糖、塩を混ぜ合わせ、あたたかいごはんとごまにまぜて、しゃもじで切るようになじませて酢飯にする。', 'Mix the vinegar, sugar and salt, then cut them into the warm rice with the sesame to make sushi rice.'),
+    T('油揚げの油をペーパーで拭き、箸を転がして開きやすくしてから、半分に切る。', 'Blot the oil off the fried tofu, roll a chopstick over it so it opens easily, and cut each sheet in half.'),
+    T('しめじは石づきを落としてほぐす。のりはネコの目・鼻・ひげの形に切り抜く。', 'Trim and separate the shimeji. Cut the nori into cat eyes, noses and whiskers.'),
+    T('鍋に酒、砂糖、しょうゆ、水100mlを入れて煮立て、油揚げを加える。落としぶたをのせ、弱火で10分ほど煮含めて取り出す。', 'Bring the sake, sugar, soy sauce and 100 ml water to a boil, add the tofu, cover with a drop lid and simmer 10 minutes on low; lift out.'),
+    T('残りの煮汁にひき肉を入れて中火で、ほぐしながら熱し、しめじも加えて火が通るまで炒めて、汁けをきる。', 'Add the mince to the remaining liquid over medium heat, breaking it up, then stir in the shimeji until the meat is cooked; drain.'),
+    T('酢飯に炒めた具とコーンを混ぜて8等分にし、油揚げの角まで入れないように詰める。口を閉じて形を整え、のりで顔を作る。', 'Mix the filling and corn into the rice, divide into 8, and stuff each pouch without pushing into the corners. Close, shape and add the nori face.'),
+  ],
+  storage: [
+    T('お弁当にするときは、十分に冷ましてから詰めて蓋を閉めます。', 'For a lunchbox, cool the pieces thoroughly before packing and closing the lid.'),
+    T('夏場や梅雨の時期は避け、保冷剤と保冷バッグを使うか冷蔵庫で保管して、早めに食べます。', 'Avoid the hot, humid season; keep it with an ice pack in a cool bag or in the fridge, and eat it soon.'),
+    T('小さな子が食べるときは、むせないように食べることに専念させ、落ち着いた状態で食べさせます。', 'When small children eat it, let them concentrate on eating and sit calmly so they do not choke.'),
+  ],
+  adaptations: [
+    T('元のレシピは8個分で、幼児向けの量とは書かれていません。分量は変えていません。', 'The source makes 8 pieces and does not call itself a child portion; amounts are unchanged.'),
+    T('しめじは元のレシピで1/2パックのため、1個の半分として入れています。砂糖は酢飯用と煮汁用を別の行にしています。水は100ml（材料欄には入れていません）。', 'The shimeji is 1/2 pack, entered as half of one unit. Sugar is on two lines (rice and simmering liquid). The 100 ml of water is in the steps, not the list.'),
+    T('酢・しょうゆの原材料は製品で違うため、参照した製品の表示にもとづいて記録しています。使う製品の表示を確認してください。', 'Vinegar and soy sauce differ by product; they follow the cited labels, so check the labels of the ones you use.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-neko-inari', 'キャラ弁に！ ネコのきのこいなり寿司のレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/166854137332367852'),
+    SRC.shoyu(),
+    SRC.vinegar(),
+  ],
+};

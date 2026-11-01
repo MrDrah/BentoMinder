@@ -1,0 +1,56 @@
+const { I, SRC, T } = require('../lib.cjs');
+const SHOYU = { poss: ['alg-wheat', 'alg-soybean'] };
+module.exports = {
+  id: 'rcp-delish-gyudon-bento',
+  name: T('牛丼弁当', 'Gyudon beef bowl bento'),
+  shortNameJa: '牛丼',
+  shortNameEn: 'Gyudon',
+  nameKana: 'ぎゅうどんべんとう',
+  style: 'japanese',
+  themeId: null,
+  description: T(
+    '牛肉と玉ねぎ、ゆで卵を甘辛く煮てごはんにのせ、ごま和えのいんげんを添えた牛丼弁当です。味がしっかりして冷めてもおいしいです。',
+    'A beef bowl bento: beef, onion and a boiled egg simmered in a sweet-salty sauce over rice, with sesame green beans on the side.',
+  ),
+  yield: T('1人分（ごはん200g）', '1 serving (200 g rice)'),
+  minutes: 20,
+  ingredients: [
+    I('ing-rice', '白ごはん（どんぶり1杯）', 'cooked white rice (1 donburi bowl)', 200, 'g'),
+    I('ing-beef', '牛切り落とし肉', 'sliced beef trimmings', 100, 'g'),
+    I('ing-onion', '玉ねぎ', 'onion', 0.25, 'piece'),
+    I('ing-egg', 'ゆで卵', 'boiled egg', 1, 'piece'),
+    I('ing-cooking-sake', '酒（煮汁用）', 'cooking sake (for the simmering liquid)', 1, 'tbsp'),
+    I('ing-mirin', 'みりん（煮汁用）', 'mirin (for the simmering liquid)', 1, 'tbsp'),
+    I('ing-sugar', '砂糖（煮汁用）', 'sugar (for the simmering liquid)', 2, 'tsp'),
+    I('ing-soy-sauce', 'しょうゆ（煮汁用）', 'soy sauce (for the simmering liquid)', 1, 'tbsp', { lab: SHOYU }),
+    I('ing-ginger', 'おろししょうが', 'grated ginger', 0.5, 'tsp'),
+    I('ing-green-beans', 'いんげん', 'green beans', 4, 'piece'),
+    I('ing-sugar', '砂糖（いんげん用）', 'sugar (for the green beans)', 0.5, 'tsp'),
+    I('ing-soy-sauce', 'しょうゆ（いんげん用）', 'soy sauce (for the green beans)', 1, 'tsp', { lab: SHOYU }),
+    I('ing-sesame', '白すりごま', 'ground white sesame', 1, 'tsp'),
+    I('ing-benishoga', '紅しょうが', 'red pickled ginger', null, 'to-taste'),
+  ],
+  steps: [
+    T('玉ねぎはくし切りにする。鍋に酒・みりん・砂糖・しょうゆ・しょうが・水100mlと玉ねぎ、ゆで卵を入れて火にかけ、沸いたら蓋をして、中火のまま5分煮る。', 'Cut the onion into wedges. Put the onion, boiled egg, sake, mirin, sugar, soy sauce, ginger and 100 ml water in a pot, bring to the boil, cover and simmer over medium heat for 5 minutes.'),
+    T('牛肉は1枚ずつほぐして入れ、アクをすくいながら弱火で8分煮る。', 'Add the beef, separating the slices, and simmer over low heat for 8 minutes, skimming off the scum.'),
+    T('ゆで卵を半分に切る。', 'Cut the boiled egg in half.'),
+    T('いんげんを4等分に切って耐熱容器に入れ、ラップをかぶせて600Wで1分半温め、水けをきる。', 'Cut the beans into 4 pieces, microwave them covered loosely at 600 W for 1 minute 30 seconds, and drain.'),
+    T('いんげんに砂糖、しょうゆ、すりごまを混ぜる。', 'Toss the beans with the sugar, soy sauce and ground sesame.'),
+    T('煮た具は十分に冷まして汁けをきり、弁当箱のごはんにのせ、いんげんと紅しょうがを添える。', 'Cool the simmered topping well, drain the liquid, and set it on the rice in the lunchbox with the beans and the red pickled ginger.'),
+  ],
+  storage: [
+    T('お弁当に詰めるときは、しっかり冷まして汁けをきってからにします。', 'Cool the topping thoroughly and drain it before packing.'),
+    T('冷蔵庫や涼しい場所で保管し、持ち歩くときは保冷剤か保冷バッグを使って、早めに食べます。', 'Keep it in the fridge or a cool place, use an ice pack or cool bag when carrying it, and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは大人サイズの1人分で、ごはんは丼1杯の200g、牛肉は100gです。幼児向けの量とは書かれていません。分量は変えていません。', 'The source is an adult-sized serving (200 g rice, 100 g beef) and does not call itself a child portion. Amounts are unchanged.'),
+    T('ゆで卵は「ゆで卵1個」と書かれていて、ゆで方の説明はありません。あらかじめゆでたものを使います。水（100cc）は材料表に載せず、手順に100mlと書いています。', 'The egg is listed as a boiled egg with no boiling instructions, so use one boiled beforehand. The water ("100 cc") is not listed as an ingredient and appears in the steps as 100 ml.'),
+    T('いんげんは本数（4本）だけで重さの記載がありません。紅しょうがは「適量」で、製品表示が参照できないためアレルゲンは不明として記録しています。', 'The beans are given as a count (4) with no weight. The red pickled ginger is "as needed"; no label was cited, so its allergens are recorded as unknown.'),
+    T('しょうゆは参照した製品表示（小麦・大豆を含む）によります。使う製品の表示を確認してください。', 'Soy sauce follows the cited product label (wheat and soy). Check the label of the product you use.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-gyudon-bento', '喜ばれること間違いなし♡ 牛丼弁当のレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/176148531621396838', ['recipe', 'storage']),
+    SRC.shoyu(),
+    SRC.maff(),
+  ],
+};

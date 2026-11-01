@@ -1,0 +1,53 @@
+const { I, SRC, LAB, T } = require('../lib.cjs');
+module.exports = {
+  id: 'rcp-delish-halloween-pumpkin-bento',
+  name: T('パンプキン弁当', 'Pumpkin bento'),
+  shortNameJa: 'パンプキン',
+  shortNameEn: 'Pumpkin',
+  nameKana: 'ぱんぷきんべんとう',
+  style: 'western-inspired',
+  themeId: 'theme-seasonal',
+  description: T(
+    'ソーセージ入りのケチャップライスに薄焼き卵をかぶせ、のりとチーズの帽子でハロウィンのかぼちゃおばけに仕上げるオムライス風のお弁当です。',
+    'An omelette-rice style bento: ketchup rice with sausage, covered by a thin omelette and given a nori and cheese hat to become a Halloween pumpkin.',
+  ),
+  yield: T('1人分（ごはん150g）', '1 serving (150 g rice)'),
+  minutes: 20,
+  ingredients: [
+    I('ing-rice', '白ごはん（お茶碗1杯）', 'cooked white rice (1 rice bowl)', 150, 'g'),
+    I('ing-ketchup', 'ケチャップ', 'ketchup', 1, 'tbsp', { lab: { poss: [] } }),
+    I('ing-sausage', 'ソーセージ', 'sausage', 2, 'piece', { lab: { poss: ['alg-pork'] } }),
+    I('ing-corn', 'コーン', 'corn kernels', 1, 'tbsp'),
+    I('ing-salt', '塩（塩こしょうの塩）', 'salt (from the salt and pepper)', null, 'small-amount'),
+    I('ing-pepper', 'こしょう（塩こしょうのこしょう）', 'pepper (from the salt and pepper)', null, 'small-amount'),
+    I('ing-egg', '卵', 'egg', 1, 'piece'),
+    I('ing-oil', 'サラダ油', 'cooking oil', 1, 'tbsp'),
+    I('ing-nori', '焼きのり', 'toasted nori', 0.25, 'sheet'),
+    I('ing-carrot', 'にんじん', 'carrot', null, 'to-taste'),
+    I('ing-cheese', 'スライスチーズ', 'sliced cheese', null, 'to-taste', { lab: { poss: [] } }),
+  ],
+  steps: [
+    T('ソーセージを小口切りにしておく。別に、ラップをかけた耐熱皿でにんじんを600W・2分温めてやわらかくする。', 'Cut the sausages into rounds. Put the carrot on a heatproof plate, cover with cling film and microwave at 600 W for 2 minutes.'),
+    T('卵を溶きほぐす。フライパンに油の半量を薄くのばし、卵液を流して薄焼き卵を焼く。', 'Beat the egg. Spread half of the oil thinly in a frying pan and pour in the egg to cook a thin omelette.'),
+    T('同じフライパンに残りの油を入れ、ソーセージを焼き色がつくまで炒める。ここへごはん・コーン・ケチャップを順に加えて炒め合わせ、塩とこしょうで味を決める。', 'Add the rest of the oil to the pan and brown the sausage. Stir in the rice, corn and ketchup, and season with salt and pepper.'),
+    T('薄焼き卵を二つ折りにして切り分け、一方の角を丸く切り落としてかぼちゃ型にする。', 'Cut the omelette in half and round off the corners of one half to make the pumpkin shape.'),
+    T('ケチャップライスを弁当箱に敷き詰め、かぼちゃ型の卵をその上に置く。のりを切り抜いて帽子・目・鼻にし、帽子のつば部分に細く切ったチーズをのせる。', 'Pack the ketchup rice, lay the shaped omelette on top, and add nori for the hat, eyes and nose, with strips of cheese along the brim of the hat.'),
+    T('丸く抜いたにんじんをほっぺにして仕上げる。', 'Finish with round-cut carrot pieces as the cheeks.'),
+  ],
+  storage: [
+    T('チーズは先にレンジで温め、少し冷ましてから飾ります。600Wで20秒前後が目安ですが、芯まで温まっているかを見て加減してください。', 'Heat the cheese in the microwave and let it cool a little before use: about 20 seconds at 600 W, adjusted until the centre is hot.'),
+    T('夏場や梅雨は避け、保冷剤・保冷バッグを使うか冷蔵庫で保管して、早めに食べます。', 'Avoid hot, humid weather; use an ice pack and cool bag or the fridge, and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは1人分で、ごはんは茶碗1杯の150gです。幼児向けの量とは書かれていないので、分量は変えていません。', 'The source is for 1 serving (one rice bowl, 150 g) and does not call itself a child portion. Amounts are unchanged.'),
+    T('「塩こしょう少々」は塩とこしょうに分けて、量なしで登録しています。にんじんとスライスチーズは「適量」なので量なしです。', 'The pinch of "salt and pepper" is split into salt and pepper with no amounts. The carrot and the sliced cheese are "as needed", so they have no amount.'),
+    T('ケチャップ、ソーセージ、チーズは参照した製品表示（デルモンテ、日本ハム、雪印メグミルク）によります。チーズは乳成分を含みます。使う製品の表示を確認してください。', 'Ketchup, sausage and cheese follow the cited product labels (Del Monte, Nippon Ham, Megmilk Snow Brand); the cheese contains milk. Check the labels of your own products.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-halloween-pumpkin', 'トリックオアトリート！ ハロウィンに！パンプキン弁当のレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/163983457679049107', ['recipe', 'storage']),
+    SRC.ketchup(),
+    LAB('src-nipponham-schauessen-label'),
+    LAB('src-meg-snow-torokeru-slice-label'),
+    SRC.maff(),
+  ],
+};

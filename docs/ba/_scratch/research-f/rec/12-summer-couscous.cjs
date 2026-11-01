@@ -1,0 +1,51 @@
+const { I, SRC, T } = require('../lib.cjs');
+module.exports = {
+  id: 'rcp-bbc-summer-couscous-salad',
+  name: T('サマー・クスクスサラダ', 'Summer couscous salad'),
+  shortNameJa: '夏クスクス',
+  shortNameEn: 'Couscous',
+  nameKana: 'さまーくすくすさらだ',
+  style: 'other',
+  themeId: null,
+  description: T(
+    'ひよこ豆を混ぜたクスクスに、焼いたズッキーニとトマト、カリッと焼いたハルーミチーズをのせ、ライムとミントのドレッシングをかける夏のサラダです。',
+    'A summer salad of couscous mixed with chickpeas, topped with fried courgette, tomatoes and crisp halloumi, dressed with lime and mint.',
+  ),
+  yield: T('4人分', '4 servings'),
+  minutes: 40,
+  ingredients: [
+    I('ing-couscous', 'クスクス', 'couscous', 250, 'g'),
+    I('ing-vegetable-stock', '野菜ブイヨン（熱いもの）', 'vegetable stock (boiling)', 250, 'ml'),
+    I('ing-chickpea', 'ひよこ豆の缶詰（水けをきる）', 'canned chickpeas (drained)', 400, 'g'),
+    I('ing-oil', '植物油またはオリーブ油（焼き用）', 'vegetable or olive oil (for frying)', 1, 'tbsp'),
+    I('ing-zucchini', 'ズッキーニ（斜め切り）', 'courgette (sliced on the slant)', 300, 'g'),
+    I('ing-tomato', '小さめのトマト（半分に切る）', 'small tomatoes (halved)', 300, 'g'),
+    I('ing-halloumi', 'ハルーミチーズ（厚切りにして縦半分）', 'halloumi cheese (thickly sliced, halved lengthways)', 250, 'g'),
+    I('ing-olive-oil', 'オリーブオイル（ドレッシング用）', 'olive oil (for the dressing)', 125, 'ml'),
+    I('ing-lime', 'ライム果汁（ドレッシング用）', 'lime juice (for the dressing)', 3, 'tbsp'),
+    I('ing-garlic', 'にんにく（大・みじん切り）', 'garlic (large cloves, finely chopped)', 2, 'piece'),
+    I('ing-mint', 'ミント（刻む）', 'fresh mint (chopped)', 2, 'tbsp'),
+    I('ing-sugar', '砂糖（ドレッシング用）', 'sugar (for the dressing)', 0.5, 'tsp'),
+  ],
+  steps: [
+    T('ボウルにクスクスを入れ、熱い野菜ブイヨンを注いでフォークで混ぜ、皿をかぶせて4分おく。', 'Put the couscous in a bowl, pour on the boiling stock, mix with a fork and cover with a plate for 4 minutes.'),
+    T('待つあいだに、ドレッシングの材料（オリーブオイル、ライム果汁、にんにく、ミント、砂糖）をボウルでよく混ぜる。', 'While it stands, mix the dressing ingredients (olive oil, lime juice, garlic, mint and sugar) well in a bowl.'),
+    T('クスクスをフォークでほぐし、ひよこ豆とドレッシングの半量を混ぜ、大きな皿に山盛りにする。', 'Fluff the couscous with a fork, stir in the chickpeas and half of the dressing, and heap it on a large serving dish.'),
+    T('大きめのフライパンに油大さじ1を強火で熱し、ズッキーニを2〜3分、濃い焼き色がつくまで焼いてペーパーにとる。', 'Heat 1 tbsp oil in a large pan over high heat and fry the courgette for 2 to 3 minutes until deep golden, then lift it onto kitchen paper.'),
+    T('同じフライパンにトマトを切り口を下にして入れ、2分ほど焼いて底に軽く焼き色をつける。クスクスにズッキーニ、トマトの順にのせる。', 'Put the tomatoes cut side down in the same pan and cook for about 2 minutes until the underside colours. Top the couscous with the courgette, then the tomatoes.'),
+    T('フライパンが乾いていたら油を足して熱し、ハルーミを2〜3分、ときどき返しながらカリッと焼いて、トマトの上にのせる。残りのドレッシングをかけ、すぐに食べる。', 'If the pan is dry add a little oil and heat it, fry the halloumi for 2 to 3 minutes, turning now and then, until crisp, and pile it on the tomatoes. Drizzle on the rest of the dressing and serve right away.'),
+  ],
+  storage: [
+    T('出典では、できあがったらなるべく早く食べるようにとされています。', 'The source says to serve it as soon as possible after making it.'),
+    T('持ち歩くときは十分に冷ましてから詰め、保冷剤か保冷バッグを使って早めに食べます。', 'When taking it along, let it cool before packing, use an ice pack or cool bag, and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは4人分で、子ども向けや弁当向けとは書かれていません。分量は変えず4人分のまま記載しています。作る量は人数に合わせて調整してください。', 'The source makes 4 servings and is not written for children or lunchboxes. Amounts are unchanged; scale to the number of eaters.'),
+    T('出典は英語のページで、料理名の日本語は翻訳です。焼き用の油は「大さじ1〜2」と幅があり、手順に書かれた大さじ1を登録しました。足りなければ追加します。', 'The source is in English and the Japanese name is a translation. The frying oil is given as 1 to 2 tbsp; the 1 tbsp in the steps is recorded, with more added if the pan is dry.'),
+    T('野菜ブイヨンとハルーミは参照できる製品表示がないため、アレルゲンは不明として記録しています。クスクスは小麦から作られます。', 'No label was cited for the vegetable stock or the halloumi, so their allergens are recorded as unknown. Couscous is made from wheat.'),
+  ],
+  sources: [
+    { id: 'src-bbc-summer-couscous', publisher: 'Immediate Media Company Ltd (BBC Good Food)', title: 'Summer couscous salad recipe | Good Food', url: 'https://www.bbcgoodfood.com/recipes/summer-couscous-salad', accessed: '2026-11-01', language: 'en', usedFor: ['recipe', 'storage'] },
+    SRC.maff(),
+  ],
+};

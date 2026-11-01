@@ -5000,6 +5000,499 @@
       "animalOriginKnown": false,
       "seasoning": true,
       "note": null
+    },
+    {
+      "id": "ing-inari-age",
+      "ja": "稲荷揚げ",
+      "kana": "いなりあげ",
+      "en": "Seasoned fried tofu pouch (inari-age)",
+      "categoryIds": [
+        "cat-soy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "稲荷揚げ",
+        "味付き油揚げ",
+        "味付油揚げ",
+        "いなり揚げ",
+        "稲荷あげ",
+        "いなりの皮"
+      ],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": false,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-nanohana",
+      "ja": "菜の花",
+      "kana": "なのはな",
+      "en": "Nanohana (rapeseed blossom)",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "菜の花",
+        "菜花",
+        "なばな"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-sushi-vinegar",
+      "ja": "すし酢",
+      "kana": "すしず",
+      "en": "Sushi vinegar (seasoned rice vinegar)",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "すし酢",
+        "寿司酢"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-chickpea",
+      "ja": "ひよこ豆",
+      "kana": "ひよこまめ",
+      "en": "Chickpea",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ひよこ豆",
+        "ひよこまめ",
+        "ガルバンゾ",
+        "チックピー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-swordfish",
+      "ja": "かじき",
+      "kana": "かじき",
+      "en": "Swordfish (kajiki)",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "かじき",
+        "かじきまぐろ",
+        "メカジキ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-bay-leaf",
+      "ja": "ローリエ",
+      "kana": "ろーりえ",
+      "en": "Bay leaf",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ローリエ",
+        "月桂樹の葉",
+        "ベイリーフ",
+        "ローレル"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-furikake",
+      "ja": "ふりかけ",
+      "kana": "ふりかけ",
+      "en": "Furikake (rice seasoning)",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ふりかけ",
+        "振りかけ",
+        "ごはんにふりかけ",
+        "かつお節のふりかけ",
+        "たらこのふりかけ",
+        "赤じそふりかけ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-mango-chutney",
+      "ja": "マンゴーチャツネ",
+      "kana": "まんごーちゃつねー",
+      "en": "Mango chutney",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "マンゴーチャツネ",
+        "チャツネ",
+        "マンゴーチャツニー"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-red-cabbage",
+      "ja": "紫キャベツ",
+      "kana": "むらさききゃべつ",
+      "en": "Red cabbage",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "紫キャベツ",
+        "赤キャベツ",
+        "レッドキャベツ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mustard",
+      "ja": "マスタード",
+      "kana": "ますたーど",
+      "en": "Prepared mustard",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "マスタード",
+        "からし",
+        "粒マスタード",
+        "フレンチマスタード",
+        "洋がらし"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-dried-basil",
+      "ja": "乾燥バジル",
+      "kana": "かんそうばじる",
+      "en": "Dried basil",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "乾燥バジル",
+        "ドライバジル",
+        "乾燥バジルリーフ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-fish-sauce",
+      "ja": "ナンプラー",
+      "kana": "なんぷらー",
+      "en": "Fish sauce (nam pla)",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ナンプラー",
+        "魚醤",
+        "フィッシュソース",
+        "ニョクマム"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-quinoa",
+      "ja": "キヌア",
+      "kana": "きぬあ",
+      "en": "Quinoa",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "キヌア",
+        "キノア"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-falafel",
+      "ja": "ファラフェル",
+      "kana": "ふぁらふぇる",
+      "en": "Falafel",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ファラフェル",
+        "ひよこ豆のコロッケ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-hummus",
+      "ja": "フムス",
+      "kana": "ふむす",
+      "en": "Hummus",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "フムス",
+        "ホムス",
+        "ハムス",
+        "ひよこ豆のペースト"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-pomegranate",
+      "ja": "ざくろ",
+      "kana": "ざくろ",
+      "en": "Pomegranate",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ざくろ",
+        "石榴",
+        "ポメグラネート"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-corned-beef",
+      "ja": "コンビーフ",
+      "kana": "こんびーふ",
+      "en": "Corned beef (canned)",
+      "categoryIds": [
+        "cat-meat-processed"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "コンビーフ",
+        "コンビーフ缶",
+        "コーンビーフ"
+      ],
+      "inherentAllergenIds": [
+        "alg-beef"
+      ],
+      "info": "varies",
+      "animalOrigin": [
+        "beef"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-couscous",
+      "ja": "クスクス",
+      "kana": "くすくす",
+      "en": "Couscous",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "クスクス",
+        "乾燥クスクス",
+        "クスクスパスタ"
+      ],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-halloumi",
+      "ja": "ハルーミチーズ",
+      "kana": "はるーみちーず",
+      "en": "Halloumi cheese",
+      "categoryIds": [
+        "cat-dairy"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ハルーミチーズ",
+        "ハロウミ",
+        "ハルーミ",
+        "ハロウミチーズ"
+      ],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
+      "info": "varies",
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mint",
+      "ja": "ミント",
+      "kana": "みんと",
+      "en": "Mint (fresh leaves)",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ミント",
+        "ミントの葉",
+        "フレッシュミント",
+        "スペアミント"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-lime",
+      "ja": "ライム",
+      "kana": "らいむ",
+      "en": "Lime",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ライム",
+        "ライム果汁",
+        "ライムジュース"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-vegetable-stock",
+      "ja": "野菜ブイヨン",
+      "kana": "やさいぶいよん",
+      "en": "Vegetable stock",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "野菜ブイヨン",
+        "ベジタブルストック",
+        "ベジタブルブイヨン",
+        "野菜スープの素",
+        "野菜だし"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
     }
   ],
   "dishes": [

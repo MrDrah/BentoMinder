@@ -1,0 +1,52 @@
+const { I, SRC, T } = require('../lib.cjs');
+module.exports = {
+  id: 'rcp-bbc-coronation-chickpea-sandwich',
+  name: T('コロネーション・ひよこ豆サンド', 'Coronation chickpea sandwich filler'),
+  shortNameJa: 'ひよこ豆サンド',
+  shortNameEn: 'Chickpea',
+  nameKana: 'ころねーしょんひよこまめさんど',
+  style: 'other',
+  themeId: null,
+  description: T(
+    'ひよこ豆をマヨネーズ、マンゴーチャツネ、カレー粉、レモン汁であえてレーズンと玉ねぎを混ぜた、ロールパンや食パンにはさむ具です。8分でできて、冷蔵庫で数日もちます。',
+    'Chickpeas dressed with mayonnaise, mango chutney, curry powder and lemon, mixed with raisins and onion and used as a filling for rolls or sandwich bread.',
+  ),
+  yield: T('4人分（ロールパン4個または食パン8枚分）', '4 servings (4 rolls or 8 slices of bread)'),
+  minutes: 8,
+  ingredients: [
+    I('ing-chickpea', 'ひよこ豆の缶詰（水けをきる）', 'canned chickpeas (drained)', 400, 'g'),
+    I('ing-mayonnaise', 'マヨネーズ', 'mayonnaise', 3.5, 'tbsp', { lab: { poss: ['alg-egg', 'alg-soybean'] } }),
+    I('ing-mango-chutney', 'マンゴーチャツネ', 'mango chutney', 1.5, 'tbsp', { unknown: true }),
+    I('ing-curry-powder', 'カレー粉（マイルド）', 'mild curry powder', 2, 'tsp', { lab: { poss: [] } }),
+    I('ing-lemon', 'レモン果汁', 'lemon juice', 0.5, 'piece'),
+    I('ing-raisin', 'レーズン', 'raisins', 50, 'g'),
+    I('ing-onion', '赤玉ねぎ（小・みじん切り）', 'red onion (small, finely chopped)', 0.5, 'piece'),
+    I('ing-salt', '塩', 'salt', null, 'to-taste'),
+    I('ing-pepper', 'こしょう', 'pepper', null, 'to-taste'),
+    I('ing-bread', 'ロールパン（4個）または食パン（8枚）', 'bread rolls (4) or bread slices (8)', 4, 'piece', { known: false }),
+    I('ing-lettuce', 'リトルジェムレタスの葉（または好みのレタス）', 'Little Gem lettuce leaves', null, 'to-taste', { optional: true }),
+  ],
+  steps: [
+    T('ひよこ豆の水けをキッチンペーパーでふきとる。', 'Pat the chickpeas dry with kitchen paper.'),
+    T('ボウルにマヨネーズ、マンゴーチャツネ、カレー粉、レモン汁を入れて混ぜ、塩とこしょうをしっかりめにきかせる。', 'In a bowl mix the mayonnaise, chutney, curry powder and lemon juice and season generously with salt and pepper.'),
+    T('レーズン、玉ねぎ、ひよこ豆を加えて全体を混ぜる。', 'Add the raisins, onion and chickpeas and mix everything together.'),
+    T('ロールパンにはさむか、食パンにレタスと一緒にはさむ。', 'Spoon it into the rolls, or sandwich it between bread slices with the lettuce.'),
+  ],
+  storage: [
+    T('具は冷蔵庫で保管すれば3日ほどもちます（出典の記載）。パンにはさんだら早めに食べます。', 'The filling keeps for about three days in the fridge according to the source; once it is in the bread, eat it soon.'),
+    T('持ち歩くときは保冷剤か保冷バッグを使います。', 'Use an ice pack or cool bag when carrying it.'),
+  ],
+  adaptations: [
+    T('元のレシピは4人分です。1人分に換算すると割り切れない量（マヨネーズ大さじ3.5など）になるため、4人分のまま記載しています。作る量は人数に合わせて調整してください。', 'The source makes 4 servings. Dividing would give awkward amounts (for example 3.5 tbsp mayonnaise), so the 4-serving amounts are kept; scale it to the number of eaters.'),
+    T('出典は英語のページで、缶（400g）の重さは水けをきった豆の量として書かれています。レモンは半個分の果汁、赤玉ねぎは小1/2個です。', 'The source is in English and gives the 400 g can as drained chickpeas; lemon is the juice of half a lemon and the red onion is half a small one.'),
+    T('マヨネーズは植物性の代替品でもよいと出典にあります。この記録は通常のマヨネーズ（卵・大豆を含む表示）で登録しています。', 'The source allows a vegan mayonnaise alternative; this record uses ordinary mayonnaise (whose cited label declares egg and soy).'),
+    T('マンゴーチャツネ、ロールパン、食パンは参照できる製品表示がないため、アレルゲンは不明として記録しています。パンは動物由来の原料も不明です。', 'No label was cited for the mango chutney or the bread, so their allergens are recorded as unknown (the bread also has unknown animal origin).'),
+    T('カレー粉とマヨネーズは参照した製品表示（ハウス食品、味の素）によります。使う製品の表示を確認してください。', 'Curry powder and mayonnaise follow the cited product labels (House Foods, Ajinomoto). Check the labels of your own products.'),
+  ],
+  sources: [
+    { id: 'src-bbc-coronation-chickpea', publisher: 'Immediate Media Company Ltd (BBC Good Food)', title: 'Coronation chickpea sandwich filler recipe | Good Food', url: 'https://www.bbcgoodfood.com/recipes/coronation-chickpea-sandwich-filler', accessed: '2026-11-01', language: 'en', usedFor: ['recipe', 'storage'] },
+    SRC.mayo(),
+    SRC.currypowder(),
+    SRC.maff(),
+  ],
+};

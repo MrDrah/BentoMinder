@@ -1,0 +1,55 @@
+const { I, SRC, T } = require('../lib.cjs');
+const SHOYU = { poss: ['alg-wheat', 'alg-soybean'] };
+module.exports = {
+  id: 'rcp-delish-soboro-mille-bento',
+  name: T('レンジそぼろのミルフィーユ弁当', 'Microwave soboro layered rice bento'),
+  shortNameJa: 'そぼろ重ね',
+  shortNameEn: 'Layers',
+  nameKana: 'れんじそぼろのみるふぃーゆべんとう',
+  style: 'japanese',
+  themeId: null,
+  description: T(
+    '電子レンジだけで作る鶏そぼろ・炒り卵・いんげんを、ごはんと交互に重ねて詰める、断面がきれいな層になったそぼろ弁当です。',
+    'A soboro bento made entirely in the microwave: chicken soboro, scrambled egg and green beans packed in layers between rice.',
+  ),
+  yield: T('1人分（ごはん200g）', '1 serving (200 g rice)'),
+  minutes: 20,
+  ingredients: [
+    I('ing-rice', '白ごはん（どんぶり1杯）', 'cooked white rice (1 donburi bowl)', 200, 'g'),
+    I('ing-ground-chicken', '鶏ひき肉（もも）', 'ground chicken (thigh)', 80, 'g'),
+    I('ing-cooking-sake', '酒（そぼろ用）', 'cooking sake (for the soboro)', 1, 'tsp'),
+    I('ing-sugar', '砂糖（そぼろ用）', 'sugar (for the soboro)', 1, 'tsp'),
+    I('ing-soy-sauce', 'しょうゆ（そぼろ用）', 'soy sauce (for the soboro)', 1, 'tsp', { lab: SHOYU }),
+    I('ing-ginger', 'おろししょうが', 'grated ginger', 0.25, 'tsp'),
+    I('ing-egg', '卵', 'egg', 1, 'piece'),
+    I('ing-sugar', '砂糖（炒り卵用）', 'sugar (for the scrambled egg)', 0.5, 'tsp'),
+    I('ing-salt', '塩（ひとつまみ・炒り卵用）', 'salt (a pinch, for the scrambled egg)', null, 'small-amount'),
+    I('ing-green-beans', 'いんげん', 'green beans', 5, 'piece'),
+    I('ing-salt', '塩（ひとつまみ・いんげん用）', 'salt (a pinch, for the green beans)', null, 'small-amount'),
+    I('ing-sesame-oil', 'ごま油', 'sesame oil', 1, 'tsp'),
+    I('ing-sesame', '白いりごま', 'toasted white sesame seeds', null, 'small-amount'),
+  ],
+  steps: [
+    T('鶏ひき肉、酒、砂糖、しょうゆ、しょうがを耐熱ボウルに入れてよく混ぜ、ラップをふんわりかけて電子レンジ（600W）に2分かける。', 'Mix the chicken, sake, sugar, soy sauce and ginger in a heatproof bowl, cover loosely with cling film and microwave at 600 W for 2 minutes.'),
+    T('一度取り出して混ぜ、今度はラップなしで1分かけてそぼろにし、粗熱をとる。', 'Take it out, stir, then microwave uncovered for 1 more minute to make the soboro, and let it cool a little.'),
+    T('別の耐熱容器に卵、砂糖、塩を入れてよく溶き、ラップをふんわりかけて600Wで40秒かける。', 'In another heatproof dish beat the egg with the sugar and salt, cover loosely and microwave at 600 W for 40 seconds.'),
+    T('混ぜてからもう一度40秒かけ、細かいぽろぽろに細かくなるまで混ぜ、冷ます。', 'Stir, microwave for 40 seconds again, then stir until it breaks into small crumbs and let it cool.'),
+    T('いんげんはへたを落として1cm幅の斜め切りにし、水少々とともに耐熱容器に入れ、ラップをして40秒かける。水にとって水けをしっかりきる。', 'Trim the beans and cut them on the slant into 1 cm pieces. Microwave them with a little water, covered, for 40 seconds, then cool in water and drain well.'),
+    T('いんげんを塩とごま油で和える。', 'Toss the beans with the salt and sesame oil.'),
+    T('弁当箱にごはん1/3量、いんげん、ごはん1/3量、炒り卵、残りのごはんの順に重ね、鶏そぼろをのせて白いりごまをふる。', 'In the lunchbox layer one third of the rice, the beans, another third of the rice, the egg, and the last of the rice. Top with the soboro and sprinkle the sesame seeds.'),
+  ],
+  storage: [
+    T('具はしっかり冷ましてから詰め、そのあとで蓋を閉めます。', 'Let every topping cool completely before packing, and close the lid only after that.'),
+    T('夏場や梅雨は避け、保冷剤・保冷バッグを使うか冷蔵庫で保管して、早めに食べます。', 'Avoid hot, humid weather; use an ice pack and cool bag or the fridge, and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは大人サイズの1人分で、ごはんは丼1杯の200gです。幼児向けの量とは書かれていません。分量は変えていません。', 'The source is an adult-sized single serving (one donburi bowl, 200 g rice) and does not call itself a child portion. Amounts are unchanged.'),
+    T('いんげんは本数（5本）だけで重さの記載がありません。塩「ひとつまみ」と白いりごま「少々」は量なしで登録しています。', 'The green beans are given only as a count (5) with no weight. The pinches of salt and the sesame seeds ("a little") are entered without an amount.'),
+    T('しょうゆは参照した製品表示（小麦・大豆を含む）によります。使う製品の表示を確認してください。', 'Soy sauce follows the cited product label (wheat and soy). Check the label of the product you use.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-soboro-mille', '重ねて詰めるだけ♪ レンジそぼろのミルフィーユ弁当のレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/237891047055688810', ['recipe', 'storage']),
+    SRC.shoyu(),
+    SRC.maff(),
+  ],
+};
