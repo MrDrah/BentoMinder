@@ -218,7 +218,7 @@
     "billingModel": "unknown",
     "usageLog": "docs/evidence/usage.jsonl",
     "pricing": null,
-    "liveUrl": null,
-    "smokeMarker": null
+    "liveUrl": "https://mrdrah.github.io/BentoMinder/",
+    "smokeMarker": "BentoMinder"
   }
 }

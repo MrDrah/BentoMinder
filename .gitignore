@@ -31,3 +31,6 @@ docs/ba/_scratch/**/*.html
 
 # real school documents used as local mocks; never commit (public repo)
 local-mocks/
+
+# Playwright run artifacts of the QA suites
+tests/_scratch/qa-*-results/
