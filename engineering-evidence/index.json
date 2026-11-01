@@ -34,6 +34,34 @@
       },
       "assessment": "UNVERIFIED",
       "supersedes": null,
+      "supersededBy": "mvp-r2"
+    },
+    {
+      "id": "mvp-r2",
+      "milestoneId": "mvp",
+      "label": "MVP",
+      "revision": 2,
+      "path": "mvp-r2",
+      "schemaVersion": "1.1.0",
+      "sourceCommit": "6e63c79544a10d61409b82d08bc31cd4e7daebbd",
+      "collectedAt": "2026-11-01T02:20:31.451Z",
+      "frozenAt": "2026-11-01T02:21:36.957Z",
+      "sha256": "0a7778f3cafabeca0ddb36b56d32295a5e2ea08886a724c9109aea73f2a7ba8b",
+      "files": {
+        "evidence/ci-runs.json": "ca0385fc6d893fc5309ceb240848749a737ad2a586044795dc0a857fafb1fa1c",
+        "evidence/coverage-summary.json": "fcf0d7065acc2b05e31c30d8d0c01e400137efc89d2e2487cf1eb1741ec5b87b",
+        "evidence/events.jsonl": "5d6af22e299650b4de69dd60865cd9099ce5e17aff2446b4797a0db88a28b112",
+        "evidence/git.json": "91a979348eea46b5058fc481c454691d2b20675b0a6a2d079c6b6db95d8715f6",
+        "evidence/junit-1.xml": "2787e4f7f803c418a29b32305460ab2e92ee7bf55134e4c844c20e78656b898d",
+        "evidence/junit-2.xml": "9d87ede9af5002e7bc88a7dec8ad430b2a5536a86ae38f8aac5f670e6e546b26",
+        "evidence/smoke.json": "13f034a8e5a151e7467a618bc36633e3f8036cf4b592fcd46e01ce77f3abba01",
+        "evidence/stories.md": "e616fc8cabaf088cce64ae8c46d32a4915dc371cf58e618d35d6bff3986c0833",
+        "evidence/usage.json": "3183ac03f38f66f47bda10c4d57d651db31594a3ad8334223633ec9d142d0263",
+        "metrics.json": "b0b55b2b4213ca86e1b9c62bcab419e5ced20bb93bbe3a9efbd925f2d51b1f9c",
+        "summary.md": "b1ee7b40ea4f15acda3df9edd925139b40f8a60d1702cb6f4c69062d0b38beef"
+      },
+      "assessment": "UNVERIFIED",
+      "supersedes": "mvp",
       "supersededBy": null
     }
   ]
