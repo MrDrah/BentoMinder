@@ -8,7 +8,8 @@ import { buildPrompt, modelResponseSchema } from './gemini-prompt.ts';
 export const GEMINI_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models';
 /** ADR 002 §1: ids the proxy accepts unless AI_ALLOW_PAID_MODELS=true. */
 export const FREE_TIER_MODELS: readonly string[] = ['gemini-3.8-flash', 'gemini-3.5-flash-lite'];
-export const PROVIDER_TIMEOUT_MS = 60_000;
+/** Backstop only: server/menu/extract.ts enforces the per-call budget (25 s primary, <= 30 s second call) inside the client's 60 s. */
+export const PROVIDER_TIMEOUT_MS = 30_000;
 export const GEMINI_TEMPERATURE = 0.1;
 
 export interface Usage {

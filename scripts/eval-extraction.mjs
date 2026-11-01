@@ -26,6 +26,9 @@ if (apiKey === undefined || apiKey.trim() === '') {
 // the last reply goes to reports/ (git-ignored). Wraps fetch only: no key, header or request body.
 const debug = process.env.EVAL_DEBUG === '1';
 let lastRaw = null;
+let debugMonth = '2026-11';
+const rawByFixture = {};
+let debugFixture = '';
 const debugFetch = async (url, init) => {
   const res = await globalThis.fetch(url, init);
   const model = /models\/([^:]+):/.exec(String(url))?.[1] ?? '?';
@@ -37,8 +40,9 @@ const debugFetch = async (url, init) => {
   if (!res.ok) console.log(`  [debug] error=${JSON.stringify(body?.error ?? null).slice(0, 1000)}`);
   if (res.ok) {
     lastRaw = text;
+    rawByFixture[`${debugFixture}#${Object.keys(rawByFixture).length}`] = text;
     console.log(`  [debug] raw(first 2000)=${text.slice(0, 2000)}`);
-    const out = parseModelReply(text, { targetMonth: '2026-11', sha256: 'x'.repeat(64), byteSize: 1, model, promptVersion: 1, at: new Date().toISOString() });
+    const out = parseModelReply(text, { targetMonth: debugMonth, sha256: 'x'.repeat(64), byteSize: 1, model, promptVersion: 1, at: new Date().toISOString() });
     console.log(`  [debug] parse=${out.kind}${out.kind === 'malformed' ? ' issues=' + JSON.stringify(out.issues) : ''}`);
   }
   return res;
@@ -66,6 +70,8 @@ for (const id of ids) {
     continue;
   }
   const before = usage.length;
+  debugMonth = key.targetMonth;
+  debugFixture = id;
   const res = await runExtraction(
     { pdf, targetMonth: key.targetMonth },
     {

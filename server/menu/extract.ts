@@ -91,6 +91,8 @@ export interface ExtractDeps {
   /** Contract timestamp for source.fetchedAt / extractedAt. */
   timestamp(): string;
   sleep(ms: number): Promise<void>;
+  /** Clock for the time budget; defaults to Date.now. */
+  now?(): number;
   /** Server-side log only (model ids, status codes); never sent to the client. */
   log?(message: string): void;
   /** Test/dev scenarios bypass the cache so every request runs its scenario. */
@@ -103,6 +105,15 @@ export interface ExtractInput {
 }
 
 export const MAX_FALLBACK_WAIT_MS = 5_000;
+/**
+ * Time budget (D-H4-01, US-NF-04/AC3): the client gives up after 60 s, so the proxy finishes first.
+ * Call 1 gets PRIMARY_TIMEOUT_MS; call 2 (fallback or repair) gets what is left of
+ * OVERALL_BUDGET_MS, at most SECOND_CALL_MAX_MS. 25 + 30 = 55 s, 5 s under the client limit.
+ */
+export const OVERALL_BUDGET_MS = 55_000;
+export const PRIMARY_TIMEOUT_MS = 25_000;
+export const SECOND_CALL_MAX_MS = 30_000;
+const MIN_SECOND_CALL_MS = 1_000;
 
 function isAborted(signal: AbortSignal | undefined): boolean {
   return signal?.aborted === true;
@@ -131,14 +142,24 @@ export async function runExtraction(input: ExtractInput, deps: ExtractDeps, sign
 
   const transport = deps.transport;
   let calls: 0 | 1 | 2 = 0;
+  const now = deps.now ?? Date.now;
+  const startedAt = now();
   const call = async (model: string, repairErrors?: string[]): Promise<ProviderReply> => {
+    const budgetMs = calls === 0 ? PRIMARY_TIMEOUT_MS : Math.min(SECOND_CALL_MAX_MS, OVERALL_BUDGET_MS - (now() - startedAt));
+    // Too little time left to be worth a call: counts as a timeout, no provider call is made.
+    if (budgetMs < MIN_SECOND_CALL_MS) return { kind: 'timeout' };
     deps.cap.record();
     calls = calls === 0 ? 1 : 2;
+    const limit = new AbortController();
+    const timer = setTimeout(() => limit.abort(), budgetMs);
+    const combined = signal === undefined ? limit.signal : AbortSignal.any([signal, limit.signal]);
     const request: ProviderRequest = { model, pdf, targetMonth, promptVersion: PROMPT_VERSION, schemaVersion: EXTRACTION_SCHEMA_VERSION, ...(repairErrors === undefined ? {} : { repairErrors }) };
     try {
-      return await transport.call(request, signal);
+      return await transport.call(request, combined);
     } catch {
       return { kind: 'timeout' };
+    } finally {
+      clearTimeout(timer);
     }
   };
   const fail = (error: ExtractErrorCode, retryAfterSec?: number | null): ServerExtractResult =>
