@@ -2433,7 +2433,7 @@ Scenario: AC2 Tests never need live AI
   Then the unit and e2e suites run with the AI adapter mocked from fixtures, and live AI evaluations run only in a separate opt-in command
 
 Scenario: AC3 Timeouts
-  Then an extraction request is abandoned after 60 s and treated as "unavailable"
+  Then an extraction request is abandoned after 90 s and treated as "unavailable"
 ```
 
 ### US-NF-05 No secrets in the client · M · S

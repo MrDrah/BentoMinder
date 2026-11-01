@@ -150,7 +150,7 @@ describe('US-E2-06 rate limits and outages', () => {
     const { run, requests } = setup([http(404)], { log });
     expect(await run()).toEqual({ ok: false, error: 'UNAVAILABLE', providerCalls: 1 });
     expect(requests).toHaveLength(1);
-    expect(log).toHaveBeenCalledWith(expect.stringContaining('gemini-3.8-flash answered HTTP 404'));
+    expect(log).toHaveBeenCalledWith(expect.stringContaining('gemini-3.8-flash attempt: http 404'));
   });
 
   it('US-E2-06/AC4 no provider configured → NOT_CONFIGURED without any call', async () => {

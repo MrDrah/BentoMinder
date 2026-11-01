@@ -16,7 +16,7 @@ export function extractUrl(targetMonth: string): string {
 }
 
 /** US-NF-04/AC3: a request still unanswered after this long is abandoned and shown as unavailable. */
-export const EXTRACT_TIMEOUT_MS = 60_000;
+export const EXTRACT_TIMEOUT_MS = 90_000;
 
 export function createWebExtractor(fetchImpl: typeof fetch = (...args) => fetch(...args), timeoutMs: number = EXTRACT_TIMEOUT_MS): MenuExtractor {
   return {

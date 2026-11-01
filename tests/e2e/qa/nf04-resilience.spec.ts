@@ -1,4 +1,4 @@
-// QA: US-NF-04 AC1 (everything except import works with the AI adapter down) and AC3 (60 s extraction timeout).
+// QA: US-NF-04 AC1 (everything except import works with the AI adapter down) and AC3 (90 s extraction timeout).
 // "Down" = every /api/** request is aborted at the network layer. Run with playwright.h4.config.ts.
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
@@ -77,10 +77,10 @@ test('US-NF-04/AC1 with the adapter down, importing says the service is unavaila
   expect((await readStore(page)).menus).toEqual({});
 });
 
-// D-H4-01: no 60 s extraction timeout exists on the client (the web extractor only forwards the caller's signal; the import
+// D-H4-01: no 90 s extraction timeout exists on the client (the web extractor only forwards the caller's signal; the import
 // screen sets no timer) or in the server transport. A hanging adapter leaves the import spinning forever.
-// Fixed: client-side 60 s timeout in the web extractor.
-test('US-NF-04/AC3 D-H4-01 an extraction request that hangs is abandoned after 60 s and shown as unavailable', async ({ page }) => {
+// Fixed: client-side 90 s timeout in the web extractor.
+test('US-NF-04/AC3 D-H4-01 an extraction request that hangs is abandoned after 90 s and shown as unavailable', async ({ page }) => {
   await page.clock.install({ time: new Date(jst('2026-10-28', '10:00')) });
   await page.route('**/api/menu/extract**', () => new Promise(() => undefined)); // never answers
   await page.goto('./');
@@ -89,8 +89,8 @@ test('US-NF-04/AC3 D-H4-01 an extraction request that hangs is abandoned after 6
   await page.getByTestId('import-upload').setInputFiles(FX01);
   await page.getByTestId('consent-accept').click();
   await expect(page.getByTestId('import-progress')).toBeVisible();
-  await page.clock.fastForward(59_000);
+  await page.clock.fastForward(89_000);
   await expect(page.getByTestId('import-error')).toHaveCount(0); // not yet
-  await page.clock.fastForward(2_000); // 61 s in
+  await page.clock.fastForward(2_000); // 91 s in
   await expect(page.getByTestId('import-error')).toContainText('読み取りサービスに接続できませんでした', { timeout: 5_000 });
 });

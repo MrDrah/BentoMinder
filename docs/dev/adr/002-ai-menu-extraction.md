@@ -157,3 +157,8 @@ The plain-language text in `ai-provider.md` §A3 goes to the designer's copy she
 - **Decision:** `gemini-3.5-flash-lite` is the default primary, `gemini-3.8-flash` the default fallback (`GEMINI_MODEL_PRIMARY` / `GEMINI_MODEL_FALLBACK` still override). The 25 s first call, remaining-budget second call, free-tier id guard and "thinkingConfig only for non-lite" are unchanged. The table above lists the earlier order.
 - **Evidence:** in 17 + 6 live calls `gemini-3.8-flash` timed out at 60 s on 8 of 9 fixtures and answered once; Flash-Lite answered nearly every time inside the budget with 0 invented allergen days.
 - **Revisit:** if 3.8 Flash latency drops (re-run `eval:extraction` with the order swapped back) or Flash-Lite accuracy regresses on a new menu layout.
+
+## Timeout revision (2026-11-01, real November menu)
+- **Evidence:** the first real import was cut by our own 25 s first call (AbortError), then the fallback answered 503. A full month needs ~5k output tokens, so 25 s is too short.
+- **Decision:** client abort 90 s (`EXTRACT_TIMEOUT_MS`); proxy overall budget 85 s; call 1 gets 45 s; call 2 gets the remainder, at most 40 s; `PROVIDER_TIMEOUT_MS` backstop 45 s. Still at most 2 provider calls. This supersedes the 25/55/30/60 s figures above.
+- **Log:** one line per attempt, `provider <model> attempt: ok|timeout|http <status>|malformed in <ms>ms` (no key, headers, PDF or response text). Revisit if imports regularly take over 60 s.

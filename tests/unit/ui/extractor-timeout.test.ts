@@ -1,4 +1,4 @@
-// US-NF-04/AC3: the web extractor abandons a hanging request after 60 s and reports it as unavailable.
+// US-NF-04/AC3: the web extractor abandons a hanging request after 90 s and reports it as unavailable.
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createWebExtractor } from '../../../src/adapters/web/extractor.ts';
 
@@ -11,10 +11,10 @@ const req = { pdf: new ArrayBuffer(4), targetMonth: '2026-11' } as never;
 afterEach(() => vi.useRealTimers());
 
 describe('web extractor timeout', () => {
-  it('US-NF-04/AC3 abandons after 60 s by default and counts 0 provider calls', async () => {
+  it('US-NF-04/AC3 abandons after 90 s by default and counts 0 provider calls', async () => {
     vi.useFakeTimers();
     const p = createWebExtractor(hang).extract(req);
-    await vi.advanceTimersByTimeAsync(59_999);
+    await vi.advanceTimersByTimeAsync(89_999);
     let done = false;
     void p.then(() => (done = true));
     await vi.advanceTimersByTimeAsync(0);

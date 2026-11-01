@@ -1,4 +1,4 @@
-// Time budget of one import (D-H4-01, US-NF-04/AC3): the client aborts after 60 s, so the proxy's
+// Time budget of one import (D-H4-01, US-NF-04/AC3): the client aborts after 90 s, so the proxy's
 // primary attempt plus the fallback must end inside that. Fake timers and a transport that hangs
 // until its signal aborts; no network.
 import { readFileSync } from 'node:fs';
@@ -44,14 +44,14 @@ function harness(steps: ({ afterMs: number; reply: ProviderReply } | 'hang')[]) 
   return { requests, run: () => runExtraction({ pdf: PDF, targetMonth: '2026-11' as YearMonth }, deps) };
 }
 
-describe('US-NF-04/AC3 provider time budget fits inside the 60 s client limit', () => {
+describe('US-NF-04/AC3 provider time budget fits inside the 90 s client limit', () => {
   it('the constants leave the client its margin: primary + second call <= overall < client', () => {
     expect(PRIMARY_TIMEOUT_MS + SECOND_CALL_MAX_MS).toBeLessThanOrEqual(OVERALL_BUDGET_MS);
     expect(OVERALL_BUDGET_MS).toBeLessThan(EXTRACT_TIMEOUT_MS);
-    expect(PROVIDER_TIMEOUT_MS).toBeLessThanOrEqual(SECOND_CALL_MAX_MS);
+    expect(PROVIDER_TIMEOUT_MS).toBeGreaterThanOrEqual(PRIMARY_TIMEOUT_MS);
   });
 
-  it('a primary that hangs times out at 25 s, the fallback answers, total well under 60 s, 2 calls', async () => {
+  it('a primary that hangs times out at 45 s, the fallback answers, total well under 90 s, 2 calls', async () => {
     const h = harness(['hang', { afterMs: 20_000, reply: VALID }]);
     const start = Date.now();
     const p = h.run();
@@ -66,7 +66,7 @@ describe('US-NF-04/AC3 provider time budget fits inside the 60 s client limit', 
     expect(Date.now() - start).toBeLessThan(EXTRACT_TIMEOUT_MS);
   });
 
-  it('both calls hang: UNAVAILABLE after 55 s at most, never a third call', async () => {
+  it('both calls hang: UNAVAILABLE after 85 s at most, never a third call', async () => {
     const h = harness(['hang', 'hang']);
     const start = Date.now();
     const p = h.run();
@@ -77,8 +77,8 @@ describe('US-NF-04/AC3 provider time budget fits inside the 60 s client limit', 
     expect(h.requests).toHaveLength(2);
   });
 
-  it('a primary that would answer at 28 s is cut at 25 s, then the fallback runs', async () => {
-    const h = harness([{ afterMs: 28_000, reply: VALID }, { afterMs: 1_000, reply: VALID }]);
+  it('a primary that would answer at 48 s is cut at 45 s, then the fallback runs', async () => {
+    const h = harness([{ afterMs: 48_000, reply: VALID }, { afterMs: 1_000, reply: VALID }]);
     const p = h.run();
     await vi.advanceTimersByTimeAsync(PRIMARY_TIMEOUT_MS + 1_000);
     expect((await p).ok).toBe(true);

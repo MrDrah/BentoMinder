@@ -106,13 +106,13 @@ export interface ExtractInput {
 
 export const MAX_FALLBACK_WAIT_MS = 5_000;
 /**
- * Time budget (D-H4-01, US-NF-04/AC3): the client gives up after 60 s, so the proxy finishes first.
+ * Time budget (D-H4-01, US-NF-04/AC3): the client gives up after 90 s, so the proxy finishes first.
  * Call 1 gets PRIMARY_TIMEOUT_MS; call 2 (fallback or repair) gets what is left of
- * OVERALL_BUDGET_MS, at most SECOND_CALL_MAX_MS. 25 + 30 = 55 s, 5 s under the client limit.
+ * OVERALL_BUDGET_MS, at most SECOND_CALL_MAX_MS. Overall 85 s, 5 s under the client limit (a full month needs ~5k output tokens).
  */
-export const OVERALL_BUDGET_MS = 55_000;
-export const PRIMARY_TIMEOUT_MS = 25_000;
-export const SECOND_CALL_MAX_MS = 30_000;
+export const OVERALL_BUDGET_MS = 85_000;
+export const PRIMARY_TIMEOUT_MS = 45_000;
+export const SECOND_CALL_MAX_MS = 40_000;
 const MIN_SECOND_CALL_MS = 1_000;
 
 function isAborted(signal: AbortSignal | undefined): boolean {
@@ -153,10 +153,15 @@ export async function runExtraction(input: ExtractInput, deps: ExtractDeps, sign
     const limit = new AbortController();
     const timer = setTimeout(() => limit.abort(), budgetMs);
     const combined = signal === undefined ? limit.signal : AbortSignal.any([signal, limit.signal]);
+    const attemptStart = now();
+    const attemptLog = (outcome: string) => deps.log?.(`provider ${model} attempt: ${outcome} in ${now() - attemptStart}ms`);
     const request: ProviderRequest = { model, pdf, targetMonth, promptVersion: PROMPT_VERSION, schemaVersion: EXTRACTION_SCHEMA_VERSION, ...(repairErrors === undefined ? {} : { repairErrors }) };
     try {
-      return await transport.call(request, combined);
+      const reply = await transport.call(request, combined);
+      attemptLog(reply.kind === 'http' ? `http ${reply.status}` : reply.kind);
+      return reply;
     } catch {
+      attemptLog('timeout');
       return { kind: 'timeout' };
     } finally {
       clearTimeout(timer);
@@ -164,8 +169,7 @@ export async function runExtraction(input: ExtractInput, deps: ExtractDeps, sign
   };
   const fail = (error: ExtractErrorCode, retryAfterSec?: number | null): ServerExtractResult =>
     retryAfterSec === undefined || retryAfterSec === null ? { ok: false, error, providerCalls: calls } : { ok: false, error, retryAfterSec, providerCalls: calls };
-  const failureOf = (r: Exclude<ProviderReply, { kind: 'ok' }>, model: string): ServerExtractResult => {
-    if (r.kind === 'http') deps.log?.(`provider ${model} answered HTTP ${r.status}`);
+  const failureOf = (r: Exclude<ProviderReply, { kind: 'ok' }>): ServerExtractResult => {
     if (r.kind === 'http' && r.status === 429) return fail('RATE_LIMITED', r.retryAfterSec);
     return fail('UNAVAILABLE');
   };
@@ -176,6 +180,7 @@ export async function runExtraction(input: ExtractInput, deps: ExtractDeps, sign
       return { ok: true, menu: out.menu, meta: meta(model, false, calls) };
     }
     if (out.kind === 'not-a-menu') return fail('NOT_A_MENU');
+    deps.log?.(`provider ${model} attempt: malformed (${out.issues.length} issues)`);
     return final ? fail('MALFORMED_OUTPUT') : { malformed: out.issues };
   };
 
@@ -186,15 +191,15 @@ export async function runExtraction(input: ExtractInput, deps: ExtractDeps, sign
     if (!('malformed' in result)) return result;
     // Call 2: one repair retry on the same model, with the validation errors.
     const second = await call(deps.primaryModel, result.malformed);
-    if (second.kind !== 'ok') return failureOf(second, deps.primaryModel);
+    if (second.kind !== 'ok') return failureOf(second);
     return accept(second, deps.primaryModel, true) as ServerExtractResult;
   }
-  if (!isTransient(first)) return failureOf(first, deps.primaryModel); // 400/403/404: never retried
+  if (!isTransient(first)) return failureOf(first); // 400/403/404: never retried
   // Call 2: the fallback model, after min(Retry-After, 5 s).
   const wait = first.kind === 'http' && first.retryAfterSec !== null ? Math.min(first.retryAfterSec * 1000, MAX_FALLBACK_WAIT_MS) : 0;
   if (wait > 0) await deps.sleep(wait);
   if (isAborted(signal)) return fail('UNAVAILABLE');
   const second = await call(deps.fallbackModel);
-  if (second.kind !== 'ok') return failureOf(second, deps.fallbackModel);
+  if (second.kind !== 'ok') return failureOf(second);
   return accept(second, deps.fallbackModel, true) as ServerExtractResult;
 }
