@@ -29,7 +29,7 @@ async function startProxy(port: number, env: Record<string, string> = {}): Promi
 const post = (port: number, path: string, body: BodyInit, headers: Record<string, string> = {}) =>
   fetch(`http://127.0.0.1:${port}${path}`, { method: 'POST', body, headers });
 const fetchPdf = (port: number, url: unknown) => post(port, '/api/menu/fetch-pdf', JSON.stringify({ url }), { 'content-type': 'application/json' });
-const Q = 'targetMonth=2026-11&promptVersion=1&schemaVersion=1';
+const Q = 'targetMonth=2026-11&promptVersion=2&schemaVersion=1';
 const extract = (port: number, pdf: Uint8Array, scenario?: string) => post(port, `/api/menu/extract?${Q}`, pdf as unknown as BodyInit, scenario ? { 'x-bm-mock-scenario': scenario } : {});
 
 test.describe.configure({ mode: 'serial' });
@@ -147,7 +147,7 @@ test.describe('extract allow-list, cache and caps', () => {
         const r = await fetch(`${base}?${Q}&${extra}`, { method: 'POST', body: pdf });
         expect(r.status, extra).toBe(400);
       }
-      for (const bad of ['targetMonth=2026-13&promptVersion=1&schemaVersion=1', 'targetMonth=2026-11&promptVersion=2&schemaVersion=1', 'targetMonth=2026-11&promptVersion=1', 'targetMonth=<script>&promptVersion=1&schemaVersion=1']) {
+      for (const bad of ['targetMonth=2026-13&promptVersion=2&schemaVersion=1', 'targetMonth=2026-11&promptVersion=3&schemaVersion=1', 'targetMonth=2026-11&promptVersion=2', 'targetMonth=<script>&promptVersion=2&schemaVersion=1']) {
         expect((await fetch(`${base}?${bad}`, { method: 'POST', body: pdf })).status, bad).toBe(400);
       }
       expect((await fetch(`${base}?${Q}`, { method: 'GET' })).status).toBe(405);

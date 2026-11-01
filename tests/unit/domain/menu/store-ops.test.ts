@@ -143,3 +143,16 @@ describe('US-E1-01 where the app opens', () => {
     expect(store.menus['2026-12']!.extractions).toEqual([]);
   });
 });
+
+describe('US-E2-08/AC3 notice versioning', () => {
+  it('US-E2-08/AC3 consent for version 1 is not asked again for 1 but is asked again when the notice becomes version 2', () => {
+    const v1 = giveConsent(fresh(), NOW, 1);
+    expect(v1.consent?.aiNoticeVersion).toBe(1);
+    expect(needsConsent(v1, 1)).toBe(false);
+    expect(needsConsent(v1, 2)).toBe(true);
+    const v2 = giveConsent(v1, NOW, 2);
+    expect(v2.consent?.aiNoticeVersion).toBe(2);
+    expect(needsConsent(v2, 2)).toBe(false);
+    valid(v2);
+  });
+});

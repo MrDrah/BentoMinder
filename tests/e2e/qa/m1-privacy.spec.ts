@@ -60,7 +60,7 @@ test('US-NF-03/AC1 harness positive control: an injected request carrying the ni
   page.on('request', (r) => reqs.push(r));
   await page.goto('./');
   await page.evaluate((n) => fetch('/api/menu/fetch-pdf', { method: 'POST', body: JSON.stringify({ url: 'https://x.test/', nickname: n }) }), NICK);
-  await page.evaluate((n) => fetch('/api/menu/extract?targetMonth=2026-11&promptVersion=1&schemaVersion=1', { method: 'POST', headers: { 'x-note': btoa(unescape(encodeURIComponent(n))) }, body: 'x' }), NOTE);
+  await page.evaluate((n) => fetch('/api/menu/extract?targetMonth=2026-11&promptVersion=2&schemaVersion=1', { method: 'POST', headers: { 'x-note': btoa(unescape(encodeURIComponent(n))) }, body: 'x' }), NOTE);
   await expect.poll(() => findLeaks(reqs).length).toBeGreaterThanOrEqual(2);
 });
 

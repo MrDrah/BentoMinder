@@ -15,6 +15,7 @@ import {
 } from '../../../server/menu/extract.ts';
 import { createFixtureTransports, replyOf } from '../../../server/menu/mock-transport.ts';
 import type { YearMonth } from '../../../src/domain/time/jst.ts';
+import { PROMPT_VERSION } from '../../../src/domain/menu/extraction.ts';
 import { loadFixture } from '../helpers/fixtures.ts';
 
 const MENUS = join(process.cwd(), 'tests', 'fixtures', 'menus');
@@ -244,7 +245,7 @@ describe('US-NF-03/AC1 the provider request holds only the allow-listed inputs (
     await run();
     expect(Object.keys(requests[0]!).sort()).toEqual(['model', 'pdf', 'promptVersion', 'schemaVersion', 'targetMonth']);
     expect(Object.keys(requests[1]!).sort()).toEqual(['model', 'pdf', 'promptVersion', 'repairErrors', 'schemaVersion', 'targetMonth']);
-    expect(requests[0]).toMatchObject({ targetMonth: '2026-11', promptVersion: 1, schemaVersion: 1 });
+    expect(requests[0]).toMatchObject({ targetMonth: '2026-11', promptVersion: PROMPT_VERSION, schemaVersion: 1 });
   });
 });
 

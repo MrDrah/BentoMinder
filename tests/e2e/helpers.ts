@@ -16,6 +16,8 @@ export async function seedStore(page: Page, json: string = STATE_V1): Promise<vo
 
 /** US-NF-02/AC1: 0 serious or critical axe violations on the current screen. */
 export async function expectNoSeriousAxe(page: Page, label: string): Promise<void> {
+  // Axe reads colours mid-fade (the reminder banner fades in over 200 ms): let animations finish first.
+  await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished.catch(() => undefined))));
   const results = await new AxeBuilder({ page }).analyze();
   const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
   expect(serious.map((v) => `${label} ${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual([]);

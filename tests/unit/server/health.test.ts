@@ -5,6 +5,7 @@ import type { AddressInfo } from 'node:net';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { appVersion, createHandler, defaultDeps, proxyPort, startServer, type ProxyDeps } from '../../../server/index.ts';
+import { PROMPT_VERSION } from '../../../src/domain/menu/extraction.ts';
 import { memoryCache, windowCap } from '../../../server/menu/extract.ts';
 import type { PdfResponse } from '../../../server/menu/fetch-pdf.ts';
 import { createFixtureTransports } from '../../../server/menu/mock-transport.ts';
@@ -113,7 +114,7 @@ describe('POST /api/menu/fetch-pdf', () => {
 });
 
 describe('POST /api/menu/extract', () => {
-  const ok = 'targetMonth=2026-11&promptVersion=1&schemaVersion=1';
+  const ok = `targetMonth=2026-11&promptVersion=${PROMPT_VERSION}&schemaVersion=1`;
 
   it('US-E2-04/AC1 the FX-01 PDF is recognised by sha256 and its recorded reading returned', async () => {
     const res = await extract(ok);
@@ -125,7 +126,7 @@ describe('POST /api/menu/extract', () => {
 
   it('US-NF-03/AC1 only targetMonth, promptVersion and schemaVersion are accepted in the query (BR-10)', async () => {
     expect((await extract(`${ok}&nickname=hana`)).status).toBe(400);
-    expect((await extract('targetMonth=2026-13&promptVersion=1&schemaVersion=1')).status).toBe(400);
+    expect((await extract(`targetMonth=2026-13&promptVersion=${PROMPT_VERSION}&schemaVersion=1`)).status).toBe(400);
     expect((await extract('targetMonth=2026-11&promptVersion=9&schemaVersion=1')).status).toBe(400);
   });
 

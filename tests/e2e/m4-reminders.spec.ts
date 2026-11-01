@@ -226,3 +226,18 @@ test('US-E7-03/AC1 US-E7-03/AC2 US-NF-02/AC1 the today card on a Saturday points
   await page.getByTestId('today-card').click();
   await expect(page.getByTestId('day-sheet')).toHaveAttribute('data-date', '2026-11-09');
 });
+
+for (const scheme of ['light', 'dark'] as const) {
+  test(`US-E7-05/AC2 US-E7-07/AC2 US-NF-02/AC1 the missed reminder (original time, title, recipe line) passes axe contrast in ja and en, ${scheme} theme`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await open(page, '2026-11-03T12:00:00Z'); // 21:00 JST: the 17:30 reminder is missed
+    const banner = page.getByTestId('reminder-day-before-2026-11-04');
+    await expect(banner.getByTestId('reminder-missed')).toBeVisible();
+    await settled(page);
+    await expectNoSeriousAxe(page, `missed reminder ja ${scheme}`);
+    await page.getByTestId('lang-toggle-en').click();
+    await expect(banner.getByTestId('reminder-missed')).toContainText('Japan time');
+    await settled(page);
+    await expectNoSeriousAxe(page, `missed reminder en ${scheme}`);
+  });
+}

@@ -10,6 +10,7 @@ import { memoryCache, runExtraction, windowCap, type ExtractDeps, type ServerExt
 import { createGeminiTransport, GEMINI_ENDPOINT, type Usage } from '../../../server/menu/gemini-transport.ts';
 import { createHandler, defaultDeps } from '../../../server/index.ts';
 import type { YearMonth } from '../../../src/domain/time/jst.ts';
+import { PROMPT_VERSION } from '../../../src/domain/menu/extraction.ts';
 import { loadFixture } from '../helpers/fixtures.ts';
 
 const KEY = 'TEST-SENTINEL-KEY-0123456789';
@@ -292,7 +293,7 @@ describe('US-NF-03 the key never leaves the transport', () => {
     await new Promise<void>((r) => server.listen(0, '127.0.0.1', r));
     try {
       const port = (server.address() as AddressInfo).port;
-      const res = await fetch(`http://127.0.0.1:${port}/api/menu/extract?targetMonth=2026-11&promptVersion=1&schemaVersion=1`, { method: 'POST', body: Buffer.from(PDF), headers: { 'content-type': 'application/pdf' } });
+      const res = await fetch(`http://127.0.0.1:${port}/api/menu/extract?targetMonth=2026-11&promptVersion=${PROMPT_VERSION}&schemaVersion=1`, { method: 'POST', body: Buffer.from(PDF), headers: { 'content-type': 'application/pdf' } });
       const body = await res.text();
       expect(JSON.parse(body)).toMatchObject({ ok: false, error: 'UNAVAILABLE', providerCalls: 1 });
       expect(calls).toHaveLength(1);

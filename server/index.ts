@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { EXTRACTION_SCHEMA_VERSION, PROMPT_VERSION } from '../src/domain/menu/extraction.ts';
 import { MAX_PDF_BYTES } from '../src/domain/schema/extracted-menu.ts';
 import { isYearMonth, toJstTimestamp, type Instant } from '../src/domain/time/jst.ts';
+import { defaultCache } from './menu/file-cache.ts';
 import { memoryCache, runExtraction, sha256Hex, windowCap, type CallCap, type ExtractDeps, type ExtractionCache, type ProviderTransport } from './menu/extract.ts';
 import { fetchPdf, type Requester, type Resolver } from './menu/fetch-pdf.ts';
 import { createGeminiTransport } from './menu/gemini-transport.ts';
@@ -209,7 +210,8 @@ export function defaultDeps(env: NodeJS.ProcessEnv = process.env, fetchImpl: typ
           onUsage: (model, u) => log(`usage ${model} in=${u.inputTokens} out=${u.outputTokens}`),
         })
       : null,
-    cache: memoryCache(),
+    // Real provider: replies are kept on disk (ADR 002 §2, git-ignored). Recorded-fixture mode keeps them in memory only, so repeat runs of the test suites never see stale entries.
+    cache: useReal ? defaultCache(join(here, '.cache'), log) : memoryCache(),
     // ADR 002 §2: extract ≤ 5/hour and ≤ 20/day; fetch-pdf ≤ 30/hour. Raised only for the e2e run.
     extractCap: windowCap({ perHour: envInt(env, 'PROXY_EXTRACT_PER_HOUR', 5), perDay: envInt(env, 'PROXY_EXTRACT_PER_DAY', 20) }, nowMs),
     fetchCap: windowCap({ perHour: envInt(env, 'PROXY_FETCH_PER_HOUR', 30), perDay: Number.MAX_SAFE_INTEGER }, nowMs),

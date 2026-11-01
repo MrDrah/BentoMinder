@@ -136,3 +136,11 @@ The plain-language text in `ai-provider.md` §A3 goes to the designer's copy she
 - **Result:** run 2 (fallback model after the primary's 503): ok:true, date mapping 18/18, dish recall 57/57, no extra dishes, no invented allergen days. Not measured: primary-model quality, other fixtures, scanned/image PDFs.
 - **Quota:** no 429 seen; the real free-tier limit is still UNVERIFIED (4 live calls from the 2 task runs, plus 2 earlier).
 - **Debug:** `EVAL_DEBUG=1 npm run eval:extraction` prints model, status, finishReason, token counts, the first 2,000 chars of the raw reply and the parse issues, and writes `reports/eval-*.raw.txt`; it wraps `fetch` in the script only (no key, headers or request body).
+
+## Note 2026-10-31: M5 slice B (on-disk cache, consent audit)
+- `server/menu/file-cache.ts`: `fileCache` / `defaultCache`, one `server/.cache/<sha256>.json` per PDF (git-ignored). Entry = validated reply text, model, promptVersion, schemaVersion, storedAt; never the key, headers, PDF or child data.
+- An entry with another promptVersion or schemaVersion, a corrupt file or a non-hex key is a miss. Writes go to a temp file then rename. Caps: 200 entries and 20 MB, oldest first. An unwritable directory falls back to the memory cache (logged).
+- Wired only when the real provider is on (`useReal`); recorded-fixture mode keeps the memory cache so test runs never see stale entries.
+- `PROMPT_VERSION` 1 to 2 (the prompt changed in 004cf95). The proxy refuses a client sending the old number, so old cached readings and old clients are both cut off.
+- US-E2-08 audit: AC1 to AC4 were met. Added: `needsConsent` / `giveConsent` take the notice version (default 1), so AC3's version 2 re-ask is now tested in the UI and the domain.
+- Revisit: add a TTL if the provider's output drifts for the same prompt; a shared store if the proxy ever runs on more than one instance.

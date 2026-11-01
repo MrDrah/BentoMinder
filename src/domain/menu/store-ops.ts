@@ -34,12 +34,12 @@ export function importMonthOptions(today: LocalDate, promptFromDay: number): { o
   return { options: [current, next], selected: Number(today.slice(8, 10)) >= promptFromDay ? next : current };
 }
 
-export function needsConsent(store: BentoMinderStore): boolean {
-  return store.consent === null || store.consent.aiNoticeVersion < AI_NOTICE_VERSION;
+export function needsConsent(store: BentoMinderStore, noticeVersion: number = AI_NOTICE_VERSION): boolean {
+  return store.consent === null || store.consent.aiNoticeVersion < noticeVersion;
 }
 
-export function giveConsent(store: BentoMinderStore, now: Instant): BentoMinderStore {
-  return { ...touch(store, now), consent: { aiNoticeVersion: AI_NOTICE_VERSION, consentedAt: toJstTimestamp(now) } };
+export function giveConsent(store: BentoMinderStore, now: Instant, noticeVersion: number = AI_NOTICE_VERSION): BentoMinderStore {
+  return { ...touch(store, now), consent: { aiNoticeVersion: noticeVersion, consentedAt: toJstTimestamp(now) } };
 }
 
 /** Contract §3.1 `aiUsage`: provider calls per Tokyo month, also for failed actions (BR-10). */

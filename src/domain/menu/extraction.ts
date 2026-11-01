@@ -6,7 +6,7 @@ import type { YearMonth } from '../time/jst.ts';
 import { isNotAMenu, normalizeModelOutput } from './normalize.ts';
 
 /** Version of the fixed extraction prompt (ADR 002 §3); bump when the prompt text changes. */
-export const PROMPT_VERSION = 1;
+export const PROMPT_VERSION = 2;
 /** Version of the ExtractedMenu JSON Schema sent to the model (contract `extracted-menu/1`). */
 export const EXTRACTION_SCHEMA_VERSION = 1;
 
