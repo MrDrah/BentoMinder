@@ -11,11 +11,10 @@ const root = process.cwd();
 const dist = join(root, 'dist', 'assets');
 
 // Under vitest NODE_ENV is "test", which makes vite build a different (larger) bundle than the production one the budget is about.
-const productionBuildEnv = (): NodeJS.ProcessEnv => {
-  const env: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
-  for (const k of Object.keys(env)) if (k.startsWith('VITEST')) delete env[k];
-  return env;
-};
+const productionBuildEnv = (): NodeJS.ProcessEnv => ({
+  ...Object.fromEntries(Object.entries(process.env).filter(([k]) => !k.startsWith('VITEST'))),
+  NODE_ENV: 'production',
+});
 
 beforeAll(() => {
   if (!existsSync(dist) || readdirSync(dist).length === 0) execSync('npm run build', { cwd: root, stdio: 'ignore', env: productionBuildEnv() });
