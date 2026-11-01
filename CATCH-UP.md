@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-11-01 (MVP evidence mvp-r2 frozen) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-11-01 (MVP done; runs locally by PO decision) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -45,7 +45,7 @@ Two tasks were stopped at a safe point; each wrote pause notes:
 ### Next 📋
 MVP is feature-complete and green (release gate, CI, Pages preview deployed: https://mrdrah.github.io/BentoMinder/). Milestones M0–M6 done: M5 live Gemini works on synthetic fixtures (primary now gemini-3.5-flash-lite, fallback gemini-3.8-flash; 0 invented allergens in 23 live calls; 7 of 9 first-pass fixtures ok, the 2 failures fixed after prompt changes); all 20 recipes verifier-reviewed; Android feasibility doc written (GO for a 1-day spike).
 1. MVP approved by the PO 2026-11-01; evidence packages `mvp` and its correction `mvp-r2` frozen (r2 adds the late-logged events; UNVERIFIED overall: functional 87.7% of ACs, cost token-only by PO choice under a subscription, no controlled recovery test). The 26 Oct–1 Nov corrections, defects and interruptions were late-logged (marked) and are in mvp-r2; their log timing is the logging time. Lesson: log events when they happen (CLAUDE.md §2.2).
-3. Not in the MVP: hosted AI proxy for the live site (the live site is mock-only; real import runs locally with the PO's key), v1 items (accounts/sync, Android build, holidays US-E8-04, reservation reminder), a live check of the real school PDF (PO to approve sending it to Google).
+3. **Hosting decision (PO, 2026-11-01): everything local for the MVP.** Real import: `npm run dev` (Vite + proxy on 127.0.0.1:8787, key read from the git-ignored `.env`), open the printed local URL. The Pages preview is a mock-only demo and may be taken down at any time. Not in the MVP / v1: hosted AI proxy (caps, origin allowlist, access code, SSRF check), accounts/sync, Android build (feasibility doc says GO for a 1-day spike), holidays US-E8-04, reservation reminder US-E7-08, a live check of the real school PDF (PO must approve sending it to Google; a copy is in the git-ignored `local-mocks/`).
 
 ## 4. Key decisions (summary; the full log is in docs/PLAN.md §7)
 - Local git only; no push, deploy or paid services without PO approval.

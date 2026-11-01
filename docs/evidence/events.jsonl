@@ -225,3 +225,4 @@
 {"v":1,"at":"2026-11-01T02:20:48.879Z","by":"orchestrator","type":"task-start","task":"metrics-mvp-r2","summary":"Task metrics-mvp-r2 dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-01T02:21:36.760Z","by":"orchestrator","type":"task-end","task":"metrics-mvp-r2","outcome":"success","summary":"diff-guard: 0 changed files, all allowed"}
 {"v":1,"at":"2026-11-01T02:21:36.960Z","type":"milestone","milestone":"mvp","by":"metrics","summary":"Evidence package mvp-r2 frozen (UNVERIFIED)"}
+{"v":1,"at":"2026-11-01T02:25:06.809Z","type":"product-decision","summary":"PO: MVP runs locally only; no hosted proxy. Real AI import via npm run dev with the PO's key; Pages preview stays mock-only"}
