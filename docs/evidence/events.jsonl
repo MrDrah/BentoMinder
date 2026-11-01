@@ -161,3 +161,64 @@
 {"v":1,"at":"2026-11-01T01:42:18.462Z","by":"orchestrator","type":"task-start","task":"metrics-mvp-2","summary":"Task metrics-mvp-2 dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-01T01:43:39.025Z","by":"orchestrator","type":"task-end","task":"metrics-mvp-2","outcome":"success","summary":"diff-guard: 0 changed files, all allowed"}
 {"v":1,"at":"2026-11-01T01:43:39.283Z","type":"milestone","milestone":"mvp","by":"metrics","summary":"Evidence package mvp frozen (UNVERIFIED)"}
+{"v":1,"at":"2026-11-01T02:12:20.423Z","type":"technical-correction","summary":"(logged late 2026-11-01) Updated QA m3-copy test pin to require 0 banned-phrase offenders after the M3-D01 reword","task":"m3-d01-reword"}
+{"v":1,"at":"2026-11-01T02:12:20.515Z","type":"technical-correction","summary":"(logged late 2026-11-01) Fixed an unescaped quote in an e2e test title that broke lint (M4 slice C follow-up)","task":"m4-share-debug"}
+{"v":1,"at":"2026-11-01T02:12:20.596Z","type":"technical-correction","summary":"(logged late 2026-11-01) Fixed flaky shell title unit test with waitFor and aligned contract line 319 wording (M4-D01, M4-D02)","task":"m4-qa"}
+{"v":1,"at":"2026-11-01T02:12:20.676Z","type":"technical-correction","summary":"(logged late 2026-11-01) CI workflow: npm run e2e did not exist; changed to test:e2e","task":"h4-trace"}
+{"v":1,"at":"2026-11-01T02:12:20.762Z","type":"technical-correction","summary":"(logged late 2026-11-01) CI workflow: added a source-fetch step because cited-source text is never committed","task":"h4-trace"}
+{"v":1,"at":"2026-11-01T02:12:20.845Z","type":"technical-correction","summary":"(logged late 2026-11-01) CI workflow: gate job lacked Chromium; added install step and job timeouts","task":"h4-trace"}
+{"v":1,"at":"2026-11-01T02:12:20.933Z","type":"technical-correction","summary":"(logged late 2026-11-01) CI workflow: standalone e2e job lacked a build before vite preview","task":"h4-trace"}
+{"v":1,"at":"2026-11-01T02:12:21.015Z","type":"technical-correction","summary":"(logged late 2026-11-01) Raised jsdom UI test timeout to 20 s after 3 load-related timeout flakes","task":"m5-gemini"}
+{"v":1,"at":"2026-11-01T02:12:21.100Z","type":"technical-correction","summary":"(logged late 2026-11-01) Updated QA proxy/privacy specs for PROMPT_VERSION 2 after the cache slice bumped it","task":"m5-slice-b"}
+{"v":1,"at":"2026-11-01T02:12:21.181Z","type":"technical-correction","summary":"(logged late 2026-11-01) Applied verifier findings: 2 yield texts unsupported by sources fixed in 2 recipes","task":"label-round-2"}
+{"v":1,"at":"2026-11-01T02:12:21.267Z","type":"technical-correction","summary":"(logged late 2026-11-01) Applied verifier findings: 3 yield texts unsupported by sources fixed, adaptation reworded","task":"h4-trace"}
+{"v":1,"at":"2026-11-01T02:12:21.346Z","type":"technical-correction","summary":"(logged late 2026-11-01) Orchestrator allow-lists for diff-guard were too narrow or mis-specified on several tasks; files accepted by hand","task":"m2-finish"}
+{"v":1,"at":"2026-11-01T02:12:21.425Z","type":"agent-failure","summary":"(logged late 2026-11-01) Label round slice 2 agent stopped by an API weekly usage limit; resumed after the reset","task":"label-round-2"}
+{"v":1,"at":"2026-11-01T02:12:21.510Z","type":"agent-failure","summary":"(logged late 2026-11-01) M5 slice B agent stopped when the session ended before it reported; resumed with an extended task","task":"m5-slice-b"}
+{"v":1,"at":"2026-11-01T02:12:21.591Z","type":"interruption","summary":"(logged late 2026-11-01) Weekly usage limit stopped the label-round agent","minutes":720}
+{"v":1,"at":"2026-11-01T02:12:21.675Z","type":"interruption","summary":"(logged late 2026-11-01) Session ended while the M5 slice B agent was running"}
+{"v":1,"at":"2026-11-01T02:12:21.756Z","type":"resume","summary":"(logged late 2026-11-01) Resumed from CATCH-UP.md on 2026-10-30 (M2 close-out)","outcome":"success"}
+{"v":1,"at":"2026-11-01T02:12:21.834Z","type":"resume","summary":"(logged late 2026-11-01) Resumed from CATCH-UP.md on 2026-10-31","outcome":"success"}
+{"v":1,"at":"2026-11-01T02:12:21.913Z","type":"resume","summary":"(logged late 2026-11-01) Resumed from CATCH-UP.md on 2026-11-01 (M5 slice B finish)","outcome":"success"}
+{"v":1,"at":"2026-11-01T02:12:21.998Z","type":"recovery-test","summary":"(logged late 2026-11-01) A fresh session on 2026-10-30 restored the project from CATCH-UP.md alone and resumed M2 without re-doing finished work","outcome":"success"}
+{"v":1,"at":"2026-11-01T02:12:22.077Z","type":"verification","summary":"(logged late 2026-11-01) Verifier spot-check of 8 recipes: 6 pass, 2 yield-only fails fixed","task":"label-round-2","outcome":"failure"}
+{"v":1,"at":"2026-11-01T02:12:22.163Z","type":"verification","summary":"(logged late 2026-11-01) Verifier review of the remaining 12 recipes: 9 pass, 3 yield-only issues fixed","task":"h4-trace","outcome":"failure"}
+{"v":1,"at":"2026-11-01T02:12:22.245Z","type":"verification","summary":"(logged late 2026-11-01) Verifier spot-check of 6 ham, sausage and maker-label records: all match","task":"label-round-2","outcome":"success"}
+{"v":1,"at":"2026-11-01T02:12:22.324Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M2-D01 found","defect":"M2-D01","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:22.407Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M2-D01 fixed","defect":"M2-D01","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:22.489Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M2-D02 found","defect":"M2-D02","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:22.573Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M2-D02 fixed","defect":"M2-D02","severity":"P4","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:22.654Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M2-D03 found","defect":"M2-D03","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:22.742Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M2-D03 fixed","defect":"M2-D03","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:22.838Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M3-D01 found","defect":"M3-D01","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:22.923Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M3-D01 fixed","defect":"M3-D01","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:23.006Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M3-D03 found","defect":"M3-D03","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:23.092Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M3-D03 fixed","defect":"M3-D03","severity":"P4","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:23.188Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M4-D01 found","defect":"M4-D01","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:23.298Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M4-D01 fixed","defect":"M4-D01","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:23.382Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M4-D02 found","defect":"M4-D02","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:23.466Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M4-D02 fixed","defect":"M4-D02","severity":"P4","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:23.549Z","type":"defect","summary":"(logged late 2026-11-01) QA defect D-H4-01 found","defect":"D-H4-01","severity":"P2","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:23.634Z","type":"defect","summary":"(logged late 2026-11-01) QA defect D-H4-01 fixed","defect":"D-H4-01","severity":"P2","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:23.729Z","type":"defect","summary":"(logged late 2026-11-01) QA defect D-H4-02 found","defect":"D-H4-02","severity":"P2","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:23.834Z","type":"defect","summary":"(logged late 2026-11-01) QA defect D-H4-02 fixed","defect":"D-H4-02","severity":"P2","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:23.939Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D04 found","defect":"M5-D04","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:24.033Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D04 fixed","defect":"M5-D04","severity":"P4","state":"fixed"}
+{"v":1,"at":"2026-11-01T02:12:24.130Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M3-D02 found","defect":"M3-D02","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:24.226Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M3-D02 deferred","defect":"M3-D02","severity":"P4","state":"deferred"}
+{"v":1,"at":"2026-11-01T02:12:24.307Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D01 found","defect":"M5-D01","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:24.390Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D01 deferred","defect":"M5-D01","severity":"P4","state":"deferred"}
+{"v":1,"at":"2026-11-01T02:12:24.480Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D02 found","defect":"M5-D02","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:24.622Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D02 deferred","defect":"M5-D02","severity":"P4","state":"deferred"}
+{"v":1,"at":"2026-11-01T02:12:24.779Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D03 found","defect":"M5-D03","severity":"P4","state":"found"}
+{"v":1,"at":"2026-11-01T02:12:24.901Z","type":"defect","summary":"(logged late 2026-11-01) QA defect M5-D03 deferred","defect":"M5-D03","severity":"P4","state":"deferred"}
+{"v":1,"at":"2026-11-01T02:12:25.177Z","type":"product-decision","summary":"(logged late 2026-11-01) Deferred US-E12-01 and US-E8-04 via allowUntested (later: Android doc written)"}
+{"v":1,"at":"2026-11-01T02:12:25.408Z","type":"product-decision","summary":"(logged late 2026-11-01) M3-D02: hide other-recipes list when 3 or fewer recipes pass"}
+{"v":1,"at":"2026-11-01T02:12:25.557Z","type":"product-decision","summary":"(logged late 2026-11-01) Day-before reminder suppressed only when plannedAt is after dueAt (equality creates it)"}
+{"v":1,"at":"2026-11-01T02:12:25.658Z","type":"product-decision","summary":"(logged late 2026-11-01) Gemini free-tier flash-lite made primary model, 3.8-flash fallback, from live eval evidence"}
+{"v":1,"at":"2026-11-01T02:12:25.745Z","type":"product-decision","summary":"(logged late 2026-11-01) M5-D04: no reminders due before the profile was created"}
+{"v":1,"at":"2026-11-01T02:12:25.867Z","type":"product-decision","summary":"(logged late 2026-11-01) PO: 8 of 20 recipes verified first, then all 20; PO authorised GitHub push and Pages preview"}
+{"v":1,"at":"2026-11-01T02:12:25.991Z","type":"product-decision","summary":"(logged late 2026-11-01) PO: billing model is a monthly subscription, token use only, no dollar figure"}
+{"v":1,"at":"2026-11-01T02:12:26.099Z","type":"approval","summary":"(logged late 2026-11-01) PO approved M3 and M4 plans and each slice dispatch"}
+{"v":1,"at":"2026-11-01T02:12:26.196Z","type":"approval","summary":"(logged late 2026-11-01) PO approved the first live Gemini eval on synthetic fixtures only"}
+{"v":1,"at":"2026-11-01T02:12:26.282Z","type":"approval","summary":"(logged late 2026-11-01) PO approved stopping leftover test servers on ports 8787 and 4173"}
