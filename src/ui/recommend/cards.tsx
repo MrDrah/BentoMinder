@@ -3,7 +3,7 @@ import type { RankedRecipe } from '../../domain/recommend/rank.ts';
 import { useApp } from '../app-store.tsx';
 import { toHash } from '../router.ts';
 import type { LocalDate } from '../../domain/time/jst.ts';
-import { AllergenLines, Check, Clock, RecipeArt, reasonText, recipeNames, RecipeWarnings } from './parts.tsx';
+import { AllergenLines, Check, Clock, ProcessedCardLine, RecipeArt, reasonText, recipeNames } from './parts.tsx';
 
 export interface CardProps {
   ranked: RankedRecipe;
@@ -48,7 +48,6 @@ export function RecCard({ ranked, prefix, rank, date, current, canConfirm, prima
             {t('rec.current')}
           </span>
         )}
-        {!ranked.complete && <RecipeWarnings recipe={recipe} prefix={prefix} incomplete />}
         <p className="rec-card__meta" data-testid={`${prefix}-minutes`}>
           <Clock />
           {t('fmt.minutes', { n: recipe.minutes })}
@@ -64,7 +63,7 @@ export function RecCard({ ranked, prefix, rank, date, current, canConfirm, prima
           </ul>
         )}
         <AllergenLines recipe={recipe} testId={`${prefix}-allergens`} />
-        {ranked.complete && <RecipeWarnings recipe={recipe} prefix={prefix} incomplete={false} />}
+        {ranked.processedWarning !== null && <ProcessedCardLine testId={`${prefix}-processed`} />}
         <div className="rec-card__actions">
           {canConfirm && (
             <button

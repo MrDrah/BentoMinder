@@ -5,7 +5,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { createDayViewer } from '../../domain/calendar/day-view.ts';
 import { applyDecisionEvent } from '../../domain/decision/apply.ts';
 import type { DecisionEvent, RecipeRef } from '../../domain/decision/decision.ts';
-import { createRanker, type RankProfile, type RankResult } from '../../domain/recommend/rank.ts';
+import { createRanker, type ProcessedWarning, type RankProfile, type RankResult } from '../../domain/recommend/rank.ts';
 import type { BentoMinderStore } from '../../domain/schema/index.ts';
 import type { Recipe } from '../../domain/schema/recipe.ts';
 import type { LocalDate } from '../../domain/time/jst.ts';
@@ -38,6 +38,13 @@ export function useBlocked(): ReadonlyMap<string, RankResult['excluded'][number]
   const { today } = useApp();
   const result = useRank(today);
   return useMemo(() => new Map(result.excluded.map((e) => [e.recipeId, e])), [result]);
+}
+
+/** US-E6-02/AC11-AC12: the processed-food warning of a recipe that passes the filters (null when excluded or nothing to show). */
+export function useProcessedWarning(recipeId: string): ProcessedWarning | null {
+  const { today } = useApp();
+  const result = useRank(today);
+  return useMemo(() => result.all.find((r) => r.recipeId === recipeId)?.processedWarning ?? null, [result, recipeId]);
 }
 
 export function useRecipe(id: string): Recipe | undefined {

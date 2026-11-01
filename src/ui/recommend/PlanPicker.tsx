@@ -8,13 +8,15 @@ import { formatDate } from '../../i18n/format.ts';
 import { useApp, useStore } from '../app-store.tsx';
 import { DECISION_KEYS } from '../calendar/labels.ts';
 import { useFocusTrap } from '../hooks.ts';
-import { useConfirmRecipe } from './hooks.ts';
+import { useConfirmRecipe, useProcessedWarning } from './hooks.ts';
+import { ProcessedCardLine } from './parts.tsx';
 
 export function PlanPicker({ recipeId, onClose }: { recipeId: string; onClose: () => void }) {
   const { t, state, today, services } = useApp();
   const store = useStore();
   const lang = state.language;
   const { busyId, confirm } = useConfirmRecipe();
+  const warning = useProcessedWarning(recipeId);
   const [picked, setPicked] = useState<LocalDate | null>(null);
   const titleId = useId();
   const headRef = useRef<HTMLHeadingElement>(null);
@@ -36,6 +38,7 @@ export function PlanPicker({ recipeId, onClose }: { recipeId: string; onClose: (
         <h2 id={titleId} ref={headRef} tabIndex={-1} className="picker__title">
           {t('recipe.planPick.title')}
         </h2>
+        {warning !== null && <ProcessedCardLine testId="plan-pick-processed" />}
         {dates.length === 0 ? (
           <p data-testid="plan-pick-empty">{t('recipe.planPick.empty')}</p>
         ) : (

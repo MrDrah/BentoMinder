@@ -18,14 +18,13 @@ const recipe = (id: string) => library.find((r) => r.id === id) as Recipe;
 
 describe('US-E6-03/AC3 allergen summary', () => {
   it('US-E6-03/AC3 no allergen and nothing varies by product: the careful "none used" wording applies', () => {
-    expect(allergenSummary(recipe('rcp-syn-e-veggie'))).toEqual({ allergenIds: [], mayContainIds: [], varies: false, none: true });
+    expect(allergenSummary(recipe('rcp-syn-e-veggie'))).toEqual({ allergenIds: [], varies: false, none: true });
   });
 
-  it('US-E6-03/AC3 US-E6-02/AC4 a varies-by-product ingredient is never "none" and lists what may be in it', () => {
+  it('US-E6-03/AC3 a varies-by-product ingredient is never "none"', () => {
     const s = allergenSummary(recipe('rcp-syn-b-karaage'));
     expect(s.varies).toBe(true);
     expect(s.none).toBe(false);
-    expect(s.mayContainIds.length).toBeGreaterThan(0);
   });
 });
 

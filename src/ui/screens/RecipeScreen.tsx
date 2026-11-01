@@ -1,7 +1,7 @@
 // Recipe detail (design/components.md 5.1, US-E6-04, US-E6-03/AC1): content, the always-present
 // food-handling notes, allergen and diet badges, sources, the disclaimer and the footer action for
 // the context the parent came from. Nothing here says the recipe is safe (BR-07).
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { createDayViewer } from '../../domain/calendar/day-view.ts';
 import { applyDecisionEvent } from '../../domain/decision/apply.ts';
 import type { DecisionEvent } from '../../domain/decision/decision.ts';
@@ -15,8 +15,8 @@ import { TopBar } from '../components/Bars.tsx';
 import { BentoIcon } from '../components/Marks.tsx';
 import { navigate, toHash } from '../router.ts';
 import { PlanPicker } from '../recommend/PlanPicker.tsx';
-import { useBlocked, useConfirmRecipe, useRecipe } from '../recommend/hooks.ts';
-import { allergenLabel, AllergenLines, conflictText, dietKey, Disclaimer, RecipeArt, recipeNames, WarnRow } from '../recommend/parts.tsx';
+import { useBlocked, useConfirmRecipe, useProcessedWarning, useRecipe } from '../recommend/hooks.ts';
+import { allergenLabel, AllergenLines, conflictText, dietKey, Disclaimer, ProcessedItemMarker, ProcessedNotice, RecipeArt, recipeNames, WarnRow } from '../recommend/parts.tsx';
 
 /** 農林水産省, the guidance the general notes are credited to (copy.md recipe.safety.*). */
 const MAFF_URL = 'https://www.maff.go.jp/j/syouan/seisaku/foodpoisoning/lunchbox.html';
@@ -53,6 +53,9 @@ function RecipeDetail({ recipe, date, lang }: { recipe: Recipe; date: LocalDate 
   const { t, today, services } = useApp();
   const store = useStore();
   const blocked = useBlocked().get(recipe.id);
+  const warning = useProcessedWarning(recipe.id);
+  // role="status" only when the notice appears because the profile changed while the page is open.
+  const hadWarningOnLoad = useRef(warning !== null);
   const viewer = useMemo(() => createDayViewer(services.dictionary), [services.dictionary]);
   const names = recipeNames(recipe, lang);
   const v = date === null ? null : viewer(store, date, today);
@@ -112,8 +115,6 @@ function RecipeDetail({ recipe, date, lang }: { recipe: Recipe; date: LocalDate 
                 ))}
               </ul>
             )}
-            {!recipe.allergenDataComplete && <WarnRow testId="recipe-incomplete" text={t('rec.incomplete')} />}
-            {recipe.ingredients.some((i) => i.allergenInfo === 'varies-by-product') && <WarnRow testId="recipe-varies" text={t('rec.variesByProduct')} />}
             {blocked !== undefined && (
               <div data-testid="recipe-conflicts">
                 {blocked.reasons.map((r) => (
@@ -121,6 +122,7 @@ function RecipeDetail({ recipe, date, lang }: { recipe: Recipe; date: LocalDate 
                 ))}
               </div>
             )}
+            {warning !== null && <ProcessedNotice allergenIds={warning.allergenIds} live={!hadWarningOnLoad.current} />}
             <section aria-labelledby="recipe-ingredients-h">
               <h2 id="recipe-ingredients-h" className="recipe__h">
                 {t('recipe.ingredients')}
@@ -134,6 +136,7 @@ function RecipeDetail({ recipe, date, lang }: { recipe: Recipe; date: LocalDate 
                         <th scope="row" lang={name.lang}>
                           {name.text}
                           {i.optional && <span className="tag"> {t('common.optional')}</span>}
+                          {warning?.processedIngredientIds.includes(i.ingredientId) === true && <ProcessedItemMarker testId={`recipe-ingredient-${i.ingredientId}-processed`} />}
                         </th>
                         <td>{quantityText(t, i)}</td>
                       </tr>

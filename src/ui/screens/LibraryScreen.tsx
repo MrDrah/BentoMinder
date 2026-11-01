@@ -7,7 +7,7 @@ import { TopBar } from '../components/Bars.tsx';
 import { Icon } from '../components/Icon.tsx';
 import { toHash } from '../router.ts';
 import { useRank } from '../recommend/hooks.ts';
-import { AllergenLines, Clock, conflictText, Disclaimer, RecipeArt, recipeNames } from '../recommend/parts.tsx';
+import { AllergenLines, Clock, conflictText, Disclaimer, ProcessedCardLine, RecipeArt, recipeNames } from '../recommend/parts.tsx';
 
 export function LibraryScreen() {
   const { t, state, today, services } = useApp();
@@ -15,6 +15,7 @@ export function LibraryScreen() {
   const result = useRank(today);
   const { plannable, blocked } = libraryOrder(result);
   const total = services.library.length;
+  const warned = new Set(result.all.filter((r) => r.processedWarning !== null).map((r) => r.recipeId));
 
   const row = (recipe: Recipe, reasons: string[]) => {
     const names = recipeNames(recipe, lang);
@@ -31,6 +32,7 @@ export function LibraryScreen() {
               {t('fmt.minutes', { n: recipe.minutes })}
             </span>
             <AllergenLines recipe={recipe} testId={`library-row-${recipe.id}-allergens`} />
+            {reasons.length === 0 && warned.has(recipe.id) && <ProcessedCardLine testId={`library-row-${recipe.id}-processed`} />}
             {reasons.length > 0 && (
               <span className="library-row__reason" data-testid={`library-row-${recipe.id}-reason`}>
                 {reasons.map((r) => (

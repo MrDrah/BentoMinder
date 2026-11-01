@@ -1,0 +1,25 @@
+/* Processed-food warning (design/components.md 5.4): compact line, ingredient marker, recipe notice. Tokens only. */
+.processed-line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  margin: 0;
+  color: var(--warning);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.processed-line .icon {
+  flex: none;
+  margin-top: 2px;
+}
+.processed-line--item {
+  margin-top: var(--space-1);
+}
+.processed-notice {
+  max-width: 760px;
+  overflow-wrap: anywhere;
+}
+.processed-notice .banner__body {
+  margin: 0;
+  line-height: var(--leading-relaxed);
+}

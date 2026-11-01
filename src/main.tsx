@@ -9,6 +9,7 @@ import { AppProvider } from './ui/app-store.tsx';
 import { App } from './ui/App.tsx';
 import 'virtual:display-font.css';
 import './ui/styles/global.css';
+import './ui/styles/processed.css';
 
 async function boot(): Promise<void> {
   const adapters = selectAdapters();

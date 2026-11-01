@@ -27,9 +27,7 @@ export type ExclusionReason =
   | { kind: 'allergen'; allergenIds: string[] } // F1'' (the child's own registered ids, also for a group hit)
   | { kind: 'excluded-ingredient'; ids: string[] } // F2 (ids = the profile entries that matched)
   | { kind: 'diet'; diets: Diet[]; tags: AnimalTag[] } // F3
-  | { kind: 'diet-incomplete' } // F3, unknown animal origin while a diet is selected
-  /** @deprecated F4 retired 2026-11-01 (ADR 013): never produced; kept only so the UI switch compiles until slice 2. */
-  | { kind: 'allergen-incomplete' };
+  | { kind: 'diet-incomplete' }; // F3, unknown animal origin while a diet is selected
 
 /** Explanation keys with params; src/i18n renders them (US-E6-01/AC2: a card shows at most 2). */
 export type RankReason =
@@ -49,10 +47,6 @@ export interface RankedRecipe {
   recipeId: string;
   recipe: Recipe;
   score: number;
-  /** @deprecated No longer ranks anything (R-3 retired 2026-11-01); the UI still reads it until slice 2. */
-  complete: boolean;
-  /** @deprecated Superseded by `processedWarning` (AC4 retired); the UI still reads it until slice 2. */
-  checkLabel: boolean;
   processedWarning: ProcessedWarning | null;
   reasons: RankReason[];
   parts: { liked: number; disliked: number; theme: boolean; recentlyPlanned: boolean; slow: boolean };
@@ -222,8 +216,6 @@ export function createRanker(dict: Dictionary, library: readonly Recipe[]): Rank
         recipeId: recipe.id,
         recipe,
         score,
-        complete: recipe.allergenDataComplete,
-        checkLabel: recipe.ingredients.some((i) => i.allergenInfo === 'varies-by-product'),
         processedWarning: warning(recipe),
         reasons: why,
         parts: { liked: liked.length, disliked: dislikedCount, theme, recentlyPlanned, slow },

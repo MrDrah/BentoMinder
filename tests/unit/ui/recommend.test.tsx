@@ -70,14 +70,17 @@ describe('US-E6-01 three ranked suggestions (BR-09)', () => {
   });
 
   it('US-E6-01/AC4 two recipes pass: exactly two cards and 「条件に合うレシピは2件です」', async () => {
-    const store = withProfile({ allergyStatus: 'has-known', knownAllergenIds: allAllergens().filter((a) => a !== 'alg-egg') });
+    // F1'': every allergen but egg, and the sausage and curry-roux foods, leave the egg recipe and the vegetable one
+    const store = withProfile({ allergyStatus: 'has-known', knownAllergenIds: allAllergens().filter((a) => a !== 'alg-egg'), excludedIngredientIds: ['ing-sausage', 'ing-curry-roux'] });
     await open('#/recommend/2026-11-12', store);
     expect(screen.getByTestId('recs-fewer')).toHaveTextContent('条件に合うレシピは2件です');
     expect(ids(screen.getByTestId('recs-list'))).toHaveLength(2);
   });
 
   it('US-E6-01/AC5 US-E5-03/AC1 none pass: the empty state with both links, and the decision is unchanged', async () => {
-    const store = withProfile({ allergyStatus: 'has-known', knownAllergenIds: allAllergens(), excludedIngredientIds: ['ing-corn'] });
+    const left = ['rcp-syn-e-veggie', 'rcp-syn-d-sausage', 'rcp-syn-m-corn-curry']; // what no registered allergen rules out
+    const foods = [...new Set(library().filter((r) => left.includes(r.id)).flatMap((r) => r.ingredients.map((i) => i.ingredientId)))];
+    const store = withProfile({ allergyStatus: 'has-known', knownAllergenIds: allAllergens(), excludedIngredientIds: foods });
     const app = await open('#/recommend/2026-11-12', store);
     const before = app.storage.data.get('bentominder.state');
     const empty = screen.getByTestId('recs-empty');
@@ -138,23 +141,23 @@ describe('US-E6-02 and US-E6-03 honest allergen wording (BR-07)', () => {
     expect(document.body.textContent).not.toMatch(/安全です|対応済み/);
   });
 
-  it('US-E6-02/AC4 a varies-by-product ingredient shows the check-the-label warning and the may-contain line', async () => {
+  it('US-E6-02/AC13 a recipe whose only allergen information is a label (varies-by-product) shows no allergen line and no retired may-contain or check-the-label rows', async () => {
     await open('#/recipe/rcp-syn-b-karaage');
-    expect(screen.getByTestId('recipe-varies')).toHaveTextContent('市販品は製品によりアレルゲンが異なります。表示を確認してください。');
-    expect(screen.getByTestId('recipe-allergens')).toHaveTextContent('製品によって含むことがあるもの：');
+    expect(screen.queryByTestId('recipe-varies')).toBeNull();
+    expect(document.body.textContent).not.toContain('製品によって含むことがあるもの');
     expect(screen.getByTestId('recipe-allergens')).not.toHaveTextContent('使用していません');
   });
 
-  it('US-E6-02/AC5 incomplete allergen data is flagged under the name and ranked after every complete recipe (child with no known allergen)', async () => {
+  it('US-E6-02/AC13 incomplete allergen data neither flags a recipe nor ranks it last (child with no known allergen)', async () => {
     const store = withProfile({ allergyStatus: 'none-known', knownAllergenIds: [], excludedIngredientIds: [] });
     await open('#/recommend/2026-11-12', store);
     const user = userEvent.setup();
     await user.click(screen.getByTestId('recs-more'));
     const rows = ids(screen.getByTestId('recs-more-list'));
-    expect(rows.at(-1)).toBe('rcp-syn-m-corn-curry');
+    const result = createRanker(dictionary(), library())({ profile: store.profile as never, decisions: Object.values(store.decisions), targetDate: localDate('2026-11-12') });
+    expect(rows).toEqual(result.all.map((r) => r.recipeId)); // the ranker's order, no extra tier
     const row = screen.getByTestId('recs-more-list').querySelector('[data-recipe-id="rcp-syn-m-corn-curry"]') as HTMLElement;
-    expect(row).toHaveTextContent('一部の材料のアレルゲン情報がわかりません。食品の表示を確認してください。');
-    // and it can still be planned
+    expect(row).not.toHaveTextContent('一部の材料のアレルゲン情報がわかりません');
     expect(within(row).getByRole('button', { name: 'この日に決定' })).toBeEnabled();
   });
 

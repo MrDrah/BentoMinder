@@ -49,8 +49,6 @@ export function conflictText(t: Translate, lang: Language, dict: Dictionary, rea
       return t('library.conflict.diet', { diet: reason.diets.map((d) => t(`diet.${dietKey(d)}` as MessageKey)).join(joiner(lang)) });
     case 'diet-incomplete':
       return t('library.conflict.dietIncomplete');
-    case 'allergen-incomplete':
-      return t('library.conflict.incomplete');
   }
 }
 
@@ -80,26 +78,61 @@ export function AllergenLines({ recipe, testId }: { recipe: Recipe; testId: stri
   const { t, state, services } = useApp();
   const lang = state.language;
   const s = allergenSummary(recipe);
-  // M3-D03: a recipe with no allergens and a varies-by-product ingredient has nothing to list here (its warning is the WarnRow).
-  if (!s.none && s.allergenIds.length === 0 && s.mayContainIds.length === 0) return null;
+  // A recipe with no allergens and a varies-by-product ingredient has nothing to list here (never claims "none").
+  if (!s.none && s.allergenIds.length === 0) return null;
   return (
     <div className="rec-allergens" data-testid={testId}>
       {s.none && <p className="rec-line">{t('rec.allergensNone')}</p>}
       {s.allergenIds.length > 0 && <p className="rec-line">{t('rec.allergens', { list: allergenList(services.dictionary, s.allergenIds, lang) })}</p>}
-      {s.mayContainIds.length > 0 && <p className="rec-line">{t('rec.mayContain', { list: allergenList(services.dictionary, s.mayContainIds, lang) })}</p>}
     </div>
   );
 }
 
-/** The varies-by-product and incomplete-data warnings (US-E6-02/AC4, AC5). */
-export function RecipeWarnings({ recipe, prefix, incomplete }: { recipe: Recipe; prefix: string; incomplete: boolean }) {
+/** Joined with 「、」 / ", ", in the given order, never shortened (design/components.md 5.4 B). */
+export const allergenNames = (dict: Dictionary, ids: readonly string[], lang: Language): string => allergenList(dict, ids, lang);
+
+/** C. Compact notice (`warn.processed.card`): static, not focusable, icon hidden from assistive tech. */
+export function ProcessedCardLine({ testId }: { testId: string }) {
   const { t } = useApp();
-  const varies = allergenSummary(recipe).varies;
   return (
-    <>
-      {incomplete && <WarnRow testId={`${prefix}-incomplete`} text={t('rec.incomplete')} />}
-      {varies && <WarnRow testId={`${prefix}-varies`} text={t('rec.variesByProduct')} />}
-    </>
+    <p className="processed-line" data-testid={testId}>
+      <svg className="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+        <path d="M12 4l9 16H3zM12 10v4M12 17v.01" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span>{t('warn.processed.card')}</span>
+    </p>
+  );
+}
+
+/** A. Ingredient marker (`warn.processed.item`): package icon + visible text, part of the row text. */
+export function ProcessedItemMarker({ testId }: { testId: string }) {
+  const { t } = useApp();
+  return (
+    <span className="processed-line processed-line--item" data-testid={testId}>
+      <svg className="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+        <path d="M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5M12 13v8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span>{t('warn.processed.item')}</span>
+    </span>
+  );
+}
+
+/** B. Recipe notice (`warn.processed.recipe`): once, above the ingredient list; `role="status"` only when `live`. */
+export function ProcessedNotice({ allergenIds, live }: { allergenIds: readonly string[]; live: boolean }) {
+  const { t, state, services } = useApp();
+  const text = t('warn.processed.recipe', { allergens: allergenList(services.dictionary, allergenIds, state.language) });
+  return (
+    <div className="banner banner--warning processed-notice" role={live ? 'status' : undefined} data-testid="recipe-processed-notice">
+      <div className="banner__row">
+        <BannerIcon variant="warning" />
+        <div className="banner__content">
+          <p className="banner__body">
+            <span className="visually-hidden">{t('warn.processed.prefix')}</span>
+            {text}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -311,6 +311,11 @@ export function ProfileForm({ initial, submitLabel, submitTestId, onSubmit, foot
                 </div>
               </div>
             ))}
+            {form.knownAllergenIds.length > 0 && (
+              <p className="field__hint" data-testid="allergy-processed-hint">
+                {t('allergy.processed.hint')}
+              </p>
+            )}
             <FoodPicker
               name="other-foods"
               legend={t('allergy.pick.other')}

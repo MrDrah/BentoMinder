@@ -10,9 +10,7 @@ import type { ExcludedRecipe, RankResult } from './rank.ts';
 export interface AllergenSummary {
   /** Allergens the recipe contains (labelled list). */
   allergenIds: string[];
-  /** Allergens that may be in some store-bought products (varies-by-product ingredients only). */
-  mayContainIds: string[];
-  /** A varies-by-product ingredient exists (US-E6-02/AC4 warning). */
+  /** A varies-by-product ingredient exists (no allergen line is claimed for it; the processed warning is separate, ADR 013). */
   varies: boolean;
   /** US-E6-03/AC3: no allergen and nothing varies, so the careful 「使用していません」 wording applies. */
   none: boolean;
@@ -22,7 +20,6 @@ export function allergenSummary(recipe: Recipe): AllergenSummary {
   const varies = recipe.ingredients.some((i) => i.allergenInfo === 'varies-by-product');
   return {
     allergenIds: recipe.allergenIds,
-    mayContainIds: varies ? recipe.mayContainAllergenIds : [],
     varies,
     none: recipe.allergenIds.length === 0 && !varies,
   };

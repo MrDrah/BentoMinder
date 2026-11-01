@@ -405,9 +405,9 @@ describe('US-E8-05 display theme', () => {
 });
 
 describe('M3-D03 an empty allergen container is not rendered', () => {
-  it('US-E6-04/AC1 a recipe with no allergens but a varies-by-product ingredient shows the warning and no empty allergen container', async () => {
+  it('US-E6-04/AC4 a recipe with no allergens but a processed ingredient shows the processed-food notice and no empty allergen container', async () => {
     await renderApp({ store: november(), now: jst('2026-11-02 10:00'), hash: '#/recipe/rcp-delish-niwatori-hiyoko-onigiri' });
-    expect(await screen.findByTestId('recipe-varies')).toHaveTextContent('市販品は');
+    expect(await screen.findByTestId('recipe-processed-notice')).toHaveTextContent('市販品には、登録したアレルゲン（えび）');
     expect(screen.queryByTestId('recipe-allergens')).toBeNull();
   });
 
