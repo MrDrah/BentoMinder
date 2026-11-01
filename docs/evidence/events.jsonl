@@ -232,3 +232,4 @@
 {"v":1,"at":"2026-11-01T09:13:30.875Z","by":"orchestrator","type":"task-start","task":"library-wave1","summary":"Task library-wave1 dispatched (7 allowed globs)"}
 {"v":1,"at":"2026-11-01T09:30:25.377Z","by":"orchestrator","type":"task-start","task":"library-wave2","summary":"Task library-wave2 dispatched (7 allowed globs)"}
 {"v":1,"at":"2026-11-01T09:46:01.400Z","by":"orchestrator","type":"task-start","task":"library-growth-fixes","summary":"Task library-growth-fixes dispatched (8 allowed globs)"}
+{"v":1,"at":"2026-11-01T12:32:20.508Z","type":"product-decision","summary":"PO: library at 92 recipes is enough for now; no label pass or verifier pass on the new batches yet"}
