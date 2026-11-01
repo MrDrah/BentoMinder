@@ -215,7 +215,7 @@
     ],
     "testCommand": "npx vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=reports/junit.xml",
     "coverageSummary": "coverage/coverage-summary.json",
-    "billingModel": "unknown",
+    "billingModel": "subscription",
     "usageLog": "docs/evidence/usage.jsonl",
     "pricing": null,
     "liveUrl": "https://mrdrah.github.io/BentoMinder/",
