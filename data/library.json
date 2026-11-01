@@ -539,8 +539,8 @@
       "en": "Bread rolls filled with curry-spiced cabbage and sausage, given nori faces to look like a bear and a bunny; everything is heated in the microwave, no hob needed."
     },
     "yield": {
-      "ja": "幼児1人分",
-      "en": "1 child portion"
+      "ja": "1人分",
+      "en": "1 portion"
     },
     "minutes": 30,
     "makeAhead": null,
@@ -811,7 +811,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-niwatori-hiyoko-onigiri",
@@ -1053,7 +1053,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-penguin-onigirazu-bento",
@@ -1416,7 +1416,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-penguin-seiretsu-bento",
@@ -1598,7 +1598,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-yaki-oyakodon-bento",
@@ -1882,7 +1882,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-house-hajimete-curry-chahan",
@@ -2168,8 +2168,8 @@
       "en": "A Japanese-style egg sandwich: an egg boiled the day before is mashed with mayonnaise, spread between two slices of bread and cut to fit the box, about 10 minutes in the morning."
     },
     "yield": {
-      "ja": "幼児1人分（サンドイッチ1組）",
-      "en": "1 child portion (one sandwich)"
+      "ja": "1人分（サンドイッチ1組）",
+      "en": "1 portion (one sandwich)"
     },
     "minutes": 10,
     "makeAhead": {
@@ -2314,8 +2314,8 @@
     "dietOk": [],
     "adaptations": [
       {
-        "ja": "元のレシピはサンドイッチ1組分で、そのまま幼児1人分としました。",
-        "en": "The source makes one sandwich, used here as one child portion."
+        "ja": "元のレシピはサンドイッチ1組分で、そのまま1人分としました。",
+        "en": "The source makes one sandwich, used here as one portion."
       },
       {
         "ja": "元のレシピは「半熟またはかたゆで」の卵ですが、お弁当用の安全上の注意に従って固ゆでにしました。",
@@ -2366,7 +2366,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-buta-ketchup-bento",
@@ -2703,7 +2703,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-niku-yasaimaki-bento",
@@ -3568,7 +3568,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-sake-hamburg-bento",
@@ -4378,7 +4378,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-tori-tamago-onigiri-bento",
@@ -4676,7 +4676,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-tuna-tamago-soboro-bento",
@@ -5583,8 +5583,8 @@
       "en": "Small hamburger patties made moist with grated carrot stay soft when cold; served with honey-glazed pumpkin and cabbage dressed with bonito flakes."
     },
     "yield": {
-      "ja": "幼児1人分",
-      "en": "1 child portion"
+      "ja": "1人分",
+      "en": "1 portion"
     },
     "minutes": 30,
     "makeAhead": null,
@@ -5913,7 +5913,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-nhk-ohanabatake-bento",
@@ -6638,6 +6638,6 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   }
 ]

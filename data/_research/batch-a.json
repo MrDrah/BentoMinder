@@ -335,7 +335,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-sake-hamburg-bento",
@@ -944,7 +944,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-tuna-tamago-soboro-bento",
@@ -2141,7 +2141,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-niku-yasaimaki-bento",
@@ -2776,7 +2776,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-sanshoku-mini-onigiri-bento",
@@ -3219,7 +3219,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-kikkoman-tori-tamago-onigiri-bento",
@@ -3517,7 +3517,7 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   },
   {
     "id": "rcp-delish-penguin-onigirazu-bento",
@@ -3880,6 +3880,6 @@
         ]
       }
     ],
-    "reviewedBy": "ba-research"
+    "reviewedBy": "verifier"
   }
 ]

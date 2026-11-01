@@ -1,7 +1,6 @@
 // QA: US-E6-07 curated library content, asserted over data/library.json (derived from the ACs; nothing from src/).
 // AC1 validity is the project's own validator command (scripts/validate-data.mjs) exiting 0 with no data/library.json line.
-// AC4 currently fails for every recipe (all are reviewedBy "ba-research"): PLAN §7 2026-10-31 open PO decision. It is kept
-// as an expected failure (it.fails) so it flips red the moment the verifier pass lands; defect D-H4-02.
+// AC4 (reviewedBy "verifier" on every shipped recipe) was an expected failure (defect D-H4-02) until the verifier pass over all 20 recipes landed (2026-11-01); it is now a normal test.
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
@@ -69,7 +68,7 @@ describe('US-E6-07 library content', () => {
   });
 
   // Expected failure while D-H4-02 is open: passes (as "failing as expected") until every recipe is verifier-reviewed.
-  it.fails('US-E6-07/AC4 D-H4-02 every shipped recipe has reviewedBy "verifier"', () => {
+  it('US-E6-07/AC4 (D-H4-02 fixed 2026-11-01) every shipped recipe has reviewedBy "verifier"', () => {
     expect(lib.filter((r) => r.reviewedBy !== 'verifier').map((r) => r.id)).toEqual([]);
   });
 });
