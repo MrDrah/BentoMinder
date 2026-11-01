@@ -1,0 +1,53 @@
+const { I, SRC, T } = require('../lib.cjs');
+module.exports = {
+  id: 'rcp-delish-chicken-wrap-sandwich',
+  name: T('鶏むね肉でラップサンド', 'Chicken breast wrap sandwiches'),
+  shortNameJa: 'ラップサンド',
+  shortNameEn: 'Wrap',
+  nameKana: 'とりむねにくでらっぷさんど',
+  style: 'western-inspired',
+  themeId: null,
+  description: T(
+    '薄くのばしたサンドイッチ用パンに、甘酸っぱいたれをからめた鶏むね肉とレタスをのせて巻く、トルティーヤ風のサンドです。',
+    'Thinly rolled sandwich bread wrapped around chicken breast glazed in a sweet-tangy sauce and lettuce, like a tortilla wrap.',
+  ),
+  yield: T('2人分（巻き4本）', '2 servings (4 rolls)'),
+  minutes: 30,
+  ingredients: [
+    I('ing-bread', 'サンドイッチ用パン', 'sandwich bread', 4, 'slice'),
+    I('ing-chicken-breast', '鶏むね肉（1枚）', 'chicken breast (1 piece)', 200, 'g'),
+    I('ing-salt', '塩', 'salt', null, 'small-amount'),
+    I('ing-pepper', 'こしょう', 'pepper', null, 'small-amount'),
+    I('ing-oil', 'サラダ油', 'cooking oil', 1, 'tbsp'),
+    I('ing-mayonnaise', 'マヨネーズ', 'mayonnaise', null, 'to-taste', { lab: { poss: ['alg-egg', 'alg-soybean'] } }),
+    I('ing-lettuce', 'サニーレタス', 'red-leaf lettuce', null, 'to-taste'),
+    I('ing-ketchup', 'ケチャップ', 'ketchup', 1, 'tbsp', { lab: { poss: [] } }),
+    I('ing-honey', 'はちみつ', 'honey', 1, 'tbsp'),
+    I('ing-worcester-sauce', 'ウスターソース', 'Worcestershire-style sauce', 1, 'tsp', { lab: { poss: ['alg-wheat', 'alg-soybean', 'alg-apple'] }, known: true }),
+  ],
+  steps: [
+    T('鶏むね肉を4等分に切り、塩とこしょうをふる。', 'Cut the chicken breast into four pieces and season with salt and pepper.'),
+    T('フライパンに油を熱し、鶏肉を中火で焼き色がつくまで焼く。裏返してふたをし、弱火で3分ほど、中まで火を通す。', 'Heat the oil in a frying pan and brown the chicken over medium heat. Turn it, cover and cook over low heat for about 3 minutes until cooked through.'),
+    T('ケチャップ、はちみつ、ソースを回し入れ、鶏肉にまんべんなくからませる。', 'Add the ketchup, honey and sauce and coat the chicken all over.'),
+    T('ラップを広げてパンをのせ、めん棒で薄くのばす。マヨネーズをぬり、サニーレタスと鶏肉をのせてくるくる巻く。', 'Spread out cling film, lay a slice of bread on it and roll it thin with a rolling pin. Spread mayonnaise, add lettuce and a piece of chicken and roll it up.'),
+  ],
+  storage: [
+    T('鶏肉は中心までしっかり火を通します。たれがからんだら、汁けが残らないようにします。', 'Cook the chicken through to the centre, and make sure no liquid is left once the sauce has coated it.'),
+    T('生野菜のレタスはよく洗って水けをきってから巻きます。', 'Wash the lettuce well and drain it before rolling.'),
+    T('十分に冷ましてから詰め、保冷剤や保冷バッグで涼しく保って早めに食べます。', 'Cool everything fully before packing, keep it cool with an ice pack or cool bag and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは2人分（巻き4本）で、幼児向けの量とは書かれていません。分量は元のままです。', 'The source makes 2 servings (4 rolls) and does not state a child portion. Amounts are unchanged.'),
+    T('元のレシピの「塩こしょう」は、塩とこしょうの2つに分けて、どちらも少々としました。', 'The source\'s "salt and pepper" is split into salt and pepper, each a pinch.'),
+    T('元のレシピのサニーレタスは、辞書にある「レタス」として記録しています。マヨネーズは味の素「ピュアセレクト」、ケチャップはデルモンテ、ソースはキッコーマン「デリシャスソース ウスター」の表示を参照しました。製品によって違うので、表示を確認してください。', 'Red-leaf lettuce is recorded as lettuce. Allergens for the mayonnaise (Ajinomoto Pure Select), ketchup (Del Monte) and sauce (Kikkoman Delicious Sauce Worcester) follow those labels; products differ, so check yours.'),
+    T('ウスターソースは参照した表示に動物由来の原材料がないため、動物由来が分かっている材料として記録しています。', 'The sauce is recorded as having known animal origin (none) because the cited label lists no animal-derived ingredient.'),
+    T('サンドイッチ用パンは製品の表示が参照できなかったため、アレルゲンと動物由来は不明として記録しています。元のレシピは、トルティーヤの代わりにパンを使うアイデアです。', 'No label was found for the sandwich bread, so its allergens and animal origin are recorded as unknown. The source uses bread in place of a tortilla.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-chicken-wrap-sandwich', '見た目も可愛い♡ 鶏むね肉でラップサンドのレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/145870359663477235', ['recipe']),
+    SRC.mayo(),
+    SRC.ketchup(),
+    SRC.uster(),
+    SRC.maff(),
+  ],
+};

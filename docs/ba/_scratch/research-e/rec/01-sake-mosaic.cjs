@@ -1,0 +1,57 @@
+const { I, SRC, T } = require('../lib.cjs');
+const HONTSUYU = { src: 'hontsuyu', poss: ['alg-wheat', 'alg-soybean'] };
+module.exports = {
+  id: 'rcp-delish-sake-soboro-mosaic-bento',
+  name: T('鮭そぼろのモザイク弁当', 'Salmon soboro mosaic bento'),
+  shortNameJa: '鮭モザイク',
+  shortNameEn: 'Mosaic',
+  nameKana: 'さけそぼろのもざいくべんとう',
+  style: 'japanese',
+  themeId: null,
+  description: T(
+    'ごはんの上に、ほぐした鮭、黄色い炒り卵、緑の小松菜を交互にのせて、しま模様に仕上げる彩りのよいそぼろ弁当です。',
+    'A colourful soboro bento: flaked salmon, yellow scrambled egg and green komatsuna laid in alternating stripes over rice.',
+  ),
+  yield: T('1人分（ごはん150g）', '1 serving (150 g rice)'),
+  minutes: 30,
+  ingredients: [
+    I('ing-rice', '白ごはん（お茶碗1杯）', 'cooked white rice (1 rice bowl)', 150, 'g'),
+    I('ing-salmon', '生鮭（1切れ）', 'fresh salmon (1 fillet)', 60, 'g'),
+    I('ing-cooking-sake', '酒（鮭そぼろ用）', 'cooking sake (for the salmon)', 1, 'tbsp'),
+    I('ing-mirin', 'みりん（鮭そぼろ用）', 'mirin (for the salmon)', 1, 'tbsp'),
+    I('ing-salt', '塩（鮭そぼろ用）', 'salt (for the salmon)', 0.33, 'tsp'),
+    I('ing-sesame-oil', 'ごま油', 'sesame oil', 1, 'tsp'),
+    I('ing-sesame', '白いりごま', 'toasted white sesame seeds', 0.5, 'tsp'),
+    I('ing-egg', '卵', 'egg', 1, 'piece'),
+    I('ing-sugar', '砂糖（炒り卵用）', 'sugar (for the scrambled egg)', 0.5, 'tsp'),
+    I('ing-potato-starch', '片栗粉（炒り卵用）', 'potato starch (for the scrambled egg)', 1, 'tsp'),
+    I('ing-oil', 'サラダ油（炒り卵用）', 'cooking oil (for the scrambled egg)', 1, 'tsp'),
+    I('ing-komatsuna', '小松菜（1/3袋）', 'komatsuna (1/3 bag)', 0.33, 'piece'),
+    I('ing-mentsuyu', 'めんつゆ（3倍濃縮）', 'mentsuyu (3x concentrate)', 1, 'tsp', { lab: HONTSUYU, known: true }),
+  ],
+  steps: [
+    T('小松菜を水でぬらしてラップにくるみ、電子レンジ（600W）に1分かける。冷水にとり、しっかり絞って4cm長さに切る。', 'Dip the komatsuna in water, wrap it in cling film and microwave at 600 W for 1 minute. Cool it in water, squeeze it dry and cut it into 4 cm lengths.'),
+    T('小松菜をバットに入れ、めんつゆをからめてお浸しにする。', 'Toss the komatsuna with the mentsuyu in a tray to make a simple dressed side.'),
+    T('ボウルに卵、砂糖、片栗粉を入れて混ぜる。', 'Mix the egg, sugar and potato starch in a bowl.'),
+    T('フライパンに油を中火で熱して卵液を流し、混ぜながら完全に火を通して炒り卵にし、冷ます。', 'Heat the oil in a frying pan over medium heat, pour in the egg and stir until it is fully cooked through. Let it cool.'),
+    T('フライパンをペーパーで拭き、鮭、酒、みりんを入れて中火にかける。煮立ったら裏返し、色が変わったら骨と皮を除いてほぐしながら、水分がなくなるまで炒める。', 'Wipe the pan, add the salmon, sake and mirin and heat over medium. When it boils, turn the fish; once it changes colour, remove skin and bones, flake it and stir-fry until the liquid is gone.'),
+    T('塩・ごま油・ごまを入れてなじませ、粗熱をとる。', 'Stir in the salt, sesame oil and sesame seeds, then let it cool.'),
+    T('弁当箱にごはんを敷いて冷ましたら、その上に鮭、卵、小松菜を交互に並べる。', 'Pack the rice in the lunchbox and let it cool. Lay the salmon, egg and komatsuna on top in alternating stripes.'),
+  ],
+  storage: [
+    T('ごはんは温かいうちに詰めて、しっかり冷ましてから蓋を閉めます。おかずも十分に冷まします。', 'Pack the rice while warm, then cool it well before closing the lid; cool the toppings thoroughly too.'),
+    T('卵は半熟にせず、中まで火を通します。', 'Cook the egg all the way through; avoid a soft or runny result.'),
+    T('夏場や梅雨は避け、保冷剤や保冷バッグを使うか冷蔵庫で保管して、早めに食べます。', 'Avoid hot, humid weather where you can; use an ice pack and a cool bag or keep it in the fridge, and eat it soon.'),
+  ],
+  adaptations: [
+    T('元のレシピは1人分で、幼児向けの量とは書かれていません（ごはんはお茶碗1杯150g）。分量は変えず、元の表記のままにしています。', 'The source is written for 1 serving and does not say it is a child portion (150 g rice in a bowl). Amounts are kept exactly as the source states them.'),
+    T('小松菜は元のレシピで1/3袋とされていて重さの記載がないため、1/3個分として数値を入れています。', 'The source gives the komatsuna as 1/3 of a bag with no weight, so it is entered as 0.33 of one unit.'),
+    T('元のレシピのめんつゆは3倍濃縮です。アレルゲンは濃縮4倍のキッコーマン「濃いだし 本つゆ」の表示（小麦・大豆）を参照しました。使う製品の表示を必ず確認してください。', 'The source calls for 3x concentrate mentsuyu. The allergens come from the label of Kikkoman Koidashi Hontsuyu (4x concentrate: wheat, soy), so always check the label of the product you use.'),
+    T('めんつゆは、かつお節などの魚の節を使う製品の表示にもとづき、魚由来（fish-seafood）として記録しています。', 'Mentsuyu is recorded as fish-derived because the cited label lists bonito and other fish flakes.'),
+    T('塩の分量は鮭そぼろ用の小さじ1/3（0.33）です。', 'The salt is the 1/3 teaspoon (0.33) listed for the salmon.'),
+  ],
+  sources: [
+    SRC.delish('src-delish-sake-soboro-mosaic', 'カラフルおしゃれ♪ 鮭そぼろのモザイク弁当のレシピ動画・作り方 | デリッシュキッチン', 'https://delishkitchen.tv/recipes/169910713454690707'),
+    SRC.hontsuyu(),
+  ],
+};

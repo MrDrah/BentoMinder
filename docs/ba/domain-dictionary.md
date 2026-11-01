@@ -440,3 +440,27 @@ Rows appended by the research agents of the library growth batches (c–h): same
 
 | id | 表記 | よみ | English | category | synonyms | inherent allergens | info | animalOrigin |
 |---|---|---|---|---|---|---|---|---|
+| ing-pepper | こしょう | こしょう | Pepper | cat-seasoning | 胡椒, コショウ, 黒こしょう, 白こしょう, ブラックペッパー, 粗びき黒こしょう | – | known | – |
+| ing-parsley | パセリ | ぱせり | Parsley | cat-green-vegetable | – | – | known | – |
+| ing-olive-oil | オリーブオイル | おりーぶおいる | Olive oil | cat-seasoning | オリーブ油, エキストラバージンオリーブオイル | – | known | – |
+| ing-red-wine | 赤ワイン | あかわいん | Red wine (for cooking) | cat-seasoning | ワイン, ワイン（赤）, 料理用ワイン | – | known | – |
+| ing-hoisin-sauce | ホイシンソース | ほいしんそーす | Hoisin sauce | cat-seasoning | 海鮮醤, ホイシン | – | varies | – |
+| ing-watercress | クレソン | くれそん | Watercress | cat-leafy-vegetable | ウォータークレス | – | known | – |
+| ing-mentsuyu | めんつゆ | めんつゆ | Mentsuyu (noodle dipping sauce concentrate) | cat-seasoning | 麺つゆ, そばつゆ, 本つゆ | – | varies | fish-seafood, ? |
+| ing-benishoga | 紅しょうが | べにしょうが | Red pickled ginger | cat-vegetable | 紅生姜, 紅ショウガ | – | varies | – |
+| ing-snap-peas | スナップエンドウ | すなっぷえんどう | Sugar snap peas | cat-green-vegetable | スナップえんどう, スナックエンドウ, スナップ豆 | – | known | – |
+| ing-pea-shoots | 豆苗 | とうみょう | Pea shoots | cat-green-vegetable | とうみょう, エンドウ豆苗 | – | known | – |
+| ing-umeboshi | 梅干し | うめぼし | Umeboshi (salt-pickled plum) | cat-vegetable | 梅干, うめぼし, 梅漬け | – | varies | – |
+| ing-shibazuke | しば漬け | しばづけ | Shibazuke (pickled aubergine and shiso) | cat-vegetable | 柴漬け, しば漬, 柴漬 | – | varies | – |
+| ing-yakiniku-sauce | 焼肉のたれ | やきにくのたれ | Yakiniku sauce | cat-seasoning | 焼き肉のたれ, 焼肉のタレ, 焼き肉のタレ | – | varies | ? |
+| ing-oyster-sauce | オイスターソース | おいすたーそーす | Oyster sauce | cat-seasoning | 牡蠣ソース, カキソース | – | varies | fish-seafood |
+| ing-chili-pepper | 唐辛子 | とうがらし | Chili pepper | cat-seasoning | とうがらし, 赤唐辛子, 鷹の爪, 輪切り唐辛子 | – | known | – |
+| ing-harumaki-wrapper | 春巻きの皮 | はるまきのかわ | Spring-roll wrapper | cat-grain | 春巻の皮 | alg-wheat | varies | ? |
+| ing-canned-mackerel | さば缶 | さばかん | Canned mackerel | cat-fish | サバ缶, さばの缶詰, さばのしょうゆ煮, さばの味噌煮, さば水煮缶 | alg-mackerel | varies | fish-seafood |
+| ing-gochujang | コチュジャン | こちゅじゃん | Gochujang (Korean chilli paste) | cat-seasoning | – | – | varies | ? |
+| ing-chicken-soup-base | 鶏がらスープの素 | とりがらすーぷのもと | Chicken stock granules | cat-seasoning | 鶏ガラスープの素, 鶏がらスープ, 中華スープの素, 顆粒チキンスープ, チキンスープの素 | – | varies | chicken, ? |
+| ing-olive | オリーブ | おりーぶ | Olive (fruit, brined) | cat-fruit | グリーンオリーブ, ブラックオリーブ, オリーブの実 | – | known | – |
+| ing-mustard-powder | マスタードパウダー | ますたーどぱうだー | Mustard powder | cat-seasoning | 粉からし, 粉マスタード | – | varies | – |
+| ing-basil | バジル | ばじる | Basil (fresh leaves) | cat-green-vegetable | バジルの葉, フレッシュバジル | – | known | – |
+| ing-shishito | ししとう | ししとう | Shishito pepper | cat-green-vegetable | しし唐, しし唐辛子, ししとうがらし, 獅子唐 | – | known | – |
+| ing-pesto | バジルペースト | ばじるぺーすと | Basil pesto | cat-seasoning | バジルソース, ジェノベーゼ, ジェノバソース | – | varies | dairy, ? |

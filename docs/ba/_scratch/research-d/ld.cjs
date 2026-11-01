@@ -1,0 +1,3 @@
+const fs=require('fs');const h=fs.readFileSync(process.argv[2],'utf8');
+const re=/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/g;let m;
+while((m=re.exec(h))){try{let j=JSON.parse(m[1]);const arr=Array.isArray(j)?j:(j['@graph']||[j]);for(const x of arr){if(x['@type']==='Recipe'||(Array.isArray(x['@type'])&&x['@type'].includes('Recipe'))){console.log('NAME',x.name);console.log('YIELD',x.recipeYield,'TIME',x.totalTime,x.cookTime,x.prepTime);console.log('ING',JSON.stringify(x.recipeIngredient));console.log('STEPS',JSON.stringify((x.recipeInstructions||[]).map(s=>s.text||s)));console.log('DESC',x.description)}}}catch(e){console.log('err',e.message)}}

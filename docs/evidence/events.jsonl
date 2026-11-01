@@ -226,3 +226,8 @@
 {"v":1,"at":"2026-11-01T02:21:36.760Z","by":"orchestrator","type":"task-end","task":"metrics-mvp-r2","outcome":"success","summary":"diff-guard: 0 changed files, all allowed"}
 {"v":1,"at":"2026-11-01T02:21:36.960Z","type":"milestone","milestone":"mvp","by":"metrics","summary":"Evidence package mvp-r2 frozen (UNVERIFIED)"}
 {"v":1,"at":"2026-11-01T02:25:06.809Z","type":"product-decision","summary":"PO: MVP runs locally only; no hosted proxy. Real AI import via npm run dev with the PO's key; Pages preview stays mock-only"}
+{"v":1,"at":"2026-11-01T08:34:28.495Z","by":"orchestrator","type":"task-start","task":"library-candidates","summary":"Task library-candidates dispatched (3 allowed globs)"}
+{"v":1,"at":"2026-11-01T08:34:28.610Z","type":"product-decision","summary":"PO: grow recipe library to about 100 recipes, no tests for now; also wants a mock November menu PDF to try the Gemini import"}
+{"v":1,"at":"2026-11-01T08:56:13.910Z","by":"orchestrator","type":"task-start","task":"library-candidates-2","summary":"Task library-candidates-2 dispatched (3 allowed globs)"}
+{"v":1,"at":"2026-11-01T09:13:30.875Z","by":"orchestrator","type":"task-start","task":"library-wave1","summary":"Task library-wave1 dispatched (7 allowed globs)"}
+{"v":1,"at":"2026-11-01T09:30:25.377Z","by":"orchestrator","type":"task-start","task":"library-wave2","summary":"Task library-wave2 dispatched (7 allowed globs)"}

@@ -1,0 +1,99 @@
+M|d-sakekomi|鮭の炊き込みごはん弁当|Salmon takikomi rice bento|jp|10|p|Sa,So|one-pot-rice,fish,autumn|
+M|d-soboro-edamame|甘辛そぼろの枝豆ごはん|Sweet-savoury soboro and edamame rice|jp|10|p|P,Se|rice,meat,summer,quick|
+M|d-2shokusoboro|レンジで簡単！ 2色そぼろ弁当|Microwave two-colour soboro bento|jp|10|p|Ch,E|rice,egg,quick|
+M|n-18359|鶏そぼろ弁当|Chicken soboro bento|jp|40|e|Ch,E|rice,egg|
+M|n-19062|さばそぼろ弁当|Mackerel soboro bento|jp|40|e|Mk,So|rice,fish|
+M|d-sakemosaic|鮭そぼろのモザイク弁当|Salmon soboro mosaic bento|jp|30|p|Sa,Se|rice,fish,colourful|
+M|d-soboromille|レンジそぼろのミルフィーユ弁当|Microwave soboro layered rice bento|jp|20|p|Ch|rice,meat,quick|
+M|n-1468|一口そぼろ弁当|Bite-size soboro bento|jp|10|p|Ch,E,M|rice,egg,small-portion|
+M|k-takenokotsukune|たけのこ入りつくね弁当|Bamboo-shoot chicken tsukune bento|jp|15|p|Ch,E,W|meat|
+M|d-tsukuneonly|つくねだけ弁当|Tsukune-only bento|jp|10|p|Ch|meat,rice,quick|
+M|d-soccer|サッカーボールおにぎり弁当|Soccer ball rice ball bento|jp|15|p|Sa|onigiri,fish,character,quick|theme-stars
+M|d-panda|パンダのおにぎり|Panda rice ball|jp|10|p||onigiri,character,vegetarian,quick|theme-animals
+M|d-donguri|どんぐりとリスのおにぎり|Acorn and squirrel rice balls|jp|15|p|P,W|onigiri,character,autumn,quick|theme-animals
+M|d-undokai|運動会応援弁当|Sports-day cheer bento|jp|30|p|Cr,W|onigiri,autumn,character|theme-seasonal
+M|d-kumakazari|クマの飾りまき|Bear decorative rice rolls|jp|20|p|Cr|onigiri,fish,character|theme-animals
+M|d-nekoinari|ネコのきのこいなり寿司|Cat mushroom inari sushi|jp|30|p|Ch,So|onigiri,character|theme-animals
+M|d-inarizukin|稲荷ずきんちゃん|Little Red Inari rice pockets|jp|15|p|So|onigiri,vegetarian,character,quick|
+M|d-nikumakionigiri|スティック肉巻きおにぎり|Meat-wrapped rice stick|jp|30|p|P,So|onigiri,meat|
+R|n-21963|のり巻き弁当|Nori roll bento|jp|40|e|E,So,Cr|onigiri,egg|
+R|n-19549|包みいなりずし弁当|Wrapped inari sushi bento|jp|45|e|Sa,Ch,So,E|onigiri,fish|
+M|n-41062|焼きおにぎり弁当|Grilled rice ball bento|jp|30|e|So,Mk|onigiri,fish|
+M|n-43442|じゃこおにぎりと鶏ひき肉のみそ煮プレート|Dried-fish rice balls with chicken-miso plate|jp|15|p|Ch,So,Se|onigiri,meat,winter,quick|
+M|n-12142|カラフルおにぎり弁当|Colourful rice ball bento|jp|40|e|Sh,Se,So|onigiri,spring|
+M|n-19544|春色おにぎり弁当|Spring rice ball bento|jp|45|e|B,E,Se,So|onigiri,spring|
+M|n-17096|鮭としめじの照り焼き弁当|Salmon and shimeji teriyaki bento|jp|15|p|Sa,So|fish,winter,quick|
+M|d-sakefry|鮭フライ弁当|Salmon fry bento|jp|15|p|Sa,E,W|fish,quick|
+M|k-ebikaraage|えびの揚げ物弁当|Fried shrimp bento|jp|15|p|Sh,E,W|fish|
+M|k-minikakiage|ミニかき揚げ弁当|Mini kakiage tempura bento|jp|10|p|E,W,Sh|vegetable,quick|
+M|k-kitsune|きつねつくねサンド弁当|Fox-style tsukune pocket bento|jp|10|p|Ch,So,E|meat,quick|
+M|d-nanohana|菜の花とえびの春色おにぎり|Rape-blossom and shrimp spring rice balls|jp|15|p|Sh,E|onigiri,spring,quick|
+M|d-corn-edamame|とうもろこしと枝豆の混ぜご飯|Corn and edamame mixed rice|jp|10|p|So|rice,vegetable,summer,vegetarian-or-fish-only,quick|
+M|d-broccoli-mazegohan|ブロッコリーとしょうがの混ぜご飯|Broccoli and ginger mixed rice|jp|5|p||rice,vegetable,vegetarian,quick|
+M|d-kurishimeji|栗としめじの炊き込みごはん|Chestnut and shimeji takikomi rice|jp|60|p|So|one-pot-rice,vegetable,autumn|
+M|d-akinomikaku|秋の味覚弁当|Autumn flavours bento|jp|20|p|P,So|rice,meat,autumn,quick|
+M|d-satsumaimo-gohan|さつまいもごはん弁当|Sweet potato rice bento|jp|30|p|Ch,So|one-pot-rice,autumn|
+M|d-sasami-nori|ささみの唐揚げのり弁当|Chicken tender karaage nori bento|jp|20|p|Ch,So|meat,quick|
+M|d-gyudon|牛丼弁当|Gyudon beef bowl bento|jp|20|p|B,So|rice,meat,quick|
+M|d-reindeer|トナカイ弁当|Reindeer bento|jp|10|p|P,So|onigiri,character,winter,quick|theme-seasonal
+M|d-sakura|満開サクラ弁当|Cherry blossom bento|jp|15|p|P,W|onigiri,spring,character,quick|theme-flowers
+M|d-yakiudon|焼うどん弁当|Yaki-udon bento|jp|15|p|P,W,So|noodles,quick|
+M|n-1465|魚のみそづけ焼き弁当 幼児向け|Miso-marinated fish bento (for small children)|jp|10|p|Se,M|fish,quick|
+R|n-14|豚肉とえのきの甘辛煮弁当 幼児向け|Sweet-savoury pork and enoki bento (for small children)|jp|20|e|P,W,E,M|meat|
+R|n-41484|さけ弁当|Salmon bento|jp|10|p|Sa,E|fish,egg,quick|
+R|d-hanamaki|お花のくるくる巻き弁当|Spiral flower roll bento|jp|30|p|Cr,W|character,spring|theme-flowers
+R|d-wappa|旬を楽しむわっぱ弁当|Seasonal wappa bento|jp|20|p|P,So|rice,autumn,quick|
+R|d-satsumaimo-chicken|さつまいもと鶏肉のバター炒め弁当|Sweet potato and chicken butter-sauté bento|jp|30|p|Ch,M|meat,autumn|
+R|j-chicken-nanban|チキン南蛮弁当|Chicken nanban bento|jp|15|p|Ch,E,W,So|meat,egg,quick|
+R|n-18353|野菜たっぷり焼きそば弁当|Vegetable-loaded yakisoba bento|jp|15|p|P,W,So|noodles,vegetable,quick|
+R|k-tsukune|鶏つくね弁当|Chicken tsukune bento|jp|20|p|Ch,E|meat,quick|
+M|n-17106|ナポリタン弁当|Napolitan spaghetti bento|west|20|p|W|noodles,pasta|
+M|n-17107|じゃこと野菜のパスタ弁当|Dried-fish and vegetable pasta bento|west|20|p|W|noodles,pasta,fish,vegetable|
+M|n-780|コーンバーグ弁当 幼児向け|Corn hamburger steak bento (for small children)|west|30|e|B,P,E,W,M|meat|
+M|n-11626|ミートボール弁当|Meatball bento|west|30|e|E,W,M|meat,egg|
+M|n-17101|フローズンサンド弁当|Frozen sandwich bento|west|25|p|E,M,W|sandwich,egg,summer|
+M|n-18755|2階建てサンド弁当|Two-storey sandwich bento|west|25|p|E,W,M|sandwich,egg|
+M|k-cornball|ひき肉入りコーンボール弁当|Corn and mince ball bento|west|20|p|E,W,M|meat|
+M|k-menchikatsu|ひと口メンチカツ弁当|Bite-size minced cutlet bento|west|20|p|E,W,P,B|meat|
+M|k-potetokoroke|ポテトコロッケ弁当|Potato croquette bento|west|20|p|E,W,M|vegetable|
+M|k-butahirepanko|豚ヒレ肉のパン粉焼き弁当|Oven-crumbed pork fillet bento|west|15|p|P,W|meat,quick|
+M|k-asuparatizumaki|アスパラチーズ巻き焼き弁当|Asparagus and cheese roll bento|west|15|p|P,M,W|meat,vegetable,quick|
+M|k-hunburg|ミニハンバーグ弁当|Mini hamburger steak bento|west|20|p|B,P,E,W,M|meat,quick|
+M|d-kumahamburg|くまのハンバーグ|Bear-shaped hamburger steak|west|30|p|B,P,W,M|meat,character|theme-animals
+M|d-wrapchicken|鶏むね肉でラップサンド|Chicken breast wrap sandwiches|west|30|p|Ch,W,E|sandwich,meat|
+M|d-picnicwrap|ピクニックラップサンド|Picnic wrap sandwiches|west|20|p|W|sandwich,quick|
+M|d-cafesand|カフェ風サンドイッチお弁当|Cafe-style sandwich bento|west|40|p|E,M,W|sandwich,egg|
+M|d-yofusoboro|洋風そぼろ弁当|Western-style soboro bento|west|15|p|B,P,E|rice,meat,quick|
+M|d-taco|タコライス弁当|Taco rice bento|west|20|p|B,P,M|rice,meat,quick|
+M|d-halloweenpumpkin|パンプキン弁当|Pumpkin bento|west|20|p|P,W|rice,character,autumn,quick|theme-seasonal
+M|d-kumahiyo|くまヒヨ弁当|Bear and chick bento|west|30|p|P,W,E|onigiri,character|theme-animals
+M|d-lion|お花畑ライオン|Flower-garden lion bento|west|20|p|P,M,W|rice,character,quick|theme-animals
+M|d-5min|レンジで3品！ 5分弁当|Three microwave dishes in 5 minutes|west|5|p|P,E,M|egg,quick|
+M|d-flower|卵焼き器で4品！ フラワー弁当|Four dishes in one egg pan, flower bento|west|15|p|P,E,W|egg,character,quick|theme-flowers
+M|d-kirin|卵焼きを使って！ キリンさんのデコ弁|Giraffe bento from tamagoyaki|west|20|p|E|egg,character,quick|theme-animals
+M|d-nyugaku|春満開！ 入学式のお弁当|Spring school-entrance bento|west|40|p|Ch,P,W|rice,spring|theme-flowers
+M|d-snowmanmeatball|雪だるまとうずらの卵入りミートボール弁当|Snowman quail-egg meatball bento|west|30|p|P,E,Cr,W|meat,character,winter|theme-seasonal
+M|b-super-wraps|スーパーサラダラップ|Super-salad wraps|west|5|p|W,Se|sandwich,vegetable,vegetarian,quick|
+R|n-22045|コールスローサラダとコンビーフのホットサンド弁当|Coleslaw and corned-beef hot sandwich bento|west|30|e|B,W,E,M|sandwich|
+R|d-halloweenbento|ハロウィン弁当|Halloween bento|west|30|p|P,W|rice,character,autumn|theme-seasonal
+R|d-tamagoyaki5|卵焼き器５分弁当|Five-minute egg-pan bento|west|5|p|E,W,M|egg,quick|
+R|d-teritama|てりたま豚こまボール|Teriyaki-egg pork balls|west|20|p|P,E|meat,egg,quick|
+R|d-kumanugget|くまちゃんナゲット|Teddy-bear chicken nuggets|west|30|p|Ch,E,W,So|meat,character|theme-animals
+R|b-lunchbox-pasta|ランチボックス・パスタサラダ|Lunchbox pasta salad|west|26|p|W,M,E|pasta,vegetable|
+R|n-10239|かじきのスパイシーマヨステーキ弁当|Swordfish steak with spicy mayo bento|west|15|p|E,M,W|fish,quick|
+R|d-meatballporkchop|ミートボールのポークチャップ弁当|Meatball pork-chop bento|west|30|p|P,W|meat|
+M|n-13035|韓国風のり巻き弁当|Korean-style nori roll (kimbap) bento|other|15|p|B,Se,So|onigiri,vegetable|
+M|n-18659|ドライカレー弁当|Dry curry bento|other|40|e|E,W|rice,meat|
+M|d-shumai|5分で簡単！ レンジしゅうまい弁当|Microwave shumai bento|other|15|p|P,Cr,W|rice,meat,quick|
+M|d-nasigoreng|忙しい朝におすすめ！ ナシゴレン風弁当|Nasi-goreng-style bento|other|20|p|Ch,E,So|rice,egg,quick|
+M|d-khaomangai|ささみでレンチンカオマンガイ風弁当|Microwave khao-man-gai-style chicken rice bento|other|15|p|Ch,Se,So|rice,meat,quick|
+M|b-hoisin-wraps|ホイシンソースのラップ|Hoisin chicken wraps|other|10|p|W,Ch,So,Se|sandwich,meat,quick|
+M|b-falafel|ファラフェル・ランチボックス|Falafel lunchbox|other|10|p|Se,W|vegetable,vegetarian,quick|
+M|k-ebichahan|えびチャーハン弁当|Shrimp fried rice bento|other|20|p|Sh,E,W|rice,fish,quick|
+M|n-3716|カレーそぼろむすび|Curry soboro rice balls|other|10|p|Ch,W|onigiri,meat,quick|
+M|d-keema|和風キーマカレー弁当|Japanese-style keema curry bento|other|20|p|B,P,W|rice,meat,quick|
+M|b-veggie-olive|ベジタブルとオリーブのラップ|Veggie olive wraps|other|10|p|W|sandwich,vegetable,vegetarian,quick|
+M|b-coronation|コロネーション・ひよこ豆サンド|Coronation chickpea sandwich filler|other|8|p|E,W,M|sandwich,vegetable,vegetarian,quick|
+R|b-couscous|サマー・クスクスサラダ|Summer couscous salad|other|40|p|W|vegetable,vegetarian,summer|
+M|n-44511|さば缶おにぎり|Canned-mackerel rice ball|jp|5|p|Mk,So,Se|onigiri,fish,quick|
+M|s-yakionigiri|焼きおにぎり|Grilled rice balls (yaki-onigiri)|jp|20|p|So|onigiri,vegetarian-or-fish-only,quick|

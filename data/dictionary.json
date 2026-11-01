@@ -4474,6 +4474,532 @@
       "animalOriginKnown": true,
       "seasoning": false,
       "note": null
+    },
+    {
+      "id": "ing-pepper",
+      "ja": "こしょう",
+      "kana": "こしょう",
+      "en": "Pepper",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "こしょう",
+        "胡椒",
+        "黒こしょう",
+        "白こしょう",
+        "ブラックペッパー",
+        "粗びき黒こしょう"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-parsley",
+      "ja": "パセリ",
+      "kana": "ぱせり",
+      "en": "Parsley",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "パセリ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-olive-oil",
+      "ja": "オリーブオイル",
+      "kana": "おりーぶおいる",
+      "en": "Olive oil",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "オリーブオイル",
+        "オリーブ油",
+        "エキストラバージンオリーブオイル"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-red-wine",
+      "ja": "赤ワイン",
+      "kana": "あかわいん",
+      "en": "Red wine (for cooking)",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "赤ワイン",
+        "ワイン",
+        "料理用ワイン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-hoisin-sauce",
+      "ja": "ホイシンソース",
+      "kana": "ほいしんそーす",
+      "en": "Hoisin sauce",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ホイシンソース",
+        "海鮮醤",
+        "ホイシン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-watercress",
+      "ja": "クレソン",
+      "kana": "くれそん",
+      "en": "Watercress",
+      "categoryIds": [
+        "cat-leafy-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "クレソン",
+        "ウォータークレス"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mentsuyu",
+      "ja": "めんつゆ",
+      "kana": "めんつゆ",
+      "en": "Mentsuyu (noodle dipping sauce concentrate)",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "めんつゆ",
+        "麺つゆ",
+        "そばつゆ",
+        "本つゆ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-benishoga",
+      "ja": "紅しょうが",
+      "kana": "べにしょうが",
+      "en": "Red pickled ginger",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "紅しょうが",
+        "紅生姜"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-snap-peas",
+      "ja": "スナップエンドウ",
+      "kana": "すなっぷえんどう",
+      "en": "Sugar snap peas",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "スナップエンドウ",
+        "スナックエンドウ",
+        "スナップ豆"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-pea-shoots",
+      "ja": "豆苗",
+      "kana": "とうみょう",
+      "en": "Pea shoots",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "豆苗",
+        "とうみょう",
+        "エンドウ豆苗"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-umeboshi",
+      "ja": "梅干し",
+      "kana": "うめぼし",
+      "en": "Umeboshi (salt-pickled plum)",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "梅干し",
+        "梅干",
+        "うめぼし",
+        "梅漬け"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shibazuke",
+      "ja": "しば漬け",
+      "kana": "しばづけ",
+      "en": "Shibazuke (pickled aubergine and shiso)",
+      "categoryIds": [
+        "cat-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "しば漬け",
+        "柴漬け",
+        "しば漬",
+        "柴漬"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-yakiniku-sauce",
+      "ja": "焼肉のたれ",
+      "kana": "やきにくのたれ",
+      "en": "Yakiniku sauce",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "焼肉のたれ",
+        "焼き肉のたれ"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-oyster-sauce",
+      "ja": "オイスターソース",
+      "kana": "おいすたーそーす",
+      "en": "Oyster sauce",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "オイスターソース",
+        "牡蠣ソース",
+        "カキソース"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-chili-pepper",
+      "ja": "唐辛子",
+      "kana": "とうがらし",
+      "en": "Chili pepper",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "唐辛子",
+        "とうがらし",
+        "赤唐辛子",
+        "鷹の爪",
+        "輪切り唐辛子"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-harumaki-wrapper",
+      "ja": "春巻きの皮",
+      "kana": "はるまきのかわ",
+      "en": "Spring-roll wrapper",
+      "categoryIds": [
+        "cat-grain"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "春巻きの皮",
+        "春巻の皮"
+      ],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": false,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-canned-mackerel",
+      "ja": "さば缶",
+      "kana": "さばかん",
+      "en": "Canned mackerel",
+      "categoryIds": [
+        "cat-fish"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "さば缶",
+        "さばの缶詰",
+        "さばのしょうゆ煮",
+        "さばの味噌煮",
+        "さば水煮缶"
+      ],
+      "inherentAllergenIds": [
+        "alg-mackerel"
+      ],
+      "info": "varies",
+      "animalOrigin": [
+        "fish-seafood"
+      ],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-gochujang",
+      "ja": "コチュジャン",
+      "kana": "こちゅじゃん",
+      "en": "Gochujang (Korean chilli paste)",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "コチュジャン"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-chicken-soup-base",
+      "ja": "鶏がらスープの素",
+      "kana": "とりがらすーぷのもと",
+      "en": "Chicken stock granules",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "鶏がらスープの素",
+        "鶏がらスープ",
+        "中華スープの素",
+        "顆粒チキンスープ",
+        "チキンスープの素"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "chicken"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-olive",
+      "ja": "オリーブ",
+      "kana": "おりーぶ",
+      "en": "Olive (fruit, brined)",
+      "categoryIds": [
+        "cat-fruit"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "オリーブ",
+        "グリーンオリーブ",
+        "ブラックオリーブ",
+        "オリーブの実"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-mustard-powder",
+      "ja": "マスタードパウダー",
+      "kana": "ますたーどぱうだー",
+      "en": "Mustard powder",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "マスタードパウダー",
+        "粉からし",
+        "粉マスタード"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": true,
+      "note": null
+    },
+    {
+      "id": "ing-basil",
+      "ja": "バジル",
+      "kana": "ばじる",
+      "en": "Basil (fresh leaves)",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "バジル",
+        "バジルの葉",
+        "フレッシュバジル"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-shishito",
+      "ja": "ししとう",
+      "kana": "ししとう",
+      "en": "Shishito pepper",
+      "categoryIds": [
+        "cat-green-vegetable"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "ししとう",
+        "しし唐",
+        "しし唐辛子",
+        "ししとうがらし",
+        "獅子唐"
+      ],
+      "inherentAllergenIds": [],
+      "info": "known",
+      "animalOrigin": [],
+      "animalOriginKnown": true,
+      "seasoning": false,
+      "note": null
+    },
+    {
+      "id": "ing-pesto",
+      "ja": "バジルペースト",
+      "kana": "ばじるぺーすと",
+      "en": "Basil pesto",
+      "categoryIds": [
+        "cat-seasoning"
+      ],
+      "parentIngredientId": null,
+      "forms": [
+        "バジルペースト",
+        "バジルソース",
+        "ジェノベーゼ",
+        "ジェノバソース"
+      ],
+      "inherentAllergenIds": [],
+      "info": "varies",
+      "animalOrigin": [
+        "dairy"
+      ],
+      "animalOriginKnown": false,
+      "seasoning": true,
+      "note": null
     }
   ],
   "dishes": [

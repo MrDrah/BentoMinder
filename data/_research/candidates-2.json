@@ -1,0 +1,3531 @@
+{
+ "version": 1,
+ "phase": "candidates-2 (content-research §1), step 1 of library growth 20 -> ~100",
+ "generatedBy": "ba (candidate agent)",
+ "generatedOn": "2026-11-01",
+ "notes": [
+  "Each URL fetched once on 2026-11-01 (HTTP 200, page title matches the dish); Just One Cookbook pages checked with WebFetch because curl is blocked by Cloudflare.",
+  "expectedAllergens = inherent allergens guessed from the ingredient list seen in listings/JSON-LD (dictionary ids, PROVISIONAL, may be incomplete; phase 2 recomputes from the full page). Processed foods (soy sauce, ham, sausage, kanikama, roux) not listed.",
+  "estMinutes: page time when shown; NHK/Kikkoman bento sets show component times only, so those are BA estimates (minutesBasis says which).",
+  "nameJa keeps the source dish name (taglines before the name dropped); BBC Good Food pages are English-only so nameJa is a BA translation (nameJaIsTranslation true).",
+  "tier main = ranks 1-80, reserve = 81-100; a reserve carries the batch letter whose style it can replace. Excluded: everything in data/library.json (ids and titles) and the rejected/reserve entries of candidates.json that are already in the library; also baby-food (パクパク期) and raw-fish recipes.",
+  "free.* is computed from expectedAllergens only (provisional). Strong reading of the brief: free.all3 = free of egg AND milk AND wheat."
+ ],
+ "mix": {
+  "mainCount": 80,
+  "reserveCount": 19,
+  "style": {
+   "japanese": 41,
+   "western-inspired": 27,
+   "other": 12
+  },
+  "le20": 58,
+  "le20pageBased": 58,
+  "freeEgg": 50,
+  "freeMilk": 64,
+  "freeWheat": 40,
+  "freeAnyOfThree": 71,
+  "freeAllThree": 28,
+  "vegOrFish": 36,
+  "perBatchMain": {
+   "c": 14,
+   "d": 14,
+   "e": 13,
+   "f": 13,
+   "g": 13,
+   "h": 13
+  },
+  "perBatchReserve": {
+   "c": 3,
+   "d": 3,
+   "e": 4,
+   "f": 3,
+   "g": 3,
+   "h": 3
+  }
+ },
+ "proposedHosts": [
+  {
+   "host": "hugkum.sho.jp",
+   "reason": "Shogakukan parenting site with kindergarten bento roundups from the children magazines Baby Book/Mebae (editorial, tested recipes); seen in search results only, not fetched, so unverified."
+  }
+ ],
+ "candidates": [
+  {
+   "rank": 1,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-sakekomi",
+   "nameJa": "鮭の炊き込みごはん弁当",
+   "nameEn": "Salmon takikomi rice bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/232433857515749855",
+   "sourceTitle": "磯の香りが漂う♪ 鮭の炊き込みごはん弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-salmon",
+    "alg-soybean"
+   ],
+   "tags": [
+    "one-pot-rice",
+    "fish",
+    "autumn"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 2,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "delish-soboro-edamame",
+   "nameJa": "甘辛そぼろの枝豆ごはん",
+   "nameEn": "Sweet-savoury soboro and edamame rice",
+   "sourceUrl": "https://delishkitchen.tv/recipes/303010139479212367",
+   "sourceTitle": "簡単おいしい！ 甘辛そぼろの枝豆ごはん",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-sesame"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "summer",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 3,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "delish-2shokusoboro",
+   "nameJa": "レンジで簡単！ 2色そぼろ弁当",
+   "nameEn": "Microwave two-colour soboro bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/149927852731531763",
+   "sourceTitle": "レンジで簡単！ 2色そぼろ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg"
+   ],
+   "tags": [
+    "rice",
+    "egg",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 4,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "nhk-18359",
+   "nameJa": "鶏そぼろ弁当",
+   "nameEn": "Chicken soboro bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/18359_鶏そぼろ弁当.html",
+   "sourceTitle": "鶏そぼろ弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 40,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg"
+   ],
+   "tags": [
+    "rice",
+    "egg"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 5,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "nhk-19062",
+   "nameJa": "さばそぼろ弁当",
+   "nameEn": "Mackerel soboro bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/19062_さばそぼろ弁当.html",
+   "sourceTitle": "さばそぼろ弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 40,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-mackerel",
+    "alg-soybean"
+   ],
+   "tags": [
+    "rice",
+    "fish"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 6,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-sakemosaic",
+   "nameJa": "鮭そぼろのモザイク弁当",
+   "nameEn": "Salmon soboro mosaic bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/169910713454690707",
+   "sourceTitle": "カラフルおしゃれ♪ 鮭そぼろのモザイク弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-salmon",
+    "alg-sesame"
+   ],
+   "tags": [
+    "rice",
+    "fish",
+    "colourful"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 7,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-soboromille",
+   "nameJa": "レンジそぼろのミルフィーユ弁当",
+   "nameEn": "Microwave soboro layered rice bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/237891047055688810",
+   "sourceTitle": "重ねて詰めるだけ♪ レンジそぼろのミルフィーユ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 8,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "nhk-1468",
+   "nameJa": "一口そぼろ弁当",
+   "nameEn": "Bite-size soboro bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/1468_一口そぼろ弁当.html",
+   "sourceTitle": "一口そぼろ弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg",
+    "alg-milk"
+   ],
+   "tags": [
+    "rice",
+    "egg",
+    "small-portion"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 9,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "kikkoman-takenokotsukune",
+   "nameJa": "たけのこ入りつくね弁当",
+   "nameEn": "Bamboo-shoot chicken tsukune bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/takenokoiritukune.html",
+   "sourceTitle": "たけのこ入りつくね弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg",
+    "alg-wheat"
+   ],
+   "tags": [
+    "meat"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 10,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "delish-tsukuneonly",
+   "nameJa": "つくねだけ弁当",
+   "nameEn": "Tsukune-only bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/601881899559813424",
+   "sourceTitle": "インパクト大！ つくねだけ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken"
+   ],
+   "tags": [
+    "meat",
+    "rice",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 11,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "delish-soccer",
+   "nameJa": "サッカーボールおにぎり弁当",
+   "nameEn": "Soccer ball rice ball bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/202304490034954662",
+   "sourceTitle": "簡単にキャラ弁！ サッカーボールおにぎり弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-stars",
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-salmon"
+   ],
+   "tags": [
+    "onigiri",
+    "fish",
+    "character",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 12,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-panda",
+   "nameJa": "パンダのおにぎり",
+   "nameEn": "Panda rice ball",
+   "sourceUrl": "https://delishkitchen.tv/recipes/162514671742484972",
+   "sourceTitle": "みんなの注目の的！ パンダのおにぎり",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-animals",
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [],
+   "tags": [
+    "onigiri",
+    "character",
+    "vegetarian",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 13,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "delish-donguri",
+   "nameJa": "どんぐりとリスのおにぎり",
+   "nameEn": "Acorn and squirrel rice balls",
+   "sourceUrl": "https://delishkitchen.tv/recipes/165418831840280979",
+   "sourceTitle": "ラブリーっす♡ どんぐりとリスのおにぎり",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-animals",
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "onigiri",
+    "character",
+    "autumn",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 14,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-undokai",
+   "nameJa": "運動会応援弁当",
+   "nameEn": "Sports-day cheer bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/162515636432404972",
+   "sourceTitle": "かけっこ一等賞！ 運動会応援弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-seasonal",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-crab",
+    "alg-wheat"
+   ],
+   "tags": [
+    "onigiri",
+    "autumn",
+    "character"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 15,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-kumakazari",
+   "nameJa": "クマの飾りまき",
+   "nameEn": "Bear decorative rice rolls",
+   "sourceUrl": "https://delishkitchen.tv/recipes/161934052545266067",
+   "sourceTitle": "お子様もゴキゲン♪ クマの飾りまき",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-animals",
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-crab"
+   ],
+   "tags": [
+    "onigiri",
+    "fish",
+    "character"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 16,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "delish-nekoinari",
+   "nameJa": "ネコのきのこいなり寿司",
+   "nameEn": "Cat mushroom inari sushi",
+   "sourceUrl": "https://delishkitchen.tv/recipes/166854137332367852",
+   "sourceTitle": "キャラ弁に！ ネコのきのこいなり寿司",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-animals",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "character"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 17,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "delish-inarizukin",
+   "nameJa": "稲荷ずきんちゃん",
+   "nameEn": "Little Red Inari rice pockets",
+   "sourceUrl": "https://delishkitchen.tv/recipes/163827359407931795",
+   "sourceTitle": "お子様も喜ぶ！ 稲荷ずきんちゃん",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "vegetarian",
+    "character",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 18,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-nikumakionigiri",
+   "nameJa": "スティック肉巻きおにぎり",
+   "nameEn": "Meat-wrapped rice stick",
+   "sourceUrl": "https://delishkitchen.tv/recipes/126894360120787329",
+   "sourceTitle": "宮崎発のご当地グルメ！ スティック肉巻きおにぎり",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "meat"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 19,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "nhk-41062",
+   "nameJa": "焼きおにぎり弁当",
+   "nameEn": "Grilled rice ball bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/41062_焼きおにぎり弁当.html",
+   "sourceTitle": "焼きおにぎり弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-soybean",
+    "alg-mackerel"
+   ],
+   "tags": [
+    "onigiri",
+    "fish"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 20,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "nhk-43442",
+   "nameJa": "じゃこおにぎりと鶏ひき肉のみそ煮プレート",
+   "nameEn": "Dried-fish rice balls with chicken-miso plate",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/43442_じゃこおにぎりと鶏ひき肉のみそ煮プレート.html",
+   "sourceTitle": "じゃこおにぎりと鶏ひき肉のみそ煮プレート",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-soybean",
+    "alg-sesame"
+   ],
+   "tags": [
+    "onigiri",
+    "meat",
+    "winter",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 21,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "nhk-12142",
+   "nameJa": "カラフルおにぎり弁当",
+   "nameEn": "Colourful rice ball bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/12142_カラフルおにぎり弁当.html",
+   "sourceTitle": "カラフルおにぎり弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 40,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-shrimp",
+    "alg-sesame",
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "spring"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 22,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "nhk-19544",
+   "nameJa": "春色おにぎり弁当",
+   "nameEn": "Spring rice ball bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/19544_春色おにぎり弁当.html",
+   "sourceTitle": "春色おにぎり弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 45,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-egg",
+    "alg-sesame",
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "spring"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 23,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "nhk-17096",
+   "nameJa": "鮭としめじの照り焼き弁当",
+   "nameEn": "Salmon and shimeji teriyaki bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/17096_鮭としめじの照り焼き弁当.html",
+   "sourceTitle": "鮭としめじの照り焼き弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-salmon",
+    "alg-soybean"
+   ],
+   "tags": [
+    "fish",
+    "winter",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 24,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "delish-sakefry",
+   "nameJa": "鮭フライ弁当",
+   "nameEn": "Salmon fry bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/604817469273538914",
+   "sourceTitle": "洗い物少なく♪ 鮭フライ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-salmon",
+    "alg-egg",
+    "alg-wheat"
+   ],
+   "tags": [
+    "fish",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 25,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "kikkoman-ebikaraage",
+   "nameJa": "えびの揚げ物弁当",
+   "nameEn": "Fried shrimp bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/ebikaraage.html",
+   "sourceTitle": "えびの揚げ物弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-shrimp",
+    "alg-egg",
+    "alg-wheat"
+   ],
+   "tags": [
+    "fish"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 26,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "kikkoman-minikakiage",
+   "nameJa": "ミニかき揚げ弁当",
+   "nameEn": "Mini kakiage tempura bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/minikakiage.html",
+   "sourceTitle": "ミニかき揚げ弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-shrimp"
+   ],
+   "tags": [
+    "vegetable",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 27,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "kikkoman-kitsune",
+   "nameJa": "きつねつくねサンド弁当",
+   "nameEn": "Fox-style tsukune pocket bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/kitsune.html",
+   "sourceTitle": "きつねつくねサンド弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-soybean",
+    "alg-egg"
+   ],
+   "tags": [
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 28,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "delish-nanohana",
+   "nameJa": "菜の花とえびの春色おにぎり",
+   "nameEn": "Rape-blossom and shrimp spring rice balls",
+   "sourceUrl": "https://delishkitchen.tv/recipes/136509158718439691",
+   "sourceTitle": "お花見や遠足に♪ 菜の花とえびの春色おにぎり",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-shrimp",
+    "alg-egg"
+   ],
+   "tags": [
+    "onigiri",
+    "spring",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 29,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-corn-edamame",
+   "nameJa": "とうもろこしと枝豆の混ぜご飯",
+   "nameEn": "Corn and edamame mixed rice",
+   "sourceUrl": "https://delishkitchen.tv/recipes/151200673386463526",
+   "sourceTitle": "彩りきれい！ とうもろこしと枝豆の混ぜご飯",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-soybean"
+   ],
+   "tags": [
+    "rice",
+    "vegetable",
+    "summer",
+    "vegetarian-or-fish-only",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 30,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "delish-broccoli-mazegohan",
+   "nameJa": "ブロッコリーとしょうがの混ぜご飯",
+   "nameEn": "Broccoli and ginger mixed rice",
+   "sourceUrl": "https://delishkitchen.tv/recipes/157726418141184492",
+   "sourceTitle": "栄養満点！ ブロッコリーとしょうがの混ぜご飯",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 5,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [],
+   "tags": [
+    "rice",
+    "vegetable",
+    "vegetarian",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 31,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-kurishimeji",
+   "nameJa": "栗としめじの炊き込みごはん",
+   "nameEn": "Chestnut and shimeji takikomi rice",
+   "sourceUrl": "https://delishkitchen.tv/recipes/525221485892075874",
+   "sourceTitle": "秋を楽しむ定番献立♪ 栗としめじの炊き込みごはん",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 60,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-soybean"
+   ],
+   "tags": [
+    "one-pot-rice",
+    "vegetable",
+    "autumn"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 32,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-akinomikaku",
+   "nameJa": "秋の味覚弁当",
+   "nameEn": "Autumn flavours bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/523043500141314402",
+   "sourceTitle": "旬を楽しむ♪ 秋の味覚弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-soybean"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "autumn",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 33,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "delish-satsumaimo-gohan",
+   "nameJa": "さつまいもごはん弁当",
+   "nameEn": "Sweet potato rice bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/171938398854971884",
+   "sourceTitle": "ほっくり優しい甘み！ さつまいもごはん弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-soybean"
+   ],
+   "tags": [
+    "one-pot-rice",
+    "autumn"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 34,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-sasami-nori",
+   "nameJa": "ささみの唐揚げのり弁当",
+   "nameEn": "Chicken tender karaage nori bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/230356543785140703",
+   "sourceTitle": "トースターを活用して！ ささみの唐揚げのり弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-soybean"
+   ],
+   "tags": [
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 35,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-gyudon",
+   "nameJa": "牛丼弁当",
+   "nameEn": "Gyudon beef bowl bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/176148531621396838",
+   "sourceTitle": "喜ばれること間違いなし♡ 牛丼弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-soybean"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 36,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-reindeer",
+   "nameJa": "トナカイ弁当",
+   "nameEn": "Reindeer bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/169514697454780908",
+   "sourceTitle": "メリクリ♪ トナカイ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-seasonal",
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "character",
+    "winter",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 37,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "delish-sakura",
+   "nameJa": "満開サクラ弁当",
+   "nameEn": "Cherry blossom bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/601198488138548353",
+   "sourceTitle": "お花見気分満開🌸 満開サクラ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-flowers",
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "onigiri",
+    "spring",
+    "character",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 38,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "delish-yakiudon",
+   "nameJa": "焼うどん弁当",
+   "nameEn": "Yaki-udon bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/341116261872174226",
+   "sourceTitle": "味付け簡単！ 焼うどん弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat",
+    "alg-soybean"
+   ],
+   "tags": [
+    "noodles",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 39,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "nhk-1465",
+   "nameJa": "魚のみそづけ焼き弁当 幼児向け",
+   "nameEn": "Miso-marinated fish bento (for small children)",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/1465_魚のみそづけ焼き弁当 幼児向け.html",
+   "sourceTitle": "魚のみそづけ焼き弁当 幼児向け",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-sesame",
+    "alg-milk"
+   ],
+   "tags": [
+    "fish",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": false,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 40,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "nhk-17106",
+   "nameJa": "ナポリタン弁当",
+   "nameEn": "Napolitan spaghetti bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/17106_ナポリタン弁当.html",
+   "sourceTitle": "ナポリタン弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat"
+   ],
+   "tags": [
+    "noodles",
+    "pasta"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 41,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "nhk-17107",
+   "nameJa": "じゃこと野菜のパスタ弁当",
+   "nameEn": "Dried-fish and vegetable pasta bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/17107_じゃこと野菜のパスタ弁当.html",
+   "sourceTitle": "じゃこと野菜のパスタ弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat"
+   ],
+   "tags": [
+    "noodles",
+    "pasta",
+    "fish",
+    "vegetable"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 42,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "nhk-780",
+   "nameJa": "コーンバーグ弁当 幼児向け",
+   "nameEn": "Corn hamburger steak bento (for small children)",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/780_コーンバーグ弁当 幼児向け.html",
+   "sourceTitle": "コーンバーグ弁当 幼児向け",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-pork",
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "meat"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 43,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "nhk-11626",
+   "nameJa": "ミートボール弁当",
+   "nameEn": "Meatball bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/11626_ミートボール弁当.html",
+   "sourceTitle": "ミートボール弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "meat",
+    "egg"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 44,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "nhk-17101",
+   "nameJa": "フローズンサンド弁当",
+   "nameEn": "Frozen sandwich bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/17101_フローズンサンド弁当.html",
+   "sourceTitle": "フローズンサンド弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 25,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-milk",
+    "alg-wheat"
+   ],
+   "tags": [
+    "sandwich",
+    "egg",
+    "summer"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 45,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "nhk-18755",
+   "nameJa": "2階建てサンド弁当",
+   "nameEn": "Two-storey sandwich bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/18755_2階建てサンド弁当.html",
+   "sourceTitle": "2階建てサンド弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 25,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "sandwich",
+    "egg"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 46,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "kikkoman-cornball",
+   "nameJa": "ひき肉入りコーンボール弁当",
+   "nameEn": "Corn and mince ball bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/cornball.html",
+   "sourceTitle": "ひき肉入りコーンボール弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "meat"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 47,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "kikkoman-menchikatsu",
+   "nameJa": "ひと口メンチカツ弁当",
+   "nameEn": "Bite-size minced cutlet bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/menchikatsu.html",
+   "sourceTitle": "ひと口メンチカツ弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-pork",
+    "alg-beef"
+   ],
+   "tags": [
+    "meat"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 48,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "kikkoman-potetokoroke",
+   "nameJa": "ポテトコロッケ弁当",
+   "nameEn": "Potato croquette bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/potetokoroke.html",
+   "sourceTitle": "ポテトコロッケ弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "vegetable"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 49,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "kikkoman-butahirepanko",
+   "nameJa": "豚ヒレ肉のパン粉焼き弁当",
+   "nameEn": "Oven-crumbed pork fillet bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/butahirepanko.html",
+   "sourceTitle": "豚ヒレ肉のパン粉焼き弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 50,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "kikkoman-asuparatizumaki",
+   "nameJa": "アスパラチーズ巻き焼き弁当",
+   "nameEn": "Asparagus and cheese roll bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/asuparatizumaki.html",
+   "sourceTitle": "アスパラチーズ巻き焼き弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-milk",
+    "alg-wheat"
+   ],
+   "tags": [
+    "meat",
+    "vegetable",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 51,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "kikkoman-hunburg",
+   "nameJa": "ミニハンバーグ弁当",
+   "nameEn": "Mini hamburger steak bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/hunburg.html",
+   "sourceTitle": "ミニハンバーグ弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-pork",
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 52,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-kumahamburg",
+   "nameJa": "くまのハンバーグ",
+   "nameEn": "Bear-shaped hamburger steak",
+   "sourceUrl": "https://delishkitchen.tv/recipes/155554004321960428",
+   "sourceTitle": "キャラ弁にぴったり！ くまのハンバーグ",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-animals",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-pork",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "meat",
+    "character"
+   ],
+   "free": {
+    "egg": true,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 53,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-wrapchicken",
+   "nameJa": "鶏むね肉でラップサンド",
+   "nameEn": "Chicken breast wrap sandwiches",
+   "sourceUrl": "https://delishkitchen.tv/recipes/145870359663477235",
+   "sourceTitle": "見た目も可愛い♡ 鶏むね肉でラップサンド",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-wheat",
+    "alg-egg"
+   ],
+   "tags": [
+    "sandwich",
+    "meat"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 54,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-picnicwrap",
+   "nameJa": "ピクニックラップサンド",
+   "nameEn": "Picnic wrap sandwiches",
+   "sourceUrl": "https://delishkitchen.tv/recipes/496483069809656162",
+   "sourceTitle": "みんなで包んで楽しい♪ ピクニックラップサンド",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat"
+   ],
+   "tags": [
+    "sandwich",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 55,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "delish-cafesand",
+   "nameJa": "カフェ風サンドイッチお弁当",
+   "nameEn": "Cafe-style sandwich bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/449849323102929939",
+   "sourceTitle": "食べ応え抜群！ カフェ風サンドイッチお弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 40,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-milk",
+    "alg-wheat"
+   ],
+   "tags": [
+    "sandwich",
+    "egg"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 56,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "delish-yofusoboro",
+   "nameJa": "洋風そぼろ弁当",
+   "nameEn": "Western-style soboro bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/286333119261311293",
+   "sourceTitle": "彩り鮮やか♪ 洋風そぼろ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-pork",
+    "alg-egg"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 57,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-taco",
+   "nameJa": "タコライス弁当",
+   "nameEn": "Taco rice bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/471840534642558081",
+   "sourceTitle": "冷めてもおいしい！ タコライス弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-pork",
+    "alg-milk"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": false,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 58,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-halloweenpumpkin",
+   "nameJa": "パンプキン弁当",
+   "nameEn": "Pumpkin bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/163983457679049107",
+   "sourceTitle": "トリックオアトリート！ ハロウィンに！パンプキン弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-seasonal",
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "character",
+    "autumn",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 59,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-kumahiyo",
+   "nameJa": "くまヒヨ弁当",
+   "nameEn": "Bear and chick bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/260090381100647635",
+   "sourceTitle": "お手軽キャラ弁！ くまヒヨ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-animals",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat",
+    "alg-egg"
+   ],
+   "tags": [
+    "onigiri",
+    "character"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 60,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "delish-lion",
+   "nameJa": "お花畑ライオン",
+   "nameEn": "Flower-garden lion bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/171100703702385132",
+   "sourceTitle": "初級キャラ弁！ お花畑ライオン",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-animals",
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-milk",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "character",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 61,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-5min",
+   "nameJa": "レンジで3品！ 5分弁当",
+   "nameEn": "Three microwave dishes in 5 minutes",
+   "sourceUrl": "https://delishkitchen.tv/recipes/167909730470068716",
+   "sourceTitle": "レンジで3品！ 5分弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 5,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-egg",
+    "alg-milk"
+   ],
+   "tags": [
+    "egg",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 62,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "delish-flower",
+   "nameJa": "卵焼き器で4品！ フラワー弁当",
+   "nameEn": "Four dishes in one egg pan, flower bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/193383923810566548",
+   "sourceTitle": "卵焼き器で4品！ フラワー弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-flowers",
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-egg",
+    "alg-wheat"
+   ],
+   "tags": [
+    "egg",
+    "character",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 63,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-kirin",
+   "nameJa": "卵焼きを使って！ キリンさんのデコ弁",
+   "nameEn": "Giraffe bento from tamagoyaki",
+   "sourceUrl": "https://delishkitchen.tv/recipes/163962188447351187",
+   "sourceTitle": "卵焼きを使って！ キリンさんのデコ弁",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-animals",
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg"
+   ],
+   "tags": [
+    "egg",
+    "character",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 64,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "delish-nyugaku",
+   "nameJa": "春満開！ 入学式のお弁当",
+   "nameEn": "Spring school-entrance bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/208208666115965984",
+   "sourceTitle": "春満開！ 入学式のお弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-flowers",
+   "estMinutes": 40,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "spring"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 65,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-snowmanmeatball",
+   "nameJa": "雪だるまとうずらの卵入りミートボール弁当",
+   "nameEn": "Snowman quail-egg meatball bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/170777824536297964",
+   "sourceTitle": "にっこり♪ 雪だるまとうずらの卵入りミートボール弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-seasonal",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-egg",
+    "alg-crab",
+    "alg-wheat"
+   ],
+   "tags": [
+    "meat",
+    "character",
+    "winter"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 66,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "bbc-super-wraps",
+   "nameJa": "スーパーサラダラップ",
+   "nameEn": "Super-salad wraps",
+   "nameJaIsTranslation": true,
+   "sourceUrl": "https://www.bbcgoodfood.com/recipes/super-salad-wraps",
+   "sourceTitle": "Super-salad wraps recipe | Good Food",
+   "sourceHost": "bbcgoodfood.com",
+   "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 5,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat",
+    "alg-sesame"
+   ],
+   "tags": [
+    "sandwich",
+    "vegetable",
+    "vegetarian",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 67,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "nhk-13035",
+   "nameJa": "韓国風のり巻き弁当",
+   "nameEn": "Korean-style nori roll (kimbap) bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/13035_韓国風のり巻き弁当.html",
+   "sourceTitle": "韓国風のり巻き弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-sesame",
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "vegetable"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 68,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "nhk-18659",
+   "nameJa": "ドライカレー弁当",
+   "nameEn": "Dry curry bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/18659_ドライカレー弁当.html",
+   "sourceTitle": "ドライカレー弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 40,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "meat"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 69,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "delish-shumai",
+   "nameJa": "5分で簡単！ レンジしゅうまい弁当",
+   "nameEn": "Microwave shumai bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/180226878752162897",
+   "sourceTitle": "5分で簡単！ レンジしゅうまい弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-crab",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 70,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "delish-nasigoreng",
+   "nameJa": "忙しい朝におすすめ！ ナシゴレン風弁当",
+   "nameEn": "Nasi-goreng-style bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/364472701244408221",
+   "sourceTitle": "忙しい朝におすすめ！ ナシゴレン風弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg",
+    "alg-soybean"
+   ],
+   "tags": [
+    "rice",
+    "egg",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 71,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "delish-khaomangai",
+   "nameJa": "ささみでレンチンカオマンガイ風弁当",
+   "nameEn": "Microwave khao-man-gai-style chicken rice bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/196442185573336145",
+   "sourceTitle": "レンチンで手軽に！ ささみでレンチンカオマンガイ風弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-sesame",
+    "alg-soybean"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 72,
+   "tier": "main",
+   "batch": "d",
+   "candidateId": "bbc-hoisin-wraps",
+   "nameJa": "ホイシンソースのラップ",
+   "nameEn": "Hoisin chicken wraps",
+   "nameJaIsTranslation": true,
+   "sourceUrl": "https://www.bbcgoodfood.com/recipes/hoisin-wraps",
+   "sourceTitle": "Hoisin wraps recipe | Good Food",
+   "sourceHost": "bbcgoodfood.com",
+   "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat",
+    "alg-chicken",
+    "alg-soybean",
+    "alg-sesame"
+   ],
+   "tags": [
+    "sandwich",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 73,
+   "tier": "main",
+   "batch": "g",
+   "candidateId": "bbc-falafel",
+   "nameJa": "ファラフェル・ランチボックス",
+   "nameEn": "Falafel lunchbox",
+   "nameJaIsTranslation": true,
+   "sourceUrl": "https://www.bbcgoodfood.com/recipes/falafel-lunchbox",
+   "sourceTitle": "Falafel lunchbox recipe | Good Food",
+   "sourceHost": "bbcgoodfood.com",
+   "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-sesame",
+    "alg-wheat"
+   ],
+   "tags": [
+    "vegetable",
+    "vegetarian",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 74,
+   "tier": "main",
+   "batch": "h",
+   "candidateId": "kikkoman-ebichahan",
+   "nameJa": "えびチャーハン弁当",
+   "nameEn": "Shrimp fried rice bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/seafood/ebichahan.html",
+   "sourceTitle": "えびチャーハン弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-shrimp",
+    "alg-egg",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "fish",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 75,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "nhk-3716",
+   "nameJa": "カレーそぼろむすび",
+   "nameEn": "Curry soboro rice balls",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/3716_カレーそぼろむすび.html",
+   "sourceTitle": "カレーそぼろむすび",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-wheat"
+   ],
+   "tags": [
+    "onigiri",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 76,
+   "tier": "main",
+   "batch": "c",
+   "candidateId": "delish-keema",
+   "nameJa": "和風キーマカレー弁当",
+   "nameEn": "Japanese-style keema curry bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/173700197241586156",
+   "sourceTitle": "スタミナ弁当！ 和風キーマカレー弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 77,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "bbc-veggie-olive",
+   "nameJa": "ベジタブルとオリーブのラップ",
+   "nameEn": "Veggie olive wraps",
+   "nameJaIsTranslation": true,
+   "sourceUrl": "https://www.bbcgoodfood.com/recipes/veggie-olive-wraps-mustard-vinaigrette",
+   "sourceTitle": "Veggie olive wraps with mustard vinaigrette recipe | Good Food",
+   "sourceHost": "bbcgoodfood.com",
+   "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat"
+   ],
+   "tags": [
+    "sandwich",
+    "vegetable",
+    "vegetarian",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 78,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "bbc-coronation",
+   "nameJa": "コロネーション・ひよこ豆サンド",
+   "nameEn": "Coronation chickpea sandwich filler",
+   "nameJaIsTranslation": true,
+   "sourceUrl": "https://www.bbcgoodfood.com/recipes/coronation-chickpea-sandwich-filler",
+   "sourceTitle": "Coronation chickpea sandwich filler recipe | Good Food",
+   "sourceHost": "bbcgoodfood.com",
+   "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 8,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "sandwich",
+    "vegetable",
+    "vegetarian",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 79,
+   "tier": "main",
+   "batch": "e",
+   "candidateId": "nhk-44511",
+   "nameJa": "さば缶おにぎり",
+   "nameEn": "Canned-mackerel rice ball",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/44511_さば缶おにぎり.html",
+   "sourceTitle": "さば缶おにぎり",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 5,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-mackerel",
+    "alg-soybean",
+    "alg-sesame"
+   ],
+   "tags": [
+    "onigiri",
+    "fish",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 80,
+   "tier": "main",
+   "batch": "f",
+   "candidateId": "sirogohan-yakionigiri",
+   "nameJa": "焼きおにぎり",
+   "nameEn": "Grilled rice balls (yaki-onigiri)",
+   "sourceUrl": "https://www.sirogohan.com/recipe/yakionigiri/",
+   "sourceTitle": "焼きおにぎりのレシピ/作り方：白ごはん.com",
+   "sourceHost": "sirogohan.com",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-soybean"
+   ],
+   "tags": [
+    "onigiri",
+    "vegetarian-or-fish-only",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 81,
+   "tier": "reserve",
+   "batch": "f",
+   "candidateId": "nhk-21963",
+   "nameJa": "のり巻き弁当",
+   "nameEn": "Nori roll bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/21963_のり巻き弁当.html",
+   "sourceTitle": "のり巻き弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 40,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-soybean",
+    "alg-crab"
+   ],
+   "tags": [
+    "onigiri",
+    "egg"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 82,
+   "tier": "reserve",
+   "batch": "g",
+   "candidateId": "nhk-19549",
+   "nameJa": "包みいなりずし弁当",
+   "nameEn": "Wrapped inari sushi bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/19549_包みいなりずし弁当.html",
+   "sourceTitle": "包みいなりずし弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 45,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-salmon",
+    "alg-chicken",
+    "alg-soybean",
+    "alg-egg"
+   ],
+   "tags": [
+    "onigiri",
+    "fish"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 83,
+   "tier": "reserve",
+   "batch": "g",
+   "candidateId": "nhk-14",
+   "nameJa": "豚肉とえのきの甘辛煮弁当 幼児向け",
+   "nameEn": "Sweet-savoury pork and enoki bento (for small children)",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/14_「豚肉とえのきの甘辛煮弁当」 幼児向け.html",
+   "sourceTitle": "「豚肉とえのきの甘辛煮弁当」 幼児向け",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat",
+    "alg-egg",
+    "alg-milk"
+   ],
+   "tags": [
+    "meat"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 84,
+   "tier": "reserve",
+   "batch": "f",
+   "candidateId": "nhk-41484",
+   "nameJa": "さけ弁当",
+   "nameEn": "Salmon bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/41484_さけ弁当.html",
+   "sourceTitle": "さけ弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 10,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-salmon",
+    "alg-egg"
+   ],
+   "tags": [
+    "fish",
+    "egg",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 85,
+   "tier": "reserve",
+   "batch": "h",
+   "candidateId": "delish-hanamaki",
+   "nameJa": "お花のくるくる巻き弁当",
+   "nameEn": "Spiral flower roll bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/161648511811584403",
+   "sourceTitle": "お弁当がお花畑♪ お花のくるくる巻き弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": "theme-flowers",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-crab",
+    "alg-wheat"
+   ],
+   "tags": [
+    "character",
+    "spring"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 86,
+   "tier": "reserve",
+   "batch": "h",
+   "candidateId": "delish-wappa",
+   "nameJa": "旬を楽しむわっぱ弁当",
+   "nameEn": "Seasonal wappa bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/523021118009770338",
+   "sourceTitle": "秋の味覚を堪能♪ 旬を楽しむわっぱ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-soybean"
+   ],
+   "tags": [
+    "rice",
+    "autumn",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": true,
+    "all3": true
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 87,
+   "tier": "reserve",
+   "batch": "c",
+   "candidateId": "delish-satsumaimo-chicken",
+   "nameJa": "さつまいもと鶏肉のバター炒め弁当",
+   "nameEn": "Sweet potato and chicken butter-sauté bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/212543543388931290",
+   "sourceTitle": "彩り豊か！ さつまいもと鶏肉のバター炒め弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-milk"
+   ],
+   "tags": [
+    "meat",
+    "autumn"
+   ],
+   "free": {
+    "egg": true,
+    "milk": false,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 88,
+   "tier": "reserve",
+   "batch": "e",
+   "candidateId": "joc-chicken-nanban",
+   "nameJa": "チキン南蛮弁当",
+   "nameEn": "Chicken nanban bento",
+   "sourceUrl": "https://www.justonecookbook.com/chicken-nanban-bento/",
+   "sourceTitle": "Chicken Nanban Bento チキン南蛮弁当 • Just One Cookbook",
+   "sourceHost": "justonecookbook.com",
+   "publisher": "Just One Cookbook (Namiko Chen)",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg",
+    "alg-wheat",
+    "alg-soybean"
+   ],
+   "tags": [
+    "meat",
+    "egg",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "WebFetch (curl blocked by Cloudflare)",
+   "status": "verified"
+  },
+  {
+   "rank": 89,
+   "tier": "reserve",
+   "batch": "e",
+   "candidateId": "nhk-18353",
+   "nameJa": "野菜たっぷり焼きそば弁当",
+   "nameEn": "Vegetable-loaded yakisoba bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/18353_野菜たっぷり焼きそば弁当.html",
+   "sourceTitle": "野菜たっぷり焼きそば弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat",
+    "alg-soybean"
+   ],
+   "tags": [
+    "noodles",
+    "vegetable",
+    "quick"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 90,
+   "tier": "reserve",
+   "batch": "d",
+   "candidateId": "kikkoman-tsukune",
+   "nameJa": "鶏つくね弁当",
+   "nameEn": "Chicken tsukune bento",
+   "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/tsukune.html",
+   "sourceTitle": "鶏つくね弁当",
+   "sourceHost": "kikkoman.co.jp",
+   "publisher": "キッコーマン株式会社（ホームクッキング）",
+   "accessed": "2026-11-01",
+   "style": "japanese",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg"
+   ],
+   "tags": [
+    "meat",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 91,
+   "tier": "reserve",
+   "batch": "d",
+   "candidateId": "nhk-22045",
+   "nameJa": "コールスローサラダとコンビーフのホットサンド弁当",
+   "nameEn": "Coleslaw and corned-beef hot sandwich bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/22045_コールスローサラダとコンビーフのホットサンド弁当.html",
+   "sourceTitle": "コールスローサラダとコンビーフのホットサンド弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "estimate from the steps (page gives component times only)",
+   "expectedAllergens": [
+    "alg-beef",
+    "alg-wheat",
+    "alg-egg",
+    "alg-milk"
+   ],
+   "tags": [
+    "sandwich"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 92,
+   "tier": "reserve",
+   "batch": "c",
+   "candidateId": "delish-halloweenbento",
+   "nameJa": "ハロウィン弁当",
+   "nameEn": "Halloween bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/216332451247554843",
+   "sourceTitle": "あけてびっくり！ ハロウィン弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-seasonal",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "rice",
+    "character",
+    "autumn"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 93,
+   "tier": "reserve",
+   "batch": "d",
+   "candidateId": "delish-tamagoyaki5",
+   "nameJa": "卵焼き器５分弁当",
+   "nameEn": "Five-minute egg-pan bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/188357489878630822",
+   "sourceTitle": "ねぼすけも助かる！ 卵焼き器５分弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 5,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-wheat",
+    "alg-milk"
+   ],
+   "tags": [
+    "egg",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 94,
+   "tier": "reserve",
+   "batch": "e",
+   "candidateId": "delish-teritama",
+   "nameJa": "てりたま豚こまボール",
+   "nameEn": "Teriyaki-egg pork balls",
+   "sourceUrl": "https://delishkitchen.tv/recipes/539398630394560935",
+   "sourceTitle": "子どもが喜ぶ♪ てりたま豚こまボール",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 20,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-egg"
+   ],
+   "tags": [
+    "meat",
+    "egg",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": true,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 95,
+   "tier": "reserve",
+   "batch": "g",
+   "candidateId": "delish-kumanugget",
+   "nameJa": "くまちゃんナゲット",
+   "nameEn": "Teddy-bear chicken nuggets",
+   "sourceUrl": "https://delishkitchen.tv/recipes/237763794774787178",
+   "sourceTitle": "かわいさ満点♪ くまちゃんナゲット",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": "theme-animals",
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-chicken",
+    "alg-egg",
+    "alg-wheat",
+    "alg-soybean"
+   ],
+   "tags": [
+    "meat",
+    "character"
+   ],
+   "free": {
+    "egg": false,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 96,
+   "tier": "reserve",
+   "batch": "e",
+   "candidateId": "bbc-lunchbox-pasta",
+   "nameJa": "ランチボックス・パスタサラダ",
+   "nameEn": "Lunchbox pasta salad",
+   "nameJaIsTranslation": true,
+   "sourceUrl": "https://www.bbcgoodfood.com/recipes/lunchbox-pasta-salad",
+   "sourceTitle": "Lunchbox pasta salad recipe | Good Food",
+   "sourceHost": "bbcgoodfood.com",
+   "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 26,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat",
+    "alg-milk",
+    "alg-egg"
+   ],
+   "tags": [
+    "pasta",
+    "vegetable"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 97,
+   "tier": "reserve",
+   "batch": "f",
+   "candidateId": "nhk-10239",
+   "nameJa": "かじきのスパイシーマヨステーキ弁当",
+   "nameEn": "Swordfish steak with spicy mayo bento",
+   "sourceUrl": "https://www.kyounoryouri.jp/recipe/10239_かじきのスパイシーマヨステーキ弁当.html",
+   "sourceTitle": "かじきのスパイシーマヨステーキ弁当",
+   "sourceHost": "kyounoryouri.jp",
+   "publisher": "NHKエデュケーショナル（みんなのきょうの料理）",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 15,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-egg",
+    "alg-milk",
+    "alg-wheat"
+   ],
+   "tags": [
+    "fish",
+    "quick"
+   ],
+   "free": {
+    "egg": false,
+    "milk": false,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 98,
+   "tier": "reserve",
+   "batch": "h",
+   "candidateId": "delish-meatballporkchop",
+   "nameJa": "ミートボールのポークチャップ弁当",
+   "nameEn": "Meatball pork-chop bento",
+   "sourceUrl": "https://delishkitchen.tv/recipes/496754081205847169",
+   "sourceTitle": "レンチンで副菜2品！ ミートボールのポークチャップ弁当",
+   "sourceHost": "delishkitchen.tv",
+   "publisher": "デリッシュキッチン (every, Inc.)",
+   "accessed": "2026-11-01",
+   "style": "western-inspired",
+   "themeId": null,
+   "estMinutes": 30,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-pork",
+    "alg-wheat"
+   ],
+   "tags": [
+    "meat"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": false,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  },
+  {
+   "rank": 99,
+   "tier": "reserve",
+   "batch": "c",
+   "candidateId": "bbc-couscous",
+   "nameJa": "サマー・クスクスサラダ",
+   "nameEn": "Summer couscous salad",
+   "nameJaIsTranslation": true,
+   "sourceUrl": "https://www.bbcgoodfood.com/recipes/summer-couscous-salad",
+   "sourceTitle": "Summer couscous salad recipe | Good Food",
+   "sourceHost": "bbcgoodfood.com",
+   "publisher": "Immediate Media Company Ltd (BBC Good Food)",
+   "accessed": "2026-11-01",
+   "style": "other",
+   "themeId": null,
+   "estMinutes": 40,
+   "minutesBasis": "page time (first/total time on the page; Kikkoman and NHK bento pages: main component)",
+   "expectedAllergens": [
+    "alg-wheat"
+   ],
+   "tags": [
+    "vegetable",
+    "vegetarian",
+    "summer"
+   ],
+   "free": {
+    "egg": true,
+    "milk": true,
+    "wheat": false,
+    "all3": false
+   },
+   "vegetarianOrFishOnly": true,
+   "verified": "curl/fetch HTTP 200, title matches",
+   "status": "verified"
+  }
+ ]
+}
