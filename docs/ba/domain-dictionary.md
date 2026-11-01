@@ -433,3 +433,10 @@ No licensed characters (copyright): themes are generic.
 - M1 prep changes (BA, 2026-10-24; Developer item in PLAN §7 "M0 done"): categories are **labels only**, with no surface forms (§1 rules 2, 5, 7; §2 note), so `dict-synonym-unique` holds for 鶏肉, 豚肉, 牛肉, たまご and さかな, which stay forms of `ing-chicken`, `ing-pork`, `ing-beef`, `ing-egg` and `ing-fish`. The one category-level form that had no entry, 「いも」, moves to the new ambiguity group `amb-imo` (with 「芋」「おいも」). `dict-id-format` merged into `id-format`. No id changed.
 - M2 prep changes (BA, 2026-10-25): amb-momo's third candidate is written as the id `ing-pork` (豚もも); it was the words "pork thigh", which `build-dictionary` cannot turn into an id, so `candidateIds` lacked it. §7 states how review asks and how the non-food readings of amb-aji and amb-nashi are stored. §7 also fixes the picker kind labels. No id added, changed or retired. **`npm run build:dictionary` must be re-run** (generated `data/dictionary.json`).
 - Research phase 2 prep (BA, 2026-10-25; requested by the Organisator for recipe research phase 2): 10 new ingredients, no id changed or retired. `ing-tortilla` (4.1, `alg-wheat`, animalOrigin `?`); `ing-black-beans`, `ing-shiso`, `ing-coriander-leaf`, `ing-radish` (4.2); `ing-salmon-flakes` (child of `ing-salmon`, `alg-salmon`), `ing-tarako`, `ing-sakura-denbu` (4.5, `fish-seafood`); `ing-cumin`, `ing-dried-herbs` (4.7, seasonings). Forms left out on purpose to keep one form → one id: 「黒豆」 (black soybean, a different food), bare 「コリアンダー」 (usually the seed spice), 「ハーブ」 (fresh or dried), 「明太子」 (different product), 「トルティージャ」 (also the Spanish omelette). **`npm run build:dictionary` must be re-run.**
+
+## 10. Ingredient additions for library growth (BA research, 2026-11-01)
+
+Rows appended by the research agents of the library growth batches (c–h): same columns and rules as §2; each id is new (not in the tables above).
+
+| id | 表記 | よみ | English | category | synonyms | inherent allergens | info | animalOrigin |
+|---|---|---|---|---|---|---|---|---|
