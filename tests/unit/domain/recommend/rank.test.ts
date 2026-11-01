@@ -13,6 +13,8 @@ const lib = read<Recipe[]>('tests/fixtures/recipes/synthetic-library.json');
 const dietLib = read<Recipe[]>('tests/fixtures/recipes/synthetic-library-diet.json');
 const rank = createRanker(dict, lib);
 const rankDiet = createRanker(dict, dietLib);
+const procLib = read<Recipe[]>('tests/fixtures/recipes/synthetic-library-processed.json');
+const rankProc = createRanker(dict, procLib);
 
 const keyOf = (id: string): string => id.replace('rcp-syn-', '').split('-')[0]!.toUpperCase();
 const keys = (xs: { recipeId: string }[]): string => xs.map((x) => keyOf(x.recipeId)).join('');
@@ -43,29 +45,29 @@ interface Case {
   ac: string;
 }
 const cases: Case[] = [
-  { name: 'K1 sample child', profile: k1, top: 'EAB', full: 'EABFDKLJHCG', ac: 'US-E6-01/AC1' },
-  { name: 'K2 neutral', profile: base, top: 'DEK', full: 'DEKLAJCGHBFIM', ac: 'US-E6-01/AC1' },
-  { name: 'K3 egg known', profile: { ...base, knownAllergenIds: alg('egg'), likedIds: ['ing-chicken'], themeIds: ['theme-animals'] }, top: 'BEK', full: 'BEKCGH', ac: 'US-E6-02/AC1' },
-  { name: 'K4 milk only (may-contain)', profile: { ...base, knownAllergenIds: alg('milk') }, top: 'EKL', full: 'EKLACGHBF', ac: 'US-E6-02/AC1' },
-  { name: 'K5 pork (possibleAllergenIds)', profile: { ...base, knownAllergenIds: alg('pork'), likedIds: ['ing-egg'] }, top: 'AIE', full: 'AIEKLCGB', ac: 'US-E6-02/AC4' },
-  { name: 'K6 wheat+soybean', profile: { ...base, knownAllergenIds: alg('wheat', 'soybean'), dislikedIds: ['ing-spinach'] }, top: 'EKC', full: 'EKCA', ac: 'US-E6-02/AC4' },
-  { name: 'K7 all allergens known', profile: { ...base, knownAllergenIds: allKnown }, top: 'E', full: 'E', ac: 'US-E6-01/AC4' },
-  { name: 'K8 exactly two', profile: { ...base, knownAllergenIds: alg('egg', 'wheat', 'salmon') }, top: 'EK', full: 'EK', ac: 'US-E6-01/AC4' },
+  { name: 'K1 sample child', profile: k1, top: 'MEA', full: 'MEABFDKLJHCG', ac: 'US-E6-01/AC1' },
+  { name: 'K2 neutral', profile: base, top: 'DEK', full: 'DEKLAJMCGHBFI', ac: 'US-E6-01/AC1' },
+  { name: 'K3 egg known', profile: { ...base, knownAllergenIds: alg('egg'), likedIds: ['ing-chicken'], themeIds: ['theme-animals'] }, top: 'BMD', full: 'BMDEKLJCGH', ac: 'US-E6-02/AC9' },
+  { name: 'K4 milk only (may-contain is not read)', profile: { ...base, knownAllergenIds: alg('milk') }, top: 'DEK', full: 'DEKLAMCGHBFI', ac: 'US-E6-02/AC13' },
+  { name: 'K5 pork (possibleAllergenIds)', profile: { ...base, knownAllergenIds: alg('pork'), likedIds: ['ing-egg'] }, top: 'AID', full: 'AIDEKLJMCGB', ac: 'US-E6-02/AC13' },
+  { name: 'K6 wheat+soybean', profile: { ...base, knownAllergenIds: alg('wheat', 'soybean'), dislikedIds: ['ing-spinach'] }, top: 'DEK', full: 'DEKLMCHFA', ac: 'US-E6-02/AC10' },
+  { name: 'K7 all allergens known', profile: { ...base, knownAllergenIds: allKnown }, top: 'DEM', full: 'DEM', ac: 'US-E6-01/AC4' },
+  { name: 'K8 exactly two', profile: { ...base, knownAllergenIds: alg('egg', 'wheat', 'salmon') }, top: 'DEK', full: 'DEKMGH', ac: 'US-E6-01/AC4' },
   { name: 'K9 none (empty state)', profile: { ...base, diet: ['vegetarian'], knownAllergenIds: alg('egg', 'soybean'), excludedIngredientIds: ['ing-corn'] }, top: '', full: '', ac: 'US-E6-01/AC5' },
-  { name: 'K10 child id exclusion', profile: { ...base, likedIds: ['cat-meat'], excludedIngredientIds: ['ing-tomato'] }, top: 'JHB', full: 'JHBFEKLACGIM', ac: 'US-E6-02/AC2' },
+  { name: 'K10 child id exclusion', profile: { ...base, likedIds: ['cat-meat'], excludedIngredientIds: ['ing-tomato'] }, top: 'JHB', full: 'JHBFEKLAMCGI', ac: 'US-E6-02/AC2' },
   { name: 'K11 no-pork + no-beef', profile: { ...base, diet: ['no-pork', 'no-beef'], likedIds: ['ing-salmon'], themeIds: ['theme-sea'] }, top: 'CEL', full: 'CELAB', ac: 'US-E6-02/AC7' },
   { name: 'K12 vegetarian', profile: { ...base, diet: ['vegetarian'], likedIds: ['ing-carrot'], dislikedIds: ['ing-green-pepper'] }, top: 'EA', full: 'EA', ac: 'US-E6-02/AC8' },
-  { name: 'K13 variety at 14 days before', profile: k1, decisions: [planned('E', '2026-11-04')], top: 'ABF', full: 'ABFDEKLJHCG', ac: 'US-E6-01/AC3' },
-  { name: 'K14 variety outside window (15 days)', profile: k1, decisions: [planned('E', '2026-11-03')], top: 'EAB', full: 'EABFDKLJHCG', ac: 'US-E6-01/AC3' },
-  { name: 'K15 same date is not "other"', profile: k1, decisions: [planned('E', '2026-11-18')], top: 'EAB', full: 'EABFDKLJHCG', ac: 'US-E6-01/AC3' },
-  { name: 'K16 14 days after, not cumulative', profile: k1, decisions: [planned('E', '2026-12-02'), planned('E', '2026-11-11')], top: 'ABF', full: 'ABFDEKLJHCG', ac: 'US-E6-01/AC3' },
-  { name: 'K17 unknown allergy, theme', profile: { ...base, themeIds: ['theme-vehicles'] }, top: 'DLE', full: 'DLEKAJCGHBFIM', ac: 'US-E6-02/AC5' },
-  { name: 'K18 distinct found ids (B1)', profile: { ...base, likedIds: ['cat-grain'] }, top: 'IBD', full: 'IBDEKLAJCGHFM', ac: 'US-E6-01/AC1' },
-  { name: 'K19 category exclusion, dislike keeps listed', profile: { ...base, excludedIngredientIds: ['cat-seafood'], dislikedIds: ['cat-dairy'] }, top: 'DEK', full: 'DEKLACGHBFJM', ac: 'US-E6-02/AC2' },
+  { name: 'K13 variety at 14 days before', profile: k1, decisions: [planned('E', '2026-11-04')], top: 'MAB', full: 'MABFDEKLJHCG', ac: 'US-E6-01/AC3' },
+  { name: 'K14 variety outside window (15 days)', profile: k1, decisions: [planned('E', '2026-11-03')], top: 'MEA', full: 'MEABFDKLJHCG', ac: 'US-E6-01/AC3' },
+  { name: 'K15 same date is not "other"', profile: k1, decisions: [planned('E', '2026-11-18')], top: 'MEA', full: 'MEABFDKLJHCG', ac: 'US-E6-01/AC3' },
+  { name: 'K16 14 days after, not cumulative', profile: k1, decisions: [planned('E', '2026-12-02'), planned('E', '2026-11-11')], top: 'MAB', full: 'MABFDEKLJHCG', ac: 'US-E6-01/AC3' },
+  { name: 'K17 unknown allergy, theme', profile: { ...base, themeIds: ['theme-vehicles'] }, top: 'DLE', full: 'DLEKAJMCGHBFI', ac: 'US-E6-02/AC12' },
+  { name: 'K18 distinct found ids (B1)', profile: { ...base, likedIds: ['cat-grain'] }, top: 'IBD', full: 'IBDEKLAJMCGHF', ac: 'US-E6-01/AC1' },
+  { name: 'K19 category exclusion, dislike keeps listed', profile: { ...base, excludedIngredientIds: ['cat-seafood'], dislikedIds: ['cat-dairy'] }, top: 'DEK', full: 'DEKLAMCGHBFJ', ac: 'US-E6-02/AC2' },
   { name: 'K20 vegetarian, carrot excluded', profile: { ...base, diet: ['vegetarian'], excludedIngredientIds: ['ing-carrot'], likedIds: ['ing-corn'] }, top: 'A', full: 'A', ac: 'US-E6-01/AC4' },
-  { name: 'K21 incomplete ranks last despite top score', profile: { ...base, likedIds: ['ing-corn', 'ing-potato'], themeIds: ['theme-animals'] }, top: 'EDK', full: 'EDKLAJCGHBFIM', ac: 'US-E6-02/AC5' },
-  { name: 'K22 incomplete excluded with known allergen', profile: { ...base, likedIds: ['ing-corn', 'ing-potato'], themeIds: ['theme-animals'], knownAllergenIds: alg('shrimp') }, top: 'EDK', full: 'EDKLAJCGHBF', ac: 'US-E6-02/AC6' },
-  { name: 'K23 most specific entry wins (B2)', profile: { ...base, likedIds: ['cat-grain'], dislikedIds: ['ing-rice'] }, top: 'DJF', full: 'DJFIBEKLACGHM', ac: 'US-E6-01/AC1' },
+  { name: 'K21 incomplete data no longer ranks last (F4 retired)', profile: { ...base, likedIds: ['ing-corn', 'ing-potato'], themeIds: ['theme-animals'] }, top: 'MED', full: 'MEDKLAJCGHBFI', ac: 'US-E6-02/AC9' },
+  { name: 'K22 incomplete data is not excluded with a known allergen (F4 retired)', profile: { ...base, likedIds: ['ing-corn', 'ing-potato'], themeIds: ['theme-animals'], knownAllergenIds: alg('shrimp') }, top: 'MED', full: 'MEDKLAJCGHBF', ac: 'US-E6-02/AC9' },
+  { name: 'K23 most specific entry wins (B2)', profile: { ...base, likedIds: ['cat-grain'], dislikedIds: ['ing-rice'] }, top: 'DJF', full: 'DJFIBEKLAMCGH', ac: 'US-E6-01/AC1' },
 ];
 
 describe('ranking oracle cases K1-K23 on the synthetic library', () => {
@@ -83,7 +85,7 @@ describe('scores (US-E6-01/AC1, AC3)', () => {
   const scoreOf = (profile: RankProfile, key: string, decisions: PlannedDecision[] = []) =>
     rank({ profile, decisions, targetDate: T }).all.find((x) => keyOf(x.recipeId) === key)!.score;
   it('US-E6-01/AC1 K1 scores', () => {
-    const expected: Record<string, number> = { A: 2, B: 2, C: -3, D: 0, E: 2, F: 1, G: -3, H: 0, J: 0, K: 0, L: 0 };
+    const expected: Record<string, number> = { M: 3, A: 2, B: 2, C: -3, D: 0, E: 2, F: 1, G: -3, H: 0, J: 0, K: 0, L: 0 };
     for (const [k, v] of Object.entries(expected)) expect(scoreOf(k1, k), k).toBe(v);
   });
   it('US-E6-01/AC3 a recipe planned 7 days later loses 2 and ranks below an otherwise equal one', () => {
@@ -102,16 +104,15 @@ describe('scores (US-E6-01/AC1, AC3)', () => {
 describe('exclusion reasons (US-E6-02)', () => {
   const reasonsOf = (profile: RankProfile, key: string, r = rank) =>
     r({ profile, decisions: [], targetDate: T }).excluded.find((x) => keyOf(x.recipeId) === key)?.reasons;
-  it('US-E6-02/AC1 allergen reason lists the matching ids, including may-contain', () => {
-    expect(reasonsOf({ ...base, knownAllergenIds: alg('milk') }, 'D')).toEqual([{ kind: 'allergen', allergenIds: alg('milk') }]);
+  it('US-E6-02/AC9 allergen reason lists the matching allergenIds only', () => {
+    expect(reasonsOf({ ...base, knownAllergenIds: alg('milk') }, 'J')).toEqual([{ kind: 'allergen', allergenIds: alg('milk') }]);
+    expect(reasonsOf({ ...base, knownAllergenIds: alg('milk') }, 'D')).toBeUndefined();
   });
   it('US-E6-02/AC2 excluded ingredient reason names the profile entry', () => {
     expect(reasonsOf({ ...base, excludedIngredientIds: ['ing-tomato'] }, 'D')).toEqual([{ kind: 'excluded-ingredient', ids: ['ing-tomato'] }]);
   });
-  it('US-E6-02/AC6 incomplete allergen data is excluded with a known allergen', () => {
-    expect(reasonsOf({ ...base, knownAllergenIds: alg('shrimp') }, 'M')).toEqual([{ kind: 'allergen-incomplete' }]);
-  });
-  it('US-E6-02/AC5 incomplete allergen data is not excluded by exclusions alone', () => {
+  it('US-E6-02/AC9 incomplete allergen data is never an exclusion reason (F4 retired)', () => {
+    expect(reasonsOf({ ...base, knownAllergenIds: alg('shrimp') }, 'M')).toBeUndefined();
     expect(reasonsOf({ ...base, excludedIngredientIds: ['ing-tomato'] }, 'M')).toBeUndefined();
   });
   it('US-E6-02/AC8 both diet reasons are reported together (vegetarian, curry)', () => {
@@ -148,7 +149,7 @@ describe('hidden animal sources H1-H7 (US-E6-02/AC7, AC8)', () => {
       const ex = run([d]).excluded.filter((x) => x.reasons.some((r) => r.kind === 'diet-incomplete')).map((x) => keyOf(x.recipeId));
       expect(ex.sort()).toEqual(['N1', 'N4']);
     }
-    expect(run([]).all.every((x) => x.complete)).toBe(true);
+    expect(run([]).all).toHaveLength(dietLib.length);
   });
 });
 
@@ -159,7 +160,7 @@ describe('result shape and cards (US-E6-01, US-E6-02)', () => {
   });
   it('US-E6-01/AC1 library order does not change the result', () => {
     const rev = createRanker(dict, [...lib].reverse());
-    expect(keys(rev({ profile: k1, decisions: [], targetDate: T }).all)).toBe('EABFDKLJHCG');
+    expect(keys(rev({ profile: k1, decisions: [], targetDate: T }).all)).toBe('MEABFDKLJHCG');
   });
   it('US-E6-01/AC2 at most 2 reasons per card, liked foods first', () => {
     const r = rank({ profile: k1, decisions: [], targetDate: T });
@@ -174,15 +175,15 @@ describe('result shape and cards (US-E6-01, US-E6-02)', () => {
     expect(quick('B')).toBe(false); // 25 min
     expect(quick('I')).toBe(false);
   });
-  it('US-E6-02/AC4 varies-by-product recipes carry the check-label flag', () => {
-    const r = rank({ profile: base, decisions: [], targetDate: T });
-    expect(r.all.find((x) => keyOf(x.recipeId) === 'B')!.checkLabel).toBe(true);
-    expect(r.all.find((x) => keyOf(x.recipeId) === 'E')!.checkLabel).toBe(false);
-  });
-  it('US-E6-02/AC5 incomplete recipes are flagged complete=false and last', () => {
+  it('US-E6-02/AC9 order is score desc, minutes asc, id asc; an incomplete recipe is not ranked last for that', () => {
     const r = rank({ profile: { ...base, likedIds: ['ing-corn', 'ing-potato'] }, decisions: [], targetDate: T });
-    expect(r.all.at(-1)!.complete).toBe(false);
-    expect(r.all.at(-1)!.score).toBeGreaterThan(r.all[0]!.score - 1);
+    expect(keyOf(r.all[0]!.recipeId)).toBe('M');
+    for (let i = 1; i < r.all.length; i += 1) {
+      const a = r.all[i - 1]!;
+      const b = r.all[i]!;
+      const order = b.score - a.score || a.recipe.minutes - b.recipe.minutes || (a.recipeId < b.recipeId ? -1 : 1);
+      expect(order).toBeLessThanOrEqual(0);
+    }
   });
 });
 
@@ -193,5 +194,90 @@ describe('synthetic fixtures are test-only', () => {
   it('the tags in the fixtures match the pinned table', () => {
     const pin = read<{ animalOrigin: Record<string, string[]> }>('tests/fixtures/recipes/diet-tags-pinned.json').animalOrigin;
     for (const r of [...lib, ...dietLib]) for (const i of r.ingredients) expect(i.animalOrigin).toEqual(pin[i.ingredientId] ?? []);
+  });
+});
+
+describe('processed foods: generic allergen rule and warning (US-E6-02/AC9-AC15, ADR 013)', () => {
+  const run = (knownAllergenIds: string[], extra: Partial<RankProfile> = {}) =>
+    rankProc({ profile: { ...base, ...extra, knownAllergenIds }, decisions: [], targetDate: T });
+  const short = (id: string) => id.replace('rcp-syn-', '').split('-')[0]!;
+  const excl = (r: ReturnType<typeof run>) => r.excluded.map((x) => short(x.recipeId)).sort();
+  const warn = (r: ReturnType<typeof run>, key: string) => r.all.find((x) => short(x.recipeId) === key)!.processedWarning;
+
+  it('US-E6-02/AC9 an inherent allergen of a processed ingredient excludes (cheese milk, soy sauce soybean and wheat)', () => {
+    expect(excl(run(alg('milk')))).toEqual(['p2']);
+    expect(excl(run(alg('soybean')))).toEqual(['p5']);
+    expect(excl(run(alg('wheat')))).toEqual(['p5']);
+    expect(run(alg('milk')).excluded[0]!.reasons).toEqual([{ kind: 'allergen', allergenIds: alg('milk') }]);
+  });
+
+  it('US-E6-02/AC15 the fish group excludes for salmon or mackerel and the reason names the child own allergen', () => {
+    const m = run(alg('mackerel'));
+    expect(excl(m)).toEqual(['p1', 'p6']);
+    expect(m.excluded.find((x) => short(x.recipeId) === 'p1')!.reasons).toEqual([{ kind: 'allergen', allergenIds: alg('mackerel') }]);
+    const sa = run(alg('salmon'));
+    expect(excl(sa)).toEqual(['p1', 'p6']);
+    expect(sa.excluded.find((x) => short(x.recipeId) === 'p1')!.reasons).toEqual([{ kind: 'allergen', allergenIds: alg('salmon') }]);
+    expect(sa.excluded.find((x) => short(x.recipeId) === 'p6')!.reasons).toEqual([{ kind: 'allergen', allergenIds: alg('salmon') }]);
+  });
+
+  it('US-E6-02/AC15 salmon roe alone or shrimp alone does not trigger the group; the warning applies', () => {
+    for (const k of [alg('salmon-roe'), alg('shrimp')]) {
+      const r = run(k);
+      expect(excl(r)).toEqual([]);
+      expect(warn(r, 'p1')).toEqual({ allergenIds: k, processedIngredientIds: ['ing-kamaboko'] });
+    }
+  });
+
+  it('US-E6-02/AC15 the group is never written into the recipe: allergenIds of the fixture stay without fish ids', () => {
+    expect(procLib.find((r) => short(r.id) === 'p1')!.allergenIds).toEqual([]);
+  });
+
+  it('US-E6-02/AC10 a registered allergen that is not inherent does not exclude and warns', () => {
+    const r = run(alg('peanut'));
+    expect(excl(r)).toEqual([]);
+    expect(warn(r, 'p5')).toEqual({ allergenIds: alg('peanut'), processedIngredientIds: ['ing-soy-sauce'] });
+    expect(warn(r, 'p4')).toBeNull(); // nothing processed
+  });
+
+  it('US-E6-02/AC11 the warning carries the child FULL list in registered order and each processed ingredient', () => {
+    const r = run(['alg-shrimp', 'alg-peanut']);
+    expect(warn(r, 'p3')).toEqual({ allergenIds: ['alg-shrimp', 'alg-peanut'], processedIngredientIds: ['ing-ham'] });
+    for (const x of r.all) expect(x.processedWarning === null).toBe(short(x.recipeId) === 'p4');
+  });
+
+  it('US-E6-02/AC11 the trigger is the dictionary, whatever the recipe allergenInfo or allergenDataComplete says', () => {
+    const r = run(alg('peanut'));
+    const p1 = r.all.find((x) => short(x.recipeId) === 'p1')!;
+    expect(p1.recipe.allergenDataComplete).toBe(false);
+    expect(p1.processedWarning).not.toBeNull();
+    const known = createRanker(dict, [{ ...p1.recipe, ingredients: p1.recipe.ingredients.map((i) => ({ ...i, allergenInfo: 'known' as const })) }]);
+    expect(known({ profile: { ...base, knownAllergenIds: alg('peanut') }, decisions: [], targetDate: T }).all[0]!.processedWarning).not.toBeNull();
+  });
+
+  it('US-E6-02/AC12 no registered allergen means no warning (none-known, unknown, exclusions only)', () => {
+    for (const p of [{}, { excludedIngredientIds: ['ing-tomato'] }]) {
+      for (const x of run([], p).all) expect(x.processedWarning).toBeNull();
+    }
+    expect(excl(run([]))).toEqual([]);
+  });
+
+  it('US-E6-02/AC13 brand-label data warns only: may-contain and possible allergens never exclude', () => {
+    const r = run(alg('soybean'));
+    expect(r.all.some((x) => short(x.recipeId) === 'p3')).toBe(true);
+    expect(warn(r, 'p3')!.processedIngredientIds).toEqual(['ing-ham']);
+    expect(procLib.find((x) => short(x.id) === 'p3')!.mayContainAllergenIds).toContain('alg-soybean');
+  });
+
+  it('US-E6-02/AC9 retired F4: allergenDataComplete=false is not excluded and not ranked last for allergens', () => {
+    const r = run(alg('peanut'));
+    expect(r.all.map((x) => short(x.recipeId))).toEqual(['p1', 'p2', 'p3', 'p4', 'p5', 'p6']); // score 0: minutes asc
+  });
+
+  it('US-E6-02/AC9 a planned date still refuses an excluded recipe: the excluded list is what isRecipeAllowed reads', () => {
+    const r = run(alg('milk'));
+    const blocked = new Set(r.excluded.map((x) => x.recipeId));
+    expect(blocked.has(procLib.find((x) => short(x.id) === 'p2')!.id)).toBe(true);
+    expect(blocked.size).toBe(1);
   });
 });

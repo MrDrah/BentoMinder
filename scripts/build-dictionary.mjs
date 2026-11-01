@@ -81,7 +81,9 @@ export function buildDictionary(markdown) {
     dishes: [],
     themes: [],
     ambiguity: [],
+    allergenGroups: [],
   };
+  const groupLinks = [];
 
   for (const t of tables) {
     const h = t.header.join('|');
@@ -137,6 +139,10 @@ export function buildDictionary(markdown) {
         });
       } else if (h === 'id|表記|English' && r.id.startsWith('theme-')) {
         dict.themes.push({ id: r.id, ja: r['表記'], en: r.English });
+      } else if (h === 'group|members|basis') {
+        dict.allergenGroups.push({ id: r.group, memberAllergenIds: list(r.members), basis: r.basis });
+      } else if (h === 'ingredient|groups') {
+        groupLinks.push({ ingredient: r.ingredient, groups: list(r.groups) });
       } else if (h.startsWith('group id')) {
         dict.ambiguity.push({
           id: r['group id'],
@@ -147,6 +153,14 @@ export function buildDictionary(markdown) {
         });
       }
     }
+  }
+
+  // Allergen groups (dictionary §11.5): every ingredient carries allergenGroupIds (default []).
+  for (const ing of dict.ingredients) ing.allergenGroupIds = [];
+  for (const link of groupLinks) {
+    const ing = dict.ingredients.find((i) => i.id === link.ingredient);
+    if (ing) ing.allergenGroupIds = dedupe([...ing.allergenGroupIds, ...link.groups]);
+    else throw new Error(`dictionary-ingredient-group-unknown: ${link.ingredient} (§11.5 table) is not an ingredient`);
   }
 
   // Retired allergens: "**Retired:** `alg-matsutake` まつたけ (removed 2024-03)…"
@@ -170,7 +184,7 @@ function main() {
   const markdown = readFileSync(join(root, SOURCE), 'utf8');
   const dict = buildDictionary(markdown);
   const json = `${JSON.stringify(dict, null, 2)}\n`;
-  const counts = ['categories', 'allergens', 'ingredients', 'dishes', 'themes', 'ambiguity']
+  const counts = ['categories', 'allergens', 'ingredients', 'dishes', 'themes', 'ambiguity', 'allergenGroups']
     .map((k) => `${dict[k].length} ${k}`)
     .join(', ');
   if (process.argv.includes('--check')) {

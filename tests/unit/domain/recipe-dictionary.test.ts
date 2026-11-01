@@ -32,6 +32,7 @@ const ing = (id: string, extra: Partial<Dictionary['ingredients'][number]> = {})
   forms: [id.replace('ing-', 'form-')],
   inherentAllergenIds: [],
   info: 'known',
+  allergenGroupIds: [],
   animalOrigin: [],
   animalOriginKnown: true,
   seasoning: false,
@@ -74,6 +75,7 @@ function miniDictionary(): Dictionary {
       },
     ],
     themes: [{ id: 'theme-animals', ja: 'どうぶつ', en: 'Animals' }],
+    allergenGroups: [],
     ambiguity: [{ id: 'amb-test', forms: ['あじ'], candidateIds: ['ing-rice'], candidatesNote: '', resolution: '' }],
   };
 }
@@ -284,6 +286,33 @@ describe('dictionary rules (dictionary §8)', () => {
     expect(dictionaryIssues(d)).toEqual([expect.objectContaining({ rule: 'dict-synonym-unique', id: 'ing-rice' })]);
   });
 
+  it('US-E6-02/AC16 allergen group rules: unknown member, unknown group, group on a non-processed row', () => {
+    const ok = miniDictionary();
+    ok.allergenGroups = [{ id: 'grp-test', memberAllergenIds: ['alg-egg', 'alg-wheat'], basis: 'synthetic' }];
+    ok.ingredients[2]!.allergenGroupIds = ['grp-test']; // ing-dashi is info = varies
+    expect(issuesOf(ok)).toEqual([]);
+
+    const member = clone(ok);
+    member.allergenGroups[0]!.memberAllergenIds = ['alg-egg', 'alg-matsutake']; // retired
+    expect(issuesOf(member)).toEqual(['dictionary-group-member-unknown']);
+    member.allergenGroups[0]!.memberAllergenIds = ['alg-missing'];
+    expect(issuesOf(member)).toEqual(['dictionary-group-member-unknown']);
+
+    const unknown = clone(ok);
+    unknown.ingredients[2]!.allergenGroupIds = ['grp-nope'];
+    expect(issuesOf(unknown)).toEqual(['dictionary-ingredient-group-unknown']);
+
+    const known = clone(ok);
+    known.ingredients[0]!.allergenGroupIds = ['grp-test']; // ing-rice is info = known
+    expect(issuesOf(known)).toEqual(['dictionary-group-ingredient-not-processed']);
+  });
+
+  it('US-E6-02/AC16 a group id in a recipe allergen field fails allergen-unknown', () => {
+    const lib = (extra: Partial<Recipe>) => recipeLibraryIssues([{ ...syntheticRecipe(), ...extra }], miniDictionary(), HOSTS).map((i) => i.rule);
+    expect(lib({ allergenIds: ['alg-egg', 'grp-fish'] })).toContain('allergen-unknown');
+    expect(lib({ mayContainAllergenIds: ['grp-fish'] })).toContain('allergen-unknown');
+  });
+
   it('normalises like dictionary §1 rule 1', () => {
     expect(normalizeForMatch('ピーマン・ナス（大）')).toBe('ぴーまんなす大');
     expect(normalizeForMatch('ＡＢＣ　ｶﾚｰ')).toBe('ABCかれー');
@@ -298,6 +327,13 @@ describe('shipped dictionary (live data: properties only)', () => {
   it('validates and every reference resolves', () => {
     const parsed = dictionarySchema.parse(shipped);
     expect(dictionaryIssues(parsed)).toEqual([]);
+  });
+
+  it('US-E6-02/AC15 US-E6-02/AC16 groups: every group is defined, members are scheme allergens, carriers are processed', () => {
+    const parsed = dictionarySchema.parse(shipped);
+    expect(parsed.allergenGroups.length).toBeGreaterThan(0);
+    for (const g of parsed.allergenGroups) expect(g.id).toMatch(/^grp-/);
+    expect(parsed.ingredients.filter((i) => i.allergenGroupIds.length > 0).every((i) => i.info === 'varies')).toBe(true);
   });
 
   it('every ingredient has an animal-origin value and seasonings are flagged by category', () => {

@@ -28,13 +28,43 @@ const profileArb: fc.Arbitrary<RankProfile> = fc.record({
 });
 
 describe('ranking properties on data/library.json', () => {
-  it('US-E6-02/AC3 US-E6-02/AC1 no recipe with a known allergen (incl. may-contain) is suggested or listed', () => {
+  const ingOf = new Map(dict.ingredients.map((i) => [i.id, i] as const));
+  const groupMembers = new Map(dict.allergenGroups.map((g) => [g.id, g.memberAllergenIds] as const));
+  /** Independent restatement of F1'' from the dictionary (not from the recipe's derived fields only). */
+  const violates = (r: Recipe, known: ReadonlySet<string>): boolean =>
+    r.allergenIds.some((a) => known.has(a)) ||
+    r.ingredients.some((i) => {
+      const d = ingOf.get(i.ingredientId)!;
+      return (
+        (d.info === 'varies' && d.inherentAllergenIds.some((a) => known.has(a))) ||
+        d.allergenGroupIds.some((g) => (groupMembers.get(g) ?? []).some((m) => known.has(m)))
+      );
+    });
+  const processedIds = (r: Recipe): string[] => [...new Set(r.ingredients.map((i) => i.ingredientId).filter((id) => ingOf.get(id)!.info === 'varies'))];
+  const checkAllergens = (knownAllergenIds: string[]) => {
+    const profile: RankProfile = { likedIds: [], dislikedIds: [], knownAllergenIds, excludedIngredientIds: [], diet: [], themeIds: [] };
+    const r = rank({ profile, decisions: [], targetDate: T });
+    const known = new Set(knownAllergenIds);
+    for (const x of r.all) {
+      expect(violates(x.recipe, known), x.recipeId).toBe(false);
+      const processed = processedIds(x.recipe);
+      if (knownAllergenIds.length === 0 || processed.length === 0) expect(x.processedWarning).toBeNull();
+      else expect(x.processedWarning).toEqual({ allergenIds: knownAllergenIds, processedIngredientIds: processed });
+    }
+    for (const x of r.excluded) if (x.reasons.every((q) => q.kind === 'allergen')) expect(violates(x.recipe, known), x.recipeId).toBe(true);
+    for (const x of r.suggestions) expect(r.all).toContain(x);
+  };
+
+  it('US-E6-02/AC14 no suggested or listed recipe has a registered allergen (allergenIds, inherent of processed, group); warning exactly when allergens registered and a processed ingredient exists', () => {
     fc.assert(
       fc.property(profileArb, (profile) => {
         const r = rank({ profile, decisions: [], targetDate: T });
         const known = new Set(profile.knownAllergenIds);
         for (const x of r.all) {
-          for (const a of [...x.recipe.allergenIds, ...x.recipe.mayContainAllergenIds]) expect(known.has(a)).toBe(false);
+          expect(violates(x.recipe, known)).toBe(false);
+          const processed = processedIds(x.recipe);
+          if (known.size === 0 || processed.length === 0) expect(x.processedWarning).toBeNull();
+          else expect(x.processedWarning).toEqual({ allergenIds: profile.knownAllergenIds, processedIngredientIds: processed });
         }
         for (const x of r.suggestions) expect(r.all).toContain(x);
       }),
@@ -42,14 +72,15 @@ describe('ranking properties on data/library.json', () => {
     );
   });
 
-  it('US-E6-02/AC3 every single allergen and every pair: nothing violating survives', () => {
-    const sets = [...allergenIds.map((a) => [a]), ...allergenIds.flatMap((a, i) => allergenIds.slice(i + 1).map((b) => [a, b]))];
-    for (const knownAllergenIds of sets) {
-      const r = rank({ profile: { likedIds: [], dislikedIds: [], knownAllergenIds, excludedIngredientIds: [], diet: [], themeIds: [] }, decisions: [], targetDate: T });
-      for (const x of r.all) {
-        expect(x.recipe.allergenDataComplete).toBe(true);
-        expect([...x.recipe.allergenIds, ...x.recipe.mayContainAllergenIds].some((a) => knownAllergenIds.includes(a))).toBe(false);
-      }
+  it('US-E6-02/AC14 every single allergen and every pair: nothing violating survives; the warning rule holds', () => {
+    const sets = [[], ...allergenIds.map((a) => [a]), ...allergenIds.flatMap((a, i) => allergenIds.slice(i + 1).map((b) => [a, b]))];
+    for (const knownAllergenIds of sets) checkAllergens(knownAllergenIds);
+  });
+
+  it('US-E6-02/AC9 US-E6-02/AC15 survivors of 6 sample profiles stay above zero (library has choices for each)', () => {
+    for (const k of [[], ['alg-milk'], ['alg-egg'], ['alg-wheat'], ['alg-salmon'], ['alg-peanut']]) {
+      const r = rank({ profile: { likedIds: [], dislikedIds: [], knownAllergenIds: k, excludedIngredientIds: [], diet: [], themeIds: [] }, decisions: [], targetDate: T });
+      expect(r.all.length, k.join()).toBeGreaterThan(0);
     }
   });
 
@@ -74,8 +105,11 @@ describe('ranking properties on data/library.json', () => {
         expect(b.all.map((x) => x.recipeId)).toEqual(a.all.map((x) => x.recipeId));
         expect(a.suggestions.map((x) => x.recipeId)).toEqual(a.all.slice(0, 3).map((x) => x.recipeId));
         expect(a.all.length + a.excluded.length).toBe(library.length);
-        const complete = a.all.map((x) => x.complete);
-        expect(complete).toEqual([...complete].sort((x, y) => Number(y) - Number(x)));
+        for (let i = 1; i < a.all.length; i += 1) {
+          const p = a.all[i - 1]!;
+          const q = a.all[i]!;
+          expect(q.score - p.score || p.recipe.minutes - q.recipe.minutes || (p.recipeId < q.recipeId ? -1 : 1)).toBeLessThanOrEqual(0);
+        }
       }),
       { numRuns: 200 },
     );

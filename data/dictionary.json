@@ -533,7 +533,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-rice-flour",
@@ -552,7 +553,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mixed-grain-rice",
@@ -573,7 +575,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bread",
@@ -599,7 +602,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-wheat-flour",
@@ -622,7 +626,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bread-crumbs",
@@ -646,7 +651,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-tortilla",
@@ -670,7 +676,8 @@
       "animalOrigin": [],
       "animalOriginKnown": false,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-udon",
@@ -692,7 +699,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-soba",
@@ -714,7 +722,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chinese-noodles",
@@ -740,7 +749,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-spaghetti",
@@ -763,7 +773,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-macaroni",
@@ -784,7 +795,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-harusame",
@@ -804,7 +816,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-potato",
@@ -826,7 +839,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-sweet-potato",
@@ -847,7 +861,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-taro",
@@ -867,7 +882,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-yam",
@@ -892,7 +908,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-konjac",
@@ -914,7 +931,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-carrot",
@@ -935,7 +953,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-onion",
@@ -957,7 +976,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cabbage",
@@ -976,7 +996,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chinese-cabbage",
@@ -996,7 +1017,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-daikon",
@@ -1016,7 +1038,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-dried-daikon",
@@ -1037,7 +1060,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-burdock",
@@ -1057,7 +1081,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-lotus-root",
@@ -1077,7 +1102,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-green-pepper",
@@ -1096,7 +1122,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-paprika",
@@ -1116,7 +1143,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-eggplant",
@@ -1137,7 +1165,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pumpkin",
@@ -1158,7 +1187,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-broccoli",
@@ -1177,7 +1207,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cauliflower",
@@ -1196,7 +1227,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-spinach",
@@ -1216,7 +1248,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-komatsuna",
@@ -1236,7 +1269,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bok-choy",
@@ -1257,7 +1291,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mizuna",
@@ -1277,7 +1312,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-shungiku",
@@ -1297,7 +1333,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-lettuce",
@@ -1316,7 +1353,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cucumber",
@@ -1336,7 +1374,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-tomato",
@@ -1355,7 +1394,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cherry-tomato",
@@ -1375,7 +1415,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bean-sprouts",
@@ -1394,7 +1435,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-green-onion",
@@ -1417,7 +1459,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chinese-chive",
@@ -1437,7 +1480,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-corn",
@@ -1458,7 +1502,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-edamame",
@@ -1480,7 +1525,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": "conservative, see note"
+      "note": "conservative, see note",
+      "allergenGroupIds": []
     },
     {
       "id": "ing-green-peas",
@@ -1501,7 +1547,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-black-beans",
@@ -1523,7 +1570,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-green-beans",
@@ -1543,7 +1591,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-snow-peas",
@@ -1564,7 +1613,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-okra",
@@ -1583,7 +1633,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-asparagus",
@@ -1603,7 +1654,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-celery",
@@ -1622,7 +1674,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-turnip",
@@ -1642,7 +1695,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-zucchini",
@@ -1661,7 +1715,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bamboo-shoot",
@@ -1681,7 +1736,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-garlic",
@@ -1701,7 +1757,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ginger",
@@ -1721,7 +1778,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-shiso",
@@ -1745,7 +1803,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-coriander-leaf",
@@ -1768,7 +1827,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-radish",
@@ -1789,7 +1849,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mixed-vegetables",
@@ -1808,7 +1869,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-shiitake",
@@ -1829,7 +1891,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-enoki",
@@ -1849,7 +1912,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-shimeji",
@@ -1869,7 +1933,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-maitake",
@@ -1889,7 +1954,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-eringi",
@@ -1908,7 +1974,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mushroom",
@@ -1927,7 +1994,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-hijiki",
@@ -1948,7 +2016,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-wakame",
@@ -1968,7 +2037,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-nori",
@@ -1990,7 +2060,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-aonori",
@@ -2010,7 +2081,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-kombu",
@@ -2031,7 +2103,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-agar",
@@ -2051,7 +2124,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-soybean",
@@ -2074,7 +2148,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-tofu",
@@ -2098,7 +2173,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-fried-tofu",
@@ -2122,7 +2198,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-thick-fried-tofu",
@@ -2145,7 +2222,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-koya-tofu",
@@ -2167,7 +2245,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-natto",
@@ -2189,7 +2268,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-soy-milk",
@@ -2211,7 +2291,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-kinako",
@@ -2233,7 +2314,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-egg",
@@ -2260,7 +2342,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-quail-egg",
@@ -2285,7 +2368,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-milk",
@@ -2309,7 +2393,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cheese",
@@ -2335,7 +2420,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-yogurt",
@@ -2359,7 +2445,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-butter",
@@ -2382,7 +2469,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cream",
@@ -2405,7 +2493,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-skim-milk",
@@ -2429,7 +2518,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chicken",
@@ -2456,7 +2546,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chicken-thigh",
@@ -2481,7 +2572,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chicken-breast",
@@ -2506,7 +2598,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chicken-tender",
@@ -2530,7 +2623,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ground-chicken",
@@ -2555,7 +2649,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pork",
@@ -2583,7 +2678,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ground-pork",
@@ -2607,7 +2703,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-beef",
@@ -2632,7 +2729,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ground-beef",
@@ -2656,7 +2754,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ground-mixed",
@@ -2684,7 +2783,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ground-meat",
@@ -2707,7 +2807,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ham",
@@ -2732,7 +2833,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-sausage",
@@ -2757,7 +2859,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bacon",
@@ -2780,7 +2883,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-fish",
@@ -2803,7 +2907,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-white-fish",
@@ -2827,7 +2932,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-salmon",
@@ -2853,7 +2959,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mackerel",
@@ -2877,7 +2984,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cod",
@@ -2899,7 +3007,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-yellowtail",
@@ -2921,7 +3030,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-horse-mackerel",
@@ -2942,7 +3052,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-spanish-mackerel",
@@ -2964,7 +3075,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-saury",
@@ -2986,7 +3098,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-sardine",
@@ -3008,7 +3121,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-shishamo",
@@ -3030,7 +3144,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-tuna",
@@ -3052,7 +3167,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-canned-tuna",
@@ -3074,7 +3190,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-whitebait",
@@ -3098,7 +3217,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bonito-flakes",
@@ -3123,7 +3243,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-niboshi",
@@ -3146,7 +3267,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-salmon-roe",
@@ -3169,7 +3291,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-salmon-flakes",
@@ -3195,7 +3318,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-tarako",
@@ -3217,7 +3343,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-shrimp",
@@ -3243,7 +3372,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-crab",
@@ -3267,7 +3397,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-squid",
@@ -3291,7 +3422,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-octopus",
@@ -3312,7 +3444,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-clam",
@@ -3334,7 +3467,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-scallop",
@@ -3357,7 +3491,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-oyster",
@@ -3378,7 +3513,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chikuwa",
@@ -3400,7 +3536,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-kamaboko",
@@ -3422,7 +3561,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-hanpen",
@@ -3444,7 +3586,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-satsuma-age",
@@ -3467,7 +3612,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-crab-stick",
@@ -3489,7 +3637,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-sakura-denbu",
@@ -3514,7 +3665,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-apple",
@@ -3537,7 +3691,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-banana",
@@ -3558,7 +3713,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mandarin",
@@ -3582,7 +3738,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": "conservative, see note §4.2"
+      "note": "conservative, see note §4.2",
+      "allergenGroupIds": []
     },
     {
       "id": "ing-orange",
@@ -3603,7 +3760,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-grapefruit",
@@ -3622,7 +3780,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-kiwi",
@@ -3644,7 +3803,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-strawberry",
@@ -3664,7 +3824,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-peach",
@@ -3688,7 +3849,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pineapple",
@@ -3708,7 +3870,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-grape",
@@ -3730,7 +3893,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-raisin",
@@ -3750,7 +3914,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-melon",
@@ -3769,7 +3934,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-watermelon",
@@ -3789,7 +3955,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pear",
@@ -3810,7 +3977,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-persimmon",
@@ -3829,7 +3997,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-lemon",
@@ -3848,7 +4017,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-sesame",
@@ -3875,7 +4045,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-peanut",
@@ -3899,7 +4070,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-walnut",
@@ -3921,7 +4093,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-almond",
@@ -3942,7 +4115,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cashew",
@@ -3963,7 +4137,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-soy-sauce",
@@ -3988,7 +4163,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-miso",
@@ -4012,7 +4188,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-sugar",
@@ -4033,7 +4210,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-salt",
@@ -4053,7 +4231,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-vinegar",
@@ -4074,7 +4253,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mirin",
@@ -4094,7 +4274,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cooking-sake",
@@ -4114,7 +4295,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-oil",
@@ -4136,7 +4318,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-sesame-oil",
@@ -4157,7 +4340,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mayonnaise",
@@ -4181,7 +4365,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-ketchup",
@@ -4201,7 +4386,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-worcester-sauce",
@@ -4223,7 +4409,8 @@
       "animalOrigin": [],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-curry-roux",
@@ -4251,7 +4438,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-stew-roux",
@@ -4279,7 +4467,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-curry-powder",
@@ -4299,7 +4488,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-cumin",
@@ -4320,7 +4510,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-dried-herbs",
@@ -4340,7 +4531,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-dashi",
@@ -4364,7 +4556,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-consomme",
@@ -4389,7 +4582,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-potato-starch",
@@ -4409,7 +4603,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-gelatin",
@@ -4434,7 +4629,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-jam",
@@ -4454,7 +4650,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-honey",
@@ -4474,7 +4671,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-barley-tea",
@@ -4494,7 +4692,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pepper",
@@ -4518,7 +4717,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-parsley",
@@ -4537,7 +4737,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-olive-oil",
@@ -4558,7 +4759,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-red-wine",
@@ -4579,7 +4781,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-hoisin-sauce",
@@ -4602,7 +4805,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-watercress",
@@ -4622,7 +4826,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mentsuyu",
@@ -4649,7 +4854,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-benishoga",
@@ -4669,7 +4875,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-snap-peas",
@@ -4690,7 +4897,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pea-shoots",
@@ -4711,7 +4919,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-umeboshi",
@@ -4733,7 +4942,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-shibazuke",
@@ -4755,7 +4965,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-yakiniku-sauce",
@@ -4778,7 +4989,8 @@
       "animalOrigin": [],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-oyster-sauce",
@@ -4801,7 +5013,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chili-pepper",
@@ -4824,7 +5037,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-harumaki-wrapper",
@@ -4846,7 +5060,8 @@
       "animalOrigin": [],
       "animalOriginKnown": false,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-canned-mackerel",
@@ -4873,7 +5088,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-gochujang",
@@ -4894,7 +5112,8 @@
       "animalOrigin": [],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chicken-soup-base",
@@ -4921,7 +5140,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-olive",
@@ -4943,7 +5163,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mustard-powder",
@@ -4964,7 +5185,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-basil",
@@ -4985,7 +5207,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-shishito",
@@ -5008,7 +5231,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pesto",
@@ -5034,7 +5258,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-inari-age",
@@ -5060,7 +5285,8 @@
       "animalOrigin": [],
       "animalOriginKnown": false,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-nanohana",
@@ -5081,7 +5307,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-sushi-vinegar",
@@ -5101,7 +5328,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-chickpea",
@@ -5123,7 +5351,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-swordfish",
@@ -5146,7 +5375,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-bay-leaf",
@@ -5168,7 +5398,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-furikake",
@@ -5194,7 +5425,8 @@
       ],
       "animalOriginKnown": false,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mango-chutney",
@@ -5215,7 +5447,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-red-cabbage",
@@ -5236,7 +5469,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mustard",
@@ -5259,7 +5493,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-dried-basil",
@@ -5280,7 +5515,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-fish-sauce",
@@ -5304,7 +5540,10 @@
       ],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": [
+        "grp-fish"
+      ]
     },
     {
       "id": "ing-quinoa",
@@ -5324,7 +5563,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-falafel",
@@ -5344,7 +5584,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-hummus",
@@ -5368,7 +5609,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-pomegranate",
@@ -5389,7 +5631,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-corned-beef",
@@ -5414,7 +5657,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-couscous",
@@ -5437,7 +5681,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-halloumi",
@@ -5463,7 +5708,8 @@
       ],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-mint",
@@ -5485,7 +5731,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-lime",
@@ -5506,7 +5753,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": false,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     },
     {
       "id": "ing-vegetable-stock",
@@ -5529,7 +5777,8 @@
       "animalOrigin": [],
       "animalOriginKnown": true,
       "seasoning": true,
-      "note": null
+      "note": null,
+      "allergenGroupIds": []
     }
   ],
   "dishes": [
@@ -6688,6 +6937,16 @@
       ],
       "candidatesNote": "ing-potato, ing-sweet-potato, ing-taro, ing-yam",
       "resolution": "Longest match first: the ingredient forms in §4.1 (「じゃがいも」「じゃが芋」「さつまいも」「さつま芋」「さといも」「里芋」「やまいも」「山芋」「長いも」…) → that ingredient. Standalone 「いも」「芋」「おいも」 (e.g. 「おいものにもの」) → ask. (M1 prep: replaces the category-level form 「いも」 → `cat-potato`.)"
+    }
+  ],
+  "allergenGroups": [
+    {
+      "id": "grp-fish",
+      "memberAllergenIds": [
+        "alg-salmon",
+        "alg-mackerel"
+      ],
+      "basis": "The scheme's only fish items besides salmon roe (`alg-salmon-roe` is roe and is not a member). PO ruling P5 2026-11-01: a fish product excludes the recipe for a child registered with any fish item of the scheme."
     }
   ]
 }

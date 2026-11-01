@@ -34,6 +34,8 @@ export const dictionarySchema = obj({
       forms: z.array(label),
       inherentAllergenIds: z.array(z.string()),
       info: z.enum(['known', 'varies']),
+      /** Allergen groups the product carries (dictionary §11.5, F1''); never an `alg-*` id. */
+      allergenGroupIds: z.array(z.string()).default([]),
       animalOrigin: z.array(z.enum(ANIMAL_TAGS)),
       animalOriginKnown: z.boolean(),
       seasoning: z.boolean(),
@@ -56,6 +58,8 @@ export const dictionarySchema = obj({
     }),
   ),
   themes: z.array(obj({ id: idSchema('theme'), ja: label, en: label })),
+  /** Allergen groups (dictionary §11.5): a group id is not an allergen id. */
+  allergenGroups: z.array(obj({ id: idSchema('grp'), memberAllergenIds: z.array(z.string()).min(1), basis: z.string() })).default([]),
   ambiguity: z.array(
     obj({
       id: idSchema('amb'),
@@ -85,6 +89,7 @@ export function dictionaryIssues(dict: Dictionary): DictIssue[] {
     ...dict.dishes,
     ...dict.themes,
     ...dict.ambiguity,
+    ...dict.allergenGroups,
   ];
   for (const rec of all) {
     if (ids.has(rec.id)) out.push({ rule: 'dict-id-unique', id: rec.id });
@@ -93,8 +98,13 @@ export function dictionaryIssues(dict: Dictionary): DictIssue[] {
   const cats = new Set(dict.categories.map((c) => c.id));
   const ings = new Set(dict.ingredients.map((i) => i.id));
   const algs = new Set(dict.allergens.map((a) => a.id));
+  const groupIds = new Set(dict.allergenGroups.map((g) => g.id));
+  const liveAlgs = new Set(dict.allergens.filter((a) => !a.retired).map((a) => a.id));
   const foods = new Set([...ings, ...dict.dishes.map((d) => d.id), ...cats]);
 
+  for (const g of dict.allergenGroups) {
+    if (g.memberAllergenIds.some((m) => !liveAlgs.has(m))) out.push({ rule: 'dictionary-group-member-unknown', id: g.id });
+  }
   for (const c of dict.categories) {
     if (c.parentId !== null && !cats.has(c.parentId)) out.push({ rule: 'dict-parent-resolves', id: c.id });
   }
@@ -104,6 +114,8 @@ export function dictionaryIssues(dict: Dictionary): DictIssue[] {
       out.push({ rule: 'dict-parent-resolves', id: i.id });
     }
     if (i.inherentAllergenIds.some((a) => !algs.has(a))) out.push({ rule: 'dict-allergen-resolves', id: i.id });
+    if (i.allergenGroupIds.some((g) => !groupIds.has(g))) out.push({ rule: 'dictionary-ingredient-group-unknown', id: i.id });
+    if (i.allergenGroupIds.length > 0 && i.info !== 'varies') out.push({ rule: 'dictionary-group-ingredient-not-processed', id: i.id });
     if (new Set(i.animalOrigin).size !== i.animalOrigin.length) out.push({ rule: 'dict-animal-origin-valid', id: i.id });
   }
   for (const d of dict.dishes) {

@@ -1,4 +1,4 @@
-// Recipe ranking (BR-06, BR-07, BR-09, R-3; ADR 004 §3, ADR 008; data contract §4 `ranking-*`).
+// Recipe ranking (BR-06, BR-07, BR-09; F1'' and warning: ADR 013; ADR 004 §3, ADR 008; data contract §4 `ranking-*`).
 // A pure function of the dictionary, the recipe library, the child profile, the planned decisions
 // and the target date. No clock, no randomness, no network: same input, same output.
 import { BR09 } from '../rules.ts';
@@ -24,11 +24,12 @@ export interface RankInput {
 }
 
 export type ExclusionReason =
-  | { kind: 'allergen'; allergenIds: string[] } // F1
+  | { kind: 'allergen'; allergenIds: string[] } // F1'' (the child's own registered ids, also for a group hit)
   | { kind: 'excluded-ingredient'; ids: string[] } // F2 (ids = the profile entries that matched)
   | { kind: 'diet'; diets: Diet[]; tags: AnimalTag[] } // F3
   | { kind: 'diet-incomplete' } // F3, unknown animal origin while a diet is selected
-  | { kind: 'allergen-incomplete' }; // F4 (R-3)
+  /** @deprecated F4 retired 2026-11-01 (ADR 013): never produced; kept only so the UI switch compiles until slice 2. */
+  | { kind: 'allergen-incomplete' };
 
 /** Explanation keys with params; src/i18n renders them (US-E6-01/AC2: a card shows at most 2). */
 export type RankReason =
@@ -36,14 +37,23 @@ export type RankReason =
   | { key: 'rank.theme'; params: { themeId: string } }
   | { key: 'rank.quick'; params: { minutes: number } };
 
+/** US-E6-02/AC11-AC12: the processed-food warning of a ranked recipe; null when nothing is shown. */
+export interface ProcessedWarning {
+  /** The child's FULL registered allergen list, in `knownAllergenIds` order. */
+  allergenIds: string[];
+  /** Recipe ingredient ids whose dictionary `info` is `varies` (distinct, recipe order). */
+  processedIngredientIds: string[];
+}
+
 export interface RankedRecipe {
   recipeId: string;
   recipe: Recipe;
   score: number;
-  /** R-3: false when allergen data is incomplete (ranked after every complete recipe). */
+  /** @deprecated No longer ranks anything (R-3 retired 2026-11-01); the UI still reads it until slice 2. */
   complete: boolean;
-  /** US-E6-02/AC4: the recipe has a varies-by-product ingredient. */
+  /** @deprecated Superseded by `processedWarning` (AC4 retired); the UI still reads it until slice 2. */
   checkLabel: boolean;
+  processedWarning: ProcessedWarning | null;
   reasons: RankReason[];
   parts: { liked: number; disliked: number; theme: boolean; recentlyPlanned: boolean; slow: boolean };
 }
@@ -109,6 +119,7 @@ function verdictOf(food: Food, idx: DictIndex, likes: ReadonlySet<string>, disli
 
 export function createRanker(dict: Dictionary, library: readonly Recipe[]): Ranker {
   const idx = dictIndex(dict);
+  const groupMembers = new Map(dict.allergenGroups.map((g) => [g.id, g.memberAllergenIds] as const));
   const foods = new Map<string, Food[]>();
   const foodsFor = (r: Recipe): Food[] => {
     let f = foods.get(r.id);
@@ -130,8 +141,24 @@ export function createRanker(dict: Dictionary, library: readonly Recipe[]): Rank
     return [...hit].sort();
   };
 
+  /** F1'': the child's own registered members of every group an ingredient of the recipe carries. */
+  const groupHits = (r: Recipe, known: ReadonlySet<string>): string[] => {
+    if (known.size === 0) return [];
+    const hit: string[] = [];
+    for (const ing of r.ingredients) {
+      for (const gid of idx.ingredients.get(ing.ingredientId)?.allergenGroupIds ?? []) {
+        for (const m of groupMembers.get(gid) ?? []) if (known.has(m)) hit.push(m);
+      }
+    }
+    return hit;
+  };
+  const processedOf = (r: Recipe): string[] => [
+    ...new Set(r.ingredients.map((i) => i.ingredientId).filter((id) => idx.ingredients.get(id)?.info === 'varies')),
+  ];
+
   return function rank({ profile, decisions, targetDate }) {
     const known = new Set(profile.knownAllergenIds);
+    const knownList = [...new Set(profile.knownAllergenIds)];
     const excludedIds = new Set(profile.excludedIngredientIds);
     const likes = new Set(profile.likedIds);
     const dislikes = new Set(profile.dislikedIds);
@@ -148,7 +175,7 @@ export function createRanker(dict: Dictionary, library: readonly Recipe[]): Rank
     const ranked: RankedRecipe[] = [];
     for (const recipe of library) {
       const reasons: ExclusionReason[] = [];
-      const allergenHits = [...new Set([...recipe.allergenIds, ...recipe.mayContainAllergenIds])].filter((a) => known.has(a)).sort();
+      const allergenHits = [...new Set([...recipe.allergenIds.filter((a) => known.has(a)), ...groupHits(recipe, known)])].sort();
       if (allergenHits.length > 0) reasons.push({ kind: 'allergen', allergenIds: allergenHits });
       const exHits = excludedIds.size === 0 ? [] : exclusionHits(recipe, excludedIds);
       if (exHits.length > 0) reasons.push({ kind: 'excluded-ingredient', ids: exHits });
@@ -160,7 +187,6 @@ export function createRanker(dict: Dictionary, library: readonly Recipe[]): Rank
         }
         if (!recipe.dietDataComplete) reasons.push({ kind: 'diet-incomplete' });
       }
-      if (!recipe.allergenDataComplete && known.size > 0) reasons.push({ kind: 'allergen-incomplete' });
       if (reasons.length > 0) {
         excluded.push({ recipeId: recipe.id, recipe, reasons });
         continue;
@@ -187,19 +213,24 @@ export function createRanker(dict: Dictionary, library: readonly Recipe[]): Rank
         ...(theme && recipe.themeId !== null ? [{ key: 'rank.theme', params: { themeId: recipe.themeId } } as RankReason] : []),
         ...(!slow ? [{ key: 'rank.quick', params: { minutes: recipe.minutes } } as RankReason] : []),
       ].slice(0, MAX_REASONS);
+      const warning = (r: Recipe): ProcessedWarning | null => {
+        if (knownList.length === 0) return null;
+        const processed = processedOf(r);
+        return processed.length === 0 ? null : { allergenIds: knownList, processedIngredientIds: processed };
+      };
       ranked.push({
         recipeId: recipe.id,
         recipe,
         score,
         complete: recipe.allergenDataComplete,
         checkLabel: recipe.ingredients.some((i) => i.allergenInfo === 'varies-by-product'),
+        processedWarning: warning(recipe),
         reasons: why,
         parts: { liked: liked.length, disliked: dislikedCount, theme, recentlyPlanned, slow },
       });
     }
     ranked.sort(
       (a, b) =>
-        Number(b.complete) - Number(a.complete) ||
         b.score - a.score ||
         a.recipe.minutes - b.recipe.minutes ||
         (a.recipeId < b.recipeId ? -1 : a.recipeId > b.recipeId ? 1 : 0),
