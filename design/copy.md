@@ -242,9 +242,9 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | review.allergens.unreadable | 読み取れませんでした | Couldn't be read | status unreadable | BR-08 |
 | review.allergens.declaredNone | 献立表の記載：「{raw}」 | The sheet says: "{raw}" | status declared-none: quotes the PDF, never a summary | BR-08, US-E2-04/AC3 |
 | review.noLunch.toggle | 給食なしの日にする | Mark as a no-lunch day | Toggle/button on a day | US-E3-02/AC3, AC6 (verbatim) |
-| review.noLunch.restore | 給食ありに戻す | Restore school lunch | Undo on a no-lunch day | US-E3-02/AC3 (verbatim) |
+| review.noLunch.restore | 給食のある日 | Day with cafeteria lunch | Undo on a no-lunch day | US-E3-02/AC3 (verbatim) |
 | review.noLunch.reason | 理由 | Reason | Radio-group legend | US-E3-02/AC6 |
-| review.noLunch.bentoDay | お弁当の日（みんなお弁当） | Bento day (everyone brings a bento) | reason bento-day | US-E3-02/AC6 (verbatim), US-E5-08 |
+| review.noLunch.bentoDay | お弁当の日（手づくり） | Homemade bento day | reason bento-day | US-E3-02/AC6 (verbatim), US-E5-08 |
 | review.noLunch.noLunch | 給食なし（午前保育など） | No lunch (half day etc.) | reason no-lunch | US-E3-02/AC3, AC6 (verbatim) |
 | review.noLunch.closed | お休み（休園など） | School closed | reason closed | US-E3-02/AC6 (verbatim) |
 | review.noLunch.unknown | その他 | Other | reason unknown | US-E3-02/AC6 (verbatim) |
