@@ -267,7 +267,7 @@
         "quantity": 1,
         "unit": "tbsp",
         "optional": false,
-        "allergenInfo": "unknown",
+        "allergenInfo": "known",
         "allergenIds": [],
         "possibleAllergenIds": [],
         "animalOrigin": [],
@@ -349,7 +349,7 @@
       "alg-sesame"
     ],
     "mayContainAllergenIds": [],
-    "allergenDataComplete": false,
+    "allergenDataComplete": true,
     "allergenScheme": "caa-2026-04",
     "animalOrigin": [],
     "dietDataComplete": true,
@@ -594,7 +594,10 @@
         "unit": "tbsp",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-soybean",
+          "alg-wheat"
+        ],
         "possibleAllergenIds": [
           "alg-wheat",
           "alg-soybean"
@@ -655,7 +658,8 @@
     "allergenIds": [
       "alg-wheat",
       "alg-pork",
-      "alg-sesame"
+      "alg-sesame",
+      "alg-soybean"
     ],
     "mayContainAllergenIds": [
       "alg-wheat",
@@ -1246,7 +1250,10 @@
         "unit": "tsp",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-soybean",
+          "alg-wheat"
+        ],
         "possibleAllergenIds": [
           "alg-wheat",
           "alg-soybean"
@@ -1319,7 +1326,9 @@
     "allergenIds": [
       "alg-egg",
       "alg-chicken",
-      "alg-sesame"
+      "alg-sesame",
+      "alg-soybean",
+      "alg-wheat"
     ],
     "mayContainAllergenIds": [
       "alg-pork",
@@ -1549,7 +1558,10 @@
         "unit": "tsp",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-soybean",
+          "alg-wheat"
+        ],
         "possibleAllergenIds": [
           "alg-wheat",
           "alg-soybean"
@@ -1582,7 +1594,9 @@
         "unit": "slice",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-pork"
+        ],
         "possibleAllergenIds": [
           "alg-egg",
           "alg-milk",
@@ -1775,7 +1789,10 @@
     "allergenIds": [
       "alg-chicken",
       "alg-milk",
-      "alg-sesame"
+      "alg-sesame",
+      "alg-soybean",
+      "alg-wheat",
+      "alg-pork"
     ],
     "mayContainAllergenIds": [
       "alg-wheat",
@@ -1965,7 +1982,9 @@
         "unit": "tbsp",
         "optional": false,
         "allergenInfo": "unknown",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-soybean"
+        ],
         "possibleAllergenIds": [],
         "animalOrigin": [],
         "animalOriginKnown": true
@@ -2059,7 +2078,8 @@
     ],
     "allergenIds": [
       "alg-chicken",
-      "alg-wheat"
+      "alg-wheat",
+      "alg-soybean"
     ],
     "mayContainAllergenIds": [],
     "allergenDataComplete": false,
@@ -2227,7 +2247,9 @@
         "unit": "slice",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-pork"
+        ],
         "possibleAllergenIds": [
           "alg-egg",
           "alg-milk",
@@ -2318,7 +2340,9 @@
         "unit": "tbsp",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-egg"
+        ],
         "possibleAllergenIds": [
           "alg-egg",
           "alg-soybean"
@@ -2364,7 +2388,8 @@
     "allergenIds": [
       "alg-egg",
       "alg-milk",
-      "alg-shrimp"
+      "alg-shrimp",
+      "alg-pork"
     ],
     "mayContainAllergenIds": [
       "alg-egg",
@@ -2515,7 +2540,10 @@
         "unit": "tsp",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-soybean",
+          "alg-wheat"
+        ],
         "possibleAllergenIds": [
           "alg-wheat",
           "alg-soybean"
@@ -2633,7 +2661,9 @@
         "unit": "tbsp",
         "optional": false,
         "allergenInfo": "unknown",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-wheat"
+        ],
         "possibleAllergenIds": [],
         "animalOrigin": [
           "dairy",
@@ -2850,7 +2880,9 @@
       "alg-beef",
       "alg-pork",
       "alg-egg",
-      "alg-milk"
+      "alg-milk",
+      "alg-soybean",
+      "alg-wheat"
     ],
     "mayContainAllergenIds": [
       "alg-wheat",
@@ -3116,7 +3148,10 @@
         "unit": "tsp",
         "optional": false,
         "allergenInfo": "varies-by-product",
-        "allergenIds": [],
+        "allergenIds": [
+          "alg-soybean",
+          "alg-wheat"
+        ],
         "possibleAllergenIds": [
           "alg-wheat",
           "alg-soybean"
@@ -3248,7 +3283,9 @@
     ],
     "allergenIds": [
       "alg-chicken",
-      "alg-egg"
+      "alg-egg",
+      "alg-soybean",
+      "alg-wheat"
     ],
     "mayContainAllergenIds": [
       "alg-wheat",

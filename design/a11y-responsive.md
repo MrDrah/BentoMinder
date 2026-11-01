@@ -13,6 +13,8 @@
 
 Computed with the WCAG 2.1 relative-luminance formula from the hex values in `design/tokens.json` by `design/_scratch/contrast.mjs` (re-run after any token change; it exits non-zero on a failure). `surface-1` is pure white `#FFFFFF` (PO 2026-10-24). Thresholds: **4.5:1** for text (all our text is treated as normal size, even headings), **3:1** for UI parts, icons that carry meaning and focus indicators.
 
+W1–W4 (added 2026-11-01) re-use the values of P35–P38 for the processed-food warning; no new colour pair.
+
 **Result: 68 pairs × 2 themes = 136 checks, 0 failures.**
 - Lowest text pair: **P09 `ink-3` on `surface-3` = 4.65:1** (light; disabled text). Next: P13 `ink-inverse` on `accent-strong` = 4.96:1 (primary button).
 - Lowest UI pair: **U03 `line-ui` on `surface-3` = 3.07:1** (light; dashed border of a disabled control).
@@ -85,6 +87,10 @@ Computed with the WCAG 2.1 relative-luminance formula from the hex values in `de
 | U20 | `planned-edge` on `navy-fill` | 3.53 | 4.67 | 3 | Red top edge of a planned cell and planned banner edge |
 | U21 | `accent` on `surface-3` | 3.37 | 5.42 | 3 | Stripe band on illustration panels (decorative) |
 | U22 | `stripe-a` on `surface-1` | 14.22 | 15.03 | 3 | Navy stripe band under the app bar (decorative) |
+| W1 | `warning` on `surface-1` (= P38) | 7.20 | 10.70 | 4.5 | Processed-food marker and compact notice text on page rows |
+| W2 | `warning` on `surface-2` (= P37) | 7.08 | 9.52 | 4.5 | Processed-food marker and compact notice on cards, sheets, ingredient table in cards; icon at 3:1 (U14) |
+| W3 | `ink-1` on `warning-soft` (= P36) | 12.62 | 11.31 | 4.5 | Recipe notice `warn.processed.recipe` body |
+| W4 | `warning` on `warning-soft` (= P35) | 6.39 | 8.05 | 3 | Recipe notice icon |
 | D01 | `debug-ink` on `debug-surface` | 14.58 | 14.58 | 4.5 | Debug panel text (dev only) |
 | D02 | `debug-accent` on `debug-surface` | 9.39 | 9.39 | 3 | Debug panel borders and controls (dev only) |
 | D03 | `debug-surface` on `debug-accent` | 9.39 | 9.39 | 4.5 | DEV pill text on accent (dev only) |
@@ -111,6 +117,7 @@ Computed with the WCAG 2.1 relative-luminance formula from the hex values in `de
 | Today | navy circle | Filled circle shape, 「今日、」 in the accessible name, `aria-current="date"`, today card names the date | US-E5-01/AC1 |
 | Past day | ink-3 numeral | Box background removed (transparent) + 「過去の日」 in the accessible name + read-only note in the sheet | US-E5-02/AC3 |
 | Needs review / allergen conflict | warning / danger | "!" badge shape; 「献立が変わりました」/「アレルゲン注意」 in the accessible name and the sheet banner | US-E3-05/AC2, US-E1-05/AC2 |
+| Processed food (child with a registered allergen) | warning | Package icon + visible text 「市販品。表示を確認」 on the ingredient; triangle icon + text in the notice and compact line; hidden 「注意」 lead-in | US-E6-02/AC11 |
 | Uncertain review field | warning fill and border | 「要確認」 tag + triangle icon + reason text | US-E3-01/AC2 |
 | Date-correction grid: same weekday / taken / current date / selected | ink-1 bar / ink-2 dot + ink-3 numeral / dashed line-ui / navy fill | Bar, dot, dashed border; visible legend text and accessible-name suffixes 「曜日が一致」「ほかの献立があります」「いまの日付」; status-line text; `aria-disabled`, `aria-selected` | US-E2-05/AC7, AC8 |
 | Disliked menu item | accent wavy underline | Tag 「苦手」 | US-E4-02 |
@@ -135,7 +142,7 @@ Test: the e2e suite runs the calendar screenshot check in greyscale (`filter: gr
 | C1 Calendar | app bar (日本語/EN, レシピ, 設定) → reminder banners (actions, then close; 「ほかにn件」) → storage/menu cards → today card action / checkbox → upcoming rows → 前の月 → 今日 → 次の月 → **grid (one tab stop, arrows inside)** → legend toggle → 今週の予定を共有. Desktop: then the side panel (its header receives focus when a date is chosen) |
 | D1 Day sheet | header (date, receives focus on open) → close → conflict/allergen banner actions → menu (no stops unless links) → 判定を変更 → override radios → 自動判定に戻す → plan actions top to bottom → reservation checkbox. Esc / close → focus returns to the cell |
 | R1 Recommendations | back → title → (unknown-allergy banner is text, no stop) → card 1: この日に決定, 作り方を見る → card 2 … → card 3 … → ほかのレシピ → links in the disclaimer (none) / empty-state links |
-| R2 Recipe | back → (planned banner, no stop) → source links in reading order → 農林水産省 credit link → sticky footer action(s) (last) |
+| R2 Recipe | back → processed-food notice and markers are static text, no stop (read in DOM order: notice before the ingredient table, marker between an ingredient's label and its quantity) → (planned banner, no stop) → source links in reading order → 農林水産省 credit link → sticky footer action(s) (last) |
 | R3 Library | back → rows in order → (plan-date picker: title → options → この日に決定 → close) |
 | S1 Profile | back (not on step 1) → nickname → age chips (radio group: one stop, arrows) → likes search → selected chips' remove buttons → popular chips → dislikes (same) → allergy radio group → allergen chips (9, then 20) → other-foods search → diet chips → theme chips → note → 次へ. On a failed 次へ: focus to the first invalid group |
 | S2 Import | back → month select → URL → 取り込む → PDFファイルを選ぶ → くわしく見る → 手入力する → あとで取り込む. After an error: focus moves to the error panel (heading), then its actions |

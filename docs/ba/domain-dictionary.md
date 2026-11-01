@@ -16,9 +16,9 @@ Scope: v1 covers the dishes and ingredients typical of Japanese kindergarten 給
 7. **Categories.** Liking/disliking a category (e.g. `cat-fish`) matches every found ingredient and dish whose category is that category or one of its descendants. A category is never found in menu text by itself: a menu word that names a whole group is a surface form of one generic ingredient (「さかな」→ `ing-fish`, 「鶏肉」→ `ing-chicken`) or of an ambiguity group (「いも」→ `amb-imo`), and reaches the category through that entry.
 7a. **One verdict per food, most specific entry wins** (H1 rulings B1, B2, follow-up, "OQ-16 overruled", "collapse narrowed", "collapse detail"). D and L count foods, not profile entries. Within one lunch item a matched dish and its `definingIngredientId` (§5) are one food; other ingredients named in the dish stay separate (豚のしょうが焼き = 豚肉-food + しょうが = 2). A found ancestor id folds into each found descendant; siblings stay separate (鶏肉 + 鶏もも肉 + 鶏むね肉 = 2 foods). Nothing is chained: different items merge only through identical or ancestor/descendant ids, and two dishes never merge. A defining-ingredient link never crosses items (「鶏のから揚げ」 + 「鶏もも肉のてりやき」 = 2 foods). The verdict is checked level by level: the food's ingredient ids → their dictionary parents → the dish id → categories and ancestors (ingredient → dish → category); at the deciding level a dislike beats a like. Example: likes `cat-fish`, dislikes `ing-mackerel` → さば is disliked only, さけ is liked. Full rule and worked example: `user-stories.md` E4.
 8. **Seasonings do not count** towards D or L unless the child's profile names that exact id.
-9. **Allergens are never inferred from the menu.** `inherent allergens` below are used only to validate recipes (`recipe-ingredient-inherent-allergen`) and to label profile pickers; school-menu allergen notices use only what the PDF declares (BR-08).
+9. **Allergens are never inferred from the menu.** `inherent allergens` below are used to validate recipes (`recipe-ingredient-inherent-allergen`), to exclude recipes with a processed ingredient whose inherent allergen the child has registered (data contract §3.7a, F1', PO 2026-11-01) and to label profile pickers; fish products carry an allergen group instead of an alg id (§11.5, F1''); school-menu allergen notices use only what the PDF declares (BR-08).
 
-Column meaning: **inherent allergens** = the food is itself that allergen item (卵 → alg-egg). **info** = `known` (single food) or `varies` (processed food whose allergens depend on the product; recipes must record the label's allergens as `possibleAllergenIds`). **animalOrigin** (H1 ruling B14; used only by the diet filter, data contract §3.8) = the animal-origin tags the food has or that its common products contain, from `meat` (species not stated or varying), `pork`, `beef`, `chicken`, `fish-seafood`, `egg`, `dairy`, `gelatin`; `–` = no animal origin; a trailing `?` = the animal origin of the food's products cannot be bounded (JSON: `animalOrigin` array + `animalOriginKnown: false`). A recipe ingredient copies these tags (it may add tags, never remove them); a `?` ingredient makes the recipe `dietDataComplete = false`, and so excluded for every selected diet, unless the recipe's cited source states that product's ingredients.
+Column meaning: **inherent allergens** = the food is itself that allergen item (卵 → alg-egg). **info** = `known` (single food) or `varies` (**processed ingredient** since 2026-11-01: its allergens depend on the product; the inherent allergens in the previous column are the ones that exclude recipes, anything else is a warning about the package label, never an exclusion; recipes need no new maker-label research). **animalOrigin** (H1 ruling B14; used only by the diet filter, data contract §3.8) = the animal-origin tags the food has or that its common products contain, from `meat` (species not stated or varying), `pork`, `beef`, `chicken`, `fish-seafood`, `egg`, `dairy`, `gelatin`; `–` = no animal origin; a trailing `?` = the animal origin of the food's products cannot be bounded (JSON: `animalOrigin` array + `animalOriginKnown: false`). A recipe ingredient copies these tags (it may add tags, never remove them); a `?` ingredient makes the recipe `dietDataComplete = false`, and so excluded for every selected diet, unless the recipe's cited source states that product's ingredients.
 
 **animalOrigin coverage (H1; research phase 2 prep):** 181 of 181 ingredients carry a value: 65 with at least one tag or `?`, 116 `–`. Unknown (`?`, 8): `ing-bread`, `ing-bread-crumbs` (milk, butter or egg are common; other animal-derived fats or additives cannot be ruled out across products), `ing-worcester-sauce` (some products may use animal extracts; not established), `ing-curry-roux`, `ing-stew-roux` (typically contain meat extracts and fats and milk; exact species vary), `ing-dashi` (fish-based; granulated 和風だし may contain other extracts), `ing-consomme` (beef, chicken and pork extracts or fats are common; varies), `ing-tortilla` (flour tortillas are made with a fat that may be vegetable oil, shortening or lard depending on the product; not established, so no tag is asserted). Hidden sources tagged without `?`: かつおぶし, 煮干し (`fish-seafood`), ウインナー, ハム (`meat`, `pork`), ベーコン (`pork`), ちくわ, かまぼこ, はんぺん, さつま揚げ, カニカマ, 桜でんぶ, たらこ, 鮭フレーク (`fish-seafood`), マヨネーズ (`egg`), バター and other dairy (`dairy`), ヨーグルト (`dairy`, `gelatin`: some products contain gelatin), ひき肉 with species not stated (`meat`). Still to verify: animal rennet in チーズ (tagged `dairy` only; see `open-questions.md`).
 
@@ -111,13 +111,13 @@ Allergen synonyms are used only to map **declared** allergen lines of the menu P
 | ing-rice | ごはん | ごはん | Cooked rice | cat-grain | ご飯, 白飯, 米, お米, ライス, 白ごはん | – | known | – |
 | ing-rice-flour | 米粉 | こめこ | Rice flour | cat-grain | – | – | varies | – |
 | ing-mixed-grain-rice | 麦ごはん | むぎごはん | Rice with barley | cat-grain | 麦ご飯, 押麦 | – | known | – |
-| ing-bread | パン | ぱん | Bread | cat-grain | 食パン, ロールパン, コッペパン | – | varies | dairy, egg, ? |
+| ing-bread | パン | ぱん | Bread | cat-grain | 食パン, ロールパン, コッペパン | alg-wheat | varies | dairy, egg, ? |
 | ing-wheat-flour | 小麦粉 | こむぎこ | Wheat flour | cat-grain | 薄力粉, 強力粉 | alg-wheat | known | – |
-| ing-bread-crumbs | パン粉 | ぱんこ | Bread crumbs | cat-grain | – | – | varies | dairy, egg, ? |
+| ing-bread-crumbs | パン粉 | ぱんこ | Bread crumbs | cat-grain | – | alg-wheat | varies | dairy, egg, ? |
 | ing-tortilla | トルティーヤ | とるてぃーや | Wheat flour tortilla | cat-grain | トルティーア, トルティア, フラワートルティーヤ | alg-wheat | varies | ? |
 | ing-udon | うどん | うどん | Udon noodles | cat-noodle | ウドン, 饂飩 | alg-wheat | varies | – |
 | ing-soba | そば（蕎麦） | そば | Buckwheat noodles | cat-noodle | 蕎麦, 日本そば | alg-buckwheat | varies | – |
-| ing-chinese-noodles | 中華めん | ちゅうかめん | Chinese-style wheat noodles | cat-noodle | 中華麺, ラーメン, 焼きそばめん | – | varies | egg |
+| ing-chinese-noodles | 中華めん | ちゅうかめん | Chinese-style wheat noodles | cat-noodle | 中華麺, ラーメン, 焼きそばめん | alg-wheat | varies | egg |
 | ing-spaghetti | スパゲティ | すぱげてぃ | Spaghetti | cat-noodle | スパゲッティ, パスタ | alg-wheat | varies | – |
 | ing-macaroni | マカロニ | まかろに | Macaroni | cat-noodle | – | alg-wheat | varies | – |
 | ing-harusame | 春雨 | はるさめ | Glass noodles | cat-noodle | はるさめ, ハルサメ | – | varies | – |
@@ -231,9 +231,9 @@ Note on ing-edamame and ing-mandarin (decided default, H1): edamame are immature
 | ing-ground-beef | 牛ひき肉 | ぎゅうひきにく | Ground beef (child of ing-beef) | cat-beef | 牛ミンチ | alg-beef | known | beef |
 | ing-ground-mixed | 合いびき肉 | あいびきにく | Ground beef & pork | cat-beef, cat-pork | あいびき肉, 合挽肉 | alg-beef, alg-pork | known | beef, pork |
 | ing-ground-meat | ひき肉 | ひきにく | Ground meat (species not stated) | cat-meat | 挽肉, ミンチ | – | varies | meat |
-| ing-ham | ハム | はむ | Ham | cat-meat-processed | ロースハム | – | varies | meat, pork |
+| ing-ham | ハム | はむ | Ham | cat-meat-processed | ロースハム | alg-pork | varies | meat, pork |
 | ing-sausage | ウインナー | ういんなー | Sausage / wiener | cat-meat-processed | ウィンナー, ソーセージ, ウインナーソーセージ | – | varies | meat, pork |
-| ing-bacon | ベーコン | べーこん | Bacon | cat-meat-processed | – | – | varies | pork |
+| ing-bacon | ベーコン | べーこん | Bacon | cat-meat-processed | – | alg-pork | varies | pork |
 | ing-fish | 魚 | さかな | Fish (unspecified) | cat-fish | さかな, お魚 | – | known | fish-seafood |
 | ing-white-fish | 白身魚 | しろみざかな | White fish (unspecified) | cat-fish | 白身, ホキ, メルルーサ | – | known | fish-seafood |
 | ing-salmon | さけ | さけ | Salmon | cat-fish | 鮭, しゃけ, サケ, サーモン, 銀鮭 | alg-salmon | known | fish-seafood |
@@ -301,8 +301,8 @@ Note: 「カキ」 in katakana belongs to the ambiguity group amb-kaki (§7), no
 ### 4.7 Seasonings, sweets, drinks
 | id | 表記 | よみ | English | category | synonyms | inherent allergens | info | animalOrigin |
 |----|------|------|---------|----------|----------|--------------------|------|--------------|
-| ing-soy-sauce | しょうゆ | しょうゆ | Soy sauce | cat-seasoning | 醤油, しょう油, うすくちしょうゆ | – | varies | – |
-| ing-miso | みそ | みそ | Miso | cat-seasoning | 味噌, ミソ, 白みそ, 赤みそ | – | varies | – |
+| ing-soy-sauce | しょうゆ | しょうゆ | Soy sauce | cat-seasoning | 醤油, しょう油, うすくちしょうゆ | alg-soybean, alg-wheat | varies | – |
+| ing-miso | みそ | みそ | Miso | cat-seasoning | 味噌, ミソ, 白みそ, 赤みそ | alg-soybean | varies | – |
 | ing-sugar | 砂糖 | さとう | Sugar | cat-seasoning | さとう, 三温糖 | – | known | – |
 | ing-salt | 塩 | しお | Salt | cat-seasoning | しお | – | known | – |
 | ing-vinegar | 酢 | す | Vinegar | cat-seasoning | 米酢, 穀物酢 | – | varies | – |
@@ -310,11 +310,11 @@ Note: 「カキ」 in katakana belongs to the ambiguity group amb-kaki (§7), no
 | ing-cooking-sake | 酒 | さけ | Cooking sake | cat-seasoning | 料理酒 | – | known | – |
 | ing-oil | 油 | あぶら | Cooking oil | cat-seasoning | サラダ油, 植物油, なたね油 | – | known | – |
 | ing-sesame-oil | ごま油 | ごまあぶら | Sesame oil | cat-seasoning | – | alg-sesame | known | – |
-| ing-mayonnaise | マヨネーズ | まよねーず | Mayonnaise | cat-seasoning | マヨ | – | varies | egg |
+| ing-mayonnaise | マヨネーズ | まよねーず | Mayonnaise | cat-seasoning | マヨ | alg-egg | varies | egg |
 | ing-ketchup | ケチャップ | けちゃっぷ | Ketchup | cat-seasoning | トマトケチャップ | – | varies | – |
 | ing-worcester-sauce | ソース | そーす | Japanese brown sauce | cat-seasoning | ウスターソース, 中濃ソース, とんかつソース | – | varies | ? |
-| ing-curry-roux | カレールウ | かれーるう | Curry roux | cat-seasoning | カレールー | – | varies | meat, pork, beef, chicken, dairy, ? |
-| ing-stew-roux | シチュールウ | しちゅーるう | Stew roux | cat-seasoning | シチュールー | – | varies | meat, pork, beef, chicken, dairy, ? |
+| ing-curry-roux | カレールウ | かれーるう | Curry roux | cat-seasoning | カレールー | alg-wheat | varies | meat, pork, beef, chicken, dairy, ? |
+| ing-stew-roux | シチュールウ | しちゅーるう | Stew roux | cat-seasoning | シチュールー | alg-wheat | varies | meat, pork, beef, chicken, dairy, ? |
 | ing-curry-powder | カレー粉 | かれーこ | Curry powder | cat-seasoning | カレーパウダー | – | varies | – |
 | ing-cumin | クミン | くみん | Cumin | cat-seasoning | クミンシード, クミンパウダー | – | known | – |
 | ing-dried-herbs | 乾燥ハーブ | かんそうはーぶ | Dried herbs | cat-seasoning | ドライハーブ | – | varies | – |
@@ -444,26 +444,26 @@ Rows appended by the research agents of the library growth batches (c–h): same
 | ing-parsley | パセリ | ぱせり | Parsley | cat-green-vegetable | – | – | known | – |
 | ing-olive-oil | オリーブオイル | おりーぶおいる | Olive oil | cat-seasoning | オリーブ油, エキストラバージンオリーブオイル | – | known | – |
 | ing-red-wine | 赤ワイン | あかわいん | Red wine (for cooking) | cat-seasoning | ワイン, ワイン（赤）, 料理用ワイン | – | known | – |
-| ing-hoisin-sauce | ホイシンソース | ほいしんそーす | Hoisin sauce | cat-seasoning | 海鮮醤, ホイシン | – | varies | – |
+| ing-hoisin-sauce | ホイシンソース | ほいしんそーす | Hoisin sauce | cat-seasoning | 海鮮醤, ホイシン | alg-soybean | varies | – |
 | ing-watercress | クレソン | くれそん | Watercress | cat-leafy-vegetable | ウォータークレス | – | known | – |
-| ing-mentsuyu | めんつゆ | めんつゆ | Mentsuyu (noodle dipping sauce concentrate) | cat-seasoning | 麺つゆ, そばつゆ, 本つゆ | – | varies | fish-seafood, ? |
+| ing-mentsuyu | めんつゆ | めんつゆ | Mentsuyu (noodle dipping sauce concentrate) | cat-seasoning | 麺つゆ, そばつゆ, 本つゆ | alg-soybean, alg-wheat | varies | fish-seafood, ? |
 | ing-benishoga | 紅しょうが | べにしょうが | Red pickled ginger | cat-vegetable | 紅生姜, 紅ショウガ | – | varies | – |
 | ing-snap-peas | スナップエンドウ | すなっぷえんどう | Sugar snap peas | cat-green-vegetable | スナップえんどう, スナックエンドウ, スナップ豆 | – | known | – |
 | ing-pea-shoots | 豆苗 | とうみょう | Pea shoots | cat-green-vegetable | とうみょう, エンドウ豆苗 | – | known | – |
 | ing-umeboshi | 梅干し | うめぼし | Umeboshi (salt-pickled plum) | cat-vegetable | 梅干, うめぼし, 梅漬け | – | varies | – |
 | ing-shibazuke | しば漬け | しばづけ | Shibazuke (pickled aubergine and shiso) | cat-vegetable | 柴漬け, しば漬, 柴漬 | – | varies | – |
-| ing-yakiniku-sauce | 焼肉のたれ | やきにくのたれ | Yakiniku sauce | cat-seasoning | 焼き肉のたれ, 焼肉のタレ, 焼き肉のタレ | – | varies | ? |
+| ing-yakiniku-sauce | 焼肉のたれ | やきにくのたれ | Yakiniku sauce | cat-seasoning | 焼き肉のたれ, 焼肉のタレ, 焼き肉のタレ | alg-soybean, alg-wheat | varies | ? |
 | ing-oyster-sauce | オイスターソース | おいすたーそーす | Oyster sauce | cat-seasoning | 牡蠣ソース, カキソース | – | varies | fish-seafood |
 | ing-chili-pepper | 唐辛子 | とうがらし | Chili pepper | cat-seasoning | とうがらし, 赤唐辛子, 鷹の爪, 輪切り唐辛子 | – | known | – |
 | ing-harumaki-wrapper | 春巻きの皮 | はるまきのかわ | Spring-roll wrapper | cat-grain | 春巻の皮 | alg-wheat | varies | ? |
 | ing-canned-mackerel | さば缶 | さばかん | Canned mackerel | cat-fish | サバ缶, さばの缶詰, さばのしょうゆ煮, さばの味噌煮, さば水煮缶 | alg-mackerel | varies | fish-seafood |
-| ing-gochujang | コチュジャン | こちゅじゃん | Gochujang (Korean chilli paste) | cat-seasoning | – | – | varies | ? |
-| ing-chicken-soup-base | 鶏がらスープの素 | とりがらすーぷのもと | Chicken stock granules | cat-seasoning | 鶏ガラスープの素, 鶏がらスープ, 中華スープの素, 顆粒チキンスープ, チキンスープの素 | – | varies | chicken, ? |
+| ing-gochujang | コチュジャン | こちゅじゃん | Gochujang (Korean chilli paste) | cat-seasoning | – | alg-soybean | varies | ? |
+| ing-chicken-soup-base | 鶏がらスープの素 | とりがらすーぷのもと | Chicken stock granules | cat-seasoning | 鶏ガラスープの素, 鶏がらスープ, 中華スープの素, 顆粒チキンスープ, チキンスープの素 | alg-chicken | varies | chicken, ? |
 | ing-olive | オリーブ | おりーぶ | Olive (fruit, brined) | cat-fruit | グリーンオリーブ, ブラックオリーブ, オリーブの実 | – | known | – |
 | ing-mustard-powder | マスタードパウダー | ますたーどぱうだー | Mustard powder | cat-seasoning | 粉からし, 粉マスタード | – | varies | – |
 | ing-basil | バジル | ばじる | Basil (fresh leaves) | cat-green-vegetable | バジルの葉, フレッシュバジル | – | known | – |
 | ing-shishito | ししとう | ししとう | Shishito pepper | cat-green-vegetable | しし唐, しし唐辛子, ししとうがらし, 獅子唐 | – | known | – |
-| ing-pesto | バジルペースト | ばじるぺーすと | Basil pesto | cat-seasoning | バジルソース, ジェノベーゼ, ジェノバソース | – | varies | dairy, ? |
+| ing-pesto | バジルペースト | ばじるぺーすと | Basil pesto | cat-seasoning | バジルソース, ジェノベーゼ, ジェノバソース | alg-milk | varies | dairy, ? |
 | ing-inari-age | 稲荷揚げ | いなりあげ | Seasoned fried tofu pouch (inari-age) | cat-soy | 味付き油揚げ, 味付油揚げ, いなり揚げ, 稲荷あげ, いなりの皮 | alg-soybean | varies | ? |
 | ing-nanohana | 菜の花 | なのはな | Nanohana (rapeseed blossom) | cat-green-vegetable | 菜花, なばな | – | known | – |
 | ing-sushi-vinegar | すし酢 | すしず | Sushi vinegar (seasoned rice vinegar) | cat-seasoning | 寿司酢 | – | varies | – |
@@ -478,7 +478,7 @@ Rows appended by the research agents of the library growth batches (c–h): same
 | ing-fish-sauce | ナンプラー | なんぷらー | Fish sauce (nam pla) | cat-seasoning | 魚醤, フィッシュソース, ニョクマム | – | varies | fish-seafood |
 | ing-quinoa | キヌア | きぬあ | Quinoa | cat-grain | キノア, キヌア（調理済み） | – | known | – |
 | ing-falafel | ファラフェル | ふぁらふぇる | Falafel | cat-vegetable | ファラフェル（市販）, ひよこ豆のコロッケ | – | varies | – |
-| ing-hummus | フムス | ふむす | Hummus | cat-seasoning | ホムス, ハムス, ひよこ豆のペースト | – | varies | – |
+| ing-hummus | フムス | ふむす | Hummus | cat-seasoning | ホムス, ハムス, ひよこ豆のペースト | alg-sesame | varies | – |
 | ing-pomegranate | ざくろ | ざくろ | Pomegranate | cat-fruit | ザクロ, 石榴, ポメグラネート | – | known | – |
 | ing-corned-beef | コンビーフ | こんびーふ | Corned beef (canned) | cat-meat-processed | コンビーフ缶, コーンビーフ | alg-beef | varies | beef |
 | ing-couscous | クスクス | くすくす | Couscous | cat-grain | 乾燥クスクス, クスクスパスタ | alg-wheat | known | – |
@@ -486,3 +486,85 @@ Rows appended by the research agents of the library growth batches (c–h): same
 | ing-mint | ミント | みんと | Mint (fresh leaves) | cat-green-vegetable | ミントの葉, フレッシュミント, スペアミント | – | known | – |
 | ing-lime | ライム | らいむ | Lime | cat-fruit | ライム果汁, ライムジュース | – | known | – |
 | ing-vegetable-stock | 野菜ブイヨン | やさいぶいよん | Vegetable stock | cat-seasoning | ベジタブルストック, ベジタブルブイヨン, 野菜スープの素, 野菜だし | – | varies | – |
+
+## 11. Inherent allergens of processed foods: basis (BA audit, 2026-11-01)
+
+PO decision (docs/PLAN.md §7, 2026-11-01): for every `info = varies` ingredient, `inherent allergens` lists the allergens that belong to the **definition** of that kind of food (not "might contain"). The audit covered all 65 `varies` rows. **33 rows keep "–"** (no allergen of the 29-item scheme is part of the definition, or the definition is not settled); **17 rows were set in this audit**; 15 further rows already carried a value (tortilla, udon, soba, spaghetti, macaroni, soy-milk, cheese, yogurt, cream, salmon-flakes, harumaki-wrapper, canned-mackerel, inari-age, corned-beef, halloumi) and were confirmed, not changed.
+
+**Honesty note on sources.** The scheme itself (29 items, cashew mandatory since 2026-04, labelling by the "specified raw materials" and "equivalent" classes) is from the CAA pages already cited in §3. The CAA handbook / annex PDFs that would state food-by-food examples were fetched on 2026-11-01 but their text could not be extracted in this environment (Japanese fonts without a character map), so no sentence of them is quoted or relied on below. The "basis" column therefore says what supports each row: **PO** (named by the PO in the 2026-11-01 ruling), **definition** (the allergen is the main raw material or a defining step of the food, e.g. bread is wheat dough; this is general food knowledge, not a cited fact), or **scheme** (follows from the item names in §3). A parent-facing statement is never built from this table: it only decides which recipes are excluded and which warnings appear.
+
+Scheme and labelling references: https://www.caa.go.jp/policies/policy/food_labeling/food_sanitation/allergy/ (CAA allergen labelling page, fetched 2026-11-01, lists the handbook of April 2026 and the notices of 2024-03-28 and 2026-04-01) and the annex https://www.caa.go.jp/policies/policy/food_labeling/food_labeling_act/assets/food_labeling_cms201_230414_01.pdf (fetched, text not readable here).
+
+### 11.1 Rows set in this audit (17)
+| id | set to | basis | note |
+|----|------------------------|-------|------|
+| ing-bread | alg-wheat | PO + definition | bread is wheat dough; milk and egg are common but not definitional |
+| ing-bread-crumbs | alg-wheat | PO + definition | made from bread |
+| ing-chinese-noodles | alg-wheat | PO (ramen) + definition | egg is not definitional (kansui noodles) |
+| ing-ham | alg-pork | definition | ham in the dictionary's usage is pork; a poultry ham exists but is not the default (see needs PO decision) |
+| ing-bacon | alg-pork | definition | bacon is cured pork belly |
+| ing-soy-sauce | alg-soybean, alg-wheat | PO | brewed from soybeans and wheat |
+| ing-miso | alg-soybean | PO | fermented soybeans |
+| ing-mayonnaise | alg-egg | PO | emulsion of egg yolk and oil |
+| ing-curry-roux | alg-wheat | definition | block roux is a wheat-flour roux; milk is common but not definitional |
+| ing-stew-roux | alg-wheat | definition | as curry roux |
+| ing-hoisin-sauce | alg-soybean | definition | based on fermented soybean paste; wheat and sesame vary by maker |
+| ing-mentsuyu | alg-soybean, alg-wheat | definition | concentrate built on soy sauce (hence wheat and soybean); borderline, listed below |
+| ing-yakiniku-sauce | alg-soybean, alg-wheat | definition | soy-sauce based; borderline, listed below |
+| ing-gochujang | alg-soybean | definition | fermented soybean and chilli paste; wheat varies |
+| ing-chicken-soup-base | alg-chicken | definition | a stock made from chicken; chicken is an "equivalent" item in the scheme |
+| ing-pesto | alg-milk | definition | classic basil pesto contains hard cheese; nuts vary and pine nut is not in the scheme |
+| ing-hummus | alg-sesame | definition | tahini (sesame paste) is a defining ingredient |
+
+### 11.2 Rows confirmed with "–" (no inherent allergen of the scheme in the definition): 33
+Grains and noodles: rice-flour, harusame. Vegetables and pickles: mixed-vegetables, benishoga, umeboshi, shibazuke, falafel. Meat and fish: ground-meat (species unstated), sausage (pork, beef or chicken depending on product), canned-tuna, tarako, chikuwa, kamaboko, hanpen, satsuma-age, crab-stick, sakura-denbu (fish items are not in the scheme, see below). Seasonings: vinegar, ketchup, worcester-sauce, curry-powder, dried-herbs, dashi, consomme, jam, oyster-sauce, mustard-powder, sushi-vinegar, furikake, mango-chutney, mustard, fish-sauce, vegetable-stock.
+
+### 11.3 Needs PO decision (not guessed)
+- **Fish products (surimi, kamaboko, chikuwa, hanpen, satsuma-age, crab stick, tarako, canned tuna, sakura denbu, fish sauce, dashi): the scheme has no "fish" item**; only salmon, mackerel and salmon roe exist, and surimi is typically pollock. The PO's example "surimi → fish" cannot be an `alg-*` id today. Options: (a) keep "–": a child registered with salmon or mackerel gets the warning but no exclusion (recommended: no new allergen item outside the legal scheme); (b) add a pseudo-allergen "fish" to the picker and the dictionary (new id, outside `caa-2026-04`; needs designer, data contract and QA changes); (c) give fish-paste rows alg-salmon and alg-mackerel (rejected: wrong, surimi is not salmon).
+- **ing-sausage**: pork, beef or chicken depending on the product; recommend "–" (warning only). Alternative: alg-pork.
+- **ing-ham**: set to alg-pork; a chicken ham exists. Recommend keep (defensive for pork-allergic children, the likelier case).
+- **ing-hanpen**: made with fish paste, egg white and often grated yam (nagaimo); egg and yam recommended "–" until a source is read (none was available).
+- **ing-crab-stick**: crab flavour/extract is common but not guaranteed; recommend "–" (warning only). Alternative: alg-crab.
+- **ing-stew-roux, ing-curry-roux**: milk recommended "–" (varies by product, cream stew vs curry); wheat is set.
+- **ing-mentsuyu, ing-yakiniku-sauce, ing-oyster-sauce, ing-hoisin-sauce, ing-gochujang** (soy-sauce and bean-paste derivatives): soybean and wheat were set where the base is soy sauce or fermented soybeans; wheat in hoisin, gochujang and oyster sauce, and sesame in yakiniku sauce are left out as product-dependent. Confirm or loosen.
+- **ing-soba**: carries alg-buckwheat only; many dried soba contain wheat flour as a binder. Wheat is product-dependent, so not set; confirm.
+- **ing-chinese-noodles, ing-udon** egg (kansui noodles) stays "–".
+- **ing-harumaki-wrapper, ing-tortilla** are wheat by definition (already set).
+
+### 11.4 Effect on data (2026-11-01)
+`npm run build:dictionary` then `npm run merge:research` regenerated `data/dictionary.json` and `data/library.json`; 183 ingredient entries in 71 recipes of `data/_research/batch-*.json` gained the inherent allergen in `allergenIds` (and the recipe union where missing) to satisfy `recipe-ingredient-inherent-allergen`. Nothing else in those recipes changed. `node scripts/validate-data.mjs`: OK. Consequence for the product: with these inherent ids, a child registered with wheat or soybean excludes most recipes that use soy sauce, bread or noodles; the library should be re-checked for "enough suggestions" per allergen (QA oracle).
+
+### 11.5 Allergen groups (PO ruling P5, 2026-11-01)
+The scheme `caa-2026-04` has no generic "fish" allergen: only salmon, mackerel and salmon roe exist as fish items. A fish allergy is therefore registered as `alg-salmon` and/or `alg-mackerel`. An **allergen group** is a named set of allergen ids defined here (not an `alg-*` id: never offered in a picker, never written to a child profile or a recipe's `allergenIds`). A processed food made of fish of unstated species carries the group instead of an `alg-*` id, so recipe data never claims "contains salmon". Effect: data contract §3.7a (F1'').
+
+**Parsing (developer, scripts/build-dictionary.mjs): two tables in this section, found by their exact header lines.**
+
+Header 1 (one row per group): `| group | members | basis |`
+- `group`: id `grp-<name>`; `members`: comma-separated existing non-retired `alg-*` ids of §3; `basis`: free text.
+
+| group | members | basis |
+|-------|---------|-------|
+| grp-fish | alg-salmon, alg-mackerel | The scheme's only fish items besides salmon roe (`alg-salmon-roe` is roe and is not a member). PO ruling P5 2026-11-01: a fish product excludes the recipe for a child registered with any fish item of the scheme. |
+
+Header 2 (one row per ingredient that carries a group; unlisted ingredients carry none): `| ingredient | groups |`
+- `ingredient`: an existing ingredient id of §4/§10; `groups`: comma-separated `grp-*` ids defined in header 1. The group is in addition to `inherent allergens`, which stays `alg-*` only (canned mackerel keeps `alg-mackerel` there).
+
+| ingredient | groups |
+|------------|--------|
+| ing-chikuwa | grp-fish |
+| ing-kamaboko | grp-fish |
+| ing-hanpen | grp-fish |
+| ing-satsuma-age | grp-fish |
+| ing-crab-stick | grp-fish |
+| ing-sakura-denbu | grp-fish |
+| ing-tarako | grp-fish |
+| ing-canned-tuna | grp-fish |
+| ing-canned-mackerel | grp-fish |
+| ing-salmon-flakes | grp-fish |
+| ing-fish-sauce | grp-fish |
+
+Judgement: all 11 are `info = varies` fish-based foods whose species or exact recipe the dictionary entry does not fix (fish-paste products are typically pollock, tuna cans vary, fish sauce is made from anchovy or similar). Left without the group: `ing-dashi`, `ing-consomme` (stock; bonito, kombu or none depending on product: warn-only); known whole fish (`ing-fish`, `ing-cod`, `ing-tuna`, `ing-whitebait`, `ing-niboshi`, `ing-bonito-flakes` ...: `info = known`; the parent uses excluded ingredients or the fish category); `ing-salmon-roe` (own `alg-salmon-roe`).
+
+Output in `data/dictionary.json`: `allergenGroups: [{id, memberAllergenIds, basis}]` and per ingredient `allergenGroupIds: string[]` (empty when none).
+
+Validator (`validate-data`, new rules): `dictionary-group-member-unknown` (a member is not a non-retired scheme allergen), `dictionary-ingredient-group-unknown` (an ingredient in header 2 does not exist, or its group is not in header 1), `dictionary-group-ingredient-not-processed` (a group on a row whose info is not `varies`). A group id in any recipe or profile allergen field fails the existing `allergen-unknown`.

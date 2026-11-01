@@ -260,8 +260,8 @@ Cross-field rules:
 | `steps` | localized text[] | ✔ | 2–12 steps, each ≤ 120 chars (ja); own words | |
 | `storage` | localized text[] | ✔ | ≥ 1; recipe-specific handling from a cited source; the general MAFF notes are added by the app (US-E6-04/AC2) | |
 | `allergenIds` | string[] | ✔ | union of `ingredients[].allergenIds` (`recipe-allergen-union`) | `["alg-wheat","alg-soybean"]` |
-| `mayContainAllergenIds` | string[] | ✔ | union of `ingredients[].possibleAllergenIds` of varies-by-product ingredients (`recipe-may-contain-union`) | `["alg-egg","alg-milk"]` |
-| `allergenDataComplete` | boolean | ✔ | `false` iff any ingredient has `allergenInfo = "unknown"`; derived and checked by the validator (`recipe-allergen-complete-derived`). Drives the R-3 rule in §4 `ranking-incomplete-allergen` | `true` |
+| `mayContainAllergenIds` | string[] | ✔ | union of `ingredients[].possibleAllergenIds` of varies-by-product ingredients (`recipe-may-contain-union`). **Reference data since 2026-11-01** (brand-label records): displayed nowhere as a statement about a product and **not read by the hard filter** (`ranking-hard-filter`) | `["alg-egg","alg-milk"]` |
+| `allergenDataComplete` | boolean | ✔ | `false` iff any ingredient has `allergenInfo = "unknown"`; derived and checked by the validator (`recipe-allergen-complete-derived`). **Deprecated as a filter input 2026-11-01**: derivation and the validator rule stay, but no ranking, filter, badge or notice reads it (the old `ranking-incomplete-allergen` rule is retired, §4) | `true` |
 | `allergenScheme` | string | ✔ | `caa-2026-04` | |
 | `animalOrigin` | string[] | ✔ | union of `ingredients[].animalOrigin` (`recipe-animal-origin-union`) | `["egg","fish-seafood"]` |
 | `dietDataComplete` | boolean | ✔ | `false` iff any ingredient has `animalOriginKnown = false`; derived and checked (`recipe-diet-complete-derived`) | `true` |
@@ -279,12 +279,24 @@ Cross-field rules:
 | `unit` | enum | ✔ | `g`, `ml`, `piece` (個), `slice` (枚), `stick` (本), `tbsp` (大さじ), `tsp` (小さじ), `cup` (カップ 200 ml), `sheet` (枚・のり), `to-taste` (適量), `small-amount` (少々) | `g` |
 | `optional` | boolean | ✔ | | `false` |
 | `allergenInfo` | enum | ✔ | `known` (the food itself defines its allergens, e.g. 卵) \| `varies-by-product` (processed food: ウインナー, カレールー, ケチャップ, みそ…; the allergens of the one maker label the recipe cites, in `allergenIds` when the food itself defines them and otherwise in `possibleAllergenIds`; the recipe adds an adaptation telling the parent to 「表示を確認」, check the label of the product they use) \| `unknown` (processed food for which no label could be fetched or the label is ambiguous; never shown as allergen-free) | `known` |
-| `allergenIds` | string[] | ✔ | must include the dictionary's `inherentAllergenIds` for that ingredient (`recipe-ingredient-inherent-allergen`) | `["alg-egg"]` |
-| `possibleAllergenIds` | string[] | ✔ | only `varies-by-product` may list entries (empty for `known` and `unknown`); it may be empty when the cited label declares no allergen beyond `allergenIds`; entries come from the cited maker label, never from "typical" products (`recipe-possible-allergens`) | `["alg-pork","alg-milk","alg-soybean"]` |
+| `allergenIds` | string[] | ✔ | must include the dictionary's `inherentAllergenIds` for that ingredient (`recipe-ingredient-inherent-allergen`). For a processed ingredient (§3.7a) this is exactly the set that excludes a recipe for a child with that allergen (F1'); the 2026-11-01 library audit found no label-derived extras here | `["alg-egg"]` |
+| `possibleAllergenIds` | string[] | ✔ | only `varies-by-product` may list entries (empty for `known` and `unknown`); it may be empty when the cited label declares no allergen beyond `allergenIds`; entries come from the cited maker label, never from "typical" products (`recipe-possible-allergens`). Reference data since 2026-11-01: warn-only, never excludes; new records need not carry it (leave `[]`) | `["alg-pork","alg-milk","alg-soybean"]` |
 | `animalOrigin` | string[] | ✔ | animal-origin tags (§3.8) of this ingredient; must include every tag the dictionary lists for the `ingredientId` (`recipe-ingredient-animal-origin`); tags may be added from the cited source, never removed | `["fish-seafood"]` |
 | `animalOriginKnown` | boolean | ✔ | `true` if the dictionary's `animalOrigin` for the id is fully known; if the dictionary marks it `?` (unknown), `true` only when a cited source (`usedFor` includes `"recipe"` or `"allergen"`) states the product's ingredients, else `false` (`recipe-animal-origin-known`) | `true` |
 
 `Source`: `{ id: "src-…", publisher: string, title: string, url: http(s), accessed: date, language: "ja" | "en", usedFor: ("recipe" | "storage" | "allergen")[] }`. `url` is an absolute `http://` or `https://` URL without spaces (`source-url-invalid`) whose host is, or is a subdomain of, a host in §3.10 (`source-publisher-approved`); `publisher` uses the publisher name given there.
+
+### 3.7a Processed ingredients and the generic allergen rule (PO decision 2026-11-01)
+Supersedes the 2025-10-25 ruling "processed food is always varies-by-product with a cited label" for new work; no new maker-label research is done for processed foods.
+- **Processed ingredient** = a dictionary ingredient with `info = varies` (65 in the dictionary of 2026-11-01). The test is on the dictionary record of `ingredientId`, never on the recipe's `allergenInfo`, so it holds for old and new records alike.
+- **Inherent allergens of a processed ingredient** = its dictionary `inherentAllergenIds`: the allergens that belong to the definition of that kind of food (bread → wheat, mayonnaise → egg, soy sauce → soybean + wheat). "May contain" and "common in some products" are never inherent. Basis per row: dictionary §11.
+- **F1' (exclusion)**: a recipe is excluded when `allergenIds` (which contains each ingredient's inherent ids, `recipe-ingredient-inherent-allergen`) intersects the child's `knownAllergenIds`. This is the same set test as before; what changed is that `mayContainAllergenIds` is no longer part of it and that the dictionary now defines inherent allergens for processed foods.
+- **Allergen groups, F1'' (PO ruling P5, 2026-11-01)**: dictionary §11.5 defines groups (`grp-fish` = {alg-salmon, alg-mackerel}) and the processed ingredients carrying one (`allergenGroupIds` in `data/dictionary.json`: fish-paste products, canned tuna and mackerel, salmon flakes, fish sauce). A group id is NOT an allergen id: never written to `allergenIds`, `possibleAllergenIds`, `mayContainAllergenIds` or a profile, so recipe data never claims "contains salmon". F1'' = F1' plus: a recipe is also excluded when any of its ingredients carries a group (dictionary lookup by `ingredientId`) and the child's `knownAllergenIds` contains any member of that group. `alg-salmon-roe` alone does not trigger `grp-fish`. The exclusion reason in 「レシピ一覧」 names the child's registered member (e.g. 「さけを含む」), never the group. The processed-food warning (US-E6-04 notice) is unchanged and independent of groups. Validator rules: dictionary §11.5.
+- **Processed-food warning** (`ranking-processed-warning`): when `knownAllergenIds` is non-empty and the recipe is not excluded, every processed ingredient shows a marker and the recipe shows one notice with the child's FULL `knownAllergenIds` list (not an intersection with anything: the product's content is unknown). When `knownAllergenIds` is empty (allergyStatus none-known, unknown, or has-known with only `excludedIngredientIds`) nothing is shown. It never says or implies safety (BR-07).
+- Copy keys (designer specifies the final strings; intent only): `warn.processed.item` (per processed ingredient row: "store-bought, check the label"), `warn.processed.recipe` (once on the detail: "store-bought products may contain the registered allergens {list}; check the package label"), `warn.processed.card` (compact line on cards and list rows: "check labels of store-bought items"). Retired strings: 「市販品は製品によりアレルゲンが異なります。表示を確認してください。」 (US-E6-02/AC4) and 「一部の材料のアレルゲン情報がわかりません。…」 (US-E6-02/AC5).
+- **Existing brand-label data** (`allergenInfo: varies-by-product` with `possibleAllergenIds` from a cited maker label, about 26 records): stays in the files for reference, warn-only.
+- Not changed: diet filters (`animalOrigin`, §3.8, `ranking-diet-incomplete`), `excludedIngredientIds`, the disclaimer and the unknown-status banner (BR-07).
+- Open points (no blocker): see "Open points" at the end of §11.
 
 ### 3.8 Diet meaning (used by the hard filter, BR-06; H1 ruling B14)
 Diets are evaluated **only on ingredient-level animal-origin tags** (`animalOrigin`, dictionary §4): never on allergen ids and never through categories. Tags: `meat` (meat whose species is not stated or varies, incl. sheep casings), `pork`, `beef`, `chicken`, `fish-seafood` (fish, shellfish, other seafood, fish-paste products, fish-based stock), `egg`, `dairy`, `gelatin`. The dictionary lists, per ingredient, every tag the food has or that its common products contain (hidden sources: だし → `fish-seafood` + `?`; かつお節・煮干し → `fish-seafood`; コンソメ/ブイヨン → `beef`, `chicken`, `pork` + `?`; カレールウ/シチュールウ → `meat`, `pork`, `beef`, `chicken`, `dairy` + `?`; ウインナー・ハム → `meat`, `pork`; ベーコン → `pork`; ちくわ・かまぼこ → `fish-seafood`; マヨネーズ → `egg`; バター → `dairy`…), or `?` when the animal origin of the food's products cannot be bounded.
@@ -362,10 +374,11 @@ No host in `APPROVED_HOSTS` belongs to a different publisher than the brief inte
 | `assessment-independent` | Assessment computation reads `profile`, `menus[].confirmed` and `overrides` only; it never reads or writes `decisions` (BR-01). |
 | `decision-parent-only` | `decisions` changes only through UI actions listed in the state machine (BR-02); import, refresh, assessment, reminders and time never write it. |
 | `ai-payload-allowlist` | The adapter request has exactly: `pdf` (bytes or URL), `targetMonth`, `promptVersion`, `schemaVersion` (BR-10). |
-| `ranking-hard-filter` | A recipe is excluded from suggestions, 「ほかのレシピ」 and planning if any `allergenIds` or `mayContainAllergenIds` id is in `knownAllergenIds`, any ingredient (or dictionary parent/category) is in `excludedIngredientIds`, or its `animalOrigin` contains a tag forbidden by a selected diet (§3.8) (BR-06, OQ-13, B14). |
+| `ranking-hard-filter` | A recipe is excluded from suggestions, 「ほかのレシピ」 and planning if any `allergenIds` id is in `knownAllergenIds` (F1'; `mayContainAllergenIds` is no longer read, 2026-11-01, §3.7a), any ingredient (or dictionary parent/category) is in `excludedIngredientIds`, or its `animalOrigin` contains a tag forbidden by a selected diet (§3.8) (BR-06, OQ-13, B14). |
 | `ranking-diet-incomplete` | A recipe with `dietDataComplete = false` is excluded like the above when at least one diet is selected, with reason `diet-incomplete` (§3.8, US-E6-02/AC8). |
 | `ranking-liked-ids` | BR-09's "per liked id" / "per disliked id" count the recipe's foods (its ingredient ids collapsed by ancestor/descendant) with the same verdict rule as D and L (§3.5 Counting). |
-| `ranking-incomplete-allergen` | A recipe with `allergenDataComplete = false` is excluded like the above when `knownAllergenIds` is non-empty; otherwise it stays, flagged, ordered after every recipe with complete data (R-3, US-E6-02/AC5–AC6). |
+| `ranking-incomplete-allergen` | **RETIRED 2026-11-01** (PO: generic processed-food rule; F4). Was: a recipe with `allergenDataComplete = false` is excluded when `knownAllergenIds` is non-empty, else flagged and ordered last. Now no filter, order tier or badge reads `allergenDataComplete`. |
+| `ranking-processed-warning` | When `knownAllergenIds` is non-empty, a recipe that passes the filters shows `warn.processed.item` on each ingredient whose dictionary `info = varies`, and `warn.processed.recipe` once with the child's full `knownAllergenIds` list; with an empty `knownAllergenIds` nothing is shown. Trigger = dictionary, not `allergenInfo` (§3.7a, US-E6-02/AC11–AC13). |
 | `ai-call-budget` | One import action makes at most 2 provider calls: call 1 primary model; call 2 either one repair retry on the primary (malformed output) or one call to the fallback model on **429, 408/timeout, 5xx**, never both; 400/403/404 are never retried; 0 calls when `source.sha256` already has an extraction (BR-10, R-1). |
 | `export-roundtrip` | An export file is the stored `BentoMinderStore` written as is (no envelope, no extra top-level field such as `exportedAt`; any extra field fails `unknown-field`) and re-validates as a `BentoMinderStore` of the same `schemaVersion`. The export date is carried only by the file name `bentominder-export-<YYYY-MM-DD>.json` (the Tokyo date of the export) (US-E10-03/AC4; M1 prep decision). |
 
@@ -453,7 +466,7 @@ This table is the full list of rule ids. Code reports only these ids; a check wi
 | `recipe-possible-allergens` | S | `possibleAllergenIds` is non-empty only when `allergenInfo = varies-by-product` (it may be empty there when the cited label declares none). |
 | `recipe-allergen-union` | L | `Recipe.allergenIds` = union of its ingredients' `allergenIds`. |
 | `recipe-may-contain-union` | L | `mayContainAllergenIds` = union of the varies-by-product ingredients' `possibleAllergenIds`. |
-| `recipe-allergen-complete-derived` | L | `allergenDataComplete` is false iff an ingredient has `allergenInfo = unknown`. |
+| `recipe-allergen-complete-derived` | L | `allergenDataComplete` is false iff an ingredient has `allergenInfo = unknown` (derived field kept; no ranking effect since 2026-11-01). |
 | `recipe-ingredient-animal-origin` | L | An ingredient's `animalOrigin` includes every dictionary tag for its id. |
 | `recipe-animal-origin-known` | L | `animalOriginKnown` follows the dictionary's `?` and the cited-source rule. |
 | `recipe-animal-origin-union` | L | `Recipe.animalOrigin` = union of its ingredients' tags. |
@@ -471,10 +484,11 @@ This table is the full list of rule ids. Code reports only these ids; a check wi
 | `ref-recipe` | E | An unresolved `recipeId` on read is reported, never deleted. |
 | `ai-payload-allowlist` | P | The adapter request has exactly `pdf`, `targetMonth`, `promptVersion`, `schemaVersion`. |
 | `ai-call-budget` | P | At most 2 provider calls per import action as in BR-10. |
-| `ranking-hard-filter` | E | Allergen, exclusion and diet filters (BR-06). |
+| `ranking-hard-filter` | E | Allergen (`allergenIds` only; inherent allergens of processed foods included, F'), exclusion and diet filters (BR-06). |
 | `ranking-diet-incomplete` | E | `dietDataComplete = false` excluded when any diet is selected. |
 | `ranking-liked-ids` | E | BR-09 per-id scores count foods with the D/L verdict rule. |
-| `ranking-incomplete-allergen` | E | Incomplete allergen data: excluded with known allergens, else flagged and ranked last. |
+| `ranking-incomplete-allergen` | E | **Retired 2026-11-01** (kept as a name so old tests and evidence resolve; asserts nothing). |
+| `ranking-processed-warning` | E | Processed-food warning shown only with registered allergens, per processed ingredient, never claiming safety (US-E6-02/AC11–AC13). |
 | `export-roundtrip` | S | An export file is the store as is and re-validates as the same `schemaVersion` (§4). |
 | `dict-id-unique` | D | No two dictionary records share an id. |
 | `dict-synonym-unique` | D | One normalised surface form belongs to one ingredient, dish or ambiguity group (categories have no surface forms). |
@@ -547,3 +561,21 @@ Items from PLAN §7 "M1 merged locally" and "M1 QA" (`tests/reports/m1-qa-report
 | §3.4 `changedDatesSincePrevious`: "changed" = item text + kind, reason, moved, added, removed; unique, sorted, in month; `noLunchDays` unique and sorted | States the M1 code's comparison; the schema did not check these lists |
 | §3.1 extraction eviction rule (oldest not confirmed dropped at 4) | States the M1 code's rule (`recordExtraction`) |
 | §3.4 needs-review list: nothing "opened" is stored | `design/components.md` §6.8 (refresh review list) says the list stays reachable "until every listed date was opened once", which needs stored state |
+
+## 11. Processed-food rule changes (2026-11-01)
+PO decision in `docs/PLAN.md` §7 (last row of 2026-11-01). No field added, removed or renamed; no schema version change.
+
+| Change | Why |
+|--------|-----|
+| §3.7a new (definitions: processed ingredient, inherent allergens, F1', warning rule, copy keys) | PO: generic rule for processed foods |
+| §3.7 `mayContainAllergenIds`, `possibleAllergenIds` reference-only; `allergenDataComplete` no longer a filter input; `allergenInfo` unchanged | PO: label data warn-only; F4 retired |
+| §4 `ranking-hard-filter` reads `allergenIds` only; `ranking-incomplete-allergen` retired; `ranking-processed-warning` added; §6.1 mirrors | same |
+| Validator rules kept unchanged: `recipe-allergen-union`, `recipe-may-contain-union`, `recipe-possible-allergens`, `recipe-allergen-complete-derived`, `recipe-ingredient-inherent-allergen` (now bites on 17 more dictionary rows; 71 recipes were fixed minimally, 183 ingredient entries) | minimal change |
+| Dictionary: `inherentAllergenIds` set for 17 processed rows (dictionary §11) | F1' needs them |
+
+### Open points (each with a recommendation; none blocks work)
+- **P1 Warning granularity.** Options: (a) per ingredient with the full list each time; (b) marker per ingredient + the full list once per recipe; (c) once per recipe only. **Recommend (b)**: 90 of 92 recipes have a processed ingredient, so (a) would repeat the list many times and bury it; (c) loses the "which product" hint. AC11 is written for (b).
+- **P2 Ordering.** Options: keep BR-09 unchanged except retiring the incomplete-last tier, or rank recipes without processed ingredients first. **Recommend no change**: the PO asked for a warning, not a penalty, and almost every recipe carries one.
+- **P3 Dead fields.** Options: keep `allergenInfo: unknown`/`allergenDataComplete` as derived data, or delete them in a schema change. **Recommend keep** (no migration; a later cleanup can drop them). 57 library recipes still have `allergenDataComplete = false`; nothing reads it.
+- **P4 Stale data.** `ing-kombu` (a plain seaweed, `info = known`) has `allergenInfo = unknown` in two records; recommend setting it `known` with no allergens in a data fix (outside this BA task).
+- **P5 Fish.** The scheme has no "fish" allergen item (only salmon, mackerel, salmon roe), so the PO examples surimi/kamaboko/chikuwa → fish cannot be an inherent id. See dictionary §11 "needs PO decision".

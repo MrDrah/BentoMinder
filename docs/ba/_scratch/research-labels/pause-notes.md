@@ -19,3 +19,6 @@
 - Done (varies-by-product, label cited): ツナ缶 (Hagoromo Lフレーク: soy), 鮭フレーク (Nissui: salmon, soy), みそ (Marukome 料亭の味 生みそ: soy), プロセスチーズ in rcp-kikkoman-niku-yasaimaki (Snow Brand 6P: milk only). Script `s2-labels.cjs`, `s2-dict.cjs` (one-off). Dictionary notes sourced (sakura denbu, salmon flakes, black beans, matsutake verified); build:dictionary run.
 - Left unknown (no label found/fetchable): たらこ x2, 桜でんぶ, パン粉, ロールパン, 食パン (Yamazaki pages have no ingredient list), トルティーヤ, スティックチーズ, チェダーチーズ. animalOriginKnown unchanged for bread, crumbs, tortilla. No source found for tarako/tortilla dictionary notes (MAFF pdf unreadable).
 - New hosts: hagoromofoods.co.jp, marukome.co.jp, nissui.co.jp, meg-snow.com (plus nipponham.co.jp from slice 1; already in APPROVED_HOSTS). Orchestrator: add, overlap --fetch, merge:research.
+
+## Cancelled (2026-11-01)
+All remaining label research listed above (Still to do, Left unknown) is cancelled by the PO decision of 2026-11-01; there is no further label pass.

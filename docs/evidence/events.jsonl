@@ -233,3 +233,8 @@
 {"v":1,"at":"2026-11-01T09:30:25.377Z","by":"orchestrator","type":"task-start","task":"library-wave2","summary":"Task library-wave2 dispatched (7 allowed globs)"}
 {"v":1,"at":"2026-11-01T09:46:01.400Z","by":"orchestrator","type":"task-start","task":"library-growth-fixes","summary":"Task library-growth-fixes dispatched (8 allowed globs)"}
 {"v":1,"at":"2026-11-01T12:32:20.508Z","type":"product-decision","summary":"PO: library at 92 recipes is enough for now; no label pass or verifier pass on the new batches yet"}
+{"v":1,"at":"2026-11-01T12:45:54.898Z","type":"product-decision","summary":"PO: processed foods use a generic rule: exclude when the child's allergen is inherent to the food, else warn to check the packaging; no brand label research"}
+{"v":1,"at":"2026-11-01T12:45:55.124Z","by":"orchestrator","type":"task-start","task":"allergen-rule-ba","summary":"Task allergen-rule-ba dispatched (5 allowed globs)"}
+{"v":1,"at":"2026-11-01T12:51:59.555Z","by":"orchestrator","type":"task-end","task":"allergen-rule-ba","outcome":"success","summary":"diff-guard: 13 changed files, all allowed"}
+{"v":1,"at":"2026-11-01T12:51:59.732Z","by":"orchestrator","type":"task-start","task":"allergen-rule-design","summary":"Task allergen-rule-design dispatched (6 allowed globs)"}
+{"v":1,"at":"2026-11-01T12:54:42.685Z","by":"orchestrator","type":"task-start","task":"allergen-rule-dev1","summary":"Task allergen-rule-dev1 dispatched (7 allowed globs)"}

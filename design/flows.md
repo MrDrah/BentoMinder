@@ -350,8 +350,8 @@ flowchart TD
 | Frame | Shown | Story |
 |---|---|---|
 | Card | Name, minutes, ≤ 2 reasons (「好きな鶏肉入り」「どうぶつテーマ」), allergen badges, may-contain line | US-E6-01/AC2 |
-| Varies-by-product | 「市販品は製品によりアレルゲンが異なります。表示を確認してください。」 | US-E6-02/AC4 |
-| Incomplete allergen data (child without known allergens) | 「一部の材料のアレルゲン情報がわかりません。食品の表示を確認してください。」; ranked last; plannable | US-E6-02/AC5 |
+| Processed ingredient, child with a registered allergen | Card, 「ほかのレシピ」 row, plannable library row and plan-date picker header: 「市販品の表示を確認」 (`warn.processed.card`). Detail: marker 「市販品。表示を確認」 on each processed ingredient + one notice above the ingredient list with the child's full allergen list (`warn.processed.recipe`). A recipe whose processed ingredient inherently contains a registered allergen never reaches these screens (excluded; library shows 「卵を含む」 greyed). No registered allergen (none-known, unknown, only excluded foods): none of these appear; the unknown-allergy banner and the disclaimer are unchanged | US-E6-02/AC9–AC12, US-E6-04/AC4–AC5 |
+| Retired | 「市販品は製品によりアレルゲンが異なります…」 and the incomplete-data notice (no longer shown or ranked) | US-E6-02/AC4–AC6 superseded, US-E6-04/AC6 |
 | No allergens in the recipe | 「表示対象のアレルゲン：使用していません（食品の表示をご確認ください）」 | US-E6-03/AC3 |
 | Change mode | Current recipe tagged 「いまのレシピ」, its button disabled | US-E5-06/AC1 |
 | R2 content | Name (en when EN), minutes, servings, ingredients, steps, storage + 農林水産省 notes, badges, theme, sources, disclaimer | US-E6-04/AC1–AC2, US-E8-01/AC4 |
@@ -359,7 +359,7 @@ flowchart TD
 | Today / past | Today plannable; past dates never reach R1 (no action on D1) | US-E5-03/AC4 |
 
 ## 11. F9: recipe library (US-E6-05, E6-02/AC1, AC6, AC8)
-App bar レシピ → R3: every recipe; conflicting ones last, greyed, with the reason (「卵を含む」, incomplete data, diet-incomplete, diet) and plan disabled → open a recipe → 「日付を選んで計画」 → plan-date picker (school days and bento days from today) → 「この日に決定」 = same confirm as US-E5-03/AC2. Empty picker: 「計画できる日がありません。献立を取り込むと選べるようになります。」. Story: US-E6-05/AC1–AC2, US-E6-07 (content shown).
+App bar レシピ → R3: every recipe; conflicting ones last, greyed, with the reason (「卵を含む」 also for an inherent allergen of a processed ingredient, diet-incomplete, diet; the incomplete-allergen reason is retired) and plan disabled → open a recipe → 「日付を選んで計画」 → plan-date picker (school days and bento days from today) → 「この日に決定」 = same confirm as US-E5-03/AC2. Empty picker: 「計画できる日がありません。献立を取り込むと選べるようになります。」. Story: US-E6-05/AC1–AC2, US-E6-07 (content shown).
 
 ---
 

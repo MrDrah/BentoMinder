@@ -451,30 +451,29 @@ States: default; loading (3 skeleton cards; `rec.loading` for screen readers; �
 Live region: `live.recCount` once on load. Test ids: `screen-recs`, `recs-fewer`, `recs-empty`, `recs-more`, `disclaimer`, `banner-allergy-unknown`. Stories: US-E6-01, US-E6-02, US-E6-03, US-E5-03, US-E1-03/AC5, US-E0-01/AC1.
 
 ### 4.2 Recommendation card
-Anatomy: illustration panel 112 px (`surface-3`, red stripe band at its bottom, decorative) with rank badge `rec.rank` (navy pill, text) · name (h3, `text-lg`, ja; en name below in `ink-3` when language = ja and an en name exists, and vice versa) · meta: clock icon + `fmt.minutes` · reason chips (≤ 2: `rec.reason.liked`, `rec.reason.theme`, `rec.reason.quick`, success tags with check icons) · allergen line `rec.allergens` (dictionary labels) or `rec.allergensNone` · `rec.mayContain` when any varies-by-product ingredient · warning rows: `rec.variesByProduct` (US-E6-02/AC4), `rec.incomplete` (flagged incomplete-allergen recipe, US-E6-02/AC5) · actions: `rec.confirm` (primary on card 1, secondary on 2–3) and `rec.details` link.
+Anatomy: illustration panel 112 px (`surface-3`, red stripe band at its bottom, decorative) with rank badge `rec.rank` (navy pill, text) · name (h3, `text-lg`, ja; en name below in `ink-3` when language = ja and an en name exists, and vice versa) · meta: clock icon + `fmt.minutes` · reason chips (≤ 2: `rec.reason.liked`, `rec.reason.theme`, `rec.reason.quick`, success tags with check icons) · allergen line `rec.allergens` (dictionary labels) or `rec.allergensNone` · compact processed-food notice `warn.processed.card` (§5.4; replaces the retired `rec.mayContain`, `rec.variesByProduct`, `rec.incomplete`) · actions: `rec.confirm` (primary on card 1, secondary on 2–3) and `rec.details` link.
 
 Domain states:
 
 | State | Treatment |
 |---|---|
 | complete allergen data | as above |
-| **flagged incomplete allergen data** (only when the child has no known allergens) | warning row `rec.incomplete` with triangle icon, placed directly under the name (before reasons) so it can't be missed; ranked after all complete recipes; can be planned (US-E6-02/AC5) |
-| varies-by-product ingredient | warning row `rec.variesByProduct` + `rec.mayContain` line |
+| processed ingredient and child with a registered allergen | compact notice `warn.processed.card` (§5.4), placed under the allergen line, above the actions; otherwise absent (US-E6-02/AC11, AC12). Incomplete data and brand-label data change nothing (retired, AC13) |
 | current recipe (change-recipe mode) | tag `rec.current`; its `rec.confirm` disabled with that tag as the reason |
 
 Interaction states: default; hover (card `elevation-2`, the card itself is not a link: only its buttons/links are); focus-visible (on the buttons); active; disabled (current recipe only); loading (pressed `rec.confirm` shows `rec.saving`, other cards' buttons disabled); error (write failed → `toast.saveFailed`, stay on screen); empty n/a.
 On success: decision written (CONFIRM_RECIPE or CHANGE_RECIPE), navigate back to the calendar with the day sheet open, toast `day.saved.bento`.
-Test ids: `rec-card-<i>`, `rec-card-<i>-confirm`, `rec-card-<i>-incomplete`, `rec-card-<i>-varies`. Stories: US-E6-01/AC1–AC3, US-E6-02/AC4–AC5, US-E6-03/AC3, US-E5-03/AC2, US-E5-06/AC1.
+Test ids: `rec-card-<i>`, `rec-card-<i>-confirm`, `rec-card-<i>-processed`. Stories: US-E6-01/AC1–AC3, US-E6-02/AC9–AC12, US-E6-03/AC3, US-E5-03/AC2, US-E5-06/AC1.
 
 ### 4.3 「ほかのレシピ」 list
-Same card in a compact row form (64 px illustration thumb, name, minutes, allergen line, warning rows, `rec.confirm` secondary). Contains only recipes that pass the hard filters, in rank order (US-E6-01/AC6). States as 4.2. Test id `recs-more-list`.
+Same card in a compact row form (64 px illustration thumb, name, minutes, allergen line, `warn.processed.card`, `rec.confirm` secondary). Contains only recipes that pass the hard filters, in rank order (US-E6-01/AC6). States as 4.2. Test id `recs-more-list`.
 
 ---
 
 ## 5. Recipe detail, library, plan-date picker
 
 ### 5.1 Recipe detail
-Anatomy: top bar · hero illustration 150 px with navy stripe band · planned banner (`navy-fill`, `planned-edge` left edge, `recipe.plannedFor`) when this recipe is planned on the date in context · name (h1) + other-language name · meta row: `recipe.time`, `recipe.yield`, `recipe.theme` · badges: allergens (`rec.allergens` / `rec.allergensNone`), `rec.mayContain`, diet badges `recipe.diet` (only for diets the child selected) · warning rows: `allergy.unknown.banner` (above everything else when status unknown), `rec.variesByProduct`, `rec.incomplete`, `day.recipeAllergen` (planned + conflicting) · `recipe.ingredients` table (label left, quantity + unit right, tabular numerals) · `recipe.steps` numbered list (navy step circles, `leading-relaxed`) · `recipe.storage` with the recipe's storage notes + `recipe.safety.cool`, `recipe.safety.carry`, `recipe.safety.credit` (linked) · `recipe.adapted` note · `recipe.sources` list (publisher, title, link with `common.newWindow`, `recipe.source.accessed`) · `allergy.disclaimer` info box (always) · sticky footer with the context action:
+Anatomy: top bar · hero illustration 150 px with navy stripe band · planned banner (`navy-fill`, `planned-edge` left edge, `recipe.plannedFor`) when this recipe is planned on the date in context · name (h1) + other-language name · meta row: `recipe.time`, `recipe.yield`, `recipe.theme` · badges: allergens (`rec.allergens` / `rec.allergensNone`), diet badges `recipe.diet` (only for diets the child selected) · warning rows: `allergy.unknown.banner` (above everything else when status unknown), `day.recipeAllergen` (planned + conflicting) · `warn.processed.recipe` notice (§5.4, once, directly above the ingredients) · `recipe.ingredients` table (label left, quantity + unit right, tabular numerals; processed rows carry the `warn.processed.item` marker under the label, §5.4) · `recipe.steps` numbered list (navy step circles, `leading-relaxed`) · `recipe.storage` with the recipe's storage notes + `recipe.safety.cool`, `recipe.safety.carry`, `recipe.safety.credit` (linked) · `recipe.adapted` note · `recipe.sources` list (publisher, title, link with `common.newWindow`, `recipe.source.accessed`) · `allergy.disclaimer` info box (always) · sticky footer with the context action:
 
 | Context | Footer |
 |---|---|
@@ -490,7 +489,7 @@ Anatomy: top bar · hero illustration 150 px with navy stripe band · planned ba
 | Layout | single column, footer sticky | two columns: left (hero, meta, badges, ingredients) 400 px; right (steps, storage, sources); footer inline at the top right |
 
 States: default; loading (skeleton); error/empty: unknown id → not-found block `recipe.notFound` + `recipe.notFound.back` (US-E6-04/AC3); hover/focus/active on links and buttons; disabled (library conflict, above).
-Test ids: `screen-recipe`, `recipe-planned-banner`, `recipe-ingredients`, `recipe-steps`, `recipe-safety`, `recipe-sources`, `disclaimer`, `recipe-footer-action`, `recipe-not-found`. Stories: US-E6-04/AC1–AC3, US-E6-03/AC1, AC3, US-E1-03/AC5, US-E6-02/AC4–AC5, US-E7-02/AC2, US-E0-01/AC1.
+Test ids: `screen-recipe`, `recipe-planned-banner`, `recipe-ingredients`, `recipe-processed-notice`, `recipe-ingredient-<id>-processed`, `recipe-steps`, `recipe-safety`, `recipe-sources`, `disclaimer`, `recipe-footer-action`, `recipe-not-found`. Stories: US-E6-04/AC1–AC5, US-E6-03/AC1, AC3, AC4, US-E1-03/AC5, US-E6-02/AC11–AC12, US-E7-02/AC2, US-E0-01/AC1.
 
 ### 5.2 Recipe library
 List of every recipe, plannable ones first (rank-free order: by name), then conflicting ones **greyed** (`surface-3` row, `ink-3` meta, name stays `ink-1` for legibility) with the reason line (`library.conflict.*`, warning icon) and `rec.confirm`/`recipe.planPick` disabled (US-E6-02/AC1, AC6, AC8, US-E6-05/AC1). Lead `library.lead`.
@@ -501,6 +500,35 @@ States: default; hover (row `surface-1`); focus-visible; active; disabled (confl
 ### 5.3 Plan-date picker (library → 「日付を選んで計画」)
 Bottom sheet (dialog on tablet/desktop): `recipe.planPick.title`, `recipe.planPick.lead`, radio list of plannable dates from today (school days + bento days of confirmed menus; option `recipe.planPick.option`), primary `rec.confirm`. Choosing a date then applies the same confirm as US-E5-03/AC2.
 States: default; selected (radio); loading (confirm busy); error (`toast.saveFailed`); empty `recipe.planPick.empty`; disabled confirm until a date is chosen (hint: the lead). Test ids: `plan-pick`, `plan-pick-option-<date>`, `plan-pick-confirm`. Stories: US-E6-05/AC2.
+
+---
+
+### 5.4 Processed-food warning (marker, recipe notice, compact notice) (PO 2026-11-01; US-E6-02/AC9–AC14, US-E6-03/AC4–AC5, US-E6-04/AC4–AC6, US-E1-03/AC7)
+**Trigger (all three parts).** Shown only when the child's `knownAllergenIds` is non-empty and the recipe passes the filters; trigger = the ingredient's dictionary `info = varies`, never the recipe's `allergenInfo` or `allergenDataComplete`. With an empty list (none-known, unknown, or only excluded foods) none of the three is rendered (no empty space, no hidden node). `allergy.unknown.banner` is independent and keeps its place. Excluded recipes (F1') show no warning: they show the reason `library.conflict.allergen`. Nothing here ever says or implies safety.
+
+**A. Ingredient marker (`warn.processed.item`, detail only).**
+- Anatomy: inline tag under the ingredient label inside the label cell: 16 px package-box icon (outline, `aria-hidden`) + text `warn.processed.item`, `text-sm` (14 px), weight 600, colour `warning`, no fill, no border. The text is always visible, so the meaning never relies on colour or the icon.
+- Placement: label cell, second line, 4 px above the quantity baseline; quantity stays right-aligned. Rows of non-processed foods have no marker and the same row height as before.
+- Wrapping: the text wraps inside the label cell (no truncation, no ellipsis); on 390 px at most 2 lines.
+- Surface: page (`surface-1`) or card (`surface-2`); both audited (W1, W2).
+- States: default; hover, active, disabled, loading, error, empty n/a (not interactive, no tap target needed, not focusable); focus-visible n/a; dark mode via tokens (`warning` becomes the gold).
+- Screen reader: part of the row text, read after the label and before the quantity: 「<label>、市販品。表示を確認、<quantity>」. No extra role.
+
+**B. Recipe notice (`warn.processed.recipe`, detail only, once).**
+- Anatomy: the warning banner of §1.10 without title and without close: `warning-soft` fill, 12 px radius, 20 px triangle-! icon (`warning`, `aria-hidden`), body text `text-md` in `ink-1`, `leading-relaxed`. A visually hidden `warn.processed.prefix` precedes the body for screen readers. The whole sentence is one paragraph; the allergen names are part of it (the same weight, no chips).
+- Placement: in the left column on desktop, directly above the `recipe.ingredients` heading (after the badges and `allergy.unknown.banner`, before the ingredient table), full width of the column (max 760 px). Not sticky.
+- Allergen list: the child's full list in the order of `knownAllergenIds`, never truncated, summarised or collapsed (the full list is the safety information). It wraps like any text (`overflow-wrap: anywhere`; ja breaks after 「、」). With 29 allergens the notice is about 6 lines at 390 px; accepted.
+- States: default; hover/active/disabled/loading/error/empty n/a (static text; loading = absent until the profile and recipe are loaded, no layout jump because the notice sits above the table in a skeleton slot); focus-visible only on links inside (none). No `role`: it is present on load, so it is read in DOM order and not announced as a live update. If the profile changes while the screen is open, the notice appears with `role="status"`.
+- Dark mode: `warning-soft` fill, `ink-1` text, `warning` icon (all audited, W3, W4).
+- Test ids: `recipe-processed-notice`, `recipe-ingredient-<id>-processed`.
+
+**C. Compact notice (`warn.processed.card`; recommendation card, 「ほかのレシピ」 row, plannable library row, plan-date picker header).**
+- Anatomy: one line, 16 px triangle-! icon + text `warn.processed.card`, `text-sm` weight 600, colour `warning`, no fill (cards are already dense). It does not list allergens, so nothing to truncate.
+- Placement: card: under the allergen line, above the actions. Compact row: after the allergen line. Library: plannable rows only, in the reason line position; greyed (conflict) rows show only their reason. Plan-date picker: under the recipe name in the sheet header, above `recipe.planPick.title` options.
+- Surfaces: `surface-2` (card, sheet) or `surface-1` (page rows); both audited (W1, W2). Not used on `surface-3` greyed rows.
+- Wrapping: wraps to 2 lines on a 320 px column; never truncated.
+- States and a11y as A: static, not focusable, no tap target; read in DOM order with the card text; icon `aria-hidden`.
+- Test id: `rec-card-<i>-processed`, `library-row-<recipeId>-processed`.
 
 ---
 

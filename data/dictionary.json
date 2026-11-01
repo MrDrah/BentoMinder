@@ -589,7 +589,9 @@
         "ロールパン",
         "コッペパン"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [
         "dairy",
@@ -634,7 +636,9 @@
       "forms": [
         "パン粉"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [
         "dairy",
@@ -727,7 +731,9 @@
         "ラーメン",
         "焼きそばめん"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [
         "egg"
@@ -2716,7 +2722,9 @@
         "ハム",
         "ロースハム"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-pork"
+      ],
       "info": "varies",
       "animalOrigin": [
         "meat",
@@ -2763,7 +2771,9 @@
       "forms": [
         "ベーコン"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-pork"
+      ],
       "info": "varies",
       "animalOrigin": [
         "pork"
@@ -3970,7 +3980,10 @@
         "しょう油",
         "うすくちしょうゆ"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-soybean",
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [],
       "animalOriginKnown": true,
@@ -3992,7 +4005,9 @@
         "白みそ",
         "赤みそ"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
       "info": "varies",
       "animalOrigin": [],
       "animalOriginKnown": true,
@@ -4157,7 +4172,9 @@
         "マヨネーズ",
         "マヨ"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-egg"
+      ],
       "info": "varies",
       "animalOrigin": [
         "egg"
@@ -4221,7 +4238,9 @@
         "カレールウ",
         "カレールー"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [
         "meat",
@@ -4247,7 +4266,9 @@
         "シチュールウ",
         "シチュールー"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [
         "meat",
@@ -4574,7 +4595,9 @@
         "海鮮醤",
         "ホイシン"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
       "info": "varies",
       "animalOrigin": [],
       "animalOriginKnown": true,
@@ -4616,7 +4639,10 @@
         "そばつゆ",
         "本つゆ"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-soybean",
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [
         "fish-seafood"
@@ -4744,7 +4770,10 @@
         "焼肉のたれ",
         "焼き肉のたれ"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-soybean",
+        "alg-wheat"
+      ],
       "info": "varies",
       "animalOrigin": [],
       "animalOriginKnown": false,
@@ -4858,7 +4887,9 @@
       "forms": [
         "コチュジャン"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-soybean"
+      ],
       "info": "varies",
       "animalOrigin": [],
       "animalOriginKnown": false,
@@ -4881,7 +4912,9 @@
         "顆粒チキンスープ",
         "チキンスープの素"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-chicken"
+      ],
       "info": "varies",
       "animalOrigin": [
         "chicken"
@@ -4992,7 +5025,9 @@
         "ジェノベーゼ",
         "ジェノバソース"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-milk"
+      ],
       "info": "varies",
       "animalOrigin": [
         "dairy"
@@ -5326,7 +5361,9 @@
         "ハムス",
         "ひよこ豆のペースト"
       ],
-      "inherentAllergenIds": [],
+      "inherentAllergenIds": [
+        "alg-sesame"
+      ],
       "info": "varies",
       "animalOrigin": [],
       "animalOriginKnown": true,

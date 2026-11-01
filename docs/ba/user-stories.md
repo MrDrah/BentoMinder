@@ -60,6 +60,13 @@ Acceptance criteria are numbered per story: `Scenario: AC1 …` has the full ID 
 
 Priority: **M**ust / **S**hould / **C**ould / **W**on't (MoSCoW) · Size: S / M / L · `(v1)` in a title means the story is out of the MVP and must not be built before the PO approves v1.
 
+### Processed-food allergen rule (2026-11-01: 73 / 320 → 73 / 332 incl. 3 superseded; PO decision in PLAN §7, last row)
+The PO's brand-label ruling above is implemented as AC9-AC14 etc.; 12 ACs added; the three superseded ACs stay numbered but are not counted as testable.
+
+| Why | Changed | Added | Retired |
+|-----|---------|-------|---------|
+| PO: no brand-label research; generic rule for processed foods (exclude when an inherent allergen is registered, otherwise warn per processed ingredient, no warning without registered allergens, label data warn-only) | E6 preamble (ordering, F1', filter 3), US-E6-03/AC3, US-E6-05/AC1 | US-E6-02/AC9-AC14, US-E6-03/AC4-AC5, US-E6-04/AC4-AC6, US-E1-03/AC7 | US-E6-02/AC4, AC5, AC6 (kept in place, marked SUPERSEDED, not to be tested); E6 ordering tier "complete data first"; filter 3 (F4) |
+
 ## Conventions used in the ACs
 - "Today" is the simulated or real date **in Asia/Tokyo** (BR-15). Dates are written `YYYY-MM-DD`; weekdays were checked against a calendar (2026-11-03 Tue 文化の日, 2026-11-23 Mon 勤労感謝の日, 2026-11-30 Mon, 2027-01-29 Fri, 2027-02-01 Mon, 2028-02-29 Tue).
 - "The fixture menu" is the synthetic test menu `fixture-menu-2026-11` (November 2026, kindergarten style, see `docs/ba/data-contract.md` §5). Fixtures are synthetic and never presented as a real school's menu.
@@ -276,6 +283,10 @@ Scenario: AC6 Allergy screen never promises safety (BR-07)
   When step 1 is shown
   Then the helper text states the app filters recipes by the registered information only
   And no text on the screen contains a safety guarantee (e.g. 「安全です」「アレルギー対応済み」)
+
+Scenario: AC7 The registered list also drives the processed-food warning (BR-07, PO 2026-11-01)
+  Given the parent registered knownAllergenIds ["alg-peanut"]
+  Then recipes with processed ingredients show the packaging warning naming 落花生 (US-E6-02/AC11), and a child registered as 「特になし」 or 「わからない・未確認」 sees none; no new onboarding field or screen is needed
 ```
 
 ### US-E1-04 Diet preferences and themes · S · S
@@ -1497,12 +1508,12 @@ Scenario: AC5 Planning an お弁当の日 replaces a dormant record (BR-02, BR-1
 
 ## E6 Bento recommendations & recipes
 
-Ranking (BR-09): candidates = library recipes passing every hard filter (BR-06, incl. OQ-13 and R-3 below). Score = `+2` per distinct liked id in the recipe (the recipe's distinct ingredient ids, each given one verdict by the most-specific-entry rule of E4, dislike winning a same-level tie: the same counting as D and L, H1 rulings B1/B2), `+1` if a recipe theme is one of the child's themes, `−3` per distinct disliked id, `−2` if the same recipe is planned on any other date within 14 days before or after the target date, `−1` if `minutes > 20`. Order: recipes with complete allergen data (`allergenDataComplete = true`) before recipes with incomplete data (R-3), then score desc, then minutes asc, then id asc. Show the top 3.
+Ranking (BR-09): candidates = library recipes passing every hard filter (BR-06, incl. OQ-13 and R-3 below). Score = `+2` per distinct liked id in the recipe (the recipe's distinct ingredient ids, each given one verdict by the most-specific-entry rule of E4, dislike winning a same-level tie: the same counting as D and L, H1 rulings B1/B2), `+1` if a recipe theme is one of the child's themes, `−3` per distinct disliked id, `−2` if the same recipe is planned on any other date within 14 days before or after the target date, `−1` if `minutes > 20`. Order: score desc, then minutes asc, then id asc (the earlier "complete allergen data first" tier of R-3 is retired by the 2026-11-01 processed-food ruling, below). Show the top 3.
 
-Hard filters (BR-06, OQ-13, R-3), applied before scoring:
-1. Exclude a recipe if any id in `allergenIds` or `mayContainAllergenIds` (the latter includes every `possibleAllergenIds` of its varies-by-product ingredients) is in the child's `knownAllergenIds`.
+Hard filters (BR-06, OQ-13; R-3 retired for allergens 2026-11-01), applied before scoring:
+1. Exclude a recipe if any id in `allergenIds` is in the child's `knownAllergenIds`. **(F1'', 2026-11-01: also exclude when an ingredient carries an allergen group, dictionary §11.5, and the child has any member of it; US-E6-02/AC15.)** **(F1', 2026-11-01)** For a processed ingredient (dictionary `info = varies`) only its dictionary `inherentAllergenIds` count: `allergenIds` is the union of the ingredients' ids and the validator makes each ingredient's ids include the inherent ones (`recipe-ingredient-inherent-allergen`); the library has no label-derived extras in a processed ingredient's `allergenIds` (checked 2026-11-01). `mayContainAllergenIds` / `possibleAllergenIds` (brand-label data) no longer exclude: they are reference data (US-E6-02/AC13).
 2. Exclude a recipe if any ingredient, or its dictionary parent or category, is in `excludedIngredientIds`, or if it violates a selected diet. Diets work on ingredient-level animal-origin tags (`animalOrigin`, dictionary §4, incl. hidden sources such as だし, コンソメ, カレールウ, ウインナー): a recipe violates a diet when any ingredient carries a tag the diet forbids, and a recipe with an ingredient of unknown animal origin is excluded for every selected diet with reason `diet-incomplete` (data contract §3.8, H1 ruling B14).
-3. Recipes with incomplete allergen data (`allergenDataComplete = false`, data contract §3.7): if the child's `knownAllergenIds` is non-empty, exclude them; otherwise (allergy status `none-known`, `unknown`, or `has-known` with only excluded ingredients) keep them, flagged, ranked after every complete recipe.
+3. ~~Recipes with incomplete allergen data (`allergenDataComplete = false`): excluded when `knownAllergenIds` is non-empty, else flagged and ranked last.~~ **Retired 2026-11-01** (PO: processed foods follow the generic rule; F4 no longer exists). No recipe is excluded or ranked down because `allergenDataComplete` is false; the field stays as derived data only.
 
 ### US-E6-01 Three ranked suggestions · M · M
 As a parent I want three good options so that choosing is quick.
@@ -1558,12 +1569,12 @@ Scenario: AC3 Property over the whole library (BR-06)
   For every single allergen id of the current scheme, every pair of them, and every diet preference
   Then no suggested recipe violates the filter (property test over the real library)
 
-Scenario: AC4 Recipe with product-dependent allergen information (BR-06, BR-07)
+Scenario: AC4 [SUPERSEDED 2026-11-01 by AC9-AC13; do not test] Recipe with product-dependent allergen information (BR-06, BR-07)
   Given a recipe has an ingredient with allergenInfo "varies-by-product" (e.g. ウインナー)
   Then its card and detail show 「市販品は製品によりアレルゲンが異なります。表示を確認してください。」
   And if any of that ingredient's possibleAllergenIds is a known allergen of the child, the recipe is excluded
 
-Scenario: AC5 Incomplete allergen data, child without known allergens: shown, flagged, ranked last (BR-07, BR-09)
+Scenario: AC5 [SUPERSEDED 2026-11-01 by AC12 and the ordering line of the E6 preamble; do not test] Incomplete allergen data, child without known allergens: shown, flagged, ranked last (BR-07, BR-09)
   Given the fixture library contains recipe X with allergenDataComplete false and the highest BR-09 score
   And the child's knownAllergenIds is empty (allergy status "none-known" or "unknown")
   When recommendations are requested
@@ -1572,7 +1583,7 @@ Scenario: AC5 Incomplete allergen data, child without known allergens: shown, fl
   And X is shown among the 3 suggestions only when fewer than 3 recipes with complete data pass the filters
   And X can be planned
 
-Scenario: AC6 Incomplete allergen data, child with known allergens: excluded (BR-06)
+Scenario: AC6 [SUPERSEDED 2026-11-01 by AC9 and AC10; do not test] Incomplete allergen data, child with known allergens: excluded (BR-06)
   Given recipe X has allergenDataComplete false and none of its known allergenIds or mayContainAllergenIds matches the child
   And the child has knownAllergenIds ["alg-shrimp"]
   When recommendations are requested
@@ -1594,6 +1605,63 @@ Scenario: AC8 Unknown animal origin excludes a recipe for any selected diet (BR-
   Then W appears neither in the 3 suggestions nor in 「ほかのレシピ」, and in 「レシピ一覧」 it is greyed with reason diet-incomplete 「原材料の由来がわからないため、食事の制限と照合できません」 / "The origin of some ingredients is unknown, so it can't be checked against the diet", and its 「この日に決定」 is disabled
   When the child has no diet selected
   Then W is not excluded for diet reasons
+
+Scenario: AC9 A registered allergen inherent to a processed ingredient excludes the recipe (BR-06, F1', PO 2026-11-01)
+  # Processed ingredient = dictionary info "varies" (data contract §3.7a); inherent allergens = dictionary inherentAllergenIds of that ingredient (dictionary §11).
+  Given recipe R has ing-mayonnaise (inherentAllergenIds ["alg-egg"]) and no other egg source
+  And the child's knownAllergenIds is ["alg-egg"]
+  Then R appears neither in the 3 suggestions nor in 「ほかのレシピ」
+  And in 「レシピ一覧」 R is listed last, greyed, with the reason 「卵を含む」 and its 「この日に決定」 is disabled
+  # Same for ing-soy-sauce with alg-wheat or alg-soybean, ing-bread with alg-wheat, ing-cheese with alg-milk, ing-miso with alg-soybean.
+  # Fish example (F1'', AC15): recipe R has ing-kamaboko (allergenGroupIds ["grp-fish"], inherentAllergenIds []) and the child's knownAllergenIds is ["alg-salmon"] or ["alg-mackerel"]: R is excluded as above, the reason names the child's own allergen (e.g. 「さけを含む」).
+
+Scenario: AC15 Allergen group fish (BR-06, F1'', PO ruling P5 2026-11-01)
+  # Groups: dictionary §11.5; grp-fish = {alg-salmon, alg-mackerel}; carried by ing-chikuwa, kamaboko, hanpen, satsuma-age, crab-stick, sakura-denbu, tarako, canned-tuna, canned-mackerel, salmon-flakes, fish-sauce.
+  Given recipe R has ing-chikuwa (allergenGroupIds ["grp-fish"]) and no ingredient with alg-salmon or alg-mackerel in allergenIds
+  And the child's knownAllergenIds is ["alg-mackerel"]
+  Then R appears neither in the 3 suggestions nor in 「ほかのレシピ」, and in 「レシピ一覧」 it is listed last, greyed, reason 「さばを含む」, 「この日に決定」 disabled
+  And R's data does not contain alg-salmon or alg-mackerel because of the chikuwa (the group is never written to allergenIds)
+  And for knownAllergenIds ["alg-salmon"] the result is the same (reason 「さけを含む」)
+  And for knownAllergenIds ["alg-salmon-roe"] only, or ["alg-shrimp"] only, R is not excluded and the AC11 warning applies
+  And for a child with neither salmon nor mackerel registered, R is not excluded
+
+Scenario: AC16 Allergen group data validation (data contract §3.7a, dictionary §11.5)
+  Given a dictionary where grp-fish lists a member that is not a non-retired scheme allergen, or an ingredient lists an undefined group, or a group sits on an ingredient whose info is "known"
+  Then the data validator reports dictionary-group-member-unknown, dictionary-ingredient-group-unknown or dictionary-group-ingredient-not-processed respectively
+  And a recipe whose allergenIds, possibleAllergenIds or mayContainAllergenIds contains "grp-fish" fails allergen-unknown
+
+Scenario: AC10 A registered allergen that is not inherent does not exclude; it triggers the packaging warning (BR-06, BR-07)
+  Given recipe R has ing-soy-sauce (inherent alg-soybean, alg-wheat) and no ingredient carrying alg-peanut
+  And the child's knownAllergenIds is ["alg-peanut"]
+  Then R is not excluded and ranks by BR-09 like any other recipe
+  And the processed-food warning of AC11 is shown for ing-soy-sauce
+
+Scenario: AC11 Processed-food warning (BR-07, PO 2026-11-01)
+  Given the child's knownAllergenIds is non-empty (e.g. ["alg-peanut","alg-shrimp"]) and the recipe passes the filters
+  When a recipe is shown on its detail screen
+  Then every ingredient row whose dictionary info is "varies" carries a marker with the text key warn.processed.item (intent ja: 「市販品。表示を確認」 / en: "Store-bought product: check the label")
+  And the recipe detail shows once, above the ingredient list, the notice warn.processed.recipe naming the child's FULL registered allergen list (dictionary labels, in the order of knownAllergenIds), intent ja: 「市販品には、登録したアレルゲン（落花生、えび）が含まれる場合があります。パッケージの表示を確認してください」 / en: "Store-bought products may contain the registered allergens (peanut, shrimp). Check the package label."
+  And the recipe card shows the compact notice warn.processed.card (intent ja: 「市販品の表示を確認」 / en: "Check labels of store-bought items") when the recipe has at least one processed ingredient
+  And no text says or implies that a product is free of those allergens (BR-07, banned-phrase check)
+  And the warning is shown whether allergenDataComplete is true or false and whatever the recipe's allergenInfo (known, varies-by-product, unknown) of that ingredient: the trigger is the dictionary, not the recipe record
+  # Granularity (recommendation, open point P1): marker per ingredient, allergen list once per recipe, so a recipe with 6 processed ingredients does not repeat the list 6 times.
+
+Scenario: AC12 No registered allergen, no allergen warning (BR-07, PO 2026-11-01)
+  Given allergyStatus "none-known", or "unknown", or "has-known" with knownAllergenIds [] (only excludedIngredientIds)
+  Then no card, detail or list row shows warn.processed.item, warn.processed.recipe or warn.processed.card
+  And allergyStatus "unknown" still shows the banner of US-E1-03/AC5 (BR-07); the warning neither replaces nor suppresses the banner
+
+Scenario: AC13 Brand-label data warns only (PO 2026-11-01)
+  Given ing-sausage in recipe R has allergenInfo "varies-by-product" and possibleAllergenIds ["alg-pork","alg-soybean"] from a cited maker label
+  And the child's knownAllergenIds is ["alg-soybean"]
+  Then R is not excluded (mayContainAllergenIds is not read by the hard filter)
+  And ing-sausage shows the processed-food warning of AC11 like every other processed ingredient
+  And possibleAllergenIds stay in the data and are never shown as a statement about the product the parent buys
+
+Scenario: AC14 Property over the whole library (BR-06, F1')
+  For every single allergen id of the current scheme and every pair of them
+  Then no suggested recipe has an id of them in allergenIds, and no suggested recipe has a processed ingredient whose dictionary inherentAllergenIds contain any of them, and no suggested recipe has an ingredient whose dictionary allergenGroupIds group has any of them as member (AC15)
+  And every suggested recipe with a processed ingredient shows the AC11 warning when the child has at least one registered allergen, and none when the child has none
 ```
 
 ### US-E6-03 Never guarantee allergy safety · M · S
@@ -1608,8 +1676,18 @@ Scenario: AC2 No safety claims anywhere (BR-07)
   # Matching: both sides NFKC-normalised and case-folded; ja phrases match as substrings; en phrases match as whole words or word sequences (so "bad" does not match "badge"). Recipe text in data/library.json is checked against the same file.
 
 Scenario: AC3 Empty allergen list is worded carefully (BR-07)
-  Given a recipe with allergenIds [] and no varies-by-product ingredient
+  Given a recipe with allergenIds [] and no processed ingredient (dictionary info "varies"; changed 2026-11-01 from "varies-by-product ingredient")
   Then its badge reads 「表示対象のアレルゲン：使用していません（食品の表示をご確認ください）」, never 「アレルゲンなし」 alone
+
+Scenario: AC4 The processed-food warning never claims safety (BR-07, PO 2026-11-01)
+  Given any recipe with a processed ingredient and a child with at least one registered allergen
+  Then the warning copy (warn.processed.*) lists the child's registered allergens as something to check and never states or implies that the product, the recipe or the ingredient is free of them
+  And 0 warn.processed.* strings (ja, en) match data/banned-phrases.json
+  And the disclaimer of AC1 is still shown on the same screen
+
+Scenario: AC5 Disclaimer stays, warning absent without registered allergens (BR-07)
+  Given a child with allergyStatus "none-known"
+  Then the disclaimer of AC1 is shown and no warn.processed.* string is shown
 ```
 
 ### US-E6-04 Recipe detail · M · S
@@ -1626,6 +1704,19 @@ Scenario: AC2 Food-handling guidance is always present
 Scenario: AC3 Deep link
   When /recipes/<recipeId> is opened directly
   Then the recipe detail opens; an unknown id shows 「レシピが見つかりません」 and a link to the calendar
+
+Scenario: AC4 Processed ingredients are marked on the detail (BR-07, PO 2026-11-01)
+  Given the child has at least one registered allergen and the recipe has processed ingredients (dictionary info "varies")
+  Then each such ingredient row carries warn.processed.item and the notice warn.processed.recipe is shown once above the list (US-E6-02/AC11)
+  And rows of non-processed foods carry no such marker
+
+Scenario: AC5 No registered allergen: no processed-food markers (PO 2026-11-01)
+  Given knownAllergenIds is []
+  Then the detail shows no warn.processed.* text; the general disclaimer (US-E6-03/AC1) and the unknown-status banner (when applicable) behave as before
+
+Scenario: AC6 Retired incomplete-data notice (PO 2026-11-01)
+  Given a recipe whose allergenDataComplete is false
+  Then the detail does not show 「一部の材料のアレルゲン情報がわかりません…」 on that account (string retired from the catalog)
 ```
 
 ### US-E6-05 Browse the recipe library · S · S
@@ -1633,7 +1724,7 @@ As a parent I want to browse all bentos so that I can plan ahead without startin
 
 ```gherkin
 Scenario: AC1 List with conflicts last (BR-06)
-  Then the list shows every library recipe; recipes conflicting with the child's allergens, exclusions or diet are listed last, greyed, with the reason, and cannot be planned
+  Then the list shows every library recipe; recipes conflicting with the child's allergens (including the inherent allergens of processed ingredients, US-E6-02/AC9), exclusions or diet are listed last, greyed, with the reason, and cannot be planned
 
 Scenario: AC2 Plan from the library (BR-03)
   When the parent opens a recipe, taps 「日付を選んで計画」 and picks 2026-11-18

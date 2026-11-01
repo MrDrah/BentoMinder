@@ -126,6 +126,7 @@
 | allergy.pick.otherHint | 表示の対象にない食材は、ここで探して追加します。 | Add foods that aren't on the label list here. | Hint | US-E1-03/AC2 |
 | allergy.pick.error | アレルギーの食材を1つ以上選んでください | Please choose at least one allergy food | Inline error | US-E1-03/AC4 (verbatim) |
 | allergy.unknown.banner | アレルギー情報が未登録です。材料の表示を必ずご確認ください。 | No allergy information is registered. Always check the ingredient labels. | Warning banner above recipes when status = unknown | US-E1-03/AC5 (verbatim) |
+| allergy.processed.hint | 市販品を使うレシピには、登録したアレルゲンを挙げて、パッケージの表示を確認するようご案内します。 | For recipes that use store-bought products, the app lists the allergens you register and reminds you to check the package label. | Hint under the allergen picker; only when 「アレルギーあり」 is selected and at least one allergen is chosen | US-E1-03/AC7 |
 
 
 Allergen names come from the dictionary (`alg-*` labels, ja/en). Diet and theme names:
@@ -472,10 +473,14 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | rec.reason.theme | {theme}テーマ | {theme} theme | Reason chip | US-E6-01/AC2 (verbatim pattern 「どうぶつテーマ」) |
 | rec.reason.quick | 20分以内でできます | Ready in 20 minutes or less | Reason chip | US-E6-01/AC7 (verbatim), BR-09 |
 | rec.allergens | アレルゲン：{list} | Allergens: {list} | Badge line | US-E6-01/AC2 |
-| rec.mayContain | 製品によって含むことがあるもの：{list} | May be in some products: {list} | Badge line | US-E6-02/AC4 |
+| rec.mayContain | 製品によって含むことがあるもの：{list} | May be in some products: {list} | Badge line **RETIRED 2026-11-01** (US-E6-02/AC4 superseded; label data is never shown as a statement, AC13; developer removes the key and its uses) | US-E6-02/AC4 |
 | rec.allergensNone | 表示対象のアレルゲン：使用していません（食品の表示をご確認ください） | Labelled allergens: none used (please check the food labels) | Badge line when allergenIds is empty and nothing varies | US-E6-03/AC3 (verbatim) |
-| rec.variesByProduct | 市販品は製品によりアレルゲンが異なります。表示を確認してください。 | Store-bought products differ in allergens. Check the label. | Warning row | US-E6-02/AC4 (verbatim) |
-| rec.incomplete | 一部の材料のアレルゲン情報がわかりません。食品の表示を確認してください。 | Allergen information is missing for some ingredients. Check the food labels. | Warning row on incomplete-allergen recipes | US-E6-02/AC5 (verbatim, AC en) |
+| rec.variesByProduct | 市販品は製品によりアレルゲンが異なります。表示を確認してください。 | Store-bought products differ in allergens. Check the label. | Warning row **RETIRED 2026-11-01** (US-E6-02/AC4 superseded by warn.processed.*; developer removes the key and its uses) | US-E6-02/AC4 (verbatim) |
+| rec.incomplete | 一部の材料のアレルゲン情報がわかりません。食品の表示を確認してください。 | Allergen information is missing for some ingredients. Check the food labels. | Warning row on incomplete-allergen recipes **RETIRED 2026-11-01** (US-E6-02/AC5, US-E6-04/AC6; replaced by warn.processed.card and warn.processed.recipe; developer removes the key and its uses) | US-E6-02/AC5 (verbatim, AC en) |
+| warn.processed.card | 市販品の表示を確認 | Check labels of store-bought items | Compact line (triangle icon + text) on a recommendation card, a 「ほかのレシピ」 row, a plannable library row and the plan-date picker header; only when the child has a registered allergen and the recipe has a processed ingredient | US-E6-02/AC11, AC12 |
+| warn.processed.item | 市販品。表示を確認 | Store-bought product: check the label | Marker on each processed ingredient row of the recipe detail | US-E6-02/AC11, US-E6-04/AC4 |
+| warn.processed.recipe | 市販品には、登録したアレルゲン（{allergens}）が含まれる場合があります。パッケージの表示を確認してください。 | Store-bought products may contain the registered allergens ({allergens}). Check the package label. | Notice once, above the ingredient list of the recipe detail. {allergens} = the child's full list, dictionary labels in the order of knownAllergenIds, joined with 「、」 (ja) or ", " (en), never shortened | US-E6-02/AC11, US-E6-03/AC4 |
+| warn.processed.prefix | 注意 | Note | Visually hidden lead-in read before warn.processed.recipe by screen readers; not shown | US-NF-02 |
 | rec.confirm | この日に決定 | Choose for this day | Primary on card 1, secondary on 2–3 | US-E5-03/AC2 (verbatim) |
 | rec.current | いまのレシピ | Current recipe | Tag on the planned recipe in change-recipe mode; its button is disabled | US-E5-06/AC1 |
 | rec.saving | 保存しています… | Saving… | Busy label on the pressed button | US-E5-03/AC2 |
@@ -521,8 +526,9 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | library.conflict.allergen | {allergen}を含む | Contains {allergen} | Greyed row reason | US-E6-02/AC1 (verbatim pattern 「卵を含む」) |
 | library.conflict.excluded | {food}を含む | Contains {food} | Greyed row reason (excluded ingredient) | US-E6-02/AC2 |
 | library.conflict.diet | {diet}の条件に合いません | Doesn't fit: {diet} | Greyed row reason | US-E6-05/AC1 |
-| library.conflict.incomplete | アレルゲン情報が不完全なため、登録したアレルギーと照合できません | Allergen information is incomplete, so it can't be checked against the registered allergies | Greyed row reason | US-E6-02/AC6 (verbatim, AC en) |
+| library.conflict.incomplete | アレルゲン情報が不完全なため、登録したアレルギーと照合できません | Allergen information is incomplete, so it can't be checked against the registered allergies | Greyed row reason **RETIRED 2026-11-01** (US-E6-02/AC6 superseded; no exclusion on incomplete data; developer removes the key and its uses) | US-E6-02/AC6 (verbatim, AC en) |
 | library.conflict.dietIncomplete | 原材料の由来がわからないため、食事の制限と照合できません | The origin of some ingredients is unknown, so it can't be checked against the diet | Greyed row reason | US-E6-02/AC8 (verbatim, AC en) |
+| (reuse) | library.conflict.allergen | | A recipe excluded because a processed ingredient inherently contains a registered allergen reuses 「{allergen}を含む」, e.g. 「卵を含む」; no new string | US-E6-02/AC9 |
 | library.conflict.cantPlan | この条件では計画できません | Can't be planned with these settings | Disabled-button hint | US-E6-02/AC1 |
 | library.empty | レシピがまだありません | No recipes yet | Empty state (build without library) | |
 
