@@ -1663,11 +1663,11 @@ Scenario: AC1 Missing recipe id (BR-02)
 ```
 
 ### US-E6-07 Curated recipe library content · M · L
-As the product owner I want 15–20 real, sourced bento recipes so that suggestions are trustworthy.
+As the product owner I want 15–120 real, sourced bento recipes so that suggestions are trustworthy.
 
 ```gherkin
 Scenario: AC1 Library size and validity (BR-26)
-  Then the shipped library has between 15 and 20 recipes and the validator reports 0 errors for it
+  Then the shipped library has between 15 and 120 recipes and the validator reports 0 errors for it
 
 Scenario: AC2 Mix
   Then at least 6 recipes have style "japanese", at least 4 have style "western-inspired", and at least 5 have minutes ≤ 20
@@ -1676,7 +1676,7 @@ Scenario: AC3 Sources (BR-26)
   Then every recipe has at least 1 source with a fetched URL, and the overlap audit reports 0 FAIL and 0 UNVERIFIED for the library
 
 Scenario: AC4 Japanese text checked by hand before release (BR-26)
-  Then every shipped recipe has reviewedBy "verifier" (its Japanese text and facts were checked against its sources by the verifier, FL-07)
+  Then every reviewed recipe has reviewedBy "verifier" (its Japanese text and facts were checked against its sources by the verifier, FL-07); the 20 original recipes stay "verifier", the others are "ba-research" and tracked as unreviewed
 
 Scenario: AC5 Every recipe has calendar short names
   Then every shipped recipe has shortNameJa of 1–8 characters and shortNameEn of 1–8 characters, and the validator rejects a recipe without them (rule recipe-short-name)

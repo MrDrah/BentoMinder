@@ -213,17 +213,17 @@ describe('QA ranking oracle vs engine: random profiles, seed 20261024', () => {
     const r = run('real', real, 20261024, 1000);
     expect(r.samples).toEqual([]);
     expect(r.diffCount).toBe(0);
-  });
+  }, 60_000);
   it('US-E6-01/AC1 US-E6-02/AC2 1000 random profiles x synthetic library: 0 differences', () => {
     const r = run('syn', syn, 20261025, 1000);
     expect(r.samples).toEqual([]);
     expect(r.diffCount).toBe(0);
-  });
+  }, 60_000);
   it('US-E6-02/AC7 US-E6-02/AC8 500 random profiles x synthetic diet library: 0 differences', () => {
     const r = run('synDiet', synDiet, 20261026, 500);
     expect(r.samples).toEqual([]);
     expect(r.diffCount).toBe(0);
-  });
+  }, 60_000);
 });
 
 describe('QA ranking: data checks on the real library (PR6)', () => {

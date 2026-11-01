@@ -73,7 +73,7 @@ const CASES: Case[] = [
     u: 0,
   },
   { id: 'A16', p: PA, rows: [['にんじんのグラッセ', 'sd'], ['ニンジンしりしり', 'sd'], ['人参スープ', 'sp']], state: 'low-preference', key: 'assess.low', d: 1, l: 0, u: 0 },
-  { id: 'A17', p: PS, rows: [['なすのにびたし', 'sd'], ['ふりかけ', 'st'], ['ビビンバ', 'mn']], state: 'low-preference', key: 'assess.low', d: 1, l: 0, u: 2 },
+  { id: 'A17', p: PS, rows: [['なすのにびたし', 'sd'], ['はりはり漬け', 'st'], ['ビビンバ', 'mn']], state: 'low-preference', key: 'assess.low', d: 1, l: 0, u: 2 },
   { id: 'A18', p: PS, rows: [['鯵フライ', 'mn'], ['ごはん', 'st']], state: 'low-preference', key: 'assess.low', d: 1, l: 0, u: 0 },
   { id: 'A20', p: PS, rows: [['なすのにびたし', 'sd'], ['卵焼き', 'sd'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0 },
   { id: 'A21', p: PS, rows: [['ブロッコリーのおかかあえ', 'sd'], ['鶏のから揚げ', 'mn'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0 },
@@ -83,10 +83,10 @@ const CASES: Case[] = [
   { id: 'A25', p: PD, rows: [['カレーライス', 'mn'], ['卵焼き', 'sd']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0 },
   { id: 'A26', p: PI, rows: [['コーンスープ', 'sp'], ['にんじんのグラッセ', 'sd']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0 },
   { id: 'A27', p: PB, rows: [['さばのみそ煮', 'mn'], ['ごはん', 'st']], state: 'low-preference', key: 'assess.low', d: 1, l: 0, u: 0 },
-  { id: 'A28', p: PS, rows: [['コーンスープ', 'sp'], ['ごはん', 'st'], ['ふりかけ', 'st']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
-  { id: 'A29', p: PS, rows: [['コーンスープ', 'sp'], ['ふりかけ', 'st']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
+  { id: 'A28', p: PS, rows: [['コーンスープ', 'sp'], ['ごはん', 'st'], ['はりはり漬け', 'st']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
+  { id: 'A29', p: PS, rows: [['コーンスープ', 'sp'], ['はりはり漬け', 'st']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
   { id: 'A30', p: PS, rows: [['ちくわの磯辺揚げ', 'sd'], ['ごはん', 'st'], ['卵焼き', 'sd']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 0 },
-  { id: 'A31', p: PA, rows: [['もちもちとうもろこしパン', 'st'], ['ふりかけ', 'st']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
+  { id: 'A31', p: PA, rows: [['もちもちとうもろこしパン', 'st'], ['はりはり漬け', 'st']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
   { id: 'A32', p: PS, rows: [['カレー', 'mn'], ['卵焼き', 'sd']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
   { id: 'A33', p: PS, rows: [['みそ汁', 'sp'], ['ごはん', 'st'], ['コーンスープ', 'sp']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 0 },
   { id: 'A34', p: PS, rows: [['コーンスープ', 'sp'], ['ビビンバ', 'mn'], ['せんべい', 'sn']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 1 },
@@ -104,18 +104,18 @@ const CASES: Case[] = [
   },
   { id: 'A37', p: PS, rows: [['タンドリーチキン', 'mn'], ['ナン', 'st'], ['ミネストローネ', 'sp']], state: 'mixed-uncertain', key: 'assess.mixedUnknown', d: 0, l: 1, u: 2 },
   { id: 'A38', p: PS, rows: [['ごはん', 'st'], ['すまし汁', 'sp'], ['りんご', 'ds']], state: 'mixed-uncertain', key: 'assess.mixedNeutral', d: 0, l: 0, u: 0 },
-  { id: 'A39', p: PS, rows: [['ふりかけ', 'st'], ['ビビンバ', 'mn'], ['ナン', 'st']], state: 'mixed-uncertain', key: 'assess.mixedUnknown', d: 0, l: 0, u: 3 },
+  { id: 'A39', p: PS, rows: [['はりはり漬け', 'st'], ['ビビンバ', 'mn'], ['ナン', 'st']], state: 'mixed-uncertain', key: 'assess.mixedUnknown', d: 0, l: 0, u: 3 },
   { id: 'A40', p: PS, rows: [['アジフライ', 'mn'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedNeutral', d: 0, l: 0, u: 1 },
   { id: 'A41', p: PD, rows: [['カレー', 'mn'], ['りんご', 'ds']], state: 'mixed-uncertain', key: 'assess.mixedNeutral', d: 0, l: 0, u: 1 },
   { id: 'A42', p: PG, rows: [['ごはん', 'st'], ['すまし汁', 'sp']], state: 'mixed-uncertain', key: 'assess.mixedNeutral', d: 0, l: 0, u: 0 },
   { id: 'A43', p: PS, rows: [['親子丼', 'mn'], ['すまし汁', 'sp'], ['バナナ', 'ds']], state: 'mixed-uncertain', key: 'assess.mixedNeutral', d: 0, l: 0, u: 0 },
-  { id: 'A48', p: PS, rows: [['カレーうどん', 'mn'], ['ふりかけ', 'st'], ['卵焼き', 'sd']], state: 'mixed-uncertain', key: 'assess.mixedUnknown', d: 0, l: 1, u: 2 },
+  { id: 'A48', p: PS, rows: [['カレーうどん', 'mn'], ['はりはり漬け', 'st'], ['卵焼き', 'sd']], state: 'mixed-uncertain', key: 'assess.mixedUnknown', d: 0, l: 1, u: 2 },
   { id: 'A50', p: PB, rows: [['さばのみそ煮', 'mn'], ['さけのしおやき', 'mn'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0 },
   { id: 'A51', p: PJ, rows: [['鶏もも肉のてりやき', 'mn'], ['ごはん', 'st']], state: 'low-preference', key: 'assess.low', d: 1, l: 0, u: 0 },
   { id: 'A52', p: PJ, rows: [['鶏肉のソテー', 'mn'], ['鶏もも肉のてりやき', 'mn'], ['ごはん', 'st']], state: 'low-preference', key: 'assess.low', d: 1, l: 0, u: 0, disliked: ['ing-chicken-thigh'] },
   { id: 'A53', p: PK, rows: [['さばのみそ煮', 'mn'], ['ごはん', 'st']], state: 'likely-enjoyable', key: 'assess.likely', d: 0, l: 1, u: 0 },
   { id: 'A54', p: PK, rows: [['さばのみそ煮', 'mn'], ['白身魚のフライ', 'mn'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0 },
-  { id: 'A55', p: PS, rows: [['ふりかけ', 'st'], ['ビビンバ', 'mn'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedUnknown', d: 0, l: 0, u: 2 },
+  { id: 'A55', p: PS, rows: [['はりはり漬け', 'st'], ['ビビンバ', 'mn'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedUnknown', d: 0, l: 0, u: 2 },
   { id: 'A58', p: PL, rows: [['さばのみそ煮', 'mn'], ['卵焼き', 'sd'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0, disliked: ['dish-saba-miso'] },
   { id: 'A59', p: PN, rows: [['豚のしょうが焼き', 'mn'], ['ごはん', 'st']], state: 'mixed-uncertain', key: 'assess.mixedOne', d: 1, l: 1, u: 0 },
   { id: 'A60', p: PN, rows: [['豚のしょうが焼き', 'mn'], ['豚汁', 'sp'], ['ごはん', 'st']], state: 'low-preference', key: 'assess.low', d: 2, l: 1, u: 0, disliked: ['dish-ginger-pork', 'dish-tonjiru'] },
@@ -184,8 +184,8 @@ describe('US-E4-01 rule order and boundaries', () => {
   });
 
   it('US-E4-01/AC2 the U = 50 % boundary: exactly half unknown still likely-enjoyable, one more unknown is mixed-uncertain', () => {
-    expect(run(PS, [['コーンスープ', 'sp'], ['ふりかけ', 'st']]).calculatedState).toBe('likely-enjoyable');
-    expect(run(PS, [['コーンスープ', 'sp'], ['ふりかけ', 'st'], ['ビビンバ', 'mn']]).calculatedState).toBe('mixed-uncertain');
+    expect(run(PS, [['コーンスープ', 'sp'], ['はりはり漬け', 'st']]).calculatedState).toBe('likely-enjoyable');
+    expect(run(PS, [['コーンスープ', 'sp'], ['はりはり漬け', 'st'], ['ビビンバ', 'mn']]).calculatedState).toBe('mixed-uncertain');
   });
 });
 
@@ -353,9 +353,9 @@ describe('US-E4-02 every case has exactly one explanation key (B4) and shows wha
   });
 
   it('US-E4-02/AC3 an uncertain explanation lists up to 3 unmatched dish names in menu order, with the full count', () => {
-    const a = run(PS, [['タンドリーチキン', 'mn'], ['ナン', 'st'], ['ミネストローネ', 'sp'], ['ふりかけ', 'st'], ['ビビンバ', 'mn']]);
+    const a = run(PS, [['タンドリーチキン', 'mn'], ['ナン', 'st'], ['ミネストローネ', 'sp'], ['はりはり漬け', 'st'], ['ビビンバ', 'mn']]);
     expect(a.explanationKey).toBe('assess.mixedUnknown');
-    expect(a.explanationParams.unmatched).toEqual(['ナン', 'ミネストローネ', 'ふりかけ']);
+    expect(a.explanationParams.unmatched).toEqual(['ナン', 'ミネストローネ', 'はりはり漬け']);
     expect(a.explanationParams.unmatchedTotal).toBe(4);
   });
 
