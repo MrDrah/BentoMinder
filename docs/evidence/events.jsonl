@@ -158,3 +158,6 @@
 {"v":1,"at":"2026-11-01T01:22:14.692Z","type":"approval","summary":"PO approved the MVP milestone for the evidence package","milestone":"mvp"}
 {"v":1,"at":"2026-11-01T01:30:30.812Z","by":"orchestrator","type":"task-start","task":"metrics-mvp","summary":"Task metrics-mvp dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-01T01:31:29.379Z","by":"orchestrator","type":"task-end","task":"metrics-mvp","outcome":"success","summary":"diff-guard: 0 changed files, all allowed"}
+{"v":1,"at":"2026-11-01T01:42:18.462Z","by":"orchestrator","type":"task-start","task":"metrics-mvp-2","summary":"Task metrics-mvp-2 dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-01T01:43:39.025Z","by":"orchestrator","type":"task-end","task":"metrics-mvp-2","outcome":"success","summary":"diff-guard: 0 changed files, all allowed"}
+{"v":1,"at":"2026-11-01T01:43:39.283Z","type":"milestone","milestone":"mvp","by":"metrics","summary":"Evidence package mvp frozen (UNVERIFIED)"}

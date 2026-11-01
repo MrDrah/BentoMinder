@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:app-boilerplate:engineering-evidence:usage:1",
+  "title": "Token usage record — one line of docs/evidence/usage.jsonl",
+  "description": "Snapshot of model token usage from Claude Code session logs, written by 'evidence.mjs usage' (run at every session start and before collect). One record per session, hour, model and agent; a later record with the same key holds that bucket's running total and replaces the earlier one. Numbers only: no prompts, file names or paths.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["v", "at", "session", "hour", "model", "agent", "requests", "inputTokens", "outputTokens", "cacheWriteTokens", "cacheReadTokens"],
+  "properties": {
+    "v": { "const": 1 },
+    "at": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?Z$", "description": "When this snapshot was taken." },
+    "session": { "type": "string", "pattern": "^[0-9a-f]{12}$", "description": "First 12 hex characters of the sha256 of the Claude Code session id." },
+    "hour": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}$", "description": "UTC hour the responses were received in." },
+    "model": { "type": "string", "pattern": "^[A-Za-z0-9._:@/-]+$" },
+    "agent": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "description": "main for the session itself, otherwise the sub-agent type." },
+    "requests": { "type": "integer", "minimum": 0 },
+    "inputTokens": { "type": "integer", "minimum": 0 },
+    "outputTokens": { "type": "integer", "minimum": 0 },
+    "cacheWriteTokens": { "type": "integer", "minimum": 0 },
+    "cacheReadTokens": { "type": "integer", "minimum": 0 }
+  }
+}

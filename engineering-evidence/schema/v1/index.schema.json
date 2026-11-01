@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:app-boilerplate:engineering-evidence:index:1",
+  "title": "Engineering Evidence index — engineering-evidence/index.json",
+  "description": "Discovery manifest: the frozen (published) evidence packages of one project. A consumer reads this file first, then each package's metrics.json. Drafts are never listed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "project", "packages"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$" },
+    "kind": { "const": "engineering-evidence/index" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "repository"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "repository": { "anyOf": [{ "type": "string", "pattern": "^https://[^\\s]+$" }, { "type": "null" }] }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "milestoneId", "label", "revision", "path", "schemaVersion", "sourceCommit", "collectedAt", "frozenAt", "sha256", "files", "assessment", "supersedes", "supersededBy"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "description": "Package id = directory name." },
+          "milestoneId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" },
+          "label": { "type": "string", "minLength": 1 },
+          "revision": { "type": "integer", "minimum": 1 },
+          "path": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "description": "Directory relative to engineering-evidence/." },
+          "schemaVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+          "collectedAt": { "type": "string", "minLength": 20 },
+          "frozenAt": { "type": "string", "minLength": 20 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "sha256 over the sorted list of '<path> <sha256>' lines of every file in the package (LF line endings)." },
+          "files": {
+            "type": "object",
+            "description": "Every file of the package (relative path → sha256 of its LF-normalised bytes).",
+            "additionalProperties": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          },
+          "assessment": { "enum": ["PASS", "FAIL", "UNVERIFIED", "NOT_APPLICABLE"] },
+          "supersedes": { "type": ["string", "null"] },
+          "supersededBy": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

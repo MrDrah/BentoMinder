@@ -1,0 +1,3002 @@
+{
+  "$schema": "../schema/v1/metrics.schema.json",
+  "schemaVersion": "1.1.0",
+  "kind": "engineering-evidence/metrics",
+  "project": {
+    "id": "bentominder",
+    "name": "BentoMinder",
+    "repository": "https://github.com/MrDrah/BentoMinder"
+  },
+  "milestone": {
+    "id": "mvp",
+    "packageId": "mvp",
+    "label": "MVP",
+    "date": "2026-11-01",
+    "revision": 1,
+    "supersedes": null
+  },
+  "framework": {
+    "name": "app-boilerplate",
+    "version": "0.5.0"
+  },
+  "source": {
+    "commit": "2b98064d8a22b71cdce63ddca40fea185ad375f3",
+    "committedAt": "2026-11-01T10:33:58+09:00",
+    "ref": null,
+    "clean": true
+  },
+  "collectedAt": "2026-11-01T01:41:54.477Z",
+  "collector": {
+    "tool": "app-boilerplate/evidence.mjs",
+    "version": "0.5.0"
+  },
+  "window": {
+    "from": null,
+    "to": "2026-11-01T01:41:54.477Z"
+  },
+  "metrics": {
+    "functional": {
+      "status": "UNVERIFIED",
+      "denominator": "acceptance-criteria",
+      "criteriaTotal": {
+        "value": 326,
+        "unit": "count",
+        "basis": "measured",
+        "method": "distinct criteria in docs/ba/user-stories.md",
+        "sources": [
+          "stories"
+        ]
+      },
+      "criteriaPassing": {
+        "value": 286,
+        "unit": "count",
+        "basis": "measured",
+        "method": "criteria (acceptance-criteria) from docs/ba/user-stories.md with status PASS; a criterion passes only when ≥1 executed JUnit test names its ID and none fails",
+        "sources": [
+          "stories",
+          "junit",
+          "junit-2"
+        ]
+      },
+      "criteriaFailing": {
+        "value": 0,
+        "unit": "count",
+        "basis": "measured",
+        "method": "criteria (acceptance-criteria) from docs/ba/user-stories.md with ≥1 failing test; a criterion passes only when ≥1 executed JUnit test names its ID and none fails",
+        "sources": [
+          "stories",
+          "junit",
+          "junit-2"
+        ]
+      },
+      "criteriaUnverified": {
+        "value": 28,
+        "unit": "count",
+        "basis": "measured",
+        "method": "criteria (acceptance-criteria) from docs/ba/user-stories.md with no executed test; a criterion passes only when ≥1 executed JUnit test names its ID and none fails",
+        "sources": [
+          "stories",
+          "junit",
+          "junit-2"
+        ]
+      },
+      "criteriaDeferred": {
+        "value": 12,
+        "unit": "count",
+        "basis": "measured",
+        "method": "criteria (acceptance-criteria) from docs/ba/user-stories.md deferred in quality-gate.json → trace.allowUntested; a criterion passes only when ≥1 executed JUnit test names its ID and none fails",
+        "sources": [
+          "stories",
+          "junit",
+          "junit-2"
+        ]
+      },
+      "testsPassed": {
+        "value": 1181,
+        "unit": "count",
+        "basis": "measured",
+        "method": "JUnit test cases naming ≥1 criterion that passed",
+        "sources": [
+          "junit",
+          "junit-2"
+        ]
+      },
+      "testsFailed": {
+        "value": 0,
+        "unit": "count",
+        "basis": "measured",
+        "method": "JUnit test cases naming ≥1 criterion that failed",
+        "sources": [
+          "junit",
+          "junit-2"
+        ]
+      },
+      "completionPercent": {
+        "value": 87.7,
+        "unit": "percent",
+        "basis": "measured",
+        "method": "criteriaPassing / criteriaTotal × 100 (deferred and unverified criteria count as not complete)",
+        "sources": [
+          "stories",
+          "junit",
+          "junit-2"
+        ]
+      },
+      "criteria": [
+        {
+          "id": "US-E5-01/AC1",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-01/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-01/AC3",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-01/AC4",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-01/AC5",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-01/AC6",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-01/AC7",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-01/AC8",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-08/AC1",
+          "status": "PASS",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-08/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-08/AC3",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-08/AC4",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-05/AC1",
+          "status": "PASS",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-05/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC1",
+          "status": "PASS",
+          "passed": 31,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC2",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC4",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC5",
+          "status": "PASS",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC6",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC7",
+          "status": "PASS",
+          "passed": 14,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC8",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC9",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-05/AC10",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC1",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC2",
+          "status": "PASS",
+          "passed": 32,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC3",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC4",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC6",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC7",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC8",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-06/AC9",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-07/AC1",
+          "status": "PASS",
+          "passed": 14,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-07/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-07/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-07/AC4",
+          "status": "PASS",
+          "passed": 41,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-03/AC1",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-03/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-03/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC3",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC4",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC5",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC6",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC7",
+          "status": "PASS",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-02/AC8",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-07/AC1",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-07/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-07/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-07/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-07/AC5",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-02/AC1",
+          "status": "PASS",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-02/AC2",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-02/AC3",
+          "status": "PASS",
+          "passed": 52,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-05/AC1",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-05/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-05/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-04/AC1",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-04/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-04/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-04/AC4",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-06/AC1",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-06/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-06/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-06/AC4",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-06/AC5",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-06/AC6",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-06/AC7",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-07/AC1",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-07/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-07/AC3",
+          "status": "PASS",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-08/AC1",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC1",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC2",
+          "status": "PASS",
+          "passed": 65,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC3",
+          "status": "PASS",
+          "passed": 18,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC4",
+          "status": "PASS",
+          "passed": 16,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC5",
+          "status": "PASS",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC6",
+          "status": "PASS",
+          "passed": 23,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC7",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC8",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC9",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC10",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC11",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC12",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC13",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC14",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC15",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC16",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC17",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC18",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC19",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC20",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-01/AC21",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-08/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-08/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-08/AC3",
+          "status": "PASS",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-08/AC4",
+          "status": "PASS",
+          "passed": 14,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-08/AC5",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-03/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-03/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-03/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-03/AC4",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-03/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-05/AC1",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-05/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-05/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-06/AC1",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-06/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-06/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC1",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC3",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC5",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC6",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC7",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-04/AC8",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-02/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-02/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-02/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-02/AC4",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC1",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC2",
+          "status": "PASS",
+          "passed": 15,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC3",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC5",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC6",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC7",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC8",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC9",
+          "status": "PASS",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC10",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC11",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC12",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC13",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-05/AC14",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC1",
+          "status": "PASS",
+          "passed": 25,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC3",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC5",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC6",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC7",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-02/AC8",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-03/AC1",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-03/AC2",
+          "status": "PASS",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-03/AC3",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-03/AC4",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-06/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-01/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-01/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-01/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-01/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-01/AC5",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-01/AC6",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-04/AC1",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-04/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-03/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-03/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-03/AC3",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E0-01/AC1",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E0-01/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E0-01/AC3",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-01/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-01/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-01/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-01/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-01/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-06/AC1",
+          "status": "PASS",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-06/AC2",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-06/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-06/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-05/AC1",
+          "status": "PASS",
+          "passed": 17,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-05/AC2",
+          "status": "PASS",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-05/AC3",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-05/AC4",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-05/AC5",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-02/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-02/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-02/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-02/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-02/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-02/AC6",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E9-01/AC1",
+          "status": "PASS",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "id": "US-E9-01/AC2",
+          "status": "PASS",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "id": "US-E9-01/AC3",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E9-01/AC4",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-03/AC1",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-03/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-03/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-03/AC4",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-03/AC5",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-03/AC6",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-01/AC1",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-01/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-01/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-01/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-02/AC1",
+          "status": "PASS",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-02/AC2",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-02/AC3",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-02/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-01/AC1",
+          "status": "PASS",
+          "passed": 30,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-01/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-01/AC3",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-01/AC4",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-01/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-01/AC6",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-01/AC7",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-05/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-05/AC2",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-05/AC3",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-05/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-05/AC6",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-03/AC1",
+          "status": "PASS",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-03/AC2",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-03/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-03/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-03/AC5",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC1",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC4",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC6",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC7",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-02/AC8",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC2",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC6",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC7",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-02/AC8",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-03/AC1",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-03/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-03/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-03/AC4",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-03/AC5",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-03/AC6",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-03/AC7",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-01/AC1",
+          "status": "PASS",
+          "passed": 14,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-01/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-01/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-01/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-01/AC5",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-01/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-01/AC2",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-01/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-01/AC4",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-01/AC1",
+          "status": "PASS",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-01/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-01/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-01/AC1",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-01/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-01/AC1",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-02/AC1",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-02/AC2",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-01/AC1",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-01/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-01/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-04/AC1",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-04/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-03/AC1",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-03/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-03/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-03/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-03/AC5",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E1-03/AC6",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-04/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E3-04/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-03/AC1",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-03/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-03/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E2-03/AC4",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-05/AC1",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-05/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E4-05/AC3",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-04/AC1",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-04/AC2",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-04/AC1",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-04/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-05/AC1",
+          "status": "PASS",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-05/AC2",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E5-05/AC3",
+          "status": "PASS",
+          "passed": 13,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-04/AC1",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-04/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E6-04/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-04/AC1",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-04/AC2",
+          "status": "PASS",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-04/AC3",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-04/AC4",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-06/AC1",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-06/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-07/AC1",
+          "status": "PASS",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-07/AC2",
+          "status": "PASS",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "id": "US-E7-07/AC3",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-02/AC1",
+          "status": "PASS",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-02/AC2",
+          "status": "PASS",
+          "passed": 11,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-02/AC3",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-03/AC1",
+          "status": "PASS",
+          "passed": 6,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-03/AC2",
+          "status": "PASS",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "id": "US-E8-03/AC3",
+          "status": "PASS",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-02/AC1",
+          "status": "PASS",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-02/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-02/AC3",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-02/AC4",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E9-02/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E9-02/AC2",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E10-05/AC1",
+          "status": "PASS",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-02/AC1",
+          "status": "PASS",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-02/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E11-02/AC3",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-03/AC1",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-03/AC2",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-03/AC3",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-04/AC1",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-04/AC2",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-E12-04/AC3",
+          "status": "DEFERRED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-03/AC1",
+          "status": "PASS",
+          "passed": 10,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-03/AC2",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-03/AC3",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-04/AC1",
+          "status": "UNVERIFIED",
+          "passed": 0,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-04/AC2",
+          "status": "PASS",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "id": "US-NF-04/AC3",
+          "status": "PASS",
+          "passed": 7,
+          "failed": 0
+        }
+      ]
+    },
+    "intervention": {
+      "status": "PASS",
+      "total": {
+        "value": 34,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "intervention events in the window",
+        "sources": [
+          "events"
+        ]
+      },
+      "corrective": {
+        "value": 11,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "technical-correction + agent-failure + manual-implementation events",
+        "sources": [
+          "events"
+        ]
+      },
+      "byType": {
+        "product-decision": {
+          "value": 16,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "\"product-decision\" events in the window",
+          "sources": [
+            "events"
+          ]
+        },
+        "approval": {
+          "value": 7,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "\"approval\" events in the window",
+          "sources": [
+            "events"
+          ]
+        },
+        "technical-correction": {
+          "value": 6,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "\"technical-correction\" events in the window",
+          "sources": [
+            "events"
+          ]
+        },
+        "agent-failure": {
+          "value": 1,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "\"agent-failure\" events in the window",
+          "sources": [
+            "events"
+          ]
+        },
+        "manual-implementation": {
+          "value": 4,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "\"manual-implementation\" events in the window",
+          "sources": [
+            "events"
+          ]
+        }
+      },
+      "agentTasks": {
+        "value": 47,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "distinct tasks with a task-start event (validate.mjs task-start)",
+        "sources": [
+          "events"
+        ]
+      },
+      "agentTasksWithoutCorrection": {
+        "value": 26,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "tasks whose last task-end succeeded (diff-guard) and that no corrective event names",
+        "sources": [
+          "events"
+        ]
+      },
+      "items": [
+        {
+          "at": "2026-10-24T07:38:12.438Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "Kick-off: BentoMinder scaffolded from app-boilerplate v0.5.0 (content-app), local git only, no push or deploy without PO approval"
+        },
+        {
+          "at": "2026-10-24T07:38:12.851Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO asked to delegate requirements, architecture and design proposals before BR-table approval; framework order (BR yes before dispatch) relaxed for proposal-only work"
+        },
+        {
+          "at": "2026-10-24T07:40:20.569Z",
+          "type": "manual-implementation",
+          "corrective": true,
+          "summary": "Orchestrator set the new repo's local git identity by hand (preflight warning; framework forbids global config)"
+        },
+        {
+          "at": "2026-10-24T07:53:55.025Z",
+          "type": "technical-correction",
+          "corrective": true,
+          "task": "tech-research",
+          "summary": "Orchestrator split a merged model-card quote and added the Android 14 exact-alarm citation after verification"
+        },
+        {
+          "at": "2026-10-24T08:11:53.066Z",
+          "type": "approval",
+          "corrective": false,
+          "summary": "PO approved the architecture (ADR 001-005 direction) and the BR table BR-01..BR-27 at kick-off"
+        },
+        {
+          "at": "2026-10-24T08:13:09.547Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO: design token surface-1 (light page background) changed from cream to pure white, no yellow tint"
+        },
+        {
+          "at": "2026-10-24T08:28:01.973Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO accepted the design direction: Monday week start (Sunday setting), Sat blue / Sun red numbers, Zen Maru Gothic + system fonts, no tab bar"
+        },
+        {
+          "at": "2026-10-24T08:30:01.453Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO: AI menu import used from Japan only; Gemini free tier, no billing account"
+        },
+        {
+          "at": "2026-10-24T08:30:01.703Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO accepted all 15 BA open-question defaults OQ-01..OQ-15"
+        },
+        {
+          "at": "2026-10-24T08:42:52.044Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "H1: BR-06/09/10 restated with resolved R-1/R-3 rules; BR-14 tightened to https-only import URLs (security default)"
+        },
+        {
+          "at": "2026-10-24T08:53:35.332Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "H1 rulings on 8 QA blockers (B1 B2 B4 B5 B6 B7 B10 B14) and 5 non-blocking items, logged in PLAN section 7"
+        },
+        {
+          "at": "2026-10-24T08:59:18.835Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "H1 follow-ups: bento-day refresh not flagged, dislike wins ties, dormant decisions on no-lunch dates, KEEP_PLAN acknowledgement"
+        },
+        {
+          "at": "2026-10-24T09:04:48.815Z",
+          "type": "technical-correction",
+          "corrective": true,
+          "task": "h1-fix-ba",
+          "summary": "Orchestrator overruled BA default OQ-16: related dictionary ids (dish/ingredient, parent/child) count as one food in D/L"
+        },
+        {
+          "at": "2026-10-24T09:32:39.327Z",
+          "type": "technical-correction",
+          "corrective": true,
+          "task": "h1-fix-ba",
+          "summary": "Orchestrator narrowed the BA's transitive food-collapse wording: dish merges only with its defining ingredient; no chaining across items"
+        },
+        {
+          "at": "2026-10-24T09:36:43.345Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "H1 closing rulings A57 S10 O-3 U5 RU1 N3 and AC15 precedence, logged in PLAN section 7"
+        },
+        {
+          "at": "2026-10-24T10:28:45.995Z",
+          "type": "approval",
+          "corrective": false,
+          "summary": "PO approved committing H1 and H2 locally and starting M0"
+        },
+        {
+          "at": "2026-10-24T11:01:21.537Z",
+          "type": "technical-correction",
+          "corrective": true,
+          "task": "m0-skeleton",
+          "summary": "Orchestrator error: task-start --allow was given comma lists (needs one flag per glob); diff-guard runs falsely failed. Re-run correctly: 86 files all allowed"
+        },
+        {
+          "at": "2026-10-24T11:01:21.732Z",
+          "type": "agent-failure",
+          "corrective": true,
+          "task": "m0-skeleton",
+          "summary": "Developer could not write the env example file: blocked by the secrets deny rule; surfaced to the PO, not bypassed"
+        },
+        {
+          "at": "2026-10-24T11:03:20.285Z",
+          "type": "manual-implementation",
+          "corrective": true,
+          "task": "m0-skeleton",
+          "summary": "Orchestrator added .gitattributes (eol=lf): CRLF checkout of merged M0 broke a Vitest import; gate green after"
+        },
+        {
+          "at": "2026-10-24T11:06:40.358Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO will write the env example file personally (agents are blocked by the secrets rule); M1 approved to start"
+        },
+        {
+          "at": "2026-10-24T11:22:59.779Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "M1 prep: OQ-21..26 defaults accepted; export without exportedAt; rule-id renames for the developer"
+        },
+        {
+          "at": "2026-10-24T14:45:30.510Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO: from now on developer and QA agents run on Sonnet; orchestrator, BA and verifier stay on Opus. Running M1 developer finishes on Opus"
+        },
+        {
+          "at": "2026-10-24T16:12:50.866Z",
+          "type": "manual-implementation",
+          "corrective": true,
+          "task": "m1-qa",
+          "summary": "Orchestrator excluded QA's own e2e suite from the main Playwright config (it needs the proxy and its own config); main e2e back to 24 passing"
+        },
+        {
+          "at": "2026-10-24T23:49:02.460Z",
+          "type": "approval",
+          "corrective": false,
+          "summary": "PO approved committing M1 locally and running the M1 fix round in parallel with M2 prep"
+        },
+        {
+          "at": "2026-10-25T00:29:13.123Z",
+          "type": "technical-correction",
+          "corrective": true,
+          "task": "m1-qa",
+          "summary": "Orchestrator miss: committed e9ae2e9 without re-running the gate after QA added its suite (24 lint errors, 1 type error); found and fixed in the M1 fix round"
+        },
+        {
+          "at": "2026-10-25T00:29:13.261Z",
+          "type": "technical-correction",
+          "corrective": true,
+          "task": "m1-fix",
+          "summary": "Developer relaxed two lint rules for QA test files only to unblock the gate; accepted temporarily, QA to clean up and restore in M2"
+        },
+        {
+          "at": "2026-10-25T07:57:27.173Z",
+          "type": "approval",
+          "corrective": false,
+          "summary": "PO approved committing the M1 fixes and M2 prep, and starting M2 with recipe research in parallel"
+        },
+        {
+          "at": "2026-10-25T08:44:54.893Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "Research: unlabelled processed foods keep allergenInfo unknown (R-3) instead of skipping; stated source times win; House curry label checked for cashew"
+        },
+        {
+          "at": "2026-10-25T13:47:44.472Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "PO: cite manufacturer labels for processed foods (ham, sausage, tuna, cheese, miso, bread) so allergen filtering is precise instead of unknown"
+        },
+        {
+          "at": "2026-10-25T13:49:28.510Z",
+          "type": "manual-implementation",
+          "corrective": true,
+          "summary": "Orchestrator relaxed recipe-possible-allergens: varies-by-product may cite a label with no allergens, so processed foods are never recorded as known-none (verifier finding)"
+        },
+        {
+          "at": "2026-10-25T14:17:07.587Z",
+          "type": "approval",
+          "corrective": false,
+          "summary": "PO approved committing main locally before the break; the M2 branch stays unmerged"
+        },
+        {
+          "at": "2026-10-25T14:27:36.840Z",
+          "type": "product-decision",
+          "corrective": false,
+          "summary": "Lean orchestration applied on branch chore/lean-orchestration: Sonnet default, Opus only with PO approval, BA scope narrowed, 2-cycle fix limit; baseline recorded"
+        },
+        {
+          "at": "2026-10-25T14:34:32.638Z",
+          "type": "approval",
+          "corrective": false,
+          "summary": "PO approved merge of chore/lean-orchestration into main (7a70e23, local, no push)"
+        },
+        {
+          "at": "2026-11-01T01:22:14.692Z",
+          "type": "approval",
+          "corrective": false,
+          "milestone": "mvp",
+          "summary": "PO approved the MVP milestone for the evidence package"
+        }
+      ]
+    },
+    "qa": {
+      "status": "PASS",
+      "testsExecuted": {
+        "value": 1317,
+        "unit": "count",
+        "basis": "measured",
+        "method": "JUnit test cases not skipped",
+        "sources": [
+          "junit",
+          "junit-2"
+        ]
+      },
+      "testsPassed": {
+        "value": 1317,
+        "unit": "count",
+        "basis": "measured",
+        "method": "JUnit test cases without failure, error or skipped",
+        "sources": [
+          "junit",
+          "junit-2"
+        ]
+      },
+      "testsFailed": {
+        "value": 0,
+        "unit": "count",
+        "basis": "measured",
+        "method": "JUnit test cases with a failure or error",
+        "sources": [
+          "junit",
+          "junit-2"
+        ]
+      },
+      "testsSkipped": {
+        "value": 0,
+        "unit": "count",
+        "basis": "measured",
+        "method": "JUnit test cases marked skipped",
+        "sources": [
+          "junit",
+          "junit-2"
+        ]
+      },
+      "defectsFound": {
+        "value": 9,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "distinct defect IDs (cumulative to collection; latest state per defect ID)",
+        "sources": [
+          "events"
+        ]
+      },
+      "defectsBySeverity": {
+        "P1": {
+          "value": 0,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "distinct P1 defect IDs (cumulative to collection; latest state per defect ID)",
+          "sources": [
+            "events"
+          ]
+        },
+        "P2": {
+          "value": 2,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "distinct P2 defect IDs (cumulative to collection; latest state per defect ID)",
+          "sources": [
+            "events"
+          ]
+        },
+        "P3": {
+          "value": 3,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "distinct P3 defect IDs (cumulative to collection; latest state per defect ID)",
+          "sources": [
+            "events"
+          ]
+        },
+        "P4": {
+          "value": 4,
+          "unit": "count",
+          "basis": "recorded",
+          "method": "distinct P4 defect IDs (cumulative to collection; latest state per defect ID)",
+          "sources": [
+            "events"
+          ]
+        }
+      },
+      "defectsFixed": {
+        "value": 5,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "defects whose latest state is fixed (cumulative to collection; latest state per defect ID)",
+        "sources": [
+          "events"
+        ]
+      },
+      "defectsDeferred": {
+        "value": 0,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "defects whose latest state is deferred (cumulative to collection; latest state per defect ID)",
+        "sources": [
+          "events"
+        ]
+      },
+      "defectsOpen": {
+        "value": 4,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "defects whose latest state is found (cumulative to collection; latest state per defect ID)",
+        "sources": [
+          "events"
+        ]
+      },
+      "regressionFailures": {
+        "value": null,
+        "unit": "count",
+        "basis": "not_applicable",
+        "method": "tests passing in the previous milestone package and failing now",
+        "reason": "no earlier frozen milestone package to compare with"
+      },
+      "verificationsPassed": {
+        "value": 6,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "verification events with outcome success in the window",
+        "sources": [
+          "events"
+        ]
+      },
+      "verificationsFailed": {
+        "value": 1,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "verification events with outcome failure in the window",
+        "sources": [
+          "events"
+        ]
+      },
+      "requirementCoveragePercent": {
+        "value": 87.7,
+        "unit": "percent",
+        "basis": "measured",
+        "method": "criteria with ≥1 executed test / criteriaTotal × 100 (requirement coverage, not code coverage)",
+        "sources": [
+          "stories",
+          "junit",
+          "junit-2"
+        ]
+      },
+      "codeCoveragePercent": {
+        "value": 99.5,
+        "unit": "percent",
+        "basis": "measured",
+        "method": "total.lines.pct from the coverage summary (which code ran, not whether it is correct)",
+        "sources": [
+          "coverage"
+        ]
+      },
+      "detectionEffectiveness": {
+        "value": null,
+        "unit": "percent",
+        "basis": "not_applicable",
+        "method": "seeded defects detected / seeded defects × 100",
+        "reason": "no seeded-defect baseline (quality-gate.json → evidence.seededDefects); without one, detection effectiveness cannot be measured"
+      }
+    },
+    "cost": {
+      "status": "UNVERIFIED",
+      "billingModel": "subscription",
+      "totalTokens": {
+        "value": 3951063,
+        "unit": "tokens",
+        "basis": "measured",
+        "method": "sum of input + output tokens over model usage entries (cache tokens are reported separately)",
+        "sources": [
+          "usage"
+        ]
+      },
+      "cacheTokens": {
+        "value": 572706238,
+        "unit": "tokens",
+        "basis": "measured",
+        "method": "sum of cache-write + cache-read input tokens over model usage entries",
+        "sources": [
+          "usage"
+        ]
+      },
+      "apiCostUsd": {
+        "value": null,
+        "unit": "usd",
+        "basis": "unavailable",
+        "method": "sum of model costUsd",
+        "reason": "no list price configured for claude-opus-5-5, claude-sonnet-5-5 (quality-gate.json → evidence.pricing); the subscription itself is billed separately and this is not zero-cost execution"
+      },
+      "infrastructureCostUsd": {
+        "value": null,
+        "unit": "usd",
+        "basis": "unavailable",
+        "method": "sum of infrastructure costUsd",
+        "reason": "the usage log covers model tokens only; supply infrastructure costs with --usage"
+      },
+      "items": [
+        {
+          "category": "model",
+          "name": "claude-opus-5-5",
+          "phase": "ba",
+          "requests": 611,
+          "inputTokens": 1230,
+          "outputTokens": 752541,
+          "cacheWriteTokens": 2186163,
+          "cacheReadTokens": 76580044,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-opus-5-5",
+          "phase": "designer",
+          "requests": 194,
+          "inputTokens": 388,
+          "outputTokens": 412949,
+          "cacheWriteTokens": 830919,
+          "cacheReadTokens": 29435383,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-opus-5-5",
+          "phase": "developer",
+          "requests": 360,
+          "inputTokens": 724,
+          "outputTokens": 580376,
+          "cacheWriteTokens": 1751006,
+          "cacheReadTokens": 84913295,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-opus-5-5",
+          "phase": "general-purpose",
+          "requests": 37,
+          "inputTokens": 74,
+          "outputTokens": 40409,
+          "cacheWriteTokens": 145582,
+          "cacheReadTokens": 3373020,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-opus-5-5",
+          "phase": "main",
+          "requests": 222,
+          "inputTokens": 510,
+          "outputTokens": 187718,
+          "cacheWriteTokens": 1832424,
+          "cacheReadTokens": 68427803,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-opus-5-5",
+          "phase": "qa",
+          "requests": 123,
+          "inputTokens": 248,
+          "outputTokens": 328108,
+          "cacheWriteTokens": 960713,
+          "cacheReadTokens": 15777322,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-opus-5-5",
+          "phase": "verifier",
+          "requests": 52,
+          "inputTokens": 104,
+          "outputTokens": 30017,
+          "cacheWriteTokens": 235547,
+          "cacheReadTokens": 2363373,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-sonnet-5-5",
+          "phase": "ba",
+          "requests": 87,
+          "inputTokens": 174,
+          "outputTokens": 45301,
+          "cacheWriteTokens": 218735,
+          "cacheReadTokens": 4061384,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-sonnet-5-5",
+          "phase": "developer",
+          "requests": 733,
+          "inputTokens": 1470,
+          "outputTokens": 858957,
+          "cacheWriteTokens": 5229864,
+          "cacheReadTokens": 151801778,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-sonnet-5-5",
+          "phase": "general-purpose",
+          "requests": 8,
+          "inputTokens": 16,
+          "outputTokens": 7288,
+          "cacheWriteTokens": 87191,
+          "cacheReadTokens": 478952,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-sonnet-5-5",
+          "phase": "main",
+          "requests": 299,
+          "inputTokens": 712,
+          "outputTokens": 159501,
+          "cacheWriteTokens": 1041263,
+          "cacheReadTokens": 59320379,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-sonnet-5-5",
+          "phase": "metrics",
+          "requests": 6,
+          "inputTokens": 12,
+          "outputTokens": 6190,
+          "cacheWriteTokens": 58420,
+          "cacheReadTokens": 178749,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-sonnet-5-5",
+          "phase": "qa",
+          "requests": 404,
+          "inputTokens": 808,
+          "outputTokens": 514457,
+          "cacheWriteTokens": 1159164,
+          "cacheReadTokens": 58583785,
+          "costUsd": null,
+          "basis": "measured"
+        },
+        {
+          "category": "model",
+          "name": "claude-sonnet-5-5",
+          "phase": "verifier",
+          "requests": 40,
+          "inputTokens": 80,
+          "outputTokens": 20701,
+          "cacheWriteTokens": 169771,
+          "cacheReadTokens": 1504209,
+          "costUsd": null,
+          "basis": "measured"
+        }
+      ]
+    },
+    "recovery": {
+      "status": "UNVERIFIED",
+      "interruptions": {
+        "value": 4,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "interruption events in the window",
+        "sources": [
+          "events"
+        ]
+      },
+      "recoveryAttempts": {
+        "value": 3,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "resume events in the window",
+        "sources": [
+          "events"
+        ]
+      },
+      "resumptionsSucceeded": {
+        "value": 3,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "resume events with outcome success",
+        "sources": [
+          "events"
+        ]
+      },
+      "resumptionsFailed": {
+        "value": 0,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "resume events with outcome failure",
+        "sources": [
+          "events"
+        ]
+      },
+      "reworkMinutes": {
+        "value": null,
+        "unit": "minutes",
+        "basis": "unavailable",
+        "method": "sum of minutes on interruption/resume events",
+        "reason": "interruptions were logged without minutes of rework"
+      },
+      "recoveryTestsPassed": {
+        "value": 0,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "controlled recovery tests (fresh session restored state from CATCH-UP.md) that succeeded",
+        "sources": [
+          "events"
+        ]
+      },
+      "recoveryTestsFailed": {
+        "value": 0,
+        "unit": "count",
+        "basis": "recorded",
+        "method": "controlled recovery tests that failed",
+        "sources": [
+          "events"
+        ]
+      }
+    },
+    "delivery": {
+      "status": "PASS",
+      "releaseRef": {
+        "value": null,
+        "unit": "text",
+        "basis": "unavailable",
+        "method": "git tag pointing at the measured commit",
+        "reason": "no tag points at the measured commit"
+      },
+      "ci": {
+        "conclusion": {
+          "value": "success",
+          "unit": "text",
+          "basis": "measured",
+          "method": "latest .github/workflows/ci.yml run for the commit (GitHub Actions)",
+          "sources": [
+            "ci-runs"
+          ]
+        },
+        "runIds": [
+          41261610957
+        ],
+        "urls": [
+          "https://github.com/MrDrah/BentoMinder/actions/runs/41261610957"
+        ]
+      },
+      "deploy": {
+        "conclusion": {
+          "value": "success",
+          "unit": "text",
+          "basis": "measured",
+          "method": "latest .github/workflows/deploy.yml run for the commit (GitHub Actions)",
+          "sources": [
+            "ci-runs"
+          ]
+        },
+        "runIds": [
+          41262075641
+        ],
+        "urls": [
+          "https://github.com/MrDrah/BentoMinder/actions/runs/41262075641"
+        ]
+      },
+      "liveUrl": {
+        "value": "https://mrdrah.github.io/BentoMinder/",
+        "unit": "text",
+        "basis": "measured",
+        "method": "configured live URL, fetched during collection",
+        "sources": [
+          "smoke"
+        ]
+      },
+      "smokeTest": {
+        "value": "pass",
+        "unit": "text",
+        "basis": "measured",
+        "method": "HTTP 200 and the page contains the configured marker",
+        "sources": [
+          "smoke"
+        ]
+      },
+      "blockers": [],
+      "milestoneComplete": {
+        "value": null,
+        "unit": "boolean",
+        "basis": "unavailable",
+        "method": "true when there are no blockers and functional, QA and delivery are PASS",
+        "reason": "functional, QA or delivery evidence is unverified"
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "git",
+      "kind": "git",
+      "description": "The measured commit as git reported it",
+      "path": "evidence/git.json",
+      "sha256": "3285f8f790273d44347ada0bdf255fb702864d48c3fd3aa698bdc981ac461a92"
+    },
+    {
+      "id": "junit",
+      "kind": "test-results",
+      "description": "JUnit test results (reports/junit-e2e.xml), logs and stack traces removed",
+      "path": "evidence/junit-1.xml",
+      "sha256": "ded112a14116f827b4c29cbe3862c2f49c8ba3bad6f88644fc12c69038832e43"
+    },
+    {
+      "id": "junit-2",
+      "kind": "test-results",
+      "description": "JUnit test results (reports/junit.xml), logs and stack traces removed",
+      "path": "evidence/junit-2.xml",
+      "sha256": "76468acf23f9d8bb2c8f27d764518b71506524f9a37d395ebb5ff3fad147a73d"
+    },
+    {
+      "id": "stories",
+      "kind": "stories",
+      "description": "User stories and acceptance criteria (docs/ba/user-stories.md)",
+      "path": "evidence/stories.md",
+      "sha256": "e616fc8cabaf088cce64ae8c46d32a4915dc371cf58e618d35d6bff3986c0833"
+    },
+    {
+      "id": "events",
+      "kind": "event-log",
+      "description": "Event log entries in this window, plus every defect event up to collection (docs/evidence/events.jsonl)",
+      "path": "evidence/events.jsonl",
+      "sha256": "b30ccad93c13e8180cfb977f2b0cb79015e19fcb9e426d2d8d5f4a5739dcdc5f"
+    },
+    {
+      "id": "coverage",
+      "kind": "coverage",
+      "description": "Coverage totals (coverage/coverage-summary.json; per-file entries removed)",
+      "path": "evidence/coverage-summary.json",
+      "sha256": "35a6cc9a41fa93b2f9e1c33ee07aa85cd687c9776a44446f6c71b9942c14c974"
+    },
+    {
+      "id": "usage",
+      "kind": "usage",
+      "description": "Token usage per model and agent from the project usage log (docs/evidence/usage.jsonl), hour buckets in this window",
+      "path": "evidence/usage.json",
+      "sha256": "e1d5a1ac3b7f59123f8590f4b0454b5ef462999db0bd046478fba41790ff836b"
+    },
+    {
+      "id": "ci-runs",
+      "kind": "ci-runs",
+      "description": "GitHub Actions runs for commit 2b98064",
+      "path": "evidence/ci-runs.json",
+      "sha256": "4628f89d9562f99d9f580cc495883977efcb87fd22f7c0dba0c53074f32a9d13"
+    },
+    {
+      "id": "smoke",
+      "kind": "smoke",
+      "description": "Smoke check of https://mrdrah.github.io/BentoMinder/",
+      "path": "evidence/smoke.json",
+      "sha256": "b9c9bab422048910fe0197ea1831d341b777f63ae6216659fb84d46e35abd324"
+    }
+  ],
+  "missing": [
+    {
+      "metric": "cost.apiCostUsd",
+      "reason": "no list price configured for claude-opus-5-5, claude-sonnet-5-5 (quality-gate.json → evidence.pricing); the subscription itself is billed separately and this is not zero-cost execution"
+    },
+    {
+      "metric": "cost.infrastructureCostUsd",
+      "reason": "the usage log covers model tokens only; supply infrastructure costs with --usage"
+    },
+    {
+      "metric": "recovery.reworkMinutes",
+      "reason": "interruptions were logged without minutes of rework"
+    },
+    {
+      "metric": "delivery.releaseRef",
+      "reason": "no tag points at the measured commit"
+    },
+    {
+      "metric": "delivery.milestoneComplete",
+      "reason": "functional, QA or delivery evidence is unverified"
+    }
+  ],
+  "assessment": {
+    "status": "UNVERIFIED",
+    "categories": {
+      "functional": "UNVERIFIED",
+      "intervention": "PASS",
+      "qa": "PASS",
+      "cost": "UNVERIFIED",
+      "recovery": "UNVERIFIED",
+      "delivery": "PASS"
+    },
+    "limitations": [
+      "3 acceptance criteria have tests that name only their story, not the AC ID; they stay unverified until a test names the AC.",
+      "Intervention, defect and recovery counts come from the project event log and are only as complete as that log.",
+      "Code coverage shows which lines ran during tests; it is not evidence that the code has no defects.",
+      "Token usage comes from Claude Code session logs snapshotted on the machines that ran this project (hour buckets; the boundary hour belongs to the earlier milestone). Sessions on other machines or in the cloud are missing unless they were snapshotted there.",
+      "Development cost is incomplete: no list price configured for claude-opus-5-5, claude-sonnet-5-5 (quality-gate.json → evidence.pricing); the subscription itself is billed separately and this is not zero-cost execution.",
+      "No controlled recovery test in this window: the absence of recorded failures is not evidence that work can be resumed reliably."
+    ]
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:app-boilerplate:engineering-evidence:metrics:1",
+  "title": "Engineering Evidence Package — metrics.json",
+  "description": "One milestone snapshot of a project's delivery evidence. Contract: docs/EVIDENCE-CONTRACT.md in the app-boilerplate framework. Every measurement says where its value came from, how it was computed, and whether it was measured, recorded, estimated or is unavailable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "project", "milestone", "framework", "source", "collectedAt", "collector", "window", "metrics", "evidence", "missing", "assessment"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$" },
+    "kind": { "const": "engineering-evidence/metrics" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "repository"],
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "name": { "type": "string", "minLength": 1 },
+        "repository": { "anyOf": [{ "$ref": "#/$defs/httpsUrl" }, { "type": "null" }] }
+      }
+    },
+    "milestone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "date", "revision", "supersedes", "packageId"],
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "packageId": { "$ref": "#/$defs/slug", "description": "Directory name of this package: the milestone id, or <id>-r<N> for revision N > 1." },
+        "label": { "type": "string", "minLength": 1 },
+        "date": { "$ref": "#/$defs/date" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "supersedes": { "anyOf": [{ "$ref": "#/$defs/slug" }, { "type": "null" }] }
+      }
+    },
+    "framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": { "name": { "type": "string", "minLength": 1 }, "version": { "$ref": "#/$defs/semver" } }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "committedAt", "ref", "clean"],
+      "description": "The exact revision measured. The commit that adds this package comes later and has this commit as an ancestor.",
+      "properties": {
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "committedAt": { "$ref": "#/$defs/dateTime" },
+        "ref": { "type": ["string", "null"], "description": "A tag or release name pointing at the commit, if any." },
+        "clean": { "type": "boolean", "description": "false if uncommitted changes existed when the evidence was collected (then the package lists it as a limitation)." }
+      }
+    },
+    "collectedAt": { "$ref": "#/$defs/dateTime" },
+    "collector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "version"],
+      "properties": { "tool": { "type": "string", "minLength": 1 }, "version": { "$ref": "#/$defs/semver" } }
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "description": "Event-log period this package covers: after the previous frozen package of the project (null = project start) up to collection time.",
+      "properties": { "from": { "anyOf": [{ "$ref": "#/$defs/dateTime" }, { "type": "null" }] }, "to": { "$ref": "#/$defs/dateTime" } }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["functional", "intervention", "qa", "cost", "recovery", "delivery"],
+      "properties": {
+        "functional": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "denominator", "criteriaTotal", "criteriaPassing", "criteriaFailing", "criteriaUnverified", "criteriaDeferred", "testsPassed", "testsFailed", "completionPercent"],
+          "properties": {
+            "status": { "$ref": "#/$defs/verdict" },
+            "denominator": { "enum": ["acceptance-criteria", "stories", "mixed"], "description": "What one criterion is. mixed = AC IDs where the stories have them, the story itself where they don't." },
+            "criteriaTotal": { "$ref": "#/$defs/count" },
+            "criteriaPassing": { "$ref": "#/$defs/count" },
+            "criteriaFailing": { "$ref": "#/$defs/count" },
+            "criteriaUnverified": { "$ref": "#/$defs/count" },
+            "criteriaDeferred": { "$ref": "#/$defs/count" },
+            "testsPassed": { "$ref": "#/$defs/count" },
+            "testsFailed": { "$ref": "#/$defs/count" },
+            "completionPercent": { "$ref": "#/$defs/percent" },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "status", "passed", "failed"],
+                "properties": {
+                  "id": { "type": "string", "minLength": 1 },
+                  "status": { "enum": ["PASS", "FAIL", "UNVERIFIED", "DEFERRED"] },
+                  "passed": { "type": "integer", "minimum": 0 },
+                  "failed": { "type": "integer", "minimum": 0 }
+                }
+              }
+            }
+          }
+        },
+        "intervention": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "total", "corrective", "byType", "agentTasks", "agentTasksWithoutCorrection", "items"],
+          "properties": {
+            "status": { "$ref": "#/$defs/verdict" },
+            "total": { "$ref": "#/$defs/count" },
+            "corrective": { "$ref": "#/$defs/count" },
+            "byType": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["product-decision", "approval", "technical-correction", "agent-failure", "manual-implementation"],
+              "properties": {
+                "product-decision": { "$ref": "#/$defs/count" },
+                "approval": { "$ref": "#/$defs/count" },
+                "technical-correction": { "$ref": "#/$defs/count" },
+                "agent-failure": { "$ref": "#/$defs/count" },
+                "manual-implementation": { "$ref": "#/$defs/count" }
+              }
+            },
+            "agentTasks": { "$ref": "#/$defs/count" },
+            "agentTasksWithoutCorrection": { "$ref": "#/$defs/count" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["at", "type", "corrective", "summary"],
+                "properties": {
+                  "at": { "$ref": "#/$defs/dateTime" },
+                  "type": { "enum": ["product-decision", "approval", "technical-correction", "agent-failure", "manual-implementation"] },
+                  "corrective": { "type": "boolean" },
+                  "task": { "type": "string" },
+                  "milestone": { "type": "string" },
+                  "summary": { "type": "string", "maxLength": 200 }
+                }
+              }
+            }
+          }
+        },
+        "qa": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "testsExecuted", "testsPassed", "testsFailed", "testsSkipped", "defectsFound", "defectsBySeverity", "defectsFixed", "defectsDeferred", "defectsOpen", "regressionFailures", "verificationsPassed", "verificationsFailed", "requirementCoveragePercent", "codeCoveragePercent", "detectionEffectiveness"],
+          "properties": {
+            "status": { "$ref": "#/$defs/verdict" },
+            "testsExecuted": { "$ref": "#/$defs/count" },
+            "testsPassed": { "$ref": "#/$defs/count" },
+            "testsFailed": { "$ref": "#/$defs/count" },
+            "testsSkipped": { "$ref": "#/$defs/count" },
+            "defectsFound": { "$ref": "#/$defs/count" },
+            "defectsBySeverity": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["P1", "P2", "P3", "P4"],
+              "properties": { "P1": { "$ref": "#/$defs/count" }, "P2": { "$ref": "#/$defs/count" }, "P3": { "$ref": "#/$defs/count" }, "P4": { "$ref": "#/$defs/count" } }
+            },
+            "defectsFixed": { "$ref": "#/$defs/count" },
+            "defectsDeferred": { "$ref": "#/$defs/count" },
+            "defectsOpen": { "$ref": "#/$defs/count" },
+            "regressionFailures": { "$ref": "#/$defs/count" },
+            "verificationsPassed": { "$ref": "#/$defs/count" },
+            "verificationsFailed": { "$ref": "#/$defs/count" },
+            "requirementCoveragePercent": { "$ref": "#/$defs/percent", "description": "Criteria with at least one executed (not skipped) test, over all criteria. Not code coverage." },
+            "codeCoveragePercent": { "$ref": "#/$defs/percent", "description": "Line coverage from the coverage summary. Says which code ran, not that it is correct." },
+            "detectionEffectiveness": { "$ref": "#/$defs/percent", "description": "Seeded defects caught over seeded defects. not_applicable without a seeded-defect baseline." }
+          }
+        },
+        "cost": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "billingModel", "totalTokens", "apiCostUsd", "infrastructureCostUsd", "items"],
+          "properties": {
+            "status": { "$ref": "#/$defs/verdict" },
+            "billingModel": { "enum": ["api", "subscription", "mixed", "unknown"] },
+            "totalTokens": { "$ref": "#/$defs/count", "description": "Input + output tokens. Cache tokens are in cacheTokens." },
+            "cacheTokens": { "$ref": "#/$defs/count", "description": "Since 1.1.0, optional: cache-write + cache-read input tokens, when the usage source reports them." },
+            "apiCostUsd": { "$ref": "#/$defs/usd" },
+            "infrastructureCostUsd": { "$ref": "#/$defs/usd" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["category", "name", "basis"],
+                "properties": {
+                  "category": { "enum": ["model", "infrastructure"] },
+                  "name": { "type": "string", "minLength": 1, "description": "provider/model for model usage, service name for infrastructure" },
+                  "phase": { "type": "string", "description": "Workflow phase or agent (main, or the sub-agent type)." },
+                  "requests": { "type": "integer", "minimum": 0, "description": "Since 1.1.0, optional." },
+                  "inputTokens": { "type": ["integer", "null"], "minimum": 0 },
+                  "outputTokens": { "type": ["integer", "null"], "minimum": 0 },
+                  "cacheWriteTokens": { "type": "integer", "minimum": 0, "description": "Since 1.1.0, optional." },
+                  "cacheReadTokens": { "type": "integer", "minimum": 0, "description": "Since 1.1.0, optional." },
+                  "costUsd": { "type": ["number", "null"], "minimum": 0 },
+                  "basis": { "enum": ["measured", "estimated"], "description": "How the token figures were obtained." },
+                  "costBasis": { "enum": ["measured", "estimated"], "description": "Since 1.1.0, optional: how costUsd was obtained when it differs from basis (e.g. measured tokens × list price = estimated cost)." }
+                }
+              }
+            }
+          }
+        },
+        "recovery": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "interruptions", "recoveryAttempts", "resumptionsSucceeded", "resumptionsFailed", "reworkMinutes", "recoveryTestsPassed", "recoveryTestsFailed"],
+          "properties": {
+            "status": { "$ref": "#/$defs/verdict" },
+            "interruptions": { "$ref": "#/$defs/count" },
+            "recoveryAttempts": { "$ref": "#/$defs/count" },
+            "resumptionsSucceeded": { "$ref": "#/$defs/count" },
+            "resumptionsFailed": { "$ref": "#/$defs/count" },
+            "reworkMinutes": { "$ref": "#/$defs/minutes" },
+            "recoveryTestsPassed": { "$ref": "#/$defs/count", "description": "Controlled tests: a fresh session restored the state from CATCH-UP.md alone." },
+            "recoveryTestsFailed": { "$ref": "#/$defs/count" }
+          }
+        },
+        "delivery": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "releaseRef", "ci", "deploy", "liveUrl", "smokeTest", "blockers", "milestoneComplete"],
+          "properties": {
+            "status": { "$ref": "#/$defs/verdict" },
+            "releaseRef": { "$ref": "#/$defs/text" },
+            "ci": { "$ref": "#/$defs/runResult" },
+            "deploy": { "$ref": "#/$defs/runResult" },
+            "liveUrl": { "$ref": "#/$defs/text" },
+            "smokeTest": { "$ref": "#/$defs/text", "description": "pass | fail" },
+            "blockers": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "milestoneComplete": { "$ref": "#/$defs/flag" }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Files and links the measurements cite by id.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "description"],
+        "properties": {
+          "id": { "$ref": "#/$defs/evidenceId" },
+          "kind": { "enum": ["test-results", "coverage", "stories", "event-log", "ci-runs", "smoke", "usage", "previous-package", "git", "config"] },
+          "description": { "type": "string", "minLength": 1 },
+          "path": { "$ref": "#/$defs/relPath", "description": "Relative to this package's directory." },
+          "url": { "$ref": "#/$defs/httpsUrl" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        },
+        "anyOf": [{ "required": ["path", "sha256"] }, { "required": ["url"] }]
+      }
+    },
+    "missing": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["metric", "reason"],
+        "properties": { "metric": { "type": "string", "pattern": "^[a-z]+\\.[A-Za-z0-9.-]+$" }, "reason": { "type": "string", "minLength": 10 } }
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "categories", "limitations"],
+      "properties": {
+        "status": { "$ref": "#/$defs/verdict" },
+        "categories": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["functional", "intervention", "qa", "cost", "recovery", "delivery"],
+          "properties": {
+            "functional": { "$ref": "#/$defs/verdict" },
+            "intervention": { "$ref": "#/$defs/verdict" },
+            "qa": { "$ref": "#/$defs/verdict" },
+            "cost": { "$ref": "#/$defs/verdict" },
+            "recovery": { "$ref": "#/$defs/verdict" },
+            "delivery": { "$ref": "#/$defs/verdict" }
+          }
+        },
+        "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 10 } }
+      }
+    }
+  },
+  "$defs": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$", "maxLength": 64 },
+    "evidenceId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "semver": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "dateTime": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$" },
+    "httpsUrl": { "type": "string", "pattern": "^https://[^\\s]+$" },
+    "relPath": { "type": "string", "pattern": "^(?![/\\\\])(?![A-Za-z]:)(?!.*(^|/)\\.\\.(/|$))[^\\\\\\s]+$" },
+    "verdict": { "enum": ["PASS", "FAIL", "UNVERIFIED", "NOT_APPLICABLE"] },
+    "basis": { "enum": ["measured", "recorded", "estimated", "unavailable", "not_applicable"], "description": "measured: computed by a script from an evidence file. recorded: counted from the project's event log (as complete as the log). estimated: derived with stated assumptions. unavailable / not_applicable: value is null and reason says why." },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "unit", "basis", "method"],
+      "properties": {
+        "value": { "type": ["number", "string", "boolean", "array", "null"] },
+        "unit": { "enum": ["count", "percent", "usd", "tokens", "minutes", "boolean", "text", "list"] },
+        "basis": { "$ref": "#/$defs/basis" },
+        "method": { "type": "string", "minLength": 3 },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/evidenceId" } },
+        "reason": { "type": "string", "minLength": 10 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "basis": { "enum": ["unavailable", "not_applicable"] } } },
+          "then": { "required": ["reason"], "properties": { "value": { "type": "null" } } }
+        },
+        {
+          "if": { "properties": { "basis": { "enum": ["measured", "recorded", "estimated"] } } },
+          "then": { "required": ["sources"], "properties": { "value": { "not": { "type": "null" } }, "sources": { "minItems": 1 } } }
+        }
+      ]
+    },
+    "count": { "allOf": [{ "$ref": "#/$defs/measurement" }, { "properties": { "unit": { "enum": ["count", "tokens"] }, "value": { "anyOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }] } } }] },
+    "percent": { "allOf": [{ "$ref": "#/$defs/measurement" }, { "properties": { "unit": { "const": "percent" }, "value": { "anyOf": [{ "type": "number", "minimum": 0, "maximum": 100 }, { "type": "null" }] } } }] },
+    "usd": { "allOf": [{ "$ref": "#/$defs/measurement" }, { "properties": { "unit": { "const": "usd" }, "value": { "anyOf": [{ "type": "number", "minimum": 0 }, { "type": "null" }] } } }] },
+    "minutes": { "allOf": [{ "$ref": "#/$defs/measurement" }, { "properties": { "unit": { "const": "minutes" }, "value": { "anyOf": [{ "type": "number", "minimum": 0 }, { "type": "null" }] } } }] },
+    "flag": { "allOf": [{ "$ref": "#/$defs/measurement" }, { "properties": { "unit": { "const": "boolean" }, "value": { "type": ["boolean", "null"] } } }] },
+    "text": { "allOf": [{ "$ref": "#/$defs/measurement" }, { "properties": { "unit": { "const": "text" }, "value": { "type": ["string", "null"] } } }] },
+    "runResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conclusion", "runIds"],
+      "properties": {
+        "conclusion": { "$ref": "#/$defs/text", "description": "success | failure | cancelled | in_progress | not_found" },
+        "runIds": { "type": "array", "items": { "type": "integer" } },
+        "urls": { "type": "array", "items": { "$ref": "#/$defs/httpsUrl" } }
+      }
+    }
+  }
+}

@@ -1,0 +1,274 @@
+<testsuites id="" name="" tests="120" failures="0" skipped="0" errors="0" time="64.101099">
+<testsuite name="m1-import.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="5" failures="0" skipped="0" time="22.911" errors="0">
+<testcase name="US-E1-01/AC1 US-E1-02/AC1 US-E2-03/AC1 US-E2-08/AC1 US-E3-01/AC2 US-E3-02/AC1 US-E3-03/AC1 US-NF-03/AC1 first launch → profile → upload → review → confirm → calendar" classname="m1-import.spec.ts" time="10.501">
+</testcase>
+<testcase name="US-E2-02/AC1 US-E2-02/AC2 US-E2-02/AC3 a blocked URL keeps the URL and the upload fallback records both" classname="m1-import.spec.ts" time="2.886">
+</testcase>
+<testcase name="US-E2-05/AC2 US-E3-04/AC1 an extraction that stays malformed offers retry, upload and manual entry" classname="m1-import.spec.ts" time="2.885">
+</testcase>
+<testcase name="US-E10-03/AC4 US-E10-04/AC1 export the store as is, then delete everything" classname="m1-import.spec.ts" time="4.075">
+</testcase>
+<testcase name="US-E10-02/AC4 corrupt stored data offers export and start over" classname="m1-import.spec.ts" time="2.564">
+</testcase>
+</testsuite>
+<testsuite name="m1-two-tabs.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="2" failures="0" skipped="0" time="2.457" errors="0">
+<testcase name="US-E10-01/AC1 a storage event reloads an idle second tab and tells the parent" classname="m1-two-tabs.spec.ts" time="1.393">
+</testcase>
+<testcase name="US-E10-01/AC1 a stale tab that missed the event cannot overwrite the other tab’s data" classname="m1-two-tabs.spec.ts" time="1.064">
+</testcase>
+</testsuite>
+<testsuite name="m2-calendar.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="11" failures="0" skipped="0" time="27.936" errors="0">
+<testcase name="US-E5-01/AC3 US-E5-01/AC4 US-NF-02/AC1 the calendar shows assessment and decision apart; axe finds nothing serious" classname="m2-calendar.spec.ts" time="4.04">
+</testcase>
+<testcase name="US-E5-01/AC3 grid keyboard: one tab stop, arrows, Home/End, PageDown, Enter opens the sheet and Esc returns the focus to the cell" classname="m2-calendar.spec.ts" time="2.597">
+</testcase>
+<testcase name="US-E5-01/AC5 US-E5-01/AC6 month boundaries: Nov → Jan 2027 with two taps, 「今日」 returns, February 2028 has 29 cells" classname="m2-calendar.spec.ts" time="0.674">
+</testcase>
+<testcase name="US-E4-03/AC2 US-E3-05/AC1 US-E3-05/AC9 an override survives a reload and a menu refresh; the refresh keeps the plan and lists the changed days" classname="m2-calendar.spec.ts" time="2.573">
+</testcase>
+<testcase name="US-E5-05/AC1 US-E5-06/AC2 US-E5-06/AC3 US-E5-07/AC3 decide later, tick the reservation record, and go back to school lunch only after the dialog; reloads keep it" classname="m2-calendar.spec.ts" time="2.911">
+</testcase>
+<testcase name="US-E5-03/AC1 US-E5-03/AC3 「手作りお弁当にする」 opens the recommendation view and changes nothing; back returns to the sheet" classname="m2-calendar.spec.ts" time="0.702">
+</testcase>
+<testcase name="US-E5-01/AC8 the week can start on Sunday; the setting survives a reload" classname="m2-calendar.spec.ts" time="2.053">
+</testcase>
+<testcase name="US-E3-05/AC2 US-E3-05/AC7 a refresh conflict is flagged; 「このまま」 keeps the plan, 「計画を取り消す」 asks and removes it" classname="m2-calendar.spec.ts" time="2.83">
+</testcase>
+<testcase name="US-E2-05/AC7 US-E2-05/AC9 review: a weekday-mismatch day is moved to a free date with the picker; axe clean on the picker" classname="m2-calendar.spec.ts" time="6.824">
+</testcase>
+<testcase name="US-E10-01/AC1 D-M1-06 two tabs: an idle tab shows the other tab&apos;s decision; a stale tab&apos;s edit is refused and the stored decision stays" classname="m2-calendar.spec.ts" time="1.543">
+</testcase>
+<testcase name="US-E10-01/AC1 D-M1-06 two tabs: with the storage event an idle tab reloads and shows the decision at once" classname="m2-calendar.spec.ts" time="1.189">
+</testcase>
+</testsuite>
+<testsuite name="m3-recommend.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="8" failures="0" skipped="0" time="19.985" errors="0">
+<testcase name="US-E5-03/AC2 US-E6-01/AC1 US-E6-01/AC2 US-E6-03/AC1 the journey: bento for 11-12, three cards with the disclaimer, choose one, it is on the calendar and survives a reload" classname="m3-recommend.spec.ts" time="0.942">
+</testcase>
+<testcase name="US-E6-01/AC6 US-NF-02/AC1 the recommendation view with 「ほかのレシピ」 open is operable by keyboard; axe finds nothing serious in ja and en" classname="m3-recommend.spec.ts" time="5.006">
+</testcase>
+<testcase name="US-E5-03/AC3 back from the recommendation view leaves the stored decision exactly as it was" classname="m3-recommend.spec.ts" time="0.748">
+</testcase>
+<testcase name="US-E6-04/AC1 US-E6-04/AC2 US-E6-04/AC3 recipe detail: content, the 農林水産省 notes, deep link, unknown id; axe in ja and en" classname="m3-recommend.spec.ts" time="3.258">
+</testcase>
+<testcase name="US-E6-05/AC1 US-E6-05/AC2 US-E6-05/AC3 the library lists blocked recipes last; the picker plans a date by keyboard; axe with the picker open" classname="m3-recommend.spec.ts" time="5.382">
+</testcase>
+<testcase name="US-E6-05/AC2 Escape closes the picker and returns the focus to 「日付を選んで計画」" classname="m3-recommend.spec.ts" time="0.465">
+</testcase>
+<testcase name="US-E6-06/AC1 a planned recipe missing from the library keeps its stored names and the plan; the sheet offers a re-choice" classname="m3-recommend.spec.ts" time="2.485">
+</testcase>
+<testcase name="US-E1-03/AC5 an unknown allergy status shows the warning above the cards and on a recipe; never a safety claim" classname="m3-recommend.spec.ts" time="1.699">
+</testcase>
+</testsuite>
+<testsuite name="m4-reminders.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="12" failures="0" skipped="0" time="32.772" errors="0">
+<testcase name="US-E7-02/AC1 US-E7-07/AC1 US-E7-05/AC1 the day-before reminder appears at 17:30 Tokyo time while the app is open, opens the recipe, and once dismissed stays away after a reload" classname="m4-reminders.spec.ts" time="0.896">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-07/AC2 opened at 21:00 Tokyo time the missed reminder is shown with its original time and 「（日本時間）」" classname="m4-reminders.spec.ts" time="0.485">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-03/AC1 first opened at 07:00 Tokyo time on the day: the reminder expired and the today card shows the plan" classname="m4-reminders.spec.ts" time="0.416">
+</testcase>
+<testcase name="US-E7-03/AC3 the today card rolls over at Tokyo midnight without a reload, whatever the browser timezone" classname="m4-reminders.spec.ts" time="0.487">
+</testcase>
+<testcase name="US-E7-01/AC1 US-E7-01/AC2 US-E8-03/AC1 the weekly summary appears on Sunday 14:00 Tokyo time, 「計画する」 opens the day sheet; English dates follow US-E8-03" classname="m4-reminders.spec.ts" time="3.959">
+</testcase>
+<testcase name="US-E7-05/AC5 US-NF-02/AC1 a day-before and a weekly reminder together: one banner and 「ほかに1件のお知らせ」, keyboard operable, axe finds nothing in ja and en" classname="m4-reminders.spec.ts" time="4.096">
+</testcase>
+<testcase name="US-E7-04/AC1 US-E7-04/AC2 US-E7-06/AC1 US-E7-07/AC2 reminder settings: defaults, the web limit, 「（日本時間）」, changes persist; axe in ja and en" classname="m4-reminders.spec.ts" time="3.052">
+</testcase>
+<testcase name="US-E7-04/AC4 switching off 前日のお知らせ removes day-before reminders and the today card still works" classname="m4-reminders.spec.ts" time="0.563">
+</testcase>
+<testcase name="US-E8-05/AC1 US-E8-05/AC2 US-E8-05/AC3 the theme follows the device by default, a manual choice persists, and only planned cells stay solid-filled in both themes; axe in both" classname="m4-reminders.spec.ts" time="7.574">
+</testcase>
+<testcase name="US-E7-03/AC1 US-E7-03/AC2 US-NF-02/AC1 the today card on a Saturday points to the next school day; axe in ja and en" classname="m4-reminders.spec.ts" time="3.425">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-07/AC2 US-NF-02/AC1 the missed reminder (original time, title, recipe line) passes axe contrast in ja and en, light theme" classname="m4-reminders.spec.ts" time="3.748">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-07/AC2 US-NF-02/AC1 the missed reminder (original time, title, recipe line) passes axe contrast in ja and en, dark theme" classname="m4-reminders.spec.ts" time="4.071">
+</testcase>
+</testsuite>
+<testsuite name="m4-share-debug.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="13" failures="0" skipped="0" time="49.965" errors="0">
+<testcase name="weekly share on the production build › US-E9-01/AC1 US-E9-02/AC1 US-E9-02/AC2 the sheet previews the exact text, with the two notes and no child data" classname="m4-share-debug.spec.ts" time="2.975">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC1 US-E9-02/AC2 the English text and the sheet pass axe" classname="m4-share-debug.spec.ts" time="3">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC2 the native share sheet receives the text" classname="m4-share-debug.spec.ts" time="1.044">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC2 a rejected share falls back to the clipboard and 「コピーしました」 shows" classname="m4-share-debug.spec.ts" time="0.647">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC2 without a share sheet only 「コピーする」 is offered and copies" classname="m4-share-debug.spec.ts" time="0.506">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC4 when the clipboard is blocked too, the message shows and the text is selected" classname="m4-share-debug.spec.ts" time="2.783">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC3 an empty week says so (exact text, no others line)" classname="m4-share-debug.spec.ts" time="0.387">
+</testcase>
+<testcase name="no debug code on the production build › US-E11-01/AC2 no debug UI renders, /debug is the not-found page and the built JS has no marker string" classname="m4-share-debug.spec.ts" time="0.553">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-01/AC1 a 「Debug」 button is visible in a corner and opens the panel (axe)" classname="m4-share-debug.spec.ts" time="9.306">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-02/AC1 US-E11-02/AC3 simulating 17:29 then +1 minute makes the day-before reminder due; 「実時間に戻す」 restores real time" classname="m4-share-debug.spec.ts" time="7.172">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-02/AC2 triggering shows a debug-marked reminder and does not write the shown-reminders log" classname="m4-share-debug.spec.ts" time="7.225">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-03/AC1 US-E11-03/AC3 the sample menu opens the review without an AI call; the stored decisions are listed and can be cleared" classname="m4-share-debug.spec.ts" time="7.545">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-03/AC2 the panel selects a failure mode and shows the AI call count of this month (the mode-to-result mapping is unit-tested)" classname="m4-share-debug.spec.ts" time="6.822">
+</testcase>
+</testsuite>
+<testsuite name="m5-consent.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="2" failures="0" skipped="0" time="1.674" errors="0">
+<testcase name="US-E2-08/AC1 US-E2-08/AC2 no /api/menu/extract request before consent; declining sends none and keeps manual entry open" classname="m5-consent.spec.ts" time="1.181">
+</testcase>
+<testcase name="US-E2-08/AC1 US-E2-08/AC3 the request is sent only after 「同意して読み取る」; the consent is stored with notice version 1 and the next import does not ask" classname="m5-consent.spec.ts" time="0.493">
+</testcase>
+</testsuite>
+<testsuite name="smoke.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="7" failures="0" skipped="0" time="6.072" errors="0">
+<testcase name="US-E8-01/AC1 opens in Japanese whatever the browser language" classname="smoke.spec.ts" time="0.347">
+</testcase>
+<testcase name="US-E8-01/AC2 one tap switches to EN and one tap back, without reload" classname="smoke.spec.ts" time="0.533">
+</testcase>
+<testcase name="US-E8-01/AC3 the language choice survives a reload" classname="smoke.spec.ts" time="0.53">
+</testcase>
+<testcase name="US-E5-01/AC1 opens on the current Tokyo month with the Tokyo date marked as today" classname="smoke.spec.ts" time="0.41">
+</testcase>
+<testcase name="US-E5-01/AC1 at Tokyo month change the next month opens even though the device is still in the old one" classname="smoke.spec.ts" time="0.462">
+</testcase>
+<testcase name="the calendar shell has no serious or critical axe violations in ja and en" classname="smoke.spec.ts" time="3.354">
+</testcase>
+<testcase name="the production build has no debug UI (BR-24)" classname="smoke.spec.ts" time="0.436">
+</testcase>
+</testsuite>
+<testsuite name="m1-import.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="5" failures="0" skipped="0" time="20.872" errors="0">
+<testcase name="US-E1-01/AC1 US-E1-02/AC1 US-E2-03/AC1 US-E2-08/AC1 US-E3-01/AC2 US-E3-02/AC1 US-E3-03/AC1 US-NF-03/AC1 first launch → profile → upload → review → confirm → calendar" classname="m1-import.spec.ts" time="9.181">
+</testcase>
+<testcase name="US-E2-02/AC1 US-E2-02/AC2 US-E2-02/AC3 a blocked URL keeps the URL and the upload fallback records both" classname="m1-import.spec.ts" time="2.771">
+</testcase>
+<testcase name="US-E2-05/AC2 US-E3-04/AC1 an extraction that stays malformed offers retry, upload and manual entry" classname="m1-import.spec.ts" time="2.527">
+</testcase>
+<testcase name="US-E10-03/AC4 US-E10-04/AC1 export the store as is, then delete everything" classname="m1-import.spec.ts" time="4.357">
+</testcase>
+<testcase name="US-E10-02/AC4 corrupt stored data offers export and start over" classname="m1-import.spec.ts" time="2.036">
+</testcase>
+</testsuite>
+<testsuite name="m1-two-tabs.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="2" failures="0" skipped="0" time="2.381" errors="0">
+<testcase name="US-E10-01/AC1 a storage event reloads an idle second tab and tells the parent" classname="m1-two-tabs.spec.ts" time="1.157">
+</testcase>
+<testcase name="US-E10-01/AC1 a stale tab that missed the event cannot overwrite the other tab’s data" classname="m1-two-tabs.spec.ts" time="1.224">
+</testcase>
+</testsuite>
+<testsuite name="m2-calendar.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="11" failures="0" skipped="0" time="32.08" errors="0">
+<testcase name="US-E5-01/AC3 US-E5-01/AC4 US-NF-02/AC1 the calendar shows assessment and decision apart; axe finds nothing serious" classname="m2-calendar.spec.ts" time="4.667">
+</testcase>
+<testcase name="US-E5-01/AC3 grid keyboard: one tab stop, arrows, Home/End, PageDown, Enter opens the sheet and Esc returns the focus to the cell" classname="m2-calendar.spec.ts" time="3.087">
+</testcase>
+<testcase name="US-E5-01/AC5 US-E5-01/AC6 month boundaries: Nov → Jan 2027 with two taps, 「今日」 returns, February 2028 has 29 cells" classname="m2-calendar.spec.ts" time="0.866">
+</testcase>
+<testcase name="US-E4-03/AC2 US-E3-05/AC1 US-E3-05/AC9 an override survives a reload and a menu refresh; the refresh keeps the plan and lists the changed days" classname="m2-calendar.spec.ts" time="2.98">
+</testcase>
+<testcase name="US-E5-05/AC1 US-E5-06/AC2 US-E5-06/AC3 US-E5-07/AC3 decide later, tick the reservation record, and go back to school lunch only after the dialog; reloads keep it" classname="m2-calendar.spec.ts" time="3.798">
+</testcase>
+<testcase name="US-E5-03/AC1 US-E5-03/AC3 「手作りお弁当にする」 opens the recommendation view and changes nothing; back returns to the sheet" classname="m2-calendar.spec.ts" time="0.808">
+</testcase>
+<testcase name="US-E5-01/AC8 the week can start on Sunday; the setting survives a reload" classname="m2-calendar.spec.ts" time="2.364">
+</testcase>
+<testcase name="US-E3-05/AC2 US-E3-05/AC7 a refresh conflict is flagged; 「このまま」 keeps the plan, 「計画を取り消す」 asks and removes it" classname="m2-calendar.spec.ts" time="3.46">
+</testcase>
+<testcase name="US-E2-05/AC7 US-E2-05/AC9 review: a weekday-mismatch day is moved to a free date with the picker; axe clean on the picker" classname="m2-calendar.spec.ts" time="6.973">
+</testcase>
+<testcase name="US-E10-01/AC1 D-M1-06 two tabs: an idle tab shows the other tab&apos;s decision; a stale tab&apos;s edit is refused and the stored decision stays" classname="m2-calendar.spec.ts" time="1.742">
+</testcase>
+<testcase name="US-E10-01/AC1 D-M1-06 two tabs: with the storage event an idle tab reloads and shows the decision at once" classname="m2-calendar.spec.ts" time="1.335">
+</testcase>
+</testsuite>
+<testsuite name="m3-recommend.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="8" failures="0" skipped="0" time="20.429" errors="0">
+<testcase name="US-E5-03/AC2 US-E6-01/AC1 US-E6-01/AC2 US-E6-03/AC1 the journey: bento for 11-12, three cards with the disclaimer, choose one, it is on the calendar and survives a reload" classname="m3-recommend.spec.ts" time="1.01">
+</testcase>
+<testcase name="US-E6-01/AC6 US-NF-02/AC1 the recommendation view with 「ほかのレシピ」 open is operable by keyboard; axe finds nothing serious in ja and en" classname="m3-recommend.spec.ts" time="5.261">
+</testcase>
+<testcase name="US-E5-03/AC3 back from the recommendation view leaves the stored decision exactly as it was" classname="m3-recommend.spec.ts" time="0.743">
+</testcase>
+<testcase name="US-E6-04/AC1 US-E6-04/AC2 US-E6-04/AC3 recipe detail: content, the 農林水産省 notes, deep link, unknown id; axe in ja and en" classname="m3-recommend.spec.ts" time="3.464">
+</testcase>
+<testcase name="US-E6-05/AC1 US-E6-05/AC2 US-E6-05/AC3 the library lists blocked recipes last; the picker plans a date by keyboard; axe with the picker open" classname="m3-recommend.spec.ts" time="5.141">
+</testcase>
+<testcase name="US-E6-05/AC2 Escape closes the picker and returns the focus to 「日付を選んで計画」" classname="m3-recommend.spec.ts" time="0.631">
+</testcase>
+<testcase name="US-E6-06/AC1 a planned recipe missing from the library keeps its stored names and the plan; the sheet offers a re-choice" classname="m3-recommend.spec.ts" time="2.527">
+</testcase>
+<testcase name="US-E1-03/AC5 an unknown allergy status shows the warning above the cards and on a recipe; never a safety claim" classname="m3-recommend.spec.ts" time="1.652">
+</testcase>
+</testsuite>
+<testsuite name="m4-reminders.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="12" failures="0" skipped="0" time="34.424" errors="0">
+<testcase name="US-E7-02/AC1 US-E7-07/AC1 US-E7-05/AC1 the day-before reminder appears at 17:30 Tokyo time while the app is open, opens the recipe, and once dismissed stays away after a reload" classname="m4-reminders.spec.ts" time="0.829">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-07/AC2 opened at 21:00 Tokyo time the missed reminder is shown with its original time and 「（日本時間）」" classname="m4-reminders.spec.ts" time="0.438">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-03/AC1 first opened at 07:00 Tokyo time on the day: the reminder expired and the today card shows the plan" classname="m4-reminders.spec.ts" time="0.375">
+</testcase>
+<testcase name="US-E7-03/AC3 the today card rolls over at Tokyo midnight without a reload, whatever the browser timezone" classname="m4-reminders.spec.ts" time="0.519">
+</testcase>
+<testcase name="US-E7-01/AC1 US-E7-01/AC2 US-E8-03/AC1 the weekly summary appears on Sunday 14:00 Tokyo time, 「計画する」 opens the day sheet; English dates follow US-E8-03" classname="m4-reminders.spec.ts" time="3.928">
+</testcase>
+<testcase name="US-E7-05/AC5 US-NF-02/AC1 a day-before and a weekly reminder together: one banner and 「ほかに1件のお知らせ」, keyboard operable, axe finds nothing in ja and en" classname="m4-reminders.spec.ts" time="4.343">
+</testcase>
+<testcase name="US-E7-04/AC1 US-E7-04/AC2 US-E7-06/AC1 US-E7-07/AC2 reminder settings: defaults, the web limit, 「（日本時間）」, changes persist; axe in ja and en" classname="m4-reminders.spec.ts" time="3.601">
+</testcase>
+<testcase name="US-E7-04/AC4 switching off 前日のお知らせ removes day-before reminders and the today card still works" classname="m4-reminders.spec.ts" time="0.521">
+</testcase>
+<testcase name="US-E8-05/AC1 US-E8-05/AC2 US-E8-05/AC3 the theme follows the device by default, a manual choice persists, and only planned cells stay solid-filled in both themes; axe in both" classname="m4-reminders.spec.ts" time="7.618">
+</testcase>
+<testcase name="US-E7-03/AC1 US-E7-03/AC2 US-NF-02/AC1 the today card on a Saturday points to the next school day; axe in ja and en" classname="m4-reminders.spec.ts" time="3.852">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-07/AC2 US-NF-02/AC1 the missed reminder (original time, title, recipe line) passes axe contrast in ja and en, light theme" classname="m4-reminders.spec.ts" time="4.194">
+</testcase>
+<testcase name="US-E7-05/AC2 US-E7-07/AC2 US-NF-02/AC1 the missed reminder (original time, title, recipe line) passes axe contrast in ja and en, dark theme" classname="m4-reminders.spec.ts" time="4.206">
+</testcase>
+</testsuite>
+<testsuite name="m4-share-debug.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="13" failures="0" skipped="0" time="45.35" errors="0">
+<testcase name="weekly share on the production build › US-E9-01/AC1 US-E9-02/AC1 US-E9-02/AC2 the sheet previews the exact text, with the two notes and no child data" classname="m4-share-debug.spec.ts" time="2.485">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC1 US-E9-02/AC2 the English text and the sheet pass axe" classname="m4-share-debug.spec.ts" time="2.915">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC2 the native share sheet receives the text" classname="m4-share-debug.spec.ts" time="1.152">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC2 a rejected share falls back to the clipboard and 「コピーしました」 shows" classname="m4-share-debug.spec.ts" time="0.623">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC2 without a share sheet only 「コピーする」 is offered and copies" classname="m4-share-debug.spec.ts" time="0.614">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC4 when the clipboard is blocked too, the message shows and the text is selected" classname="m4-share-debug.spec.ts" time="2.645">
+</testcase>
+<testcase name="weekly share on the production build › US-E9-01/AC3 an empty week says so (exact text, no others line)" classname="m4-share-debug.spec.ts" time="0.503">
+</testcase>
+<testcase name="no debug code on the production build › US-E11-01/AC2 no debug UI renders, /debug is the not-found page and the built JS has no marker string" classname="m4-share-debug.spec.ts" time="0.488">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-01/AC1 a 「Debug」 button is visible in a corner and opens the panel (axe)" classname="m4-share-debug.spec.ts" time="7.755">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-02/AC1 US-E11-02/AC3 simulating 17:29 then +1 minute makes the day-before reminder due; 「実時間に戻す」 restores real time" classname="m4-share-debug.spec.ts" time="7.118">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-02/AC2 triggering shows a debug-marked reminder and does not write the shown-reminders log" classname="m4-share-debug.spec.ts" time="6.447">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-03/AC1 US-E11-03/AC3 the sample menu opens the review without an AI call; the stored decisions are listed and can be cleared" classname="m4-share-debug.spec.ts" time="6.539">
+</testcase>
+<testcase name="debug panel on the development server › US-E11-03/AC2 the panel selects a failure mode and shows the AI call count of this month (the mode-to-result mapping is unit-tested)" classname="m4-share-debug.spec.ts" time="6.066">
+</testcase>
+</testsuite>
+<testsuite name="m5-consent.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="2" failures="0" skipped="0" time="1.702" errors="0">
+<testcase name="US-E2-08/AC1 US-E2-08/AC2 no /api/menu/extract request before consent; declining sends none and keeps manual entry open" classname="m5-consent.spec.ts" time="1.24">
+</testcase>
+<testcase name="US-E2-08/AC1 US-E2-08/AC3 the request is sent only after 「同意して読み取る」; the consent is stored with notice version 1 and the next import does not ask" classname="m5-consent.spec.ts" time="0.462">
+</testcase>
+</testsuite>
+<testsuite name="smoke.spec.ts" timestamp="2026-11-01T01:34:58.311Z" tests="7" failures="0" skipped="0" time="6.021" errors="0">
+<testcase name="US-E8-01/AC1 opens in Japanese whatever the browser language" classname="smoke.spec.ts" time="0.392">
+</testcase>
+<testcase name="US-E8-01/AC2 one tap switches to EN and one tap back, without reload" classname="smoke.spec.ts" time="0.543">
+</testcase>
+<testcase name="US-E8-01/AC3 the language choice survives a reload" classname="smoke.spec.ts" time="0.54">
+</testcase>
+<testcase name="US-E5-01/AC1 opens on the current Tokyo month with the Tokyo date marked as today" classname="smoke.spec.ts" time="0.368">
+</testcase>
+<testcase name="US-E5-01/AC1 at Tokyo month change the next month opens even though the device is still in the old one" classname="smoke.spec.ts" time="0.388">
+</testcase>
+<testcase name="the calendar shell has no serious or critical axe violations in ja and en" classname="smoke.spec.ts" time="3.371">
+</testcase>
+<testcase name="the production build has no debug UI (BR-24)" classname="smoke.spec.ts" time="0.419">
+</testcase>
+</testsuite>
+</testsuites>

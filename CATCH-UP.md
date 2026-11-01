@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-11-01 (MVP feature-complete; awaiting PO review) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-11-01 (MVP evidence package mvp frozen) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -44,8 +44,7 @@ Two tasks were stopped at a safe point; each wrote pause notes:
 
 ### Next 📋
 MVP is feature-complete and green (release gate, CI, Pages preview deployed: https://mrdrah.github.io/BentoMinder/). Milestones M0–M6 done: M5 live Gemini works on synthetic fixtures (primary now gemini-3.5-flash-lite, fallback gemini-3.8-flash; 0 invented allergens in 23 live calls; 7 of 9 first-pass fixtures ok, the 2 failures fixed after prompt changes); all 20 recipes verifier-reviewed; Android feasibility doc written (GO for a 1-day spike).
-1. **PO review of the MVP** (try the preview or `npm run dev`), then the PO approves the milestone.
-2. Then: `evidence.mjs collect --milestone mvp`, `metrics` agent writes findings, PO reviews, freeze, commit (CLAUDE.md §2.7).
+1. MVP approved by the PO 2026-11-01; evidence package `mvp` frozen (UNVERIFIED overall: functional 87.7% of ACs, cost token-only by PO choice under a subscription, no controlled recovery test). Known gap: the event log lacks the corrections, defects and interruptions of 26 Oct–1 Nov, so intervention counts are probably undercounted; a revision (`collect --milestone mvp --revise --reason`) after late-logging them is optional.
 3. Not in the MVP: hosted AI proxy for the live site (the live site is mock-only; real import runs locally with the PO's key), v1 items (accounts/sync, Android build, holidays US-E8-04, reservation reminder), a live check of the real school PDF (PO to approve sending it to Google).
 
 ## 4. Key decisions (summary; the full log is in docs/PLAN.md §7)

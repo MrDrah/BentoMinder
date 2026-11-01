@@ -1,0 +1,40 @@
+{
+  "$schema": "./schema/v1/index.schema.json",
+  "schemaVersion": "1.1.0",
+  "kind": "engineering-evidence/index",
+  "project": {
+    "id": "bentominder",
+    "name": "BentoMinder",
+    "repository": "https://github.com/MrDrah/BentoMinder"
+  },
+  "packages": [
+    {
+      "id": "mvp",
+      "milestoneId": "mvp",
+      "label": "MVP",
+      "revision": 1,
+      "path": "mvp",
+      "schemaVersion": "1.1.0",
+      "sourceCommit": "2b98064d8a22b71cdce63ddca40fea185ad375f3",
+      "collectedAt": "2026-11-01T01:41:54.477Z",
+      "frozenAt": "2026-11-01T01:43:39.275Z",
+      "sha256": "0d292ca057f1de0eaf4e8f739645fca1de27ad6e417b5fcc9e33e7e6595be09f",
+      "files": {
+        "evidence/ci-runs.json": "4628f89d9562f99d9f580cc495883977efcb87fd22f7c0dba0c53074f32a9d13",
+        "evidence/coverage-summary.json": "35a6cc9a41fa93b2f9e1c33ee07aa85cd687c9776a44446f6c71b9942c14c974",
+        "evidence/events.jsonl": "b30ccad93c13e8180cfb977f2b0cb79015e19fcb9e426d2d8d5f4a5739dcdc5f",
+        "evidence/git.json": "3285f8f790273d44347ada0bdf255fb702864d48c3fd3aa698bdc981ac461a92",
+        "evidence/junit-1.xml": "ded112a14116f827b4c29cbe3862c2f49c8ba3bad6f88644fc12c69038832e43",
+        "evidence/junit-2.xml": "76468acf23f9d8bb2c8f27d764518b71506524f9a37d395ebb5ff3fad147a73d",
+        "evidence/smoke.json": "b9c9bab422048910fe0197ea1831d341b777f63ae6216659fb84d46e35abd324",
+        "evidence/stories.md": "e616fc8cabaf088cce64ae8c46d32a4915dc371cf58e618d35d6bff3986c0833",
+        "evidence/usage.json": "e1d5a1ac3b7f59123f8590f4b0454b5ef462999db0bd046478fba41790ff836b",
+        "metrics.json": "950a0486052d9488646f31bbcd1c5399ed89fd6a36cbf0e78857a873ef4bca1c",
+        "summary.md": "627f2c36e881408fde3714f15b83889a3d93e146ad61e8b1517e5557b8c11abb"
+      },
+      "assessment": "UNVERIFIED",
+      "supersedes": null,
+      "supersededBy": null
+    }
+  ]
+}

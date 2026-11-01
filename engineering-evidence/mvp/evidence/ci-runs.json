@@ -1,0 +1,24 @@
+[
+  {
+    "id": 41262075641,
+    "name": "Deploy",
+    "path": ".github/workflows/deploy.yml",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "2b98064d8a22b71cdce63ddca40fea185ad375f3",
+    "created_at": "2026-11-01T01:40:41Z",
+    "html_url": "https://github.com/MrDrah/BentoMinder/actions/runs/41262075641"
+  },
+  {
+    "id": 41261610957,
+    "name": "CI",
+    "path": ".github/workflows/ci.yml",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "2b98064d8a22b71cdce63ddca40fea185ad375f3",
+    "created_at": "2026-11-01T01:34:01Z",
+    "html_url": "https://github.com/MrDrah/BentoMinder/actions/runs/41261610957"
+  }
+]
