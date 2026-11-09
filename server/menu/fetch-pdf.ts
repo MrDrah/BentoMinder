@@ -61,6 +61,7 @@ async function resolveSafe(url: URL, resolve: Resolver): Promise<ResolvedAddress
   const host = stripBrackets(url.hostname);
   const literal = /^[\d.]+$/.test(host) ? 4 : host.includes(':') ? 6 : 0;
   if (literal !== 0) return isBlockedAddress(host) ? 'BLOCKED' : { address: host, family: literal };
+  if (isInternalName(host)) return 'BLOCKED'; // no lookup, no connection (US-E14-04/AC1)
   let addresses: ResolvedAddress[];
   try {
     addresses = await resolve(host);
@@ -70,7 +71,14 @@ async function resolveSafe(url: URL, resolve: Resolver): Promise<ResolvedAddress
   if (addresses.length === 0) return 'NETWORK';
   // Conservative: if any address of the name is internal, the name is refused.
   if (addresses.some((a) => isBlockedAddress(a.address))) return 'BLOCKED';
-  return addresses[0] as ResolvedAddress;
+  // IPv4 first: the hosted egress may not route IPv6, and a failure there must read as NETWORK (ADR 015 §4).
+  return (addresses.find((a) => a.family === 4) ?? addresses[0]) as ResolvedAddress;
+}
+
+/** Names that are never a public school site: single-label hosts, localhost, and internal/local zones (incl. metadata.google.internal). */
+export function isInternalName(host: string): boolean {
+  const h = host.toLowerCase().replace(/\.$/, '');
+  return !h.includes('.') || h === 'localhost' || h.endsWith('.localhost') || h.endsWith('.internal') || h.endsWith('.local') || h === 'metadata.google.internal';
 }
 
 const isRedirect = (status: number) => status === 301 || status === 302 || status === 303 || status === 307 || status === 308;

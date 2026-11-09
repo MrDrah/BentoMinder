@@ -1,0 +1,5 @@
+{
+  "type": "module",
+  "private": true,
+  "description": "Source is ES modules (like the rest of the repository); the deployed bundle in ../lib is CommonJS, built by ../build.mjs."
+}
