@@ -6,7 +6,7 @@ import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { selectAdapters } from './adapters/select.ts';
 import { selectAuth } from './adapters/select-auth.ts';
-import type { AuthUser } from './domain/auth/types.ts';
+import type { AuthPort } from './domain/auth/types.ts';
 import { adoptLegacyStore } from './domain/storage/adoption.ts';
 import { createRepository } from './domain/storage/repository.ts';
 import { AuthRoot, type AccountEnv } from './ui/auth/AuthRoot.tsx';
@@ -15,8 +15,9 @@ import './ui/styles/global.css';
 import './ui/styles/processed.css';
 
 /** One signed-in account: its storage keys (after the one-time adoption of the old unkeyed data), adapters and reminders. */
-async function openAccount(_user: AuthUser, accountId: string | undefined): Promise<AccountEnv> {
-  const adapters = selectAdapters(accountId);
+async function openAccount(auth: AuthPort, accountId: string | undefined): Promise<AccountEnv> {
+  // The account's ID token is asked for per request and only when the proxy is hosted (US-E14-07/AC4).
+  const adapters = selectAdapters(accountId, (force) => auth.getIdToken(force));
   const dbg = import.meta.env.DEV ? await import('./debug/index.ts') : null;
   const clock = dbg ? dbg.wrapClock(adapters.clock) : adapters.clock;
   if (accountId !== undefined) {
@@ -57,7 +58,7 @@ async function boot(): Promise<void> {
   const { auth, accountOf } = await selectAuth();
   createRoot(rootElement).render(
     <StrictMode>
-      <AuthRoot auth={auth} accountOf={accountOf} openAccount={openAccount} />
+      <AuthRoot auth={auth} accountOf={accountOf} openAccount={(_user, accountId) => openAccount(auth, accountId)} />
     </StrictMode>,
   );
 }

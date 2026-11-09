@@ -2,6 +2,7 @@
 // fetch other sites' PDFs, and the proxy owns the SSRF checks). File path: size and `%PDF-`
 // checks happen here before anything is read into memory or sent (BR-14, US-E2-03).
 import type { PdfError, PdfSource } from '../../domain/ports.ts';
+import { parseDenial } from '../../domain/proxy/denial.ts';
 import { MAX_PDF_BYTES } from '../../domain/schema/extracted-menu.ts';
 
 const MAGIC = [0x25, 0x50, 0x44, 0x46, 0x2d]; // %PDF-
@@ -22,7 +23,7 @@ const SERVER_ERRORS: Readonly<Record<string, PdfError>> = {
   EMPTY: 'EMPTY',
 };
 
-export function createWebPdfSource(fetchImpl: typeof fetch = (...args) => fetch(...args)): PdfSource {
+export function createWebPdfSource(fetchImpl: typeof fetch = (...args) => fetch(...args), warn: (message: string) => void = (m) => console.warn(m)): PdfSource {
   return {
     async fromUrl(url, signal) {
       let res: Response;
@@ -43,10 +44,15 @@ export function createWebPdfSource(fetchImpl: typeof fetch = (...args) => fetch(
       }
       let code = '';
       try {
-        code = String(((await res.json()) as { error?: unknown }).error ?? '');
+        const body: unknown = await res.json();
+        // US-E14-08/AC1-AC3: the hosted proxy's account-level denials.
+        const denial = parseDenial(body);
+        if (denial !== null) return { ok: false, ...denial };
+        code = String((body as { error?: unknown }).error ?? '');
       } catch {
         // not JSON: the proxy isn't there (e.g. a static host)
       }
+      if (code === 'ORIGIN_NOT_ALLOWED') warn('The hosted proxy refused this site (ORIGIN_NOT_ALLOWED). Check its allowed origins.');
       return { ok: false, error: SERVER_ERRORS[code] ?? 'NETWORK' };
     },
 

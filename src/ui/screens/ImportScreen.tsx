@@ -14,12 +14,13 @@ import {
   recordExtraction,
   savedSourceUrl,
 } from '../../domain/menu/store-ops.ts';
-import type { ExtractError, PdfBytes, PdfError } from '../../domain/ports.ts';
+import type { ExtractError, LimitScope, PdfBytes, PdfError, ProxyDenial } from '../../domain/ports.ts';
 import type { BentoMinderStore } from '../../domain/schema/store.ts';
 import type { YearMonth } from '../../domain/time/jst.ts';
 import { formatMonth } from '../../i18n/format.ts';
 import type { MessageKey } from '../../i18n/index.ts';
 import { useApp, useStore } from '../app-store.tsx';
+import { useAccount } from '../auth/account-context.tsx';
 import { Banner, Dialog, FieldError } from '../components/Controls.tsx';
 import { navigate, type Route } from '../router.ts';
 import { rememberSessionPdf } from '../session.ts';
@@ -29,7 +30,7 @@ const CONSENT_TERMS_URL = 'https://ai.google.dev/gemini-api/terms';
 type Panel =
   | { kind: 'fetch'; message: MessageKey; urlKept: boolean }
   | { kind: 'file'; message: MessageKey }
-  | { kind: 'ai'; message: MessageKey; retry: boolean; upload: boolean; retryAfterSec?: number };
+  | { kind: 'ai'; message: MessageKey; retry: boolean; upload: boolean; retryAfterSec?: number; signIn?: boolean };
 
 interface Pending {
   bytes: PdfBytes;
@@ -54,8 +55,22 @@ const FILE_ERRORS: Record<PdfError, MessageKey> = {
   EMPTY: 'import.err.unreadable',
 };
 
-function aiPanel(error: ExtractError, retryAfterSec?: number): Panel {
+const isDenial = (e: PdfError | ProxyDenial): e is ProxyDenial => e === 'UNAUTHENTICATED' || e === 'NOT_ALLOWED' || e === 'ACCOUNT_LIMIT';
+
+type AiPanel = Extract<Panel, { kind: 'ai' }>;
+
+function aiPanel(error: ExtractError, retryAfterSec?: number, scope?: LimitScope): Panel {
   switch (error) {
+    // US-E14-08: the hosted proxy's account-level answers. None of them changes stored data.
+    case 'UNAUTHENTICATED':
+      return { kind: 'ai', message: 'proxy.expired', retry: false, upload: true, signIn: true };
+    case 'NOT_ALLOWED':
+      return { kind: 'ai', message: 'proxy.notAllowed', retry: false, upload: false };
+    case 'ACCOUNT_LIMIT':
+      if (scope === 'hour') return { kind: 'ai', message: 'proxy.limit.hour', retry: true, upload: true, ...(retryAfterSec === undefined ? {} : { retryAfterSec }) };
+      return { kind: 'ai', message: scope === 'fetch' ? 'proxy.limit.fetch' : 'proxy.limit.day', retry: false, upload: true };
+    case 'ORIGIN_NOT_ALLOWED':
+      return { kind: 'ai', message: 'import.err.unavailable', retry: true, upload: true };
     case 'MALFORMED_OUTPUT':
       return { kind: 'ai', message: 'import.err.malformed', retry: true, upload: true };
     case 'RATE_LIMITED':
@@ -76,6 +91,7 @@ function aiPanel(error: ExtractError, retryAfterSec?: number): Panel {
 
 export function ImportScreen({ onboarding }: { onboarding: boolean }) {
   const { t, state, today, now, services, commit, setFlash } = useApp();
+  const account = useAccount();
   const store = useStore();
   const storeRef = useRef<BentoMinderStore>(store);
   storeRef.current = store;
@@ -152,7 +168,7 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
       let next = addAiUsage(storeRef.current, now(), calls);
       if (!result.ok) {
         if (next !== storeRef.current) await save(next);
-        showPanel(aiPanel(result.error, result.retryAfterSec));
+        showPanel(aiPanel(result.error, result.retryAfterSec, result.scope));
         return;
       }
       const menu = stampOrigin(result.menu, p.origin);
@@ -203,9 +219,15 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
         setPhase('fetching');
         const r = await services.pdfSource.fromUrl(target);
         setPhase('idle');
+        if (!r.ok && isDenial(r.error)) {
+          // US-E14-08: the fetch itself was refused; there is no PDF to retry with, so no retry button (AC3: nothing is stored).
+          showPanel({ ...(aiPanel(r.error, r.retryAfterSec, r.scope ?? 'fetch') as AiPanel), retry: false });
+          return;
+        }
         if (!r.ok) {
           setFailedUrl(target);
-          showPanel({ kind: 'fetch', message: FETCH_ERRORS[r.error], urlKept: r.error !== 'NOT_A_PDF' && r.error !== 'TOO_LARGE' && r.error !== 'EMPTY' });
+          const err: PdfError = isDenial(r.error) ? 'NETWORK' : r.error;
+          showPanel({ kind: 'fetch', message: FETCH_ERRORS[err], urlKept: err !== 'NOT_A_PDF' && err !== 'TOO_LARGE' && err !== 'EMPTY' });
           return;
         }
         await continueWith({ bytes: r.bytes, sha256: r.sha256, origin: { kind: 'url', url: target } });
@@ -221,7 +243,7 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
       void (async () => {
         const r = await services.pdfSource.fromFile(file);
         if (!r.ok) {
-          showPanel({ kind: 'file', message: FILE_ERRORS[r.error] });
+          showPanel({ kind: 'file', message: FILE_ERRORS[isDenial(r.error) ? 'NETWORK' : r.error] });
           return;
         }
         // US-E2-02/AC2: an upload after a failed URL keeps that URL as the source reference.
@@ -336,6 +358,11 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
                     }}
                   >
                     {countdown > 0 ? t('common.retryIn', { s: countdown }) : t('common.retry')}
+                  </button>
+                )}
+                {panel.signIn === true && account !== null && (
+                  <button type="button" className="btn btn--primary" data-testid="import-error-signin" onClick={() => void account.signOut()}>
+                    {t('proxy.signInAgain')}
                   </button>
                 )}
                 <p className="field__sublabel">{t('import.err.otherPaths')}</p>

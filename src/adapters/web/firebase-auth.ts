@@ -141,6 +141,17 @@ export function createFirebaseAuth(env: Env, options: FirebaseAuthOptions = {}):
       }
     },
 
+    async getIdToken(forceRefresh = false) {
+      const s = await load();
+      const user = s?.auth.currentUser ?? null;
+      if (user === null) return null;
+      try {
+        return await user.getIdToken(forceRefresh);
+      } catch {
+        return null;
+      }
+    },
+
     onChange(handler) {
       handlers.add(handler);
       return () => handlers.delete(handler);
