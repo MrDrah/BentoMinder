@@ -107,7 +107,7 @@ export function formToProfile(form: ProfileForm, now: Instant, existing: ChildPr
     diet: [...new Set(diet)],
     themeIds: form.themeIds.slice(0, THEMES_MAX),
     ...(note === '' ? {} : { note }),
-    ownerId: LOCAL_OWNER_ID,
+    ownerId: existing?.ownerId ?? LOCAL_OWNER_ID,
     createdAt: existing?.createdAt ?? ts,
     updatedAt: ts,
   };
@@ -218,7 +218,8 @@ export const POPULAR_FOOD_IDS = [
 ] as const;
 
 export function saveProfile(store: BentoMinderStore, profile: ChildProfile, now: Instant): BentoMinderStore {
-  return { ...store, profile, updatedAt: toJstTimestamp(now) };
+  // The profile belongs to the store's account (ADR 014, US-E13-04/AC5).
+  return { ...store, profile: { ...profile, ownerId: store.settings.ownerId }, updatedAt: toJstTimestamp(now) };
 }
 
 /**

@@ -1,6 +1,6 @@
 // E13 (slice A): the auth state machine and the scripted fake. No Firebase, no network.
 import { describe, expect, it } from 'vitest';
-import { authReducer, initialAuthSession, RESTORE_TIMEOUT_MS, type AuthEvent, type AuthSession } from '../../../../src/domain/auth/session.ts';
+import { authReducer, initialAuthSession, type AuthEvent, type AuthSession } from '../../../../src/domain/auth/session.ts';
 import { FakeAuth, TEST_USER, TEST_USER_2 } from '../../../../src/domain/auth/fake-auth.ts';
 import type { AuthPort } from '../../../../src/domain/auth/types.ts';
 
@@ -28,7 +28,6 @@ describe('US-E13-02 session persists and works offline (state machine)', () => {
     expect(authReducer(initialAuthSession, { type: 'signedOut' }).status).toBe('loading');
     auth.releaseRestore();
     expect(await pending).toEqual(TEST_USER);
-    expect(RESTORE_TIMEOUT_MS).toBe(3000);
   });
 
   it('US-E13-02/AC3 the cached session is used offline and nothing blocks use', async () => {

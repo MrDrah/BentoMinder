@@ -11,6 +11,7 @@ import {
 } from '../schema/store.ts';
 import { todayJst } from '../time/jst.ts';
 import { migrate, MigrationError, migrations as shippedMigrations, type MigrationMap } from './migrations/index.ts';
+import { LOCAL_OWNER_ID } from './defaults.ts';
 import { storeKeysFor } from './keys.ts';
 import { rewriteOwnerId } from './owner.ts';
 import { repairReminderTimes } from './repair.ts';
@@ -68,6 +69,8 @@ export interface RepositoryOptions {
 }
 
 export interface Repository {
+  /** The owner of every record this repository stores: the account uid, or `local` when unkeyed (ADR 014). */
+  readonly ownerId?: string;
   load(): Promise<LoadResult>;
   save(state: BentoMinderStore, options?: SaveOptions): Promise<void>;
   exportJson(state: BentoMinderStore): string;
@@ -171,6 +174,7 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
   }
 
   return {
+    ownerId: accountId ?? LOCAL_OWNER_ID,
     load: () => serial(loadNow),
 
     save(state, saveOptions) {

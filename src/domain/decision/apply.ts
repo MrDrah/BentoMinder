@@ -20,7 +20,7 @@ export function dayContextOf(store: BentoMinderStore, date: LocalDate): DayConte
 export type ApplyResult = { ok: true; store: BentoMinderStore } | { ok: false; error: DecisionError };
 
 export function applyDecisionEvent(store: BentoMinderStore, date: LocalDate, event: DecisionEvent, env: TransitionEnv): ApplyResult {
-  const result = transition(dayContextOf(store, date), store.decisions[date], event, env);
+  const result = transition(dayContextOf(store, date), store.decisions[date], event, { ...env, ownerId: env.ownerId ?? store.settings.ownerId });
   if (!result.ok) return result;
   const kept = Object.entries(store.decisions).filter(([key]) => key !== date);
   const decisions = Object.fromEntries(result.next === null ? kept : [...kept, [date, result.next]]);

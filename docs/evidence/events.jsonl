@@ -257,3 +257,12 @@
 {"v":1,"at":"2026-11-09T08:33:43.216Z","by":"orchestrator","type":"task-end","task":"auth-dev-b","outcome":"success","summary":"diff-guard: 0 changed files, all allowed"}
 {"v":1,"at":"2026-11-09T08:42:25.678Z","by":"orchestrator","type":"task-start","task":"auth-ba2","summary":"Task auth-ba2 dispatched (2 allowed globs)"}
 {"v":1,"at":"2026-11-09T08:43:14.110Z","by":"orchestrator","type":"task-end","task":"auth-ba2","outcome":"success","summary":"diff-guard: 1 changed files, all allowed"}
+{"v":1,"at":"2026-11-09T09:05:08.093Z","by":"orchestrator","type":"task-start","task":"auth-qa","summary":"Task auth-qa dispatched (6 allowed globs)"}
+{"v":1,"at":"2026-11-09T09:05:13.003Z","by":"orchestrator","type":"task-start","task":"auth-qa","summary":"Task auth-qa dispatched (5 allowed globs)"}
+{"v":1,"at":"2026-11-09T09:20:40.781Z","by":"orchestrator","type":"task-end","task":"auth-qa","outcome":"failure","summary":"diff-guard: 6 files outside the allow-list"}
+{"v":1,"at":"2026-11-09T09:20:41.280Z","by":"orchestrator","type":"task-start","task":"auth-fix1","summary":"Task auth-fix1 dispatched (3 allowed globs)"}
+{"v":1,"at":"2026-11-09T09:21:16.981Z","type":"defect","summary":"E13 QA: signed-in account cannot save new records (ownerId local vs ownerMismatches)","by":"qa","defect":"E13-D02","severity":"P1","state":"found"}
+{"v":1,"at":"2026-11-09T09:21:17.089Z","type":"defect","summary":"E13 QA: invalid deep link after sign-in shows not-found","by":"qa","defect":"E13-D01","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-09T09:35:43.630Z","type":"defect","summary":"E13-D02 fixed in fix cycle 1; QA e13 suite 146/146, main e2e 160/160, dev gate green","by":"developer","defect":"E13-D02","severity":"P1","state":"fixed"}
+{"v":1,"at":"2026-11-09T09:35:43.734Z","type":"defect","summary":"E13-D01 fixed in fix cycle 1; QA e13 suite 146/146, main e2e 160/160, dev gate green","by":"developer","defect":"E13-D01","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-09T09:35:43.847Z","type":"defect","summary":"E13-D03 fixed in fix cycle 1; QA e13 suite 146/146, main e2e 160/160, dev gate green","by":"developer","defect":"E13-D03","severity":"P4","state":"fixed"}

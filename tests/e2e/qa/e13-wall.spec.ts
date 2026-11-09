@@ -138,7 +138,7 @@ test.describe('US-E13-02 session', () => {
     await expect(page.getByTestId('screen-calendar')).toBeVisible();
     await expect(page.getByTestId('screen-login')).toHaveCount(0);
     const state = await page.context().storageState();
-    const ctx = await browser.newContext({ storageState: state, viewport: page.viewportSize() ?? undefined, locale: 'ja-JP' });
+    const ctx = await browser.newContext({ storageState: state, viewport: page.viewportSize() ?? null, locale: 'ja-JP' });
     const p2 = await ctx.newPage();
     await p2.goto('/');
     await expect(p2.getByTestId('screen-calendar')).toBeVisible();

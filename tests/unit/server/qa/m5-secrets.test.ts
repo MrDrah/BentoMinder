@@ -40,7 +40,7 @@ describe('US-NF-05/AC1 the production client bundle holds no key, no provider ho
       const vite = join(ROOT, 'node_modules', 'vite', 'bin', 'vite.js');
       const run = spawnSync(process.execPath, [vite, 'build', '--outDir', out, '--emptyOutDir'], {
         cwd: ROOT,
-        env: { ...process.env, GEMINI_API_KEY: SENTINEL, VITE_GEMINI_API_KEY: '' },
+        env: { ...process.env, GEMINI_API_KEY: SENTINEL, VITE_GEMINI_API_KEY: '', VITE_FIREBASE_API_KEY: '' },
         encoding: 'utf8',
         timeout: 90_000,
       });

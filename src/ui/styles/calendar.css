@@ -273,7 +273,7 @@
 .upcoming__title {
   margin: 0 0 var(--space-2);
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: calc(var(--text-lg) * var(--title-scale));
 }
 .upcoming__list {
   display: grid;
@@ -405,7 +405,7 @@
   flex: 1;
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-xl);
+  font-size: calc(var(--text-xl) * var(--title-scale));
 }
 .sheet__title:focus-visible {
   outline-offset: 4px;
@@ -423,7 +423,7 @@
 }
 .sheet__heading {
   margin: 0 0 var(--space-2);
-  font-size: var(--text-md);
+  font-size: calc(var(--text-md) * var(--title-scale));
   font-weight: var(--weight-bold);
 }
 @media (min-width: 768px) and (max-width: 1279px) {
@@ -730,7 +730,7 @@
   flex: 1;
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: calc(var(--text-lg) * var(--title-scale));
 }
 .datefix__context {
   margin: var(--space-2) 0;

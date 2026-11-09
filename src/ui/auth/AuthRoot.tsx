@@ -10,6 +10,7 @@ import type { Repository } from '../../domain/storage/repository.ts';
 import { createTranslator, type Language } from '../../i18n/index.ts';
 import { App } from '../App.tsx';
 import { AppProvider, type AppServices } from '../app-store.tsx';
+import { navigate, parseHash } from '../router.ts';
 import { AccountContext, type AccountValue } from './account-context.tsx';
 import { LoginScreen, RestoringScreen } from './LoginScreen.tsx';
 
@@ -111,7 +112,10 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
     setJustSignedOut(false);
     dispatch({ type: 'signInStarted' });
     try {
-      dispatch({ type: 'signInFinished', result: await auth.signInWithGoogle() });
+      const result = await auth.signInWithGoogle();
+      // US-E13-01/AC2: a valid deep link is kept; an address that names no screen opens the start screen instead of not-found.
+      if (result.ok && parseHash(window.location.hash).name === 'not-found') navigate({ name: 'calendar', month: null });
+      dispatch({ type: 'signInFinished', result });
     } catch (err) {
       console.warn(`Sign-in threw: ${err instanceof Error ? err.name : 'unknown error'}`);
       dispatch({ type: 'signInFinished', result: { ok: false, error: 'other' } });

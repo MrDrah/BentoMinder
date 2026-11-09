@@ -11,9 +11,6 @@ export interface AuthSession {
   lastError: AuthErrorKind | null;
 }
 
-/** US-E13-02/AC2: after this long the screen stops waiting for the cached session. */
-export const RESTORE_TIMEOUT_MS = 3000;
-
 export type AuthEvent =
   | { type: 'restored'; user: AuthUser | null }
   | { type: 'signInStarted' }

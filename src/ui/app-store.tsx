@@ -142,7 +142,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   useEffect(() => {
     let cancelled = false;
     void repository.load().then((result) => {
-      if (!cancelled) dispatch({ type: 'loaded', result, fresh: createEmptyStore({ deviceId: newDeviceId(), now: clock.now() }) });
+      if (!cancelled) dispatch({ type: 'loaded', result, fresh: createEmptyStore({ deviceId: newDeviceId(), now: clock.now(), ...(repository.ownerId === undefined ? {} : { ownerId: repository.ownerId }) }) });
     });
     return () => {
       cancelled = true;
@@ -153,7 +153,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   // writes from a stale copy (ADR 003 change log 2026-10-25, D-M1-06).
   const reloadFromStorage = useCallback(async () => {
     const result = await repository.load();
-    dispatch({ type: 'loaded', result, fresh: createEmptyStore({ deviceId: newDeviceId(), now: clock.now() }) });
+    dispatch({ type: 'loaded', result, fresh: createEmptyStore({ deviceId: newDeviceId(), now: clock.now(), ...(repository.ownerId === undefined ? {} : { ownerId: repository.ownerId }) }) });
     setUpdatedElsewhere(true);
   }, [repository, clock, newDeviceId]);
 
@@ -207,7 +207,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   const startOver = useCallback(async () => {
     await repository.deleteAll();
     setProfileDraft(null); // typed-but-unsaved step-1 answers go too (BR-22: nothing of the family's stays)
-    dispatch({ type: 'reset', store: createEmptyStore({ deviceId: newDeviceId(), now: clock.now() }) });
+    dispatch({ type: 'reset', store: createEmptyStore({ deviceId: newDeviceId(), now: clock.now(), ...(repository.ownerId === undefined ? {} : { ownerId: repository.ownerId }) }) });
   }, [repository, newDeviceId, clock]);
 
   const replaceStore = useCallback(

@@ -6,7 +6,7 @@ import { toJstTimestamp, type Instant } from '../time/jst.ts';
 
 export const LOCAL_OWNER_ID = 'local';
 
-export function defaultSettings(now: Instant): Settings {
+export function defaultSettings(now: Instant, ownerId: string = LOCAL_OWNER_ID): Settings {
   const ts = toJstTimestamp(now);
   return {
     language: 'ja',
@@ -18,21 +18,21 @@ export function defaultSettings(now: Instant): Settings {
     nextMonthPromptFromDay: 20,
     weekStartsOn: 'monday',
     theme: 'auto',
-    ownerId: LOCAL_OWNER_ID,
+    ownerId,
     createdAt: ts,
     updatedAt: ts,
   };
 }
 
 /** `deviceId` is a random UUID v4 made by the caller (randomness stays outside the domain). */
-export function createEmptyStore(input: { deviceId: string; now: Instant }): BentoMinderStore {
+export function createEmptyStore(input: { deviceId: string; now: Instant; ownerId?: string }): BentoMinderStore {
   const ts = toJstTimestamp(input.now);
   return {
     deviceId: input.deviceId,
     schemaVersion: CURRENT_SCHEMA_VERSION,
     createdAt: ts,
     updatedAt: ts,
-    settings: defaultSettings(input.now),
+    settings: defaultSettings(input.now, input.ownerId),
     profile: null,
     menus: {},
     overrides: {},

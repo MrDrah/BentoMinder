@@ -119,4 +119,24 @@ test.describe('E13 sign-in', () => {
     expect(await stored(page, 'bentominder.test-uid-002.state')).toBeNull();
     await expect(page.locator('body')).not.toContainText('はなちゃん');
   });
+
+  test('US-E13-04/AC5 US-E13-01/AC4 a new account saves its first onboarding step under its own key, owned by the uid', async ({ page }) => {
+    await seed(page, { 'bentominder.fake-auth': JSON.stringify(USER_B) });
+    await page.goto('/');
+    await page.getByTestId('chip-age-age-4-5').click();
+    await page.getByTestId('radio-allergy-none-known').check();
+    await page.getByTestId('ob-next').click();
+    await expect(page.getByTestId('ob-step-2')).toBeVisible();
+    await expect(page.getByTestId('banner-storage')).toHaveCount(0);
+    const doc = JSON.parse((await stored(page, 'bentominder.test-uid-002.state')) ?? 'null');
+    expect(doc.settings.ownerId).toBe('test-uid-002');
+    expect(doc.profile.ownerId).toBe('test-uid-002');
+  });
+
+  test('US-E13-01/AC2 an address that names no screen opens the start screen after sign-in', async ({ page }) => {
+    await seed(page, { 'bentominder.fake-auth': 'signed-out', 'bentominder.test-uid-001.state': STATE_V1.replace(/"local"/g, '"test-uid-001"') });
+    await page.goto('/#/no-such-route');
+    await page.getByTestId('login-google').click();
+    await expect(page.getByTestId('screen-calendar')).toBeVisible();
+  });
 });

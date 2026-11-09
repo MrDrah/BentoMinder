@@ -1,7 +1,6 @@
 // Manual overrides (BR-05, BR-27; data contract §3.5): set, change or clear one date's override.
 // Only a parent action calls these; nothing here reads or writes decisions (BR-01).
 import { dayTypeOf } from '../menu/day-kind.ts';
-import { LOCAL_OWNER_ID } from '../storage/defaults.ts';
 import type { AssessmentOverride, BentoMinderStore } from '../schema/index.ts';
 import { monthOf, toJstTimestamp, type Instant, type LocalDate } from '../time/jst.ts';
 
@@ -29,7 +28,7 @@ export function setOverride(store: BentoMinderStore, date: LocalDate, state: Ove
     state,
     setAt: ts,
     menuVersionAtSet: menu.version,
-    ownerId: previous?.ownerId ?? LOCAL_OWNER_ID,
+    ownerId: previous?.ownerId ?? store.settings.ownerId,
     createdAt: previous?.createdAt ?? ts,
     updatedAt: ts,
   };

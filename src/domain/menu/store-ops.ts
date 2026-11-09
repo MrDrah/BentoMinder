@@ -1,7 +1,6 @@
 // Pure store transitions for the import → review → confirm flow (US-E2, US-E3-01…04) and the
 // rules that pick defaults on the import screen. Each function returns a new store; the UI
 // saves it through the repository (which validates every write, US-E10-05).
-import { LOCAL_OWNER_ID } from '../storage/defaults.ts';
 import type { BentoMinderStore, ConfirmedMenu, ExtractedMenu, MenuMonth } from '../schema/index.ts';
 import { MAX_URL_LENGTH, isHttpsUrl } from '../schema/extracted-menu.ts';
 import { addMonths, monthOf, toJstTimestamp, todayJst, type Instant, type LocalDate, type YearMonth } from '../time/jst.ts';
@@ -68,9 +67,10 @@ export function savedSourceUrl(store: BentoMinderStore): string | null {
   return withUrl.at(-1)?.sourceUrl ?? null;
 }
 
-function emptyMonth(month: string, now: Instant): MenuMonth {
+/** The new month record belongs to the store's account (ADR 014, US-E13-04/AC5). */
+function emptyMonth(month: string, now: Instant, ownerId: string): MenuMonth {
   const ts = toJstTimestamp(now);
-  return { month, extractions: [], confirmed: null, ownerId: LOCAL_OWNER_ID, createdAt: ts, updatedAt: ts };
+  return { month, extractions: [], confirmed: null, ownerId, createdAt: ts, updatedAt: ts };
 }
 
 /**
@@ -81,7 +81,7 @@ function emptyMonth(month: string, now: Instant): MenuMonth {
 export function recordExtraction(store: BentoMinderStore, menu: ExtractedMenu, now: Instant, sourceUrl?: string): BentoMinderStore {
   const ts = toJstTimestamp(now);
   const month = menu.targetMonth;
-  const current = store.menus[month] ?? emptyMonth(month, now);
+  const current = store.menus[month] ?? emptyMonth(month, now, store.settings.ownerId);
   let extractions = [...current.extractions.filter((e) => e.id !== menu.id), menu];
   while (extractions.length > MAX_EXTRACTIONS_PER_MONTH) {
     const keep = current.confirmed?.extractionId;
@@ -100,7 +100,7 @@ export function recordExtraction(store: BentoMinderStore, menu: ExtractedMenu, n
 
 /** US-E3-03/AC1 (BR-12): the confirmed menu becomes the month's menu; the pending review ends. */
 export function storeConfirmedMenu(store: BentoMinderStore, confirmed: ConfirmedMenu, now: Instant): BentoMinderStore {
-  const current = store.menus[confirmed.month] ?? emptyMonth(confirmed.month, now);
+  const current = store.menus[confirmed.month] ?? emptyMonth(confirmed.month, now, store.settings.ownerId);
   const { pendingReviewExtractionId: _pending, ...rest } = current;
   void _pending;
   const next: MenuMonth = { ...rest, confirmed, updatedAt: toJstTimestamp(now) };

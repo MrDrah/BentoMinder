@@ -16,7 +16,7 @@ async function onboardAs(page: Page, nickname: string) {
   await page.getByTestId('chip-age-age-4-5').click();
   await page.getByTestId('radio-allergy-none-known').check();
   await page.getByTestId('ob-next').click();
-  await expect(page.getByTestId('ob-step-2').or(page.getByTestId('screen-onboarding'))).toBeVisible();
+  await expect(page.getByTestId('ob-step-2').or(page.getByTestId('screen-onboarding')).first()).toBeVisible();
 }
 async function signOut(page: Page) {
   await page.goto('/#/settings');
