@@ -74,7 +74,10 @@ jobs:
         env:
           FIREBASE_CONFIG: ${{ vars.FIREBASE }}
         run: printf '%s\n' "$FIREBASE_CONFIG" | tr -d '\r' | grep -E '^VITE_FIREBASE_[A-Z_]+=' >> "$GITHUB_ENV" || true
+      # Address of the hosted AI proxy (US-E14-07). Empty or unset = the Pages site stays a mock-only demo.
       - run: npm run build
+        env:
+          VITE_AI_PROXY_BASE_URL: ${{ vars.AI_PROXY_BASE_URL }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

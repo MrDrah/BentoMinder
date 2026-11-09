@@ -276,3 +276,6 @@
 {"v":1,"at":"2026-11-09T14:34:38.099Z","by":"orchestrator","type":"task-start","task":"e14-slice-a","summary":"Task e14-slice-a dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-09T14:45:20.043Z","by":"orchestrator","type":"task-end","task":"e14-slice-a","outcome":"failure","summary":"diff-guard: 9 files outside the allow-list"}
 {"v":1,"at":"2026-11-09T14:48:26.871Z","by":"orchestrator","type":"task-start","task":"e14-slice-b","summary":"Task e14-slice-b dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-09T15:08:39.104Z","by":"orchestrator","type":"task-start","task":"e14-slice-c","summary":"Task e14-slice-c dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-09T15:22:43.195Z","by":"orchestrator","type":"task-end","task":"e14-slice-c","outcome":"failure","summary":"diff-guard: 19 files outside the allow-list"}
+{"v":1,"at":"2026-11-09T15:22:47.895Z","by":"orchestrator","type":"task-end","task":"e14-slice-c","outcome":"failure","summary":"diff-guard: 20 files outside the allow-list"}
