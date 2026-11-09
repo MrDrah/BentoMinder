@@ -7,8 +7,12 @@ export interface Clock {
   now(): Instant;
 }
 
-/** ADR 003: one versioned document plus the last good copy. */
-export type StorageKey = 'bentominder.state' | 'bentominder.state.prev';
+/**
+ * ADR 003: one versioned document plus the last good copy. ADR 014: one pair per account
+ * (`bentominder.<uid>.state`, `.state.prev`, see storage/keys.ts); the unkeyed pair below is the
+ * legacy store, read only by the one-time adoption and by the not-signed-in code paths.
+ */
+export type StorageKey = `bentominder.${string}`;
 export const STORAGE_KEYS: readonly StorageKey[] = ['bentominder.state', 'bentominder.state.prev'];
 
 export interface Storage {
