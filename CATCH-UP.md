@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-11-01 (recipe library grown to 92; CI green) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-11-09 (E13 Google sign-in built, QA'd, fixed, retested by the PO on localhost; library 92; JS budget 420 KB) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -26,6 +26,11 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 | M0 | App skeleton: Vite/React/TS, i18n + toggle, JST module, contract v1 schemas, storage, proxy health, data scripts; dev gate green | `src/`, `server/`, `scripts/`, `tests/` |
 | H2 | Final tokens, 64 component specs, flows, a11y spec, ja/en copy (561 rows), preview v1.0 | `design/` |
 | H1 | 73 stories / 287 ACs, data contract v1, dictionary, ADR 001–005, QA strategy + 4 oracles; ~30 rulings in PLAN §7 | `docs/ba/`, `docs/dev/`, `tests/plan/`, `tests/oracle/` |
+
+### Since the MVP (2026-11-02 → 2026-11-09) ✅
+- **Processed-food allergen rule, longer import timeouts, real-menu import**: done; the PO confirmed the real menu import works. Review-screen day options renamed ("Homemade bento day" / "Day with cafeteria lunch").
+- **E13 accounts (ADR 014, PLAN §7 2026-11-09)**: Firebase Google sign-in (login wall, stays signed in, sign-out in Settings, per-account data `bentominder.<uid>.state`, first account adopts the old local data, reminders cancelled on sign-out). QA found 3 defects (D02 P1 records kept the old owner id, D01, D03), fixed in cycle 1 of 2; PO retested the real login on localhost: OK. Config is `VITE_FIREBASE_*` in the git-ignored `.env` locally; the deploy workflow reads them from GitHub repository **Variables** (public web config). JS budget raised to 420 KB gz for the Firebase SDK. Later: email+password, Sign in with Apple (iPhone), sync/backup, account deletion, APPI consent, Capacitor native sign-in. Open nit: QA-D04 (privacy line position, stories vs design).
+- Lesson: a running dev server (proxy on :8787) makes the e2e reuse the real-Gemini proxy and fail; stop it before the gate.
 
 ### In progress 🔄 — PAUSED 2026-10-25 by the PO (resume next weekend)
 Two tasks were stopped at a safe point; each wrote pause notes:
