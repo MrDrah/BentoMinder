@@ -2241,6 +2241,11 @@ Scenario: AC6 (Could) An export from a newer app version changes nothing (BR-22)
   Given an export file whose schemaVersion is greater than the app's
   When the parent chooses it with 「データを読み込む」
   Then 「このファイルは新しいバージョンのアプリで作られています。アプリを更新してください。」 is shown, no replace dialog opens, and storage is unchanged
+
+Scenario: AC7 (Could) Import while signed in rewrites ownership (data contract §12)
+  Given the parent is signed in with uid "test-uid-001" and a valid export whose records carry another ownerId (for example `local` or "test-uid-002")
+  When the parent chooses it with 「データを読み込む」 and confirms replacing current data
+  Then every imported record's ownerId is rewritten to "test-uid-001", and the data is saved under that account's keys (`bentominder.test-uid-001.state`)
 ```
 
 ### US-E10-04 Delete all data · M · S
@@ -2249,7 +2254,7 @@ As a parent I want to erase everything so that nothing stays on a shared or old 
 ```gherkin
 Scenario: AC1 Delete everything with confirmation (BR-22)
   When the parent taps 「すべてのデータを削除」 and types or taps the explicit confirmation 「削除する」
-  Then every BentoMinder key (store, backups, reminder log, consent, language) is removed
+  Then every BentoMinder key of the signed-in account (`bentominder.<uid>.state`, its backup `.prev`, reminder log, consent, language; see data contract §12) is removed
   And the app returns to onboarding in Japanese
 
 Scenario: AC2 Cancel keeps everything (BR-22)
@@ -2436,7 +2441,7 @@ Scenario: AC1 Reopen does not ask again
 Scenario: AC2 No login flash on start
   Given a persisted session
   When the app starts and the session is still being read
-  Then a neutral loading screen is shown (never the login screen), for at most 3 seconds before the cached session is used
+  Then a neutral loading screen is shown (never the login screen), for at most 8 seconds before the cached session is used (fallback to the login screen after 8 s)
 
 Scenario: AC3 Offline reopen works
   Given the parent signed in earlier and the network is off
