@@ -13,6 +13,8 @@ const test = base.extend<object, { dev: { url: string } }>({
     // eslint-disable-next-line no-empty-pattern
     async ({}, use, workerInfo) => {
       const port = 5300 + workerInfo.parallelIndex;
+      // E13: the dev server needs the sign-in test seam too (the default fake account starts signed in).
+      process.env['VITE_AUTH_FAKE'] = '1';
       const server: ViteDevServer = await createServer({ configFile: join(process.cwd(), 'vite.config.ts'), logLevel: 'silent', server: { port, strictPort: true, host: '127.0.0.1' } });
       await server.listen();
       await use({ url: `http://127.0.0.1:${port}/` });

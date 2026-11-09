@@ -1,0 +1,160 @@
+/* Sign-in screens and the settings account card (design/components.md §15). Existing tokens only. */
+.auth {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface-1);
+}
+.auth__top {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-3) var(--space-6);
+}
+.auth__col {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-6) var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.auth__col--center {
+  align-items: center;
+  margin-top: 25vh;
+  gap: var(--space-4);
+  text-align: center;
+}
+.auth__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.auth__wordmark {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-2xl);
+}
+.auth__tagline {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--text-md);
+}
+.auth__title {
+  margin: var(--space-4) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
+.auth__title:focus {
+  outline: none;
+}
+.auth__lead {
+  margin: 0;
+}
+.auth-google {
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--touch-comfy);
+  margin-top: var(--space-2);
+}
+.auth-google[aria-disabled='true'] {
+  cursor: default;
+}
+.auth-google__label {
+  text-align: center;
+}
+.auth__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-height: 0;
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+.auth__privacy {
+  margin: var(--space-2) 0 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.auth__restoring {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.auth-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--line-ui);
+  border-top-color: var(--ink-1);
+  border-radius: 50%;
+  animation: auth-spin 0.9s linear infinite;
+}
+.auth-spinner--large {
+  width: 24px;
+  height: 24px;
+}
+@keyframes auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-spinner {
+    animation: none;
+    border-style: dotted;
+    border-top-color: var(--line-ui);
+  }
+}
+@media (min-width: 1280px) {
+  .auth__wordmark {
+    font-size: var(--text-3xl);
+  }
+  .auth__col {
+    margin-top: 8vh;
+  }
+}
+
+/* Settings account card */
+.account__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.account__avatar {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.account__avatar--initial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-3);
+  color: var(--ink-1);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-lg);
+}
+.account__text {
+  min-width: 0;
+}
+.account__text p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.account__name {
+  font-weight: var(--weight-bold);
+}
+.account__name--empty {
+  color: var(--ink-2);
+}
+.account__email,
+.account__caption {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}

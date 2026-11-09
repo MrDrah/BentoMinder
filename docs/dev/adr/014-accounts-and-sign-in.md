@@ -1,6 +1,6 @@
 # ADR 014: Accounts and sign-in (E13)
 
-Status: accepted (slice A built; slice B pending) · 2026-11-09 · Owner: developer
+Status: accepted (slices A and B built) · 2026-11-09 · Owner: developer
 
 ## Context
 The product owner decided (PLAN §7, 2026-11-09) on Google sign-in through Firebase Authentication, web first. Data stays on the device; no sync, backup or server copy. Stories US-E13-01..07, data contract §12.
@@ -13,8 +13,11 @@ The product owner decided (PLAN §7, 2026-11-09) on Google sign-in through Fireb
 - **Adoption.** `adoptLegacyStore` runs after sign-in, before the first load: if the account has no store and the legacy keys hold a readable store, rewrite every `ownerId` to the uid, write the new keys, read them back equal, then remove the legacy keys. Because the legacy keys are gone afterwards, the next account finds nothing (no marker needed). Unreadable legacy data is left untouched. A crash between write and remove is finished at the next sign-in of the same account (same `deviceId`), never by another account.
 - **Import** while signed in rewrites `ownerId` to the uid (the file becomes this account's data). Export and delete-all use only the bound account's keys.
 
-## Slice B (not built)
-Firebase adapter with `browserLocalPersistence`; restoring (3 s cap, `RESTORE_TIMEOUT_MS`) and login screens; deep link and notification target kept across login; settings account section with the confirm dialog; notification gating (cancel all on sign-out, reschedule from the account's own store on sign-in); `selectAdapters(uid)` and `createRepository(..., {accountId})` wired in `main.tsx`; existing suites start with `FakeAuth` signed in.
+## Slice B (built)
+- **Firebase adapter** (`src/adapters/web/firebase-auth.ts`): the only module that names the SDK, and only through dynamic `import()`, so the SDK is separate lazy chunks. Google provider by pop-up, `browserLocalPersistence`, `authStateReady()` for the cached session (no network). Firebase error codes map to the contract's kinds (closing the window is `cancelled` and shows nothing). Configuration only from the seven `VITE_FIREBASE_*` variables (named in the adapter); if one is missing it behaves as a failed sign-in (`other`) and logs one warning naming the missing variables, never values. Analytics is not loaded; the measurement id is only part of the config object.
+- **Shell** (`src/ui/auth/AuthRoot.tsx`): reads the session first (splash: nothing for 150 ms, then at least 300 ms; login screen with the generic error after 8 s), shows the login screen when signed out, and mounts `AppProvider` keyed by uid only for the signed-in account. `main.tsx` opens an account: `selectAdapters(uid)`, `adoptLegacyStore`, `createRepository(..., {accountId})`. The address is never rewritten, so a deep link (or a reminder's target) is kept across login. Leaving an account calls `cancelAll()` on its notification adapter; the next account gets a new adapter and the reminder engine plans from that account's own store.
+- **Test seam.** `select-auth.ts` picks the fake only when `import.meta.env.VITE_AUTH_FAKE === '1'`, a build-time literal: a normal build folds the branch away and the fake is not in the bundle (`tests/unit/scripts/auth-bundle.test.ts` builds without the flag and scans for the fake, the fixed user and the seed key). `npm run preview` (what every Playwright config starts) builds with the flag into `node_modules/.cache/bentominder-e2e-dist`, never into `dist/`; `npm run preview:prod` serves the real build. Specs seed through localStorage keys documented in `src/adapters/web/e2e-auth.ts`. In the e2e build the default test account starts signed in with its data in the old unkeyed keys ("compat mode"), so the earlier specs needed no change; any seeded account uses the keyed scheme.
+- **Bundle.** The SDK adds about 47 KiB gzip in lazy chunks and the UI about 5 KiB in the main chunk. The budget sums every JS file, so the total is about 403 KiB against 400. Recorded for the product owner; the budget was not raised.
 
 ## Later (sync slice)
 Server copy, APPI consent for allergy and health data, in-app account deletion, tombstones and `updatedBy`; decide whether `ownerId` becomes a family id.

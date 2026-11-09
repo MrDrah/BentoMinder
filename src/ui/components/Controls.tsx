@@ -19,10 +19,15 @@ export interface DialogProps {
   confirmTestId?: string;
   testId?: string;
   cancelTestId?: string;
+  /** alertdialog with a primary (not red) confirm: the sign-out dialog (components §15.4). */
+  alert?: boolean;
+  /** While busy both buttons are aria-disabled and Esc is ignored (components §15.4). */
+  lockWhileBusy?: boolean;
+  errorTestId?: string;
 }
 
 /** §1.13: modal, labelled and described; initial focus on the least destructive action; Esc = cancel. */
-export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm, onCancel, destructive = false, busy = false, error = null, children, confirmTestId, cancelTestId, testId }: DialogProps) {
+export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm, onCancel, destructive = false, busy = false, error = null, children, confirmTestId, cancelTestId, testId, alert = false, lockWhileBusy = false, errorTestId }: DialogProps) {
   const titleId = useId();
   const bodyId = useId();
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -35,7 +40,7 @@ export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
       event.preventDefault();
-      onCancel();
+      if (!(lockWhileBusy && busy)) onCancel();
       return;
     }
     if (event.key !== 'Tab') return;
@@ -55,7 +60,7 @@ export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm
       <div
         ref={boxRef}
         className="dialog"
-        role={destructive ? 'alertdialog' : 'dialog'}
+        role={destructive || alert ? 'alertdialog' : 'dialog'}
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={body === undefined ? undefined : bodyId}
@@ -72,7 +77,7 @@ export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm
         )}
         {children}
         {error !== null && (
-          <p className="field-error" role="alert">
+          <p className="field-error" role="alert" data-testid={errorTestId}>
             {error}
           </p>
         )}
@@ -82,12 +87,17 @@ export function Dialog({ name, title, body, confirmLabel, cancelLabel, onConfirm
             className={destructive ? 'btn btn--destructive' : 'btn btn--primary'}
             data-testid={confirmTestId ?? `dialog-${name}-confirm`}
             aria-busy={busy || undefined}
-            disabled={busy}
-            onClick={onConfirm}
+            disabled={busy && !lockWhileBusy}
+            aria-disabled={busy && lockWhileBusy ? true : undefined}
+            onClick={() => {
+              if (!(lockWhileBusy && busy)) onConfirm();
+            }}
           >
             {confirmLabel}
           </button>
-          <button ref={cancelRef} type="button" className="btn btn--secondary" data-testid={cancelTestId ?? `dialog-${name}-cancel`} onClick={onCancel}>
+          <button ref={cancelRef} type="button" className="btn btn--secondary" data-testid={cancelTestId ?? `dialog-${name}-cancel`} aria-disabled={busy && lockWhileBusy ? true : undefined} onClick={() => {
+            if (!(lockWhileBusy && busy)) onCancel();
+          }}>
             {cancelLabel}
           </button>
         </div>

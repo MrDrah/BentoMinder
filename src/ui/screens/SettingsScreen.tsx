@@ -11,6 +11,7 @@ import type { Settings } from '../../domain/schema/index.ts';
 import { toJstTimestamp } from '../../domain/time/jst.ts';
 import { useApp, useStore } from '../app-store.tsx';
 import { useDayViewer } from '../calendar/use-day-viewer.ts';
+import { AccountSection } from '../auth/AccountSection.tsx';
 import { TopBar } from '../components/Bars.tsx';
 import { Dialog } from '../components/Controls.tsx';
 import type { MessageKey } from '../../i18n/index.ts';
@@ -80,6 +81,7 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
         <p className="visually-hidden" role="status" aria-live="polite" data-testid="settings-saved">
           {saved}
         </p>
+        <AccountSection />
         <ReminderSettings onChange={(patch) => void saveReminders(patch)} />
 
         <section className="card" aria-labelledby="settings-display">
