@@ -14,7 +14,7 @@ const KEY = ['AIza', 'SyQA-E14-BUNDLE-0123456789abcdefg'].join('');
 const ALLOW_EMAIL = 'qa-real-looking-parent@sentinel-mail.test';
 const ALLOW_UID = 'qaSentinelUid0123456789';
 const BASE = 'https://asia-northeast1-qa-sentinel.cloudfunctions.net/api';
-const env = { ...process.env, GEMINI_API_KEY: KEY, ALLOWED_ACCOUNTS: `${ALLOW_EMAIL},${ALLOW_UID}`, VITE_AI_PROXY_BASE_URL: BASE, EXTRACT_PER_HOUR: '4242', FETCH_PER_DAY: '31337' };
+const env = { ...process.env, GEMINI_API_KEY: KEY, ALLOWED_ACCOUNTS: `${ALLOW_EMAIL},${ALLOW_UID}`, VITE_AI_PROXY_BASE_URL: BASE, VITE_FIREBASE_API_KEY: '', VITE_GEMINI_API_KEY: '', EXTRACT_PER_HOUR: '4242', FETCH_PER_DAY: '31337' };
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((n) => {

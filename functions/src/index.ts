@@ -26,10 +26,21 @@ const FETCH_PER_DAY = defineInt('FETCH_PER_DAY', { default: 100 });
 
 let deps: ProxyDeps | undefined;
 
+function projectFromFirebaseConfig(raw: string | undefined): string | undefined {
+  if (raw === undefined || raw === '') return undefined;
+  try {
+    const id = (JSON.parse(raw) as { projectId?: unknown }).projectId;
+    return typeof id === 'string' && id !== '' ? id : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 /** Built on the first request of an instance (secrets are readable only at run time), then reused. */
 function getDeps(): ProxyDeps {
   if (deps !== undefined) return deps;
-  const projectId = process.env['GCLOUD_PROJECT'];
+  // The runtime sets one of these; try all so a missing one cannot refuse every token (E14-D02).
+  const projectId = process.env['GCLOUD_PROJECT'] || process.env['GOOGLE_CLOUD_PROJECT'] || projectFromFirebaseConfig(process.env['FIREBASE_CONFIG']);
   // No credentials file: verification needs only Google's public certificates; Firestore uses the runtime identity.
   const app = getApps()[0] ?? (projectId === undefined || projectId === '' ? initializeApp() : initializeApp({ projectId }));
   deps = buildHostedDeps(

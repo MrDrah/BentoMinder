@@ -369,7 +369,7 @@ describe('US-E14-03/AC5/AC7/AC8 the Firestore counter wrapper (fake transaction)
   it('US-E14-03/AC8 end to end: Firestore fake failing gives 503 through the handler', async () => {
     const db = new FakeDb();
     db.failGet = true;
-    const r = rig({ store: undefined });
+    const r = rig();
     r.deps.policy!.store = createFirestoreStore(db);
     const c = await extract(r);
     expect(c.json).toEqual({ ok: false, error: 'UNAVAILABLE', providerCalls: 0 });

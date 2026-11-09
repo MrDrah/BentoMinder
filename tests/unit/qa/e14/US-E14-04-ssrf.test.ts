@@ -431,7 +431,7 @@ describe('US-E14-04 a syntactically valid URL counts against the fetch limit eve
 
 describe('US-E14-04 probes beyond the AC table (own list)', () => {
   // RFC 2765 IPv4-translated address ::ffff:0:a.b.c.d embeds an IPv4 address like ::ffff:a.b.c.d does.
-  it.fails('E14-D01 (P4) IPv4-translated ::ffff:0:127.0.0.1 and ::ffff:0:169.254.169.254 are refused like IPv4-mapped forms', async () => {
+  it('E14-D01 (P4, fixed) IPv4-translated ::ffff:0:127.0.0.1 and ::ffff:0:169.254.169.254 are refused like IPv4-mapped forms', async () => {
     for (const url of ['https://[::ffff:0:7f00:1]/', 'https://[::ffff:0:a9fe:a9fe]/']) {
       const r = rig();
       const c = await fetchUrl(r, url);

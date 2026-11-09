@@ -89,6 +89,7 @@ export function isBlockedIPv6(g: number[]): boolean {
   if (g.every((x) => x === 0)) return true; // ::
   if (zeroTo(7) && g[7] === 1) return true; // ::1
   if (zeroTo(5) && f === 0xffff) return isBlockedIPv4(embeddedV4(g)); // ::ffff:a.b.c.d (IPv4-mapped)
+  if (zeroTo(4) && e === 0xffff && f === 0) return true; // ::ffff:0:a.b.c.d (IPv4-translated, ::ffff:0:0:0/96; E14-D01)
   if (zeroTo(6)) return true; // ::a.b.c.d (deprecated IPv4-compatible) and other ::/96
   if (a === 0x0064 && b === 0xff9b && zeroTo(0) && c === 0 && d === 0 && e === 0 && f === 0) return isBlockedIPv4(embeddedV4(g)); // NAT64 64:ff9b::/96
   if (a === 0x0064 && b === 0xff9b && c === 0x0001) return true; // local-use NAT64 64:ff9b:1::/48

@@ -279,3 +279,5 @@
 {"v":1,"at":"2026-11-09T15:08:39.104Z","by":"orchestrator","type":"task-start","task":"e14-slice-c","summary":"Task e14-slice-c dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-09T15:22:43.195Z","by":"orchestrator","type":"task-end","task":"e14-slice-c","outcome":"failure","summary":"diff-guard: 19 files outside the allow-list"}
 {"v":1,"at":"2026-11-09T15:22:47.895Z","by":"orchestrator","type":"task-end","task":"e14-slice-c","outcome":"failure","summary":"diff-guard: 20 files outside the allow-list"}
+{"v":1,"at":"2026-11-09T15:45:57.464Z","type":"defect","summary":"E14-D01 P4 IPv4-translated IPv6 not blocked (fixed in server/net/ip.ts)","by":"qa","defect":"E14-D01","severity":"P4","state":"fixed"}
+{"v":1,"at":"2026-11-09T15:45:57.575Z","type":"defect","summary":"E14-D02 P3 token verifier project id only from GCLOUD_PROJECT (fallbacks added)","by":"qa","defect":"E14-D02","severity":"P3","state":"fixed"}
