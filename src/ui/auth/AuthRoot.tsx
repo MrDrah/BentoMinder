@@ -112,7 +112,8 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
     dispatch({ type: 'signInStarted' });
     try {
       dispatch({ type: 'signInFinished', result: await auth.signInWithGoogle() });
-    } catch {
+    } catch (err) {
+      console.warn(`Sign-in threw: ${err instanceof Error ? err.name : 'unknown error'}`);
       dispatch({ type: 'signInFinished', result: { ok: false, error: 'other' } });
     } finally {
       signingIn.current = false;

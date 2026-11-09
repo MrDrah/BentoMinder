@@ -122,7 +122,10 @@ export function createFirebaseAuth(env: Env, options: FirebaseAuthOptions = {}):
         return { ok: true, user: toUser(cred.user) };
       } catch (err) {
         const code = typeof err === 'object' && err !== null && 'code' in err ? (err as { code: unknown }).code : undefined;
-        return { ok: false, error: mapFirebaseAuthError(code, isOnline()) };
+        const kind = mapFirebaseAuthError(code, isOnline());
+        // Support aid: the provider's error code only (no user data, no config values).
+        if (kind !== 'cancelled') warn(`Sign-in failed: ${typeof code === 'string' ? code : 'unknown error'}`);
+        return { ok: false, error: kind };
       }
     },
 
