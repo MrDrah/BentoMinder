@@ -1,0 +1,7 @@
+# Copy to functions/.env.bentominder (git-ignored) before deploying. Names and defaults only; secrets are set with
+# `firebase functions:secrets:set GEMINI_API_KEY` and `ALLOWED_ACCOUNTS` and never live in files (ADR 015).
+ALLOWED_ORIGINS=https://mrdrah.github.io
+EXTRACT_PER_HOUR=5
+EXTRACT_PER_DAY=20
+FETCH_PER_HOUR=30
+FETCH_PER_DAY=100

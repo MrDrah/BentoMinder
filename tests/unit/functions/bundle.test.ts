@@ -112,7 +112,11 @@ describe('US-E14-05/AC6 the web source and the web build hold no proxy credentia
     if (!existsSync(dist)) return;
     for (const f of walk(dist).filter((p) => /\.(js|css|html|json)$/i.test(p))) {
       const text = readFileSync(f, 'utf8');
-      expect(text, f).not.toMatch(KEY_SHAPE);
+      // No key-shape check here: a dist built from a developer's own .env legitimately holds the public Firebase web
+      // API key (same AIza shape as a Gemini key). The Gemini-key leak is covered by m5-secrets (clean build env)
+      // and by the sentinel checks above.
+      expect(text, f).not.toContain(KEY_SENTINEL);
+      expect(text, f).not.toContain(LIST_SENTINEL);
       expect(text, f).not.toMatch(/firebase-admin|firebase-functions|proxyLimits|ALLOWED_ACCOUNTS/);
     }
   });
