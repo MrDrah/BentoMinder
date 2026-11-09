@@ -21,9 +21,10 @@ export interface Adapters {
   newDeviceId: () => string;
 }
 
-export function selectAdapters(): Adapters {
+/** `accountId` (ADR 014) binds storage to the signed-in account; omitted = legacy unkeyed storage. */
+export function selectAdapters(accountId?: string): Adapters {
   return {
-    storage: createWebStorage(),
+    storage: createWebStorage(undefined, accountId),
     clock: createSystemClock(),
     extractor: createWebExtractor(),
     pdfSource: createWebPdfSource(),

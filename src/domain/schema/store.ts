@@ -49,6 +49,24 @@ export interface RuleIssue {
   path: string;
 }
 
+/**
+ * Data contract 12.1 `meta-owner-matches-account` (store level): every record in an account's
+ * store has `ownerId` equal to the uid in that store's key name. Not part of the zod schema
+ * because it needs the account; the repository applies it when it is bound to one.
+ */
+export function ownerMismatches(store: BentoMinderStore, uid: string): RuleIssue[] {
+  const issues: RuleIssue[] = [];
+  const check = (path: string, ownerId: string) => {
+    if (ownerId !== uid) issues.push({ rule: 'meta-owner-matches-account', path });
+  };
+  check('settings.ownerId', store.settings.ownerId);
+  if (store.profile !== null) check('profile.ownerId', store.profile.ownerId);
+  for (const [k, m] of Object.entries(store.menus)) check(`menus.${k}.ownerId`, m.ownerId);
+  for (const [k, o] of Object.entries(store.overrides)) check(`overrides.${k}.ownerId`, o.ownerId);
+  for (const [k, d] of Object.entries(store.decisions)) check(`decisions.${k}.ownerId`, d.ownerId);
+  return issues;
+}
+
 /** Flattens zod issues to `{ rule, path }` (the message is always the rule id when the contract names one). */
 export function toRuleIssues(error: z.ZodError): RuleIssue[] {
   return error.issues.map((i) => ({ rule: i.message, path: i.path.map(String).join('.') }));
