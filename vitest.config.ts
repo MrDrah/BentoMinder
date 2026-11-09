@@ -12,7 +12,7 @@ export default defineConfig({
         test: {
           name: 'domain',
           environment: 'node',
-          include: ['tests/unit/domain/**/*.test.ts', 'tests/unit/server/**/*.test.ts', 'tests/unit/scripts/**/*.test.ts'],
+          include: ['tests/unit/domain/**/*.test.ts', 'tests/unit/server/**/*.test.ts', 'tests/unit/functions/**/*.test.ts', 'tests/unit/scripts/**/*.test.ts'],
         },
       },
       {

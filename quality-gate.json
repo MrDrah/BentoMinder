@@ -26,6 +26,10 @@
       "run": "npm run build"
     },
     {
+      "name": "build functions",
+      "run": "npm run build:functions"
+    },
+    {
       "name": "no debug in build",
       "run": "npm run check:no-debug"
     },
@@ -38,6 +42,10 @@
     {
       "path": "dist/**",
       "by": "npm run build"
+    },
+    {
+      "path": "functions/lib/**",
+      "by": "npm run build:functions"
     },
     {
       "path": "data/library.json",

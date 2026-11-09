@@ -8,7 +8,7 @@ import { MAX_PDF_BYTES } from '../../src/domain/schema/extracted-menu.ts';
 import { isYearMonth, toJstTimestamp, type Instant } from '../../src/domain/time/jst.ts';
 import { runExtraction, sha256Hex, type CallCap, type ExtractDeps, type ExtractionCache, type ProviderTransport } from '../menu/extract.ts';
 import { checkUrl, fetchPdf, startsWithMagic, type Requester, type Resolver } from '../menu/fetch-pdf.ts';
-import { SCENARIO_HEADER, type FixtureTransports } from '../menu/mock-transport.ts';
+import { SCENARIO_HEADER, type FixtureTransports } from './scenario.ts';
 import {
   accountKey,
   corsHeaders,

@@ -2,13 +2,17 @@
 // address fetchPdf already validated; the host name is used only for TLS (SNI + certificate
 // check) and the Host header, so DNS rebinding between check and connect is impossible.
 import { lookup } from 'node:dns/promises';
-import { request as httpsRequest } from 'node:https';
-import type { PdfResponse, Requester, Resolver } from './fetch-pdf.ts';
+import { Agent, request as httpsRequest } from 'node:https';
+import type { PdfResponse, Requester, ResolvedAddress, Resolver } from './fetch-pdf.ts';
 
 export const nodeResolver: Resolver = async (hostname) => {
   const all = await lookup(hostname, { all: true, verbatim: true });
-  return all.map((a) => ({ address: a.address, family: a.family === 6 ? 6 : 4 }));
+  const mapped = all.map((a): ResolvedAddress => ({ address: a.address, family: a.family === 6 ? 6 : 4 }));
+  return [...mapped.filter((a) => a.family === 4), ...mapped.filter((a) => a.family === 6)]; // IPv4 first (ADR 015 §4)
 };
+
+// No connection reuse, no happy-eyeballs: the socket really is the one to the vetted address (ADR 015 §4).
+const agent = new Agent({ keepAlive: false, autoSelectFamily: false });
 
 export const nodeRequester: Requester = ({ url, address, signal }) =>
   new Promise<PdfResponse>((resolve, reject) => {
@@ -16,6 +20,7 @@ export const nodeRequester: Requester = ({ url, address, signal }) =>
       {
         host: address.address,
         family: address.family,
+        agent,
         port: 443,
         servername: url.hostname.replace(/^\[|\]$/g, ''),
         path: `${url.pathname}${url.search}`,

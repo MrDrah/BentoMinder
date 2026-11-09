@@ -8,26 +8,21 @@
 //   3. an unknown PDF without a scenario → no transport (NOT_CONFIGURED, US-E2-06/AC4).
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { SCENARIO_HEADER, type FixtureTransports } from '../core/scenario.ts';
 import { sha256Hex, type ProviderReply, type ProviderTransport } from './extract.ts';
 
 interface Recorded {
   response: { httpStatus: number; modelOutput?: unknown; rawText?: string; retryAfterSeconds?: number | null };
 }
 
-export const SCENARIO_HEADER = 'x-bm-mock-scenario';
+export { SCENARIO_HEADER };
+export type { FixtureTransports };
 const SCENARIO_ENTRY = /^(?:[a-z0-9-]+\/[a-z0-9-]+|status:\d{3}|timeout)$/;
 
 export function replyOf(recorded: Recorded): ProviderReply {
   const r = recorded.response;
   if (r.httpStatus !== 200) return { kind: 'http', status: r.httpStatus, retryAfterSec: r.retryAfterSeconds ?? null };
   return { kind: 'ok', text: r.rawText ?? JSON.stringify(r.modelOutput) };
-}
-
-export interface FixtureTransports {
-  /** The transport for one request, or null when nothing is configured for this PDF. */
-  forRequest(sha256: string, scenario: string | undefined): ProviderTransport | null;
-  /** sha256 → fixture id, for logs and tests. */
-  readonly known: ReadonlyMap<string, string>;
 }
 
 export function createFixtureTransports(menusDir: string): FixtureTransports {

@@ -29,7 +29,7 @@ const noArgDate = {
 };
 
 export default tseslint.config(
-  { ignores: ['dist/**', 'coverage/**', 'reports/**', 'node_modules/**', 'playwright-report/**', 'test-results/**', '.claude/**', '.agents/**', '.codex/**', 'design/**', 'docs/**', '**/_scratch/**'] },
+  { ignores: ['functions/lib/**', 'dist/**', 'coverage/**', 'reports/**', 'node_modules/**', 'playwright-report/**', 'test-results/**', '.claude/**', '.agents/**', '.codex/**', 'design/**', 'docs/**', '**/_scratch/**'] },
   js.configs.recommended,
   ...tseslint.configs.strict,
   {
@@ -54,7 +54,7 @@ export default tseslint.config(
   },
   {
     // The web adapters are where platform APIs belong; scripts, server and tests run in Node or Playwright.
-    files: ['src/adapters/web/**', 'scripts/**', 'server/**', 'tests/**', '*.config.{ts,js}'],
+    files: ['src/adapters/web/**', 'scripts/**', 'server/**', 'functions/**', 'tests/**', '*.config.{ts,js}'],
     rules: { 'no-restricted-globals': 'off', 'no-restricted-properties': 'off', 'no-restricted-syntax': 'off' },
   },
   {
