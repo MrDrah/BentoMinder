@@ -68,16 +68,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Firebase web config is public (it ships in the page); set as repository Variables, not secrets (ADR 014).
-      - run: npm run build
+      # Firebase web config is public (it ships in the page). One repository Variable named FIREBASE holds the
+      # seven VITE_FIREBASE_* KEY=value lines (ADR 014); only lines with that prefix are taken into the build.
+      - name: Load Firebase web config
         env:
-          VITE_FIREBASE_API_KEY: ${{ vars.VITE_FIREBASE_API_KEY }}
-          VITE_FIREBASE_AUTH_DOMAIN: ${{ vars.VITE_FIREBASE_AUTH_DOMAIN }}
-          VITE_FIREBASE_PROJECT_ID: ${{ vars.VITE_FIREBASE_PROJECT_ID }}
-          VITE_FIREBASE_STORAGE_BUCKET: ${{ vars.VITE_FIREBASE_STORAGE_BUCKET }}
-          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ vars.VITE_FIREBASE_MESSAGING_SENDER_ID }}
-          VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID }}
-          VITE_FIREBASE_MEASUREMENT_ID: ${{ vars.VITE_FIREBASE_MEASUREMENT_ID }}
+          FIREBASE_CONFIG: ${{ vars.FIREBASE }}
+        run: printf '%s\n' "$FIREBASE_CONFIG" | tr -d '\r' | grep -E '^VITE_FIREBASE_[A-Z_]+=' >> "$GITHUB_ENV" || true
+      - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
