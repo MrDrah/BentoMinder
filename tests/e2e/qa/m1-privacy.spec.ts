@@ -5,7 +5,8 @@
 import { expect, test, type Request } from '@playwright/test';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { FX01, fillProfile, freezeClock } from './helpers.ts';
+import { join } from 'node:path';
+import { FX01, fillProfile, freezeClock, ROOT } from './helpers.ts';
 
 const NICK = 'ゆにーく名Z9';
 const NOTE = '秘密ノート-QX7-ひみつ';
@@ -169,6 +170,11 @@ test('US-NF-03/AC3 production bundle references no third-party host', async ({ r
   }
   // known harmless: w3.org (SVG/XML namespaces), reactjs.org (React error-decoder text), ai.google.dev (the consent link, a user-initiated link)
   const allowed = new Set(['www.w3.org', 'w3.org', 'react.dev', 'reactjs.org', 'ai.google.dev', 'json-schema.org' /* zod $schema identifier string, never fetched */, 'localhost', '127.0.0.1', 'example.com']);
+  // M5: recipe source links (data/library.json) are shown as user-initiated links. E13 (2026-11): Firebase Auth's lazy chunk
+  // carries apis.google.com and www.google.com (contacted only while signing in with Google; e13-wall/e13-data assert no request in tests).
+  const library = readFileSync(join(ROOT, 'data', 'library.json'), 'utf8');
+  for (const h of hostsFound) if (library.toLowerCase().includes('//' + h)) allowed.add(h);
+  for (const h of ['apis.google.com', 'www.google.com']) allowed.add(h);
   const unexpected = [...hostsFound].filter((h) => !allowed.has(h));
   test.info().annotations.push({ type: 'hosts', description: [...hostsFound].join(', ') });
   expect(unexpected).toEqual([]);
