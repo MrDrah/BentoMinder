@@ -621,6 +621,12 @@ export const ja = {
   'auth.signOut.failed': 'ログアウトできませんでした。もう一度お試しください。',
   'auth.signedOut.live': 'ログアウトしました。',
   'auth.docTitle': 'ログイン',
+  'proxy.expired': 'ログインの有効期限が切れました。もう一度ログインしてください。',
+  'proxy.signInAgain': 'ログインし直す',
+  'proxy.notAllowed': 'このアカウントでは献立の読み取りを使えません。',
+  'proxy.limit.hour': '読み取りの回数が上限に達しました。1時間ほどしてからもう一度お試しください。',
+  'proxy.limit.day': '今日の読み取り回数の上限に達しました。明日もう一度お試しください。',
+  'proxy.limit.fetch': 'URLからの取得回数が上限に達しました。PDFをアップロードするか、しばらくしてからお試しください。',
 } as const;
 
 export type MessageKey = keyof typeof ja;

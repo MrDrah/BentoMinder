@@ -28,6 +28,11 @@ export interface Storage {
 
 export type PdfBytes = Uint8Array;
 
+/** Hosted proxy denials (data contract 13.3): the account's token, allow-list or per-account limit. */
+export type ProxyDenial = 'UNAUTHENTICATED' | 'NOT_ALLOWED' | 'ACCOUNT_LIMIT';
+/** Which per-account limit was reached (US-E14-03/AC4). */
+export type LimitScope = 'hour' | 'day' | 'fetch';
+
 /** ADR 002 §3 wire errors, plus NOT_A_PDF / NOT_CONFIGURED (M1) and NETWORK (proxy unreachable). */
 export type ExtractError =
   | 'RATE_LIMITED'
@@ -37,7 +42,9 @@ export type ExtractError =
   | 'TOO_LARGE'
   | 'NOT_A_PDF'
   | 'NOT_CONFIGURED'
-  | 'NETWORK';
+  | 'NETWORK'
+  | ProxyDenial
+  | 'ORIGIN_NOT_ALLOWED';
 export type ProviderCalls = 0 | 1 | 2;
 
 export type ExtractResult =
@@ -46,7 +53,7 @@ export type ExtractResult =
       menu: ExtractedMenu;
       meta: { model: string; cached: boolean; promptVersion: number; schemaVersion: number; providerCalls: ProviderCalls };
     }
-  | { ok: false; error: ExtractError; retryAfterSec?: number; providerCalls: ProviderCalls };
+  | { ok: false; error: ExtractError; retryAfterSec?: number; scope?: LimitScope; providerCalls: ProviderCalls };
 
 export interface MenuExtractor {
   extract(input: { pdf: PdfBytes; targetMonth: string }, signal?: AbortSignal): Promise<ExtractResult>;
@@ -56,7 +63,7 @@ export interface MenuExtractor {
 export type PdfError = 'NETWORK' | 'NOT_FOUND' | 'NOT_A_PDF' | 'TOO_LARGE' | 'BLOCKED' | 'EMPTY';
 export type PdfResult =
   | { ok: true; bytes: PdfBytes; sha256: string; byteSize: number; filename?: string }
-  | { ok: false; error: PdfError };
+  | { ok: false; error: PdfError | ProxyDenial; retryAfterSec?: number; scope?: LimitScope };
 
 export interface PdfSource {
   fromUrl(url: string, signal?: AbortSignal): Promise<PdfResult>;

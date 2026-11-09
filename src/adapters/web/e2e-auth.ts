@@ -56,6 +56,7 @@ export function createE2eAuth(): AuthSetup {
       return fake.signInWithGoogle();
     },
     signOut: () => fake.signOut(),
+    getIdToken: (force) => fake.getIdToken(force),
     onChange: (h) => fake.onChange(h),
   };
   return { auth, accountOf: (u) => (compat && u.uid === TEST_USER.uid ? undefined : u.uid) };

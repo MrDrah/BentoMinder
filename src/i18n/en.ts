@@ -614,4 +614,10 @@ export const en = {
   'auth.signOut.failed': 'We couldn\'t sign you out. Please try again.',
   'auth.signedOut.live': 'You have signed out.',
   'auth.docTitle': 'Sign in',
+  'proxy.expired': 'Your sign-in has expired. Please sign in again.',
+  'proxy.signInAgain': 'Sign in again',
+  'proxy.notAllowed': 'This account can\'t use menu reading.',
+  'proxy.limit.hour': 'You\'ve reached the reading limit for now. Please try again in about an hour.',
+  'proxy.limit.day': 'You\'ve reached today\'s reading limit. Please try again tomorrow.',
+  'proxy.limit.fetch': 'You\'ve reached the limit for fetching from addresses. Upload the PDF, or try again later.',
 } satisfies Catalog;

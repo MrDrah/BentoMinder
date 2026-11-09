@@ -792,3 +792,16 @@ Reference story: `US-E13` (BA is writing US-E13-01…; replace the placeholder p
 | auth.signOut.failed | ログアウトできませんでした。もう一度お試しください。 | We couldn't sign you out. Please try again. | Inline error in the dialog | US-E13 |
 | auth.signedOut.live | ログアウトしました。 | You have signed out. | Live region (polite) on the login screen after sign-out | US-E13 |
 | auth.docTitle | ログイン | Sign in | `{screen}` for `app.docTitle` | US-E13 |
+
+## 21. Hosted AI proxy messages (`proxy.*`; E14, PO 2026-11-09)
+
+Shown in the import error panel (components §6.7 pattern: message, then the other ways). The AC wording is used as written; no codes, URLs or technical text appear (US-E14-08/AC9). `import.err.unavailable` (US-E2-06/AC2) is reused for an unreachable or origin-refused proxy.
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| proxy.expired | ログインの有効期限が切れました。もう一度ログインしてください。 | Your sign-in has expired. Please sign in again. | Import error panel (hosted proxy refused the token twice) | US-E14-08/AC1 (verbatim) |
+| proxy.signInAgain | ログインし直す | Sign in again | Button in that panel (signs out, then the login screen) | US-E14-08/AC1 (verbatim ja; en designer copy) |
+| proxy.notAllowed | このアカウントでは献立の読み取りを使えません。 | This account can't use menu reading. | Import error panel; only 「手入力する」 follows | US-E14-08/AC2 (verbatim) |
+| proxy.limit.hour | 読み取りの回数が上限に達しました。1時間ほどしてからもう一度お試しください。 | You've reached the reading limit for now. Please try again in about an hour. | Import error panel with the retry countdown | US-E14-03/AC4 (verbatim) |
+| proxy.limit.day | 今日の読み取り回数の上限に達しました。明日もう一度お試しください。 | You've reached today's reading limit. Please try again tomorrow. | Import error panel, no retry button | US-E14-03/AC4 (verbatim) |
+| proxy.limit.fetch | URLからの取得回数が上限に達しました。PDFをアップロードするか、しばらくしてからお試しください。 | You've reached the limit for fetching from addresses. Upload the PDF, or try again later. | Import error panel after a URL fetch, no retry button | US-E14-03/AC4 (verbatim) |

@@ -18,6 +18,9 @@ export interface FakeAuthOptions {
 export class FakeAuth implements AuthPort {
   /** Calls seen, so tests can assert "only one sign-in started" and "no window before a tap". */
   readonly calls = { restore: 0, signIn: 0, signOut: 0 };
+  /** Every token request seen (true = forced refresh), so tests can assert "one refresh and retry". */
+  readonly tokenRequests: boolean[] = [];
+  private refreshes = 0;
   private user: AuthUser | null;
   private readonly handlers = new Set<(change: AuthChange) => void>();
   private readonly script: SignInResult[] = [];
@@ -62,6 +65,12 @@ export class FakeAuth implements AuthPort {
   externalChange(user: AuthUser | null): void {
     this.user = user;
     this.emit(user === null ? { user: null, reason: 'signed-out' } : { user });
+  }
+  /** A fixed-shape fake token per account; a forced refresh yields a different one. Null when signed out. */
+  getIdToken(forceRefresh = false): Promise<string | null> {
+    this.tokenRequests.push(forceRefresh);
+    if (forceRefresh) this.refreshes += 1;
+    return Promise.resolve(this.user === null ? null : `fake-id-token-${this.user.uid}-${this.refreshes}`);
   }
   currentUser(): AuthUser | null {
     return this.user;

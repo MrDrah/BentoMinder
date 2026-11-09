@@ -23,6 +23,11 @@ export interface AuthPort {
   signInWithGoogle(): Promise<SignInResult>;
   /** Ends the local session; works offline (US-E13-05/AC6) and never touches stored data. */
   signOut(): Promise<void>;
+  /**
+   * The current account's ID token for the hosted AI proxy (ADR 015, US-E14-07/AC4); `forceRefresh` asks the provider
+   * for a new one. Null when nobody is signed in or the token cannot be had. Never stored, logged or exported by the app.
+   */
+  getIdToken(forceRefresh?: boolean): Promise<string | null>;
   /** Later session changes (another tab, revoked session); returns unsubscribe. */
   onChange(handler: (change: AuthChange) => void): () => void;
 }
