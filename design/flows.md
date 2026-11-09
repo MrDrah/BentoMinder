@@ -449,3 +449,22 @@ Settings → 「プロフィールを編集」 → P2 (same fields as S1) → �
 | US-E3-06 | F5 | US-E11-01…03 | F16 | US-E12-01 | no UI (document) |
 | US-NF-01 | loading budgets (components §1.12, §4.1) | US-NF-02 | a11y-responsive.md | US-E12-02…04 (v1) | copy §19 only |
 | US-NF-03 | F2 (consent, payload box) | US-NF-04 | F2, F14 | US-NF-05 | no UI |
+
+## 21. F18: sign in with Google, restore session, sign out (US-E13)
+Screens: A0 restoring splash, A1 login, then the existing home (C1). Hard wall: nobody reaches C1 or any other screen signed out. The language toggle (`lang.toggle.*`) is on A1 (top right); elsewhere it stays in settings.
+
+1. **Cold start** -> A0 (`auth.restoring`, spinner, no buttons) while the saved session is read. A1 is never rendered before this resolves, so a signed-in user never sees it flash.
+2. **Session valid** -> straight to C1 (or onboarding step 1 if the device has no profile yet; sign-in never replaces onboarding). Signed in once, stays signed in across reloads and restarts.
+3. **No session** -> A1 (idle). Tap `auth.google.button` -> button busy (`auth.google.signingIn`, `aria-disabled`, `aria-busy`), live `auth.signingIn.live`, Google window opens.
+4. **Success** -> C1 (or onboarding). Local data on the device is kept and used as is.
+5. **Errors** (all return to A1 idle, button enabled and focused, error line in an assertive live region, no data touched):
+   - Google window closed -> `auth.error.cancelled`.
+   - Pop-up blocked -> `auth.error.popupBlocked`.
+   - No connection (also if it drops midway) -> `auth.error.offline`.
+   - Anything else -> `auth.error.other`.
+   - Offline cold start with a saved session: counts as signed in (session read locally), A0 -> C1. The wall applies only when there is no session.
+   - Session read takes more than 8 s -> A1 with `auth.error.other`.
+6. **Session expired or revoked while using the app** -> A1 with notice `auth.expired.*`; local data kept; after sign-in, back to C1.
+7. **Sign out** (settings -> アカウント -> `auth.signOut`) -> confirm dialog (`auth.signOut.body`: data stays on this device) -> `auth.signOut.confirm` -> A1 with live `auth.signedOut.live`. Cancel / Esc -> back to settings, nothing changed. Failure -> `auth.signOut.failed` inside the dialog, dialog stays open.
+8. **Signing in again** with the same account -> the local data is shown. A different account on the same device: not decided (see report); until decided, the device data is shown.
+Stories: US-E13 (IDs to be filled).

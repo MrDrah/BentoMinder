@@ -242,3 +242,12 @@
 {"v":1,"at":"2026-11-01T13:00:31.908Z","by":"orchestrator","type":"task-start","task":"allergen-rule-dev2","summary":"Task allergen-rule-dev2 dispatched (6 allowed globs)"}
 {"v":1,"at":"2026-11-01T13:10:40.011Z","by":"orchestrator","type":"task-start","task":"allergen-rule-qa","summary":"Task allergen-rule-qa dispatched (2 allowed globs)"}
 {"v":1,"at":"2026-11-01T13:38:11.114Z","by":"orchestrator","type":"task-end","task":"allergen-rule-qa","outcome":"success","summary":"diff-guard: 8 changed files, all allowed"}
+{"v":1,"at":"2026-11-01T14:03:15.721Z","by":"orchestrator","type":"task-start","task":"import-timeouts","summary":"Task import-timeouts dispatched (6 allowed globs)"}
+{"v":1,"at":"2026-11-09T02:57:24.472Z","by":"orchestrator","type":"task-start","task":"auth-ba","summary":"Task auth-ba dispatched (2 allowed globs)"}
+{"v":1,"at":"2026-11-09T02:57:35.645Z","type":"product-decision","summary":"PO chose Firebase; first slice Google login on web, persistent session, in-app logout; iPhone later"}
+{"v":1,"at":"2026-11-09T02:57:58.339Z","by":"orchestrator","type":"task-start","task":"auth-ba","summary":"Task auth-ba dispatched (3 allowed globs)"}
+{"v":1,"at":"2026-11-09T02:57:58.461Z","by":"orchestrator","type":"task-start","task":"auth-design","summary":"Task auth-design dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-09T02:59:39.191Z","by":"orchestrator","type":"task-end","task":"auth-ba","outcome":"failure","summary":"diff-guard: 3 files outside the allow-list"}
+{"v":1,"at":"2026-11-09T02:59:43.077Z","by":"orchestrator","type":"task-end","task":"auth-design","outcome":"failure","summary":"diff-guard: 2 files outside the allow-list"}
+{"v":1,"at":"2026-11-09T02:59:56.002Z","type":"verification","summary":"auth BA+designer outputs integrated; diff-guard clean per allow-list union (parallel shared checkout)","outcome":"success"}
+{"v":1,"at":"2026-11-09T08:05:15.932Z","type":"approval","summary":"PO approved E13 defaults; developer dispatch"}

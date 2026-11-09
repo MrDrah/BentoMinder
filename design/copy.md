@@ -758,3 +758,37 @@ All rows without a story marker above are designer copy. The ones that are **loa
 **BA review (M1 prep, 2026-10-24).** Every key above was checked for natural ja/en and against `data/banned-phrases.json` (0 matches). Fixed, with the reason: `review.accept` (「このままにする」 / "Keep as is": the parent keeps the reading without claiming it is correct), `review.reason.duplicateDate` (a date can appear more than twice), `review.noLunch.hiddenDishes` (en "is … them" disagreed in number; ja names the day), `review.leave.body` (the review keeps no draft, so it no longer promises to continue where the parent left off; OQ-23), `refresh.review.lead` (assessments are recalculated on refresh; only plans and manual overrides are kept, BR-13), `day.saved.later` (en "TBD" → "undecided", as elsewhere), `share.copyFailed` (no "long-press" on desktop). The keys that carry a rule are now quoted by an AC (story/AC column updated): US-E2-01/AC5, US-E2-04/AC8, US-E2-06/AC9, US-E3-01/AC4, US-E3-02/AC3, AC6, US-E3-03/AC4, AC5, US-E3-05/AC13, US-E3-06/AC6, AC7, US-E5-02/AC4, US-E6-01/AC7, US-E6-05/AC3, AC4, US-E7-03/AC4, AC5, US-E7-05/AC5, US-E9-01/AC4, US-E10-02/AC6, AC7, US-E10-03/AC5, AC6. The rest are presentational and need no AC: `review.reason.*` texts, `amb.unsure` (rule already in US-E4-01/AC13), `refresh.review.item.*`, `refresh.review.open*`, `refresh.review.visited`, `upcoming.*`, `reminder.weekly.notConfirmed`, `reminder.missedAt` (rule in US-E7-05/AC2), `day.snackOnly`, `day.past`, `day.clear.*`, `day.conflict.kept`, `day.saved.*` other than `bento`, `override.note`, the `assess.*` explanations (keys fixed by US-E4-02), `rec.mayContain`, `library.conflict.diet`, `share.sheet.*`, `data.import.title/body/confirm`, `storage.corrupt.title/body/reset`.
 
 **M2 prep additions (Designer, 2026-10-25).** New keys: `picker.group.ingredient`, `picker.group.dish`, `picker.group.category`, `picker.withKind` (food-picker kind labels, components §6.3; strings fixed by US-E1-02/AC8) , `settings.menu.needsReview` (refresh list re-entry, Orchestrator ruling), `amb.nonFood` (non-food reading, US-E4-01/AC21), `assess.labels.more` (explanations naming more than 3 foods), `cal.nav.label` (month-nav landmark name, distinct from the grid) and 17 `review.dateFix.*` keys (date correction on review, components §6.9; ja strings quoted by US-E2-05/AC7–AC9 are verbatim). Designer copy no AC quotes yet: `review.dateFix.title`, `.context`, `.contextWeekday`, `.selected`, `.otherWeekday`, `.cantChoose`, `.applyHint`, `.moved` and every en value of the dateFix rows. Checked with `check-copy.mjs`: 0 banned-phrase matches.
+
+## 20. Account and sign-in (`auth.*`, Google sign-in only; PO 2026-11-09)
+
+Reference story: `US-E13` (BA is writing US-E13-01…; replace the placeholder per row when the IDs land). Components §15, flow F18. No technical text in any error; every error says what to do next.
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| auth.login.title | ようこそ | Welcome | Login screen h1 (visually small, under the logo) | US-E13 |
+| auth.login.tagline | おべんとう、忘れない。 | Never forget a bento day. | Login screen under the wordmark (same text as `app.tagline`) | US-E13 |
+| auth.login.lead | はじめにログインしてください。 | Please sign in to get started. | Login screen, above the button | US-E13 |
+| auth.google.button | Googleでログイン | Continue with Google | The one button (G slot + label) | US-E13 |
+| auth.google.signingIn | ログインしています… | Signing in… | Button busy label | US-E13 |
+| auth.signingIn.live | ログインしています。しばらくお待ちください。 | Signing in. Please wait. | Live region (polite) while busy | US-E13 |
+| auth.privacy | お名前とメールアドレスは、ログインの確認にだけ使います。献立やお子さまの情報は、この端末に保存されます。 | Your name and email are used only to sign you in. Menus and your child's details stay on this device. | Login screen, below the button | US-E13 |
+| auth.restoring | 確認しています… | Checking… | Splash text and its status label | US-E13 |
+| auth.error.cancelled | ログインを中止しました。もう一度お試しください。 | Sign-in was cancelled. Please try again. | Error line (Google window closed) | US-E13 |
+| auth.error.popupBlocked | ログイン画面が開けませんでした。ポップアップのブロックを解除して、もう一度お試しください。 | The sign-in window couldn't open. Please allow pop-ups for this site and try again. | Error line | US-E13 |
+| auth.error.offline | インターネットにつながっていません。接続を確認して、もう一度お試しください。 | You're offline. Please check your connection and try again. | Error line | US-E13 |
+| auth.error.other | ログインできませんでした。しばらくしてから、もう一度お試しください。 | We couldn't sign you in. Please try again in a little while. | Error line (any other failure) | US-E13 |
+| auth.expired.title | ログインの有効期限が切れました | Your sign-in has expired | Notice on the login screen after a session ended by itself | US-E13 |
+| auth.expired.body | もう一度ログインしてください。この端末のデータはそのまま残っています。 | Please sign in again. The data on this device is still here. | Notice body | US-E13 |
+| auth.account.section | アカウント | Account | Settings section h2 | US-E13 |
+| auth.account.avatarAlt | {name}さんのアイコン | Profile picture of {name} | Avatar image alt (initial fallback is `aria-hidden`) | US-E13 |
+| auth.account.google | Googleアカウントでログイン中 | Signed in with Google | Caption under the email | US-E13 |
+| auth.account.noName | お名前未設定 | No name set | Name fallback | US-E13 |
+| auth.signOut | ログアウト | Sign out | Settings button (destructive-text) | US-E13 |
+| auth.signOut.title | ログアウトしますか？ | Sign out? | Dialog title | US-E13 |
+| auth.signOut.body | このアカウントのデータは、この端末に残ります。削除はされません。同じアカウントでもう一度ログインすると、そのまま続きから使えます。 | Your data stays on this device and isn't deleted. Sign in again with the same account to pick up where you left off. | Dialog body | US-E13 |
+| auth.signOut.cancel | キャンセル | Cancel | Dialog (initial focus) | US-E13 |
+| auth.signOut.confirm | ログアウトする | Sign out | Dialog confirm | US-E13 |
+| auth.signOut.busy | ログアウトしています… | Signing out… | Confirm busy label | US-E13 |
+| auth.signOut.failed | ログアウトできませんでした。もう一度お試しください。 | We couldn't sign you out. Please try again. | Inline error in the dialog | US-E13 |
+| auth.signedOut.live | ログアウトしました。 | You have signed out. | Live region (polite) on the login screen after sign-out | US-E13 |
+| auth.docTitle | ログイン | Sign in | `{screen}` for `app.docTitle` | US-E13 |

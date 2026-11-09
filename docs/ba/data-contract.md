@@ -573,6 +573,31 @@ PO decision in `docs/PLAN.md` §7 (last row of 2026-11-01). No field added, remo
 | Validator rules kept unchanged: `recipe-allergen-union`, `recipe-may-contain-union`, `recipe-possible-allergens`, `recipe-allergen-complete-derived`, `recipe-ingredient-inherent-allergen` (now bites on 17 more dictionary rows; 71 recipes were fixed minimally, 183 ingredient entries) | minimal change |
 | Dictionary: `inherentAllergenIds` set for 17 processed rows (dictionary §11) | F1' needs them |
 
+## 12. Accounts and sign-in (v1 slice 1, 2026-11-09; stories E13)
+PO decision in `docs/PLAN.md` §7 (2026-11-09). Google sign-in through Firebase Authentication. Data stays on the device. Items marked PROPOSAL are BA defaults awaiting the product owner.
+
+**12.1 `ownerId` source.** While an account is signed in, `ownerId` (§2) is that account's Firebase `uid`. Legacy records carry `local` (MVP) and are rewritten to the uid when the first account adopts the device data (US-E13-04/AC1). The `meta-owner` rule is unchanged (non-blank string). New rule `meta-owner-matches-account` (S, store level): every record in an account's store has `ownerId` equal to the uid in that store's key name. Never an e-mail address or display name.
+
+**12.2 Account-keyed storage key naming (PROPOSAL).** Keys become `bentominder.<uid>.state` and `bentominder.<uid>.state.prev` (the existing two-key backup scheme, one pair per account). `<uid>` is the Firebase uid used verbatim (alphanumeric, at most 128 characters; reject and treat as sign-in failure if it contains `.` or whitespace). The old keys `bentominder.state` and `bentominder.state.prev` are the legacy unkeyed store: read only by the one-time adoption (US-E13-04/AC1), never written afterwards. Other per-device settings that are not account data (for example theme, language) may stay unkeyed; the developer lists them in the ADR. `deviceId` stays per store as in §3.1. `schemaVersion` stays `1` (no field is added to the store); the key rename is a storage-layout change, not a schema change.
+
+**12.3 Auth session state (runtime only, never stored in `BentoMinderStore`, never exported).**
+| Field | Type | Req. | Rule |
+|-------|------|------|------|
+| `status` | `'loading'` \| `'signedOut'` \| `'signedIn'` | ✔ | `loading` only while the cached session is being read (US-E13-02/AC2) |
+| `user.uid` | string | ✔ when `signedIn` | non-blank; see 12.2 for allowed characters |
+| `user.displayName` | string \| null | ✔ when `signedIn` | display only |
+| `user.email` | string \| null | ✔ when `signedIn` | display only |
+| `user.photoUrl` | string \| null | ✔ when `signedIn` | display only; shown as decorative image |
+| `lastError` | `'cancelled'` \| `'popupBlocked'` \| `'offline'` \| `'disabled'` \| `'other'` \| `'sessionEnded'` \| null | ✔ | maps to the copy of US-E13-03 and US-E13-02/AC5; `cancelled` shows no message; no technical text is stored or shown |
+
+`user` is absent unless `status` is `signedIn`. The session itself (tokens) is held by the Firebase SDK's own persistence (`browserLocalPersistence`), not by the app.
+
+**12.4 What is stored.** In the app's own storage: the uid (as key-name part and `ownerId`) only. Display name, e-mail and photo URL are never written to the store or the export file. Firebase's SDK keeps its own session data in the browser as part of Authentication.
+
+**12.5 Validator.** `meta-owner-matches-account` (above) is added to §6.1 when implemented; the existing store validator is otherwise unchanged. Fixtures for tests use a fixed fake uid (for example `test-uid-001`) and a second one (`test-uid-002`) for the different-account cases.
+
+**12.6 Carried to the sync slice (not in this slice).** APPI consent record for allergy and health data (adds to `consent`), in-app account deletion, tombstones and `updatedBy` (§7), and a decision on whether `ownerId` becomes a family id for shared records.
+
 ### Open points (each with a recommendation; none blocks work)
 - **P1 Warning granularity.** Options: (a) per ingredient with the full list each time; (b) marker per ingredient + the full list once per recipe; (c) once per recipe only. **Recommend (b)**: 90 of 92 recipes have a processed ingredient, so (a) would repeat the list many times and bury it; (c) loses the "which product" hint. AC11 is written for (b).
 - **P2 Ordering.** Options: keep BR-09 unchanged except retiring the incomplete-last tier, or rank recipes without processed ingredients first. **Recommend no change**: the PO asked for a warning, not a penalty, and almost every recipe carries one.

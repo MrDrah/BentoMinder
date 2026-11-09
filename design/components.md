@@ -866,3 +866,65 @@ Test ids: `debug-open`, `debug-panel`, `debug-clock-input`, `debug-clock-set`, `
 | Dialogs | 12 confirm dialogs | yes |
 | System | 5 (storage banner, newer, corrupt, migrated, not found) | yes |
 | Debug | 2 (pill, panel) | yes |
+
+---
+
+## 15. Account and sign-in (US-E13; Google only, web first, Android later)
+
+### 15.1 Login screen (A1)
+Full screen, white page (`surface-1`), no app bar, no tab bar. One centred column, max 400 px (390 wide: 24 px side padding), vertically centred and slightly top-weighted. Order = focus order:
+1. Language toggle (`lang.toggle.*`, §1.7), top right, 44 px targets, always reachable; switching changes the screen copy at once.
+2. Wordmark `app.name` (display font) + tagline `auth.login.tagline` (`ink-2`, `text-md`). The logo is decorative (`aria-hidden`); the h1 is `auth.login.title`, visually small.
+3. Lead `auth.login.lead`.
+4. Google button. 5. Error line (directly under the button). 6. Privacy line `auth.privacy` (`text-sm`, `ink-2`).
+Optional info banner (§1.10) `auth.expired.*` above the lead, only after a session ended by itself.
+
+**Google button.** Follows Google's sign-in branding in words: the standard neutral (white) "Sign in with Google" button, label `auth.google.button`; the Google "G" mark is never recoloured, redrawn or cropped, and nothing implies another provider. Anatomy: 52 px high, block width (max 400), secondary variant (2 px `ink-1` border, `surface-1` fill, so the border keeps 3:1+), 20 px square **G slot** on the left (`aria-hidden`), 12 px gap, label centred in the rest. In the design the slot holds a neutral placeholder (20 px circle `surface-3` with 「G」 in `ink-1`); the developer fills it with the official asset from Google's brand resources (not embedded here).
+
+| State | Look and behaviour |
+|---|---|
+| default | as above |
+| hover | fill `surface-3` |
+| focus-visible | ring + halo (§1.3) |
+| active | fill `surface-3`, 1 px inset |
+| disabled / loading (signing in) | label `auth.google.signingIn`; G slot replaced by a 20 px spinner (reduced motion: static three dots); `aria-disabled="true"` + `aria-busy="true"`, stays focusable so focus never jumps; clicks ignored; polite live region `auth.signingIn.live` (a `role="status"` node that exists from first render, text swapped in) |
+| error | not on the button; shown as the line below; button enabled and focused again |
+| empty | n/a |
+
+**Error line.** A persistent `aria-live="assertive"` region from first render (not `role="alert"` injected), text swapped in. `danger` text with a leading "!" icon (never colour alone), `text-sm`, 8 px under the button, max 3 lines. Cleared on the next tap. Never shows codes or technical text.
+
+| Variant | Key | Cause |
+|---|---|---|
+| cancelled | `auth.error.cancelled` | Google window closed |
+| popup blocked | `auth.error.popupBlocked` | browser blocked the window |
+| offline | `auth.error.offline` | no connection |
+| other | `auth.error.other` | anything else |
+
+| | 390 | >= 1280 |
+|---|---|---|
+| Layout | column fills width minus 48 px | same column, centred; wordmark larger (`text-3xl`); no card, no shadow |
+
+Screen states: idle; signing-in; error (4 variants); expired notice; loading n/a (A0 covers it); empty n/a.
+Test ids: `screen-login`, `login-google`, `login-error`, `login-privacy`, `login-expired`, `login-lang`.
+
+### 15.2 Restoring-session splash (A0)
+Shown on every cold start until the saved session has been read, **instead of** A1 or C1, so neither flashes. Centred wordmark + 24 px spinner (static in reduced motion) + `auth.restoring` (`text-sm`, `ink-2`) on `surface-1`. No buttons, no language toggle. Container `role="status"` with `aria-busy="true"` carries `auth.restoring`. Timing: if resolved within 150 ms nothing is drawn (plain white, no flicker); once shown it stays at least 300 ms. After 8 s it falls back to A1 with `auth.error.other`.
+States: default (the only one); hover/focus/active/disabled n/a (no controls); loading is the screen; error -> A1; empty n/a. Test id: `screen-restoring`.
+
+### 15.3 AccountSection (settings, §9)
+New first card of the settings screen, h2 `auth.account.section`. Row: 48 px round avatar (Google photo with alt `auth.account.avatarAlt`; fallback: first character of the name, or of the email if no name, in `ink-1` on `surface-3`, `aria-hidden`), then display name (`text-md`, 700, ellipsis, `title` on hover), email (`text-sm`, `ink-2`, ellipsis), caption `auth.account.google`. Below: `auth.signOut` (destructive-text, 44 px; block on 390). Missing name: `auth.account.noName` in `ink-2`.
+States: default; hover/focus/active on the button; disabled (while the dialog is busy); loading (avatar and two lines as `surface-3` skeletons, button enabled); error n/a (the cached profile is used); empty = fallback name + initial.
+390: full-width card. >= 1280: first card of the left column.
+Test ids: `settings-account`, `account-avatar`, `account-name`, `account-email`, `account-sign-out`.
+
+### 15.4 Sign-out confirm dialog
+`alertdialog` (§1.13), title `auth.signOut.title`, body `auth.signOut.body` (the data-stays statement is the point of the dialog and is never shortened). Actions: `auth.signOut.cancel` (initial focus, secondary) and `auth.signOut.confirm` (primary, not red: nothing is lost).
+States: default; hover/focus/active per button; loading (confirm shows spinner + `auth.signOut.busy`, both buttons `aria-disabled`, Esc and backdrop ignored); error (`auth.signOut.failed` in the dialog, `danger` with "!" icon, assertive live, buttons re-enabled); disabled and empty n/a. Cancel/Esc returns focus to `account-sign-out`. On success the dialog closes, A1 appears, focus lands on its h1 and `auth.signedOut.live` is announced.
+Test ids: `dialog-sign-out`, `dialog-sign-out-confirm`, `dialog-sign-out-cancel`, `dialog-sign-out-error`.
+
+### 15.5 Accessibility and responsive (all of §15)
+- Targets >= 44 px (button 52, toggle 44). Only existing audited token pairs are used (ink-1/surface-1, ink-2/surface-1, danger/surface-1, line-ui 3:1+); no new colours. The Google asset is the only exception and is not text.
+- Keyboard: Tab order language toggle -> Google button; Enter/Space activates; focus stays on the button while signing in. Dialog traps focus; Esc = cancel.
+- `<html lang>` follows the toggle; `<title>` uses `auth.docTitle`. Reduced motion: spinners become static dots; no screen transitions.
+- Works at 320 px and 200 % zoom (column reflows, privacy line wraps, nothing clipped).
+- Hard wall: signed out, A1 is the only reachable screen; a deep link lands on A1 and, after sign-in, on the requested screen (C1 if none).

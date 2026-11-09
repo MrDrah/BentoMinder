@@ -94,8 +94,9 @@ Counts are active ACs (retired ACs are kept as comments and not counted). `(v1)`
 | E10 Data | US-E10-01 … 05 | 5 | 18 | MVP |
 | E11 Debug panel | US-E11-01 … 03 | 3 | 8 | MVP (development builds only) |
 | E12 Android | US-E12-01 … 04 | 4 | 9 (8) | MVP: US-E12-01 only; US-E12-02 … 04 are v1 |
+| E13 Accounts and sign-in | US-E13-01 … 07 | 7 | 39 (39 v1) | v1 slice 1 (web, Google only) |
 | NF Non-functional | US-NF-01 … 05 | 5 | 15 | MVP |
-| **Total** | | **73** | **320 (10 v1)** | |
+| **Total** | | **80** | **359 (49 v1)** | |
 
 ---
 
@@ -2378,6 +2379,211 @@ Scenario: AC2 (v1) Timezone change
 Scenario: AC3 (v1) Expired reminders
   Given a notification's target date has passed while the device was off
   Then it is not delivered late (removed on next app start)
+```
+
+---
+
+## E13 Accounts and sign-in
+
+First slice of v1 accounts (PO decision, `docs/PLAN.md` §7, 2026-11-09). Firebase Authentication, **Google sign-in only**, web first. Data stays on the device; no sync, no backup, no server copy of anything.
+
+**Out of scope / later (no ACs here):** Sign in with Apple (iPhone), email + password, account deletion in the app, APPI consent for allergy data, cloud sync and backup, family members and sharing, the hosted AI proxy token check, Android-native Google sign-in (Capacitor plugin).
+
+**Notes (rules for all E13 stories)**
+- N1 Testability: the app talks to sign-in only through an `AuthPort` (current user, `onAuthStateChanged`, `signInWithGoogle`, `signOut`). Unit, component and e2e tests use a fake adapter and never call Google or Firebase; only a manual smoke check uses the real adapter.
+- N2 User-facing messages are plain Japanese, no error codes or technical text. The designer writes final copy; quoted labels below are working labels.
+- N3 Items marked DEFAULT are Business Analyst proposals the product owner may overturn.
+
+### US-E13-01 Login screen is shown first (hard wall) · M · M
+As a parent I want to sign in once before using the app so that my data belongs to my account.
+
+```gherkin
+Scenario: AC1 Signed out shows only the login screen
+  Given no signed-in user
+  When the app opens at any address (including a deep link to a calendar day or recipe)
+  Then only the login screen is shown, with the app name and one button 「Googleでログイン」, and no calendar, profile, menu or settings content is rendered
+
+Scenario: AC2 Deep link is not lost
+  Given no signed-in user and a deep link to 2026-11-13
+  When the parent signs in
+  Then the app opens that deep link (or the normal start screen if the link is invalid)
+
+Scenario: AC3 Sign-in starts only on the parent's tap
+  When the login screen is shown
+  Then no Google window opens until the parent taps 「Googleでログイン」
+
+Scenario: AC4 Successful sign-in enters the app
+  Given sign-in succeeds
+  Then the login screen is replaced by onboarding when the account's local store has no profile, otherwise by the calendar
+
+Scenario: AC5 Login screen is accessible
+  Then the button is reachable by keyboard with a visible focus ring, has an accessible name, the screen has one h1 and the axe check of US-NF-02 passes in light and dark
+
+Scenario: AC6 Notification tap while signed out
+  Given a reminder notification is tapped while signed out
+  Then the login screen is shown first and, after sign-in, the app opens the screen the notification targets
+```
+
+### US-E13-02 Session persists and works offline · M · M
+As a parent I want to stay signed in so that I am not asked again every time.
+
+```gherkin
+Scenario: AC1 Reopen does not ask again
+  Given the parent signed in earlier
+  When the browser or app is closed and reopened
+  Then the app opens straight into the signed-in app with no login screen
+
+Scenario: AC2 No login flash on start
+  Given a persisted session
+  When the app starts and the session is still being read
+  Then a neutral loading screen is shown (never the login screen), for at most 3 seconds before the cached session is used
+
+Scenario: AC3 Offline reopen works
+  Given the parent signed in earlier and the network is off
+  When the app is reopened
+  Then the cached session is used, the app opens normally, and no message blocks use (BR-22, US-E10-01/AC3)
+
+Scenario: AC4 First sign-in needs the network
+  Given no session and the network is off
+  When the parent taps 「Googleでログイン」
+  Then the outcome of US-E13-03/AC4 is shown and the app is not entered
+
+Scenario: AC5 Session ended by the account provider
+  Given the network is on and the provider reports the session as ended (revoked, account disabled or deleted)
+  Then the login screen is shown with 「再度ログインしてください」, local data is not deleted, and signing in again with the same account restores it
+
+Scenario: AC6 Offline never forces sign-out
+  Given a cached session and no network
+  Then the app does not sign the parent out and does not require a token refresh to run any feature that works offline
+```
+
+### US-E13-03 Sign-in errors · M · S
+As a parent I want clear, calm messages when sign-in does not work so that I know what to do.
+
+```gherkin
+Scenario: AC1 Parent cancels (closes the Google window)
+  Then the login screen stays, no error banner is shown, and the button is usable again
+
+Scenario: AC2 Popup blocked
+  Given the browser blocks the sign-in window
+  Then the login screen shows 「ログイン画面を開けませんでした。ポップアップを許可してもう一度お試しください。」 and the button is usable again
+
+Scenario: AC3 Another sign-in already running
+  When the parent taps the button twice quickly
+  Then only one sign-in starts and the button is disabled with a busy state until it ends
+
+Scenario: AC4 Offline at first sign-in
+  Given no network
+  Then the login screen shows 「インターネットに接続してからログインしてください」 and the button stays usable
+
+Scenario: AC5 Account disabled or any other failure
+  Then the login screen shows 「ログインできませんでした。しばらくしてからもう一度お試しください。」, no code or technical text is shown, and nothing is stored
+
+Scenario: AC6 Errors never enter the app or touch data
+  Given any failure of AC1 to AC5
+  Then the auth state stays signed out and the local data of every account is unchanged
+```
+
+### US-E13-04 Local data is keyed to the account · M · M
+As a parent I want my data to stay with my account on this device so that someone else signing in here does not see it.
+
+```gherkin
+Scenario: AC1 Existing data is adopted by the first account (DEFAULT)
+  Given the device has data in the old unkeyed store (`bentominder.state`, records with ownerId `local`) and no account store exists
+  When a parent signs in for the first time
+  Then the data is moved to that account's keys, every record's ownerId changes from `local` to the Firebase uid, nothing else changes, and the old unkeyed keys are removed only after the new keys are written and read back equal
+
+Scenario: AC2 Adoption happens once
+  Given the unkeyed store was already adopted by account A
+  When account B signs in on the same device
+  Then B gets an empty store (onboarding) and never receives A's data
+
+Scenario: AC3 Same account returns to its data
+  Given account A signed out earlier
+  When A signs in again on the same device
+  Then A's profile, menus, decisions, overrides, reminder times and consent are restored exactly (BR-22)
+
+Scenario: AC4 A different account does not see another's data
+  Given account A's data is on the device
+  When account B signs in
+  Then no screen, export, notification or search result shows any of A's data, and A's keys are not read
+
+Scenario: AC5 ownerId is the uid
+  Then every record created or updated while account A is signed in has ownerId equal to A's uid (ADR 003), never the e-mail address
+
+Scenario: AC6 Export and delete act on the current account only
+  Then export and 「すべて削除」 of E10 read and delete only the signed-in account's keys; deleting never touches another account's keys
+```
+
+### US-E13-05 Sign-out in the app · M · S
+As a parent I want to sign out from settings so that I can hand over or share the device safely.
+
+```gherkin
+Scenario: AC1 Settings shows the account
+  Given a signed-in parent
+  When they open settings
+  Then an account section shows the display name (or e-mail when the name is missing), the e-mail, a photo if present (decorative, empty alt text) and a button 「ログアウト」
+
+Scenario: AC2 Confirm explains that data stays
+  When the parent taps 「ログアウト」
+  Then a confirm dialog says that the data stays on this device and returns on the next login with the same Google account, and that reminders stop until then; buttons 「ログアウト」 and 「キャンセル」, focus on 「キャンセル」
+
+Scenario: AC3 Confirm signs out
+  When the parent confirms
+  Then the session ends, the login screen is shown, and no local data of the account is deleted
+
+Scenario: AC4 Cancel changes nothing
+  When the parent cancels (button or Escape)
+  Then the dialog closes and the parent stays signed in
+
+Scenario: AC5 Reminders on sign-out and sign-in (DEFAULT)
+  Given reminders are scheduled
+  When the parent signs out
+  Then all scheduled local notifications of the app are cancelled
+  And when any account signs in, reminders are rescheduled from that account's own settings and decisions only
+
+Scenario: AC6 Sign-out works offline
+  Given no network
+  When the parent confirms 「ログアウト」
+  Then the local session ends and the login screen is shown
+```
+
+### US-E13-06 Privacy of the account data · M · S
+As a parent I want to know what the app learns about me from Google so that I can trust it.
+
+```gherkin
+Scenario: AC1 What is received and what is kept
+  Then the app receives uid, display name, e-mail and photo URL from Google; only the uid is stored by the app (as ownerId and in storage key names); name, e-mail and photo are read from the session only to display them and are never written into the BentoMinderStore or exported
+
+Scenario: AC2 Short notice at first sign-in (DEFAULT)
+  Given a first sign-in on this device
+  Then the login screen shows, above the button, one short notice (at most 3 lines): sign-in is with Google, the app uses your name and e-mail only to show them, and the child's information stays on this device; no extra consent tick box is required in this slice
+
+Scenario: AC3 No child data leaves the device
+  Then no request to Google or Firebase contains profile, allergy, decision, override or menu data (BR-10, BR-22, US-NF-03)
+
+Scenario: AC4 No tracking added
+  Then sign-in adds no analytics, advertising SDK or third-party cookie beyond what Firebase Authentication needs for the session
+
+Scenario: AC5 Requirement carried to the sync slice
+  Then the sync slice must add APPI consent for allergy and health data, in-app account deletion and a privacy notice before any profile data is sent to a server (recorded; not tested in E13)
+```
+
+### US-E13-07 Testability of sign-in · M · S
+As the team I want sign-in testable without Google so that tests are fast and stable.
+
+```gherkin
+Scenario: AC1 Auth behind a port
+  Then all UI and domain code reach sign-in only through `AuthPort`; no component imports the Firebase SDK directly
+
+Scenario: AC2 Fake adapter covers every state
+  Then the fake adapter can produce: signed out, signed in (given uid, name, e-mail), cancelled, popup blocked, offline, disabled, other failure, session revoked, and a delayed session read
+
+Scenario: AC3 Tests make no external calls
+  Then unit, component and e2e runs make zero requests to Google or Firebase hosts (asserted by network interception in e2e)
+
+Scenario: AC4 Existing suites run signed in
+  Then the existing e2e and component suites start with the fake signed in as a fixed test account, so they need no login steps, and a separate suite covers the signed-out wall
 ```
 
 ---
