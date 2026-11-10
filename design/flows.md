@@ -468,3 +468,85 @@ Screens: A0 restoring splash, A1 login, then the existing home (C1). Hard wall: 
 7. **Sign out** (settings -> アカウント -> `auth.signOut`) -> confirm dialog (`auth.signOut.body`: data stays on this device) -> `auth.signOut.confirm` -> A1 with live `auth.signedOut.live`. Cancel / Esc -> back to settings, nothing changed. Failure -> `auth.signOut.failed` inside the dialog, dialog stays open.
 8. **Signing in again** with the same account -> the local data is shown. A different account on the same device: not decided (see report); until decided, the device data is shown.
 Stories: US-E13 (IDs to be filled).
+
+## 22. F19: family sharing, cloud storage, sync status (US-E15-01…E15-11)
+Screens and parts (components §16): S1 Family card (settings), S2 consent notice, S3 create progress, S4 invite block, S5 join screen + confirm, S6 adoption choice, S7 new-device loading / retry, S8 status button + sheet, S9 notes (banners), S10 leave / remove / delete dialogs, S11 import warning. Entry is always **settings -> 家族で共有** (S1) or a join link. Nothing here blocks the calendar, recipes, export or delete-all (US-E15-06/AC7).
+Lazy-loaded: S2 to S6, S10, S11 and the status sheet / lost list of S8, S9. In the main bundle: the app-bar status button, S1 shell, S7.
+
+### F19.1 Turn sharing on: create a family (US-E15-01, US-E15-02)
+1. Settings S1, variant A: `family.none.lead`, buttons `family.create` and `family.join`. Nothing is uploaded, no request made (US-E15-01/AC1). In a family already: variant B, neither button (AC6).
+2. Tap `family.create`. **Offline** -> `family.offline` in the card, no consent, no family (AC7).
+3. Online -> S2 consent (first time, or the version upgrade state; skipped if the current version is already accepted). Nothing leaves the device before 「同意して進む」 (US-E15-02/AC1, AC8).
+4. **Decline** (`consent.cloud.decline` or Esc) -> back to S1 variant A, toast `consent.cloud.declined.toast`; local only, no cloud change (US-E15-01/AC2, US-E15-02/AC4).
+5. **Agree** -> S3 progress (`family.create.busy`); second tap ignored (US-E15-01/AC8). Consent recording fails -> `consent.cloud.error`, nothing stored (US-E15-02/AC8).
+6. **Success** -> toast `family.toast.created`, S1 variant B, status chip appears (`synced` or `syncing`). Local data uploaded unchanged (AC3); empty local copy: identical screen, onboarding continues as normal (AC4).
+7. **Network lost midway** -> S3 closes with the info banner `family.create.paused`; chip `pending-offline` / `retrying`; invite disabled (`family.invite.waitUpload`); resumes alone (US-E15-01/AC5).
+8. Consent stored per member; readable later in S1 (`family.consent.row` -> read view with the date and the leave action) (US-E15-02/AC5, AC7).
+
+### F19.2 Invite the spouse (US-E15-03)
+1. S4 none -> `family.invite`. Disabled with hint when offline (`family.invite.offline`), upload unfinished (`family.invite.waitUpload`) or family full (`family.invite.full`) (AC9, US-E15-01/AC5, AC5).
+2. Active: code in two groups, link, `family.invite.copyCode` / `copyLink` (toast), `family.invite.share` (if the device can), expiry `family.invite.expires` (72 h) (AC1). Copy blocked -> `family.invite.copyFailed`.
+3. `family.invite.newCode` or `family.invite.cancel` -> the earlier code stops at once, one invite at most (AC4); toast `family.toast.inviteCancelled` for cancel.
+4. Expiry reached -> S4 none + `family.invite.expired` (AC2).
+5. Redeemed -> the member appears in the list, the invite is gone, toast `family.toast.joined` (AC8). Single use and rate limits act on the joiner's side (AC3, AC6).
+
+### F19.3 Join with a code or link (US-E15-04, US-E15-03/AC6, AC7)
+1. **Link, signed out** -> login (A1, F18) with `family.join.loginHint` -> sign in -> S5 with the code filled (AC1). **Link or settings, signed in** -> S5.
+2. Type the code (any case, spaces or hyphens ignored) -> `common.next`. Fewer or more than 10 symbols: `family.join.err.format`, no request (AC2).
+3. S2 consent if the version is not yet accepted (decline -> back to S5, nothing changed, AC8) -> confirm dialog (`family.join.confirm.*`; cancel changes nothing, AC8) -> `family.join.confirm.ok`.
+4. **Refusals** (nothing changes, no family info, AC10): `family.join.err.generic` (wrong / used / cancelled), `.expired`, `.full`, `.rate` (10 tries an hour), `.already` (one family per account, AC9), `.offline`, `common.error.generic`.
+5. **Success, local copy empty** -> download -> calendar with the family data, never onboarding (AC3); toast `family.toast.joinedSelf`.
+6. **Success, local copy has data**
+   - family empty -> no question, the local data is uploaded (AC7);
+   - family has data -> S6 `family.adopt.title`: `family.adopt.useFamily` (preselected) or `family.adopt.addLocal`; `family.adopt.continue` or cancel (AC4). Use family: local replaced, backup copy kept 30 days and exportable (AC5). Add: family profile and settings stay, missing months, plans and overrides are added, same keys keep the family's version, backup copy kept (AC6).
+7. **Interrupted** (app closed, network lost) -> next open: S7 container with `family.join.resuming`, then S6 if not yet answered; never a member with no way to finish (AC11).
+8. After joining the new member has every control the creator has; the UI marks no owner (AC12).
+
+### F19.4 First sign-in on a new device (US-E15-05)
+1. Sign in (F18). Member, no local copy -> S7 loading (`family.load.title`), 15 s limit; no onboarding, no empty calendar flash (AC1).
+2. Read fails or takes longer than 15 s -> S7 retry (`family.load.failed.title`, `family.load.retry`, or `family.load.failed.offline`); `auth.signOut` stays available; no local profile is created (AC3).
+3. Read succeeds -> consent notice first only if this device has not recorded the current version (AC2), then the calendar.
+4. Device with a local copy -> opens at once; membership check and sharing run in the background; offline is fine (AC4).
+5. Account in no family, device has old data -> nothing changes; local only until the parent chooses (AC5).
+6. Member whose device has different local data -> S6 once (`family.adopt.lead.device`), same outcomes as F19.3 step 6 (AC6).
+7. Changes made on another device appear within 60 s without reload; reminders re-plan on this device (AC7); a changed allergy profile re-assesses plans with the existing "assessment changed" banner (AC8). Signing out here changes nothing for the family or other devices (AC9).
+
+### F19.5 Status, offline and retry (US-E15-06, US-E15-10, US-E15-02/AC6)
+1. App-bar status button (not shown while `local-only`) and the settings status row show one of: `synced`, `syncing`, `pending-offline`, `retrying`, `paused-no-consent`, `paused-limit`, `paused-app-too-old`, `membership-ended` (AC4). Tap -> status sheet (word, hint, last update, pending count, action).
+2. Editing offline: saved at once on the device, chip `sync.pendingOffline`, queue shows the count (3 records, not 5 edits) and survives a restart (AC1, AC2). Online again -> `syncing` then `synced` with the time (AC3).
+3. Temporary failure -> `sync.retrying`, no dialog; after 5 minutes `sync.retryNow` appears (AC5). Retry fails again -> `sync.retry.failed`.
+4. Pending changes older than 24 h -> the chip is highlighted (ring, "!", `sync.stale.short`) and the sheet shows `sync.stale` (AC6).
+5. New notice version -> consent upgrade state on the next open; decline -> chip `sync.needsConsent`, card banner `consent.cloud.paused.*` (US-E15-02/AC6).
+6. Size limit -> `sync.limit` (US-E15-10/AC1); runaway write guard -> `sync.limit.writes`, resumes within the hour (AC3); cloud from a newer app -> `sync.appTooOld` + `sync.appTooOld.action` (US-E15-06/AC8). The local copy keeps working and export stays available in all of them (US-E15-06/AC7).
+7. Notes (S9): a downloaded record that failed validation -> `family.ignored.title`, once (AC9). My pending edit lost to a newer family edit -> `family.lost.one.*` + `family.lost.show`; several -> `family.lost.many` + list (US-E15-07/AC8). Dismiss closes; never shown again.
+8. Sign-out stops sending; the queue stays under the account's keys (US-E15-06/AC10). Reminder log and shown state are never shared (AC11).
+
+### F19.6 Leave, remove, delete (US-E15-08)
+All three need the network: offline, the destructive button is disabled with `family.offline.action` and nothing is queued (AC9). Cancel, Esc or backdrop changes nothing (AC8).
+1. **Leave** (two members): `family.leave` -> dialog `family.leave.*` (says the other member keeps the data) -> `family.leave.confirm` -> toast `family.toast.left`; the device keeps its data as local only, chip disappears (`local-only`), S1 variant A (AC1, AC2, AC10).
+2. **Last member leaving:** `family.leave` -> `family.leaveLast.*` with typed confirmation (`family.typed.*`) -> online data deleted, local kept (AC4).
+3. **Remove the other member:** `family.remove` -> `family.remove.*` -> `family.remove.confirm` -> toast `family.toast.removed`; the list loses the row (AC3). On the removed person's device, at next open or sharing run: banner `family.ended.removed.*` (S9), their data kept as local only, S1 variant A after `family.ended.ok` (AC3).
+4. **Delete the online data:** `family.delete` -> `family.delete.*` + typed `family.typed.word` -> `family.delete.confirm` -> toast `family.toast.deleted`; Google sign-in and every local copy stay (AC5, AC7). Other member's device at next open: banner `family.ended.deleted.*`, local data kept, nothing re-uploaded (AC6).
+5. Failure in any dialog -> `common.error.generic` inside, dialog stays, nothing changed.
+6. **Local "delete all"** (E10-04) while in a family: dialog shows `family.deleteAll.note` first; the online data stays; next sign-in downloads it again (US-E15-11/AC7, US-E15-08/AC7).
+
+### F19.7 Import and export while in a family (US-E15-11)
+1. Export is unchanged (`data.export`); no extra copy (AC4). A family member can also export the backup copy (`family.safety.export`).
+2. Old export file, no family: as today (AC5).
+3. Import as a member: after a valid file, dialog `family.import.*` says everyone's data is replaced (AC6); confirm -> done, both devices show it after sharing; cancel, an invalid or a too-new file change nothing (`data.import.invalid`, `data.import.newer`).
+4. Settings data note switches to `family.data.where` while in a family (US-E15-02/AC7).
+
+### F19.8 Story coverage (US-E15)
+| Story | Frames |
+|---|---|
+| US-E15-01 | F19.1 steps 1 to 7; AC1, AC6, AC7 in S1; AC5 and AC8 in S3 and S4 |
+| US-E15-02 | F19.1 steps 3 to 8; F19.5 step 5; AC2, AC3 are the notice text (copy §22.1) |
+| US-E15-03 | F19.2; F19.3 step 4 |
+| US-E15-04 | F19.3 |
+| US-E15-05 | F19.4 |
+| US-E15-06 | F19.5 |
+| US-E15-07 | F19.5 step 7 (AC8 is the only UI AC; AC1 to AC7, AC9 to AC12 are engine rules with no screen) |
+| US-E15-08 | F19.6 |
+| US-E15-09 | no UI (rules and authorisation tests) |
+| US-E15-10 | F19.5 step 6 (AC1, AC3 status text); AC2, AC4 to AC8 no UI |
+| US-E15-11 | F19.6 step 6, F19.7 (AC4 to AC7 UI); AC1 to AC3, AC8, AC9 no UI |

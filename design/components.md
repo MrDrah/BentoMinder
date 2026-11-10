@@ -928,3 +928,291 @@ Test ids: `dialog-sign-out`, `dialog-sign-out-confirm`, `dialog-sign-out-cancel`
 - `<html lang>` follows the toggle; `<title>` uses `auth.docTitle`. Reduced motion: spinners become static dots; no screen transitions.
 - Works at 320 px and 200 % zoom (column reflows, privacy line wraps, nothing clipped).
 - Hard wall: signed out, A1 is the only reachable screen; a deep link lands on A1 and, after sign-in, on the requested screen (C1 if none).
+
+---
+
+## 16. Family sharing and cloud storage (US-E15; PO 2026-11-10)
+
+Rules for the whole section. Everything is built from existing parts: settings card and row (§9, §15.3), dialog (§1.13), bottom sheet (§1.12), banner (§1.10), toast (§1.11), text input (§1.4), radio group and choice cards (§1.9), spinner and skeleton (§1.16), buttons (§1.3). **No new colour, radius or elevation token.** Words: the UI says 「家族」 (family), 「共有」 (sharing), 「招待コード」, 「オンラインデータ」; it never says "sync", "tombstone", "server", 「クラウド」, uid or an error code. The only places 「同期」 appears are the two words the ACs fix (`sync.synced` 「同期済み」, `sync.syncing` 「同期中」, US-E15-06/AC3).
+Copy: `design/copy.md` §22 (`family.*`, `sync.*`, `consent.cloud.*`). Flow: `design/flows.md` §22 (F19).
+Never blocked by sharing (US-E15-06/AC7, N3): nothing in §16 disables a calendar, recipe, export or delete-all control. Sharing controls disable only themselves.
+
+**Lazy loading (lean build).** Always in the main bundle: the app-bar status button (§16.7, icon + a status word), the Family card shell (§16.1) and the new-device loading/retry screen (§16.9, it is on the boot path). Lazy chunk `family` (loaded when a sharing control is first used or a join link is opened): consent notice, create progress, invite panel, join screen, adoption choice, member list, safety-copy row and all dialogs of §16.10. Lazy chunk `sync-status`: status sheet (§16.7) and the lost-edit list dialog (§16.8). Until a chunk arrives its trigger shows the loading state (spinner + busy label) for up to 3 s, then `common.error.generic` inline.
+
+### 16.1 FamilyCard (settings; new card between 「アカウント」 and 「リマインダー」)
+Card with h2 `family.section`. The content is exactly one of three variants, never mixed.
+
+**Variant A: no family** (US-E15-01/AC1, AC6, AC7). Lead `family.none.lead` (`text-md`), then two block buttons: `family.create` (primary, 52 px) and `family.join` (secondary, 52 px). After leaving, the consent row (§16.2 read view) and the safety-copy row (§16.6) show if they exist. Offline: both buttons stay focusable with `aria-disabled="true"`; tapping shows `family.offline` (verbatim AC7) in the card's assertive error line (icon + `danger` text) and does nothing else; the hint is also linked with `aria-describedby`. No network request is made until a button is tapped.
+
+**Variant B: member.** Rows in this order:
+1. Status row (§16.7): icon + `sync.*` word + last-synced line; a button that opens the status sheet. 64 px min height, chevron at right.
+2. Members: h3 `family.members`; one row per member: 40 px initial tile (`aria-hidden`), name or e-mail (`text-md`, 700, ellipsis, `title`), the `family.member.you` tag chip (§1.6) on your own row, nothing else. Nothing marks anyone as owner (US-E15-04/AC12). The other member's row has `family.remove` (destructive-text, 44 px). With one member the list shows the line `family.members.room` (`ink-2`).
+3. Invite block (§16.4).
+4. Consent row (§16.2 read view): `family.consent.row` + `consent.cloud.agreedOn`; a 44 px link-style button that opens the notice read-only.
+5. Safety-copy row (§16.6), only while a safety copy exists.
+6. Actions below a `line-1` divider: `family.leave` and `family.delete` (destructive-text, 44 px, stacked, 8 px gap).
+
+**Variant C: ended** (US-E15-08/AC3, AC6). An info banner (§1.10, `role="status"`, `family.ended.removed.*` or `family.ended.deleted.*`, action `family.ended.ok`) at the top of the card and on the calendar home (§16.8). After 「わかりました」 the card becomes variant A. Reason `left` shows only the toast `family.toast.left` (the parent did it themselves).
+
+| State | Look and behaviour |
+|---|---|
+| default | as above |
+| hover / focus-visible / active | per control (§1.3); the status row is a button: hover `surface-1`, focus ring, active `surface-3` |
+| disabled | a control that cannot act right now is `aria-disabled` + dashed + a hint linked by `aria-describedby`: offline (`family.offline`), uploading (`family.invite.waitUpload`), full (`family.invite.full`) |
+| loading | card skeleton (two lines + one 52 px block) while membership is first read on a device that has a local copy, at most 3 s; a tapped button shows spinner + its busy label (`family.create.busy`) |
+| error | assertive line in the card (icon + `danger`): `family.offline` or `common.error.generic` |
+| empty | variant A is the empty state; no illustration |
+
+| | 390 | >= 1280 |
+|---|---|---|
+| Layout | full-width card, buttons block | first card of the left column after account, buttons inline, min 160 px |
+
+Test ids: `settings-family`, `family-create`, `family-join`, `family-offline`, `family-status-row`, `family-members`, `family-member-<index>`, `family-remove`, `family-leave`, `family-delete`, `family-consent-row`, `banner-ended`.
+Stories: US-E15-01/AC1, AC6, AC7; US-E15-02/AC7; US-E15-04/AC12; US-E15-08/AC1, AC3, AC6, AC9.
+
+### 16.2 Consent notice (`consent.cloud.*`)
+One component, three entry states and one read view. It is the only thing shown between 「家族をつくる」 / 「参加する」 and any upload or download (US-E15-02/AC1, AC8): no family data request is made before 「同意して進む」.
+
+**Container.** 390: full-screen dialog (no scrim, nothing behind competes); top bar with title and the language toggle (§1.7) so the notice can be read in either language; no back arrow (the buttons decide). >= 1280: centred dialog, max 560 px, max-height 90 vh, body scrolls. `role="dialog"`, `aria-modal="true"`, `aria-labelledby` the h2, `aria-describedby` the lead.
+
+**Anatomy.**
+1. h2 `consent.cloud.title`, lead `consent.cloud.lead` (upgrade state: info banner first, §below).
+2. A definition list (`<dl>`) of seven items, each a bold `<dt>` (`text-md`, 700) and a `<dd>` of one or two sentences: what is stored / why / where / who can see it / the operator / AI reading / how to stop. Keys `consent.cloud.what.h` and `.b`, and so on. All text is visible without a tap (no accordion). The sentence "the menu PDF itself is not stored" is in the what-body.
+3. Contact line `consent.cloud.contact` (`text-sm`, `ink-2`); the address is a `mailto:` link whose text is the address (`ink-1`, underlined, `lang="en"`).
+4. Parent line `consent.cloud.parent` (`text-md`) directly above the buttons, so the statement the tap stands for is the last thing read.
+5. Footer: `consent.cloud.accept` (primary, 52) and `consent.cloud.decline` (secondary, 52). **Same size and width; decline is not a text link and not smaller** (US-E15-02/AC4). 390: stacked, accept on top, 12 px gap. Desktop: a row, decline left of accept. On 390 the footer is sticky only when the viewport is at least 560 px tall and zoom is below 200 %; otherwise it scrolls with the content so it never hides text.
+6. Version note `consent.cloud.version` (`text-sm`, `ink-3`) at the bottom.
+
+**Focus.** Initial focus on the h2 (`tabindex="-1"`), never on 「同意して進む」 (AC4). Tab order: language toggle, contact link, accept, decline. Esc = decline (no penalty). Nothing is pre-ticked; there is no checkbox: the tap is the explicit act.
+
+| State | Look and behaviour |
+|---|---|
+| first time (create or join) | title `consent.cloud.title`, lead `consent.cloud.lead`; accept proceeds (create: §16.3; join: §16.5 confirmation) |
+| upgrade (re-consent, US-E15-02/AC6) | info banner (§1.10) above the list: `consent.cloud.upgrade.title` + `consent.cloud.upgrade.lead` (version changed, sharing is paused until you decide, local use unaffected); same list and buttons. Shown on the first open after the app carries a newer version |
+| declined, first time | dialog closes, back to the card (variant A), toast `consent.cloud.declined.toast`; nothing uploaded; no cloud change (US-E15-01/AC2, US-E15-04/AC8) |
+| declined, upgrade | dialog closes; the card shows a warning banner `consent.cloud.paused.title` / `.body` with actions `consent.cloud.paused.review` (reopens the notice) and `family.leave`; status `paused-no-consent` (§16.7). The member stays; local use continues |
+| read view (settings, US-E15-02/AC7) | same text, no accept/decline; `consent.cloud.agreedOn` under the h2; one button `common.close`; below the list a text button `family.leave` that closes the view and opens the leave dialog |
+| hover / focus-visible / active | buttons per §1.3 |
+| disabled | accept `aria-disabled` while offline (first-time create/join cannot record consent offline), hint `consent.cloud.offline`; decline always works |
+| loading | accept: spinner + `consent.cloud.busy`; both buttons `aria-disabled`; Esc and backdrop ignored; width locked |
+| error | `consent.cloud.error` in an assertive line above the buttons (icon + `danger`); buttons re-enabled; nothing uploaded |
+| empty | n/a |
+
+Test ids: `consent-cloud`, `consent-cloud-accept`, `consent-cloud-decline`, `consent-cloud-upgrade`, `consent-cloud-contact`, `consent-cloud-agreed-on`, `consent-cloud-error`.
+Stories: US-E15-02/AC1 to AC7, US-E15-01/AC2, US-E15-04/AC2, AC8.
+
+### 16.3 Create family (progress and result)
+Trigger: 「家族をつくる」 (§16.1) -> consent (§16.2) only if the current version is not yet accepted -> progress dialog (§1.13 frame, not dismissible while running).
+- Offline is checked on the first tap: `family.offline` in the card, no consent shown, no family (US-E15-01/AC7).
+- Running: spinner + `family.create.busy`, second line `family.create.keepOpen` (`ink-2`). The accept button that started it is `aria-busy`; a second tap is ignored (AC8).
+- Success: dialog closes, toast `family.toast.created`, the card shows variant B. The invite button stays disabled with `family.invite.waitUpload` until the first upload has finished (US-E15-01/AC5, US-E15-03/AC1).
+- Interrupted (network lost): dialog closes with an info banner in the card `family.create.paused` ("it will continue by itself"); status `pending-offline` or `retrying`; invite stays disabled; no error dialog.
+- Empty local copy: identical UI (US-E15-01/AC4).
+States: running (loading), success, interrupted; hover/focus/error/empty n/a (no controls; failures are the interrupted state). Test ids: `dialog-create-family`, `family-create-paused`.
+
+### 16.4 Invite block (member variant of §16.1)
+Sub-card (`surface-3` panel, `radius-lg`, 16 px padding), h3 `family.invite.section`.
+
+| Invite state | Content |
+|---|---|
+| none | text `family.invite.lead`; button `family.invite` (primary, 52) |
+| blocked | the same button `aria-disabled` + dashed, one hint: `family.invite.offline` (verbatim US-E15-03/AC9), `family.invite.waitUpload`, or `family.invite.full` (verbatim AC5); priority offline, uploading, full. No code shown |
+| creating | button: spinner + `family.invite.busy` |
+| active | (1) label `family.invite.codeLabel`; (2) the code in two groups of five (`ABCDE FGHJK`), `text-2xl`, display font 700, letter-spacing 0.12 em, `surface-2` box with 2 px `ink-1` border, `user-select: all`; the visible text is `aria-hidden` and a visually hidden span speaks the characters one by one; (3) `family.invite.copyCode` and `family.invite.copyLink` (secondary); (4) `family.invite.share` (secondary), only when `navigator.share` exists; (5) expiry line `family.invite.expires` (`text-sm`, `ink-2`) with date and time, becoming `family.invite.expiresSoon` with a warning tag when under 6 hours remain; (6) `family.invite.newCode` (text button) with `family.invite.newCode.hint`; (7) `family.invite.cancel` (destructive-text, 44 px). At most one invite is ever shown (US-E15-03/AC4) |
+| expired | the panel returns to none and shows `family.invite.expired` (info line) until the next tap |
+| redeemed | the panel returns to none; the member list gains the new member; toast `family.toast.joined` (US-E15-03/AC8) |
+
+Copy: toast `family.toast.codeCopied` / `family.toast.linkCopied` (polite). Clipboard blocked: the code is selected and `family.invite.copyFailed` appears inline. Cancel is one tap, no dialog (nothing is lost; a new code is one tap away): the code stops at once, toast `family.toast.inviteCancelled`. The share text `family.invite.shareText` holds the code, link and expiry and nothing about the child.
+Row states: default; hover/focus/active per button; disabled (blocked); loading (creating); error (`common.error.generic` inline, button re-enabled); empty (= none).
+
+| | 390 | >= 1280 |
+|---|---|---|
+| Layout | buttons block, stacked | copy buttons side by side; code box left-aligned, max 360 px |
+
+Test ids: `invite-section`, `invite-create`, `invite-hint`, `invite-code`, `invite-copy-code`, `invite-copy-link`, `invite-share`, `invite-expiry`, `invite-new`, `invite-cancel`, `invite-expired`.
+Stories: US-E15-03/AC1 to AC5, AC8, AC9; US-E15-01/AC5.
+
+### 16.5 Join screen and confirmation
+Route `#/join/<code>` or settings -> 「招待コードで参加する」. A normal screen (top bar with back and the language toggle), not a dialog. Signed out: the login screen (§15.1) shows first with the info banner `family.join.loginHint` above the lead; after sign-in this screen opens with the code filled (US-E15-04/AC1).
+
+Anatomy: h1 `family.join.title`; lead `family.join.lead`; text input (§1.4) label `family.join.codeLabel`, hint `family.join.codeHint`, `autocapitalize="characters"`, `autocomplete="off"`, `autocorrect="off"`, `spellcheck="false"`; up to 24 typed characters (spaces and hyphens allowed and ignored); on blur the field shows the code uppercased and grouped `ABCDE-FGHJK`. Button `common.next` (primary), enabled when 10 valid symbols remain; otherwise `aria-disabled` with the hint. Under it a text button `common.cancel`.
+Flow: next -> consent (§16.2) if needed -> confirmation dialog (`family.join.confirm.title` / `.body`, actions `common.cancel` with initial focus and `family.join.confirm.ok` 「参加する」, US-E15-04/AC2) -> busy -> adoption choice (§16.6) if required -> success toast `family.toast.joinedSelf` and the calendar (empty local copy: the family data, never onboarding, AC3). The code is only sent on the confirmation (the rate limit counts failed attempts, US-E15-03/AC6).
+
+| State | Look and behaviour |
+|---|---|
+| default | empty field, `common.next` disabled |
+| hover / focus-visible / active | per §1.3 / §1.4 |
+| disabled | `common.next` until 10 valid symbols; the whole screen while busy |
+| loading | confirm button: spinner + `family.join.busy`; both dialog buttons `aria-disabled`; Esc/backdrop ignored; polite live `family.join.busy.live` |
+| error | assertive line under the field (icon + `danger`), `aria-invalid`, field focused; variants below |
+| empty | = default |
+
+| Error variant | Key | When |
+|---|---|---|
+| format | `family.join.err.format` | not 10 valid symbols (local check, no request) |
+| generic | `family.join.err.generic` | wrong, used or cancelled; never says which (US-E15-03/AC7) |
+| expired | `family.join.err.expired` | expired |
+| full | `family.join.err.full` | family at its maximum |
+| too many tries | `family.join.err.rate` (verbatim) | 10 failed codes in an hour; `common.next` also dashed-disabled |
+| already in a family | `family.join.err.already` (verbatim) | US-E15-04/AC9 |
+| offline | `family.join.err.offline` (verbatim) | no network |
+| other | `common.error.generic` | anything else; nothing changed |
+
+Every refusal changes nothing and shows no family, member or child information (AC10). Interrupted join (US-E15-04/AC11): at the next open the loading container of §16.9 shows `family.join.resuming` and continues to the adoption choice if it was not answered.
+Layout: 390 single column, button block; >= 1280 column max 480 centred.
+Test ids: `screen-join`, `input-join-code`, `input-join-code-error`, `join-next`, `join-cancel`, `dialog-join-confirm` (`-ok`, `-cancel`), `screen-join-resuming`.
+Stories: US-E15-04/AC1 to AC3, AC8 to AC11; US-E15-03/AC6, AC7.
+
+### 16.6 Adoption choice and safety copy
+Shown (a) after joining when the joiner's local copy has data and the family has data (US-E15-04/AC4), (b) once on the first sharing run of a further device of a member whose local data differs (US-E15-05/AC6). Not shown when either side is empty (US-E15-04/AC3, AC7).
+
+Anatomy: h1 `family.adopt.title` (verbatim AC4); lead `family.adopt.lead` (a), `family.adopt.lead.device` (b) or `family.adopt.lead.resumed` (join already committed); a `surface-3` summary box `family.adopt.localSummary` (this device's contents: profile yes/no, months, decisions; counts from the app); a radio group (§1.9) with legend `family.adopt.legend` and two choice cards: `family.adopt.useFamily` (preselected) + `.desc`, and `family.adopt.addLocal` + `.desc`. Footer: `family.adopt.continue` (primary) and `common.cancel` (secondary). Under both, `family.adopt.safety` (`ink-2`, `text-sm`).
+The brief's "3-way choice" is these two options plus cancel; the ACs define no third data option.
+Cancel: in a first join the member is not yet added, so cancel returns to the join screen untouched (US-E15-04/AC8). If the join is already committed (resumed, lead `.resumed`) there is no cancel; the line `family.adopt.later` explains that the choice is still needed before sharing starts (see the report: AC4, AC8 and AC11 pull apart).
+
+| State | Look and behaviour |
+|---|---|
+| default | useFamily preselected; continue enabled |
+| hover / focus-visible / active | choice-card rules (§1.9); arrows move inside the radio group; initial focus on the h1, not on a card |
+| disabled | continue and group `aria-disabled` while busy |
+| loading | continue: spinner + `family.adopt.busy`; polite live `family.adopt.busy.live`; Esc ignored |
+| error | `common.error.generic` above the footer (assertive); device unchanged (the safety copy is written before anything is replaced); buttons enabled |
+| empty | n/a |
+
+**Safety-copy row** (Family card, shown while a safety copy exists; also in variant A after leaving until it expires): archive icon, `family.safety.title`, `family.safety.until`, buttons `family.safety.export` (secondary; the same file as `data.export`) and `family.safety.delete` (destructive-text) -> alertdialog `family.safety.delete.title` / `.body`, actions `common.cancel` (initial focus) and `family.safety.delete.confirm`. States: default; hover/focus/active; loading (busy label); error (`common.error.generic`); empty (row absent).
+Test ids: `screen-adopt`, `adopt-summary`, `radio-adopt-family`, `radio-adopt-local`, `adopt-continue`, `adopt-cancel`, `safety-copy`, `safety-export`, `safety-delete`, `dialog-safety-delete`.
+Stories: US-E15-04/AC4 to AC8, AC11; US-E15-05/AC6.
+
+### 16.7 Sync status: app-bar button, settings row, status sheet
+**Not shown at all** while the account is in no family (`local-only`): the app looks exactly as before. Shown for the other states, and for `membership-ended` until acknowledged.
+
+**App-bar button (`appbar-sync`).** A 44 x 44 icon button (circle, `ink-1` icon 24 px) left of the 設定 button, 4 px gap. The icon **shape** differs per state (colour is never the only signal); the accessible name is `sync.chip.aria` ("Sharing status: {state}"). From 768 px the state word follows the icon (`text-sm`, 700); on 390 the word is in the accessible name only. With pending changes older than 24 h the button gets a 2 px `warning` ring on `warning-soft` fill, a small "!" mark on the icon, and its word becomes `sync.stale.short` (US-E15-06/AC6).
+App-bar width: +48 px (44 + 4). While the button exists the brand text shows from **480 px** (was 400, §1.1): 24 + 36 + 8 + 115 + 206 + 48 = 437 fits; below 480 only the logo shows, and 320 to 479 px totals 24 + 36 + 206 + 48 = 314, which fits at 320 with 6 px spare.
+
+| State (`syncStatus`) | Icon shape | Word key | Sheet hint key | Action in the sheet |
+|---|---|---|---|---|
+| local-only | not shown | `sync.localOnly` | | create / join live in the Family card |
+| synced | cloud with check | `sync.synced` | `sync.synced.hint` | none |
+| syncing | cloud with two arrows (rotates; reduced motion: static) | `sync.syncing` | `sync.syncing.hint` | none |
+| pending-offline | cloud with a slash | `sync.pendingOffline` | `sync.pendingOffline.hint` | none (resumes by itself) |
+| retrying | cloud with a circular arrow | `sync.retrying` | `sync.retrying.hint` | `sync.retryNow` after 5 minutes of failure (US-E15-06/AC5) |
+| paused-no-consent | cloud with a pause bar | `sync.needsConsent` | `sync.needsConsent.hint` | `sync.needsConsent.action` opens the notice (§16.2) |
+| paused-limit | cloud with pause bar and "!" | `sync.limit` (`sync.limit.writes` when the cause is the hourly write guard) | `sync.limit.hint` / `sync.limit.writes.hint` | none; export stays available |
+| paused-app-too-old | cloud with an up-arrow | `sync.appTooOld` | `sync.appTooOld.hint` | `sync.appTooOld.action` (reloads the page) |
+| membership-ended | cloud with a cross | `sync.membershipEnded` | `sync.membershipEnded.hint` | `family.ended.ok` |
+
+**Status row (settings)** = first row of the member variant of §16.1: same icon + word + `sync.last` ("Last updated: {when}") or `sync.last.never`; a 64 px button opening the sheet.
+
+**Status sheet (`sheet-sync`, lazy).** Bottom sheet on 390, dialog on desktop (§1.12); h2 `sync.sheet.title`. Body: status line (32 px icon + word, `text-lg`, 700), the hint, `sync.last`, `sync.pending` (hidden at 0), `sync.stale` (warning tag) when pending changes are 24 h old, the state's action button, `common.close`. 「今すぐ再試行」 (`sync.retryNow`, secondary) appears only when the engine says so; tapping shows spinner + `sync.retrying.busy`, and if it fails again the sheet stays open and `sync.retry.failed` appears. Nothing shows a code.
+
+**Live regions.** One persistent polite `role="status"` node in the app root (`sync-live`). It announces only what needs attention: entering `pending-offline`, entering `retrying` after the 5-minute mark, any `paused-*`, `membership-ended`, and the return to `synced` after any of these (`sync.live.*`). It never announces routine syncing -> synced cycles and at most once per 10 s. The row and the sheet are static text.
+
+| State | Look and behaviour |
+|---|---|
+| default | as above |
+| hover | circle `surface-3` |
+| focus-visible | ring + halo |
+| active | `surface-3` |
+| disabled | n/a (always openable; read-only information) |
+| loading | the first read after sign-in: `syncing` shape and word; the sheet shows skeleton lines |
+| error | the problem states above are the error states; none opens a dialog by itself |
+| empty | n/a (`local-only` hides the button) |
+
+Test ids: `appbar-sync`, `sync-state` (`data-state="<syncStatus>"`), `sync-row`, `sheet-sync`, `sync-last`, `sync-pending`, `sync-stale`, `sync-retry-now`, `sync-action`, `sync-live`.
+Stories: US-E15-06/AC2 to AC8, US-E15-02/AC6, US-E15-10/AC1, AC3, US-E15-01/AC5.
+
+### 16.8 Notes: lost edit, ignored records, membership ended
+All are **banners** (§1.10, info variant, `role="status"`, never `role="alert"`): non-blocking, dismissible, under the app bar of the calendar home and settings. One at a time; queue priority: ended, lost edit, ignored. Each is shown once (the engine clears the item when it is shown; dismissing or acting on it never re-shows it). Never a toast: the parent reads at their own pace.
+- **Lost edit** (US-E15-07/AC8). One lost edit: `family.lost.one.<kind>`, kinds `plan`, `override`, `menu`, `profile`, `settings`, with `{date}` or `{month}`; action `family.lost.show` (44 px secondary: opens the date's day sheet; `menu` opens that month; `profile` and `settings` open those screens). More than one in a cycle: one banner `family.lost.many` with `family.lost.showAll`, opening a dialog (§1.13, `role="dialog"`) of at most 10 rows, each a 44 px link `family.lost.row.<kind>`, plus `common.close`. Every banner has a close icon button (44 px, `common.close`).
+- **Ignored records** (US-E15-06/AC9). `family.ignored.title` (verbatim) + `family.ignored.body`; close button only.
+- **Ended** (US-E15-08/AC3, AC6): title and body by reason (`family.ended.removed.*`, `family.ended.deleted.*`), button `family.ended.ok`. It is the one note that survives a reload until acknowledged, because the parent must learn it.
+A remote allergy-profile change uses the existing "assessment changed" warning banner (US-E15-05/AC8); nothing new.
+
+| State | Look and behaviour |
+|---|---|
+| default | as above |
+| hover / focus-visible / active | inner buttons only (§1.3); the banner is not a control |
+| disabled / loading / error | n/a (an item that cannot be opened shows the existing day-sheet text) |
+| empty | nothing rendered |
+
+Test ids: `banner-lost-edit`, `banner-lost-show`, `dialog-lost-list`, `banner-ignored`, `banner-ended`.
+Stories: US-E15-07/AC8, US-E15-06/AC9, US-E15-08/AC3, AC6.
+
+### 16.9 New-device loading and retry (boot path, not lazy)
+Same container as A0 (§15.2): centred, `surface-1`, no app bar, language toggle at top right. Shown **instead of onboarding and instead of an empty calendar** when the account is a member and the device has no local copy (US-E15-05/AC1, AC3; contract 14.8).
+- **Loading** (up to 15 s): wordmark, 24 px spinner (reduced motion: static dots), `family.load.title`, `family.load.body`. `role="status"`, `aria-busy="true"`. Resolved under 150 ms: nothing is drawn; once drawn it stays at least 300 ms.
+- **Retry** (after 15 s or a failed read): h1 `family.load.failed.title` (verbatim US-E15-05/AC3), body `family.load.failed.body` (offline: `family.load.failed.offline`), primary `family.load.retry` (verbatim, 52 px, focused on arrival), text button `auth.signOut` (the existing dialog §15.4) so nobody is trapped. Onboarding is not offered and no local profile is created.
+- After a successful read: the calendar; if the notice version is not recorded on this device, the consent notice comes first (US-E15-05/AC2).
+- Resuming an interrupted join: the same container with `family.join.resuming` (§16.5).
+
+| State | Look and behaviour |
+|---|---|
+| loading | as above |
+| error | the retry screen; the retry button busy: spinner + `family.load.busy`, `aria-disabled` |
+| hover / focus-visible / active | per button; disabled and empty n/a |
+
+Test ids: `screen-family-loading`, `screen-family-load-failed`, `family-load-retry`.
+Stories: US-E15-05/AC1 to AC3, US-E15-04/AC11.
+
+### 16.10 Dialogs (`family` chunk; frame §1.13; `alertdialog` except where noted)
+Add to the §11 catalogue:
+
+| Dialog | Trigger | Keys | Actions (initial focus first) | Typed | Story |
+|---|---|---|---|---|---|
+| Leave (2 members) | `family.leave` | `family.leave.title` / `.body` | `common.cancel` · `family.leave.confirm` (「抜ける」, destructive) | no | US-E15-08/AC1, AC2 |
+| Leave (last member) | `family.leave` when alone | `family.leaveLast.title` / `.body` | `common.cancel` · `family.leaveLast.confirm` | yes | US-E15-08/AC4 |
+| Remove member | `family.remove` | `family.remove.title` / `.body` with `{name}` | `common.cancel` · `family.remove.confirm` (「外す」) | no | US-E15-08/AC3 |
+| Delete the online data | `family.delete` | `family.delete.title` / `.body` | `common.cancel` · `family.delete.confirm` (「削除する」) | yes | US-E15-08/AC5, AC7 |
+| Join confirm (`dialog`) | §16.5 | `family.join.confirm.*` | `common.cancel` · `family.join.confirm.ok` | no | US-E15-04/AC2 |
+| Delete safety copy | §16.6 | `family.safety.delete.*` | as listed | no | US-E15-04/AC5 |
+| Import into family | `data.import` while a member | `family.import.title` / `.body` / `.hint` | `common.cancel` · `family.import.confirm` | no (one clear warning) | US-E15-11/AC6 |
+| Delete all local data (member variant) | `data.deleteAll` while a member | existing `data.deleteAll.*` with `family.deleteAll.note` above the body | existing | no | US-E15-11/AC7, US-E15-08/AC7 |
+
+Typed only where the ACs ask (the last member leaving and deleting the online data). Leave and remove use one explicit confirm button as AC1 and AC3 word it.
+
+**Typed confirmation (shared pattern).** Under the body: label `family.typed.label` ("To confirm, type 「削除する」", the word in bold), a text input (§1.4, 52 px, `autocomplete="off"`, `autocapitalize="off"`, `autocorrect="off"`, `spellcheck="false"`, `lang` follows the app language) and hint `family.typed.hint`. The destructive button is `aria-disabled` (dashed, `ink-3`) until the input equals the word after trimming and NFKC normalisation (full-width forms match; the English word compares case-insensitively), the hint linked by `aria-describedby`. IME: the check runs on `input` and on `compositionend`, never while a composition is open, so the button does not flicker. Enter with a matching word triggers the button; with a non-matching word it does nothing. The input is empty on every open; a mismatch shows no error text (the hint is already visible) so nothing flashes red while typing. Initial focus is `common.cancel`, not the input, so a stray Enter cannot delete.
+Offline: the destructive button is `aria-disabled` with `family.offline.action` (verbatim 「インターネットに接続してください」, US-E15-08/AC9); the dialog still opens so the reason can be read; nothing is queued. Cancel, Esc and backdrop change nothing (AC8) unless busy.
+
+| State | Look and behaviour |
+|---|---|
+| default | as above |
+| hover / focus-visible / active | per button (§1.3) |
+| disabled | destructive button when offline or (typed) not yet matching |
+| loading | destructive: spinner + `family.dialog.busy`; both buttons `aria-disabled`; Esc and backdrop ignored; polite live `family.dialog.busy.live` |
+| error | `common.error.generic` inside the dialog (danger line, assertive); dialog stays; buttons enabled; nothing changed |
+| empty | n/a |
+
+After success: dialog closes, focus to the Family card h2, toast `family.toast.left` / `family.toast.removed` / `family.toast.deleted`; the card becomes variant A (or the list loses the row).
+Test ids: `dialog-leave`, `dialog-leave-last`, `dialog-remove-member`, `dialog-delete-family` (each with `-confirm`, `-cancel`), `input-typed-confirm`, `dialog-error`.
+
+### 16.11 Responsive summary
+| Component | 390 | >= 1280 |
+|---|---|---|
+| Family card | first card after account, full width | left column, buttons inline |
+| Consent | full-screen dialog | centred dialog 560 px |
+| Join, adoption, loading/retry | full-screen columns | centred column 480 px |
+| Status sheet, lost list | bottom sheet | centred dialog 480 px |
+| Dialogs | stacked buttons, destructive on top | row, cancel left |
+| App-bar button | 44 px icon only | icon + word |
+
+### 16.12 Accessibility and contrast notes (no new colour pair)
+Every pair is an existing audited pair (`design/a11y-responsive.md` §2), light / dark:
+
+| Use in §16 | Pair | Audit id | Light | Dark | Min |
+|---|---|---|---|---|---|
+| Body, dd text, dialogs | `ink-1` / `surface-1`, `surface-2` | P01, P02 | 14.22 / 13.99 | 15.03 / 13.37 | 4.5 |
+| Summary box, safety row, invite panel | `ink-1` / `surface-3` | P03 | 11.90 | 11.49 | 4.5 |
+| Hints, contact line | `ink-2` / `surface-3` | P06 | 7.29 | 7.74 | 4.5 |
+| Info banners (upgrade, ended, notes) | `info` / `info-soft` | P29 | 5.65 | 6.14 | 4.5 |
+| Warning banners, stale tag | `warning` / `warning-soft` | P35 | 6.39 | 8.05 | 4.5 |
+| Errors in the card, field, dialogs | `danger` / `surface-1`, `surface-2` | P39, P40 | 7.32 / 7.20 | 8.53 / 7.59 | 4.5 |
+| Typed-input border, code box border | `line-ui` / `surface-2`; `ink-1` / `surface-2` | U02, U04 | 3.61; 13.99 | 4.26; 13.37 | 3 |
+| Stale app-bar ring | `warning` / `surface-1` | W1 | 7.20 | 10.70 | 3 |
+| Disabled typed-confirm button | `ink-3` / `surface-3`, dashed `line-ui` | P09, U03 | 4.65, 3.07 | 5.22, 3.66 | 4.5, 3 |
+The version note uses `ink-3` on `surface-1` (page, not disabled), which is at least the P09 ratio.
+- **Not colour alone.** Every status has an icon shape and a word (§16.7); stale adds a "!" mark and a ring; the chosen adoption option has a check and a border; errors have an icon and text.
+- **Keyboard.** Settings card tab order: status row, remove, invite buttons in the order shown, consent row, safety copy, leave, delete. Dialogs trap focus, Esc cancels (not while busy), focus returns to the trigger, or to the card h2 when the trigger is gone. Consent: initial focus on the h2. Join field: Enter activates `common.next`. Status sheet: focus on its h2; close returns to the app-bar button.
+- **Targets.** All controls at least 44 px; primary and secondary buttons 52 px.
+- **Screen readers.** The code is spoken character by character; expiry is plain text with date and time; typed-confirm has a linked hint; busy states use `aria-busy` plus a polite status; live nodes (`sync-live`, dialog busy, join busy) exist from first render.
+- **Motion.** The spinning cloud and spinners become static dots with reduced motion; no screen transitions.
+- **Zoom and reflow.** At 320 px and 200 % all columns reflow, the consent footer stops being sticky, the invite code wraps into its two groups.

@@ -805,3 +805,244 @@ Shown in the import error panel (components §6.7 pattern: message, then the oth
 | proxy.limit.hour | 読み取りの回数が上限に達しました。1時間ほどしてからもう一度お試しください。 | You've reached the reading limit for now. Please try again in about an hour. | Import error panel with the retry countdown | US-E14-03/AC4 (verbatim) |
 | proxy.limit.day | 今日の読み取り回数の上限に達しました。明日もう一度お試しください。 | You've reached today's reading limit. Please try again tomorrow. | Import error panel, no retry button | US-E14-03/AC4 (verbatim) |
 | proxy.limit.fetch | URLからの取得回数が上限に達しました。PDFをアップロードするか、しばらくしてからお試しください。 | You've reached the limit for fetching from addresses. Upload the PDF, or try again later. | Import error panel after a URL fetch, no retry button | US-E14-03/AC4 (verbatim) |
+
+## 22. Family sharing, cloud storage notice and sharing status (`consent.cloud.*`, `family.*`, `sync.*`; E15, PO 2026-11-10)
+
+Reference stories: US-E15-01 to US-E15-11. Components §16, flow F19. Plain words only: 「家族」「共有」「招待コード」「オンラインデータ」; never "sync", "server", a code or a uid (the AC-fixed 「同期済み」 and 「同期中」 are the only 「同期」). The consent text makes no legal claim and does not say "complies with". The en column is the same content, not a translation word for word.
+Placeholders: `{date}` ja 「11月18日（水）」 / en "Wed, Nov 18"; `{dateShort}` 「11月18日」 / "Nov 18"; `{month}` 「2026年12月」 / "December 2026"; `{expiry}` ja 「11月13日（金）10:00」 / en "Fri, Nov 13, 10:00" (local time of the device); `{when}` ja 「今日 14:32」「昨日 14:32」「11月9日 14:32」 / en "Today 14:32", "Yesterday 14:32", "Nov 9, 14:32"; `{n}` count; `{name}` the other member's display name or e-mail, as sent by sign-in, never stored in the catalog; `{code}` the 10-character invite code in two groups (`ABCDE FGHJK`); `{link}` the invite link; `{version}` the notice version number; `{consentDate}` the date the parent agreed (ja 「2026年11月10日」 / en "Nov 10, 2026"); `{state}` the word of a `sync.*` state; `{until}` a date; `{profile}` `yes` or `no`; `{months}`, `{decisions}` counts.
+
+### 22.1 Cloud-storage notice (`consent.cloud.*`; US-E15-02, notice version 1)
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| consent.cloud.title | 家族でデータを共有する前に | Before you share with your family | Notice h2 | US-E15-02/AC1 |
+| consent.cloud.lead | お子さまの情報を、インターネット上に保存します。内容を読んで、決めてください。 | Your child's information will be stored online. Please read this and decide. | Notice lead | US-E15-02/AC1 |
+| consent.cloud.what.h | 保存するもの | What is stored | dt 1 | US-E15-02/AC2(a) |
+| consent.cloud.what.b | お子さまのプロフィールと好み、アレルギーと食事の情報（健康に関わる情報です）、学校の献立表から読み取った献立、家族の予定と決定、設定を保存します。献立表のPDFそのものは保存しません。 | We store your child's profile and preferences, allergies and diet (health-related information), the menus read from the school's PDF, your family's plans and decisions, and your settings. The menu PDF itself is not stored. | dd 1 | US-E15-02/AC2(a) |
+| consent.cloud.why.h | 保存する理由 | Why | dt 2 | US-E15-02/AC2(b) |
+| consent.cloud.why.b | ログインした端末と、家族のもう1人が、同じカレンダーを見られるようにするためです。 | So that every device you sign in on, and the other person in your family, see the same calendar. | dd 2 | US-E15-02/AC2(b) |
+| consent.cloud.where.h | 保存する場所 | Where | dt 3 | US-E15-02/AC2(c) |
+| consent.cloud.where.b | Googleのサーバー（Firebase・Firestore）の、日本の東京にあるものに保存します。 | In Google's servers (Firebase, Firestore) located in Tokyo, Japan. | dd 3 | US-E15-02/AC2(c) |
+| consent.cloud.who.h | 見られる人 | Who can see it | dt 4 | US-E15-02/AC2(d) |
+| consent.cloud.who.b | この家族の2人だけです。ほかの利用者には見えません。販売や広告には使いません。 | Only the two people in this family. No other user can see it. It is never sold or used for advertising. | dd 4 | US-E15-02/AC2(d) |
+| consent.cloud.operator.h | 運営者について | The person who runs the app | dt 5 | US-E15-02/AC2(e) |
+| consent.cloud.operator.b | 運営者は、保存先の管理画面から、技術的にはデータを見られる状態にあります。データは見ないことにしており、使いません。 | The person who runs this app can technically reach the stored data through the hosting console. They do not look at it and do not use it. | dd 5 | US-E15-02/AC2(e) |
+| consent.cloud.ai.h | AIでの読み取りとは別です | AI menu reading is separate | dt 6 | US-E15-02/AC2(f) |
+| consent.cloud.ai.b | AIで献立を読み取るときは、別の同意が必要です。家族のデータはAIには送りません。 | Reading a menu with AI needs its own agreement. Your family's data is not sent to the AI. | dd 6 | US-E15-02/AC2(f) |
+| consent.cloud.stop.h | やめたいとき | How to stop | dt 7 | US-E15-02/AC2(g) |
+| consent.cloud.stop.b | 設定で「家族を抜ける」か「家族のオンラインデータを削除」を選べます。この端末のデータは、そのまま残ります。 | In Settings, choose 「Leave the family」 or 「Delete the family's online data」. The data on this device stays. | dd 7 | US-E15-02/AC2(g) |
+| consent.cloud.contact | ご質問は q.milavec+bentominder@gmail.com までご連絡ください。 | Questions? Write to q.milavec+bentominder@gmail.com. | Contact line (the address is a mailto link) | US-E15-02/AC2(h) |
+| consent.cloud.parent | 「同意して進む」を押すと、あなたがお子さまの親または保護者であること、そして上の内容に同意することになります。 | By pressing 「Agree and continue」 you confirm that you are the child's parent or guardian and that you agree to the above. | Line above the buttons | US-E15-02/AC2(i) |
+| consent.cloud.accept | 同意して進む | Agree and continue | Primary | US-E15-02/AC1 (verbatim ja) |
+| consent.cloud.decline | やめる | Not now | Secondary (same size) | US-E15-02/AC4 (verbatim ja) |
+| consent.cloud.version | お知らせの版：{version} | Notice version: {version} | Bottom note | US-E15-02/AC2 |
+| consent.cloud.upgrade.title | お知らせの内容が変わりました | The notice has changed | Banner, re-consent | US-E15-02/AC6 |
+| consent.cloud.upgrade.lead | 新しい内容を読んで、同意するかどうか決めてください。決めるまで、家族との共有は止まっています。この端末のデータは、今までどおり使えます。 | Please read the new version and decide. Sharing with your family is paused until you do. You can keep using the data on this device as usual. | Banner, re-consent | US-E15-02/AC6 |
+| consent.cloud.declined.toast | 共有はしていません。この端末だけで使えます。 | Nothing is shared. The app works on this device only. | Toast after declining the first time | US-E15-02/AC4 |
+| consent.cloud.paused.title | 新しい内容への同意がまだです | You haven't agreed to the new notice yet | Card banner after declining a new version | US-E15-02/AC6 |
+| consent.cloud.paused.body | 同意するまで、家族との共有は止まっています。この端末のデータは今までどおり使えます。 | Sharing with your family stays paused until you agree. You can still use the data on this device. | Card banner | US-E15-02/AC6 |
+| consent.cloud.paused.review | 内容を読む | Read the notice | Banner action | US-E15-02/AC6 |
+| consent.cloud.agreedOn | {consentDate}に同意しました | You agreed on {consentDate} | Read view and settings row | US-E15-02/AC7 |
+| consent.cloud.offline | インターネットに接続してから、同意してください。 | Please connect to the internet, then agree. | Hint while offline | US-E15-01/AC7 |
+| consent.cloud.busy | 記録しています… | Saving… | Accept busy label | US-E15-02/AC1 |
+| consent.cloud.error | 同意を記録できませんでした。もう一度お試しください。何も保存されていません。 | We couldn't record your answer. Please try again. Nothing has been stored. | Inline error | US-E15-02/AC8 |
+
+### 22.2 Family card, create, invite, members (`family.*`)
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| family.section | 家族で共有 | Family sharing | Settings card h2 | US-E15-01/AC1 |
+| family.none.lead | 家族でデータを共有する | Share your data with your family | Card lead (variant A) | US-E15-01/AC1 (verbatim 「家族でデータを共有する」) |
+| family.none.hint | 共有しなくても、このアプリは今までどおり使えます。 | The app works as before even if you don't share. | Card hint under the lead | US-E15-01/AC1 |
+| family.create | 家族をつくる | Create a family | Primary button | US-E15-01/AC1 (verbatim ja) |
+| family.join | 招待コードで参加する | Join with an invite code | Secondary button | US-E15-01/AC1 (verbatim ja) |
+| family.offline | インターネットに接続してからお試しください | Please connect to the internet and try again | Card error line when offline | US-E15-01/AC7 (verbatim ja) |
+| family.offline.action | インターネットに接続してください | Please connect to the internet | Hint on offline-disabled actions | US-E15-03/AC9, US-E15-08/AC9 (verbatim ja) |
+| family.create.busy | 家族をつくっています… | Creating your family… | Create progress | US-E15-01/AC8 |
+| family.create.keepOpen | 完了まで、このまま少しお待ちください。 | Please wait a moment until this finishes. | Create progress, second line | US-E15-01/AC5 |
+| family.create.paused | データの保存が途中で止まりました。インターネットにつながると、自動で続きます。 | Saving was interrupted. It will continue by itself when you're back online. | Card banner | US-E15-01/AC5 |
+| family.toast.created | 家族をつくりました。 | Your family is ready. | Toast | US-E15-01/AC3 |
+| family.members | 家族のメンバー | Family members | h3 | US-E15-03/AC8 |
+| family.member.you | あなた | You | Tag on your own row | US-E15-04/AC12 |
+| family.member.noName | お名前未設定 | No name set | Name fallback | US-E15-03/AC8 |
+| family.members.room | あと1人、招待できます。 | There's room for one more person. | Member list with one member | US-E15-03/AC1 |
+| family.invite.section | 家族を招待する | Invite someone | Invite block h3 | US-E15-03/AC1 |
+| family.invite.lead | 招待コードかリンクを送ると、相手が自分のGoogleアカウントで参加できます。 | Send a code or a link, and they can join with their own Google account. | Invite block lead | US-E15-03/AC1 |
+| family.invite | 招待する | Invite | Primary | US-E15-03/AC1 (verbatim ja) |
+| family.invite.busy | コードをつくっています… | Making a code… | Busy label | US-E15-03/AC1 |
+| family.invite.offline | インターネットに接続してください | Please connect to the internet | Disabled hint | US-E15-03/AC9 (verbatim ja) |
+| family.invite.waitUpload | データの保存が終わると、招待できます。 | You can invite someone once your data has finished saving. | Disabled hint | US-E15-01/AC5 |
+| family.invite.full | メンバーは上限です | The family is full | Disabled hint | US-E15-03/AC5 (verbatim ja) |
+| family.invite.codeLabel | 招待コード | Invite code | Label above the code | US-E15-03/AC1 |
+| family.invite.copyCode | コードをコピー | Copy code | Button | US-E15-03/AC1 (「コピー」) |
+| family.invite.copyLink | リンクをコピー | Copy link | Button | US-E15-03/AC1 |
+| family.invite.share | 送る | Send | Button (OS share sheet) | US-E15-03/AC1 |
+| family.invite.copyFailed | コピーできませんでした。コードを長押しして選び、コピーしてください。 | Couldn't copy. Press and hold the code to select and copy it. | Inline | US-E15-03/AC1 |
+| family.invite.expires | {expiry}まで使えます。 | Works until {expiry}. | Expiry line | US-E15-03/AC1 |
+| family.invite.expiresSoon | まもなく期限です：{expiry}まで | Expires soon: until {expiry} | Expiry line under 6 h | US-E15-03/AC1 |
+| family.invite.newCode | 新しいコードをつくる | Make a new code | Text button | US-E15-03/AC4 |
+| family.invite.newCode.hint | 今のコードは、すぐに使えなくなります。 | The current code stops working right away. | Hint | US-E15-03/AC4 |
+| family.invite.cancel | 招待を取り消す | Cancel the invite | Destructive-text | US-E15-03/AC4 (verbatim ja) |
+| family.invite.expired | 招待コードの有効期限が切れました。必要なら、新しいコードをつくってください。 | The invite code has expired. Make a new one if you need to. | Info line | US-E15-03/AC2 |
+| family.invite.shareText | BentoMinderの家族に招待します。招待コード：{code}　リンク：{link}　{expiry}まで使えます。 | You're invited to my BentoMinder family. Invite code: {code}  Link: {link}  Works until {expiry}. | Text given to the share sheet | US-E15-03/AC1 |
+| family.toast.codeCopied | コードをコピーしました。 | Code copied. | Toast | US-E15-03/AC1 |
+| family.toast.linkCopied | リンクをコピーしました。 | Link copied. | Toast | US-E15-03/AC1 |
+| family.toast.inviteCancelled | 招待を取り消しました。 | The invite was cancelled. | Toast | US-E15-03/AC4 |
+| family.toast.joined | {name}さんが家族に加わりました。 | {name} joined your family. | Toast on the inviter's screen | US-E15-03/AC8 |
+| family.consent.row | 共有についてのお知らせを読む | Read the sharing notice | Settings row | US-E15-02/AC7 |
+
+### 22.3 Join and choose what to do with this device's data
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| family.docTitle.join | 家族に参加 | Join a family | `{screen}` for `app.docTitle` | US-E15-04/AC1 |
+| family.join.loginHint | 家族への招待を受け取りました。ログインすると、参加の手続きに進みます。 | You've received an invite to a family. Sign in to continue. | Banner on the login screen when a join link was opened | US-E15-04/AC1 |
+| family.join.title | 家族に参加する | Join a family | h1 | US-E15-04/AC2 |
+| family.join.lead | 招待した人から届いた、10文字のコードを入力してください。 | Enter the 10-character code you received from the person who invited you. | Lead | US-E15-04/AC2 |
+| family.join.codeLabel | 招待コード | Invite code | Field label | US-E15-04/AC2 |
+| family.join.codeHint | 大文字・小文字、空白、ハイフンは、どれでもかまいません。 | Capital or small letters, spaces and hyphens are all fine. | Field hint | US-E15-04/AC2 |
+| family.join.confirm.title | この家族に参加しますか？ | Join this family? | Confirm dialog | US-E15-04/AC2 |
+| family.join.confirm.body | 参加すると、家族のデータがこの端末にも表示されます。あなたの変更も、家族に共有されます。 | Once you join, your family's data appears on this device too, and your changes are shared with them. | Confirm dialog | US-E15-04/AC2 |
+| family.join.confirm.ok | 参加する | Join | Confirm primary | US-E15-04/AC2 (verbatim ja) |
+| family.join.busy | 参加しています… | Joining… | Busy label | US-E15-04/AC2 |
+| family.join.busy.live | 家族に参加しています。しばらくお待ちください。 | Joining the family. Please wait. | Polite live | US-E15-04/AC2 |
+| family.join.resuming | 参加の続きを進めています… | Finishing joining the family… | Loading text after an interruption | US-E15-04/AC11 |
+| family.join.err.format | コードは10文字です。もう一度、確認してください。 | The code has 10 characters. Please check it and try again. | Field error | US-E15-04/AC2 |
+| family.join.err.generic | このコードは使えません。コードを確かめるか、招待した人に新しいコードをたのんでください。 | This code can't be used. Check it, or ask the person who invited you for a new one. | Field error (wrong, used or cancelled) | US-E15-03/AC7, US-E15-04/AC10 |
+| family.join.err.expired | このコードは、有効期限が切れています。招待した人に、新しいコードをたのんでください。 | This code has expired. Ask the person who invited you for a new one. | Field error | US-E15-03/AC2, AC7 |
+| family.join.err.full | この家族は、メンバーが上限に達しています。 | This family has reached its member limit. | Field error | US-E15-03/AC5, AC7 |
+| family.join.err.rate | しばらくしてからお試しください | Please try again in a little while | Field error, too many tries | US-E15-03/AC6 (verbatim ja) |
+| family.join.err.already | すでに別の家族に参加しています。先に家族を抜けてください | You're already in another family. Please leave it first | Field error | US-E15-04/AC9 (verbatim ja) |
+| family.join.err.offline | インターネットに接続してからお試しください | Please connect to the internet and try again | Field error | US-E15-04/AC10 |
+| family.toast.joinedSelf | 家族に参加しました。 | You joined the family. | Toast | US-E15-04/AC3 |
+| family.adopt.title | この端末のデータをどうしますか | What should happen to the data on this device | Choice h1 | US-E15-04/AC4 (verbatim ja) |
+| family.adopt.lead | この端末にも、家族のデータにも、すでにデータがあります。どちらを使うか選んでください。 | This device and your family both already have data. Choose which to use. | Lead, after joining | US-E15-04/AC4 |
+| family.adopt.lead.device | この端末には、前から使っているデータがあります。家族のデータとどう合わせるか選んでください。 | This device has data from before. Choose how to combine it with your family's data. | Lead, further device of a member | US-E15-05/AC6 |
+| family.adopt.lead.resumed | 家族への参加は完了しています。この端末のデータをどうするかだけ、選んでください。 | You've joined the family. Just choose what to do with this device's data. | Lead, interrupted join | US-E15-04/AC11 |
+| family.adopt.later | この選択が終わるまで、この端末の共有は始まりません。 | Sharing on this device starts after you choose. | Shown instead of cancel when joining is already done | US-E15-04/AC11 |
+| family.adopt.localSummary | この端末のデータ：プロフィール{profile, select, yes {あり} other {なし}}、献立{months}か月分、予定{decisions}件 | Data on this device: profile {profile, select, yes {yes} other {none}}, {months, plural, one {# menu month} other {# menu months}}, {decisions, plural, one {# plan} other {# plans}} | Summary box | US-E15-04/AC4 |
+| family.adopt.legend | 使うデータ | Which data to use | Radio legend | US-E15-04/AC4 |
+| family.adopt.useFamily | 家族のデータを使う | Use my family's data | Option 1 (preselected) | US-E15-04/AC4 (verbatim ja) |
+| family.adopt.useFamily.desc | この端末のデータは、家族のデータに置き換わります。今のデータは、控えとして残ります。 | The data on this device is replaced by your family's data. Your current data is kept as a backup copy. | Option 1 description | US-E15-04/AC5 |
+| family.adopt.addLocal | この端末のデータを足す | Add this device's data | Option 2 | US-E15-04/AC4 (verbatim ja) |
+| family.adopt.addLocal.desc | 家族にない月の献立や、家族にない日の予定だけを、家族のデータに足します。同じ月や日のデータと、プロフィール、設定は、家族のものが残ります。控えも残ります。 | Menu months and plans that your family doesn't have yet are added to the family's data. If both have the same month or day, the profile or the settings, your family's version stays. A backup copy is kept too. | Option 2 description | US-E15-04/AC6 |
+| family.adopt.continue | 続ける | Continue | Primary | US-E15-04/AC4 |
+| family.adopt.safety | 元のデータの控えは、この端末に30日間残ります。いつでも書き出せます。 | A backup copy of your original data stays on this device for 30 days. You can export it at any time. | Note under the buttons | US-E15-04/AC5 |
+| family.adopt.busy | 準備しています… | Getting ready… | Busy label | US-E15-04/AC5 |
+| family.adopt.busy.live | この端末のデータを準備しています。 | Getting this device's data ready. | Polite live | US-E15-04/AC5 |
+| family.safety.title | 元のデータの控え | Backup copy of your original data | Safety-copy row | US-E15-04/AC5 |
+| family.safety.until | {until}まで、この端末に残ります。家族には送られません。 | Kept on this device until {until}. It is never sent to your family. | Row line | US-E15-04/AC5 |
+| family.safety.export | 控えを書き出す | Export the backup | Secondary | US-E15-04/AC5 |
+| family.safety.delete | 控えを削除 | Delete the backup | Destructive-text | US-E15-04/AC5 |
+| family.safety.delete.title | 控えを削除しますか？ | Delete the backup copy? | Dialog | US-E15-04/AC5 |
+| family.safety.delete.body | この端末に残っている、元のデータの控えが消えます。元に戻せません。 | The backup copy of your original data on this device will be removed. This can't be undone. | Dialog | US-E15-04/AC5 |
+| family.safety.delete.confirm | 控えを削除する | Delete the backup | Dialog destructive | US-E15-04/AC5 |
+
+### 22.4 New device: loading and retry
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| family.load.title | 家族のデータを読み込んでいます | Loading your family's data | Loading screen | US-E15-05/AC1 |
+| family.load.body | 少しお待ちください。 | One moment, please. | Loading screen | US-E15-05/AC1 |
+| family.load.failed.title | 家族のデータを読み込めませんでした | We couldn't load your family's data | Retry screen h1 | US-E15-05/AC3 (verbatim ja) |
+| family.load.failed.body | 少し待ってから、もう一度お試しください。この端末には何もつくっていないので、データが消えることはありません。 | Please wait a moment and try again. Nothing has been created on this device, so nothing will be lost. | Retry screen | US-E15-05/AC3 |
+| family.load.failed.offline | インターネットにつながっていません。接続を確認して、もう一度お試しください。 | You're offline. Please check your connection and try again. | Retry screen when offline | US-E15-05/AC3 |
+| family.load.retry | もう一度試す | Try again | Retry primary | US-E15-05/AC3 (verbatim ja) |
+| family.load.busy | 読み込んでいます… | Loading… | Retry busy label | US-E15-05/AC3 |
+
+### 22.5 Sharing status (`sync.*`)
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| sync.localOnly | この端末だけで使っています | Used on this device only | Not shown as a button; screen-reader text if asked | US-E15-06/AC4 |
+| sync.synced | 同期済み | Up to date | Status word | US-E15-06/AC3 (verbatim ja) |
+| sync.synced.hint | 変更は、家族の端末にも届いています。 | Your changes have reached your family's devices. | Sheet hint | US-E15-06/AC4 |
+| sync.syncing | 同期中 | Updating | Status word | US-E15-06/AC3 (verbatim ja) |
+| sync.syncing.hint | 家族の端末と、データをそろえています。 | Making your data match your family's devices. | Sheet hint | US-E15-06/AC4 |
+| sync.pendingOffline | オフライン・未送信の変更があります | Offline. Some changes haven't been sent yet | Status word | US-E15-06/AC2 (verbatim ja) |
+| sync.pendingOffline.hint | インターネットにつながると、自動で送ります。それまでも、アプリは今までどおり使えます。 | They'll be sent by themselves when you're online. You can keep using the app meanwhile. | Sheet hint | US-E15-06/AC2, AC7 |
+| sync.retrying | 送信をやり直しています | Trying again | Status word | US-E15-06/AC5 |
+| sync.retrying.hint | うまく送れませんでした。時間をおいて、自動でやり直します。 | Sending didn't work. We'll try again by ourselves in a little while. | Sheet hint | US-E15-06/AC5 |
+| sync.retryNow | 今すぐ再試行 | Try now | Sheet button after 5 min of failure | US-E15-06/AC5 (verbatim ja) |
+| sync.retrying.busy | 試しています… | Trying… | Busy label | US-E15-06/AC5 |
+| sync.retry.failed | まだ送れませんでした。しばらくしてから、もう一度お試しください。 | It still didn't go through. Please try again in a little while. | Sheet line | US-E15-06/AC5 |
+| sync.needsConsent | 確認が必要です | Needs your OK | Status word | US-E15-02/AC6 (verbatim ja) |
+| sync.needsConsent.hint | 新しいお知らせに同意するまで、家族との共有は止まっています。この端末のデータは使えます。 | Sharing with your family is paused until you agree to the new notice. The data on this device still works. | Sheet hint | US-E15-02/AC6 |
+| sync.needsConsent.action | お知らせを読む | Read the notice | Sheet button | US-E15-02/AC6 |
+| sync.limit | データが大きすぎます | The data is too large | Status word (size limit) | US-E15-10/AC1 (verbatim ja) |
+| sync.limit.hint | 家族と共有できる大きさを超えました。共有は止まっていますが、この端末では今までどおり使えます。データの書き出しもできます。 | The data is larger than can be shared. Sharing is paused, but the app works on this device as before, and you can still export your data. | Sheet hint | US-E15-10/AC1 |
+| sync.limit.writes | 送信を少し休んでいます | Taking a short break from sending | Status word (hourly write guard) | US-E15-10/AC3 |
+| sync.limit.writes.hint | 短い間にたくさんの変更がありました。1時間以内に、自動で再開します。変更は消えません。 | There were many changes in a short time. Sending resumes by itself within an hour. Nothing is lost. | Sheet hint | US-E15-10/AC3 |
+| sync.appTooOld | アプリを更新してください | Please update the app | Status word | US-E15-06/AC8 (verbatim ja) |
+| sync.appTooOld.hint | 家族のデータは、新しいバージョンのアプリで保存されています。更新するまで、共有は止まっています。この端末のデータは変わりません。 | Your family's data was saved by a newer version of the app. Sharing is paused until you update. The data on this device isn't changed. | Sheet hint | US-E15-06/AC8 |
+| sync.appTooOld.action | アプリを更新する | Update the app | Sheet button (reloads the page) | US-E15-06/AC8 |
+| sync.membershipEnded | 家族との共有が終わりました | Sharing with the family has ended | Status word | US-E15-08/AC3 |
+| sync.membershipEnded.hint | この端末のデータは残っていて、この端末だけで使えます。 | The data on this device is still here and works on this device only. | Sheet hint | US-E15-08/AC2 |
+| sync.chip.aria | 共有の状態：{state} | Sharing status: {state} | Accessible name of the app-bar button | US-E15-06/AC4 |
+| sync.stale.short | 送信できていません | Not sent | Button word when stale | US-E15-06/AC6 |
+| sync.stale | 24時間以上、送れていない変更があります。 | Some changes haven't been sent for over 24 hours. | Sheet warning tag | US-E15-06/AC6 |
+| sync.last | 最後に更新：{when} | Last updated: {when} | Row and sheet | US-E15-06/AC6 |
+| sync.last.never | まだ更新していません | Not updated yet | Row and sheet | US-E15-06/AC6 |
+| sync.pending | 未送信の変更：{n}件 | {n, plural, one {# change} other {# changes}} not sent yet | Row and sheet, hidden at 0 | US-E15-06/AC6 |
+| sync.row.label | 共有の状態 | Sharing status | Row label (screen readers) | US-E15-06/AC4 |
+| sync.sheet.title | 共有の状態 | Sharing status | Sheet h2 | US-E15-06/AC4 |
+| sync.live.pendingOffline | オフラインです。変更は、つながったときに送ります。 | You're offline. Changes will be sent when you're back online. | Polite live | US-E15-06/AC2 |
+| sync.live.retrying | 送信をやり直しています。 | Trying to send again. | Polite live after 5 min | US-E15-06/AC5 |
+| sync.live.paused | 家族との共有が止まっています。設定で確認してください。 | Sharing with your family is paused. Check Settings. | Polite live | US-E15-06/AC4 |
+| sync.live.synced | 同期済みになりました。 | Everything is up to date again. | Polite live after a problem | US-E15-06/AC3 |
+| sync.live.ended | 家族との共有が終わりました。 | Sharing with the family has ended. | Polite live | US-E15-08/AC3 |
+
+### 22.6 Notes, leave, remove, delete, ended, import
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| family.lost.one.plan | {dateShort}の予定が、家族の変更で更新されました | The plan for {dateShort} was updated by a change from your family | Note | US-E15-07/AC8 (verbatim pattern ja) |
+| family.lost.one.override | {dateShort}の判定の変更が、家族の変更で更新されました | The check change for {dateShort} was updated by a change from your family | Note | US-E15-07/AC8 |
+| family.lost.one.menu | {month}の献立が、家族の変更で更新されました | The menu for {month} was updated by a change from your family | Note | US-E15-07/AC8 |
+| family.lost.one.profile | お子さまのプロフィールが、家族の変更で更新されました | Your child's profile was updated by a change from your family | Note | US-E15-07/AC8 |
+| family.lost.one.settings | 設定が、家族の変更で更新されました | Your settings were updated by a change from your family | Note | US-E15-07/AC8 |
+| family.lost.many | {n}件の変更が、家族の変更で更新されました | {n} of your changes were updated by changes from your family | Note, several | US-E15-07/AC8 |
+| family.lost.show | 見る | Show | Note action (single) | US-E15-07/AC8 |
+| family.lost.showAll | 一覧を見る | See the list | Note action (several) | US-E15-07/AC8 |
+| family.lost.row.plan | {dateShort}の予定 | Plan for {dateShort} | List row | US-E15-07/AC8 |
+| family.lost.row.override | {dateShort}の判定の変更 | Check change for {dateShort} | List row | US-E15-07/AC8 |
+| family.lost.row.menu | {month}の献立 | Menu for {month} | List row | US-E15-07/AC8 |
+| family.lost.row.profile | お子さまのプロフィール | Your child's profile | List row | US-E15-07/AC8 |
+| family.lost.row.settings | 設定 | Settings | List row | US-E15-07/AC8 |
+| family.lost.list.title | 更新された変更 | Updated changes | List dialog h2 | US-E15-07/AC8 |
+| family.ignored.title | 一部のデータを読み込めませんでした | Some data couldn't be loaded | Note | US-E15-06/AC9 (verbatim ja) |
+| family.ignored.body | 読み込めなかったデータは使っていません。ほかのデータには影響がありません。 | The data that couldn't be loaded isn't used. Everything else is fine. | Note | US-E15-06/AC9 |
+| family.leave | 家族を抜ける | Leave the family | Destructive-text | US-E15-08/AC1 (verbatim ja) |
+| family.leave.title | 家族を抜けますか？ | Leave the family? | Dialog | US-E15-08/AC1 |
+| family.leave.body | あなたは、家族の共有から外れます。もう1人のメンバーは、家族のデータをそのまま使えます。この端末のデータは残り、この端末だけで使えます。 | You'll stop sharing with the family. The other member keeps the family's data and can go on using it. The data on this device stays, and works on this device only. | Dialog | US-E15-08/AC1, AC2 |
+| family.leave.confirm | 抜ける | Leave | Dialog destructive | US-E15-08/AC1 (verbatim ja) |
+| family.leaveLast.title | 家族のオンラインデータを削除して、抜けますか？ | Delete the family's online data and leave? | Dialog (last member) | US-E15-08/AC4 |
+| family.leaveLast.body | あなたは、この家族の最後のメンバーです。抜けると、家族のオンラインデータはすべて削除されます。元に戻せません。この端末のデータは残ります。 | You're the last member of this family. If you leave, all of the family's online data is deleted and this can't be undone. The data on this device stays. | Dialog (last member) | US-E15-08/AC4 |
+| family.leaveLast.confirm | 削除して抜ける | Delete and leave | Dialog destructive | US-E15-08/AC4 |
+| family.remove | メンバーを外す | Remove this member | Destructive-text next to the other member | US-E15-08/AC3 (verbatim ja) |
+| family.remove.title | {name}さんを家族から外しますか？ | Remove {name} from the family? | Dialog | US-E15-08/AC3 |
+| family.remove.body | {name}さんは、すぐに家族のデータを見られなくなります。{name}さんの端末には今のデータが残り、その端末だけで使えます。あなたのデータは変わりません。 | {name} will lose access to the family's data right away. Their device keeps its current data and works on that device only. Your data doesn't change. | Dialog | US-E15-08/AC3 |
+| family.remove.confirm | 外す | Remove | Dialog destructive | US-E15-08/AC3 |
+| family.delete | 家族のオンラインデータを削除 | Delete the family's online data | Destructive-text | US-E15-08/AC5 (verbatim ja) |
+| family.delete.title | 家族のオンラインデータを削除しますか？ | Delete the family's online data? | Dialog | US-E15-08/AC5 |
+| family.delete.body | プロフィール、献立、予定、判定の変更、メンバーの一覧、招待コードなど、家族のオンラインデータがすべて削除され、元に戻せません。家族みんなの共有が終わります。それぞれの端末のデータと、Googleでのログインは残ります。 | The family's online data (profile, menus, plans, check changes, the member list, invite codes) is all deleted and this can't be undone. Sharing ends for everyone. Each device keeps its own data, and Google sign-in stays. | Dialog | US-E15-08/AC5, AC7 |
+| family.delete.confirm | 削除する | Delete | Dialog destructive | US-E15-08/AC5 (verbatim ja) |
+| family.typed.word | 削除する | Delete | The word to type (ja verbatim AC5; en compared case-insensitively) | US-E15-08/AC5 |
+| family.typed.label | 確認のため、「削除する」と入力してください | To confirm, type 「Delete」 | Typed field label | US-E15-08/AC5 |
+| family.typed.hint | 入力すると、下のボタンが押せるようになります。 | The button below becomes available once you've typed it. | Typed field hint | US-E15-08/AC5 |
+| family.dialog.busy | 処理しています… | Working… | Dialog busy label | US-E15-08/AC8 |
+| family.dialog.busy.live | 処理しています。しばらくお待ちください。 | Working on it. Please wait. | Polite live | US-E15-08/AC8 |
+| family.toast.left | 家族を抜けました。この端末のデータは残っています。 | You left the family. The data on this device is still here. | Toast | US-E15-08/AC2 |
+| family.toast.removed | {name}さんを家族から外しました。 | {name} was removed from the family. | Toast | US-E15-08/AC3 |
+| family.toast.deleted | 家族のオンラインデータを削除しました。 | The family's online data was deleted. | Toast | US-E15-08/AC5 |
+| family.ended.removed.title | 家族から外されました | You were removed from the family | Banner | US-E15-08/AC3 (verbatim ja) |
+| family.ended.removed.body | この端末のデータは残っていて、この端末だけで使えます。家族のデータは見られなくなりました。 | The data on this device is still here and works on this device only. You can no longer see the family's data. | Banner | US-E15-08/AC3 |
+| family.ended.deleted.title | 家族のデータが削除されました | The family's data was deleted | Banner | US-E15-08/AC6 (verbatim ja) |
+| family.ended.deleted.body | この端末のデータは残っていて、この端末だけで使えます。もう一度共有するには、家族をつくるか、招待コードで参加してください。 | The data on this device is still here and works on this device only. To share again, create a family or join with an invite code. | Banner | US-E15-08/AC6 |
+| family.ended.ok | わかりました | Got it | Banner button | US-E15-08/AC3 |
+| family.import.title | 家族全員のデータを置き換えますか？ | Replace the whole family's data? | Dialog (importing while in a family) | US-E15-11/AC6 |
+| family.import.body | 選んだファイルの内容で、家族全員のデータが置き換わります。ほかの家族の端末にも反映されます。ファイルにない予定や献立は、家族のデータからも消えます。 | The data of everyone in the family will be replaced by the contents of the file you chose. It will show on your family's other devices too. Plans and menus that aren't in the file are removed for everyone. | Dialog | US-E15-11/AC6 |
+| family.import.hint | 心配なときは、先に「データを書き出す」で今のデータを保存してください。 | If you're unsure, save your current data first with 「Export data」. | Dialog | US-E15-11/AC6 |
+| family.import.confirm | 家族全員のデータを置き換える | Replace everyone's data | Dialog destructive | US-E15-11/AC6 |
+| family.deleteAll.note | このアカウントは、家族に参加しています。ここで消えるのは、この端末のデータだけです。オンラインのデータは残り、次にログインすると、家族のデータがもう一度この端末に読み込まれます。オンラインのデータも消すには、先に「家族のオンラインデータを削除」を使ってください。 | This account is in a family. Only the data on this device is deleted here. The online data stays, and the next time you sign in your family's data is loaded onto this device again. To delete the online data too, first use 「Delete the family's online data」. | Added above the body of `data.deleteAll.body` when in a family | US-E15-11/AC7, US-E15-08/AC7 |
+| family.data.where | データはこの端末に保存され、家族との間で共有されています。 | Your data is stored on this device and shared with your family. | Replaces `settings.data.where` while in a family | US-E15-02/AC7 |
