@@ -573,3 +573,27 @@ No story outcome changes. Frames reuse the F5 ids; the table lists what is new o
 | F20.11 | Error paths | Unchanged from F2, F3, F5, F18, F19: the same banners, dialogs and messages, with the new spacing. If the about panel is open when a banner appears, the banner shows below the panel; nothing hides it | US-E2-06, US-E10-02, US-E13-03 |
 | F20.12 | Empty and fallback | Empty upcoming (`upcoming.empty`), no planned bento, no menu, past month, agenda fallback: as before; the panel and legend are text only and have no empty state | US-E5-01/AC7, US-E3-06/AC3 |
 | F20.13 | Signed out / session expired | Login screen: brand and tagline in the top third, Google button and privacy line in the lower third; no info disclosure there (the tagline is already visible) | US-E13-01, US-E13-02/AC5 |
+
+---
+
+## 24. F21: the calendar day tile (PO 2026-11-10; components §18; copy §24; BA US-E5-01/AC3-AC4, AC9-AC15)
+
+Supersedes every frame or table cell in this file that describes what a calendar cell shows (assessment mark, decision word, recipe short name, hatch, dashed suggestion frame, filled planned cell, needs-review badge: e.g. F5 C1 "Each school day: two indicators", frame 19 "cell filled + short name", and the F20.1 wording "navy disc"). What the cell does when tapped, and every decision flow, is unchanged: only what the tile shows changes. The Today card is below the calendar (F20.1).
+
+| Frame | Situation | What the tile shows | Stories |
+|---|---|---|---|
+| F21.1 | School-lunch day, nothing changed | number + `lunchbox`; name 「11月5日（木）、給食」 | US-E5-01/AC3 |
+| F21.2 | Parent confirms a recipe on a school day or bento day (frames 16-19) | after the toast the tile shows `home-bento` and the red top bar (a stored decision exists); on a bento day the red dash disappears | US-E5-01/AC10, AC13, US-E5-03, US-E5-08/AC1 |
+| F21.3 | Bento day with no plan | `home-bento` + red dash from today on; name ends 「お弁当の準備が未定」; the Today card and upcoming are the prompts | US-E5-01/AC13, US-E5-08 |
+| F21.4 | 「あとで決める」 | `bento-unsure` + red top bar; no dash | US-E5-05/AC1, US-E5-01/AC3, AC10 |
+| F21.5 | Parent overrides the assessment (day sheet) | tile icon does not change (the displayed decision did not change); red top bar appears; name gains 「手動で変更」. 「自動判定に戻す」 removes the bar if no decision remains | US-E4-03/AC1, AC3, US-E5-01/AC10 |
+| F21.6 | Cancel the plan on a bento day (confirm dialog, F8) | stored decision removed: red top bar goes, red dash returns (today or later) | US-E5-06, US-E5-01/AC10, AC13 |
+| F21.7 | Midnight (Asia/Tokyo) while the app is open | the filled tile moves to the new date and the framed tile to the next date; yesterday turns grey; no reload (clock check as US-E7-03/AC3) | US-E5-01/AC11, AC12, AC9 |
+| F21.8 | Last day of a month | the framed (tomorrow) tile is the 1st of the next month, visible after 「次の月」 | US-E5-01/AC12 |
+| F21.9 | Past day | grey number and icon, no fill, red top bar kept if it was changed, no dash; opens read-only | US-E5-01/AC9, AC10, US-E5-02/AC3 |
+| F21.10 | No-lunch day, outside the menu, weekend, month without a menu | number only (no icon, no box) except today (filled) and tomorrow (framed) | US-E5-01/AC3, US-E3-06/AC1 |
+| F21.11 | Refresh conflict or allergen warning on a planned day | the tile does not show it any more; the day sheet banner, the upcoming row 「献立が変わりました：{date}」 and the reminder carry it | US-E3-05/AC2, US-E1-05/AC2 |
+| F21.12 | Open the legend | closed by default; the button in the tools row opens the card with the lead line and nine rows (three icons, dash, top bar, filled, frame, grey, number colours) | US-E5-01/AC15 |
+| F21.13 | Narrow container (< 340 px) or 200 % text | agenda rows: date, icon, state word, marker words; filled / framed / grey rows as in components §18.9 | US-NF-02 |
+| F21.14 | Error and empty paths | unchanged (storage banners, missing-menu card, numerals-only grid for a month without a menu: number-only tiles) | US-E3-06/AC1, US-E10-02 |
+| F21.15 | Signed out / session expired | login screen as in F20.13; no calendar | US-E13-01 |

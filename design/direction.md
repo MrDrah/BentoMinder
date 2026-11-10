@@ -117,7 +117,7 @@ The stripes are a Breton-style reference, used sparingly:
 ## 6. Iconography
 
 - 24 px grid, 2 px rounded stroke, `currentColor`. Hand-drawn feel through round caps, not wobbly lines.
-- Set: calendar, today (sun), recipes (book), settings, bento box (compartments plus an umeboshi dot), school lunch (bowl with steam), the assessment marks ○ △, the dashed "?" circle, — (not assessed), ⌀ (no lunch), check, bell, info, warning, upload, lock, clock, theme icons (paw, star…), chevrons, close.
+- Set: calendar, today (sun), recipes (book), settings, bento box (compartments plus an umeboshi dot), school lunch (bowl with steam), **tile state icons (2026-11-10, components §18.1): `lunchbox` (school lunch), `home-bento` (crossed spoon and spatula), `bento-unsure` (crossed spoon and spatula with ?)**, the assessment marks ○ △, the dashed "?" circle, — (not assessed), ⌀ (no lunch), check, bell, info, warning, upload, lock, clock, theme icons (paw, star…), chevrons, close.
 - Illustrations are simple flat bentos seen from above, with navy outlines and the `illus-*` fills. One per recipe, with an optional theme motif.
 - No emoji in the UI: rendering differs by OS and screen readers read the emoji's name aloud.
 

@@ -1,12 +1,14 @@
 # UI refresh 2026-11: ready-for-dev notes
 
 > For the developer. Spec: `design/components.md` §17. Copy: `design/copy.md` §23. Flow: `design/flows.md` §23. Tokens: `design/tokens.json` / `tokens.css` (three cell-height values, nothing else). Before screenshots (current app, fake-auth e2e build, fixture `m2-november.json`, date 2026-11-02): `docs/dev/_scratch/ui-refresh/before/` (390 × 844 = `-sp`, 1280 × 800 = `-pc`; also `home-sp320`, `home-tab`). Script: `docs/dev/_scratch/ui-refresh/shoot.mjs` (re-run it after the build for the "after" set: `node docs/dev/_scratch/ui-refresh/shoot.mjs <outDir>` with `npm run preview` on :4173; the `review` shot falls back to import when no review is pending).
+> **2026-11-10: the calendar day tile is redesigned (PO, PLAN §7 last row). Read §3a first: it supersedes the cell content and colour rules in §3 and in components §2.4 / §17.4 (the assessment glyph and the recipe name on the tile are gone). The Today card is below the calendar, as §3 already says.**
 > Scope guard: **no rule, string meaning, state or test id changes.** Existing `data-testid`s stay; three are added (`about-toggle`, `about-panel`, `about-close`).
 
 ## 1. Order of work (each step ends in a green targeted test)
 1. Tokens: take `design/tokens.css` values (`--cell-min-height` 80 px, new `--cell-min-height-md` 96 px, `--cell-min-height-lg` 104 px). Add the five rhythm aliases to `global.css` (§2).
 2. Page container + cards: gap-based rhythm, `--card-pad`, `max-width: 36em` for text (all screens at once; low risk).
 3. Calendar home: reorder, grid sizes, Today card compact, tools row, legend closed by default.
+3a. Day tile (§3a): `TileIcon`, new `DayCell` content, the `.cell*` CSS, `cellLabel`, the legend rows, copy keys. Do it right after step 3 (one slice ending in green unit tests for icon / dash / changed / tomorrow / name).
 4. Brand-info disclosure (new component, `Icon` needs a new `info` glyph).
 5. Sticky action bar (import, onboarding, review, profile, day sheet primary).
 6. Login and new-device layout, then settings/family spacing, recommend/recipe/library.
@@ -48,9 +50,7 @@ Files: `src/ui/screens/CalendarScreen.tsx`, `src/ui/styles/calendar.css`, `src/u
 .cal { margin: 0 calc(-1 * var(--space-4)); }           /* 20 px gutter -> 4 px at 390 */
 .cal-grid, .cal-row, .cal-head { gap: 2px; }
 .cell { min-height: var(--cell-min-height); }            /* 80 */
-.cell__btn { padding: 6px; }
-.cell.is-suggest .cell__btn, .cell.is-notConfirmed .cell__btn { padding: 4px; }   /* border is 2px: keep the content box identical */
-.cell__num { font-size: var(--text-md); font-weight: var(--weight-bold); }
+/* SUPERSEDED by §3a (day tile redesign): cell__btn padding, is-suggest / is-notConfirmed padding and cell__num. Use §3a. */
 .cal-wd.is-today-col { box-shadow: inset 0 -2px 0 var(--accent); }                /* new, decorative */
 @media (min-width: 768px)  { .cal { margin: 0; } .cal-grid, .cal-row, .cal-head { gap: 4px; } .cell { min-height: var(--cell-min-height-md); } .cell__num { font-size: var(--text-lg); } }
 @media (min-width: 1280px) { .cal-grid, .cal-row, .cal-head { gap: 6px; } .cell { min-height: var(--cell-min-height-lg); } }
@@ -66,6 +66,69 @@ Page width: `.cal-layout > .page` at 768-1279 `max-width: 640px`; at 1280 `grid-
 **Legend:** in `Legend`, `expanded = open ?? false` (remove `!anyPlanned`; the `anyPlanned` prop can be deleted; the unit test that passes it needs updating). Move the `legend__toggle` button into `.cal-tools` next to the share button; the body (`#legend-body`) renders below the row as a `.card`. `aria-expanded`/`aria-controls` stay.
 
 **What stays lazy / unchanged:** day sheet code (`DaySheet.tsx`), `ShareSheet` internals, `Agenda`, reminders logic, all domain code, i18n loading, the sync chunk. No new dependency. JS budget: the disclosure is about 1 KB; no budget issue.
+
+## 3a. Day tile redesign (2026-11-10; supersedes every cell-content and cell-colour rule above and in components §2.4 / §17.4)
+
+> Spec: `design/components.md` §18. Copy: `design/copy.md` §24. A11y and contrast: `design/a11y-responsive.md` §6, §12.2. Rules: BA `docs/ba/user-stories.md` US-E5-01/AC3-AC4, AC9-AC15 (PLAN §7 last row). Preview: `design/preview/index.html` slot (h). Screens: `docs/dev/_scratch/ui-refresh/after-design/`.
+> **Superseded in this file:** the `.cell__btn` padding, the `.cell.is-suggest` / `.cell.is-notConfirmed` padding and the `.cell__num` lines of the §3 grid block (tiles use the padding below). The older assessment-mark and recipe-short-name content of the cell lives in components §2.4 and §17.4, both marked superseded. The home order (Today card and everything else below the calendar), row heights, gaps and the month nav of §3 stand.
+
+**Component changes** (`src/ui/calendar/CalendarGrid.tsx`, `src/ui/components/Marks.tsx`, `src/ui/calendar/cell-label.ts`, `CellName.tsx`):
+1. Add `TileIcon({ name: 'lunchbox' | 'home-bento' | 'bento-unsure', size })` with the markup of components §18.1 (aria-hidden, `currentColor`).
+2. `DayCell` renders, inside the existing `button.cell__btn`: `CellName` (the accessible-name sentence, same mechanism), `span.cell__num` (+ `span.cell__hol` for 「祝」 / 「Hol」), `TileIcon` when the day has one, `span.cell__dash` when the red dash applies. Remove `AssessMark`, `FlagBadge`, `ShortName`, `.cell__body`, `.cell__word`, `.cell__pill`, `.cell__mark` and `BentoIcon` from the tile.
+3. Derive from `DayView` (no new domain data except "tomorrow" = today + 1 calendar day in Asia/Tokyo): icon `school` when `displayed.state === 'school-lunch-planned'` on a school day; `home` when `homemade-bento-planned` (with a record) or `type === 'bento-day'` with no stored decision; `unsure` when `not-confirmed` (no conflict); otherwise none. `dash` = `type === 'bento-day'`, no stored decision, `date >= today`. `changed` = an applied override or any stored decision record (BA AC10; dormant cases show nothing).
+4. Classes: `has-icon`, `is-today`, `is-tomorrow`, `is-past`, `is-changed`, `has-dash`, `is-selected`, `is-holiday` (existing `is-today`, `is-past`, `is-selected` stay). Data attributes: keep `data-assessment`, `data-decision`, `data-today`, `data-past`, `data-override`; add `data-icon` (`school|home|unsure|none`), `data-dash`, `data-changed`, `data-tomorrow`; drop `data-flag`.
+5. `cellLabel` builds the name from copy §24: `cell.aria.tile`, then `cell.aria.override`, then one of `cell.aria.isToday | isTomorrow | past`, then `cell.aria.dash`; no-lunch, outside and no-menu keep their existing sentences plus the same suffixes. Delete the assessment and recipe parts.
+6. Legend (`Upcoming.tsx` `Legend`): replace the item list with the rows of components §18.7; swatches are `.cell__btn` look-alikes in a `div` (aria-hidden), 40 x 44. Keys in copy §24.2.
+7. Today card and upcoming swatches: `TileIcon` instead of `BentoIcon` (components §18.8) unless the PO says otherwise.
+
+**CSS** (`src/ui/styles/calendar.css`; replaces the `.cell*` block, keeps the sizes of §3):
+```css
+.cell { --tile-red: var(--accent); --tile-ink: var(--ink-2); }
+.cell__btn { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%; min-height: inherit;
+  padding: 4px; border: 1px solid transparent; border-radius: var(--radius-cell); background: transparent; color: var(--ink-1);
+  font: inherit; text-align: center; cursor: pointer; touch-action: manipulation; }
+.cell.has-icon .cell__btn { background: var(--surface-2); border-color: var(--line-1); padding: 5px; }
+.cell__top { display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 2px; min-height: 22px; }
+.cell__num { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-md); line-height: 22px; font-variant-numeric: tabular-nums; }
+.cell.wd-6 .cell__num { color: var(--saturday); }
+.cell.wd-0 .cell__num, .cell.is-holiday .cell__num, .cell__hol { color: var(--sunday); }
+.cell__hol { font-size: var(--text-xs); font-weight: var(--weight-bold); line-height: 1; }
+.cell__icon { width: 24px; height: 24px; margin-top: 8px; color: var(--tile-ink); flex: none; }
+.cell.wd-6 .cell__icon, .cell.wd-0 .cell__icon { width: 20px; height: 20px; }            /* the narrow weekend columns */
+.cell__dash { position: absolute; left: 50%; bottom: 8px; width: 18px; height: 4px; margin-left: -9px; border-radius: 2px; background: var(--tile-red); }
+.cell.wd-6 .cell__dash, .cell.wd-0 .cell__dash { width: 14px; margin-left: -7px; }
+.cell.is-changed .cell__btn::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--tile-red); }   /* top bar, clipped by the radius */
+.cell.is-past .cell__btn { background: transparent; }                                    /* keeps its 1px line-1 border when it has an icon */
+.cell.is-past .cell__num { color: var(--ink-3); }
+.cell.is-past.wd-6 .cell__num { color: var(--saturday); }
+.cell.is-past.wd-0 .cell__num, .cell.is-past.is-holiday .cell__num { color: var(--sunday); }
+.cell.is-past { --tile-ink: var(--ink-3); }
+.cell.is-tomorrow .cell__btn { background: var(--surface-2); border: 2px solid var(--ink-1); padding: 4px; }
+.cell.is-today { --tile-red: var(--planned-edge); --tile-ink: var(--ink-inverse); }
+.cell.is-today .cell__btn { background: var(--navy-fill); border-color: var(--navy-fill); color: var(--ink-inverse); padding: 5px; }
+.cell.is-today .cell__num, .cell.is-today .cell__hol { color: var(--ink-inverse); }       /* beats the Sat / Sun / holiday colours */
+.cell.is-selected .cell__btn { box-shadow: inset 0 0 0 3px var(--ink-1); }
+.cell.is-selected.is-today .cell__btn { box-shadow: inset 0 0 0 3px var(--ink-inverse); }
+.cell.is-selected.is-tomorrow .cell__btn { box-shadow: inset 0 0 0 1px var(--surface-2), inset 0 0 0 4px var(--ink-1); }
+@media (hover: hover) {
+  .cell:not(.is-past):not(.is-today) .cell__btn:hover { background: var(--surface-3); }
+  .cell.has-icon:not(.is-past):not(.is-today):not(.is-tomorrow) .cell__btn:hover { border-color: var(--line-ui); }
+  .cell.is-today .cell__btn:hover { box-shadow: inset 0 0 0 2px var(--ink-inverse); }
+}
+.cell:not(.is-past):not(.is-today) .cell__btn:active { background: var(--surface-3); }
+@media (min-width: 768px) { .cell__num { font-size: var(--text-lg); } .cell.has-icon .cell__btn { padding: 6px; } .cell.is-tomorrow .cell__btn { padding: 5px; } .cell__dash { width: 24px; margin-left: -12px; } }
+@media (min-width: 1280px) { .cell__icon { width: 28px; height: 28px; } .cell.wd-6 .cell__icon, .cell.wd-0 .cell__icon { width: 24px; height: 24px; } .cell__dash { width: 28px; margin-left: -14px; } .cell.is-changed .cell__btn::before { height: 4px; } }
+```
+Notes. (a) The `::before` top bar and the dash paint above the selected ring (children paint above the box-shadow). (b) A tile without an icon that is neither today nor tomorrow has no fill and no border (number only). (c) `wd-6` / `wd-0` are the existing narrow-column classes; they follow the week-start setting. (d) `overflow: hidden` on the button is only for the top-bar clip; the focus ring must not be clipped: if it is, draw the ring on the parent `.cell` (`outline` with a positive offset) instead. (e) Tomorrow comes from the Tokyo date; the existing midnight check that moves "today" also moves "tomorrow".
+
+**Tile content rules** (components §18.3): `school-lunch-planned` is `lunchbox`; `homemade-bento-planned` is `home-bento`; a bento day with no decision is `home-bento` plus the dash (today or later); `not-confirmed` is `bento-unsure`; everything else is number only.
+
+**Test impact of the tile change** (additions to §6; the BA's ACs changed, so these assertions must be rewritten against them):
+- Unit tests of `CalendarGrid`, `cellLabel`, `Marks` (`AssessMark`, `BentoIcon`, `FlagBadge`), `labels.ts` short names, `calendar.test.tsx`, `Legend`: assertions on assessment marks, `cell__word`, recipe short names, `data-flag`, the old name (「苦手かも、給食」) and the old legend rows are obsolete. New: icon per state (`data-icon`); `data-dash` only for a bento day with no decision, today or later; `data-changed` for an override or a stored decision, not for dormant ones; today and tomorrow (next calendar date, across a month end, on a Saturday); name pattern and suffix order from copy §24 in ja and en; a tile contains only the number, 「祝」 and one icon.
+- E2E (`m2-calendar`, the M2/M3 journeys, `m4-reminders`, `e13-*`, `e15-*`): steps that read cell text (「給食」, a recipe name, 「未定」), `data-assessment` as a visual, a badge, or open the legend and read items. Cells are still reached by `cal-cell-<date>`; test ids are unchanged. The greyscale check in `m1-a11y-i18n` should assert icon presence and the name, not mark glyphs.
+- `copy-catalog.test.ts`: remove the 18 rows marked SUPERSEDED in copy §8; add the new keys of copy §24 (8 in §24.1; 9 legend keys in §24.2: `legend.intro`, `school`, `home`, `unsure`, `dash`, `changedEdge`, `today`, `tomorrow`, `past`).
+- Axe on the home screen in light and dark with the legend open and with a today, tomorrow, changed and dash tile present; target size (`m1-targets`) for the 44 px weekend tile; re-run `docs/dev/_scratch/ui-refresh/shoot.mjs` and compare with `after-design/`.
+- Budgets: three inline icons and about 60 lines of CSS replace the mark, badge, word and pill code; net size about neutral.
 
 ## 4. Brand-info disclosure
 Files: `src/ui/components/Bars.tsx` (AppBar), `src/ui/components/Icon.tsx` (add `info`: path of a circle with an "i", same 24 px grid and stroke style as the others), new `src/ui/components/AboutPanel.tsx` (state `open`, `useId`, Esc handler with `keydown` on the wrapper, click-outside for ≥ 768 via `pointerdown` on `document` only while open, `matchMedia('(min-width: 768px)')` is **not** needed: the same DOM; CSS decides). Props: none (reads `useApp().t`). The consent link reuses the existing consent dialog opener (`SettingsScreen` opens it with `setDialog('consent')`; lift or reuse the same dialog component; if the dialog needs the settings state, link to `#/settings` instead and say so in the report: acceptable fallback). Version string: the same source as `settings.about.version`.
@@ -108,7 +171,7 @@ Wrap the existing `.import__actions / .footer-actions` primary + text buttons in
 
 ## 6. Impact on existing tests (likely updates; none is a behaviour change)
 - `tests/e2e/m2-calendar.spec.ts` line ~39: clicks `legend-toggle` before the axe run. With the legend always closed, the click now **opens** it in every fixture (before: only when a bento was planned). Check the assertion that follows; the intent (axe with the legend open) is preserved.
-- Unit `tests/unit/ui/calendar.test.tsx` and `shell.test.tsx`: any assertion that relies on the DOM order inside `main` (Today card before the month nav), `anyPlanned` on `Legend`, or the legend being expanded when nothing is planned.
+- **(Tile change: the longer list is at the end of §3a.)** Unit `tests/unit/ui/calendar.test.tsx` and `shell.test.tsx`: any assertion that relies on the DOM order inside `main` (Today card before the month nav), `anyPlanned` on `Legend`, or the legend being expanded when nothing is planned.
 - `tests/e2e/m4-share-debug.spec.ts` (~line 187): share button `box.x < 40` still holds only if the share button is the first item of the tools row at 390 (it is by design); the test may also scroll to it differently because the button now sits closer to the grid.
 - `tests/e2e/qa/m1-targets.spec.ts` and `m1-a11y-i18n.spec.ts` (target sizes, horizontal scroll at 320): re-run; they will also cover the new `about-toggle` (44 × 44) and the sticky bars. `expectNoSeriousAxe` on the home screen with the about panel open is a new check.
 - Any test that reads `role="img"` named `BentoMinder` in the app bar (the current logo `span`): the logo becomes decorative inside the new button (`aria-hidden`), the name moves to the button (`about.open`). The unit and e2e greps found none, but QA's selectors in `tests/e2e/qa/*` should be re-checked.

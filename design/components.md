@@ -251,6 +251,7 @@ Test ids: `cal-prev`, `cal-next`, `cal-today`, `cal-title`. Stories: US-E5-01/AC
 Test ids: `cal-grid`, `cal-agenda`.
 
 ### 2.4 Calendar cell (the core component)
+> **SUPERSEDED 2026-11-10 by §18 (day tile redesign).** The anatomy, layers 1-4, the assessment marks, the decision words, the recipe short name, the badges and the cell accessible name below are **no longer used** on the tile. A tile now shows the day number and one state icon only. Kept as history; do not build from it.
 
 **Anatomy (school day):**
 ```
@@ -344,6 +345,7 @@ Only `homemade-bento-planned` is solid-filled, in both themes (US-E8-05/AC3). Su
 Test ids: `cal-cell-<date>`; data attributes for QA (not for styling): `data-assessment`, `data-decision`, `data-today`, `data-past`, `data-flag` (`changed`/`allergen`), `data-override`. Stories: US-E5-01/AC1–AC4, AC8, US-E5-04, US-E5-05/AC1, US-E5-08, US-E4-03/AC1, US-E3-05/AC2, AC3, AC6–AC8, AC11, AC12, US-E6-06, US-E8-04, US-E8-05/AC3, US-NF-02/AC3–AC4, BR-03.
 
 ### 2.5 Upcoming summary (「これからの手作りお弁当」)
+> Mini swatch icons: see §18.8 (2026-11-10).
 Anatomy: heading (h2 with red dot, `upcoming.title`) · card list. Rows (48 px min, full-row button → day sheet):
 1. Up to 3 next `homemade-bento-planned` days from today: date (`fmt.date` compact: 「11/18 水」 visually, full date in the accessible name), mini planned swatch (navy square + bento icon), recipe name (1 line, ellipsis allowed here because the full name is in the accessible name), sub-line `upcoming.today` / `upcoming.tomorrow` / `upcoming.inDays`.
 2. Refresh conflicts not yet acknowledged: warning mini-badge + `upcoming.conflict` (US-E3-05/AC2).
@@ -353,6 +355,7 @@ States: default; hover (row `surface-1`); focus-visible (row ring); active (`sur
 Sizes: 390 full width; desktop same column. Test ids: `upcoming`, `upcoming-row-<date>`, `upcoming-low`, `upcoming-empty`. Stories: US-E5-01/AC7, US-E5-05/AC2, US-E3-05/AC2, AC7, US-E0-01/AC1.
 
 ### 2.6 Today card
+> 2026-11-10: the card sits **below** the calendar (§17.4). Its status-tile icon follows §18.8 (the three tile icons). Content and behaviour otherwise unchanged.
 Anatomy: eyebrow `today.label` · status row: 44 px icon tile (bento / school bowl / outline bento / no-lunch) + headline (h2, `text-xl`, display font) · optional assessment chip (school days) · action or note:
 
 | Today's displayed decision | Headline | Below |
@@ -376,6 +379,7 @@ Warning-banner style cards with one action:
 States: default; focus/hover on actions; others n/a; empty = not rendered. Test ids: `card-menu-missing`, `card-menu-pending`, `card-menu-next`. Stories: US-E1-01/AC5, US-E3-06/AC1–AC3, US-E3-03/AC3.
 
 ### 2.8 Legend (「表示の見かた」)
+> **Content SUPERSEDED 2026-11-10 by §18.7** (the new icons and markers). Disclosure behaviour as in §17.5.
 > **UI refresh 2026-11 (§17.5):** closed by default (the first-plan rule is dropped); the toggle moves into the tools row.
 
 Disclosure (button with chevron, `aria-expanded`), **expanded by default until the first bento is planned**, then collapsed (state remembered). Content: `legend.rule` + 2-column list of swatches (28 px) with labels: planned, not confirmed, suggestion, ○ たのしめそう, △ どちらとも, — 未判定, no-lunch hatch, bento day, needs review badge, override bar, weekend/holiday numerals. Labels use the same copy as the cells.
@@ -1280,10 +1284,12 @@ Order on every size (this is also the focus order): 1 app bar (brand-info trigge
 | Weekend-only or empty row | 44 px (`--cell-row-compact`, unchanged) | 44 px | 44 px |
 | Gap between cells | 2 px | 4 px | 6 px |
 | Column widths | weekday `minmax(0, 1fr)`; Saturday and Sunday `minmax(44px, 0.62fr)` as now (the 44 px floor keeps them tappable; at 390 a weekday cell is about 56 × 80, a weekend cell 44 × 44) | same | same |
-| Cell content | date numeral `text-md` 700 (was `text-sm`) top-left; assessment mark 18 px top-right; decision word `text-xs` at the bottom; 6 px inner padding (was 3) | numeral `text-lg` | numeral `text-lg`, word `text-sm` |
+| Cell content | **superseded by §18.2**: day number (`text-md` 700, top centre) and one 24 px state icon; no mark, no word | number `text-lg` | number `text-lg`, icon 28 px |
 | Whole month in view | yes: 56 + 8 (bar) + 56 (nav) + 28 (weekday header) + 5 school rows × 80 + weekend-only rows 44 = under 640 px of 844 (Nov 2026: 632 px), leaving room for the first line of the Today card | n/a | grid and day panel share the first screen |
 
-Cell states (§2.4 stands; only the two treatments the PO asked about are restated):
+> **SUPERSEDED 2026-11-10 by §18** (this row and the "Cell states" bullets below: the tile no longer shows the assessment mark, decision word or recipe name; today, selected and all other states are defined in §18.5-§18.6).
+
+Cell states (superseded by §18; kept as history):
 - **Today:** the numeral sits in a 28 px `ink-1` disc with an `ink-inverse` numeral (as now) and `aria-current="date"`. New: the weekday header of today's column gets a 2 px `accent` underline (decorative; the disc is the real signal).
 - **Selected** (desktop panel open, or the day whose sheet is open): `inset 0 0 0 3px ink-1` ring (on planned cells `ink-inverse`), as now. Selection is conveyed to assistive tech by the open panel's heading; no `aria-selected` is added (cells are buttons). Today and selected combine (disc plus ring) without conflict.
 - All other cell states (planned navy with red top edge, not-confirmed 2 px solid, suggestion 2 px dashed `accent`, no-lunch hatch, bento-day hatch, flagged `!` badge, override underline, past, dormant, boxed) are **unchanged**. Loading (skeleton grid at the new row height), empty (numerals only) and the agenda fallback (container < 340 px) are unchanged; agenda rows are 12 px apart.
@@ -1293,7 +1299,7 @@ Upcoming summary: content unchanged; heading `text-lg`; rows 12 px apart (was 8)
 
 ### 17.5 Tools row and legend (end of the below-the-grid stack)
 One row: **「今週の予定を共有」** (share, `btn--secondary`, 52 px, icon + text, `flex: 1 1 auto`) and **「表示の見かた」** (legend toggle, text button with the existing chevron, 44 px). At 390 they share one row when both fit and wrap to two full-width rows below 360 px. Share keeps its left edge within 40 px of the viewport edge (an existing test asserts it).
-Legend (§2.8) change: **always closed by default** (the "open until the first bento is planned" rule is dropped); open state kept for the session only. Open panel: a card (`--card-pad`) under the row; one column at 390 (rows 12 px apart, swatches 32 px), two columns at ≥ 768. There is no extra first-run hint element: the Today card and the empty-state card are the first-run guidance, and the legend button is one tap away (Decision D3 offers the old "open until the first plan" instead).
+Legend (§2.8) change (content superseded by §18.7): **always closed by default** (the "open until the first bento is planned" rule is dropped); open state kept for the session only. Open panel: a card (`--card-pad`) under the row; one column at 390 (rows 12 px apart, swatches 32 px), two columns at ≥ 768. There is no extra first-run hint element: the Today card and the empty-state card are the first-run guidance, and the legend button is one tap away (Decision D3 offers the old "open until the first plan" instead).
 
 ### 17.6 Sticky bottom action bar (new, phones only, < 768)
 Used where a screen has **one primary forward action** that today sits at the end of a long form: import (取り込む), onboarding steps (次へ), review (この内容で確定), profile edit (保存). Anatomy: bar at the bottom of the screen container, `surface-1`, 1 px `line-1` top edge, padding `space-3` `--page-gutter` `max(space-3, env(safe-area-inset-bottom))`, holding the primary button (52 px, full width) and, when the screen has one, a text button under it. It is `position: sticky; bottom: 0` inside the screen container (not `fixed`), so it never covers a focused input when the keyboard opens and it flows at the end of the content once the page is short. With 200 % text, if the bar would exceed 40 % of the viewport height it stops being sticky and flows at the end of the content. ≥ 768 it is not sticky and sits at the end of the form as today. Focus order is unchanged (the bar is last in the DOM). States are the primary button's (§1.3). Not used on the home screen (the grid is the content) or in sheets and dialogs (they have their own footers, §1.12–§1.13), except the day sheet's primary decision button (§17.7).
@@ -1328,3 +1334,123 @@ Used where a screen has **one primary forward action** that today sits at the en
 
 ### 17.9 Coverage
 Stories touched visually only (outcomes unchanged): US-E5-01 (grid), US-E5-02 (sheet), US-E7-01, US-E7-03, US-E7-05 (alert and Today card positions), US-E3-06 (menu cards), US-E8-01/AC2 (language toggle stays in the bar), US-E13-01 (login), US-E15 (family and sync card spacing), US-NF-02 (targets, reflow, keyboard). Per-screen changes and the test impact list: `design/ui-refresh-2026-11.md`.
+
+---
+
+## 18. Calendar day tile redesign (PO 2026-11-10, PLAN §7 last row; BA: US-E5-01/AC3-AC4, AC9-AC15)
+
+> **This section supersedes**: §2.4 (cell anatomy, layers 1-4 and the cell accessible name), the cell-content row and the "Today", "Selected" and "all other cell states" bullets of §17.4, the icon column of the Today card and upcoming rows (§2.5, §2.6; see §18.8), and the legend list of §2.8 / §17.5 (§18.7). Layout, grid sizes, rhythm, the order of the home screen (Today card **below** the calendar) and everything else in §17 stand. Preview: `design/preview/index.html`, slot (h). Contrast: `design/a11y-responsive.md` §12.2. Copy: `design/copy.md` §24. Flow: `design/flows.md` §24. Developer notes: `design/ui-refresh-2026-11.md` §3a.
+
+### 18.1 The three state icons (icon spec; also listed in `direction.md` §6)
+
+All three: 24 px grid (`viewBox="0 0 24 24"`), 2 px stroke, round caps and joins, `fill: none` except one dot, `stroke: currentColor`, `aria-hidden="true"`, `focusable="false"`. Shown at **24 px** in a weekday tile (28 px at >= 1280) and **20 px** in the narrow weekend column (24 px at >= 1280). The names are the `IconName` / symbol ids to use.
+
+| Name | Meaning (tile) | Silhouette (why it is distinct) | Markup |
+|---|---|---|---|
+| `lunchbox` | school-lunch-planned (`給食`) | one wide rounded rectangle, a vertical divider, one filled dot in the left compartment. No diagonals | `<rect x="3" y="6.5" width="18" height="12" rx="3"/><path d="M14 6.5v12"/><circle cx="8.5" cy="12.5" r="1.7" fill="currentColor" stroke="none"/>` |
+| `home-bento` | homemade-bento-planned, and a bento-day with no plan (`手作りお弁当`) | an X: a spoon (oval bowl, top left) crossed with a spatula/turner (rounded rectangle blade, top right); the handles end bottom right and bottom left | `<ellipse cx="6.8" cy="6.8" rx="2.6" ry="3.6" transform="rotate(-45 6.8 6.8)"/><path d="M9.4 9.4 20 20"/><rect x="14.7" y="3.9" width="4.6" height="6" rx="1.2" transform="rotate(45 17 6.9)"/><path d="M14.6 9.4 4 20"/>` |
+| `bento-unsure` | not-confirmed (`未定`) | the same X at 72 % in the lower left plus a question mark in the upper right; the "?" breaks the symmetry so it never reads as `home-bento` | `<g transform="translate(.5 8) scale(.72)" stroke-width="2.78"><ellipse cx="6.8" cy="6.8" rx="2.6" ry="3.6" transform="rotate(-45 6.8 6.8)"/><path d="M9.4 9.4 20 20"/><rect x="14.7" y="3.9" width="4.6" height="6" rx="1.2" transform="rotate(45 17 6.9)"/><path d="M14.6 9.4 4 20"/></g><path d="M15.2 6.6a3.1 3.1 0 1 1 4.5 2.8c-1 .5-1.5 1.1-1.5 2.1"/><path d="M18.2 15.6v.01"/>` |
+
+(`stroke-width="2.78"` on the scaled group keeps the drawn stroke at 2 px after the 0.72 scale; the "?" and its dot are drawn at full scale.) Distinctness check, rendered at 20 px and 24 px side by side at 2x device scale (`docs/dev/_scratch/ui-refresh/after-design/icons-test.png`): a box, an X, an X with a question mark. None shares a silhouette with the existing set (book, gear, chevrons, info circle, share, bell, the old four-compartment `BentoIcon`, the assessment marks). The old `BentoIcon` (rounded box split into four) is **retired** from the calendar tile; see §18.8 for the other places.
+
+Implementation note: `Icon.tsx` draws one `<path>` per name; these icons need several elements, so add a `TileIcon` component in `src/ui/components/Marks.tsx` next to the others and render the markup above. No new dependency.
+
+### 18.2 Anatomy (390 px, weekday column; the weekend column is narrower, see §18.4)
+
+```
+┌──────────┐  56 x 80 px tile (min), radius-cell 10
+│▔▔▔▔▔▔▔▔▔▔│  top bar: 3 px, full width, only when the user changed the day
+│    18    │  day number: top centre, display font 700, 16 px (text-md), tabular (text-lg from 768)
+│   [ico]  │  ONE state icon: 24 px, centred, 8 px below the number row (none on number-only tiles)
+│          │
+│   ━━━━   │  red dash: 18 x 4 px, radius 2, centred, 8 px above the bottom edge (only when needed)
+└──────────┘
+```
+Holiday: the text 「祝」 (en 「Hol」) stays as a `text-xs` superscript beside the number (US-E5-01/AC2 keeps it); it is part of the date, not a state mark. Nothing else is ever drawn on a tile: no assessment symbol, no word, no recipe name, no badge. The "needs review" and "allergen" badges of §2.4 layer 4 are **not on the tile any more** (BA: what a tile shows is only AC3-AC15); the same facts remain in the day sheet, the upcoming summary and the reminders (report, question 3).
+
+### 18.3 What each day shows (the icon; BA AC3, AC13)
+
+| Day (data) | Icon | Box drawn | Red dash | Name state word (copy §24) |
+|---|---|---|---|---|
+| displayed `school-lunch-planned` | `lunchbox` | yes | never | 給食 / school lunch |
+| displayed `homemade-bento-planned` (with a recipe) | `home-bento` | yes | never (planned) | 手作りお弁当 / homemade bento |
+| `no-school-lunch`, reason `bento-day`, no stored decision | `home-bento` | yes | **yes, today or later** | 手作りお弁当の日 / bento day |
+| displayed `not-confirmed` | `bento-unsure` | yes | never | 未定 / undecided |
+| every other no-lunch day, a day outside the menu, snack-only, a month with no menu | none (number only) | no (unless today or tomorrow, §18.5) | never | existing `cell.aria.noLunch` / `outside` / `noMenu` patterns |
+| padding day (other month) | none | no | no | not exposed |
+
+Past days keep their icon (grey). The dash is cleared as soon as the plan exists (the same tile then shows `home-bento` and the red top bar); it returns if the plan is cancelled (BA AC13).
+
+### 18.4 Sizes
+
+| | 360 | 390 | 768 | >= 1280 |
+|---|---|---|---|---|
+| Weekday tile | about 50 x 80 | about 56 x 80 | about 80 x 96 | about 92 x 104 |
+| Weekend tile (narrow column) | 44 x 80 | 44 x 80 | about 50 x 96 | about 57 x 104 |
+| Number | 16 px | 16 px | 18 px (`text-lg`) | 18 px |
+| Icon | 24 px (weekend 20) | same | same | 28 px (weekend 24) |
+| Red dash | 18 x 4 (weekend 14 x 4) | same | 24 x 4 | 28 x 4 |
+| Top bar | 3 px | 3 px | 3 px | 4 px |
+| Inner padding (border 1 px / 2 px) | 5 / 4 px | same | 6 / 5 px | same |
+
+Row heights, gaps and the compact 44 px weekend-only row are unchanged (§17.4). A row with no iconed tile and no today or tomorrow tile stays compact. Touch target: the whole tile (>= 44 x 44; 2 px between tiles).
+
+### 18.5 State matrix: base states (exact tokens; value light / dark)
+
+Painting order, bottom to top: fill, border, selected ring, number and icon, top bar, dash. Token values: `surface-2` #FFFDF8 / #1C2539, `surface-3` #F2EADB / #253049, `line-1` #E4DAC8 / #2F3A54, `line-ui` #8C8574 / #8A877E, `ink-1` #1B2A4A / #F6EFE2, `ink-2` #3F4B66 / #CDC6B8, `ink-3` #5F6880 / #A7A398, `ink-inverse` #FBF6EC / #141B2B, `navy-fill` #1B2A4A / #F6EFE2, `accent` #D2574F / #F08A80, `planned-edge` #D2574F / #B8443C, `saturday` #2F5C9A / #8FB4F0, `sunday` #A83A33 / #F4A097. In dark, `navy-fill` is cream and `ink-inverse` is deep navy: "navy fill with white text" means this token pair, not the hue. CSS alias: `--tile-red` is `accent`, and `planned-edge` on the today tile (contrast reason in a11y §12.2).
+
+| Time | Fill | Border | Number | Icon | Top bar (changed) | Dash (needed) |
+|---|---|---|---|---|---|---|
+| Future (default) | `surface-2` if it has an icon, else none | 1 px `line-1` if it has an icon, else none | `ink-1`; Sat `saturday`; Sun and holiday `sunday` (and 「祝」) | `ink-2` | `accent`, 3 px | `accent`, 18 x 4 |
+| Past (before today, Asia/Tokyo) | none (transparent) | 1 px `line-1` if it has an icon, else none | `ink-3`; Sat, Sun and holiday keep `saturday` / `sunday` (BA AC2) | `ink-3` (grey stroke) | `accent` stays (BA AC10) | never |
+| Today | `navy-fill` (even with no icon) | 1 px `navy-fill` | `ink-inverse` (also Sat, Sun, 「祝」) | `ink-inverse` | `planned-edge`, 3 px | `planned-edge` |
+| Tomorrow (next calendar date, BA AC12) | `surface-2` (even with no icon) | **2 px `ink-1`** | as Future | `ink-2` | `accent`, 3 px, inside the border | `accent` |
+
+Combination count: 4 times x 4 kinds (school, home, unsure, number-only) = 16; plus changed on school, home, unsure (3 kinds x 4 times) = 12; plus dash on home, unplanned, today / tomorrow / future = 3; **31 base combinations**. Weekend columns are the same combinations at the narrow sizes. Today and past exclude each other. The dash never occurs with the top bar (a dash day has no stored decision). A number-only tile never has a bar (a stored record on such a date is dormant and not shown).
+
+### 18.6 Overlays and interaction states (apply to all 31)
+
+| State | Treatment (same tokens in light and dark) |
+|---|---|
+| hover (`(hover: hover)` only; none on past tiles) | iconed tile: fill `surface-3`, border `line-ui`; number-only: fill `surface-3`; tomorrow: fill `surface-3`, border stays 2 px `ink-1`; today: 2 px inset ring `ink-inverse`. Bar and dash do not change |
+| active (pressed) | as hover (today: no change) |
+| focus-visible | global ring: 2 px `focus-ring`, 2 px offset, 2 px `focus-halo` (the halo keeps it readable on the filled today tile and in the 2 px gaps) |
+| selected (desktop panel open, or the day whose sheet is open; no `aria-selected`) | 3 px inner ring `ink-1`; on today `ink-inverse`; on tomorrow the ring starts 1 px inside the 2 px border (`inset 0 0 0 1px surface-2, inset 0 0 0 4px ink-1`). Top bar and dash stay on top of the ring |
+| loading | skeleton tile 56 x 80 during hydration (unchanged) |
+| disabled, error | n/a (every date opens a sheet, read-only when past or outside) |
+| empty | number-only tile |
+| dormant override or decision (US-E3-05/AC8, AC12) | nothing shown: the tile renders as its current day type, without a bar |
+
+**Distinguishable without colour** (BA AC10, AC15; US-NF-02/AC3): icon silhouette (box / X / X with ?) plus the state word in the name and the legend; today = the only filled tile plus 「今日」 and `aria-current="date"`; tomorrow = a double-weight frame plus 「明日」; past = no fill and a lighter stroke plus 「過去の日」; changed = a bar on the **top** edge (full width) plus 「手動で変更」; dash = a short bar at the **bottom**, centred, plus 「お弁当の準備が未定」. A top bar and a dash differ in position, length and words, so they cannot be confused in greyscale. The e2e greyscale check (a11y §3) asserts icon names and words, not hues.
+
+### 18.7 Legend 「表示の見かた」 (replaces the list in §2.8 and §17.5; BA AC15)
+
+Closed by default and opened by the button in the tools row (§17.5 unchanged). Content, one column on phones and two from 768; each row = a 40 x 44 sample tile drawn with the real tile styles (aria-hidden) plus one text line (`copy.md` §24):
+
+1. Lead sentence `legend.intro`.
+2. `lunchbox` sample: `legend.school`.
+3. `home-bento` sample: `legend.home`.
+4. `bento-unsure` sample: `legend.unsure`.
+5. Sample with a red dash: `legend.dash`.
+6. Sample with a red top bar: `legend.changedEdge`.
+7. Filled sample: `legend.today`.
+8. Framed sample (2 px): `legend.tomorrow`.
+9. Grey sample: `legend.past`.
+10. Number colours: `legend.weekend` (kept).
+
+It explains exactly the icons and markers a tile can show and nothing else: no assessment symbols, no recipe name, no hatch, no badge, no dashed "suggestion" frame. The disclosure behaviour, test id `legend` and `aria-expanded` / `aria-controls="legend-body"` are unchanged.
+
+### 18.8 Related icon updates (recommended; PO to confirm, report question 2)
+
+The old four-compartment bento box meant "homemade bento planned" in the Today card (§2.6) and in the upcoming rows (§2.5). On the tile the **lunch box now means school lunch**, so leaving the old box there would give one shape two meanings. Recommendation: the Today card tile (40 px) and the upcoming mini swatch use the same three icons as the tile (`lunchbox`, `home-bento`, `bento-unsure`); the no-lunch icon is unchanged; planned rows keep their navy swatch. No copy change.
+
+### 18.9 Agenda fallback (grid container < 340 px or 200 % text; rows, so text is allowed)
+
+Each row: the date text, the 20 px state icon, the state word (`cell.state.*`, visible because a row is not a tile), then the markers as words: 「手動で変更」 when changed and 「お弁当の準備が未定」 when the dash applies. Today row: `navy-fill` with `ink-inverse`; tomorrow row: 2 px `ink-1` frame; past rows: `ink-3`. Test ids unchanged.
+
+### 18.10 Accessible name (replaces §2.4 "Accessible name"; BA AC14)
+
+`{date}[、{holidayName}]、{state}[、手動で変更][、今日|明日|過去の日][、お弁当の準備が未定]` (en with ", "). No assessment, no recipe name, no colour words, no "button". The order is fixed. ja and en examples for every case: `design/a11y-responsive.md` §6 (replaced). Grid, row, header and gridcell roles, the roving tabindex and `aria-current="date"` on today are unchanged. QA data attributes: keep `data-testid`, `data-today`, `data-past`, `data-override`, `data-decision`, `data-assessment` (not visible; tests may still use them); add `data-icon="school|home|unsure|none"`, `data-dash="true"`, `data-changed="true"`, `data-tomorrow="true"`.
+
+### 18.11 Coverage
+US-E5-01/AC1-AC4, AC9-AC15; US-E5-02/AC1 (the sheet keeps assessment and recipe); US-E4-03/AC1, AC3; US-E5-05/AC1; US-E5-08/AC1; US-E6-06/AC1; US-E7-03/AC1 (Today card below the calendar); US-E8-04/AC1; US-E8-05/AC3; US-NF-02/AC3-AC4; BR-01, BR-02, BR-03, BR-15, BR-27.

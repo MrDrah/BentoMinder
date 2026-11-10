@@ -106,6 +106,8 @@ W1–W4 (added 2026-11-01) re-use the values of P35–P38 for the processed-food
 
 ## 3. State never relies on colour alone
 
+> **2026-11-10 (day tile redesign):** the calendar rows below that mention assessment marks (○ △ ? —), the override bar, decision words, the dashed suggestion frame, the hatch, the recipe name, the planned fill and the needs-review badge **are superseded for the tile by §12.2**. The other rows (forms, chips, switches, debug, processed food, date correction) stand.
+
 | Information | Colour cue | Non-colour cue(s) | Story |
 |---|---|---|---|
 | Assessment: likely / mixed / low / not assessed | ink-2 / ink-2 / accent-ink | Mark shape ○ / △ / dashed-circle ? / —; word in sheet and accessible name | US-E5-01/AC3, US-NF-02/AC3 |
@@ -195,26 +197,30 @@ Test: the e2e suite runs the calendar screenshot check in greyscale (`filter: gr
 | Date correction applied `review.dateFix.moved` | polite; focus also moves to the moved row legend | S3 |
 | Storage unavailable | assertive, once | all |
 
-## 6. Screen-reader names for calendar cells
+## 6. Screen-reader names for calendar tiles (replaced 2026-11-10: day tile redesign; components §18.10; BA US-E5-01/AC14)
 
-Built from `copy.md` §8 (`cell.aria*`), one full sentence per cell button, no colour words, no "button" in the text:
+Built from `copy.md` §24 (`cell.aria.*`, `cell.state.*`), one full sentence per tile button, no colour words, no "button" in the text, no assessment and no recipe name (both are in the day sheet). Order is fixed:
 
-| Cell | ja | en |
+`{date}[、{holidayName}]、{state}[、手動で変更][、今日|明日|過去の日][、お弁当の準備が未定]`
+
+| Tile | ja | en |
 |---|---|---|
-| School day, low preference, school lunch (US-NF-02/AC4 example) | 11月4日（水）、苦手かも、給食 | Wed, Nov 4, might not enjoy, school lunch |
-| Today, planned, overridden | 今日、11月18日（水）、苦手かも、手作りお弁当：くまさんおにぎり弁当、手動で変更 | Today, Wed, Nov 18, might not enjoy, homemade bento: Bear onigiri bento, changed by you |
-| Not confirmed | 11月20日（金）、どちらとも、未定 | Fri, Nov 20, hard to say, not decided |
-| Planned, refresh conflict | 11月25日（水）、給食なし、手作りお弁当：星のミニハンバーグ弁当、献立が変わりました | Wed, Nov 25, no school lunch, homemade bento: Star mini hamburg bento, menu changed |
-| Planned, recipe has a registered allergen | 11月26日（木）、たのしめそう、手作りお弁当：…、アレルゲン注意 | …, allergen alert |
-| Not assessed | 11月30日（月）、未判定、給食 | Mon, Nov 30, not assessed, school lunch |
+| School lunch, ordinary | 11月4日（水）、給食 | Wed, Nov 4, school lunch |
+| School lunch, changed by the user, tomorrow (BA example) | 11月4日（水）、給食、手動で変更、明日 | Wed, Nov 4, school lunch, changed by you, tomorrow |
+| Homemade bento planned | 11月18日（水）、手作りお弁当、手動で変更 | Wed, Nov 18, homemade bento, changed by you |
+| Homemade bento planned, today | 11月17日（火）、手作りお弁当、手動で変更、今日 | Tue, Nov 17, homemade bento, changed by you, today |
+| Bento day, no plan yet (red dash), later this month | 11月20日（金）、手作りお弁当の日、お弁当の準備が未定 | Fri, Nov 20, bento day, bento still to plan |
+| Bento day, no plan, tomorrow | 11月20日（金）、手作りお弁当の日、明日、お弁当の準備が未定 | Fri, Nov 20, bento day, tomorrow, bento still to plan |
+| Bento day, planned | 11月20日（金）、手作りお弁当、手動で変更 | Fri, Nov 20, homemade bento, changed by you |
+| Not confirmed | 11月24日（火）、未定、手動で変更 | Tue, Nov 24, undecided, changed by you |
+| Past school-lunch day | 11月5日（木）、給食、過去の日 | Thu, Nov 5, school lunch, past day |
+| Past, changed (keeps its red top border) | 11月4日（水）、手作りお弁当、手動で変更、過去の日 | Wed, Nov 4, homemade bento, changed by you, past day |
 | No-lunch day | 11月27日（金）、給食なし（午前保育（給食なし）） | Fri, Nov 27, no school lunch (午前保育（給食なし）) |
-| Bento day, not planned | 11月20日（金）、お弁当の日、未計画 | Fri, Nov 20, bento day, not planned |
 | Holiday outside the menu | 11月3日（火）、文化の日、献立に記載なし | Tue, Nov 3, Culture Day, not on the menu |
-| Weekend | 11月7日（土）、献立に記載なし | Sat, Nov 7, not on the menu |
+| Weekend, today | 11月7日（土）、献立に記載なし、今日 | Sat, Nov 7, not on the menu, today |
 | Month without a menu | 12月1日（火）、献立未取り込み | Tue, Dec 1, menu not imported |
-| Past | …、過去の日 (suffix) | …, past day |
 
-The planned cell uses the **full** recipe name (US-E5-01/AC4); missing recipe → `recipeNameSnapshot`. Menu dish names inside sentences keep `lang="ja"` in EN mode. The grid's `aria-label` is 「2026年11月のカレンダー」; column headers carry the long weekday (`aria-label="水曜日"`).
+Notes. (1) The tomorrow tile is the next calendar date (BA AC12), so a Saturday tile can say 「明日」. (2) A dormant record (US-E3-05/AC8, AC12) is not named. (3) `cell.aria.override` (「手動で変更」) is reused unchanged; the BA's AC14 wording is used, not the shorter 「変更あり」 sometimes proposed. (4) The en date format is the existing `fmt.date` ("Wed, Nov 4"); BA AC14 prints "Wednesday, November 4" as an example, tests should compare through the keys. (5) Menu dish and no-lunch reason text inside sentences keep `lang="ja"` in EN mode. (6) The grid's `aria-label` is 「2026年11月のカレンダー」; column headers carry the long weekday (`aria-label="水曜日"`). (7) The visible content of the tile (number, 「祝」) is `aria-hidden`; the name comes from the sentence, so WCAG 2.5.3 holds (no visible label text differs from the name: the only visible text is the number and 「祝」, both inside the name). (8) The old US-NF-02/AC4 name with the assessment ("苦手かも、給食") is retired by the BA.
 
 ## 7. Touch targets and pointer
 
@@ -310,3 +316,38 @@ Placeholders like 「{n}つ」 switch to 「個」 for 10 and more (copy §0).
 | `accent` 2 px underline under today's weekday | decorative; the navy disc is the real signal | n/a | n/a | none | decorative |
 
   Values computed 2026-11-10 from the hex values in `design/tokens.json` (same WCAG formula as `design/_scratch/contrast.mjs`); dark column uses the dark roles of the same names. No new colour exists.
+
+
+### 12.2 Day tile redesign (2026-11-10; components §18; BA US-E5-01/AC3-AC4, AC9-AC15)
+
+- **Keyboard and ARIA:** unchanged (roving tabindex, arrows, Home/End, PageUp/PageDown, `role="grid"`; today `aria-current="date"`). The tile name is the sentence in §6 (replaced). Icons, the red dash and the red top bar are `aria-hidden` decoration; every fact they show is in the name and in the legend text.
+- **Never colour alone** (replaces the calendar rows of §3): school / home / unsure = box / X / X with ?; changed = top bar + 「手動で変更」; needed-not-planned = bottom dash + 「お弁当の準備が未定」; today = the only filled tile + 「今日」 + `aria-current`; tomorrow = 2 px frame + 「明日」; past = no fill, lighter stroke + 「過去の日」. Assessment (○ △ ? —), recipe name and badges are no longer on the tile.
+- **Targets:** tile >= 44 x 44 (weekend column 44 x 80), 2 px gap. **Reflow / 200 % text:** agenda rows (components §18.9) carry the words as text.
+- **Reduced motion:** nothing animates on a tile. **Dark:** the same token names; `navy-fill` is cream and `ink-inverse` deep navy, so today stays "the filled tile".
+- **Contrast audit for the tile** (computed 2026-11-10 from `design/tokens.json` with the WCAG 2.1 formula by `docs/dev/_scratch/ui-refresh/tile-contrast.mjs`; **26 pairs x 2 themes = 52 checks, 0 failures**; no new colour exists). Needs: 4.5 text, 3 non-text.
+
+| # | Pair | Where | Light | Dark | Needs |
+|---|---|---|---|---|---|
+| T01 | `ink-1` on `surface-2` | day number on a tile (= P02) | 13.99 | 13.37 | 4.5 |
+| T02 | `ink-3` on `surface-1` | past day number on the transparent past tile (= P07) | 5.56 | 6.82 | 4.5 |
+| T03 | `ink-inverse` on `navy-fill` | today: number | 13.20 | 15.03 | 4.5 |
+| T04 | `ink-2` on `surface-2` | icon on a normal tile | 8.57 | 9.01 | 3 |
+| T05 | `ink-3` on `surface-1` | past icon (grey stroke) | 5.56 | 6.82 | 3 |
+| T06 | `ink-inverse` on `navy-fill` | today: icon | 13.20 | 15.03 | 3 |
+| T07 | `ink-2` on `surface-3` | icon on hover / active fill | 7.29 | 7.74 | 3 |
+| T08 | `ink-1` on `surface-3` | number on hover / active fill | 11.90 | 11.49 | 4.5 |
+| T09 | `accent` on `surface-2` | red dash and red top bar on a tile | 3.96 | 6.30 | 3 |
+| T10 | `accent` on `surface-1` | red top bar on a past (transparent) tile and against the page | 4.03 | 7.08 | 3 |
+| T11 | `accent` on `surface-3` | red dash on hover / active fill | 3.37 | 5.42 | 3 |
+| T12 | `planned-edge` on `navy-fill` | red dash and top bar on the today tile | 3.53 | 4.67 | 3 |
+| T13 | `planned-edge` on `surface-1` | top bar of the today tile against the page | 4.03 | 3.22 | 3 |
+| T14 | `ink-1` on `surface-2` | tomorrow frame against the tile fill | 13.99 | 13.37 | 3 |
+| T15 | `ink-1` on `surface-1` | tomorrow frame against the page | 14.22 | 15.03 | 3 |
+| T16 | `navy-fill` on `surface-1` | today fill against the page | 14.22 | 15.03 | 3 |
+| T17 | `ink-1` on `surface-2` | selected ring | 13.99 | 13.37 | 3 |
+| T18 | `ink-inverse` on `navy-fill` | selected ring on today | 13.20 | 15.03 | 3 |
+| T19 / T20 | `sunday` / `saturday` on `surface-2` | Sun, holiday 「祝」, Sat number on a tile (= P25, P23) | 6.23 / 6.62 | 7.52 / 7.25 | 4.5 |
+| T21 / T22 | `sunday` / `saturday` on `surface-1` | the same on a past (transparent) tile (= P24, P22) | 6.33 / 6.73 | 8.45 / 8.15 | 4.5 |
+| T25 / T26 | `focus-ring` on `focus-halo` / `surface-1` | focus ring on any tile / against the page (= U12, U10) | 6.09 / 6.09 | 8.15 / 8.15 | 3 |
+
+  Why `planned-edge` on the today tile: `accent` on the dark-theme cream fill would be 2.12:1 (already a rejected pair); `planned-edge` is the existing deeper red made for exactly this surface (T12 4.67 dark). The lowest new pair is T11 (red dash on the hover fill, light, 3.37:1), above the 3:1 floor; the lowest new text pair is T02 (5.56:1). Saturday / Sunday numbers are never drawn on the today tile (they turn `ink-inverse`), so no blue or red on navy exists. The hairline `line-1` border of a tile stays decorative (as in §2). T01-T26 are not added to the main 68-pair table; they re-use its values.

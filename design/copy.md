@@ -329,34 +329,34 @@ Theme names come from the dictionary (`theme-*`: どうぶつ, きょうりゅ�
 | cal.grid.label | {month}のカレンダー | Calendar for {month} | Grid accessible name | |
 | cal.nav.label | 月の切り替え | Change month | `aria-label` of the month-navigation `nav` (must differ from the grid name; added M2 prep) | |
 | cal.agenda.label | {month}の予定一覧 | {month} as a list | Heading of the list layout used when the grid can't fit (narrow or 200% text) | a11y-responsive.md §6 |
-| cell.word.school | 給食 | Lunch | Cell decision word | US-E5-01/AC4 (verbatim) |
-| cell.word.notConfirmed | 未定 | TBD | Cell decision word | US-E5-05/AC1 (verbatim) |
-| cell.word.noLunch | 給食なし | No lunch | Cell word (no-lunch / closed / unknown reasons) | US-E5-08/AC2 |
-| cell.word.bentoDay | お弁当の日 | Bento day | Cell word, bento-day not planned | US-E5-08/AC3 (verbatim) |
+| cell.word.school | 給食 | Lunch | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Cell decision word | US-E5-01/AC4 (verbatim) |
+| cell.word.notConfirmed | 未定 | TBD | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Cell decision word | US-E5-05/AC1 (verbatim) |
+| cell.word.noLunch | 給食なし | No lunch | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Cell word (no-lunch / closed / unknown reasons) | US-E5-08/AC2 |
+| cell.word.bentoDay | お弁当の日 | Bento day | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Cell word, bento-day not planned | US-E5-08/AC3 (verbatim) |
 | cell.word.holiday | 祝 | Hol | Cell word on a public holiday | US-E5-01/AC2 (verbatim) |
 | cell.flag.changed | 献立が変わりました | Menu changed | Needs-review badge tooltip/sheet; screen-reader part | US-E3-05/AC2 (verbatim) |
 | cell.flag.allergen | アレルゲン注意 | Allergen alert | Screen-reader part when a planned recipe conflicts (E1-05/AC2) | US-E1-05/AC2 |
-| cell.aria | {date}、{assessment}、{decision} | {date}, {assessment}, {decision} | Accessible name, school day | US-NF-02/AC4 (pattern verbatim) |
-| cell.aria.planned | 手作りお弁当：{recipe} | homemade bento: {recipe} | `{decision}` part when planned (full recipe name) | US-E5-01/AC4 |
-| cell.aria.today | 今日、 | Today, | Prefix | US-E5-01/AC1 |
+| cell.aria | {date}、{assessment}、{decision} | {date}, {assessment}, {decision} | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Accessible name, school day | US-NF-02/AC4 (pattern verbatim) |
+| cell.aria.planned | 手作りお弁当：{recipe} | homemade bento: {recipe} | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** `{decision}` part when planned (full recipe name) | US-E5-01/AC4 |
+| cell.aria.today | 今日、 | Today, | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Prefix | US-E5-01/AC1 |
 | cell.aria.holiday | 、{holidayName} | , {holidayName} | Inserted after the date | US-E8-04/AC1 |
 | cell.aria.override | 、手動で変更 | , changed by you | Suffix | US-E4-03/AC1 |
-| cell.aria.changed | 、献立が変わりました | , menu changed | Suffix | US-E3-05/AC2 |
+| cell.aria.changed | 、献立が変わりました | , menu changed | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Suffix | US-E3-05/AC2 |
 | cell.aria.past | 、過去の日 | , past day | Suffix | US-E5-02/AC3 |
 | cell.aria.noLunch | {date}、給食なし（{originalText}） | {date}, no school lunch ({originalText}) | No-lunch day | US-E5-08/AC2 |
-| cell.aria.bentoDay | {date}、お弁当の日、{decision} | {date}, bento day, {decision} | Bento day (decision = 未計画 / planned text) | US-E5-08 |
-| cell.aria.bentoDayOpen | 未計画 | not planned | `{decision}` on an unplanned bento day | |
+| cell.aria.bentoDay | {date}、お弁当の日、{decision} | {date}, bento day, {decision} | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Bento day (decision = 未計画 / planned text) | US-E5-08 |
+| cell.aria.bentoDayOpen | 未計画 | not planned | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** `{decision}` on an unplanned bento day | |
 | cell.aria.outside | {date}、献立に記載なし | {date}, not on the menu | Weekend / unlisted / no menu month / snack-only / dormant-removed | US-E5-02/AC2 |
 | cell.aria.noMenu | {date}、献立未取り込み | {date}, menu not imported | Weekday in a month without a confirmed menu | US-E3-06/AC1 |
 | legend.title | 表示の見かた | How to read the calendar | Disclosure button + heading | US-E5-01/AC3 |
-| legend.rule | 右上の記号は給食の見立て（アプリの判定）、下の文字と枠は家族の予定です。 | The mark at the top right is the app's guess about the lunch; the word and frame below are your family's plan. | Legend lead | US-E5-01/AC3 |
-| legend.planned | 手作りお弁当（決定） | Homemade bento (planned) | Legend item | US-E5-01/AC4 |
-| legend.notConfirmed | 未定（あとで決める） | TBD (decide later) | Legend item | US-E5-05 |
-| legend.suggest | 苦手かも（予定は給食のまま） | Might not enjoy (plan is still school lunch) | Legend item | US-E5-04 |
-| legend.noLunch | 給食なし | No school lunch | Legend item | |
-| legend.bentoDay | 園のお弁当の日 | School bento day | Legend item | US-E5-08 |
-| legend.changed | 献立が変わった日（要確認） | Menu changed (check this day) | Legend item | US-E3-05 |
-| legend.override | 記号の下線：手動で変更 | Underlined mark: changed by you | Legend item | US-E4-03 |
+| legend.rule | 右上の記号は給食の見立て（アプリの判定）、下の文字と枠は家族の予定です。 | The mark at the top right is the app's guess about the lunch; the word and frame below are your family's plan. | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend lead | US-E5-01/AC3 |
+| legend.planned | 手作りお弁当（決定） | Homemade bento (planned) | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend item | US-E5-01/AC4 |
+| legend.notConfirmed | 未定（あとで決める） | TBD (decide later) | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend item | US-E5-05 |
+| legend.suggest | 苦手かも（予定は給食のまま） | Might not enjoy (plan is still school lunch) | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend item | US-E5-04 |
+| legend.noLunch | 給食なし | No school lunch | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend item | |
+| legend.bentoDay | 園のお弁当の日 | School bento day | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend item | US-E5-08 |
+| legend.changed | 献立が変わった日（要確認） | Menu changed (check this day) | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend item | US-E3-05 |
+| legend.override | 記号の下線：手動で変更 | Underlined mark: changed by you | **SUPERSEDED 2026-11-10 (§24; remove from the catalog).** Legend item | US-E4-03 |
 | legend.weekend | 土・日・祝（数字の色と「祝」） | Sat, Sun, holidays (number colour and "Hol") | Legend item | US-E5-01/AC2 |
 | menuCard.missing.current | 今月の献立がまだありません | No menu for this month yet | Empty-state card, current month, no menu ever confirmed (onboarding skipped) | US-E1-01/AC5 (verbatim) |
 | menuCard.missing.month | {m}月の献立がまだありません | No menu for {m} yet | Empty-state card, any other case | US-E3-06/AC1 (verbatim) |
@@ -1062,3 +1062,40 @@ Only these rows are new. The panel also reuses existing keys verbatim: heading `
 | about.close | 説明を閉じる | Close this description | Accessible name (`aria-label`) of the panel's close button; the visible text is `common.close` (the name contains it) | PO request 2026-11-10 |
 
 Notes for the developer: the two paragraphs are designer copy summarising behaviour that already exists (reading the menu, the day-before reminder, the three suggestions, BR-xx in PLAN §3); they promise nothing the product does not do (no booking, no safety guarantee, no sync claim). Confirm the wording with the product owner with the other review items (Decision D5). The English paragraphs contain no placeholders, so no `{}` handling is needed.
+
+
+## 24. Calendar day tile redesign (components §18; BA US-E5-01/AC3-AC4, AC9-AC15; PO 2026-11-10)
+
+A tile shows a day number and one icon, so these strings are **not visible on the tile**: they are the accessible name of the tile (`cell.aria.*`, `cell.state.*`), the agenda rows (`cell.state.*` visible there) and the legend (`legend.*`). Placeholders: `{date}` = `fmt.date`, `{state}` = one `cell.state.*`. Rows of §8 marked "SUPERSEDED 2026-11-10" are removed from the catalog; `cell.aria.holiday`, `cell.aria.override`, `cell.aria.past`, `cell.aria.noLunch`, `cell.aria.outside`, `cell.aria.noMenu`, `cell.word.holiday`, `legend.weekend`, `cell.flag.changed`, `cell.flag.allergen` stay as they are. The colour words 「赤」 and 「グレー」 appear only where the colour does not flip in dark mode; the navy fill is never called navy in text (it is cream in dark).
+
+### 24.1 Tile name and state words
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| cell.aria.tile | {date}、{state} | {date}, {state} | Accessible name of a tile of a day in the menu (suffixes below are appended in the order listed) | US-E5-01/AC14, US-NF-02/AC4 |
+| cell.state.school | 給食 | school lunch | `{state}` for school-lunch-planned; icon `lunchbox`; also the agenda row word | US-E5-01/AC3, AC14 |
+| cell.state.home | 手作りお弁当 | homemade bento | `{state}` for homemade-bento-planned; icon `home-bento` | US-E5-01/AC3, AC14 |
+| cell.state.homeDay | 手作りお弁当の日 | bento day | `{state}` for a bento day with no stored decision; icon `home-bento` (with the red dash from today on) | US-E5-01/AC13, AC14 |
+| cell.state.unsure | 未定 | undecided | `{state}` for not-confirmed; icon `bento-unsure`. The visual label of the icon is 「お弁当かも？」 in the legend only (`legend.unsure`) | US-E5-01/AC3, AC14 |
+| cell.aria.isToday | 、今日 | , today | Suffix, after 「手動で変更」 | US-E5-01/AC11, AC14 |
+| cell.aria.isTomorrow | 、明日 | , tomorrow | Suffix, same slot as today/past (never both) | US-E5-01/AC12, AC14 |
+| cell.aria.dash | 、お弁当の準備が未定 | , bento still to plan | Last suffix: red dash shown | US-E5-01/AC13, AC14 |
+
+Reused unchanged: `cell.aria.override` 「、手動で変更」 / ", changed by you" (user-changed, red top bar; PO's shorter 「変更あり」 is not used: it would be a second word for the same thing next to `assess.override`), `cell.aria.past` 「、過去の日」, `cell.aria.holiday`, `cell.aria.noLunch`, `cell.aria.outside`, `cell.aria.noMenu` (the suffixes today / tomorrow / past apply to these too, no override or dash). Suffix order: 手動で変更、今日|明日|過去の日、お弁当の準備が未定. Examples: 「11月4日（水）、給食、手動で変更、明日」 / "Wed, Nov 4, school lunch, changed by you, tomorrow"; 「11月20日（金）、手作りお弁当の日、お弁当の準備が未定」 / "Fri, Nov 20, bento day, bento still to plan".
+
+### 24.2 Legend 「表示の見かた」 (replaces the legend rows of §8; the key legend.title is unchanged)
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| legend.intro | 日付の下の絵は、その日の予定です。給食の見立てやレシピ名は、日付を開くと見られます。 | The picture under the date is that day's plan. Open a day to see the lunch assessment and the recipe name. | Legend lead line | US-E5-01/AC15, US-E5-02/AC1 |
+| legend.school | 給食の日 | School lunch day | Row with the `lunchbox` sample | US-E5-01/AC3, AC15 |
+| legend.home | 手作りお弁当の日 | Homemade bento day | Row with the `home-bento` sample | US-E5-01/AC3, AC15 |
+| legend.unsure | お弁当かも？（未定・あとで決める） | Maybe a bento? (undecided, decide later) | Row with the `bento-unsure` sample | US-E5-01/AC3, AC15 |
+| legend.dash | 赤い短い線：お弁当の準備が未定（今日から先の日） | Short red line: bento still to plan (today and later) | Row with the red-dash sample | US-E5-01/AC13, AC15 |
+| legend.changedEdge | 赤い上の線：手動で変更した日 | Red line along the top: a day you changed | Row with the red-top-bar sample | US-E5-01/AC10, AC15 |
+| legend.today | 塗りつぶし：今日 | Filled tile: today | Row with the filled sample | US-E5-01/AC11, AC15 |
+| legend.tomorrow | 太い枠：明日 | Thick frame: tomorrow | Row with the framed sample | US-E5-01/AC12, AC15 |
+| legend.past | グレー：過去の日 | Grey: past day | Row with the grey sample | US-E5-01/AC9, AC15 |
+| legend.weekend | 土・日・祝（数字の色と「祝」） | Sat, Sun, holidays (number colour and "Hol") | unchanged row | US-E5-01/AC2 |
+
+No new strings are needed for the tile's visible parts (the number is a numeral; 「祝」 is `cell.word.holiday`). The agenda rows reuse `cell.state.*`, `cell.aria.override` text without the leading comma (the developer strips the 「、」 / ", " separator: same rule as the other suffixes) and `cell.aria.dash`.

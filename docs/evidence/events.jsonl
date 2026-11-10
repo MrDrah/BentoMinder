@@ -303,3 +303,6 @@
 {"v":1,"at":"2026-11-10T10:37:09.435Z","type":"product-decision","summary":"PO requests UI refresh: calendar in focus, collapsible logo explanation, more whitespace, mobile (SP) first layout","outcome":"success"}
 {"v":1,"at":"2026-11-10T10:37:09.598Z","by":"orchestrator","type":"task-start","task":"ui-refresh-design","summary":"Task ui-refresh-design dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-10T10:46:47.802Z","by":"orchestrator","type":"task-end","task":"ui-refresh-design","outcome":"failure","summary":"diff-guard: 39 files outside the allow-list"}
+{"v":1,"at":"2026-11-10T10:58:00.418Z","by":"orchestrator","type":"task-start","task":"tile-ba","summary":"Task tile-ba dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T10:58:00.551Z","by":"orchestrator","type":"task-start","task":"tile-design","summary":"Task tile-design dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T11:10:28.819Z","by":"orchestrator","type":"task-end","task":"tile-design","outcome":"failure","summary":"diff-guard: 25 files outside the allow-list"}
