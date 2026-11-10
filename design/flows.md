@@ -550,3 +550,26 @@ All three need the network: offline, the destructive button is disabled with `fa
 | US-E15-09 | no UI (rules and authorisation tests) |
 | US-E15-10 | F19.5 step 6 (AC1, AC3 status text); AC2, AC4 to AC8 no UI |
 | US-E15-11 | F19.6 step 6, F19.7 (AC4 to AC7 UI); AC1 to AC3, AC8, AC9 no UI |
+
+
+---
+
+## 23. F20: brand info and the refreshed home (UI refresh 2026-11; PO request 2026-11-10; components §17)
+
+No story outcome changes. Frames reuse the F5 ids; the table lists what is new or moved. Story IDs cited are the stories whose behaviour appears in the frame and must stay as before.
+
+| Frame | Situation | What the screen does | Stories |
+|---|---|---|---|
+| F20.1 | Open the app (390 px) | Alerts (only when present), month title row, then the whole grid; today has the navy disc; below the grid: Today card, upcoming, next-month card (when due), tools row | US-E5-01/AC1, US-E7-03/AC1, US-E3-06/AC2 |
+| F20.2 | Tap the brand (ⓘ) | The panel opens under the app bar and pushes the page down at < 768; at ≥ 768 it opens as a popover under the brand. Trigger shows `aria-expanded="true"` and the filled ⓘ. Focus stays on the trigger | PO request; US-NF-02 |
+| F20.3 | Close the panel | 「閉じる」, the trigger again or Esc: panel hides, focus returns to the trigger. Popover also closes on an outside tap. Navigating to another screen also closes it (it is closed on every load) | US-NF-02 |
+| F20.4 | 「AIでの読み取りについて」 in the panel | Opens the consent text exactly as the Settings link does; closing it returns focus to the link | US-E2-08/AC4 |
+| F20.5 | Open the legend | The 「表示の見かた」 button in the tools row toggles the legend card below it (closed by default on every load of the home screen; the open state lasts for the session) | US-E5-01/AC3, US-E5-01/AC4 |
+| F20.6 | Several alerts | Reminder banners (US-E7-05/AC5 rule unchanged), storage banner, pending-review card and missing-menu card stack above the month row, 12 px apart; the grid is pushed down only as far as there are alerts | US-E7-05, US-E3-03/AC3, US-E3-06/AC1, US-E10-02 |
+| F20.7 | No menu yet (first run, no import) | Missing-menu card above (single action 「献立を取り込む」), numerals-only grid below it | US-E1-01/AC5, US-E3-06/AC1 |
+| F20.8 | Tap a day | Phone: day sheet from the bottom (primary decision pinned); tablet: dialog; desktop: side panel and the selected-cell ring. Closing returns focus to the cell | US-E5-02 |
+| F20.9 | Narrow (< 340 px grid container) or 200 % text | Agenda list replaces the grid; the tools row wraps to two full-width rows; no horizontal scroll | US-NF-02 (a11y §6) |
+| F20.10 | Long forms on phones (import, onboarding, review, profile) | The primary button stays visible in the sticky bar above the safe area; the keyboard never covers a focused field (the bar is `sticky`, not `fixed`) | US-E2-01, US-E1-01, US-E3-04, US-E1-05 |
+| F20.11 | Error paths | Unchanged from F2, F3, F5, F18, F19: the same banners, dialogs and messages, with the new spacing. If the about panel is open when a banner appears, the banner shows below the panel; nothing hides it | US-E2-06, US-E10-02, US-E13-03 |
+| F20.12 | Empty and fallback | Empty upcoming (`upcoming.empty`), no planned bento, no menu, past month, agenda fallback: as before; the panel and legend are text only and have no empty state | US-E5-01/AC7, US-E3-06/AC3 |
+| F20.13 | Signed out / session expired | Login screen: brand and tagline in the top third, Google button and privacy line in the lower third; no info disclosure there (the tagline is already visible) | US-E13-01, US-E13-02/AC5 |

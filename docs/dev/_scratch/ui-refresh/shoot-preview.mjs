@@ -1,0 +1,14 @@
+import { chromium } from '@playwright/test';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 900, height: 1000 } });
+const errs = []; p.on('pageerror', (e) => errs.push(String(e)));
+await p.goto(pathToFileURL(resolve('design/preview/index.html')).href);
+const slot = p.locator('section.rf');
+await slot.screenshot({ path: 'docs/dev/_scratch/ui-refresh/preview-h-closed.png' });
+await p.locator('#aboutBtn').click();
+await p.locator('#legendBtn').click();
+await slot.screenshot({ path: 'docs/dev/_scratch/ui-refresh/preview-h-open.png' });
+await p.keyboard.press('Escape');
+console.log('expanded after esc', await p.locator('#aboutBtn').getAttribute('aria-expanded'), 'errors', errs);
+await b.close();

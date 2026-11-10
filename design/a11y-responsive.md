@@ -285,3 +285,28 @@ Placeholders like 「{n}つ」 switch to 「個」 for 10 and more (copy §0).
 5. 200 % text and 320 px: agenda list appears, nothing clipped.
 6. Reduced motion: no transitions (computed `transition-duration: 0s`).
 7. `node design/_scratch/contrast.mjs` exits 0 after any token change.
+
+
+---
+
+## 12. UI refresh 2026-11 (addendum; components §17)
+
+- **Breakpoints (unchanged values):** 320 (reflow floor, no horizontal scroll), 390 (design target, phone first), 400 (brand name appears), 768 (tablet: centred column, popover instead of pull-down, sheets as dialogs, sticky action bar becomes a normal footer), 1280 (calendar and day panel side by side). Cell heights: 80 / 96 / 104 px (`--cell-min-height`, `-md`, `-lg`). Rhythm aliases: components §17.3.
+- **Keyboard map additions:** brand button: Enter and Space toggle the info panel; **Esc** closes it and returns focus to the button; Tab moves from the button into the panel (heading is not focusable; first stops are the consent button, then 「閉じる」); Tab past 「閉じる」 continues to the language toggle (popover mode: also closes on outside pointer). The legend toggle: Enter and Space. The grid's roving tabindex and arrow-key map (§5) are unchanged. Sticky action bar: last in DOM and tab order.
+- **ARIA:** brand button `aria-expanded`, `aria-controls="about-panel"`, accessible name `about.open` (contains the visible name); panel `role="region"` with `aria-labelledby` pointing at its heading; legend toggle keeps `aria-expanded` and `aria-controls="legend-body"`. No live region for either disclosure. Logo inside the button is decorative (`aria-hidden`).
+- **Targets:** brand button 44 × 44 minimum on its own box; month chevrons 48 × 48; share and legend buttons 52 / 44 px high; weekday cells about 56 × 80, weekend cells 44 × 44; `touch-action: manipulation` on cells as now.
+- **Reflow and zoom:** at 320 px or 200 % text the grid container is below 340 px and the agenda list is used (unchanged); the popover is `max-width: calc(100vw - 32px)` and scrolls inside (`max-height: calc(100dvh - 96px)`); the sticky bar un-sticks when it would exceed 40 % of the viewport height.
+- **Reduced motion:** no pull-down animation, no chevron rotation; the panel appears and disappears instantly. **Dark mode:** panel uses `surface-2` / `surface-1`, `ink-1`, `line-1`, which are already audited in both themes.
+- **Contrast audit (new or changed pairs only; all other pairs are unchanged and stay in the main audit):**
+
+| Pair | Where | Light | Dark | Needed | Result |
+|---|---|---|---|---|---|
+| `ink-1` on `surface-2` | panel text, heading | 14.0:1 | 13.4:1 | 4.5:1 | pass |
+| `ink-2` on `surface-2` | panel paragraphs | 8.6:1 | 9.0:1 | 4.5:1 | pass |
+| `ink-3` on `surface-2` | version line | 5.5:1 | 6.1:1 | 4.5:1 | pass |
+| `ink-1` on `surface-1` | ⓘ badge closed (glyph on disc) | 14.2:1 | 15.0:1 | 3:1 (UI part) | pass |
+| `ink-inverse` on `ink-1` | ⓘ badge open | 13.2:1 | 15.0:1 | 3:1 | pass |
+| `line-1` top edge of the action bar | decorative divider | n/a (not required) | n/a | none | decorative |
+| `accent` 2 px underline under today's weekday | decorative; the navy disc is the real signal | n/a | n/a | none | decorative |
+
+  Values computed 2026-11-10 from the hex values in `design/tokens.json` (same WCAG formula as `design/_scratch/contrast.mjs`); dark column uses the dark roles of the same names. No new colour exists.

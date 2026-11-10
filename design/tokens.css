@@ -90,7 +90,9 @@
   /* Sizes */
   --touch-min: 44px;
   --touch-comfy: 52px;
-  --cell-min-height: 68px;
+  --cell-min-height: 80px;
+  --cell-min-height-md: 96px;
+  --cell-min-height-lg: 104px;
   --cell-row-compact: 44px;
   --weekend-col-ratio: 0.62;
   --icon-sm: 16px;

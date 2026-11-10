@@ -300,3 +300,6 @@
 {"v":1,"at":"2026-11-10T04:24:33.759Z","type":"defect","summary":"E15-D04 fixed in fix cycle 1 (merge)","by":"developer","defect":"E15-D04","severity":"P3","state":"fixed"}
 {"v":1,"at":"2026-11-10T04:24:33.927Z","type":"defect","summary":"E15-D07 fixed in fix cycle 1 (merge)","by":"developer","defect":"E15-D07","severity":"P3","state":"fixed"}
 {"v":1,"at":"2026-11-10T04:24:34.075Z","type":"defect","summary":"E15-D02 fixed in fix cycle 1 (merge)","by":"developer","defect":"E15-D02","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-10T10:37:09.435Z","type":"product-decision","summary":"PO requests UI refresh: calendar in focus, collapsible logo explanation, more whitespace, mobile (SP) first layout","outcome":"success"}
+{"v":1,"at":"2026-11-10T10:37:09.598Z","by":"orchestrator","type":"task-start","task":"ui-refresh-design","summary":"Task ui-refresh-design dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T10:46:47.802Z","by":"orchestrator","type":"task-end","task":"ui-refresh-design","outcome":"failure","summary":"diff-guard: 39 files outside the allow-list"}

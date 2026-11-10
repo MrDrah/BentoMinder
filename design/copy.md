@@ -1046,3 +1046,19 @@ Placeholders: `{date}` ja 「11月18日（水）」 / en "Wed, Nov 18"; `{dateSh
 | family.import.confirm | 家族全員のデータを置き換える | Replace everyone's data | Dialog destructive | US-E15-11/AC6 |
 | family.deleteAll.note | このアカウントは、家族に参加しています。ここで消えるのは、この端末のデータだけです。オンラインのデータは残り、次にログインすると、家族のデータがもう一度この端末に読み込まれます。オンラインのデータも消すには、先に「家族のオンラインデータを削除」を使ってください。 | This account is in a family. Only the data on this device is deleted here. The online data stays, and the next time you sign in your family's data is loaded onto this device again. To delete the online data too, first use 「Delete the family's online data」. | Added above the body of `data.deleteAll.body` when in a family | US-E15-11/AC7, US-E15-08/AC7 |
 | family.data.where | データはこの端末に保存され、家族との間で共有されています。 | Your data is stored on this device and shared with your family. | Replaces `settings.data.where` while in a family | US-E15-02/AC7 |
+
+
+---
+
+## 23. UI refresh 2026-11 (brand info disclosure; components §17.2)
+
+Only these rows are new. The panel also reuses existing keys verbatim: heading `app.tagline`, consent link `settings.about.consent`, version `settings.about.version`, visible close text `common.close`, share button `share.button`, legend toggle `legend.title`. Nothing else changes in this sheet: every existing string keeps its text, and the layout moves described in components §17 add no visible words.
+
+| key | ja | en | where | story/AC |
+|---|---|---|---|---|
+| about.open | BentoMinderについて | About BentoMinder | Accessible name (`aria-label`) of the app-bar brand button that opens and closes the info panel. Contains the visible brand name (WCAG 2.5.3). Not shown as visible text | PO request 2026-11-10 |
+| about.body.1 | BentoMinderは、園の給食の献立表を読み取って、お弁当の日を忘れないようにお知らせするアプリです。 | BentoMinder reads your school's lunch menu and reminds you about your homemade bento days. | Info panel, first paragraph | PO request 2026-11-10 |
+| about.body.2 | お子さまの好みに合わなさそうな給食に印をつけ、手作りお弁当の日には、おすすめのレシピを3つ提案します。 | It marks school lunches your child may not enjoy, and suggests three recipes for each bento day. | Info panel, second paragraph | PO request 2026-11-10 |
+| about.close | 説明を閉じる | Close this description | Accessible name (`aria-label`) of the panel's close button; the visible text is `common.close` (the name contains it) | PO request 2026-11-10 |
+
+Notes for the developer: the two paragraphs are designer copy summarising behaviour that already exists (reading the menu, the day-before reminder, the three suggestions, BR-xx in PLAN §3); they promise nothing the product does not do (no booking, no safety guarantee, no sync claim). Confirm the wording with the product owner with the other review items (Decision D5). The English paragraphs contain no placeholders, so no `{}` handling is needed.
