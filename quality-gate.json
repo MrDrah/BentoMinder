@@ -130,7 +130,7 @@
     {
       "name": "JS bundle",
       "glob": "dist/assets/*.js",
-      "maxGzipKb": 420
+      "maxGzipKb": 445
     },
     {
       "name": "CSS",

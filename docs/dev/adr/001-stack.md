@@ -8,7 +8,7 @@ BentoMinder is a Japanese-first, mobile-first family app (PO brief §3, §12). I
 - be packaged later as an Android app with Capacitor **without a rewrite** (§12), so everything must work inside an Android System WebView: no SSR, no server-only routing, no APIs the WebView lacks (Web Notifications, Web Share, Push, Background Sync);
 - keep the AI key off the client (§7), which needs a small server-side piece even in the MVP;
 - show every string in 日本語 (default) or English with a visible toggle (§3), in Japanese date formats and Asia/Tokyo time regardless of the device's timezone (§3, §11, §16);
-- stay inside the framework budget: **420 KB gzip JS (raised from 400 on 2026-11-09 for Firebase Auth, PLAN §7)**, 50 KB gzip CSS, usable in < 2.5 s on a mid-range phone on 4G (PROJECT_BRIEF §9).
+- stay inside the framework budget: **445 KB gzip JS in total (raised 400 → 420 on 2026-11-09 for Firebase Auth and 420 → 445 on 2026-11-10 for the family-space screens and their copy, PLAN §7; the sum counts lazy chunks, a split into entry and lazy budgets is a later option)**, 50 KB gzip CSS, usable in < 2.5 s on a mid-range phone on 4G (PROJECT_BRIEF §9).
 
 Related: ADR 002 (AI extraction), ADR 003 (local data), ADR 004 (domain engines), ADR 005 (notifications / Android).
 
