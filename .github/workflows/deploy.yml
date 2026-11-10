@@ -78,6 +78,8 @@ jobs:
       - run: npm run build
         env:
           VITE_AI_PROXY_BASE_URL: ${{ vars.AI_PROXY_BASE_URL }}
+          # Address of the family sync function (US-E15). Empty or unset = sync off, the app stays local-only.
+          VITE_SYNC_BASE_URL: ${{ vars.SYNC_BASE_URL }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
