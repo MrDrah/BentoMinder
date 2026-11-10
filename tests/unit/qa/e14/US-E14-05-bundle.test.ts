@@ -26,10 +26,13 @@ function walk(dir: string): string[] {
 let fnBundle = '';
 let webText = '';
 let webDir = '';
+let fnDir = '';
 
 beforeAll(() => {
-  execFileSync(process.execPath, ['functions/build.mjs'], { cwd: ROOT, env, stdio: 'pipe' });
-  fnBundle = readFileSync(join(ROOT, 'functions', 'lib', 'index.js'), 'utf8');
+  // Own output folder: other test files build into functions/lib at the same time (parallel files).
+  fnDir = mkdtempSync(join(tmpdir(), 'qa-e14-fn-'));
+  execFileSync(process.execPath, ['functions/build.mjs'], { cwd: ROOT, env: { ...env, FUNCTIONS_OUT_DIR: fnDir }, stdio: 'pipe' });
+  fnBundle = readFileSync(join(fnDir, 'index.js'), 'utf8');
   webDir = mkdtempSync(join(tmpdir(), 'qa-e14-web-'));
   execFileSync(process.execPath, [require_vite(), 'build', '--outDir', webDir, '--emptyOutDir'], { cwd: ROOT, env, stdio: 'pipe' });
   webText = walk(webDir)
@@ -40,11 +43,12 @@ beforeAll(() => {
 
 afterAll(() => {
   if (webDir !== '') rmSync(webDir, { recursive: true, force: true });
+  if (fnDir !== '') rmSync(fnDir, { recursive: true, force: true });
 });
 
 describe('US-E14-05/AC4 no secret or configuration value in the function bundle', () => {
   it('US-E14-05/AC4 the bundle exists and is the single entry', () => {
-    expect(existsSync(join(ROOT, 'functions', 'lib', 'index.js'))).toBe(true);
+    expect(existsSync(join(fnDir, 'index.js'))).toBe(true);
     expect(fnBundle.length).toBeGreaterThan(10_000);
   });
   it('US-E14-05/AC4 sentinel key, allow-list entries and limit values from the build environment are absent', () => {

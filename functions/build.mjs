@@ -9,10 +9,12 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const version = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).version ?? '0.0.0';
 
-rmSync(join(root, 'functions', 'lib'), { recursive: true, force: true });
+// FUNCTIONS_OUT_DIR lets a test build into its own folder so parallel test files never delete each other's output.
+const outDir = process.env.FUNCTIONS_OUT_DIR ?? join(root, 'functions', 'lib');
+rmSync(outDir, { recursive: true, force: true });
 await build({
   entryPoints: [join(root, 'functions', 'src', 'index.ts')],
-  outfile: join(root, 'functions', 'lib', 'index.js'),
+  outfile: join(outDir, 'index.js'),
   bundle: true,
   platform: 'node',
   target: 'node22',
