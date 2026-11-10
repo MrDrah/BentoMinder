@@ -377,11 +377,6 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
         </Banner>
       )}
 
-      <div className="action-bar">
-        <button type="button" className={`btn ${uploadPrimary ? 'btn--secondary' : 'btn--primary'} btn--block`} data-testid="import-submit" disabled={disabled} aria-busy={phase === 'fetching' || undefined} onClick={startUrl}>
-          {phase === 'fetching' ? t('import.progress.fetching') : t('import.submit')}
-        </button>
-      </div>
       <div className="import__actions">
         <p className="divider">{t('import.or')}</p>
         {!(panel?.kind === 'ai' && !panel.upload) && (
@@ -423,6 +418,13 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
             {t('import.later')}
           </button>
         )}
+      </div>
+
+      {/* Last in the DOM and focus order (PLAN ruling 2026-11-10): the phone action bar pins it to the bottom of the viewport */}
+      <div className="action-bar">
+        <button type="button" className={`btn ${uploadPrimary ? 'btn--secondary' : 'btn--primary'} btn--block`} data-testid="import-submit" disabled={disabled} aria-busy={phase === 'fetching' || undefined} onClick={startUrl}>
+          {phase === 'fetching' ? t('import.progress.fetching') : t('import.submit')}
+        </button>
       </div>
 
       {consentFor !== null && (

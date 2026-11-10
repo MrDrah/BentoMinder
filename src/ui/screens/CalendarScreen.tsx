@@ -132,7 +132,7 @@ export function CalendarScreen({ month: requested, openDate }: { month: YearMont
 
             <div ref={calRef} className="cal">
               {agenda ? (
-                <Agenda t={t} lang={lang} month={month} views={views} onOpen={open} />
+                <Agenda t={t} lang={lang} month={month} views={views} today={today} onOpen={open} />
               ) : (
                 <CalendarGrid t={t} lang={lang} month={month} today={today} weekStartsOn={weekStartsOn} views={views} selected={mode === 'panel' ? openDate : null} onOpen={open} onMonth={(m) => go(m)} />
               )}

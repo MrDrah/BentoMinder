@@ -195,10 +195,14 @@ describe('US-E5-03 choosing a recipe plans the day (BR-02, BR-03)', () => {
     expect(d?.plannedAt).toBeDefined();
     expect(d?.plannedAt).toBe(d?.decidedAt);
     expect(screen.getByTestId('toast')).toHaveTextContent('11月12日（木）を手作りお弁当にしました');
-    expect(screen.getByTestId('cal-cell-2026-11-12')).toHaveTextContent(recipe.shortNameJa);
+    // the tile shows the homemade-bento icon and no recipe name (US-E5-01/AC4); the sheet and the stored snapshots keep the names
+    expect(screen.getByTestId('cal-cell-2026-11-12')).toHaveAttribute('data-icon', 'home');
+    expect(screen.getByTestId('cal-cell-2026-11-12')).not.toHaveTextContent(recipe.shortNameJa);
     cleanup();
     await renderApp({ store: app.stored(), now: NOV2, services: { library: library() } });
-    expect(screen.getByTestId('cal-cell-2026-11-12')).toHaveTextContent(recipe.shortNameJa);
+    // the tile shows the homemade-bento icon and no recipe name (US-E5-01/AC4); the sheet and the stored snapshots keep the names
+    expect(screen.getByTestId('cal-cell-2026-11-12')).toHaveAttribute('data-icon', 'home');
+    expect(screen.getByTestId('cal-cell-2026-11-12')).not.toHaveTextContent(recipe.shortNameJa);
     expect(screen.getByTestId('cal-cell-2026-11-12')).toHaveAttribute('data-decision', 'homemade-bento-planned');
   });
 
@@ -371,11 +375,12 @@ describe('US-E6-05 the recipe library', () => {
 });
 
 describe('US-E6-06 planned recipe missing after a library change', () => {
-  it('US-E6-06/AC1 the cell keeps the stored short name; the sheet shows the stored name and the notice, offers a re-choice, and changes nothing', async () => {
+  it('US-E6-06/AC1 the tile is unchanged (home icon, no recipe name); the sheet shows the stored name and the notice, offers a re-choice, and changes nothing', async () => {
     const user = userEvent.setup();
     const app = await open('');
     const before = app.storage.data.get('bentominder.state');
-    expect(screen.getByTestId('cal-cell-2026-11-04')).toHaveTextContent('くまおにぎり');
+    expect(screen.getByTestId('cal-cell-2026-11-04')).toHaveAttribute('data-icon', 'home');
+    expect(screen.getByTestId('cal-cell-2026-11-04')).not.toHaveTextContent('くまおにぎり');
     await user.click(within(screen.getByTestId('cal-cell-2026-11-04')).getByRole('button'));
     const sheet = await screen.findByTestId('day-sheet');
     expect(within(sheet).getByTestId('day-recipe-name')).toHaveTextContent('くまさんおにぎり弁当');

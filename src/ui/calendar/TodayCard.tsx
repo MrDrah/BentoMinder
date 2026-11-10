@@ -8,7 +8,7 @@ import type { LocalDate } from '../../domain/time/jst.ts';
 import { formatDate } from '../../i18n/format.ts';
 import { useApp, useStore } from '../app-store.tsx';
 import { Banner } from '../components/Controls.tsx';
-import { AssessMark, BentoIcon } from '../components/Marks.tsx';
+import { AssessMark, TileIcon } from '../components/Marks.tsx';
 import { allergenLabel } from '../recommend/parts.tsx';
 import { toHash } from '../router.ts';
 import { recipeName, STATE_KEYS } from './labels.ts';
@@ -118,7 +118,7 @@ export function TodayCard() {
       const href = id !== undefined && recipe !== undefined ? toHash({ name: 'recipe', id, date: today }) : day(today);
       return card(
         'homemade-bento-planned',
-        <BentoIcon filled size={24} />,
+        <TileIcon name="home-bento" />,
         t('today.planned', { recipe: recipeOf(v) }),
         <>
           {hits.length > 0 && (
@@ -135,7 +135,7 @@ export function TodayCard() {
     case 'school-lunch-planned':
       return card(
         'school-lunch-planned',
-        <Bowl />,
+        <TileIcon name="lunchbox" />,
         t('today.school'),
         <>
           <p className="note-row" data-testid="today-reservation-note">
@@ -153,7 +153,7 @@ export function TodayCard() {
     case 'not-confirmed':
       return card(
         'not-confirmed',
-        <BentoIcon filled={false} size={24} />,
+        <TileIcon name="bento-unsure" />,
         t('today.notConfirmed'),
         <a className="btn btn--secondary" href={day(today)} data-testid="today-cta">
           {t('today.cta.plan')}

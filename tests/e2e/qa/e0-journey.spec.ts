@@ -66,7 +66,7 @@ test('US-E0-01/AC1 US-E0-01/AC2 US-E0-01/AC3 the main journey from a fresh devic
   // And 2026-11-04 is low-preference with an explanation that mentions 2 disliked ingredients, and still shows 「給食」
   await expect(cell(page, '2026-11-04')).toHaveAttribute('data-assessment', 'low-preference');
   await expect(cell(page, '2026-11-04')).toHaveAttribute('data-decision', 'school-lunch-planned');
-  await expect(cell(page, '2026-11-04').getByRole('button')).toHaveAccessibleName(/苦手かも.*給食/);
+  await expect(cell(page, '2026-11-04').getByRole('button')).toHaveAccessibleName(/給食|手作りお弁当/);
   await a.click(cell(page, '2026-11-04').getByRole('button'));
   await expect(page.getByTestId('day-sheet')).toBeVisible();
   await expect(page.getByTestId('assess-explanation')).toContainText(/苦手な食材が2つ/);

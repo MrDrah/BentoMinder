@@ -170,13 +170,13 @@ test('US-E7-04/AC4 switching off 前日のお知らせ removes day-before remind
   await expect(page.getByTestId('reminder-day-before-2026-11-04')).toHaveCount(0);
 });
 
-test('US-E8-05/AC1 US-E8-05/AC2 US-E8-05/AC3 the theme follows the device by default, a manual choice persists, and only planned cells stay solid-filled in both themes; axe in both', async ({ page }) => {
+test('US-E8-05/AC1 US-E8-05/AC2 US-E8-05/AC3 the theme follows the device by default, a manual choice persists, and only the today tile is solid-filled in both themes; axe in both', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await open(page, '2026-11-03T12:00:00Z'); // a reminder banner is on screen too
   await expect(page.getByTestId('reminder-list')).toBeVisible();
   const body = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   const navy = await rgb(page, 'var(--navy-fill)');
-  const planned = () => page.getByTestId('cal-cell-2026-11-04').locator('.cell__btn');
+  const planned = () => page.getByTestId('cal-cell-2026-11-03').locator('.cell__btn'); // today (the only filled tile, US-E5-01/AC11)
   const plain = () => page.getByTestId('cal-cell-2026-11-05').locator('.cell__btn');
   const bg = (loc: ReturnType<typeof planned>) => loc.evaluate((el) => getComputedStyle(el).backgroundColor);
   const light = await body();

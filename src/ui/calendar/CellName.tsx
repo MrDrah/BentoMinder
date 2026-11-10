@@ -4,20 +4,19 @@
 import type { ReactElement } from 'react';
 import type { DayView } from '../../domain/calendar/day-view.ts';
 import type { Language, Translate } from '../../i18n/index.ts';
+import type { LocalDate } from '../../domain/time/jst.ts';
 import { cellLabel } from './cell-label.ts';
 
-/** Japanese fragments that can appear inside an English sentence: the sheet's wording, a recipe with no English name. */
+/** Japanese fragments that can appear inside an English sentence: the school's own wording of a no-lunch day. */
 function japaneseFragments(lang: Language, v: DayView): string[] {
   if (lang === 'ja') return [];
   const out: string[] = [];
   if (v.type.type === 'no-lunch') out.push(v.type.noLunch.originalText);
-  const name = v.record?.recipeNameSnapshot;
-  if (name !== undefined && name.en === undefined) out.push(name.ja);
   return out.filter((f) => f !== '');
 }
 
-export function CellName({ t, lang, v }: { t: Translate; lang: Language; v: DayView }) {
-  const label = cellLabel(t, lang, v);
+export function CellName({ t, lang, v, today }: { t: Translate; lang: Language; v: DayView; today: LocalDate }) {
+  const label = cellLabel(t, lang, v, today);
   let parts: (string | ReactElement)[] = [label];
   for (const fragment of japaneseFragments(lang, v)) {
     parts = parts.flatMap((part, i) => {
