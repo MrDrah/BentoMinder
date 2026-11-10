@@ -800,3 +800,10 @@ Each is tested with the rules emulator (US-E15-09). The rules are in git; deploy
 
 ### Open points
 See `docs/ba/_scratch/e15/open-questions.md` (Q1 to Q12). None blocks the developer's ADR; each has a DEFAULT used above.
+
+**14.12 Rulings after E15 QA (Orchestrator, 2026-11-10; PO may overturn).**
+- *Old-app compatibility (14.11, E15-D06):* a family-owned local copy is read by the E13-scheme repository as corrupt. Accepted as a documented limitation: no previous build is in use, and the PO's devices run the current app. The app never downgrades a store silently.
+- *deviceId in exports (14.2, E15-D05):* the export keeps the store-root `deviceId` as before E15 (a random id, not personal data, never sent to the proxy). The "never exported" wording applies to sync records and the cloud only.
+- *Invite code at rest (E15-D01):* the invite document id is the hash of the code; the plain code is kept inside the active invite document so the inviter can see it again, and is removed when the invite is used, cancelled or expired. Accepted (72 h life, readable only through the Function).
+- *Invite code alphabet (E15-D02):* codes never contain 1, I, L, 0 or O; the length stays 10 (the generator may use rejection sampling).
+- *Read estimate (E15-D08):* an idle poll costs 4 reads; a typical two-device day measured 2,262 reads (4.5% of the free 50,000) and 165 writes; the ADR's 1,500 is superseded.
