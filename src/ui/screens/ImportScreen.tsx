@@ -377,10 +377,12 @@ export function ImportScreen({ onboarding }: { onboarding: boolean }) {
         </Banner>
       )}
 
-      <div className="import__actions">
+      <div className="action-bar">
         <button type="button" className={`btn ${uploadPrimary ? 'btn--secondary' : 'btn--primary'} btn--block`} data-testid="import-submit" disabled={disabled} aria-busy={phase === 'fetching' || undefined} onClick={startUrl}>
           {phase === 'fetching' ? t('import.progress.fetching') : t('import.submit')}
         </button>
+      </div>
+      <div className="import__actions">
         <p className="divider">{t('import.or')}</p>
         {!(panel?.kind === 'ai' && !panel.upload) && (
           <label className={`btn ${uploadPrimary ? 'btn--primary' : 'btn--secondary'} btn--block file-button${disabled ? ' is-disabled' : ''}`}>

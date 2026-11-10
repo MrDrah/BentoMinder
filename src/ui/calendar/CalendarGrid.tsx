@@ -35,6 +35,8 @@ const clampDay = (month: YearMonth, day: number): LocalDate => `${month}-${Strin
 
 export function CalendarGrid({ t, lang, month, today, weekStartsOn, views, selected, onOpen, onMonth }: CalendarGridProps) {
   const rows = monthGrid(month, weekStartsOn);
+  // The header of today's column gets a decorative underline (UI refresh 2026-11, components §17.4).
+  const todayWd = monthOf(today) === month ? weekdayOf(today) : null;
   const title = formatMonth(t, lang, month);
   const initial = monthOf(today) === month ? today : (`${month}-01` as LocalDate);
   const [focusDate, setFocusDate] = useState<LocalDate>(initial);
@@ -101,7 +103,7 @@ export function CalendarGrid({ t, lang, month, today, weekStartsOn, views, selec
     <div ref={rootRef} className="cal-grid" role="grid" aria-label={t('cal.grid.label', { month: title })} data-testid="cal-grid" data-week-starts-on={weekStartsOn} onKeyDown={onKeyDown} style={{ ['--cal-cols' as string]: columns(weekStartsOn) }}>
       <div role="row" className="cal-head">
         {weekdayOrder(weekStartsOn).map((wd) => (
-          <div key={wd} role="columnheader" className={`cal-wd wd-${wd}`} aria-label={t(`wd.long.${wd}` as MessageKey)}>
+          <div key={wd} role="columnheader" className={`cal-wd wd-${wd}${todayWd === wd ? ' is-today-col' : ''}`} aria-label={t(`wd.long.${wd}` as MessageKey)}>
             {t(`wd.short.${wd}` as MessageKey)}
           </div>
         ))}

@@ -82,78 +82,81 @@ export function CalendarScreen({ month: requested, openDate }: { month: YearMont
 
   const open = (date: LocalDate) => navigate({ name: 'day', date });
   const close = () => navigate({ name: 'calendar', month });
-  const anyPlanned = Object.values(store.decisions).some((d) => d.state === 'homemade-bento-planned');
 
   return (
     <div className="screen" data-testid="screen-calendar">
       <AppBar />
       <div className="cal-layout">
         <main id="main" className="page">
-          <ReminderList />
-          <TodayCard />
-          {pending !== null && (
-            <section className="card card--warning" data-testid="card-menu-pending">
-              <h2 className="card__title">{t('menuCard.pending')}</h2>
-              <a className="btn btn--primary" href={toHash({ name: 'review', month: pending.month as YearMonth, manual: false })} data-testid="card-menu-pending-action">
-                {t('menuCard.pending.action')}
-              </a>
-            </section>
-          )}
-          {showMissing && (
-            <section className="card card--warning" data-testid="menu-card-missing">
-              <h2 className="card__title">{t(missingKey, { m: monthLabel(t, lang, month) })}</h2>
-              <p className="card__body">{t('menuCard.missing.body')}</p>
-              <a className="btn btn--primary" href={toHash({ name: 'import' })} data-testid="card-menu-import">
-                {t('menuCard.import')}
-              </a>
-            </section>
-          )}
-          {showNext && (
-            <section className="card card--warning" data-testid="card-menu-next">
-              <h2 className="card__title">{t('menuCard.nextMonth', { m: monthLabel(t, lang, nextMonth) })}</h2>
-              <div className="review-day__actions-row">
-                <a className="btn btn--primary" href={toHash({ name: 'import' })} data-testid="card-menu-next-import">
-                  {t('menuCard.import')}
-                </a>
-                <button type="button" className="btn btn--text" data-testid="card-menu-next-dismiss" onClick={() => void hideNext()}>
-                  {t('menuCard.dismiss')}
-                </button>
-              </div>
-            </section>
-          )}
+          <div className="cal-block">
+            <div className="cal-alerts">
+              <ReminderList />
+              {pending !== null && (
+                <section className="card card--warning" data-testid="card-menu-pending">
+                  <h2 className="card__title">{t('menuCard.pending')}</h2>
+                  <a className="btn btn--primary" href={toHash({ name: 'review', month: pending.month as YearMonth, manual: false })} data-testid="card-menu-pending-action">
+                    {t('menuCard.pending.action')}
+                  </a>
+                </section>
+              )}
+              {showMissing && (
+                <section className="card card--warning" data-testid="menu-card-missing">
+                  <h2 className="card__title">{t(missingKey, { m: monthLabel(t, lang, month) })}</h2>
+                  <p className="card__body">{t('menuCard.missing.body')}</p>
+                  <a className="btn btn--primary" href={toHash({ name: 'import' })} data-testid="card-menu-import">
+                    {t('menuCard.import')}
+                  </a>
+                </section>
+              )}
+            </div>
 
-          <UpcomingSummaryCard summary={summary} today={today} />
-
-          <nav className="monthnav" aria-label={t('cal.nav.label')}>
-            <button type="button" className="iconbtn" data-testid="cal-prev" aria-label={t('cal.prevMonth')} onClick={() => go(addMonths(month, -1))}>
-              <Icon name="chevronLeft" />
-            </button>
-            <h2 className="monthnav__title" data-testid="cal-title">
-              {title}
-            </h2>
-            <button type="button" className="iconbtn" data-testid="cal-next" aria-label={t('cal.nextMonth')} onClick={() => go(addMonths(month, 1))}>
-              <Icon name="chevronRight" />
-            </button>
-            {month !== currentMonth && (
-              <button type="button" className="btn btn--small" data-testid="cal-today" onClick={() => go(currentMonth)}>
-                {t('cal.today')}
+            <nav className="monthnav" aria-label={t('cal.nav.label')}>
+              <button type="button" className="iconbtn" data-testid="cal-prev" aria-label={t('cal.prevMonth')} onClick={() => go(addMonths(month, -1))}>
+                <Icon name="chevronLeft" />
               </button>
-            )}
-          </nav>
-          <p className="visually-hidden" aria-live="polite" data-testid="cal-live">
-            {live}
-          </p>
+              <h2 className="monthnav__title" data-testid="cal-title">
+                {title}
+              </h2>
+              <button type="button" className="iconbtn" data-testid="cal-next" aria-label={t('cal.nextMonth')} onClick={() => go(addMonths(month, 1))}>
+                <Icon name="chevronRight" />
+              </button>
+              {month !== currentMonth && (
+                <button type="button" className="btn btn--small" data-testid="cal-today" onClick={() => go(currentMonth)}>
+                  {t('cal.today')}
+                </button>
+              )}
+            </nav>
+            <p className="visually-hidden" aria-live="polite" data-testid="cal-live">
+              {live}
+            </p>
 
-          <div ref={calRef} className="cal">
-            {agenda ? (
-              <Agenda t={t} lang={lang} month={month} views={views} onOpen={open} />
-            ) : (
-              <CalendarGrid t={t} lang={lang} month={month} today={today} weekStartsOn={weekStartsOn} views={views} selected={mode === 'panel' ? openDate : null} onOpen={open} onMonth={(m) => go(m)} />
-            )}
+            <div ref={calRef} className="cal">
+              {agenda ? (
+                <Agenda t={t} lang={lang} month={month} views={views} onOpen={open} />
+              ) : (
+                <CalendarGrid t={t} lang={lang} month={month} today={today} weekStartsOn={weekStartsOn} views={views} selected={mode === 'panel' ? openDate : null} onOpen={open} onMonth={(m) => go(m)} />
+              )}
+            </div>
           </div>
 
-          <Legend anyPlanned={anyPlanned} />
-          <ShareSheet />
+          <div className="cal-below">
+            <TodayCard />
+            <UpcomingSummaryCard summary={summary} today={today} />
+            {showNext && (
+              <section className="card card--warning" data-testid="card-menu-next">
+                <h2 className="card__title">{t('menuCard.nextMonth', { m: monthLabel(t, lang, nextMonth) })}</h2>
+                <div className="review-day__actions-row">
+                  <a className="btn btn--primary" href={toHash({ name: 'import' })} data-testid="card-menu-next-import">
+                    {t('menuCard.import')}
+                  </a>
+                  <button type="button" className="btn btn--text" data-testid="card-menu-next-dismiss" onClick={() => void hideNext()}>
+                    {t('menuCard.dismiss')}
+                  </button>
+                </div>
+              </section>
+            )}
+            <Legend share={<ShareSheet />} />
+          </div>
         </main>
         {mode === 'panel' && openDate === null && <aside className="sheet-empty">{t('day.panel.empty')}</aside>}
         {mode === 'panel' && openDate !== null && <DaySheet date={openDate} mode={mode} onClose={close} />}

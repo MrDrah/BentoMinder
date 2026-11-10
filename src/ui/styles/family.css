@@ -74,7 +74,7 @@
 .family-row,
 .family-leave,
 .family-safety {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
 }
 .family-h3 {
   margin: 0 0 var(--space-2);
@@ -145,7 +145,7 @@
   font-size: var(--text-sm);
 }
 .family-invite {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   padding: var(--space-4);
   border-radius: var(--radius-lg);
   background: var(--surface-3);

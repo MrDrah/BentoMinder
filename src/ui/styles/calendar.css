@@ -6,7 +6,7 @@
 .cal {
   container-type: inline-size;
   container-name: cal;
-  margin: 0 calc(-1 * var(--space-3));
+  margin: 0 calc(-1 * var(--space-4)); /* 20 px page gutter -> 4 px at 390 */
 }
 .cal-grid {
   display: grid;
@@ -35,6 +35,65 @@
 }
 .cal-wd.wd-0 {
   color: var(--sunday);
+}
+.cal-wd.is-today-col {
+  box-shadow: inset 0 -2px 0 var(--accent); /* decorative; the today tile is the real signal */
+}
+/* Home page structure (components §17.4): alerts, month row and grid are one group; the cards, the tools
+   row and the legend follow after a section gap. */
+.cal-block {
+  display: grid;
+  gap: var(--space-2);
+}
+.cal-alerts {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.cal-alerts:empty {
+  display: none;
+}
+.cal-below {
+  display: grid;
+  gap: var(--rhythm-block);
+  margin-top: calc(var(--rhythm-section) - var(--rhythm-block));
+}
+.cal-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+.cal-tools .share-button {
+  flex: 1 1 auto;
+  width: auto;
+  margin-top: 0;
+}
+@media (max-width: 359px) {
+  .cal-tools > * {
+    flex-basis: 100%;
+  }
+}
+.legend {
+  display: grid;
+  gap: var(--rhythm-block);
+}
+@media (min-width: 768px) {
+  .cal {
+    margin: 0;
+  }
+  .cal-grid,
+  .cal-row,
+  .cal-head {
+    gap: 4px;
+  }
+}
+@media (min-width: 1280px) {
+  .cal-grid,
+  .cal-row,
+  .cal-head {
+    gap: 6px;
+  }
 }
 .cell {
   position: relative;
@@ -139,6 +198,24 @@
 }
 .cell.is-planned .cell__num {
   color: var(--ink-inverse);
+}
+/* Row heights 80 / 96 / 104 px (tokens); weekend-only rows and padding cells stay 44 px. Declared after the
+   base .cell rules so the larger sizes win. */
+@media (min-width: 768px) {
+  .cell {
+    min-height: var(--cell-min-height-md);
+  }
+  .cell.cell--pad {
+    min-height: var(--cell-row-compact);
+  }
+  .cell__num {
+    font-size: var(--text-lg);
+  }
+}
+@media (min-width: 1280px) {
+  .cell {
+    min-height: var(--cell-min-height-lg);
+  }
 }
 .cell.is-today .cell__num {
   background: var(--ink-1);
@@ -268,16 +345,16 @@
 
 /* §2.5 Upcoming summary, §2.8 legend */
 .upcoming {
-  margin-bottom: var(--space-4);
+  margin: 0;
 }
 .upcoming__title {
-  margin: 0 0 var(--space-2);
+  margin: 0 0 var(--rhythm-related);
   font-family: var(--font-display);
   font-size: calc(var(--text-lg) * var(--title-scale));
 }
 .upcoming__list {
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-3);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -327,9 +404,6 @@
   margin: 0 0 var(--space-2);
   color: var(--ink-2);
 }
-.legend {
-  margin: var(--space-4) 0;
-}
 .legend__toggle {
   display: inline-flex;
   align-items: center;
@@ -346,8 +420,8 @@
 .legend__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: var(--space-2);
-  margin: var(--space-2) 0 0;
+  gap: var(--space-3);
+  margin: var(--rhythm-related) 0 0;
   padding: 0;
   list-style: none;
   font-size: var(--text-sm);
@@ -416,7 +490,7 @@
   padding: 0 var(--space-5) var(--space-6);
 }
 .sheet__section {
-  margin-top: var(--space-5);
+  margin-top: var(--rhythm-block);
 }
 .sheet__section:first-child {
   margin-top: var(--space-2);
@@ -441,10 +515,19 @@
     display: none;
   }
 }
+/* The calendar home is the one page wider than 560 px: 640 px column on tablets (components §17.4). */
+.cal-layout > .page {
+  padding-top: var(--space-2);
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .cal-layout > .page {
+    max-width: 640px;
+  }
+}
 @media (min-width: 1280px) {
   .cal-layout {
     display: grid;
-    grid-template-columns: minmax(0, 760px) var(--panel-width);
+    grid-template-columns: minmax(0, 1fr) var(--panel-width);
     gap: var(--space-6);
     max-width: 1280px;
     margin: 0 auto;
@@ -467,14 +550,16 @@
     max-height: calc(100vh - 96px);
     transform: none;
     border-radius: var(--radius-lg);
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--elevation-2);
   }
   .sheet--panel .sheet__handle {
     display: none;
   }
   .sheet--empty {
     padding: var(--space-6);
-    border: 1px dashed var(--line-ui);
+    border: 0;
+    background: var(--surface-2);
+    box-shadow: var(--elevation-2);
     border-radius: var(--radius-lg);
     color: var(--ink-2);
   }
@@ -488,7 +573,9 @@
     position: sticky;
     top: 80px;
     padding: var(--space-6);
-    border: 1px dashed var(--line-ui);
+    border: 0;
+    background: var(--surface-2);
+    box-shadow: var(--elevation-2);
     border-radius: var(--radius-lg);
     color: var(--ink-2);
   }
@@ -597,7 +684,23 @@
 }
 .plan-actions {
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-3);
+}
+/* Phones: the primary decision is the sticky action bar of the sheet; its section is the sticky container. */
+@media (max-width: 767px) {
+  .plan-actions {
+    display: contents;
+  }
+  .sheet__section .plan-action,
+  .sheet__section .action-bar {
+    margin-top: var(--space-3);
+  }
+  .sheet .action-bar {
+    margin-left: calc(-1 * var(--space-5));
+    margin-right: calc(-1 * var(--space-5));
+    padding: var(--space-3) var(--space-5);
+    background: var(--surface-2);
+  }
 }
 .plan-action {
   display: flex;

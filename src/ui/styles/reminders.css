@@ -1,8 +1,8 @@
 /* §8 Reminder banners and stack, §2.6 Today card, §1.8 Switch, §9.1 Time picker. Tokens only. */
 .reminders {
   display: grid;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
+  gap: var(--space-3);
+  margin: 0;
 }
 .reminder {
   position: relative;
@@ -96,9 +96,9 @@
 .today {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
-  padding: var(--space-4);
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--card-pad);
   border: 1px solid var(--line-1);
   border-radius: var(--radius-md);
   background: var(--surface-2);
@@ -127,8 +127,8 @@
   flex: none;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-md);
   background: var(--surface-3);
 }
@@ -144,6 +144,14 @@
 }
 .today .btn {
   align-self: flex-start;
+}
+/* Phones: the info note drops its filled box (components §17.4). */
+@media (max-width: 767px) {
+  .today .note-row {
+    padding: 0;
+    background: none;
+    color: var(--ink-2);
+  }
 }
 @media (min-width: 1280px) {
   .today__headline {

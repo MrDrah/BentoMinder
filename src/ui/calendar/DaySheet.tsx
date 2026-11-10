@@ -1,7 +1,7 @@
 // Day sheet (design/components.md §1.12, §3): the menu, the assessment with its explanation and
 // the manual override, and the plan with exactly the actions the state machine allows (BR-02).
 // Choosing homemade bento opens the recommendation view and writes nothing (US-E5-03/AC1).
-import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from 'react';
+import { Fragment, useEffect, useId, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { OVERRIDE_STATES } from '../../domain/schema/menu.ts';
 import { clearOverride, setOverride, type OverrideState } from '../../domain/assessment/override.ts';
 import type { DayAction, DayView } from '../../domain/calendar/day-view.ts';
@@ -449,19 +449,28 @@ function PlanSection({ v }: { v: DayView }) {
       {v.past && v.reservationDone && <p className="card__body">{t('day.reservation.check')}</p>}
       {actions.length > 0 && (
         <div className="plan-actions">
-          {actions.map((action) => (
-            <button
-              key={action}
-              type="button"
-              className={`plan-action${primary.includes(action) ? ' plan-action--primary' : ''}${dangerous.includes(action) ? ' plan-action--danger' : ''}`}
-              data-testid={testId[action]}
-              disabled={busy}
-              onClick={() => act(action)}
-            >
-              {t(label[action])}
-              {sub[action] !== undefined && <span className="plan-action__sub">{t(sub[action] as MessageKey)}</span>}
-            </button>
-          ))}
+          {actions.map((action) => {
+            const button = (
+              <button
+                type="button"
+                className={`plan-action${primary.includes(action) ? ' plan-action--primary' : ''}${dangerous.includes(action) ? ' plan-action--danger' : ''}`}
+                data-testid={testId[action]}
+                disabled={busy}
+                onClick={() => act(action)}
+              >
+                {t(label[action])}
+                {sub[action] !== undefined && <span className="plan-action__sub">{t(sub[action] as MessageKey)}</span>}
+              </button>
+            );
+            // The primary decision is pinned to the bottom of the sheet on phones (components §17.6, §17.7).
+            return primary.includes(action) ? (
+              <div key={action} className="action-bar">
+                {button}
+              </div>
+            ) : (
+              <Fragment key={action}>{button}</Fragment>
+            );
+          })}
         </div>
       )}
       {ask === 'cancel-plan' && (
