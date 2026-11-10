@@ -10,6 +10,7 @@ import type { Repository } from '../../domain/storage/repository.ts';
 import { createTranslator, type Language } from '../../i18n/index.ts';
 import { App } from '../App.tsx';
 import { AppProvider, type AppServices } from '../app-store.tsx';
+import type { SyncController } from '../sync/controller.ts';
 import { navigate, parseHash } from '../router.ts';
 import { AccountContext, type AccountValue } from './account-context.tsx';
 import { LoginScreen, RestoringScreen } from './LoginScreen.tsx';
@@ -25,6 +26,8 @@ export interface AccountEnv {
   extra?: ReactNode;
   /** US-E13-05/AC5: drop every scheduled reminder of this account. */
   cancelReminders: () => Promise<void>;
+  /** ADR 016: this account's sync controller; absent when sync is off (VITE_SYNC_BASE_URL unset or invalid). */
+  sync?: SyncController | null;
 }
 
 export interface AuthRootProps {
@@ -218,7 +221,7 @@ function SignedInApp({ user, accountId, openAccount, opening, envRef, account }:
   if (env === null) return <div className="screen" aria-busy="true" data-testid="screen-loading" />;
   return (
     <AccountContext.Provider value={account}>
-      <AppProvider repository={env.repository} clock={env.clock} newDeviceId={env.newDeviceId} services={env.services} {...(env.warn ? { warn: env.warn } : {})}>
+      <AppProvider repository={env.repository} clock={env.clock} newDeviceId={env.newDeviceId} services={env.services} {...(env.warn ? { warn: env.warn } : {})} sync={env.sync ?? null}>
         <App />
         {env.extra}
       </AppProvider>

@@ -6,6 +6,7 @@ import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { selectAdapters } from './adapters/select.ts';
 import { selectAuth } from './adapters/select-auth.ts';
+import { selectSyncBase } from './adapters/select-sync.ts';
 import type { AuthPort } from './domain/auth/types.ts';
 import { adoptLegacyStore } from './domain/storage/adoption.ts';
 import { createRepository } from './domain/storage/repository.ts';
@@ -27,7 +28,13 @@ async function openAccount(auth: AuthPort, accountId: string | undefined): Promi
       // Storage unavailable: the app shows its own "cannot save" notice; the old data stays where it is.
     }
   }
-  const repository = createRepository(adapters.storage, clock, accountId === undefined ? {} : { accountId });
+  // ADR 016: sync exists only for a keyed account and a valid https VITE_SYNC_BASE_URL; otherwise nothing below changes.
+  const syncBase = accountId === undefined ? null : selectSyncBase();
+  const sync =
+    accountId === undefined || syncBase === null
+      ? null
+      : await (await import('./ui/sync/open.ts')).prepareSync({ uid: accountId, base: syncBase, getToken: (force) => auth.getIdToken(force), storage: adapters.storage, clock, newDeviceId: adapters.newDeviceId, isOnline: adapters.isOnline });
+  const repository = createRepository(adapters.storage, clock, accountId === undefined ? {} : { accountId, ...(sync === null ? {} : { allowedOwnerIds: () => sync.scope.ids() }) });
   const services = {
     pdfSource: dbg ? dbg.wrapPdfSource(adapters.pdfSource) : adapters.pdfSource,
     extractor: dbg ? dbg.wrapExtractor(adapters.extractor) : adapters.extractor,
@@ -49,6 +56,7 @@ async function openAccount(auth: AuthPort, accountId: string | undefined): Promi
       </Suspense>
     ),
     cancelReminders: () => adapters.notifications.cancelAll(),
+    sync: sync === null ? null : sync.attach(repository),
   };
 }
 
