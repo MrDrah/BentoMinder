@@ -67,12 +67,20 @@ The PO's brand-label ruling above is implemented as AC9-AC14 etc.; 12 ACs added;
 |-----|---------|-------|---------|
 | PO: no brand-label research; generic rule for processed foods (exclude when an inherent allergen is registered, otherwise warn per processed ingredient, no warning without registered allergens, label data warn-only) | E6 preamble (ordering, F1', filter 3), US-E6-03/AC3, US-E6-05/AC1 | US-E6-02/AC9-AC14, US-E6-03/AC4-AC5, US-E6-04/AC4-AC6, US-E1-03/AC7 | US-E6-02/AC4, AC5, AC6 (kept in place, marked SUPERSEDED, not to be tested); E6 ordering tier "complete data first"; filter 3 (F4) |
 
+### Calendar day tile redesign (2026-11-10; PO decision in PLAN §7, last row; 73 / 359 -> 73 / 367 ACs)
+Only where and how the calendar day tile shows things changes; BR-01..BR-27, the assessment, decisions, overrides and reminders do not. No AC was renumbered; changed ACs carry `[CHANGED 2026-11-10 tile redesign]`; new ACs take the next number.
+
+| Why | Changed | Added | Retired (superseded text, number kept) |
+|-----|---------|-------|---------|
+| PO: tile = day number + one state icon; no assessment symbol, no recipe name; past grey; user-changed red top border; today navy filled; tomorrow navy border; red dash = bento needed, not planned | US-E5-01/AC1, AC2, AC3, AC4; US-E5-02/AC1; US-E5-03/AC2; US-E5-05/AC1; US-E4-03/AC1, AC3; US-E6-06/AC1; US-E6-07/AC5 (note); US-E7-03/AC1 (card below the calendar); US-E8-05/AC3; US-NF-02/AC3, AC4; US-E0-01/AC1; data contract recipeShortNameSnapshot and shortNameJa/shortNameEn wording | US-E5-01/AC9-AC15; US-E4-03/AC8 | Old US-E5-01/AC3 (two indicators per school-day cell), old US-E5-01/AC4 text (low-preference marker, 「給食」 text, recipe short name on the cell), old US-NF-02/AC4 name with the assessment, old US-E8-05/AC3 (bento cell is the only filled one) |
+
 ## Conventions used in the ACs
 - "Today" is the simulated or real date **in Asia/Tokyo** (BR-15). Dates are written `YYYY-MM-DD`; weekdays were checked against a calendar (2026-11-03 Tue 文化の日, 2026-11-23 Mon 勤労感謝の日, 2026-11-30 Mon, 2027-01-29 Fri, 2027-02-01 Mon, 2028-02-29 Tue).
 - "The fixture menu" is the synthetic test menu `fixture-menu-2026-11` (November 2026, kindergarten style, see `docs/ba/data-contract.md` §5). Fixtures are synthetic and never presented as a real school's menu.
 - "Sample child" is the debug profile: likes 鶏肉, たまご, とうもろこし, theme どうぶつ; dislikes ピーマン, なす, さかな (category); allergy status `has-known` with `alg-shrimp`; no diet restriction.
 - Visible text in the ACs is the proposed Japanese copy; the Designer owns final copy, and tests should assert on the translation key or the role/label, not the literal string, unless the AC says "exact".
 - Assessment states: `likely-enjoyable`, `mixed-uncertain`, `low-preference`, `not-assessed`, `no-school-lunch`. Decision states: `school-lunch-planned` (default), `homemade-bento-planned`, `not-confirmed`, `no-school-lunch`. These exact identifiers are used in code, tests and the store (data contract §3.5–§3.6; R-2: ADR 004's `school_lunch / bento_pending / bento_planned / no_school_lunch` are retired).
+- [CHANGED 2026-11-10 tile redesign] Calendar tiles: wherever an older AC says a calendar day or cell "shows" an assessment, a label such as 「手動で変更」, a flag line such as 「献立が変わりました」 or a recipe name, that content is in the day sheet (and the lists and cards), not on the tile; what a tile shows is only US-E5-01/AC3-AC15.
 - A scenario title ending in `(BR-xx)` enforces that business rule; a test for the AC is also evidence for the BR.
 - AI provider calls: "call 1" is the primary model; "call 2" is either one repair retry on the same model (malformed output) or one call to the fallback model (HTTP 429 rate limit, HTTP 408 or timeout, HTTP 5xx), never both; HTTP 400, 403 and 404 are never retried (BR-10, R-1). A parent tapping 「もう一度」 starts a new import action with a new budget of 2.
 
@@ -85,8 +93,8 @@ Counts are active ACs (retired ACs are kept as comments and not counted). `(v1)`
 | E1 Onboarding & profile | US-E1-01 … 06 | 6 | 30 | MVP |
 | E2 Menu import & AI extraction | US-E2-01 … 08 | 8 | 46 | MVP |
 | E3 Menu review, confirm & refresh | US-E3-01 … 06 | 6 | 37 (1) | MVP; US-E3-06/AC4 is v1 |
-| E4 Preference assessment & overrides | US-E4-01 … 05 | 5 | 36 | MVP |
-| E5 Calendar & family decisions | US-E5-01 … 08 | 8 | 33 | MVP |
+| E4 Preference assessment & overrides | US-E4-01 … 05 | 5 | 37 | MVP |
+| E5 Calendar & family decisions | US-E5-01 … 08 | 8 | 40 | MVP |
 | E6 Bento recommendations & recipes | US-E6-01 … 07 | 7 | 31 | MVP |
 | E7 Reminders & today view | US-E7-01 … 08 | 8 | 33 (1) | MVP; US-E7-08 is v1 |
 | E8 Localization & display | US-E8-01 … 05 | 5 | 15 | MVP |
@@ -96,7 +104,7 @@ Counts are active ACs (retired ACs are kept as comments and not counted). `(v1)`
 | E12 Android | US-E12-01 … 04 | 4 | 9 (8) | MVP: US-E12-01 only; US-E12-02 … 04 are v1 |
 | E13 Accounts and sign-in | US-E13-01 … 07 | 7 | 39 (39 v1) | v1 slice 1 (web, Google only) |
 | NF Non-functional | US-NF-01 … 05 | 5 | 15 | MVP |
-| **Total** | | **80** | **359 (49 v1)** | |
+| **Total** | | **80** | **367 (49 v1)** | |
 
 ---
 
@@ -113,12 +121,12 @@ Scenario: AC1 Main journey (mocked AI, Playwright) (BR-02, BR-03, BR-06, BR-16)
   And uploads "fixture-menu-2026-11.pdf"
   And confirms the extracted menu on the review screen without edits
   Then the calendar shows November 2026
-  And 2026-11-04 is highlighted as low-preference with an explanation that mentions 2 disliked ingredients
-  And 2026-11-04 still shows the decision 「給食」 (school-lunch-planned)
+  And [CHANGED 2026-11-10 tile redesign] the tile of 2026-11-04 shows the day number and the bento (school lunch) icon only, with no assessment symbol and no text
+  And [CHANGED 2026-11-10 tile redesign] the day sheet of 2026-11-04 shows low-preference with an explanation that mentions 2 disliked ingredients, and the decision 「給食」 (school-lunch-planned)
   When the parent opens 2026-11-04 and chooses 「手作りお弁当にする」
   Then exactly 3 recipe suggestions are shown and none contains alg-shrimp
   When the parent selects the first suggestion and confirms 「この日に決定」
-  Then the calendar cell for 2026-11-04 shows the confirmed-bento marker and the recipe's Japanese name
+  Then [CHANGED 2026-11-10 tile redesign] the tile of 2026-11-04 shows the crossed spoon-and-spatula icon and the red top border (user-changed), with no recipe name; the day sheet shows the recipe's Japanese name
   And the upcoming-bento summary lists 「11月4日（水）」 with that recipe
   When the debug clock is set to 2026-11-03 17:30 JST and the day-before reminder is triggered
   Then an in-app reminder 「明日は手作りお弁当の日！レシピを確認しましょう。」 is shown
@@ -1211,7 +1219,7 @@ As a parent I want to correct an assessment so that the calendar reflects what I
 Scenario: AC1 Set an override (BR-05)
   Given 2026-11-12 is likely-enjoyable
   When the parent sets 「苦手かも」 (low-preference) on 2026-11-12
-  Then the day shows low-preference with the label 「手動で変更」
+  Then [CHANGED 2026-11-10 tile redesign] the day sheet shows low-preference with the label 「手動で変更」, and the tile shows the red top border (US-E5-01/AC10) and no assessment symbol
   And an AssessmentOverride { date 2026-11-12, state low-preference, menuVersionAtSet = the current menu version } is stored, and the day still shows the calculated state (likely-enjoyable) as the app's assessment under the label
   # M2 prep: an Assessment is computed, never stored; only the override is (data contract §3.5). Outcome unchanged.
 
@@ -1222,7 +1230,7 @@ Scenario: AC2 Override persists across reload, profile edits, reassessment and m
 
 Scenario: AC3 Clear the override (BR-05)
   When the parent chooses 「自動判定に戻す」
-  Then the calculated state is shown again and the 「手動で変更」 label disappears
+  Then [CHANGED 2026-11-10 tile redesign] the calculated state is shown again in the day sheet, the 「手動で変更」 label disappears, and the tile's red top border disappears unless a stored decision still exists (US-E5-01/AC10)
 
 Scenario: AC4 Overrides are limited to school days (BR-05)
   Given 2026-11-27 is a no-lunch day
@@ -1248,6 +1256,10 @@ Scenario: AC7 Setting the override again after a menu change ends the "menu chan
   Then the override is removed and the line is no longer shown
   And a later version 3 that does not change 2026-11-18 does not show the line either
   # M2 prep: data contract §3.5 menuVersionAtSet.
+
+Scenario: AC8 [CHANGED 2026-11-10 tile redesign] Overrides show on the tile only as the red top border (BR-05)
+  Given 2026-11-12 has an override
+  Then, wherever AC1-AC7 say the day shows an assessment, a label or a line of text, that content is in the day sheet; the tile shows the red top border and no assessment symbol, label or text (US-E5-01/AC3, AC10)
 ```
 
 ### US-E4-04 Neutral, non-judgmental wording · M · S
@@ -1308,7 +1320,7 @@ As a parent I want the month at a glance so that I see school lunch and bento da
 Scenario: AC1 Opens on the current Tokyo month (BR-15)
   Given it is 2026-11-15 00:30 JST and the device timezone is Europe/Paris (local date still 2026-11-14)
   When the app opens
-  Then November 2026 is shown with 2026-11-15 marked as today
+  Then November 2026 is shown with 2026-11-15 shown as today [CHANGED 2026-11-10 tile redesign] (navy filled tile, white text, US-E5-01/AC11)
 
 Scenario: AC2 Japanese calendar conventions, week starting Monday by default
   Given a fresh install (setting weekStartsOn absent, default "monday")
@@ -1316,17 +1328,21 @@ Scenario: AC2 Japanese calendar conventions, week starting Monday by default
   And the header shows 「2026年11月」
   And Saturday date numerals are blue and Sunday date numerals are red, on numerals and weekday headers only (when holidays are shown, US-E8-04, their numerals are red and carry the text 「祝」, not colour alone)
   And November 2026 starts with Sunday 2026-11-01 in the last column of the first row
+  And [CHANGED 2026-11-10 tile redesign] the Saturday/Sunday/holiday numeral colours apply only to tiles that are neither today (white on navy) nor past (grey, AC9); a past holiday keeps its text 「祝」
 
-Scenario: AC3 Each school day shows assessment and decision separately (BR-01, BR-03)
-  Then every school day cell shows two distinct indicators: one for the assessment state and one for the decision
-  And neither indicator relies on color alone (icon or text label)
+Scenario: AC3 [CHANGED 2026-11-10 tile redesign] Each tile shows the day number and one state icon (BR-01, BR-03)
+  Then every tile of a day in the menu shows the day number and exactly one state icon for the displayed decision: school-lunch-planned = bento (lunch box) icon; homemade-bento-planned = crossed spoon and spatula; not-confirmed = crossed spoon and spatula with a question mark
+  And a no-school-lunch day with reason bento-day shows the crossed spoon and spatula (AC13); every other no-lunch day, a day outside the menu and a day in a month without a confirmed menu show the day number only, with no state icon (DEFAULT, OQ-T1)
+  And a tile shows no assessment symbol, no text label, no recipe name and no short name; the assessment with its explanation and the recipe name stay in the day sheet (US-E5-02/AC1, US-E4-02)
+  And the three icons differ in shape, each has an accessible name (AC14) and each is explained in text in the legend (AC15)
+  # Supersedes the old AC3 (two indicators, assessment state and decision, on every school-day cell).
 
-Scenario: AC4 Suggested vs confirmed is unmistakable (BR-03)
+Scenario: AC4 [CHANGED 2026-11-10 tile redesign] Suggested vs confirmed is told apart by icon; assessment and name only in the sheet (BR-03)
   Given 2026-11-04 is low-preference with decision school-lunch-planned and 2026-11-11 is homemade-bento-planned
-  Then 2026-11-04 shows the low-preference marker and 「給食」
-  And 2026-11-11 shows the filled bento marker and the recipe's short name (shortNameJa in ja, shortNameEn in en; ≤ 8 characters each, data contract §3.7) in the cell, never a mechanically cut name, and the full name in the day sheet and in the cell's accessible name
-  And if the planned recipe is missing from the library (US-E6-06), the cell shows the stored recipeShortNameSnapshot (ja or en by language) and the day sheet the stored recipeNameSnapshot
-  And the two cells differ in icon shape and text, not only color
+  Then the tile of 2026-11-04 shows the bento icon and the tile of 2026-11-11 the crossed spoon-and-spatula icon, differing in shape and not only in colour
+  And neither tile shows an assessment symbol or any recipe name; the sheet of 2026-11-04 shows low-preference with its explanation and the sheet of 2026-11-11 the recipe's full name
+  And if the planned recipe is missing from the library (US-E6-06), the tile is unchanged and the sheet shows the stored recipeNameSnapshot
+  # Retired from the tile: the low-preference marker, the text 「給食」, the filled bento marker, shortNameJa / shortNameEn / recipeShortNameSnapshot (US-E6-07/AC5; data contract §3.6-§3.7 keep them as data, OQ-T4).
 
 Scenario: AC5 Month navigation, including year boundaries
   Given November 2026 is shown
@@ -1350,6 +1366,51 @@ Scenario: AC8 Week start can be set to Sunday
   Then the weekday header is 日 月 火 水 木 金 土 and Sunday 2026-11-01 is in the first column
   And settings.weekStartsOn "sunday" is stored and still applied after a reload
   And assessments, decisions, the weekly reminder's covered days and the share text are unchanged by the setting
+
+Scenario: AC9 [CHANGED 2026-11-10 tile redesign] Past days are grey (BR-27)
+  Given today is 2026-11-10 JST
+  Then the tiles of 2026-11-09 and earlier show a grey stroke and a grey day number and icon (no hue); the state icon is still visible
+  And today and later tiles are not grey; a past tile can still be opened (read-only sheet, US-E5-02/AC3)
+  And a past tile's accessible name says it is past (AC14)
+
+Scenario: AC10 [CHANGED 2026-11-10 tile redesign] A user-changed day has a red top border (BR-05)
+  Given a day with an applied AssessmentOverride (US-E4-03) or a stored DayDecision of any parent event (CONFIRM_RECIPE, DEFER, SET_SCHOOL_LUNCH, MARK_RESERVATION, CHANGE_RECIPE)
+  Then its tile has a red top border; a day with only the calculated assessment, a dormant override (US-E3-05/AC8) or a derived decision has none
+  And the border is removed when the override is cleared (「自動判定に戻す」) and no stored decision remains, or when the stored decision is removed (「計画を取り消す」 on a bento-day, US-E5-06)
+  And a past user-changed day keeps its red top border with grey stroke and content (DEFAULT, OQ-T3)
+  And the change is not told by colour alone: the accessible name says 「手動で変更」 (en "changed by you", AC14) and the legend explains the border in text
+
+Scenario: AC11 [CHANGED 2026-11-10 tile redesign] Today is a navy filled tile
+  Given it is 2026-11-15 JST (BR-15)
+  Then the tile of 2026-11-15 is filled navy with white day number and icon, in light and dark (contrast, US-NF-02/AC1), and its accessible name says it is today
+  And at Tokyo midnight the fill moves to the next date without a reload (clock check as US-E7-03/AC3)
+  And it is the only filled tile (US-E8-05/AC3)
+
+Scenario: AC12 [CHANGED 2026-11-10 tile redesign] Tomorrow has a navy border
+  Given it is 2026-11-15 JST
+  Then the tile of 2026-11-16 has a navy border and no fill, and its accessible name says it is tomorrow
+  And tomorrow is the next calendar date, not the next school day: on Saturday 2026-11-14 the tile of Sunday 2026-11-15 has the border
+  And on 2026-11-30 the border is on 2026-12-01, visible when December is shown
+
+Scenario: AC13 [CHANGED 2026-11-10 tile redesign] A red dash marks a bento that is needed and not yet planned (BR-02, BR-16)
+  Given 2026-11-18 is a no-school-lunch day with reason bento-day and has no stored decision, and today is 2026-11-10 or 2026-11-18
+  Then its tile shows the crossed spoon-and-spatula icon and a red dash, and its accessible name says 「お弁当の準備が未定」 (en "bento still to plan", AC14)
+  When the parent confirms a recipe for 2026-11-18 (US-E5-08/AC1)
+  Then the red dash is gone and the tile keeps the icon (plus the red top border, AC10)
+  When the parent cancels the plan (US-E5-06) the dash returns
+  And a past bento day shows no dash; a school-lunch-planned day, a not-confirmed day and an ordinary no-lunch day never show one (DEFAULT, OQ-T2)
+
+Scenario: AC14 [CHANGED 2026-11-10 tile redesign] Accessible name of a tile (BR-03; US-NF-02/AC4)
+  Then each tile of a day in the menu has an accessible name made of, in this order: the date with weekday, the state, 「手動で変更」 if user-changed, 「今日」 / 「明日」 / 「過去の日」 if applicable, 「お弁当の準備が未定」 if the red dash shows; in en the same parts ("changed by you", "today", "tomorrow", "past day", "bento still to plan")
+  And the state words are 「給食」 / 「手作りお弁当」 / 「未定」 / 「手作りお弁当の日」 (bento-day, no plan) and 「給食なし」 for other no-lunch days (en "school lunch", "homemade bento", "undecided", "bento day", "no school lunch")
+  And ja example: 「11月4日（水）、給食、手動で変更、明日」; en example: "Wednesday, November 4, school lunch, changed by you, tomorrow"
+  And the name contains neither the assessment nor a recipe name (they are in the day sheet; DEFAULT, OQ-T5); the tile stays at least 44 x 44 CSS px and reachable by keyboard with a visible focus
+  And every part is derived from the same data as the visual mark, so visuals and name cannot disagree
+
+Scenario: AC15 [CHANGED 2026-11-10 tile redesign] Legend 「表示の見かた」 explains every mark in text
+  When the parent opens 「表示の見かた」
+  Then each mark is shown with its icon or sample and a text line: the three state icons, grey past day, red top border, navy filled today, navy border tomorrow, red dash
+  And it lists no assessment symbol and no recipe name, and its text exists in ja and en (US-E8-02/AC1)
 ```
 
 ### US-E5-02 Day detail sheet · M · S
@@ -1358,7 +1419,7 @@ As a parent I want to tap a day and see everything about it so that I can decide
 ```gherkin
 Scenario: AC1 Day sheet content (BR-02)
   When the parent taps 2026-11-04
-  Then a sheet shows 「11月4日（水）」, the menu items, the assessment with its explanation, the current decision, and only the actions allowed by the state machine
+  Then a sheet shows 「11月4日（水）」, the menu items, the assessment with its explanation (and the label 「手動で変更」 when overridden), the current decision, the recipe's full name when planned, and only the actions allowed by the state machine [CHANGED 2026-11-10 tile redesign] (these no longer appear on the tile)
 
 Scenario: AC2 Days outside the menu (BR-25)
   When the parent taps Saturday 2026-11-07 (not in the menu)
@@ -1389,7 +1450,7 @@ Scenario: AC1 Choosing bento opens recommendations without changing the decision
 Scenario: AC2 Confirming a recipe plans the day (BR-03)
   When the parent selects a recipe and taps 「この日に決定」
   Then the stored decision for 2026-11-04 is homemade-bento-planned with that recipeId, decidedAt, plannedAt (= decidedAt of this first confirm), recipeNameSnapshot and recipeShortNameSnapshot (the recipe's shortNameJa / shortNameEn)
-  And the calendar cell shows the recipe name
+  And [CHANGED 2026-11-10 tile redesign] the tile shows the crossed spoon-and-spatula icon and the red top border, no recipe name; the day sheet shows the recipe name
 
 Scenario: AC3 Leaving without confirming changes nothing (BR-02)
   Given the recommendation view for 2026-11-04 is open
@@ -1421,7 +1482,7 @@ As a parent I want to mark a day as "to decide later" so that it stays on my min
 ```gherkin
 Scenario: AC1 Set and display not-confirmed (BR-02)
   When the parent taps 「あとで決める」 on 2026-11-11
-  Then the decision is not-confirmed and the cell shows 「未定」 with an outline (not filled) bento marker
+  Then the decision is not-confirmed and [CHANGED 2026-11-10 tile redesign] the tile shows the crossed spoon-and-spatula icon with a question mark and the red top border, no text; the day sheet shows 「未定」
 
 Scenario: AC2 Not-confirmed days are surfaced (BR-16)
   Then not-confirmed days within the next 7 days appear in the upcoming summary and in the weekly reminder with 「計画する」
@@ -1750,7 +1811,7 @@ As a parent I want my plan to survive app updates so that a removed recipe doesn
 ```gherkin
 Scenario: AC1 Missing recipe id (BR-02)
   Given 2026-11-04 is planned with recipeId "retired-recipe" that is no longer in the library
-  Then the cell shows the stored recipeShortNameSnapshot, the sheet shows the stored recipeNameSnapshot and says 「このレシピは見つかりません。別のレシピを選んでください。」
+  Then [CHANGED 2026-11-10 tile redesign] the tile is unchanged (crossed spoon-and-spatula icon, no name), the sheet shows the stored recipeNameSnapshot and says 「このレシピは見つかりません。別のレシピを選んでください。」
   And the decision is not changed
 ```
 
@@ -1770,7 +1831,7 @@ Scenario: AC3 Sources (BR-26)
 Scenario: AC4 Japanese text checked by hand before release (BR-26)
   Then every reviewed recipe has reviewedBy "verifier" (its Japanese text and facts were checked against its sources by the verifier, FL-07); the 20 original recipes stay "verifier", the others are "ba-research" and tracked as unreviewed
 
-Scenario: AC5 Every recipe has calendar short names
+Scenario: AC5 Every recipe has calendar short names [CHANGED 2026-11-10 tile redesign] (data only: no longer shown on the tile, OQ-T4)
   Then every shipped recipe has shortNameJa of 1–8 characters and shortNameEn of 1–8 characters, and the validator rejects a recipe without them (rule recipe-short-name)
 ```
 
@@ -1856,7 +1917,7 @@ As a busy parent I want to see this morning's plan instantly so that I act on it
 ```gherkin
 Scenario Outline: AC1 Today card
   Given today's decision is <decision>
-  Then the top of the calendar screen shows <text>
+  Then [CHANGED 2026-11-10 tile redesign] the today card, placed below the calendar, shows <text>
   Examples:
     | decision                | text                                                          |
     | homemade-bento-planned  | 「今日は手作りお弁当：<recipe>」 with 「レシピを見る」            |
@@ -2073,7 +2134,7 @@ Scenario: AC2 Manual choice persists
   And 「自動」 returns to following the device
 
 Scenario: AC3 Both themes keep the meaning of the calendar
-  Then in light and in dark, homemade-bento-planned is the only solid-filled cell, and the axe and contrast checks of US-NF-02 pass in both themes
+  Then [CHANGED 2026-11-10 tile redesign] in light and in dark, today (navy filled, white text) is the only solid-filled tile, and the axe and contrast checks of US-NF-02 pass in both themes, including grey past tiles, the red top border, the navy border, the red dash and the three icons
 ```
 
 ---
@@ -2616,10 +2677,10 @@ Scenario: AC2 Keyboard-only journey
   Then the E0 journey can be completed with keyboard only, with visible focus
 
 Scenario: AC3 Not color alone, touch size (BR-03)
-  Then assessment and decision states are distinguishable without color, and every touch target is at least 44 × 44 CSS px at 360 px width
+  Then [CHANGED 2026-11-10 tile redesign] the tile marks (state icon, past, user-changed, today, tomorrow, red dash) are distinguishable without colour, the assessment states are distinguishable without colour in the day sheet, and every touch target is at least 44 × 44 CSS px at 360 px width
 
 Scenario: AC4 Screen reader labels for calendar cells
-  Then each school-day cell has an accessible name like 「11月4日（水）、苦手かも、給食」
+  Then [CHANGED 2026-11-10 tile redesign] each tile of a day in the menu has an accessible name as in US-E5-01/AC14, e.g. 「11月4日（水）、給食、手動で変更、明日」 (the assessment is no longer part of it)
 ```
 
 ### US-NF-03 Privacy: no child data to AI or third parties · M · S
