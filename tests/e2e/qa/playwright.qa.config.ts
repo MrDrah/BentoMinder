@@ -13,6 +13,7 @@ const mobile = { ...devices['Desktop Chrome'], viewport: { width: 390, height: 8
 export default defineConfig({
   testDir: '.',
   testMatch: /.*\.spec\.ts/,
+  testIgnore: /ui-refresh-.*\.spec\.ts/, // the UI refresh suite has its own config: playwright.uir.config.ts
   fullyParallel: false,
   workers: 2,
   retries: 0,

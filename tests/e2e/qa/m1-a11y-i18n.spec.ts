@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
 async function strings(page: Page): Promise<string[]> {
   return page.evaluate(() => {
     const out: string[] = [];
-    const skip = (el: Element | null) => !!el?.closest('[lang="ja"]:not(html)') || !!el?.closest('script,style,noscript');
+    const skip = (el: Element | null) => !!el?.closest('[lang="ja"]:not(html)') || !!el?.closest('script,style,noscript') || !!el?.closest('[data-testid="account-name"],[data-testid="account-email"],[data-testid="account-avatar"]'); // the signed-in person's own name and e-mail are data, not UI text (E13)
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n = walker.nextNode(); n; n = walker.nextNode()) {
       const text = (n.textContent ?? '').trim();
