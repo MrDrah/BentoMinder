@@ -15,6 +15,7 @@ import { LOCAL_OWNER_ID } from './defaults.ts';
 import { storeKeysFor } from './keys.ts';
 import { rewriteOwnerId } from './owner.ts';
 import { repairReminderTimes } from './repair.ts';
+import { ownerMismatchesFor } from '../sync/owner.ts';
 
 export type CorruptReason = 'json-parse' | 'schema-invalid' | 'migration-failed';
 
@@ -66,6 +67,12 @@ export interface RepositoryOptions {
    * only. Omitted = the legacy unkeyed pair (the not-signed-in code paths until the app is wired).
    */
   accountId?: string;
+  /**
+   * ADR 016 / contract 14.7: further owner ids the rule meta-owner-matches-account accepts besides the uid, i.e. the
+   * family id while the account is a member. A function is asked at every load and save (membership changes while the
+   * app runs). Ignored without `accountId`.
+   */
+  allowedOwnerIds?: readonly string[] | (() => readonly string[]);
 }
 
 export interface Repository {
@@ -81,11 +88,12 @@ export interface Repository {
   onExternalChange(handler: () => void): () => void;
 }
 
-export function validateStore(doc: unknown, accountId?: string): { ok: true; state: BentoMinderStore } | { ok: false; issues: RuleIssue[] } {
+/** `accountId` may be a list: the rule then accepts any id in it (the uid and the family id, contract 14.7). */
+export function validateStore(doc: unknown, accountId?: string | readonly string[]): { ok: true; state: BentoMinderStore } | { ok: false; issues: RuleIssue[] } {
   const parsed = bentoMinderStoreSchema.safeParse(doc);
   if (!parsed.success) return { ok: false, issues: toRuleIssues(parsed.error) };
   if (accountId !== undefined) {
-    const issues = ownerMismatches(parsed.data, accountId);
+    const issues = typeof accountId === 'string' ? ownerMismatches(parsed.data, accountId) : ownerMismatchesFor(parsed.data, accountId);
     if (issues.length > 0) return { ok: false, issues };
   }
   return { ok: true, state: parsed.data };
@@ -98,6 +106,14 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
   const current = options.currentVersion ?? CURRENT_SCHEMA_VERSION;
   const accountId = options.accountId;
   const keys = storeKeysFor(accountId);
+  const extraOwners = options.allowedOwnerIds;
+  /** What the owner rule accepts now: the uid alone, or the uid and the family id. */
+  const owners = (): string | readonly string[] | undefined => {
+    if (accountId === undefined || extraOwners === undefined) return accountId;
+    const extra = typeof extraOwners === 'function' ? extraOwners() : extraOwners;
+    const rest = extra.filter((id) => id !== accountId);
+    return rest.length === 0 ? accountId : [accountId, ...rest];
+  };
   // The compare-and-swap token: the exact stored text this repository last read or wrote
   // (null = nothing stored, undefined = never loaded, so no check yet). Content, not a counter,
   // so the data contract needs no new field and any Storage adapter works.
@@ -125,7 +141,7 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
         throw err;
       }
     }
-    const checked = validateStore(repairReminderTimes(migrated), accountId);
+    const checked = validateStore(repairReminderTimes(migrated), owners());
     if (!checked.ok) return { ok: false, error: 'schema-invalid', issues: checked.issues };
     return version < current ? { ok: true, state: checked.state, migratedFrom: version } : { ok: true, state: checked.state };
   }
@@ -179,7 +195,7 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
 
     save(state, saveOptions) {
       return serial(async () => {
-        const checked = validateStore(state, accountId);
+        const checked = validateStore(state, owners());
         if (!checked.ok) throw new StoreValidationError(checked.issues);
         const existing = await storage.read(keys.state);
         if (saveOptions?.force !== true && known !== undefined && existing !== known) throw new StoreConflictError();
@@ -191,7 +207,7 @@ export function createRepository(storage: Storage, clock: Clock, options: Reposi
     },
 
     exportJson(state) {
-      const checked = validateStore(state, accountId);
+      const checked = validateStore(state, owners());
       if (!checked.ok) throw new StoreValidationError(checked.issues);
       return JSON.stringify(checked.state, null, 2);
     },

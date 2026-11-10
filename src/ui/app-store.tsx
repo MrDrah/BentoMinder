@@ -19,6 +19,8 @@ import { createTranslator, type Language, type Translate } from '../i18n/index.t
 import { shippedDictionary } from './dictionary.ts';
 import { shippedLibrary } from './library.ts';
 import { setProfileDraft } from './session.ts';
+import type { SyncController } from './sync/controller.ts';
+import { SyncContext } from './sync/sync-context.tsx';
 
 export type AppState =
   | { phase: 'loading'; language: Language }
@@ -111,12 +113,14 @@ export interface AppProviderProps {
   newDeviceId: () => string;
   services?: Partial<AppServices>;
   warn?: (message: string) => void;
+  /** ADR 016: the account's sync controller; absent = sync is off and nothing below changes. */
+  sync?: SyncController | null;
   children: ReactNode;
 }
 
 const TOAST_MS = 4000;
 
-export function AppProvider({ repository, clock, newDeviceId, services: given, warn, children }: AppProviderProps) {
+export function AppProvider({ repository, clock, newDeviceId, services: given, warn, sync = null, children }: AppProviderProps) {
   const [state, dispatch] = useReducer(appReducer, { phase: 'loading', language: 'ja' });
   const [toast, setToast] = useState<string | null>(null);
   const [flash, setFlash] = useState<Flash>({});
@@ -159,6 +163,15 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
 
   useEffect(() => repository.onExternalChange(() => void reloadFromStorage()), [repository, reloadFromStorage]);
 
+  // ADR 016: what the engine applied from the family has already been saved; show it. Sync starts once the local copy is
+  // loaded (offline-first: the app never waits for it) and stops when the account's app unmounts (sign-out).
+  useEffect(() => sync?.onStoreApplied((store) => dispatch({ type: 'store-changed', store, persisted: true })), [sync]);
+  const loaded = state.phase !== 'loading';
+  useEffect(() => {
+    if (sync !== null && loaded) sync.start();
+  }, [sync, loaded]);
+  useEffect(() => () => sync?.stop(), [sync]);
+
   const setLanguage = useCallback(
     (language: Language) => {
       const current = stateRef.current;
@@ -175,11 +188,14 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       };
       dispatch({ type: 'store-changed', store });
       repository.save(store).then(
-        () => dispatch({ type: 'save-result', ok: true }),
+        () => {
+          dispatch({ type: 'save-result', ok: true });
+          void sync?.localChanged(store);
+        },
         () => dispatch({ type: 'save-result', ok: false }),
       );
     },
-    [repository, clock],
+    [repository, clock, sync],
   );
 
   const commit = useCallback(
@@ -199,16 +215,18 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       }
       lastOutcome.current = 'saved';
       dispatch({ type: 'store-changed', store, persisted: true });
+      void sync?.localChanged(store); // after every local commit (ADR 016, slice A decision 4)
       return true;
     },
-    [repository, reloadFromStorage],
+    [repository, reloadFromStorage, sync],
   );
 
   const startOver = useCallback(async () => {
     await repository.deleteAll();
     setProfileDraft(null); // typed-but-unsaved step-1 answers go too (BR-22: nothing of the family's stays)
     dispatch({ type: 'reset', store: createEmptyStore({ deviceId: newDeviceId(), now: clock.now(), ...(repository.ownerId === undefined ? {} : { ownerId: repository.ownerId }) }) });
-  }, [repository, newDeviceId, clock]);
+    void sync?.localDataDeleted(); // US-E15-11/AC7: the family data is downloaded again, never sent as deletions
+  }, [repository, newDeviceId, clock, sync]);
 
   const replaceStore = useCallback(
     async (store: BentoMinderStore) => {
@@ -220,9 +238,10 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       }
       dispatch({ type: 'reset', store });
       dispatch({ type: 'save-result', ok: true });
+      void sync?.localChanged(store);
       return true;
     },
-    [repository],
+    [repository, sync],
   );
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -278,7 +297,11 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
     () => ({ state, t, today, now, services, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash, setFlash }),
     [state, t, today, now, services, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash],
   );
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>
+      <SyncContext.Provider value={sync}>{children}</SyncContext.Provider>
+    </AppContext.Provider>
+  );
 }
 
 export function useApp(): AppContextValue {
