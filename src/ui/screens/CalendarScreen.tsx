@@ -121,7 +121,7 @@ export function CalendarScreen({ month: requested, openDate }: { month: YearMont
                 <Icon name="chevronRight" />
               </button>
               {month !== currentMonth && (
-                <button type="button" className="btn btn--small" data-testid="cal-today" onClick={() => go(currentMonth)}>
+                <button type="button" className="btn btn--secondary btn--small" data-testid="cal-today" onClick={() => go(currentMonth)}>
                   {t('cal.today')}
                 </button>
               )}

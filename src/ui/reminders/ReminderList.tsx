@@ -104,7 +104,7 @@ function WeeklyBody({ job }: { job: ReminderJob }) {
                   {item.kind === 'bento' && t('reminder.weekly.planned', { date: date(item.date), recipe: item.recipe ?? '' })}
                 </span>
                 {item.kind !== 'bento' && (
-                  <a className="btn btn--small" href={`#/day/${item.date}`} data-testid={`reminder-weekly-plan-${item.date}`}>
+                  <a className="btn btn--secondary btn--small" href={`#/day/${item.date}`} data-testid={`reminder-weekly-plan-${item.date}`}>
                     {t('reminder.weekly.plan')}
                   </a>
                 )}
