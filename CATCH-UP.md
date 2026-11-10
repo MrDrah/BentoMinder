@@ -4,7 +4,7 @@
 >
 > **To the product owner:** on a new device, **clone** the repo (a downloaded zip has no history and can't push), open it in Claude Code and say: *"Read CATCH-UP.md and catch up."*
 
-Last updated: 2026-11-09 (E13 Google sign-in built, QA'd, fixed, retested by the PO on localhost; library 92; JS budget 420 KB) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
+Last updated: 2026-11-10 (E14 hosted AI proxy live; E15 cloud sync + shared family space built and QA-fixed, not yet deployed or pushed; JS budget 445 KB) · Repo: origin = github.com/MrDrah/BentoMinder (public; PO authorized pushing 2026-10-31; first push done) · Live: none · Framework: app-boilerplate v0.5.0
 
 ---
 
@@ -31,6 +31,10 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 - **Processed-food allergen rule, longer import timeouts, real-menu import**: done; the PO confirmed the real menu import works. Review-screen day options renamed ("Homemade bento day" / "Day with cafeteria lunch").
 - **E13 accounts (ADR 014, PLAN §7 2026-11-09)**: Firebase Google sign-in (login wall, stays signed in, sign-out in Settings, per-account data `bentominder.<uid>.state`, first account adopts the old local data, reminders cancelled on sign-out). QA found 3 defects (D02 P1 records kept the old owner id, D01, D03), fixed in cycle 1 of 2; PO retested the real login on localhost: OK. Config is `VITE_FIREBASE_*` in the git-ignored `.env` locally; the deploy workflow reads them from GitHub repository **Variables** (public web config). JS budget raised to 420 KB gz for the Firebase SDK. Later: email+password, Sign in with Apple (iPhone), sync/backup, account deletion, APPI consent, Capacitor native sign-in. Open nit: QA-D04 (privacy line position, stories vs design).
 - Lesson: a running dev server (proxy on :8787) makes the e2e reuse the real-Gemini proxy and fail; stop it before the gate.
+
+### Since 2026-11-09 (E14, E15) ✅
+- **E14 hosted AI proxy**: Firebase function `api` (Tokyo, Blaze, budget alert 1000 yen), secrets GEMINI_API_KEY and ALLOWED_ACCOUNTS in Secret Manager, Firestore proxy counters; Pages site built with repository variables FIREBASE (7 VITE_FIREBASE_* lines) and AI_PROXY_BASE_URL; PO verified a live import. Firebase CLI is logged in on the PC (q.milavec@gmail.com). Deploy: `npx firebase-tools deploy --only functions --project bentominder`; the git-ignored functions env file (copy of functions/params.example) must contain the params.
+- **E15 cloud sync + shared family space** (ADR 016, stories US-E15-01..11): sync Cloud Function `sync`, engine src/domain/sync, screens src/ui/sync, QA done (report tests/reports/qa-e15.md), fix cycle 1 done, dev and release gates green (2654 unit, 178 e2e). **Local commits only; not pushed, not deployed.** Before first real upload: PO reviews consent text (design/copy.md §22.1), deploy sync function, set repository variable SYNC_BASE_URL and VITE_SYNC_BASE_URL wiring in deploy workflow, manual two-device smoke test (FakeFirestore is not real Firestore).
 
 ### In progress 🔄 — PAUSED 2026-10-25 by the PO (resume next weekend)
 Two tasks were stopped at a safe point; each wrote pause notes:

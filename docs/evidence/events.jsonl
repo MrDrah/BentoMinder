@@ -291,3 +291,12 @@
 {"v":1,"at":"2026-11-10T02:24:20.391Z","by":"orchestrator","type":"task-start","task":"e15-design","summary":"Task e15-design dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-10T02:32:39.156Z","by":"orchestrator","type":"task-start","task":"e15-slice-d","summary":"Task e15-slice-d dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-10T03:09:20.815Z","by":"orchestrator","type":"task-start","task":"e15-slice-e","summary":"Task e15-slice-e dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T04:07:28.696Z","by":"orchestrator","type":"task-start","task":"e15-fix1","summary":"Task e15-fix1 dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T04:07:33.987Z","type":"defect","summary":"E15-D03 P2 first download fails after member added: no adoption question, no safety copy, family data overwritten","by":"qa","defect":"E15-D03","severity":"P2","state":"found"}
+{"v":1,"at":"2026-11-10T04:07:34.170Z","type":"defect","summary":"E15-D04 P3 membership ends while adoption question open: continue and cancel fail forever","by":"qa","defect":"E15-D04","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-10T04:07:34.337Z","type":"defect","summary":"E15-D07 P3 status sheet chunk not prefetched: offline tap shows generic error","by":"qa","defect":"E15-D07","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-10T04:07:34.537Z","type":"defect","summary":"E15-D02 P3 invite code alphabet contains L (AC says no 1/I/L)","by":"qa","defect":"E15-D02","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-10T04:24:33.570Z","type":"defect","summary":"E15-D03 fixed in fix cycle 1 (merge)","by":"developer","defect":"E15-D03","severity":"P2","state":"fixed"}
+{"v":1,"at":"2026-11-10T04:24:33.759Z","type":"defect","summary":"E15-D04 fixed in fix cycle 1 (merge)","by":"developer","defect":"E15-D04","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-10T04:24:33.927Z","type":"defect","summary":"E15-D07 fixed in fix cycle 1 (merge)","by":"developer","defect":"E15-D07","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-10T04:24:34.075Z","type":"defect","summary":"E15-D02 fixed in fix cycle 1 (merge)","by":"developer","defect":"E15-D02","severity":"P3","state":"fixed"}
