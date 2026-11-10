@@ -283,3 +283,4 @@
 {"v":1,"at":"2026-11-09T15:45:57.575Z","type":"defect","summary":"E14-D02 P3 token verifier project id only from GCLOUD_PROJECT (fallbacks added)","by":"qa","defect":"E14-D02","severity":"P3","state":"fixed"}
 {"v":1,"at":"2026-11-10T00:52:09.577Z","type":"product-decision","summary":"PO requests cloud sync of family data; chooses shared family space (PO + spouse) over per-account data (E15)","outcome":"success"}
 {"v":1,"at":"2026-11-10T00:52:09.747Z","by":"orchestrator","type":"task-start","task":"e15-sync-ba","summary":"Task e15-sync-ba dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T00:56:43.027Z","by":"orchestrator","type":"task-start","task":"e15-adr","summary":"Task e15-adr dispatched (1 allowed globs)"}

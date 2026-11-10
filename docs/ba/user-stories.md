@@ -3416,7 +3416,7 @@ Scenario: AC9 Existing deny-all data stays deny-all
   Then the proxy's counters stay unreachable from any client (E14), and the new rules do not open any other path ("deny by default")
 
 Scenario: AC10 Rules are tested
-  Then the rules are covered by emulator tests (one per AC above), run in the default or an opt-in test command documented in the ADR, and a rules file that fails them blocks the release gate
+  Then every AC above is covered by an authorisation test against the fake store for the sync Function (ADR 016: all access goes through the Function; PLAN §7 2026-11-10), a static test proves the Firestore rules file stays deny-all for clients, an emulator contract run is optional (CI only, documented in the ADR), and a failing authorisation or rules test blocks the release gate
 ```
 
 ### US-E15-10 Limits, cost guardrails and the hosted AI proxy · S · M
