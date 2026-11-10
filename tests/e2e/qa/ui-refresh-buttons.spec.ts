@@ -385,8 +385,7 @@ for (const theme of ['light', 'dark'] as const) {
     }
   });
 
-  test(`UIR-D05 [expected to fail until fixed] day-sheet decision actions show a pressed state (surface-3) in ${theme}`, async ({ page }) => {
-    test.fail(true, 'UIR-D05 (P4): .plan-action has no :active (or hover) rule; components 1.9 / 3.3 list active = surface-3');
+  test(`UIR-D05 day-sheet decision actions show a pressed state (surface-3) in ${theme}`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.clock.setFixedTime(jst10('2026-11-17'));
     await seed(page, matrixStore('ja'));
@@ -405,8 +404,7 @@ for (const theme of ['light', 'dark'] as const) {
 }
 
 for (const [name, hash] of [['not-found', '#/nope/nothing'], ['join (no code)', '#/join/ABCDEFGHJK'], ['recipe not found', '#/recipe/rcp-does-not-exist']] as const) {
-  test(`UIR-D07 [expected to fail until fixed] every .btn has one of the six variants: ${name}`, async ({ page }) => {
-    test.fail(true, 'UIR-D07 (P4): the "back to the calendar" link on not-found, join and recipe-not-found is a bare .btn with no variant (components 1.3)');
+  test(`UIR-D07 every .btn has one of the six variants: ${name}`, async ({ page }) => {
     await page.clock.setFixedTime(jst10('2026-11-17'));
     await seed(page, matrixStore('ja'));
     await page.goto(`./${hash}`);
@@ -416,8 +414,7 @@ for (const [name, hash] of [['not-found', '#/nope/nothing'], ['join (no code)', 
   });
 }
 
-test('UIR-D06 [expected to fail until fixed] the destructive entry point of a planned day (給食に戻す) is a destructive-text button (underlined danger text), as components 1.3 and 3.3 say', async ({ page }) => {
-  test.fail(true, 'UIR-D06 (P4): rendered as an outlined danger-bordered choice card (.plan-action--danger), not the destructive-text variant');
+test('UIR-D06 the destructive entry point of a planned day (給食に戻す) is a destructive-text button (underlined danger text), as components 1.3 and 3.3 say', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.clock.setFixedTime(jst10('2026-11-17'));
   await seed(page, matrixStore('ja'));

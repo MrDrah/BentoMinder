@@ -62,8 +62,7 @@ for (const w of [320, 390, 768, 1280]) {
 
 for (const lang of ['ja', 'en'] as const) {
   for (const w of [320, 360, 390]) {
-    test(`UIR-D08 US-NF-02/AC1 [expected to fail until fixed for en at 320] month row with the 「今日」 pill (away from the current month) in ${lang} at ${w}: no horizontal scroll`, async ({ page }) => {
-      if (lang === 'en' && w === 320) test.fail(true, 'UIR-D08 (P3): at 320 px in English the month row (chevrons, title, Today pill) is 37 px wider than the viewport (found by the existing m1-targets.spec.ts reflow test)');
+    test(`UIR-D08 US-NF-02/AC1 month row with the 「今日」 pill (away from the current month) in ${lang} at ${w}: no horizontal scroll`, async ({ page }) => {
       await page.setViewportSize({ width: w, height: 700 });
       await openScreen(page, { name: 'calendar-away', hash: '#/calendar/2026-12', store: 'matrix', today: '2026-11-17', ready: '[data-testid="cal-today"]' }, lang);
       expect(await overflowX(page), `overflow at ${w} (${lang})`).toBeLessThanOrEqual(0);
