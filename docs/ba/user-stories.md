@@ -1411,6 +1411,12 @@ Scenario: AC15 [CHANGED 2026-11-10 tile redesign] Legend 「表示の見かた�
   When the parent opens 「表示の見かた」
   Then each mark is shown with its icon or sample and a text line: the three state icons, grey past day, red top border, navy filled today, navy border tomorrow, red dash
   And it lists no assessment symbol and no recipe name, and its text exists in ja and en (US-E8-02/AC1)
+
+Scenario: AC16 [ADDED 2026-11-10 tile redesign, PO ruling] An allergen alert keeps one tiny mark on the tile (safety)
+  Given a school-lunch day whose menu carries the allergen alert of US-E1-05/AC2 for the child's registered allergens
+  Then the tile shows, in addition to its number and state icon, one small 「!」 mark (the existing allergen mark), and nothing else changes on the tile
+  And the tile's accessible name adds 「アレルギーに注意」 (en: "allergen alert"), the legend 「表示の見かた」 explains the mark, the mark is not colour-only, and its contrast passes like the other tile marks
+  And no other alert (needs-review, refresh-conflict) appears on the tile
 ```
 
 ### US-E5-02 Day detail sheet · M · S
