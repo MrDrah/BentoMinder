@@ -12,7 +12,7 @@ export default defineConfig({
         test: {
           name: 'domain',
           environment: 'node',
-          include: ['tests/unit/domain/**/*.test.ts', 'tests/unit/server/**/*.test.ts', 'tests/unit/functions/**/*.test.ts', 'tests/unit/qa/e14/**/*.test.ts', 'tests/unit/scripts/**/*.test.ts'],
+          include: ['tests/unit/domain/**/*.test.ts', 'tests/unit/server/**/*.test.ts', 'tests/unit/functions/**/*.test.ts', 'tests/unit/qa/e14/**/*.test.ts', 'tests/unit/qa/e15/**/*.test.ts', 'tests/unit/scripts/**/*.test.ts'],
         },
       },
       {
@@ -20,7 +20,7 @@ export default defineConfig({
         test: {
           name: 'ui',
           environment: 'jsdom',
-          include: ['tests/unit/ui/**/*.test.{ts,tsx}'],
+          include: ['tests/unit/ui/**/*.test.{ts,tsx}', 'tests/unit/qa/e15/**/*.test.tsx'],
           setupFiles: ['tests/setup/dom.ts'],
           // jsdom UI tests type and render a lot; under parallel coverage load the 5 s default flaked (3 recorded cases)
           testTimeout: 20_000,
