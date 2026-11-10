@@ -22,7 +22,7 @@ export function AboutDisclosure({ bar }: { bar: (brand: ReactNode) => ReactNode 
   useEffect(() => {
     if (!open) return;
     const inDialog = (target: EventTarget | null) => target instanceof Element && target.closest('[role="dialog"]') !== null;
-    const onKey = (e: KeyboardEvent) => {
+    const onKey = (e: globalThis.KeyboardEvent) => {
       // Esc inside a dialog (the consent text) belongs to the dialog.
       if (e.key !== 'Escape' || e.defaultPrevented || inDialog(e.target)) return;
       setOpen(false);

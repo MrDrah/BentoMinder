@@ -314,3 +314,6 @@
 {"v":1,"at":"2026-11-10T13:19:48.652Z","by":"orchestrator","type":"task-start","task":"ui-refresh-qa","summary":"Task ui-refresh-qa dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-10T14:43:55.424Z","by":"orchestrator","type":"task-end","task":"ui-refresh-qa","outcome":"failure","summary":"diff-guard: 41 files outside the allow-list"}
 {"v":1,"at":"2026-11-10T14:43:57.910Z","by":"orchestrator","type":"task-end","task":"ui-refresh-qa","outcome":"failure","summary":"diff-guard: 41 files outside the allow-list"}
+{"v":1,"at":"2026-11-10T14:44:11.045Z","by":"orchestrator","type":"task-start","task":"ui-refresh-fix1","summary":"Task ui-refresh-fix1 dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T14:44:11.156Z","type":"defect","summary":"UI refresh QA: 0 P1/P2, 2 P3 (UIR-D01 about-panel tab order, UIR-D08 EN 320px month row overflow), 5 P4","by":"qa","defect":"UIR-D01","severity":"P3","state":"found"}
+{"v":1,"at":"2026-11-10T15:08:05.989Z","type":"defect","summary":"UIR-D01..D08 fixed in cycle 1, QA suite green","by":"developer","defect":"UIR-D01","severity":"P3","state":"fixed"}
