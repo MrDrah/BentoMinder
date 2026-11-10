@@ -24,3 +24,8 @@ export function withFamilyOwner(store: BentoMinderStore, familyId: string): Bent
 export function withAccountOwner(store: BentoMinderStore, uid: string): BentoMinderStore {
   return rewriteOwnerId(store, uid);
 }
+
+/** True when some record still carries another owner than the given id (an interrupted create, join, leave: contract 14.7). */
+export function hasForeignOwner(store: BentoMinderStore, ownerId: string): boolean {
+  return JSON.stringify(rewriteOwnerId(store, ownerId)) !== JSON.stringify(store);
+}

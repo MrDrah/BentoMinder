@@ -9,8 +9,9 @@ import { CLOUD_NOTICE_VERSION } from '../../domain/sync/config.ts';
 import { syncCycle, type CycleResult, type LostEdit } from '../../domain/sync/cycle.ts';
 import { detectDirty, noteLocalChange } from '../../domain/sync/dirty.ts';
 import type { HostEvent, SyncHost } from '../../domain/sync/host.ts';
-import { emptySyncMeta, parseSyncMeta, serializeSyncMeta, syncMetaKey, type SyncMeta } from '../../domain/sync/meta.ts';
+import { emptySyncMeta, parseSyncMeta, safetyCopyKey, serializeSyncMeta, syncMetaKey, type SyncMeta } from '../../domain/sync/meta.ts';
 import type { OwnerScope } from '../../domain/sync/owner-scope.ts';
+import { hasForeignOwner, withFamilyOwner } from '../../domain/sync/owner.ts';
 import { withPushGuard } from '../../domain/sync/push-guard.ts';
 import { emptySchedule, nextDelay, pollDelayMs, type ScheduleState } from '../../domain/sync/schedule.ts';
 import { pendingSummary } from '../../domain/sync/dirty.ts';
@@ -68,6 +69,8 @@ export interface SyncControllerDeps {
   /** Ignored-download count reported by the adapter (envelopes that failed the envelope rules). */
   ignoredFromAdapter?: { take(): number };
   noticeVersion?: number;
+  /** Waits between the retries of a delete or leave (tests pass an instant one). */
+  wait?: (ms: number) => Promise<void>;
 }
 
 export interface LoadedMeta {
@@ -118,6 +121,9 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
   let retryTimer: ReturnType<typeof setTimeout> | null = null;
   let sendTimer: ReturnType<typeof setTimeout> | null = null;
   let pollTimer: ReturnType<typeof setTimeout> | null = null;
+  // Bumped by every step that changes the membership or the local copy under the cycle's feet (leave, delete, adoption...).
+  // A cycle that started under an older value drops its own result: its writes are stale (US-E15-08/AC2, AC6).
+  let epoch = 0;
   let metaQueue: Promise<unknown> = Promise.resolve();
   const serialMeta = <T,>(task: () => Promise<T>): Promise<T> => {
     const run = metaQueue.then(task, task);
@@ -216,6 +222,26 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
     return { ...result.meta, pending: pendingNow };
   }
 
+  /**
+   * US-E15-11/AC3 after a crash: create, join and adoption write the metadata before the store, so a store that still has
+   * the uid as owner while the metadata says the adoption is done is finished here. Idempotent; never loses data (the
+   * records are only re-labelled). The leaving direction writes the store first and needs no repair.
+   */
+  async function repairOwnership(): Promise<void> {
+    await readMeta();
+    if (tooNew || meta.familyId === null || meta.consent === null || meta.adoption === null || !meta.adoption.done) return;
+    const loaded = await repository.load();
+    if (loaded.kind !== 'ok' && loaded.kind !== 'recovered-from-prev') return;
+    if (!hasForeignOwner(loaded.state, meta.familyId)) return;
+    try {
+      await repository.save(withFamilyOwner(loaded.state, meta.familyId), loaded.kind === 'ok' ? {} : { force: true });
+    } catch (err) {
+      if (err instanceof StoreConflictError) return; // another tab saved first; the next cycle looks again
+      throw err;
+    }
+    for (const h of [...appliedHandlers]) h(withFamilyOwner(loaded.state, meta.familyId));
+  }
+
   const resetBaselines = (m: SyncMeta): SyncMeta => ({ ...m, cursor: 0, baselines: {}, pending: {}, lastSyncedAt: null });
 
   async function execute(): Promise<void> {
@@ -239,10 +265,17 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
         oldestPendingAt = null;
         return;
       }
+      if (meta.safety !== null) await family.expireSafetyCopy();
+      await serialMeta(repairOwnership);
+      if (!alive.current) return;
+      const myEpoch = epoch;
       const loaded = await repository.load();
       let store: BentoMinderStore;
-      if (loaded.kind === 'ok' || loaded.kind === 'recovered-from-prev') store = loaded.state;
-      else if (loaded.kind === 'empty') {
+      let startedFrom: string | null = null; // the stored text this cycle started from (null = no local copy)
+      if (loaded.kind === 'ok' || loaded.kind === 'recovered-from-prev') {
+        store = loaded.state;
+        startedFrom = JSON.stringify(store);
+      } else if (loaded.kind === 'empty') {
         fresh ??= deps.freshStore();
         store = fresh;
         if (Object.keys(meta.baselines).length > 0) {
@@ -267,22 +300,31 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
       });
       if (!alive.current) return; // signed out meanwhile: nothing is saved or shown under this controller
 
-      if (result.storeChanged) {
-        try {
-          await repository.save(result.store);
-        } catch (err) {
-          if (err instanceof StoreConflictError) {
-            again = CONFLICT_RETRY_MS; // a local save came first: start over from what is stored now
-            return;
+      // One serialised step: the check, the store write and the metadata write cannot interleave with a membership step.
+      const stale = await serialMeta(async () => {
+        if (epoch !== myEpoch) return true;
+        if (result.storeChanged) {
+          try {
+            // The local copy must still be what this cycle started from; if a local save or an import came in between,
+            // the result is stale and the cycle starts over (nothing is lost: the cursor did not move).
+            const now = await repository.load();
+            const nowText = now.kind === 'ok' || now.kind === 'recovered-from-prev' ? JSON.stringify(now.state) : null;
+            if (nowText !== startedFrom) return true;
+            await repository.save(result.store);
+          } catch (err) {
+            if (err instanceof StoreConflictError) return true; // a local save came first: start over from what is stored now
+            throw err;
           }
-          throw err;
+          for (const h of [...appliedHandlers]) h(result.store);
         }
-        for (const h of [...appliedHandlers]) h(result.store);
-      }
-      await serialMeta(async () => {
         const latest = (await loadSyncMeta(storage, uid)).meta;
         await writeMeta(mergePending(result, latest));
+        return false;
       });
+      if (stale) {
+        again = CONFLICT_RETRY_MS;
+        return;
+      }
       schedule = result.schedule;
       lostEdits = [...lostEdits, ...result.lostEdits];
       ignored += result.quarantined.length + (deps.ignoredFromAdapter?.take() ?? 0);
@@ -324,6 +366,8 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
     membershipEnded = o.kind === 'membership-ended' ? o.reason : null;
     halted = ['no-family', 'adoption-pending', 'paused-no-consent', 'paused-app-too-old', 'membership-ended'].includes(o.kind);
     sendTimer = clear(sendTimer);
+    // Not a member any more although the device names a family (the delete or leave finished in the cloud but not here).
+    if (o.kind === 'refused' && o.detail === 'not-member') void family.reconcileMembership().catch(() => undefined);
     switch (o.kind) {
       case 'ok':
         attempt = 0;
@@ -416,6 +460,10 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
     noticeVersion: deps.noticeVersion ?? CLOUD_NOTICE_VERSION,
     freshStore: () => (fresh ??= deps.freshStore()),
     serial: serialMeta,
+    ...(deps.wait === undefined ? {} : { wait: deps.wait }),
+    membershipChanged: () => {
+      epoch += 1;
+    },
     loadMeta: async () => (await loadSyncMeta(storage, uid)).meta,
     applyStore: (store) => {
       for (const h of [...appliedHandlers]) h(store);
@@ -473,6 +521,12 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
       if (!alive.current) return;
       await serialMeta(async () => {
         await readMeta();
+        epoch += 1; // a cycle that started before the deletion must not write the old copy back
+        // The backup copy of the pre-join data is local data too: delete-all removes it (BR-22, US-E10-04).
+        if (meta.safety !== null || (await storage.read(safetyCopyKey(uid))) !== null) {
+          await storage.remove(safetyCopyKey(uid));
+          if (meta.safety !== null) await writeMeta({ ...meta, safety: null });
+        }
         if (meta.familyId === null) return;
         schedule = emptySchedule();
         await writeMeta(resetBaselines(meta));

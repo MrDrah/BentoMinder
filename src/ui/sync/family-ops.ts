@@ -7,7 +7,7 @@ import type { BentoMinderStore } from '../../domain/schema/store.ts';
 import { storeKeysFor } from '../../domain/storage/keys.ts';
 import { StoreConflictError, type Repository } from '../../domain/storage/repository.ts';
 import { toJstTimestamp, type Instant } from '../../domain/time/jst.ts';
-import { adoptFamilyData, familyHasData, hasData, planFirstSync, type AdoptionChoice } from '../../domain/sync/adoption.ts';
+import { adoptFamilyData, familyHasData, hasData, planFirstSync, safetyCopyExpired, type AdoptionChoice } from '../../domain/sync/adoption.ts';
 import { endMembership, startMembership } from '../../domain/sync/membership.ts';
 import { safetyCopyKey, serializeSyncMeta, syncMetaKey, type SyncMeta } from '../../domain/sync/meta.ts';
 import type { OwnerScope } from '../../domain/sync/owner-scope.ts';
@@ -49,6 +49,10 @@ export interface FamilyOps {
   deleteSafetyCopy(): Promise<void>;
   /** The raw text of the backup copy, for 「控えを書き出す」; null when there is none. */
   safetyCopy(): Promise<string | null>;
+  /** The cloud says this account is not (or no longer) a member while the device still names a family: end it locally. */
+  reconcileMembership(): Promise<void>;
+  /** Contract 14.4: a backup copy older than 30 days is deleted. Returns true when it did. */
+  expireSafetyCopy(): Promise<boolean>;
 }
 
 export interface FamilyOpsContext {
@@ -63,6 +67,10 @@ export interface FamilyOpsContext {
   freshStore: () => BentoMinderStore;
   /** The controller's metadata queue: one task at a time, never during a cycle's own write. */
   serial: <T>(task: () => Promise<T>) => Promise<T>;
+  /** Called inside a metadata step that changes membership or the local copy: a running cycle drops its stale result. */
+  membershipChanged: () => void;
+  /** Waits between the retries of a delete (tests pass an instant one). */
+  wait?: (ms: number) => Promise<void>;
   loadMeta: () => Promise<SyncMeta>;
   /** The store was changed by a membership step and saved: the app shows it. */
   applyStore: (store: BentoMinderStore) => void;
@@ -70,6 +78,7 @@ export interface FamilyOpsContext {
   resync: () => Promise<void>;
 }
 
+const RETRY_WAITS_MS = [1000, 3000, 6000] as const;
 const stamp = (ms: number): string => toJstTimestamp(ms as Instant);
 
 export function joinErrorOf(err: unknown): JoinError {
@@ -134,6 +143,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
       const { store, usable } = await loadLocal();
       if (!usable) throw new Error('local-copy-unreadable');
       const started = startMembership({ store: store ?? ctx.freshStore(), meta, familyId, consentVersion, nowMs: nowMs() });
+      ctx.membershipChanged();
       scope.setFamilyId(familyId);
       await writeMeta({ ...started.meta, adoption: { familyId, choice, done: true } });
       if (store !== null) await saveStore(started.store);
@@ -150,6 +160,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
     if (plan === 'ask') {
       await ctx.serial(async () => {
         const meta = await ctx.loadMeta();
+        ctx.membershipChanged();
         scope.setFamilyId(familyId);
         await writeMeta({
           ...meta,
@@ -168,14 +179,36 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
     return false;
   }
 
+  /**
+   * One cloud action of the end of a membership. A 'temporary' answer (the server is still finishing an earlier delete, or a
+   * short outage) is asked again a few times; nothing is queued (US-E15-08/AC9): the action either completes now or fails and
+   * changes nothing here. 'membership-ended' means the goal is reached already.
+   */
+  async function cloudStep(call: () => Promise<void>): Promise<void> {
+    const wait = ctx.wait ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
+    for (let attempt = 0; ; attempt += 1) {
+      try {
+        await call();
+        return;
+      } catch (err) {
+        if (err instanceof SyncPortError && err.kind === 'membership-ended') return;
+        if (!(err instanceof SyncPortError) || err.kind !== 'temporary' || attempt >= RETRY_WAITS_MS.length) throw err;
+        await wait(RETRY_WAITS_MS[attempt] as number);
+      }
+    }
+  }
+
   async function endLocal(): Promise<void> {
     await ctx.serial(async () => {
       const meta = await ctx.loadMeta();
       const { store } = await loadLocal();
       const ended = endMembership(store ?? ctx.freshStore(), meta, uid);
+      ctx.membershipChanged();
+      // Order matters for a crash in between: the store first (the uid is still accepted as owner while the family id is in
+      // the metadata), then the metadata. The other order would leave a family-owned store that no rule accepts any more.
+      if (store !== null) await saveStore(ended.store);
       scope.setFamilyId(null);
       await writeMeta(ended.meta);
-      if (store !== null) await saveStore(ended.store);
     });
     await ctx.resync();
   }
@@ -192,6 +225,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
       if (!current) {
         // Paused until the parent decides (US-E15-02/AC6); the first sync starts at acceptance.
         await ctx.serial(async () => {
+          ctx.membershipChanged();
           scope.setFamilyId(m.familyId);
           await writeMeta({ ...(await ctx.loadMeta()), familyId: m.familyId, consent: null });
         });
@@ -244,6 +278,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
       } catch {
         // The member is added but the download did not finish: the next open resumes (US-E15-04/AC11).
         await ctx.serial(async () => {
+          ctx.membershipChanged();
           scope.setFamilyId(familyId);
           await writeMeta({ ...(await ctx.loadMeta()), familyId, consent: { version: noticeVersion, at: stamp(nowMs()) } });
         });
@@ -269,9 +304,22 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
         if (familyId === null || meta.adoption === null || meta.adoption.done) return;
         const { store, usable } = await loadLocal();
         if (!usable) throw new Error('local-copy-unreadable');
-        const raw = await storage.read(keys.state);
-        // The safety copy is written before anything is replaced (contract 14.4).
-        if (raw !== null) await storage.write(safetyCopyKey(uid), raw);
+        ctx.membershipChanged();
+        // Contract 14.4, crash-safe in three writes: (1) the safety copy and its note in the metadata, (2) the new store,
+        // (3) the metadata that says the adoption is done. A run that was interrupted after (2) must not copy the already
+        // replaced store over the real safety copy, so an existing copy is kept as it is.
+        const existing = await storage.read(safetyCopyKey(uid));
+        let safety = meta.safety;
+        if (existing === null) {
+          const raw = await storage.read(keys.state);
+          if (raw !== null) {
+            await storage.write(safetyCopyKey(uid), raw);
+            safety = { createdAt: stamp(nowMs()) };
+          }
+        } else if (safety === null) {
+          safety = { createdAt: stamp(nowMs()) };
+        }
+        if (safety !== meta.safety) await writeMeta({ ...meta, safety });
         const outcome = adoptFamilyData({ local: store ?? ctx.freshStore(), family: records, choice, familyId, nowMs: nowMs() });
         scope.setFamilyId(familyId);
         await saveStore(outcome.store);
@@ -281,7 +329,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
           baselines: outcome.baselines,
           pending: {},
           adoption: { familyId, choice, done: true },
-          safety: raw !== null ? { createdAt: stamp(nowMs()) } : meta.safety,
+          safety,
         });
       });
       await ctx.resync();
@@ -292,6 +340,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
       await port.ackMembershipEnd().catch(() => undefined);
       await ctx.serial(async () => {
         const meta = await ctx.loadMeta();
+        ctx.membershipChanged();
         scope.setFamilyId(null);
         await writeMeta({ ...meta, familyId: null, consent: null, cursor: 0, baselines: {}, pending: {}, adoption: null });
       });
@@ -299,8 +348,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
     },
 
     async leave(lastMember) {
-      if (lastMember && port.leaveAsLastMember !== undefined) await port.leaveAsLastMember();
-      else await port.leave();
+      await cloudStep(() => (lastMember && port.leaveAsLastMember !== undefined ? port.leaveAsLastMember() : port.leave()));
       await endLocal();
     },
 
@@ -309,7 +357,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
     },
 
     async deleteFamily() {
-      await port.deleteFamily();
+      await cloudStep(() => port.deleteFamily());
       await endLocal();
     },
 
@@ -319,6 +367,26 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
     },
 
     safetyCopy: () => storage.read(safetyCopyKey(uid)),
+
+    async reconcileMembership() {
+      const meta = await ctx.loadMeta();
+      if (meta.familyId === null) return;
+      const m = await port.readMembership();
+      if (m.status === 'ended' || (m.status === 'member' && m.familyId === meta.familyId)) return; // the cycle reports an end; a member stays
+      await endLocal(); // no membership any more (a delete or leave whose local step was interrupted, or a second device of the account)
+    },
+
+    async expireSafetyCopy() {
+      const due = await ctx.serial(async () => {
+        const meta = await ctx.loadMeta();
+        if (meta.safety === null || !safetyCopyExpired(meta.safety.createdAt, nowMs())) return false;
+        await storage.remove(safetyCopyKey(uid));
+        await writeMeta({ ...meta, safety: null });
+        return true;
+      });
+      if (due) await ctx.resync();
+      return due;
+    },
 
     async deleteSafetyCopy() {
       await ctx.serial(async () => {

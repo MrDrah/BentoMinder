@@ -23,6 +23,8 @@ import { loadFixture } from '../helpers/fixtures.ts';
 import { fixedClock, memoryStorage, type MemoryStorage } from '../helpers/memory-storage.ts';
 
 export const NOW_MS = Date.parse('2026-11-14T15:30:00Z');
+/** Slice E: tests that need the write-coalescing window to pass move the devices' clock with this (reset it in beforeEach). */
+export const driftMs = { value: 0 };
 export const clock = fixedClock('2026-11-14T15:30:00Z');
 export { DEVICE_A, DEVICE_B, UID1, UID2, emptyStore, storeWithData };
 
@@ -61,12 +63,15 @@ export interface DeviceOptions {
   consent?: boolean;
   /** The notice version this app carries (default 1). */
   noticeVersion?: number;
+  wait?: (ms: number) => Promise<void>;
+  /** Use this storage (a restart of the same device) instead of a fresh one. */
+  storage?: MemoryStorage;
 }
 
 /** One device of one account: storage, repository, controller. The app is rendered with `renderDevice`. */
 export function makeDevice(o: DeviceOptions): FamilyDevice {
   const uid = o.uid ?? UID1;
-  const storage = memoryStorage();
+  const storage = o.storage ?? memoryStorage();
   const scope = createOwnerScope(uid);
   const familyId = o.familyId ?? null;
   const seedStore = o.store === undefined ? storeWithData(o.deviceId ?? DEVICE_A, uid) : o.store;
@@ -87,11 +92,12 @@ export function makeDevice(o: DeviceOptions): FamilyDevice {
     storage,
     scope,
     host,
-    nowMs: () => NOW_MS,
+    nowMs: () => NOW_MS + driftMs.value,
     random: () => 0,
     freshStore: () => emptyStore(o.deviceId ?? DEVICE_B, uid),
     alive: { current: true },
     ...(o.noticeVersion === undefined ? {} : { noticeVersion: o.noticeVersion }),
+    ...(o.wait === undefined ? {} : { wait: o.wait }),
   });
   const services = {
     isOnline: () => network.online,
