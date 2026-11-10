@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import { createFamilyOf, DAY, familyOfTwo, HOUR, makeRig, T0, UID1, UID2, UID3, UID4, UID_STRANGER } from './harness.ts';
 
-const ALPHABET = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{10}$/;
+const ALPHABET = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{10}$/;
 
 describe('US-E15-01 create the family (server)', () => {
   it('US-E15-01/AC3 the family exists with exactly this account as its only member, empty, and the account index points to it', async () => {

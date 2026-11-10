@@ -9,7 +9,7 @@ import { CLOUD_NOTICE_VERSION } from '../../domain/sync/config.ts';
 import { syncCycle, type CycleResult, type LostEdit } from '../../domain/sync/cycle.ts';
 import { detectDirty, noteLocalChange } from '../../domain/sync/dirty.ts';
 import type { HostEvent, SyncHost } from '../../domain/sync/host.ts';
-import { emptySyncMeta, parseSyncMeta, safetyCopyKey, serializeSyncMeta, syncMetaKey, type SyncMeta } from '../../domain/sync/meta.ts';
+import { emptySyncMeta, joinUnsettled, parseSyncMeta, questionOpen, safetyCopyKey, serializeSyncMeta, syncMetaKey, type SyncMeta } from '../../domain/sync/meta.ts';
 import type { OwnerScope } from '../../domain/sync/owner-scope.ts';
 import { hasForeignOwner, withFamilyOwner } from '../../domain/sync/owner.ts';
 import { withPushGuard } from '../../domain/sync/push-guard.ts';
@@ -107,6 +107,7 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
   let consentOk = true;
   let schemaOk = true;
   let membershipEnded: EndedReason | null = null;
+  let endedNote: EndedReason | null = null; // learned while a join or the adoption question was open (no family id left)
   let pending = 0;
   let oldestPendingAt: string | null = null;
   let lostEdits: LostEdit[] = [];
@@ -147,13 +148,13 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
     state = {
       enabled: true,
       view: statusView({ facts, lastSyncedAt: meta.lastSyncedAt, oldestPendingAt, firstFailureAtMs: firstFailureAt, nowMs: nowMs() }),
-      endedReason: membershipEnded,
+      endedReason: membershipEnded ?? endedNote,
       lostEdits,
       ignoredRecords: ignored,
       familyId: meta.familyId,
       consent: meta.consent,
       adoptionFromDiscovery: askedByDiscovery,
-      adoptionPending: meta.familyId !== null && meta.adoption !== null && !meta.adoption.done,
+      adoptionPending: questionOpen(meta),
       safetyCreatedAt: meta.safety === null ? null : meta.safety.createdAt,
       membership: meta.familyId !== null ? 'member' : discovery,
       limitScope: limitHit ? limitScope : null,
@@ -257,6 +258,24 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
       if (tooNew) {
         halted = true;
         return;
+      }
+      if (meta.familyId === null) {
+        halted = true;
+        membershipEnded = null;
+        pending = 0;
+        oldestPendingAt = null;
+        return;
+      }
+      if (joinUnsettled(meta)) {
+        // A join whose first download was not decided (network cut, unreadable copy): decide it now, never push before.
+        await family.resumeJoin();
+        await serialMeta(readMeta);
+        if (!alive.current) return;
+      } else if (questionOpen(meta)) {
+        // The cycle is halted at the question and would never learn that the membership ended meanwhile.
+        await family.checkPendingMembership().catch(() => undefined);
+        await serialMeta(readMeta);
+        if (!alive.current) return;
       }
       if (meta.familyId === null) {
         halted = true;
@@ -469,6 +488,10 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
       for (const h of [...appliedHandlers]) h(store);
     },
     resync: () => api.metaChanged(),
+    noteEnded: (reason) => {
+      endedNote = reason;
+      publish();
+    },
   });
 
   const api: SyncController = {

@@ -34,7 +34,7 @@ async function world(): Promise<{ rig: Rig; a: Ctl; familyId: string; code: stri
 }
 
 describe('US-E15-04/AC11 a join interrupted before the download finished', () => {
-  it.fails('DEFECT E15-D03 US-E15-04/AC4 AC11 after the download failed once and the app is reopened, the question is asked and nothing of the device is merged silently (observed: it syncs at once, overwriting the family profile, no safety copy)', async () => {
+  it('E15-D03 fixed US-E15-04/AC4 AC11 after the download failed once and the app is reopened, the question is asked and nothing of the device is merged silently', async () => {
     const w = await world();
     const net = newNet();
     let n = 0;
@@ -53,7 +53,7 @@ describe('US-E15-04/AC11 a join interrupted before the download finished', () =>
     expect(asked || !familyProfile.includes('B-WOULD-OVERWRITE'), `question asked: ${asked}; family profile overwritten by the device: ${familyProfile.includes('B-WOULD-OVERWRITE')}; safety copy: ${again.safety() !== null}`).toBe(true);
   });
 
-  it.fails('DEFECT E15-D03 (variant) a join whose local copy is unreadable at join time, recovered later, is not merged silently', async () => {
+  it('E15-D03 fixed (variant) a join whose local copy is unreadable at join time, recovered later, is not merged silently', async () => {
     const w = await world();
     const b = track(makeCtl({ rig: w.rig, uid: UID2, deviceId: DEVICE_B, files: { [`bentominder.${UID2}.state`]: '{"corrupt":' } }));
     await settle(30);
@@ -78,7 +78,7 @@ describe('US-E15-04/AC8 US-E15-08/AC3 AC6 the membership ends while the adoption
     return { ...w, b };
   }
 
-  it.fails('DEFECT E15-D04 US-E15-08/AC3 the removed joiner (question still open) can leave the question: answering or cancelling works and the device ends local-only with its data (observed: both fail forever)', async () => {
+  it('E15-D04 fixed US-E15-08/AC3 the removed joiner (question still open) can leave the question: answering or cancelling works and the device ends local-only with its data', async () => {
     const { a, b } = await pending();
     await a.controller.family.removeMember(UID2);
     b.clock.now += 120_000;
@@ -91,7 +91,7 @@ describe('US-E15-04/AC8 US-E15-08/AC3 AC6 the membership ends while the adoption
     expect(b.meta()?.familyId ?? null).toBeNull();
   });
 
-  it.fails('DEFECT E15-D04 US-E15-08/AC6 the family is deleted while a joiner has the question open: the joiner is told and ends local-only (observed: nothing is learned while the question is pending)', async () => {
+  it('E15-D04 fixed US-E15-08/AC6 the family is deleted while a joiner has the question open: the joiner is told and ends local-only', async () => {
     const { a, b } = await pending();
     await a.controller.family.deleteFamily();
     await settle(50);

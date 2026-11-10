@@ -4,8 +4,8 @@ import { CLOUD_NOTICE_VERSION } from '../../../domain/sync/config.ts';
 /** "ABCDE" -> "A B C D E": a screen reader speaks an invite code one character at a time (components §16.4). */
 export const chunkText = (code: string): string => Array.from(code).join(' ');
 
-/** The alphabet of an invite code (data contract 14.3): no 0, O, 1 or I. */
-export const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+/** The alphabet of an invite code (data contract 14.3): no 0, O, 1, I or L. */
+export const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 export const CODE_LENGTH = 10;
 
 /** Any case, spaces and hyphens are ignored (US-E15-04/AC2). */

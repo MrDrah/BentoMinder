@@ -8,6 +8,11 @@ import type { MessageKey } from '../../i18n/index.ts';
 const familyChunk = () => import('./family/index.tsx');
 const statusChunk = () => import('./status/index.tsx');
 
+/** Starts loading the status sheet's chunk ahead of its first use, so the indicator still opens it offline (US-E15-06/AC4, AC6). */
+export const prefetchStatusChunk = (): void => {
+  void statusChunk().catch(() => undefined);
+};
+
 type FamilyModule = Awaited<ReturnType<typeof familyChunk>>;
 type StatusModule = Awaited<ReturnType<typeof statusChunk>>;
 

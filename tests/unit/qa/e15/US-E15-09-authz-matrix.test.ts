@@ -5,7 +5,7 @@ import { ALL_OPS, MEMBER_ONLY_OPS, HOUR, T0, UID1, UID2, UID3, UID4, UID5, UID_S
 
 const env = fixtureEnvelopes();
 const profile = env['profile_profile']!;
-const SECRET = 'ピーナッツ-SECRET-MARKER';
+const PRIVATE_MARKER = 'ピーナッツ-PRIVATE-MARKER';
 
 const bodyFor = (op: string, target = UID1): unknown => {
   switch (op) {
@@ -34,7 +34,7 @@ const pin = (r: { status: number; body: Record<string, unknown> }) => JSON.strin
 async function world(overrides = {}): Promise<{ rig: Rig; famA: string; famB: string }> {
   const rig = makeRig(overrides);
   const famA = await familyOfTwo(rig);
-  const marked = { ...profile, payloadJson: profile.payloadJson!.replace(/"nickname":"[^"]*"/, `"nickname":"${SECRET}"`) };
+  const marked = { ...profile, payloadJson: profile.payloadJson!.replace(/"nickname":"[^"]*"/, `"nickname":"${PRIVATE_MARKER}"`) };
   await rig.ok('records.push', UID1, { records: [marked] });
   const famB = await createFamilyOf(rig, UID4);
   return { rig, famA, famB };
@@ -72,7 +72,7 @@ describe('US-E15-09/AC1 no sign-in, bad tokens', () => {
     const before = snapshot(rig);
     const o = await rig.call('records.pull', UID1, { cursor: 0 }, { origin: 'https://evil.example' });
     expect(o.status).toBe(403);
-    expect(JSON.stringify(o.body)).not.toContain(SECRET);
+    expect(JSON.stringify(o.body)).not.toContain(PRIVATE_MARKER);
     expect(o.headers['access-control-allow-origin']).toBeUndefined();
     const star = await rig.call('records.pull', UID1, { cursor: 0 }, { origin: 'null' });
     expect(star.status).toBe(403);
@@ -142,7 +142,7 @@ describe('US-E15-09/AC2 non-member, removed member, never-member', () => {
     expect(r.body).toMatchObject({ reason: 'family-deleted' });
     expect(rig.db.paths(`families/${famA}`)).toEqual([]);
     expect(rig.db.mentioning(famA).filter((p) => !p.startsWith('accounts/'))).toEqual([]);
-    expect(rig.db.mentioning(SECRET)).toEqual([]);
+    expect(rig.db.mentioning(PRIVATE_MARKER)).toEqual([]);
     expect(rig.db.mentioning(UID2).filter((p) => p.startsWith('invites/') || p.startsWith('families/'))).toEqual([]);
   });
 });
@@ -163,7 +163,7 @@ describe('US-E15-09/AC3 cross-family', () => {
     for (const [op, body] of attempts) await rig.call(op, UID4, body);
     expect(snapshot(rig, `families/${famA}`)).toBe(beforeA);
     const pulled = await rig.ok('records.pull', UID4, { cursor: 0, familyId: famA });
-    expect(JSON.stringify(pulled)).not.toContain(SECRET);
+    expect(JSON.stringify(pulled)).not.toContain(PRIVATE_MARKER);
     expect(JSON.stringify(pulled)).not.toContain(famA);
     // what B pushed went to B
     expect(rig.db.paths(`families/${famB}/records`).length).toBeGreaterThanOrEqual(1);
@@ -455,8 +455,8 @@ describe('US-E15-09/AC6 + US-E15-03 invites cannot be read, enumerated or distin
     const seen = new Set<string>();
     for (let i = 0; i < 200; i++) {
       const code = await mk(rig);
-      expect(code).toMatch(/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{10}$/);
-      expect(code).not.toMatch(/[01OI]/); // L is in the contract 14.3 alphabet; US-E15-03/AC6 says no L (defect E15-D02, pinned in the next test)
+      expect(code).toMatch(/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{10}$/);
+      expect(code).not.toMatch(/[01OIL]/); // US-E15-03/AC6, contract 14.12 (E15-D02 fixed)
       seen.add(code);
     }
     expect(seen.size).toBe(200);
@@ -495,8 +495,8 @@ describe('US-E15-09/AC6 + US-E15-03 invites cannot be read, enumerated or distin
   });
 });
 
-it('DEFECT PROBE (E15-D02) the alphabet of contract 14.3 contains L, which US-E15-03/AC6 forbids (no 1/I/L)', () => {
-  expect('ABCDEFGHJKLMNPQRSTUVWXYZ23456789'.includes('L')).toBe(true);
+it('E15-D02 fixed: the alphabet has no 0 O 1 I L', () => {
+  expect('ABCDEFGHJKMNPQRSTUVWXYZ23456789').not.toMatch(/[01OIL]/);
 });
 
 describe('create: who may create a family (ADR 016 section 10 item 2)', () => {
