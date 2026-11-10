@@ -197,3 +197,11 @@ Slice A to E each own the files named for them; QA derives its own tests indepen
 
 ## Revisit if
 Two members stop being enough (rules of equality and the `maxMembers` field already allow more); a seconds-level freshness target is asked for (add a listener adapter behind `onHint`); the fake-Firestore suite disagrees with the emulator or the real service; real record sizes or daily operations approach the free quotas; Java becomes easy to install everywhere (then direct client access under rules deserves a second look); Android native sync needs a different adapter (the port holds).
+
+## Addendum 2026-11-10 (slice B built; Orchestrator)
+- Wire contract of the `sync` function: `docs/dev/_scratch/e15/slice-b-wire.md` (POST `/v1/<op>`; ops family.create, invite.create/cancel/redeem, consent.set, membership.get/ack, family.leave/removeMember/delete, records.push/pull).
+- Server write guard default is 600 writes per account per hour (`SYNC_WRITES_PER_HOUR`, three times the client's 200), so a normal two-device account never trips it.
+- A push batch is refused as a whole on one invalid record (`INVALID_RECORD` with its index); the client filters or retries per record. Live records beyond the 13-month retention are refused, their tombstones accepted.
+- After `family.delete` the deleter's own account marker is removed (`membership.get` returns `none`); the other member sees `membership-ended(family-deleted)`; an unfinished delete reports `deleting` so the client can retry.
+- Creating a family needs the allow-list; joining by invite is open to any signed-in account (the code is the secret).
+- Extra stored fields: `memberCount` on the family, numeric `deletedAtMs` on tombstones, used invites keep a code-less document, member documents store the verified e-mail (Q5, easy to drop).
