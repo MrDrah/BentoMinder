@@ -95,7 +95,12 @@
     gap: 6px;
   }
 }
+/* Day tile (components §18, ui-refresh-2026-11 §3a): the number, one state icon, at most one allergen mark and
+   the edge markers (top bar = changed, dash = bento still to plan, today fill, tomorrow frame). Row heights
+   80 / 96 / 104 px (tokens); weekend-only rows and padding cells stay 44 px. */
 .cell {
+  --tile-red: var(--accent);
+  --tile-ink: var(--ink-2);
   position: relative;
   min-width: 0;
   min-height: var(--cell-min-height);
@@ -108,13 +113,14 @@
 }
 .cell__btn {
   position: relative;
+  overflow: hidden; /* only to clip the top bar to the radius; the focus outline is drawn outside the box */
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   width: 100%;
   height: 100%;
   min-height: inherit;
-  padding: 3px;
+  padding: 4px;
   border: 1px solid transparent;
   border-radius: var(--radius-cell);
   background: transparent;
@@ -124,83 +130,151 @@
   cursor: pointer;
   touch-action: manipulation;
 }
-.cell.is-boxed .cell__btn {
+.cell.has-icon .cell__btn {
   background: var(--surface-2);
   border-color: var(--line-1);
-}
-.cell.is-noLunch .cell__btn,
-.cell.is-bentoDay .cell__btn {
-  background: var(--surface-2) var(--hatch);
-}
-.cell.is-suggest .cell__btn {
-  border: 2px dashed var(--accent);
-  padding: 2px;
-}
-.cell.is-notConfirmed .cell__btn {
-  border: 2px solid var(--ink-1);
-  padding: 2px;
-}
-.cell.is-planned .cell__btn {
-  background: var(--navy-fill);
-  border-color: transparent;
-  color: var(--ink-inverse);
-  box-shadow: inset 0 3px 0 var(--planned-edge);
-}
-.cell.is-past .cell__btn {
-  background: transparent;
-}
-.cell.is-past.is-planned .cell__btn {
-  background: var(--navy-fill);
-}
-.cell.is-past .cell__num {
-  color: var(--ink-3);
-}
-.cell.is-selected .cell__btn {
-  box-shadow: inset 0 0 0 3px var(--ink-1);
-}
-.cell.is-selected.is-planned .cell__btn {
-  box-shadow: inset 0 0 0 3px var(--ink-inverse);
-}
-@media (hover: hover) {
-  .cell:not(.is-past) .cell__btn:hover {
-    border-color: var(--line-ui);
-  }
-  .cell:not(.is-boxed):not(.is-past) .cell__btn:hover {
-    background: var(--surface-3);
-  }
-  .cell.is-planned:not(.is-past) .cell__btn:hover {
-    box-shadow: inset 0 3px 0 var(--planned-edge), inset 0 0 0 2px var(--ink-inverse);
-  }
+  padding: 5px;
 }
 .cell__top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 2px;
+  min-height: 22px;
 }
 .cell__num {
-  display: inline-grid;
-  place-items: center;
-  min-width: 24px;
-  height: 24px;
-  border-radius: var(--radius-pill);
   font-family: var(--font-display);
   font-weight: var(--weight-bold);
-  font-size: 15px;
+  font-size: var(--text-md);
+  line-height: 22px;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
 .cell.wd-6 .cell__num {
   color: var(--saturday);
 }
-.cell.wd-0 .cell__num {
+.cell.wd-0 .cell__num,
+.cell.is-holiday .cell__num,
+.cell__hol {
   color: var(--sunday);
 }
-.cell.is-planned .cell__num {
-  color: var(--ink-inverse);
+.cell__hol {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  line-height: 1;
 }
-/* Row heights 80 / 96 / 104 px (tokens); weekend-only rows and padding cells stay 44 px. Declared after the
-   base .cell rules so the larger sizes win. */
+.cell__icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 8px;
+  color: var(--tile-ink);
+  flex: none;
+}
+.cell.wd-6 .cell__icon,
+.cell.wd-0 .cell__icon {
+  width: 20px;
+  height: 20px; /* the narrow weekend columns */
+}
+.cell__dash {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 18px;
+  height: 4px;
+  margin-left: -9px;
+  border-radius: 2px;
+  background: var(--tile-red);
+}
+.cell.wd-6 .cell__dash,
+.cell.wd-0 .cell__dash {
+  width: 14px;
+  margin-left: -7px;
+}
+.cell.is-changed .cell__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--tile-red); /* top bar, clipped by the radius */
+}
+.cell.is-past .cell__btn {
+  background: transparent; /* keeps its 1 px line-1 border when it has an icon */
+}
+.cell.is-past .cell__num {
+  color: var(--ink-3);
+}
+.cell.is-past.wd-6 .cell__num {
+  color: var(--saturday);
+}
+.cell.is-past.wd-0 .cell__num,
+.cell.is-past.is-holiday .cell__num {
+  color: var(--sunday);
+}
+.cell.is-past {
+  --tile-ink: var(--ink-3);
+}
+.cell.is-tomorrow .cell__btn {
+  background: var(--surface-2);
+  border: 2px solid var(--ink-1);
+  padding: 4px;
+}
+.cell.is-today {
+  --tile-red: var(--planned-edge);
+  --tile-ink: var(--ink-inverse);
+}
+.cell.is-today .cell__btn {
+  background: var(--navy-fill);
+  border-color: var(--navy-fill);
+  color: var(--ink-inverse);
+  padding: 5px;
+}
+.cell.is-today .cell__num,
+.cell.is-today .cell__hol {
+  color: var(--ink-inverse); /* beats the Sat / Sun / holiday colours */
+}
+.cell.is-selected .cell__btn {
+  box-shadow: inset 0 0 0 3px var(--ink-1);
+}
+.cell.is-selected.is-today .cell__btn {
+  box-shadow: inset 0 0 0 3px var(--ink-inverse);
+}
+.cell.is-selected.is-tomorrow .cell__btn {
+  box-shadow: inset 0 0 0 1px var(--surface-2), inset 0 0 0 4px var(--ink-1);
+}
+@media (hover: hover) {
+  .cell:not(.is-past):not(.is-today) .cell__btn:hover {
+    background: var(--surface-3);
+  }
+  .cell.has-icon:not(.is-past):not(.is-today):not(.is-tomorrow) .cell__btn:hover {
+    border-color: var(--line-ui);
+  }
+  .cell.is-today .cell__btn:hover {
+    box-shadow: inset 0 0 0 2px var(--ink-inverse);
+  }
+}
+.cell:not(.is-past):not(.is-today) .cell__btn:active {
+  background: var(--surface-3);
+}
+/* The allergen mark (components §18.12): keeps its own colours on every tile state. */
+.cell__allergen {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--danger-soft);
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+  display: grid;
+  place-items: center;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  pointer-events: none;
+}
 @media (min-width: 768px) {
   .cell {
     min-height: var(--cell-min-height-md);
@@ -211,71 +285,47 @@
   .cell__num {
     font-size: var(--text-lg);
   }
+  .cell.has-icon .cell__btn {
+    padding: 6px;
+  }
+  .cell.is-tomorrow .cell__btn {
+    padding: 5px;
+  }
+  .cell__dash {
+    width: 24px;
+    margin-left: -12px;
+  }
+  .cell__allergen {
+    width: 20px;
+    height: 20px;
+    right: 4px;
+    bottom: 4px;
+    font-size: 13px;
+  }
 }
 @media (min-width: 1280px) {
   .cell {
     min-height: var(--cell-min-height-lg);
   }
-}
-.cell.is-today .cell__num {
-  background: var(--ink-1);
-  color: var(--surface-2);
-}
-.cell.is-today.is-planned .cell__num {
-  background: var(--ink-inverse);
-  color: var(--navy-fill);
-}
-.cell__mark {
-  display: inline-flex;
-  color: var(--ink-2);
-}
-.cell.is-planned .cell__mark {
-  color: var(--ink-inverse);
-}
-.cell__mark .mark--low-preference {
-  color: var(--accent-ink);
-}
-.cell.is-planned .cell__mark .mark--low-preference {
-  color: var(--ink-inverse);
-}
-.cell__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  min-width: 0;
-  font-size: var(--text-xs);
-  font-weight: var(--weight-bold);
-  line-height: 1.2;
-  letter-spacing: 0;
-}
-.cell__word {
-  display: block;
-  white-space: nowrap;
-  color: var(--ink-2);
-}
-.cell.is-planned .cell__word,
-.cell.is-notConfirmed .cell__word {
-  color: inherit;
-}
-.cell__word--en {
-  white-space: normal;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-.cell__pill {
-  padding: 0 var(--space-1);
-  border-radius: var(--radius-pill);
-  background: var(--surface-2);
+  .cell__icon {
+    width: 28px;
+    height: 28px;
+  }
+  .cell.wd-6 .cell__icon,
+  .cell.wd-0 .cell__icon {
+    width: 24px;
+    height: 24px;
+  }
+  .cell__dash {
+    width: 28px;
+    margin-left: -14px;
+  }
+  .cell.is-changed .cell__btn::before {
+    height: 4px;
+  }
 }
 .bento-icon {
   --bento-line: var(--surface-2);
-}
-.cell.is-planned .bento-icon,
-.upcoming__swatch--planned .bento-icon {
-  --bento-line: var(--navy-fill);
 }
 .flag-badge {
   position: absolute;
@@ -324,18 +374,63 @@
   text-align: left;
   cursor: pointer;
 }
-.cal-agenda__row.is-planned .cal-agenda__btn {
+.cal-agenda__row.is-today .cal-agenda__btn {
   background: var(--navy-fill);
+  border-color: var(--navy-fill);
   color: var(--ink-inverse);
+}
+.cal-agenda__row.is-tomorrow .cal-agenda__btn {
+  border: 2px solid var(--ink-1);
+}
+.cal-agenda__row.is-past .cal-agenda__btn {
+  background: transparent;
+  color: var(--ink-3);
 }
 .cal-agenda__date {
   flex: none;
   min-width: 5.5em;
   font-weight: var(--weight-bold);
 }
+.cal-agenda__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
 .cal-agenda__text {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+.cal-agenda__marker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+}
+.cal-agenda__marker--changed {
+  border-top: 3px solid var(--accent);
+}
+.cal-agenda__row.is-today .cal-agenda__marker--changed {
+  border-top-color: var(--planned-edge);
+}
+.cal-agenda__marker--dash::before {
+  content: '';
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.cal-agenda__row.is-today .cal-agenda__marker--dash::before {
+  background: var(--planned-edge);
+}
+.cal-agenda__mark {
+  position: static;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
 }
 .cal-agenda__weekend {
   padding: var(--space-1) var(--space-3);
@@ -419,27 +514,66 @@
 }
 .legend__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--space-3);
   margin: var(--rhythm-related) 0 0;
   padding: 0;
   list-style: none;
   font-size: var(--text-sm);
 }
+@media (min-width: 768px) {
+  .legend__list {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3) var(--space-6);
+  }
+}
 .legend__item {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
-.legend__swatch {
-  display: inline-grid;
-  place-items: center;
+/* A 40 x 44 sample drawn with the real tile styles (components §18.7); the allergen sample is 40 x 56. */
+.legend__sample {
   flex: none;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--line-1);
-  border-radius: var(--radius-sm);
-  background: var(--surface-2);
+  display: block;
+  width: 40px;
+  height: 44px;
+  min-height: 44px;
+  pointer-events: none;
+}
+.legend__sample--tall {
+  height: 56px;
+  min-height: 56px;
+}
+.cell.legend__sample .cell__btn {
+  padding: 2px;
+}
+.cell.legend__sample.is-tomorrow .cell__btn {
+  padding: 1px;
+}
+.legend__sample .cell__top {
+  min-height: 16px;
+}
+.legend__sample .cell__num {
+  font-size: 12px;
+  line-height: 16px;
+}
+.legend__sample .cell__icon {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+.legend__sample .cell__dash {
+  bottom: 3px;
+  width: 14px;
+  margin-left: -7px;
+}
+.legend__sample .cell__allergen {
+  width: 16px;
+  height: 16px;
+  right: 2px;
+  bottom: 2px;
+  font-size: 12px;
 }
 
 /* §1.12 Sheet: bottom sheet below 768 px, centred dialog 768–1279 px, side panel from 1280 px. */

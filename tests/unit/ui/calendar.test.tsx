@@ -32,48 +32,58 @@ describe('US-E5-01 the calendar is the home screen', () => {
     expect(screen.getByTestId('cal-title')).toHaveTextContent('2026年11月');
   });
 
-  it('US-E5-01/AC3 US-E5-01/AC4 a school day shows the assessment and the decision separately; a suggestion is dashed, a plan is filled with the short name', async () => {
+  it('US-E5-01/AC3 US-E5-01/AC4 a tile shows the day number and one state icon; no assessment symbol, no word, no recipe name', async () => {
     await renderApp({ store: november(), now: NOV2 });
-    // 11-12: low-preference, decision still school lunch: the suggestion
+    // 11-12: low-preference, decision still school lunch: the lunch box, nothing about the assessment on the tile
     expect(cell('2026-11-12')).toHaveAttribute('data-assessment', 'low-preference');
     expect(cell('2026-11-12')).toHaveAttribute('data-decision', 'school-lunch-planned');
-    expect(cell('2026-11-12')).toHaveClass('is-suggest');
-    expect(cell('2026-11-12')).toHaveTextContent('給食');
-    expect(button('2026-11-12')).toHaveAccessibleName('11月12日（木）、苦手かも、給食');
-    // 11-04: planned: filled, short name in the cell, full name in the accessible name
-    expect(cell('2026-11-04')).toHaveClass('is-planned');
+    expect(cell('2026-11-12')).toHaveAttribute('data-icon', 'school');
+    expect(cell('2026-11-12').querySelector('[data-icon="lunchbox"]')).not.toBeNull();
+    expect(cell('2026-11-12').querySelector('.mark, .cell__mark, .cell__word, .flag-badge')).toBeNull();
+    expect(button('2026-11-12')).toHaveAccessibleName('11月12日（木）、給食');
+    // 11-04: planned: the crossed spoon and spatula, the red top border (a stored decision), no recipe name on the tile
     expect(cell('2026-11-04')).toHaveAttribute('data-decision', 'homemade-bento-planned');
-    expect(cell('2026-11-04')).toHaveTextContent('くまおにぎり');
-    expect(button('2026-11-04')).toHaveAccessibleName('11月4日（水）、苦手かも、手作りお弁当：くまさんおにぎり弁当');
-    expect(cell('2026-11-04')).not.toHaveClass('is-suggest');
+    expect(cell('2026-11-04')).toHaveAttribute('data-icon', 'home');
+    expect(cell('2026-11-04')).toHaveAttribute('data-changed', 'true');
+    expect(cell('2026-11-04').querySelector('[data-icon="home-bento"]')).not.toBeNull();
+    expect(cell('2026-11-04')).not.toHaveTextContent('くまおにぎり');
+    expect(button('2026-11-04')).toHaveAccessibleName('11月4日（水）、手作りお弁当、手動で変更');
   });
 
-  it('US-E5-01/AC4 in English the cell shows shortNameEn and the label is English', async () => {
+  it('US-E5-01/AC4 in English the name is English and the tile still has no recipe name', async () => {
     const user = userEvent.setup();
     await renderApp({ store: november(), now: NOV2 });
     await user.click(screen.getByRole('radio', { name: 'EN' }));
-    await waitFor(() => expect(cell('2026-11-04')).toHaveTextContent('Bear oni'));
-    expect(button('2026-11-04')).toHaveAccessibleName('Wed, Nov 4, might not enjoy, homemade bento: Bear onigiri bento');
+    await waitFor(() => expect(button('2026-11-04')).toHaveAccessibleName('Wed, Nov 4, homemade bento, changed by you'));
+    expect(cell('2026-11-04')).not.toHaveTextContent('Bear');
   });
 
-  it('US-E4-03/AC1 an override shows the overridden mark with the label in the accessible name', async () => {
+  it('US-E4-03/AC1 an override puts the red top border on the tile and 「手動で変更」 in the accessible name', async () => {
     await renderApp({ store: november(), now: NOV2 });
     expect(cell('2026-11-05')).toHaveAttribute('data-override', 'mixed-uncertain');
-    expect(button('2026-11-05')).toHaveAccessibleName('11月5日（木）、どちらとも、給食、手動で変更');
+    expect(cell('2026-11-05')).toHaveAttribute('data-changed', 'true');
+    expect(cell('2026-11-05')).toHaveClass('is-changed');
+    expect(button('2026-11-05')).toHaveAccessibleName('11月5日（木）、給食、手動で変更');
   });
 
-  it('US-E5-08 US-E5-02/AC2 the bento day, the no-lunch day and a weekend outside the menu are named as such', async () => {
+  it('US-E5-08 US-E5-02/AC2 US-E5-01/AC13 the bento day (home icon and dash), the no-lunch day and a weekend outside the menu (number only) are named as such', async () => {
     await renderApp({ store: november(), now: NOV2 });
-    expect(button('2026-11-20')).toHaveAccessibleName('11月20日（金）、お弁当の日、未計画');
+    expect(button('2026-11-20')).toHaveAccessibleName('11月20日（金）、手作りお弁当の日、お弁当の準備が未定');
+    expect(cell('2026-11-20')).toHaveAttribute('data-dash', 'true');
     expect(button('2026-11-27')).toHaveAccessibleName('11月27日（金）、給食なし（午前保育（給食なし））');
     expect(button('2026-11-07')).toHaveAccessibleName('11月7日（土）、献立に記載なし');
     expect(cell('2026-11-07')).not.toHaveAttribute('data-assessment');
+    for (const d of ['2026-11-27', '2026-11-07']) {
+      expect(cell(d)).toHaveAttribute('data-icon', 'none');
+      expect(cell(d).querySelector('svg, .cell__dash')).toBeNull();
+    }
   });
 
-  it('US-E5-02/AC3 days before today are marked past and carry the past suffix', async () => {
+  it('US-E5-01/AC9 US-E5-02/AC3 days before today are marked past and carry the past suffix', async () => {
     await renderApp({ store: november(), now: '2026-11-10T01:00:00Z' });
     expect(cell('2026-11-09')).toHaveAttribute('data-past', 'true');
-    expect(button('2026-11-09')).toHaveAccessibleName('11月9日（月）、たのしめそう、給食、過去の日');
+    expect(cell('2026-11-09')).toHaveClass('is-past');
+    expect(button('2026-11-09')).toHaveAccessibleName('11月9日（月）、給食、過去の日');
     expect(cell('2026-11-10')).not.toHaveAttribute('data-past');
   });
 
@@ -387,8 +397,11 @@ describe('US-E3-05 refresh conflicts in the calendar and the sheet (B7)', () => 
     const user = userEvent.setup();
     const app = await renderApp({ store: conflicted(), now: NOV2 });
     expect(cell('2026-11-04')).toHaveAttribute('data-decision', 'homemade-bento-planned');
-    expect(cell('2026-11-04')).toHaveAttribute('data-flag', 'changed');
-    expect(button('2026-11-04')).toHaveAccessibleName(/給食なし、手作りお弁当：くまさんおにぎり弁当、献立が変わりました/);
+    // the review flag is not on the tile any more (US-E5-01/AC16): the tile keeps the plan's icon and the red top border
+    expect(cell('2026-11-04')).toHaveAttribute('data-icon', 'home');
+    expect(cell('2026-11-04')).not.toHaveAttribute('data-flag');
+    expect(cell('2026-11-04').querySelector('.flag-badge')).toBeNull();
+    expect(button('2026-11-04')).toHaveAccessibleName('11月4日（水）、手作りお弁当、手動で変更');
     expect(screen.getByTestId('upcoming-conflict-2026-11-04')).toHaveTextContent('献立が変わりました：11月4日（水）');
     await open(user, '2026-11-04');
     const sheet = screen.getByTestId('day-sheet');
@@ -408,7 +421,7 @@ describe('US-E3-05 refresh conflicts in the calendar and the sheet (B7)', () => 
     expect(app.stored().decisions['2026-11-04']).toMatchObject({ state: 'homemade-bento-planned', recipeId: 'rcp-kuma-onigiri' });
     expect(screen.queryByTestId('upcoming-conflict-2026-11-04')).toBeNull();
     expect(screen.getByTestId('day-banner-conflict')).toHaveTextContent('このままにしました。前日のお知らせもそのままです。');
-    expect(cell('2026-11-04')).toHaveAttribute('data-flag', 'changed');
+    expect(cell('2026-11-04')).toHaveAttribute('data-icon', 'home');
     await user.click(screen.getByTestId('day-action-clear-plan'));
     const dialog = await screen.findByRole('alertdialog');
     expect(dialog).toHaveAccessibleName('11月4日の手作りお弁当の計画を取り消しますか？');
@@ -421,7 +434,7 @@ describe('US-E3-05 refresh conflicts in the calendar and the sheet (B7)', () => 
   it('US-E3-05/AC6 a plan on a date the menu no longer lists is opened from the calendar with the removed sentence', async () => {
     const user = userEvent.setup();
     await renderApp({ store: conflicted(), now: NOV2 });
-    expect(button('2026-11-25')).toHaveAccessibleName(/献立に記載なし、手作りお弁当：くまさんおにぎり弁当、献立が変わりました/);
+    expect(button('2026-11-25')).toHaveAccessibleName('11月25日（水）、手作りお弁当、手動で変更');
     await open(user, '2026-11-25');
     expect(screen.getByTestId('day-banner-conflict')).toHaveTextContent('献立の更新で、この日は献立表に載っていません。予定を確認してください。');
   });
@@ -432,7 +445,7 @@ describe('US-E3-05 refresh conflicts in the calendar and the sheet (B7)', () => 
     s.menus['2026-11']!.confirmed!.version = 2;
     s.menus['2026-11']!.confirmed!.changedDatesSincePrevious = ['2026-11-05'];
     const app = await renderApp({ store: s, now: NOV2 });
-    expect(cell('2026-11-05')).toHaveAttribute('data-flag', 'changed');
+    expect(cell('2026-11-05')).not.toHaveAttribute('data-flag');
     await open(user, '2026-11-05');
     expect(screen.getByTestId('day-banner-changed')).toHaveTextContent('献立が変わりました。評価を見直してください。');
     await user.click(screen.getByTestId('override-open'));

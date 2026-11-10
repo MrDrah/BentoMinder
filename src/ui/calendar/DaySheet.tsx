@@ -7,6 +7,7 @@ import { clearOverride, setOverride, type OverrideState } from '../../domain/ass
 import type { DayAction, DayView } from '../../domain/calendar/day-view.ts';
 import { applyDecisionEvent } from '../../domain/decision/apply.ts';
 import type { DecisionEvent } from '../../domain/decision/decision.ts';
+import { allergenAlertIds } from '../../domain/calendar/allergen-alert.ts';
 import type { ExtractedDay } from '../../domain/schema/index.ts';
 import type { LocalDate } from '../../domain/time/jst.ts';
 import { formatDate, formatDateNoWeekday } from '../../i18n/format.ts';
@@ -168,7 +169,7 @@ function MenuSection({ v, day }: { v: DayView; day: ExtractedDay }) {
   const declared = day.allergenDeclaration;
   const knownAllergens = profile !== null && profile.allergyStatus === 'has-known' ? profile.knownAllergenIds : [];
   const allergenLabel = (id: string) => dict.allergens.find((a) => a.id === id)?.[lang] ?? id;
-  const matches = declared.status === 'declared' ? declared.allergenIds.filter((id) => knownAllergens.includes(id)) : [];
+  const matches = allergenAlertIds(profile, day);
   const printed = declared.status === 'declared' ? (declared.rawText ?? declared.allergenIds.map(allergenLabel).join(lang === 'ja' ? '、' : ', ')) : null;
   return (
     <Section testId="day-menu" heading={t('day.menu.heading')}>

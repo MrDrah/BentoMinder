@@ -1,40 +1,25 @@
-// The accessible name of a calendar cell: one full sentence from the catalog (design/copy.md §8
-// `cell.aria*`, a11y-responsive.md §6). Never colour words, never the word "button".
+// The accessible name of a calendar tile: one full sentence from the catalog (design/copy.md §24,
+// a11y-responsive.md §6, BA US-E5-01/AC14): date, state, allergen alert, changed, today / tomorrow / past, dash.
+// No assessment, no recipe name, no colour words, never the word "button".
 import type { DayView } from '../../domain/calendar/day-view.ts';
+import type { LocalDate } from '../../domain/time/jst.ts';
 import { formatDate } from '../../i18n/format.ts';
-import type { Language, Translate } from '../../i18n/index.ts';
-import { DECISION_KEYS, recipeName, STATE_KEYS } from './labels.ts';
+import type { Language, MessageKey, Translate } from '../../i18n/index.ts';
+import { tileOf } from './tile.ts';
 
-export function cellLabel(t: Translate, lang: Language, v: DayView): string {
+export function cellLabel(t: Translate, lang: Language, v: DayView, today: LocalDate): string {
   const date = formatDate(t, lang, v.date);
-  const sep = lang === 'ja' ? '、' : ', ';
-  // in English the state and decision words sit inside a sentence (a11y-responsive.md §6: "might not enjoy, school lunch")
-  const word = (text: string) => (lang === 'en' ? text.charAt(0).toLowerCase() + text.slice(1) : text);
-  const shown = v.displayed.state;
-  const planned = shown === 'homemade-bento-planned' && v.record !== undefined ? t('cell.aria.planned', { recipe: recipeName(v.record, lang) }) : null;
-  let base: string;
-  switch (v.type.type) {
-    case 'school': {
-      const assessment = word(t(STATE_KEYS[v.assessment?.state ?? 'not-assessed']));
-      base = t('cell.aria', { date, assessment, decision: planned ?? word(t(DECISION_KEYS[shown ?? 'school-lunch-planned'])) });
-      break;
-    }
-    case 'no-lunch':
-      base = planned === null ? t('cell.aria.noLunch', { date, originalText: v.type.noLunch.originalText }) : t('cell.aria', { date, assessment: word(t('state.noLunch')), decision: planned });
-      break;
-    case 'bento-day':
-      base = t('cell.aria.bentoDay', { date, decision: planned ?? t('cell.aria.bentoDayOpen') });
-      break;
-    case 'no-menu':
-      base = t('cell.aria.noMenu', { date });
-      break;
-    default:
-      base = t('cell.aria.outside', { date });
-      if (planned !== null) base += sep + planned; // a plan kept on a date the menu no longer lists (refresh conflict)
-  }
-  let label = (v.isToday ? t('cell.aria.today') : '') + base;
-  if (v.assessment?.override != null) label += t('cell.aria.override');
-  if (v.needsReviewBadge) label += t('cell.aria.changed');
-  if (v.past) label += t('cell.aria.past');
+  const tile = tileOf(v, today);
+  let label: string;
+  if (tile.state !== null) label = t('cell.aria.tile', { date, state: t(`cell.state.${tile.state}` as MessageKey) });
+  else if (v.type.type === 'no-lunch') label = t('cell.aria.noLunch', { date, originalText: v.type.noLunch.originalText });
+  else if (v.type.type === 'no-menu') label = t('cell.aria.noMenu', { date });
+  else label = t('cell.aria.outside', { date });
+  if (tile.allergen) label += t('cell.aria.allergen');
+  if (tile.changed) label += t('cell.aria.override');
+  if (v.isToday) label += t('cell.aria.isToday');
+  else if (tile.tomorrow) label += t('cell.aria.isTomorrow');
+  else if (v.past) label += t('cell.aria.past');
+  if (tile.dash) label += t('cell.aria.dash');
   return label;
 }

@@ -6,6 +6,7 @@ import { createAssessor, type Assessment } from '../assessment/assess.ts';
 import { allowedEvents, displayedDecision, type DayContext, type DisplayedDecision } from '../decision/decision.ts';
 import { dayContextOf } from '../decision/apply.ts';
 import { dayTypeOf, type DayType } from '../menu/day-kind.ts';
+import { allergenAlertIds } from './allergen-alert.ts';
 import { refreshReview, type ReviewItem } from '../menu/refresh.ts';
 import type { AssessmentOverride, BentoMinderStore, DayDecision } from '../schema/index.ts';
 import type { Dictionary } from '../schema/dictionary.ts';
@@ -34,6 +35,8 @@ export interface DayView {
   overrideChanged: boolean;
   /** The needs-review marker of the calendar cell (components §2.4 layer 4). */
   needsReviewBadge: boolean;
+  /** The day's menu carries the allergen alert for the child's registered allergens (US-E1-05/AC2): the tile mark (US-E5-01/AC16). */
+  allergenAlert: boolean;
   /** The tick 「園で予約済み（自分で記録）」 is offered (school lunch, today or later). */
   reservationOffered: boolean;
   reservationDone: boolean;
@@ -86,6 +89,7 @@ export function createDayViewer(dict: Dictionary): DayViewer {
       conflict,
       overrideChanged,
       needsReviewBadge: conflict || overrideChanged,
+      allergenAlert: (type.type === 'school' || type.type === 'snack-only') && allergenAlertIds(store.profile, type.day).length > 0,
       reservationOffered: events.has('MARK_RESERVATION'),
       reservationDone: record?.state === 'school-lunch-planned' && record.reservationDoneExternally,
       canOverride: type.type === 'school' && !past,

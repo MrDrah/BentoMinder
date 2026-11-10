@@ -530,7 +530,7 @@ test.describe('US-E6-05 library and plan picker; US-E5-03 confirm flow; US-E6-06
     expect(d.plannedAt).toBe(d.decidedAt);
     expect(d.recipeNameSnapshot.ja).toBe(LIB.find((r) => r.id === top)!.name.ja);
     await go(page, '/calendar/2026-11');
-    await expect(page.getByTestId('cal-cell-2026-11-05')).toContainText(LIB.find((r) => r.id === top)!.shortNameJa);
+    await expect(page.getByTestId('cal-cell-2026-11-05')).toHaveAttribute('data-icon', 'home'); // the tile shows the icon, not the recipe name (US-E5-01/AC4)
   });
 
   test('US-E5-03/AC4 today 2026-11-05 08:00 JST: 11-05 can be planned, 11-04 (past) cannot: no confirm buttons and no bento action', async ({ page }) => {
@@ -550,12 +550,12 @@ test.describe('US-E6-05 library and plan picker; US-E5-03 confirm flow; US-E6-06
     expect(await raw(page)).toBe(before);
   });
 
-  test('US-E6-06/AC1 11-04 planned with a retired recipe: cell shows the stored short name, sheet shows the stored name and the missing message, decision unchanged', async ({ page }) => {
+  test('US-E6-06/AC1 11-04 planned with a retired recipe: tile keeps the home icon, sheet shows the stored name and the missing message, decision unchanged', async ({ page }) => {
     const s = stateWith();
     await seed(page, s);
     const before = JSON.stringify(s.decisions['2026-11-04']);
     await go(page, '/calendar/2026-11');
-    await expect(page.getByTestId('cal-cell-2026-11-04')).toContainText('くまおにぎり');
+    await expect(page.getByTestId('cal-cell-2026-11-04')).toHaveAttribute('data-icon', 'home'); // the tile has no recipe name (US-E5-01/AC4); the sheet keeps it
     await go(page, '/day/2026-11-04');
     await expect(page.getByTestId('day-recipe-name')).toContainText('くまさんおにぎり弁当');
     await expect(page.getByTestId('day-recipe-missing')).toContainText('このレシピは見つかりません。別のレシピを選んでください。');

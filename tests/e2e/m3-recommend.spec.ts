@@ -34,7 +34,6 @@ test('US-E5-03/AC2 US-E6-01/AC1 US-E6-01/AC2 US-E6-03/AC1 the journey: bento for
   await expect(page.getByTestId('rec-card-0')).toContainText('1位');
   await expect(page.getByTestId('rec-card-0')).toContainText(/約\d+分/);
   const first = (await page.getByTestId('rec-card-0').getAttribute('data-recipe-id')) as string;
-  const shortName = JSON.parse(readFileSync(join(process.cwd(), 'data', 'library.json'), 'utf8')).find((r: { id: string }) => r.id === first).shortNameJa as string;
   await page.getByTestId('rec-card-0-confirm').click();
   await expect(page.getByTestId('day-sheet')).toBeVisible();
   await expect(page.getByTestId('toast')).toContainText('を手作りお弁当にしました');
@@ -43,7 +42,7 @@ test('US-E5-03/AC2 US-E6-01/AC1 US-E6-01/AC2 US-E6-03/AC1 the journey: bento for
   expect(d).toMatchObject({ state: 'homemade-bento-planned', recipeId: first });
   expect(d.plannedAt).toBe(d.decidedAt);
   await page.reload();
-  await expect(cell(page, '2026-11-12')).toContainText(shortName);
+  await expect(cell(page, '2026-11-12')).toHaveAttribute('data-icon', 'home'); // the tile has the icon, no recipe name (US-E5-01/AC4)
   expect((await stored(page)).decisions['2026-11-12'].recipeId).toBe(first);
 });
 
@@ -157,7 +156,7 @@ test('US-E6-06/AC1 a planned recipe missing from the library keeps its stored na
   await seedStore(page, STATE);
   await page.goto('./');
   const before = await stored(page);
-  await expect(cell(page, '2026-11-04')).toContainText('くまおにぎり');
+  await expect(cell(page, '2026-11-04')).toHaveAttribute('data-icon', 'home'); // the tile has no recipe name (US-E5-01/AC4); the sheet keeps it
   await cell(page, '2026-11-04').getByRole('button').click();
   await expect(page.getByTestId('day-recipe-name')).toHaveText('くまさんおにぎり弁当');
   await expect(page.getByTestId('day-recipe-missing')).toHaveText('このレシピは見つかりません。別のレシピを選んでください。');

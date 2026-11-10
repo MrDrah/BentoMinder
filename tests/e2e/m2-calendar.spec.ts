@@ -24,7 +24,7 @@ const openDay = async (page: Page, date: string) => {
   await expect(page.getByTestId('day-sheet')).toBeVisible();
 };
 
-test('US-E5-01/AC3 US-E5-01/AC4 US-NF-02/AC1 the calendar shows assessment and decision apart; axe finds nothing serious', async ({ page }) => {
+test('US-E5-01/AC3 US-E5-01/AC4 US-NF-02/AC1 the tile shows the plan as one icon (assessment stays in the sheet); axe finds nothing serious', async ({ page }) => {
   await seedStore(page, STATE);
   await page.goto('./');
   await expect(page.getByTestId('cal-grid')).toBeVisible();
@@ -34,7 +34,9 @@ test('US-E5-01/AC3 US-E5-01/AC4 US-NF-02/AC1 the calendar shows assessment and d
   await expect(cell(page, '2026-11-12')).toHaveAttribute('data-decision', 'school-lunch-planned');
   await expect(cell(page, '2026-11-12')).toHaveAttribute('data-assessment', 'low-preference');
   await expect(cell(page, '2026-11-02')).toHaveAttribute('aria-current', 'date');
-  await expect(cell(page, '2026-11-04').getByRole('button')).toHaveAccessibleName('11月4日（水）、苦手かも、手作りお弁当：くまさんおにぎり弁当');
+  await expect(cell(page, '2026-11-04').getByRole('button')).toHaveAccessibleName('11月4日（水）、手作りお弁当、手動で変更');
+  await expect(cell(page, '2026-11-04')).toHaveAttribute('data-icon', 'home');
+  await expect(cell(page, '2026-11-12')).toHaveAttribute('data-icon', 'school');
   await expectNoSeriousAxe(page, 'calendar');
   await page.getByTestId('legend-toggle').click();
   await expectNoSeriousAxe(page, 'calendar with legend');
@@ -185,7 +187,9 @@ test('US-E3-05/AC2 US-E3-05/AC7 a refresh conflict is flagged; 「このまま�
   confirmed.changedDatesSincePrevious = ['2026-11-04'];
   await seedStore(page, JSON.stringify(conflicted));
   await page.goto('./');
-  await expect(cell(page, '2026-11-04')).toHaveAttribute('data-flag', 'changed');
+  // the review flag is not on the tile (US-E5-01/AC16); the plan keeps its icon
+  await expect(cell(page, '2026-11-04')).toHaveAttribute('data-icon', 'home');
+  await expect(cell(page, '2026-11-04')).not.toHaveAttribute('data-flag');
   await expect(page.getByTestId('upcoming-conflict-2026-11-04')).toContainText('献立が変わりました');
   await openDay(page, '2026-11-04');
   await expect(page.getByTestId('day-banner-conflict')).toContainText('献立の更新で、この日は給食なしになりました。予定を確認してください。');

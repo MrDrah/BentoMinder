@@ -1,12 +1,13 @@
-// Upcoming summary (design/components.md §2.5) and legend (§2.8).
+// Upcoming summary (design/components.md §2.5, §18.8) and legend (§18.7).
 import { useState, type ReactNode } from 'react';
 import type { UpcomingSummary } from '../../domain/calendar/day-view.ts';
 import { diffDays, type LocalDate } from '../../domain/time/jst.ts';
 import { formatDate } from '../../i18n/format.ts';
 import { useApp } from '../app-store.tsx';
-import { AssessMark, BentoIcon, FlagBadge } from '../components/Marks.tsx';
+import { AllergenMark, AssessMark, FlagBadge, TileIcon } from '../components/Marks.tsx';
 import { navigate } from '../router.ts';
 import { recipeName } from './labels.ts';
+import { TILE_ICON_NAMES, type TileIconKind } from './tile.ts';
 
 export function UpcomingSummaryCard({ summary, today }: { summary: UpcomingSummary; today: LocalDate }) {
   const { t, state } = useApp();
@@ -31,7 +32,7 @@ export function UpcomingSummaryCard({ summary, today }: { summary: UpcomingSumma
           <li key={date}>
             <button type="button" className="upcoming__row" data-testid={`upcoming-row-${date}`} onClick={() => open(date)}>
               <span className="upcoming__swatch upcoming__swatch--planned">
-                <BentoIcon filled />
+                <TileIcon name="home-bento" size={20} />
               </span>
               <span className="upcoming__text">
                 <span>{formatDate(t, lang, date)}</span> <span lang={lang === 'en' && record.recipeNameSnapshot?.en !== undefined ? 'en' : 'ja'}>{recipeName(record, lang)}</span>
@@ -54,7 +55,7 @@ export function UpcomingSummaryCard({ summary, today }: { summary: UpcomingSumma
           <li key={`n-${date}`}>
             <button type="button" className="upcoming__row" data-testid={`upcoming-nc-${date}`} onClick={() => open(date)}>
               <span className="upcoming__swatch">
-                <BentoIcon filled={false} />
+                <TileIcon name="bento-unsure" size={20} />
               </span>
               <span className="upcoming__text">{t('upcoming.notConfirmed', { date: formatDate(t, lang, date) })}</span>
             </button>
@@ -78,6 +79,39 @@ export function UpcomingSummaryCard({ summary, today }: { summary: UpcomingSumma
   );
 }
 
+interface SampleProps {
+  icon: TileIconKind;
+  dash?: boolean;
+  changed?: boolean;
+  allergen?: boolean;
+  today?: boolean;
+  tomorrow?: boolean;
+  past?: boolean;
+  weekend?: boolean;
+}
+
+/** One legend row: a 40 x 44 sample drawn with the real tile styles (aria-hidden) and one text line (components §18.7). */
+function LegendRow({ text, icon, dash, changed, allergen, today, tomorrow, past, weekend }: SampleProps & { text: string }) {
+  const classes = ['cell', 'legend__sample', weekend ? 'wd-6' : 'wd-3', icon !== 'none' ? 'has-icon' : '', today ? 'is-today' : '', tomorrow ? 'is-tomorrow' : '', past ? 'is-past' : '', changed ? 'is-changed' : '', allergen ? 'legend__sample--tall' : '']
+    .filter(Boolean)
+    .join(' ');
+  return (
+    <li className="legend__item" data-testid="legend-row">
+      <span className={classes} aria-hidden="true">
+        <span className="cell__btn">
+          <span className="cell__top">
+            <span className="cell__num">{weekend ? 7 : 12}</span>
+          </span>
+          {icon !== 'none' && <TileIcon name={TILE_ICON_NAMES[icon]} className="cell__icon" />}
+          {dash && <span className="cell__dash" />}
+          {allergen && <AllergenMark />}
+        </span>
+      </span>
+      <span>{text}</span>
+    </li>
+  );
+}
+
 /**
  * Tools row (components.md §17.5): the share button `share` and the legend toggle on one row, the legend body
  * below as a card. Always closed on load (UI refresh 2026-11); the open state lasts for the session only.
@@ -97,72 +131,18 @@ export function Legend({ share }: { share: ReactNode }) {
         </button>
       </div>
       <div id="legend-body" className="card" hidden={!expanded}>
-        <p className="card__body">{t('legend.rule')}</p>
+        <p className="card__body">{t('legend.intro')}</p>
         <ul className="legend__list">
-          <li className="legend__item">
-            <span className="legend__swatch" style={{ background: 'var(--navy-fill)', color: 'var(--ink-inverse)' }}>
-              <BentoIcon filled />
-            </span>
-            {t('legend.planned')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch" style={{ borderColor: 'var(--ink-1)', borderWidth: 2 }}>
-              <BentoIcon filled={false} />
-            </span>
-            {t('legend.notConfirmed')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch" style={{ borderColor: 'var(--accent)', borderStyle: 'dashed', borderWidth: 2 }}>
-              <AssessMark state="low-preference" />
-            </span>
-            {t('legend.suggest')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch">
-              <AssessMark state="likely-enjoyable" />
-            </span>
-            {t('state.likely')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch">
-              <AssessMark state="mixed-uncertain" />
-            </span>
-            {t('state.mixed')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch">
-              <AssessMark state="not-assessed" />
-            </span>
-            {t('state.notAssessed')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch" style={{ background: 'var(--surface-2) var(--hatch)' }} />
-            {t('legend.noLunch')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch" style={{ background: 'var(--surface-2) var(--hatch)' }}>
-              <BentoIcon filled={false} />
-            </span>
-            {t('legend.bentoDay')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch" style={{ position: 'relative' }}>
-              <FlagBadge />
-            </span>
-            {t('legend.changed')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch">
-              <AssessMark state="low-preference" overridden />
-            </span>
-            {t('legend.override')}
-          </li>
-          <li className="legend__item">
-            <span className="legend__swatch" style={{ color: 'var(--saturday)' }}>
-              {t('wd.short.6')}
-            </span>
-            {t('legend.weekend')}
-          </li>
+          <LegendRow text={t('legend.school')} icon="school" />
+          <LegendRow text={t('legend.home')} icon="home" />
+          <LegendRow text={t('legend.unsure')} icon="unsure" />
+          <LegendRow text={t('legend.dash')} icon="home" dash />
+          <LegendRow text={t('legend.allergen')} icon="school" allergen />
+          <LegendRow text={t('legend.changedEdge')} icon="school" changed />
+          <LegendRow text={t('legend.today')} icon="school" today />
+          <LegendRow text={t('legend.tomorrow')} icon="school" tomorrow />
+          <LegendRow text={t('legend.past')} icon="school" past />
+          <LegendRow text={t('legend.weekend')} icon="none" weekend />
         </ul>
       </div>
     </div>

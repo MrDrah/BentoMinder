@@ -53,12 +53,14 @@
 @media (hover: hover) {
   .btn--primary:hover {
     background: var(--accent-strong-hover);
+    color: var(--ink-inverse); /* the hover fill is dark: keep the label readable even where a later .btn rule sets the resting colour */
   }
   .btn--secondary:hover {
     background: var(--surface-3);
   }
   .btn--destructive:hover {
     background: var(--danger-strong-hover);
+    color: var(--ink-inverse);
   }
 }
 :focus-visible {
