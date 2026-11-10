@@ -137,7 +137,7 @@ test.describe('E15 consent gating, create, invite, join', () => {
       await expect(a.page.getByTestId('invite-create')).not.toHaveAttribute('aria-disabled', 'true', { timeout: 20_000 });
       await a.page.getByTestId('invite-create').click();
       const inviteCode = await code(a.page);
-      expect(inviteCode).toMatch(/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{10}$/);
+      expect(inviteCode).toMatch(/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{10}$/);
       await expect(a.page.getByTestId('invite-expiry')).toBeVisible();
       await expectNoSeriousAxe(a.page, 'invite shown');
       // the same family data reached the cloud once
@@ -349,8 +349,7 @@ test.describe('E15 equal members, removal, deletion, offline, status, keyboard',
     }
   });
 
-  test('DEFECT E15-D07 US-E15-06/AC4 AC6 a phone that goes offline before the status sheet was ever opened can still open it (observed: the lazy chunk cannot load, only a generic error shows)', async ({ browser }) => {
-    test.fail(true, 'E15-D07: the status sheet is a lazy chunk that is not prefetched; offline-first means it is needed exactly when there is no network');
+  test('E15-D07 fixed US-E15-06/AC4 AC6 a phone that goes offline before the status sheet was ever opened can still open it (the chunk is prefetched)', async ({ browser }) => {
     const w = world();
     const { a, b } = await pair(browser, w);
     try {

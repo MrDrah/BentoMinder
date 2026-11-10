@@ -9,9 +9,9 @@ import { StoreConflictError, type Repository } from '../../domain/storage/reposi
 import { toJstTimestamp, type Instant } from '../../domain/time/jst.ts';
 import { adoptFamilyData, familyHasData, hasData, planFirstSync, safetyCopyExpired, type AdoptionChoice } from '../../domain/sync/adoption.ts';
 import { endMembership, startMembership } from '../../domain/sync/membership.ts';
-import { safetyCopyKey, serializeSyncMeta, syncMetaKey, type SyncMeta } from '../../domain/sync/meta.ts';
+import { joinUnsettled, questionOpen, safetyCopyKey, serializeSyncMeta, syncMetaKey, type SyncMeta } from '../../domain/sync/meta.ts';
 import type { OwnerScope } from '../../domain/sync/owner-scope.ts';
-import { SyncPortError, type Invite, type Membership, type StoredEnvelope, type SyncPort } from '../../domain/sync/types.ts';
+import { SyncPortError, type EndedReason, type Invite, type Membership, type StoredEnvelope, type SyncPort } from '../../domain/sync/types.ts';
 
 export type JoinError = 'generic' | 'expired' | 'full' | 'rate' | 'already' | 'offline' | 'other';
 export type JoinResult = { kind: 'done' } | { kind: 'ask' } | { kind: 'error'; error: JoinError };
@@ -40,6 +40,10 @@ export interface FamilyOps {
   completeAdoption(choice: AdoptionChoice): Promise<void>;
   /** Cancel of a first join that was just committed: the membership is undone, nothing of the device changed. */
   cancelJoin(): Promise<void>;
+  /** Finishes a join that was interrupted before its first download was decided (US-E15-04/AC11). No-op otherwise. */
+  resumeJoin(): Promise<void>;
+  /** While the adoption question is open: has the membership ended meanwhile? If so it ends here too (US-E15-08/AC3, AC6). */
+  checkPendingMembership(): Promise<void>;
   leave(lastMember: boolean): Promise<void>;
   removeMember(uid: string): Promise<void>;
   deleteFamily(): Promise<void>;
@@ -69,6 +73,8 @@ export interface FamilyOpsContext {
   serial: <T>(task: () => Promise<T>) => Promise<T>;
   /** Called inside a metadata step that changes membership or the local copy: a running cycle drops its stale result. */
   membershipChanged: () => void;
+  /** The device learned that its membership ended outside a cycle: the controller shows the ended notice (null clears it). */
+  noteEnded?: (reason: EndedReason | null) => void;
   /** Waits between the retries of a delete (tests pass an instant one). */
   wait?: (ms: number) => Promise<void>;
   loadMeta: () => Promise<SyncMeta>;
@@ -198,6 +204,18 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
     }
   }
 
+  const endedReasonOf = (err: unknown): EndedReason | null => {
+    if (!(err instanceof SyncPortError) || err.kind !== 'membership-ended') return null;
+    return err.detail === 'left' || err.detail === 'removed' ? err.detail : 'family-deleted';
+  };
+
+  /** The membership ended while a join or the adoption question was open: stand-alone again, data untouched, the parent is told. */
+  async function endedWhileJoining(reason: EndedReason): Promise<void> {
+    await port.ackMembershipEnd().catch(() => undefined);
+    await endLocal();
+    ctx.noteEnded?.(reason);
+  }
+
   async function endLocal(): Promise<void> {
     await ctx.serial(async () => {
       const meta = await ctx.loadMeta();
@@ -218,7 +236,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
 
     async discover() {
       const meta = await ctx.loadMeta();
-      if (meta.familyId !== null) return { kind: 'member', adoptionAsked: meta.adoption !== null && !meta.adoption.done };
+      if (meta.familyId !== null) return { kind: 'member', adoptionAsked: questionOpen(meta) };
       const m = await port.readMembership(true);
       if (m.status !== 'member') return { kind: 'none' };
       const current = m.consentVersion !== null && m.consentVersion >= noticeVersion;
@@ -272,17 +290,31 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
       } catch (err) {
         return { kind: 'error', error: joinErrorOf(err) };
       }
-      try {
-        const asked = await firstSync(familyId, noticeVersion, stamp(nowMs()));
-        return asked ? { kind: 'ask' } : { kind: 'done' };
-      } catch {
-        // The member is added but the download did not finish: the next open resumes (US-E15-04/AC11).
-        await ctx.serial(async () => {
-          ctx.membershipChanged();
-          scope.setFamilyId(familyId);
-          await writeMeta({ ...(await ctx.loadMeta()), familyId, consent: { version: noticeVersion, at: stamp(nowMs()) } });
+      const at = stamp(nowMs());
+      // First durable step, before any download: this device is a member that has not settled its data yet. From here on
+      // the engine never pushes until the first sync is decided (and, when owed, the question answered): US-E15-04/AC4, AC11.
+      await ctx.serial(async () => {
+        ctx.membershipChanged();
+        scope.setFamilyId(familyId);
+        await writeMeta({
+          ...(await ctx.loadMeta()),
+          familyId,
+          consent: { version: noticeVersion, at },
+          cursor: 0,
+          baselines: {},
+          pending: {},
+          adoption: { familyId, choice: 'download', done: false },
         });
-        await ctx.resync();
+      });
+      try {
+        const asked = await firstSync(familyId, noticeVersion, at);
+        return asked ? { kind: 'ask' } : { kind: 'done' };
+      } catch (err) {
+        // The member is added but the download did not finish (or the local copy is unreadable now): the join stays unsettled and
+        // resumes at the next cycle or open; the question is asked then.
+        const ended = endedReasonOf(err);
+        if (ended !== null) await endedWhileJoining(ended);
+        else await ctx.resync();
         return { kind: 'done' };
       }
     },
@@ -296,8 +328,38 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
       };
     },
 
+    async resumeJoin() {
+      const meta = await ctx.loadMeta();
+      if (!joinUnsettled(meta) || meta.familyId === null) return;
+      const consent = meta.consent ?? { version: noticeVersion, at: stamp(nowMs()) };
+      try {
+        await firstSync(meta.familyId, consent.version, consent.at);
+      } catch (err) {
+        const ended = endedReasonOf(err);
+        if (ended === null) throw err;
+        await endedWhileJoining(ended);
+      }
+    },
+
+    async checkPendingMembership() {
+      const meta = await ctx.loadMeta();
+      if (!questionOpen(meta)) return;
+      const m = await port.readMembership();
+      if (m.status === 'ended') await endedWhileJoining(m.reason);
+    },
+
     async completeAdoption(choice) {
-      const { records, seq } = await pullAll();
+      if (!questionOpen(await ctx.loadMeta())) return; // the membership ended meanwhile: nothing is left to answer
+      let pulled: { records: StoredEnvelope[]; seq: number };
+      try {
+        pulled = await pullAll();
+      } catch (err) {
+        const ended = endedReasonOf(err);
+        if (ended === null) throw err;
+        await endedWhileJoining(ended);
+        return;
+      }
+      const { records, seq } = pulled;
       await ctx.serial(async () => {
         const meta = await ctx.loadMeta();
         const familyId = meta.familyId;
@@ -336,7 +398,15 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
     },
 
     async cancelJoin() {
-      await port.leave();
+      if ((await ctx.loadMeta()).familyId === null) return; // already stand-alone (the membership ended while the question was open)
+      try {
+        await port.leave();
+      } catch (err) {
+        const ended = endedReasonOf(err);
+        if (ended === null) throw err;
+        await endedWhileJoining(ended);
+        return;
+      }
       await port.ackMembershipEnd().catch(() => undefined);
       await ctx.serial(async () => {
         const meta = await ctx.loadMeta();
@@ -363,6 +433,7 @@ export function createFamilyOps(ctx: FamilyOpsContext): FamilyOps {
 
     async acknowledgeEnded() {
       await port.ackMembershipEnd().catch(() => undefined);
+      ctx.noteEnded?.(null);
       await endLocal();
     },
 

@@ -44,6 +44,15 @@ export interface SyncMeta {
   safety: { createdAt: string } | null;
 }
 
+/**
+ * US-E15-04/AC4, AC11: a member device whose first download has not been decided yet. Written the moment the member is added,
+ * before any download; `choice: 'download'` with `done: false` is the marker. The engine never pushes while `done` is false.
+ */
+export const joinUnsettled = (m: SyncMeta): boolean => m.familyId !== null && m.adoption !== null && !m.adoption.done && m.adoption.choice === 'download';
+
+/** The adoption question (default keep family) is owed and still open. */
+export const questionOpen = (m: SyncMeta): boolean => m.familyId !== null && m.adoption !== null && !m.adoption.done && m.adoption.choice !== 'download';
+
 export function emptySyncMeta(): SyncMeta {
   return {
     version: SYNC_META_VERSION,

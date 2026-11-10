@@ -24,7 +24,7 @@ export const path = {
 
 export const inviteHash = (normalisedCode: string): string => sha256(`bm-invite-v1:${normalisedCode}`);
 
-export const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+export const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 export const CODE_LENGTH = 10;
 export const normaliseCode = (code: string): string => code.toUpperCase().replace(/[\s-]/g, '');
 export const codeWellFormed = (code: string): boolean => code.length === CODE_LENGTH && [...code].every((c) => CODE_ALPHABET.includes(c));

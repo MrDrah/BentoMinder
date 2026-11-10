@@ -21,8 +21,15 @@ function newFamilyId(ctx: Ctx): string {
 }
 
 function newCode(ctx: Ctx): string {
-  const bytes = ctx.random(CODE_LENGTH);
-  return Array.from(bytes, (b) => CODE_ALPHABET[b % 32] as string).join(''); // 256 is a multiple of 32: no modulo bias
+  // 31 symbols: accept only bytes below 248 (= 31 * 8) so every symbol is equally likely (rejection sampling, no modulo bias).
+  const limit = 256 - (256 % CODE_ALPHABET.length);
+  let out = '';
+  while (out.length < CODE_LENGTH) {
+    for (const b of ctx.random(CODE_LENGTH * 2)) {
+      if (b < limit && out.length < CODE_LENGTH) out += CODE_ALPHABET[b % CODE_ALPHABET.length] as string;
+    }
+  }
+  return out;
 }
 
 /** The consent version a request carries: an integer at least the server minimum, or a refusal. */

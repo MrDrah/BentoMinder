@@ -1,8 +1,8 @@
 // The app-bar status button (components §16.7): a 44 px icon button left of 設定, hidden while the account is in no family
 // (`local-only`), so the app looks exactly as before. Opens the status sheet (lazy chunk `sync-status`).
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useApp } from '../app-store.tsx';
-import { ChunkBoundary, LazyStatusSheet } from './lazy.tsx';
+import { ChunkBoundary, LazyStatusSheet, prefetchStatusChunk } from './lazy.tsx';
 import { useSyncState } from './sync-context.tsx';
 import { statusText, SyncIcon } from './status-view.tsx';
 
@@ -17,7 +17,12 @@ export function SyncStatusButton() {
   const s = useSyncState();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
-  if (!s.enabled || s.view.state === 'local-only') return null;
+  const shownButton = s.enabled && s.view.state !== 'local-only';
+  useEffect(() => {
+    // Once the button is drawn the sheet's chunk is fetched in the background (a small separate file, not part of the main bundle).
+    if (shownButton) prefetchStatusChunk();
+  }, [shownButton]);
+  if (!shownButton) return null;
   const word = t(statusText(s.view.state, s.limitScope).word);
   const shown = s.view.stale ? t('sync.stale.short') : word;
   return (
