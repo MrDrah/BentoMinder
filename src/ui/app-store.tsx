@@ -16,6 +16,7 @@ import { createEmptyStore } from '../domain/storage/defaults.ts';
 import { StoreConflictError, type LoadResult, type Repository } from '../domain/storage/repository.ts';
 import { toJstTimestamp, todayJst, type Instant, type LocalDate } from '../domain/time/jst.ts';
 import { createTranslator, type Language, type Translate } from '../i18n/index.ts';
+import { prepareFamilyImport } from '../domain/sync/import.ts';
 import { shippedDictionary } from './dictionary.ts';
 import { shippedLibrary } from './library.ts';
 import { setProfileDraft } from './session.ts';
@@ -229,7 +230,15 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   }, [repository, newDeviceId, clock, sync]);
 
   const replaceStore = useCallback(
-    async (store: BentoMinderStore) => {
+    async (incoming: BentoMinderStore) => {
+      // US-E15-11/AC6: while in a family the file's records are re-labelled for the family and stamped now, so every other
+      // device converges on them; the device id stays this device's own.
+      const syncState = sync?.getState();
+      const current = stateRef.current;
+      const store =
+        syncState?.familyId != null && !syncState.adoptionPending
+          ? prepareFamilyImport({ imported: incoming, deviceId: current.phase === 'ready' ? current.store.deviceId : incoming.deviceId, familyId: syncState.familyId, nowIso: toJstTimestamp(clock.now()) })
+          : incoming;
       try {
         await repository.save(store, { force: true });
       } catch {
@@ -241,7 +250,7 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       void sync?.localChanged(store);
       return true;
     },
-    [repository, sync],
+    [repository, sync, clock],
   );
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
