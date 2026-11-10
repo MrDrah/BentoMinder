@@ -201,11 +201,14 @@ Test: the e2e suite runs the calendar screenshot check in greyscale (`filter: gr
 
 Built from `copy.md` §24 (`cell.aria.*`, `cell.state.*`), one full sentence per tile button, no colour words, no "button" in the text, no assessment and no recipe name (both are in the day sheet). Order is fixed:
 
-`{date}[、{holidayName}]、{state}[、手動で変更][、今日|明日|過去の日][、お弁当の準備が未定]`
+`{date}[、{holidayName}]、{state}[、アレルギーに注意][、手動で変更][、今日|明日|過去の日][、お弁当の準備が未定]`
 
 | Tile | ja | en |
 |---|---|---|
 | School lunch, ordinary | 11月4日（水）、給食 | Wed, Nov 4, school lunch |
+| School lunch with the allergen alert | 11月19日（木）、給食、アレルギーに注意 | Thu, Nov 19, school lunch, allergen alert |
+| School lunch, allergen alert, changed, today | 11月17日（火）、給食、アレルギーに注意、手動で変更、今日 | Tue, Nov 17, school lunch, allergen alert, changed by you, today |
+| Past school-lunch day with the alert | 11月6日（金）、給食、アレルギーに注意、過去の日 | Fri, Nov 6, school lunch, allergen alert, past day |
 | School lunch, changed by the user, tomorrow (BA example) | 11月4日（水）、給食、手動で変更、明日 | Wed, Nov 4, school lunch, changed by you, tomorrow |
 | Homemade bento planned | 11月18日（水）、手作りお弁当、手動で変更 | Wed, Nov 18, homemade bento, changed by you |
 | Homemade bento planned, today | 11月17日（火）、手作りお弁当、手動で変更、今日 | Tue, Nov 17, homemade bento, changed by you, today |
@@ -320,11 +323,11 @@ Placeholders like 「{n}つ」 switch to 「個」 for 10 and more (copy §0).
 
 ### 12.2 Day tile redesign (2026-11-10; components §18; BA US-E5-01/AC3-AC4, AC9-AC15)
 
-- **Keyboard and ARIA:** unchanged (roving tabindex, arrows, Home/End, PageUp/PageDown, `role="grid"`; today `aria-current="date"`). The tile name is the sentence in §6 (replaced). Icons, the red dash and the red top bar are `aria-hidden` decoration; every fact they show is in the name and in the legend text.
-- **Never colour alone** (replaces the calendar rows of §3): school / home / unsure = box / X / X with ?; changed = top bar + 「手動で変更」; needed-not-planned = bottom dash + 「お弁当の準備が未定」; today = the only filled tile + 「今日」 + `aria-current`; tomorrow = 2 px frame + 「明日」; past = no fill, lighter stroke + 「過去の日」. Assessment (○ △ ? —), recipe name and badges are no longer on the tile.
+- **Keyboard and ARIA:** unchanged (roving tabindex, arrows, Home/End, PageUp/PageDown, `role="grid"`; today `aria-current="date"`). The tile name is the sentence in §6 (replaced). Icons, the allergen mark, the red dash and the red top bar are `aria-hidden` decoration; every fact they show is in the name and in the legend text.
+- **Never colour alone** (replaces the calendar rows of §3): school / home / unsure = box / X / X with ?; changed = top bar + 「手動で変更」; needed-not-planned = bottom dash + 「お弁当の準備が未定」; today = the only filled tile + 「今日」 + `aria-current`; tomorrow = 2 px frame + 「明日」; past = no fill, lighter stroke + 「過去の日」. allergen alert = a circled 「!」 bottom right + 「アレルギーに注意」 (the first fact after the state in the name). Assessment (○ △ ? —), recipe name and every other badge are no longer on the tile.
 - **Targets:** tile >= 44 x 44 (weekend column 44 x 80), 2 px gap. **Reflow / 200 % text:** agenda rows (components §18.9) carry the words as text.
 - **Reduced motion:** nothing animates on a tile. **Dark:** the same token names; `navy-fill` is cream and `ink-inverse` deep navy, so today stays "the filled tile".
-- **Contrast audit for the tile** (computed 2026-11-10 from `design/tokens.json` with the WCAG 2.1 formula by `docs/dev/_scratch/ui-refresh/tile-contrast.mjs`; **26 pairs x 2 themes = 52 checks, 0 failures**; no new colour exists). Needs: 4.5 text, 3 non-text.
+- **Contrast audit for the tile** (computed 2026-11-10 from `design/tokens.json` with the WCAG 2.1 formula by `docs/dev/_scratch/ui-refresh/tile-contrast.mjs`; **31 pairs x 2 themes = 62 checks, 0 failures**; no new colour exists). Needs: 4.5 text, 3 non-text.
 
 | # | Pair | Where | Light | Dark | Needs |
 |---|---|---|---|---|---|
@@ -348,6 +351,11 @@ Placeholders like 「{n}つ」 switch to 「個」 for 10 and more (copy §0).
 | T18 | `ink-inverse` on `navy-fill` | selected ring on today | 13.20 | 15.03 | 3 |
 | T19 / T20 | `sunday` / `saturday` on `surface-2` | Sun, holiday 「祝」, Sat number on a tile (= P25, P23) | 6.23 / 6.62 | 7.52 / 7.25 | 4.5 |
 | T21 / T22 | `sunday` / `saturday` on `surface-1` | the same on a past (transparent) tile (= P24, P22) | 6.33 / 6.73 | 8.45 / 8.15 | 4.5 |
+| T27 | `danger` on `danger-soft` | allergen mark: the 「!」 glyph on its fill (12-13 px bold, so held to the text 4.5) | 5.99 | 6.93 | 4.5 |
+| T28 | `danger` on `surface-2` | allergen mark ring against a normal or tomorrow tile | 7.20 | 7.59 | 3 |
+| T29 | `danger` on `surface-1` | allergen mark ring against a past (transparent) tile | 7.32 | 8.53 | 3 |
+| T30 | `danger` on `surface-3` | allergen mark ring on the hover / active fill | 6.13 | 6.52 | 3 |
+| T31 | `danger-soft` on `navy-fill` | allergen mark fill against the today tile (the ring there is decorative) | 11.62 | 12.21 | 3 |
 | T25 / T26 | `focus-ring` on `focus-halo` / `surface-1` | focus ring on any tile / against the page (= U12, U10) | 6.09 / 6.09 | 8.15 / 8.15 | 3 |
 
-  Why `planned-edge` on the today tile: `accent` on the dark-theme cream fill would be 2.12:1 (already a rejected pair); `planned-edge` is the existing deeper red made for exactly this surface (T12 4.67 dark). The lowest new pair is T11 (red dash on the hover fill, light, 3.37:1), above the 3:1 floor; the lowest new text pair is T02 (5.56:1). Saturday / Sunday numbers are never drawn on the today tile (they turn `ink-inverse`), so no blue or red on navy exists. The hairline `line-1` border of a tile stays decorative (as in §2). T01-T26 are not added to the main 68-pair table; they re-use its values.
+  Why `planned-edge` on the today tile: `accent` on the dark-theme cream fill would be 2.12:1 (already a rejected pair); `planned-edge` is the existing deeper red made for exactly this surface (T12 4.67 dark). The lowest new pair is T11 (red dash on the hover fill, light, 3.37:1), above the 3:1 floor; the lowest new text pair is T02 (5.56:1). Saturday / Sunday numbers are never drawn on the today tile (they turn `ink-inverse`), so no blue or red on navy exists. The hairline `line-1` border of a tile stays decorative (as in §2). The lowest allergen-mark pair is T27 (5.99:1). T01-T31 are not added to the main 68-pair table; they re-use its values.

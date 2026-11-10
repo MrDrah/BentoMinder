@@ -1337,7 +1337,7 @@ Stories touched visually only (outcomes unchanged): US-E5-01 (grid), US-E5-02 (s
 
 ---
 
-## 18. Calendar day tile redesign (PO 2026-11-10, PLAN §7 last row; BA: US-E5-01/AC3-AC4, AC9-AC15)
+## 18. Calendar day tile redesign (PO 2026-11-10, PLAN §7 last row; BA: US-E5-01/AC3-AC4, AC9-AC16)
 
 > **This section supersedes**: §2.4 (cell anatomy, layers 1-4 and the cell accessible name), the cell-content row and the "Today", "Selected" and "all other cell states" bullets of §17.4, the icon column of the Today card and upcoming rows (§2.5, §2.6; see §18.8), and the legend list of §2.8 / §17.5 (§18.7). Layout, grid sizes, rhythm, the order of the home screen (Today card **below** the calendar) and everything else in §17 stand. Preview: `design/preview/index.html`, slot (h). Contrast: `design/a11y-responsive.md` §12.2. Copy: `design/copy.md` §24. Flow: `design/flows.md` §24. Developer notes: `design/ui-refresh-2026-11.md` §3a.
 
@@ -1355,7 +1355,7 @@ All three: 24 px grid (`viewBox="0 0 24 24"`), 2 px stroke, round caps and joins
 
 Implementation note: `Icon.tsx` draws one `<path>` per name; these icons need several elements, so add a `TileIcon` component in `src/ui/components/Marks.tsx` next to the others and render the markup above. No new dependency.
 
-### 18.2 Anatomy (390 px, weekday column; the weekend column is narrower, see §18.4)
+### 18.2 Anatomy (390 px, weekday column; the weekend column is narrower, see §18.4; the allergen mark of §18.12 sits bottom right)
 
 ```
 ┌──────────┐  56 x 80 px tile (min), radius-cell 10
@@ -1366,7 +1366,7 @@ Implementation note: `Icon.tsx` draws one `<path>` per name; these icons need se
 │   ━━━━   │  red dash: 18 x 4 px, radius 2, centred, 8 px above the bottom edge (only when needed)
 └──────────┘
 ```
-Holiday: the text 「祝」 (en 「Hol」) stays as a `text-xs` superscript beside the number (US-E5-01/AC2 keeps it); it is part of the date, not a state mark. Nothing else is ever drawn on a tile: no assessment symbol, no word, no recipe name, no badge. The "needs review" and "allergen" badges of §2.4 layer 4 are **not on the tile any more** (BA: what a tile shows is only AC3-AC15); the same facts remain in the day sheet, the upcoming summary and the reminders (report, question 3).
+Holiday: the text 「祝」 (en 「Hol」) stays as a `text-xs` superscript beside the number (US-E5-01/AC2 keeps it); it is part of the date, not a state mark. **Content budget (ruling 2026-11-10, BA AC16): a tile never shows more than the day number (with 「祝」 on a holiday, part of the date) + one state icon + at most one allergen mark (§18.12) + the edge markers (top bar, red dash, and the border / fill of today and tomorrow).** Nothing else is ever drawn on a tile: no assessment symbol, no word, no recipe name, no other badge. The "needs review" badge and the refresh-conflict flag of §2.4 layer 4 are **not on the tile any more**; the same facts remain in the day sheet, the upcoming summary and the reminders. The allergen mark is the only badge that stays (PO, safety). Testable form: a tile element contains the number element, at most the holiday word, at most one icon, at most one `.cell__allergen` and at most one `.cell__dash`; the top bar is a pseudo-element.
 
 ### 18.3 What each day shows (the icon; BA AC3, AC13)
 
@@ -1432,13 +1432,14 @@ Closed by default and opened by the button in the tools row (§17.5 unchanged). 
 3. `home-bento` sample: `legend.home`.
 4. `bento-unsure` sample: `legend.unsure`.
 5. Sample with a red dash: `legend.dash`.
-6. Sample with a red top bar: `legend.changedEdge`.
-7. Filled sample: `legend.today`.
-8. Framed sample (2 px): `legend.tomorrow`.
-9. Grey sample: `legend.past`.
-10. Number colours: `legend.weekend` (kept).
+6. Lunch-box sample with the allergen mark: `legend.allergen` (new, BA AC16).
+7. Sample with a red top bar: `legend.changedEdge`.
+8. Filled sample: `legend.today`.
+9. Framed sample (2 px): `legend.tomorrow`.
+10. Grey sample: `legend.past`.
+11. Number colours: `legend.weekend` (kept).
 
-It explains exactly the icons and markers a tile can show and nothing else: no assessment symbols, no recipe name, no hatch, no badge, no dashed "suggestion" frame. The disclosure behaviour, test id `legend` and `aria-expanded` / `aria-controls="legend-body"` are unchanged.
+It explains exactly the icons and markers a tile can show and nothing else: no assessment symbols, no recipe name, no hatch, no dashed "suggestion" frame, and no badge other than the allergen mark (row `legend.allergen`, sample tile 40 x 56 with the mark; the sample mark is 16 px with a 12 px glyph). The disclosure behaviour, test id `legend` and `aria-expanded` / `aria-controls="legend-body"` are unchanged.
 
 ### 18.8 Related icon updates (recommended; PO to confirm, report question 2)
 
@@ -1446,11 +1447,47 @@ The old four-compartment bento box meant "homemade bento planned" in the Today c
 
 ### 18.9 Agenda fallback (grid container < 340 px or 200 % text; rows, so text is allowed)
 
-Each row: the date text, the 20 px state icon, the state word (`cell.state.*`, visible because a row is not a tile), then the markers as words: 「手動で変更」 when changed and 「お弁当の準備が未定」 when the dash applies. Today row: `navy-fill` with `ink-inverse`; tomorrow row: 2 px `ink-1` frame; past rows: `ink-3`. Test ids unchanged.
+Each row: the date text, the 20 px state icon, the state word (`cell.state.*`, visible because a row is not a tile), then the markers as words: 「アレルギーに注意」 when the mark applies (with a 16 px copy of the mark in front of the word), 「手動で変更」 when changed and 「お弁当の準備が未定」 when the dash applies. Today row: `navy-fill` with `ink-inverse`; tomorrow row: 2 px `ink-1` frame; past rows: `ink-3`. Test ids unchanged.
 
 ### 18.10 Accessible name (replaces §2.4 "Accessible name"; BA AC14)
 
-`{date}[、{holidayName}]、{state}[、手動で変更][、今日|明日|過去の日][、お弁当の準備が未定]` (en with ", "). No assessment, no recipe name, no colour words, no "button". The order is fixed. ja and en examples for every case: `design/a11y-responsive.md` §6 (replaced). Grid, row, header and gridcell roles, the roving tabindex and `aria-current="date"` on today are unchanged. QA data attributes: keep `data-testid`, `data-today`, `data-past`, `data-override`, `data-decision`, `data-assessment` (not visible; tests may still use them); add `data-icon="school|home|unsure|none"`, `data-dash="true"`, `data-changed="true"`, `data-tomorrow="true"`.
+`{date}[、{holidayName}]、{state}[、アレルギーに注意][、手動で変更][、今日|明日|過去の日][、お弁当の準備が未定]` (en with ", "). The allergen part comes right after the state (safety first). No assessment, no recipe name, no colour words, no "button". The order is fixed. ja and en examples for every case: `design/a11y-responsive.md` §6 (replaced). Grid, row, header and gridcell roles, the roving tabindex and `aria-current="date"` on today are unchanged. QA data attributes: keep `data-testid`, `data-today`, `data-past`, `data-override`, `data-decision`, `data-assessment` (not visible; tests may still use them); add `data-icon="school|home|unsure|none"`, `data-dash="true"`, `data-changed="true"`, `data-tomorrow="true"`, `data-allergen="true"` (also the class `has-allergen`).
+
+### 18.12 Allergen mark (BA US-E5-01/AC16; PO safety ruling 2026-11-10)
+
+One tiny round badge with a 「!」, the shape of the old §2.4 layer-4 allergen badge (circle, fill, ring, bold "!") reused so the family stays one shape one meaning (the day sheet banner and the recipe warnings use the same `danger` family).
+
+**When:** the day is displayed `school-lunch-planned` (the `lunchbox` tile) and its menu carries the allergen alert of US-E1-05/AC2 for the child's registered allergens (the same predicate as the day-sheet banner `day-banner-allergen`). Not on home-bento, unsure, bento-day or number-only tiles, so it can never meet the red dash (the dash exists only on bento days). It can meet the top bar (a changed school day) and every time state.
+
+**Anatomy and position:** a `span.cell__allergen`, `aria-hidden="true"`, absolutely placed in the **bottom-right corner** of the tile's padding box. Bottom right is the only free corner: the number is top centre (with 「祝」 beside it, which rules out top right), the top bar is the top edge, the dash is bottom centre (never together with the mark) and the icon is centred.
+
+| | 360 / 390 | weekend column (44 wide) | >= 768 | >= 1280 |
+|---|---|---|---|---|
+| Badge (circle) | 18 px | 18 px | 20 px | 20 px |
+| Glyph `!` | 12 px (`text-xs`) 700 | 12 px | 13 px | 13 px |
+| Offset right / bottom | 3 px | 3 px | 4 px | 4 px |
+| Ring | 1.5 px | same | same | same |
+
+Measured in the preview (390 geometry, all combinations, `docs/dev/_scratch/ui-refresh/measure-allergen.mjs`): the badge never overlaps the number, 「祝」, the drawn lunch-box shape (clearance 2.5 px on tomorrow, 3.5 px on others, 5.6 px in the weekend column) or the selected ring (the badge sits 1 px inside it). At 768 and 1280 the tile grows to 96 and 104 px high, so the clearance is 15 px or more. The 3 px top bar and the 18 px wide dash are far away. The tile's 44 x 44 touch target is unchanged (the mark is not a control).
+
+**Tokens (same names in light and dark; no new colour):** fill `danger-soft` (#FBE3E0 / #40242A), ring and glyph `danger` (#A3271F / #FF9C92). CSS: `.cell__allergen { position: absolute; right: 3px; bottom: 3px; width: 18px; height: 18px; box-sizing: border-box; border-radius: 50%; background: var(--danger-soft); color: var(--danger); border: 1.5px solid var(--danger); display: grid; place-items: center; font-size: var(--text-xs); font-weight: var(--weight-bold); line-height: 1; pointer-events: none; }` and from 768 `width: 20px; height: 20px; right: 4px; bottom: 4px; font-size: 13px;`. It is a child of `button.cell__btn`, painted above the selected ring, the top bar and the fill.
+
+**Combinations (the mark keeps its own colours everywhere; it never inverts, greys or hides):**
+
+| Tile state | Treatment |
+|---|---|
+| default / future | as above on `surface-2` (T28) |
+| hover, active | unchanged; the ring still reads on `surface-3` (T30). No hover on past |
+| focus-visible | the global ring is drawn on the tile, the mark is unchanged |
+| selected | the 3 px ring (4 px on tomorrow) stays outside the mark; the mark is painted above it |
+| today (navy, cream in dark) | the mark keeps its own light fill, so it is a light disc on the filled tile (T31); the ring on navy is decorative |
+| tomorrow | as default on `surface-2`; sits 1 px inside the 2 px frame and the 4 px selected ring |
+| past | **stays in `danger` colours** (not grey): a safety fact is not dimmed for a past day (T29). The grey rule of AC9 applies to number and icon |
+| changed (top bar) | both shown; no interaction |
+| weekend column | same 18 px badge, same corner |
+| agenda fallback / 200 % text | row shows the 16 px badge plus the word 「アレルギーに注意」 |
+
+**Not colour-only:** a circle with the glyph 「!」 (shape and character), the words in the accessible name (copy §24.1, `cell.aria.allergen`) and in the legend (`legend.allergen`). Greyscale check: the disc and the "!" remain distinguishable. Contrast: `design/a11y-responsive.md` §12.2, T27-T31.
 
 ### 18.11 Coverage
-US-E5-01/AC1-AC4, AC9-AC15; US-E5-02/AC1 (the sheet keeps assessment and recipe); US-E4-03/AC1, AC3; US-E5-05/AC1; US-E5-08/AC1; US-E6-06/AC1; US-E7-03/AC1 (Today card below the calendar); US-E8-04/AC1; US-E8-05/AC3; US-NF-02/AC3-AC4; BR-01, BR-02, BR-03, BR-15, BR-27.
+US-E5-01/AC1-AC4, AC9-AC16; US-E1-05/AC2; US-E5-02/AC1 (the sheet keeps assessment and recipe); US-E4-03/AC1, AC3; US-E5-05/AC1; US-E5-08/AC1; US-E6-06/AC1; US-E7-03/AC1 (Today card below the calendar); US-E8-04/AC1; US-E8-05/AC3; US-NF-02/AC3-AC4; BR-01, BR-02, BR-03, BR-15, BR-27.

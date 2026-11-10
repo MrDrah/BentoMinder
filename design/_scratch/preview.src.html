@@ -337,6 +337,10 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
 .tl-dash{position:absolute;left:50%;bottom:8px;width:18px;height:4px;margin-left:-9px;border-radius:2px;background:var(--tile-red)}
 .tl.satc .tl-dash,.tl.sunc .tl-dash{width:14px;margin-left:-7px}
 .tl.is-changed::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--tile-red)}
+.tl-al{position:absolute;right:3px;bottom:3px;width:18px;height:18px;box-sizing:border-box;border-radius:50%;background:var(--danger-soft);color:var(--danger);border:1.5px solid var(--danger);display:grid;place-items:center;font-size:var(--text-xs);font-weight:700;line-height:1;pointer-events:none}
+@media (min-width:768px){.tl-al{width:20px;height:20px;right:4px;bottom:4px;font-size:13px}}
+.lg-s[data-sample=allergen],.lg-s[data-sample=allergen] .tl{height:56px;min-height:56px}
+.lg-s .tl-al{width:16px;height:16px;right:2px;bottom:2px}
 .tl.is-past{background:transparent;--tile-ink:var(--ink-3)}
 .tl.is-past .tl-num{color:var(--ink-3)}
 .tl.is-past.satc .tl-num{color:var(--saturday)}
@@ -756,6 +760,7 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
             <li><span class="lg-s" data-sample="home" aria-hidden="true"></span><span data-en="Homemade bento day">手作りお弁当の日</span></li>
             <li><span class="lg-s" data-sample="unsure" aria-hidden="true"></span><span data-en="Maybe a bento? (undecided, decide later)">お弁当かも？（未定・あとで決める）</span></li>
             <li><span class="lg-s" data-sample="dash" aria-hidden="true"></span><span data-en="Short red line: bento still to plan (today and later)">赤い短い線：お弁当の準備が未定（今日から先の日）</span></li>
+            <li><span class="lg-s" data-sample="allergen" aria-hidden="true"></span><span data-en="! mark: school lunch day that needs allergen attention (your registered allergens)">！：登録したアレルギーに注意が必要な給食の日</span></li>
             <li><span class="lg-s" data-sample="changed" aria-hidden="true"></span><span data-en="Red line along the top: a day you changed">赤い上の線：手動で変更した日</span></li>
             <li><span class="lg-s" data-sample="today" aria-hidden="true"></span><span data-en="Filled tile: today">塗りつぶし：今日</span></li>
             <li><span class="lg-s" data-sample="tomorrow" aria-hidden="true"></span><span data-en="Thick frame: tomorrow">太い枠：明日</span></li>
@@ -765,7 +770,7 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
       </div>
     </div>
   </div>
-  <p class="slot-note"><span data-en="Whole month visible on the first screen; today card, upcoming and tools sit below the calendar. A tile shows the day number and one icon only: lunch box = school lunch, crossed spoon and spatula = homemade bento, the same with ? = undecided. Red dash = bento still to plan (the 20th); red top line = a day you changed (4th, 9th, 13th, 18th, 19th, 24th, 25th); navy tile = today (17th); navy frame = tomorrow (18th); grey = past. The legend is closed until asked for. Layout above 768 px is described in components section 17 and 18.">最初の画面で月全体が見え、今日のカード・予定・ツール行はその下にあります。タイルには日付の数字とアイコン1つだけが出ます。お弁当箱＝給食、スプーンとヘラの交差＝手作りお弁当、それに？＝未定。赤い短い線＝お弁当の準備が未定（20日）、赤い上の線＝手動で変更した日、塗りつぶし＝今日（17日）、太い枠＝明日（18日）、グレー＝過去。表示の見かたは、押すまで閉じています。768px以上のレイアウトは components 17章・18章を参照。</span></p>
+  <p class="slot-note"><span data-en="Whole month visible on the first screen; today card, upcoming and tools sit below the calendar. A tile shows the day number and one icon only: lunch box = school lunch, crossed spoon and spatula = homemade bento, the same with ? = undecided. Red dash = bento still to plan (the 20th); red top line = a day you changed (4th, 9th, 13th, 18th, 19th, 24th, 25th); small ! mark bottom right = allergen alert on a school lunch day (6th, 17th, 19th); navy tile = today (17th); navy frame = tomorrow (18th); grey = past. The legend is closed until asked for. Layout above 768 px is described in components section 17 and 18.">最初の画面で月全体が見え、今日のカード・予定・ツール行はその下にあります。タイルには日付の数字とアイコン1つだけが出ます。お弁当箱＝給食、スプーンとヘラの交差＝手作りお弁当、それに？＝未定。赤い短い線＝お弁当の準備が未定（20日）、赤い上の線＝手動で変更した日、右下の小さな「!」＝給食の日のアレルギー注意（6日・17日・19日）、塗りつぶし＝今日（17日）、太い枠＝明日（18日）、グレー＝過去。表示の見かたは、押すまで閉じています。768px以上のレイアウトは components 17章・18章を参照。</span></p>
 </section>
 
 </main>
@@ -773,7 +778,7 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
 <!-- ===================== (h2) DAY TILE MATRIX 2026-11-10 ===================== -->
 <section class="tm" id="tileMatrix" aria-labelledby="cap-tm">
   <h2 id="cap-tm"><span data-en="Day tile: every combination (components section 18.5), light and dark">日付タイル：すべての組み合わせ（components 18.5）、ライトとダーク</span></h2>
-  <p class="meta"><span data-en="Columns: past, today, tomorrow, later. Rows: icon kind, with and without the red top line (a day you changed); the red dash row exists only from today on. 31 base combinations. Below: hover, selected and focus, then the narrow weekend column (44 px wide, 20 px icon).">列：過去・今日・明日・それ以降。行：アイコンの種類と、赤い上の線（手動で変更）の有無。赤い短い線の行は今日から先だけです。基本の組み合わせは31通り。その下に、ホバー・選択・フォーカス、そして狭い土日の列（幅44px、アイコン20px）を示します。</span></p>
+  <p class="meta"><span data-en="Columns: past, today, tomorrow, later. Rows: icon kind, with and without the red top line (a day you changed); the red dash row exists only from today on. 39 base combinations (31 plus 8 with the ! mark). Below: hover, selected and focus, then the narrow weekend column (44 px wide, 20 px icon).">列：過去・今日・明日・それ以降。行：アイコンの種類と、赤い上の線（手動で変更）の有無。赤い短い線の行は今日から先だけです。基本の組み合わせは39通り（31通りと、「!」つきの8通り）。その下に、ホバー・選択・フォーカス、そして狭い土日の列（幅44px、アイコン20px）を示します。</span></p>
   <div class="tm-themes" id="tmThemes"></div>
 </section>
 
@@ -835,15 +840,15 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
   }
 
   // ---- (h) day tile (components section 18). Preview only. ----
-  var TL={2:{i:'school'},4:{i:'home',ch:1},5:{i:'school'},6:{i:'school'},9:{i:'unsure',ch:1},10:{i:'school'},12:{i:'school'},13:{i:'school',ch:1},16:{i:'school'},17:{i:'school'},18:{i:'home',ch:1},19:{i:'school',ch:1},20:{i:'home',dash:1,bd:1},21:{i:'school'},24:{i:'unsure',ch:1},25:{i:'home',ch:1},26:{i:'school'},30:{i:'school'}};
+  var TL={2:{i:'school'},4:{i:'home',ch:1},5:{i:'school'},6:{i:'school',al:1},9:{i:'unsure',ch:1},10:{i:'school'},12:{i:'school'},13:{i:'school',ch:1},16:{i:'school'},17:{i:'school',al:1},18:{i:'home',ch:1},19:{i:'school',ch:1,al:1},20:{i:'home',dash:1,bd:1},21:{i:'school'},24:{i:'unsure',ch:1},25:{i:'home',ch:1},26:{i:'school'},30:{i:'school'}};
   var HOLS={3:{ja:'文化の日',en:'Culture Day'},23:{ja:'勤労感謝の日',en:'Labour Thanksgiving Day'}};
   var NOLUNCH={27:'午前保育（給食なし）'};
   var SW={school:{ja:'給食',en:'school lunch'},home:{ja:'手作りお弁当',en:'homemade bento'},homeDay:{ja:'手作りお弁当の日',en:'bento day'},unsure:{ja:'未定',en:'undecided'}};
   var SYM={school:'t-lunchbox',home:'t-home-bento',unsure:'t-bento-unsure'};
-  function dayObj(d){var x=TL[d]||{};return {d:d,wd:wdOf(d),i:x.i,ch:x.ch,dash:x.dash,bd:x.bd,today:d===TODAY,tmr:d===TODAY+1,past:d<TODAY,hol:HOLS[d],nl:NOLUNCH[d]};}
+  function dayObj(d){var x=TL[d]||{};return {d:d,wd:wdOf(d),i:x.i,ch:x.ch,al:x.al,dash:x.dash,bd:x.bd,today:d===TODAY,tmr:d===TODAY+1,past:d<TODAY,hol:HOLS[d],nl:NOLUNCH[d]};}
   function tileName(o){
     var sep=lang==='ja'?'、':', ', n=dateLabel(o.d);
-    if(o.i){ if(o.hol)n+=sep+o.hol[lang]; n+=sep+SW[(o.i==='home'&&o.bd)?'homeDay':o.i][lang]; }
+    if(o.i){ if(o.hol)n+=sep+o.hol[lang]; n+=sep+SW[(o.i==='home'&&o.bd)?'homeDay':o.i][lang]; if(o.al)n+=lang==='ja'?'、アレルギーに注意':', allergen alert'; }
     else if(o.nl){ n+=sep+(lang==='ja'?'給食なし（'+o.nl+'）':'no school lunch ('+o.nl+')'); }
     else { if(o.hol)n+=sep+o.hol[lang]; n+=sep+(lang==='ja'?'献立に記載なし':'not on the menu'); }
     if(o.ch)n+=lang==='ja'?'、手動で変更':', changed by you';
@@ -854,11 +859,11 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
   function tileHtml(o,tag,extra){
     var c=['tl'];
     if(o.wd===6)c.push('satc'); if(o.wd===0)c.push('sunc'); if(o.hol)c.push('holc');
-    if(o.i)c.push('has-icon'); if(o.today)c.push('is-today'); else if(o.tmr)c.push('is-tomorrow'); else if(o.past)c.push('is-past');
+    if(o.i)c.push('has-icon'); if(o.al)c.push('has-allergen'); if(o.today)c.push('is-today'); else if(o.tmr)c.push('is-tomorrow'); else if(o.past)c.push('is-past');
     if(o.ch)c.push('is-changed'); if(extra)c.push(extra);
     var inner='<span class="tl-top"><span class="tl-num">'+o.d+'</span>'+(o.hol?'<span class="tl-hol">'+(lang==='ja'?'祝':'Hol')+'</span>':'')+'</span>'
       +(o.i?'<svg class="tl-icon" aria-hidden="true" focusable="false"><use href="#'+SYM[o.i]+'"/></svg>':'')
-      +((o.dash&&!o.past)?'<span class="tl-dash"></span>':'');
+      +((o.dash&&!o.past)?'<span class="tl-dash"></span>':'')+(o.al?'<span class="tl-al" aria-hidden="true">!</span>':'');
     if(tag==='span')return '<span class="'+c.join(' ')+'">'+inner+'</span>';
     return '<button class="'+c.join(' ')+'" type="button" tabindex="'+(o.today?0:-1)+'"'+(o.today?' aria-current="date"':'')+' aria-label="'+tileName(o)+'" data-testid="cal-cell-2026-11-'+(o.d<10?'0':'')+o.d+'">'+inner+'</button>';
   }
@@ -871,15 +876,15 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
     return h;
   }
   var MX_TIMES=[['past',{ja:'過去',en:'Past'},12],['today',{ja:'今日',en:'Today'},17],['tmr',{ja:'明日',en:'Tomorrow'},18],['later',{ja:'それ以降',en:'Later'},19]];
-  function mo(kind,time,ch){var d=time[2];var o={d:d,wd:wdOf(d),past:time[0]==='past',today:time[0]==='today',tmr:time[0]==='tmr',ch:ch};
+  function mo(kind,time,ch,al){var d=time[2];var o={d:d,wd:wdOf(d),past:time[0]==='past',today:time[0]==='today',tmr:time[0]==='tmr',ch:ch,al:al};
     if(kind==='school')o.i='school'; if(kind==='home')o.i='home'; if(kind==='unsure')o.i='unsure'; if(kind==='dashday'){o.i='home';o.dash=1;o.bd=1;} return o;}
   function mxGrid(){
     var T=function(a,b){return lang==='ja'?a:b;};
     var h='<div class="tm-grid"><span></span>'+MX_TIMES.map(function(t){return '<span class="tm-h">'+t[1][lang]+'</span>';}).join('');
-    var rows=[['school',0,T('給食（lunchbox）','School lunch')],['school',1,T('給食・変更あり','School lunch, changed')],['home',0,T('お弁当（home-bento）','Homemade bento')],['home',1,T('お弁当・変更あり','Bento, changed')],['unsure',0,T('未定（bento-unsure）','Undecided')],['unsure',1,T('未定・変更あり','Undecided, changed')],['dashday',0,T('お弁当の日・未計画（赤い短い線）','Bento day, not planned (red dash)')],['plain',0,T('数字だけ（給食なし・献立外）','Number only (no lunch / not on menu)')]];
+    var rows=[['school',0,T('給食（lunchbox）','School lunch')],['school',1,T('給食・変更あり','School lunch, changed')],['school',0,T('給食・アレルギー注意（!）','School lunch, allergen alert (!)'),1],['school',1,T('給食・変更あり・アレルギー注意','School lunch, changed, allergen alert'),1],['home',0,T('お弁当（home-bento）','Homemade bento')],['home',1,T('お弁当・変更あり','Bento, changed')],['unsure',0,T('未定（bento-unsure）','Undecided')],['unsure',1,T('未定・変更あり','Undecided, changed')],['dashday',0,T('お弁当の日・未計画（赤い短い線）','Bento day, not planned (red dash)')],['plain',0,T('数字だけ（給食なし・献立外）','Number only (no lunch / not on menu)')]];
     rows.forEach(function(r){h+='<span class="tm-l">'+r[2]+'</span>'; MX_TIMES.forEach(function(t){
       if(r[0]==='dashday'&&t[0]==='past'){h+='<span class="tm-na">—</span>';return;}
-      h+='<span class="tm-c">'+tileHtml(mo(r[0],t,r[1]),'span')+'</span>';});});
+      h+='<span class="tm-c">'+tileHtml(mo(r[0],t,r[1],r[3]),'span')+'</span>';});});
     h+='</div>';
     // interaction states
     h+='<h3 style="margin:18px 0 8px;font-size:14px">'+T('操作の状態（お弁当・変更あり）','Interaction states (bento, changed)')+'</h3><div class="tm-grid"><span></span>'+MX_TIMES.map(function(t){return '<span class="tm-h">'+t[1][lang]+'</span>';}).join('');
@@ -887,18 +892,24 @@ html[lang="en"] .clab{max-inline-size:none;overflow-wrap:break-word}
       if(st[0]==='is-hover'&&t[0]==='past'){h+='<span class="tm-na">'+T('なし','none')+'</span>';return;}
       h+='<span class="tm-c">'+tileHtml(mo('home',t,1),'span',st[0])+'</span>';});});
     h+='</div>';
+    // interaction states, allergen mark
+    h+='<h3 style="margin:18px 0 8px;font-size:14px">'+T('操作の状態（給食・変更あり・アレルギー注意）','Interaction states (school lunch, changed, allergen alert)')+'</h3><div class="tm-grid"><span></span>'+MX_TIMES.map(function(t){return '<span class="tm-h">'+t[1][lang]+'</span>';}).join('');
+    [['is-hover',T('ホバー','Hover')],['is-selected',T('選択中','Selected')],['is-focus',T('フォーカス','Focus')]].forEach(function(st){h+='<span class="tm-l">'+st[1]+'</span>';MX_TIMES.forEach(function(t){
+      if(st[0]==='is-hover'&&t[0]==='past'){h+='<span class="tm-na">'+T('なし','none')+'</span>';return;}
+      h+='<span class="tm-c">'+tileHtml(mo('school',t,1,1),'span',st[0])+'</span>';});});
+    h+='</div>';
     // weekend narrow column
     var wk=function(k,ex){var o={d:21,wd:6};if(k==='today'){o.today=1;o.wd=6;} if(k==='past'){o.past=1;o.d=14;} if(k==='tmr'){o.tmr=1;} o.i=ex; return o;};
-    h+='<h3 style="margin:18px 0 8px;font-size:14px">'+T('土日の狭い列（幅44px・アイコン20px）','Narrow weekend column (44 px wide, 20 px icon)')+'</h3><div class="tm-grid" style="grid-template-columns:132px repeat(4,52px)"><span></span>'+['school','home','unsure','dash'].map(function(k){return '<span class="tm-h">'+k+'</span>';}).join('');
+    h+='<h3 style="margin:18px 0 8px;font-size:14px">'+T('土日の狭い列（幅44px・アイコン20px）','Narrow weekend column (44 px wide, 20 px icon)')+'</h3><div class="tm-grid" style="grid-template-columns:132px repeat(5,52px)"><span></span>'+['school','school!','home','unsure','dash'].map(function(k){return '<span class="tm-h">'+k+'</span>';}).join('');
     [['later',T('土・それ以降','Sat, later')],['today',T('土・今日','Sat, today')],['tmr',T('土・明日','Sat, tomorrow')],['past',T('土・過去','Sat, past')]].forEach(function(r){h+='<span class="tm-l">'+r[1]+'</span>';
-      ['school','home','unsure','dash'].forEach(function(k){var o=wk(r[0],k==='dash'?'home':k); if(k==='dash'){o.dash=1;o.bd=1; if(r[0]==='past'){h+='<span class="tm-na">—</span>';return;}} h+='<span class="tm-c wk">'+tileHtml(o,'span')+'</span>';});});
+      ['school','school!','home','unsure','dash'].forEach(function(k){var o=wk(r[0],k==='dash'?'home':(k==='school!'?'school':k)); if(k==='school!')o.al=1; if(k==='dash'){o.dash=1;o.bd=1; if(r[0]==='past'){h+='<span class="tm-na">—</span>';return;}} h+='<span class="tm-c wk">'+tileHtml(o,'span')+'</span>';});});
     h+='</div>';
     return h;
   }
   function renderMatrix(){
     var el=document.getElementById('tmThemes'); if(!el)return;
     el.innerHTML=['light','dark'].map(function(th){return '<div class="tm-theme" data-theme="'+th+'" aria-label="'+th+'" role="group"><h3>'+(lang==='ja'?(th==='light'?'ライト':'ダーク'):(th==='light'?'Light':'Dark'))+'</h3>'+mxGrid()+'</div>';}).join('');
-    var S={school:{d:12,i:'school'},home:{d:12,i:'home'},unsure:{d:12,i:'unsure'},dash:{d:20,i:'home',dash:1,bd:1},changed:{d:19,i:'school',ch:1},today:{d:17,i:'school',today:1},tomorrow:{d:18,i:'school',tmr:1},past:{d:12,i:'school',past:1},weekend:{d:23,hol:{ja:'',en:''}}};
+    var S={school:{d:12,i:'school'},home:{d:12,i:'home'},unsure:{d:12,i:'unsure'},dash:{d:20,i:'home',dash:1,bd:1},changed:{d:19,i:'school',ch:1},allergen:{d:12,i:'school',al:1},today:{d:17,i:'school',today:1},tomorrow:{d:18,i:'school',tmr:1},past:{d:12,i:'school',past:1},weekend:{d:23,hol:{ja:'',en:''}}};
     document.querySelectorAll('[data-sample]').forEach(function(e){var o=S[e.getAttribute('data-sample')]; if(!o)return; o=Object.assign({wd:wdOf(o.d)},o); if(e.getAttribute('data-sample')==='weekend'){o.wd=6;o.d=7;o.hol=undefined;} e.innerHTML=tileHtml(o,'span');});
   }
   function renderCal(){

@@ -30,6 +30,11 @@ const pairs = [
 ['T24','warning','warning-soft',3,'Needs-review badge glyph (= P35)'],
 ['T25','focus-ring','focus-halo',3,'Focus ring on any tile (= U12)'],
 ['T26','focus-ring','surface-1',3,'Focus ring against page (= U10)'],
+['T27','danger','danger-soft',4.5,'Allergen mark: ! glyph on its fill'],
+['T28','danger','surface-2',3,'Allergen mark: ring against a normal / tomorrow tile'],
+['T29','danger','surface-1',3,'Allergen mark: ring against a past (transparent) tile'],
+['T30','danger','surface-3',3,'Allergen mark: ring on hover/active fill'],
+['T31','danger-soft','navy-fill',3,'Allergen mark: fill against the today tile'],
 ];
 let fail=0; const rows=[];
 for (const [id,fg,bg,need,use] of pairs){ const c=(th)=>{const r=ratio(t.color[th][fg].value,t.color[th][bg].value); if(r<need)fail++; return r.toFixed(2)+(r<need?' FAIL':'');}; rows.push(`| ${id} | \`${fg}\` on \`${bg}\` | ${c('light')} | ${c('dark')} | ${need} | ${use} |`); }

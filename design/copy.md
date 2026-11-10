@@ -1064,7 +1064,7 @@ Only these rows are new. The panel also reuses existing keys verbatim: heading `
 Notes for the developer: the two paragraphs are designer copy summarising behaviour that already exists (reading the menu, the day-before reminder, the three suggestions, BR-xx in PLAN §3); they promise nothing the product does not do (no booking, no safety guarantee, no sync claim). Confirm the wording with the product owner with the other review items (Decision D5). The English paragraphs contain no placeholders, so no `{}` handling is needed.
 
 
-## 24. Calendar day tile redesign (components §18; BA US-E5-01/AC3-AC4, AC9-AC15; PO 2026-11-10)
+## 24. Calendar day tile redesign (components §18; BA US-E5-01/AC3-AC4, AC9-AC16; PO 2026-11-10)
 
 A tile shows a day number and one icon, so these strings are **not visible on the tile**: they are the accessible name of the tile (`cell.aria.*`, `cell.state.*`), the agenda rows (`cell.state.*` visible there) and the legend (`legend.*`). Placeholders: `{date}` = `fmt.date`, `{state}` = one `cell.state.*`. Rows of §8 marked "SUPERSEDED 2026-11-10" are removed from the catalog; `cell.aria.holiday`, `cell.aria.override`, `cell.aria.past`, `cell.aria.noLunch`, `cell.aria.outside`, `cell.aria.noMenu`, `cell.word.holiday`, `legend.weekend`, `cell.flag.changed`, `cell.flag.allergen` stay as they are. The colour words 「赤」 and 「グレー」 appear only where the colour does not flip in dark mode; the navy fill is never called navy in text (it is cream in dark).
 
@@ -1079,9 +1079,10 @@ A tile shows a day number and one icon, so these strings are **not visible on th
 | cell.state.unsure | 未定 | undecided | `{state}` for not-confirmed; icon `bento-unsure`. The visual label of the icon is 「お弁当かも？」 in the legend only (`legend.unsure`) | US-E5-01/AC3, AC14 |
 | cell.aria.isToday | 、今日 | , today | Suffix, after 「手動で変更」 | US-E5-01/AC11, AC14 |
 | cell.aria.isTomorrow | 、明日 | , tomorrow | Suffix, same slot as today/past (never both) | US-E5-01/AC12, AC14 |
+| cell.aria.allergen | 、アレルギーに注意 | , allergen alert | Suffix right after the state, when the allergen mark is shown (school-lunch day; BA wording verbatim). Also the visible word in the agenda row (developer strips the separator) | US-E5-01/AC16, US-E1-05/AC2 |
 | cell.aria.dash | 、お弁当の準備が未定 | , bento still to plan | Last suffix: red dash shown | US-E5-01/AC13, AC14 |
 
-Reused unchanged: `cell.aria.override` 「、手動で変更」 / ", changed by you" (user-changed, red top bar; PO's shorter 「変更あり」 is not used: it would be a second word for the same thing next to `assess.override`), `cell.aria.past` 「、過去の日」, `cell.aria.holiday`, `cell.aria.noLunch`, `cell.aria.outside`, `cell.aria.noMenu` (the suffixes today / tomorrow / past apply to these too, no override or dash). Suffix order: 手動で変更、今日|明日|過去の日、お弁当の準備が未定. Examples: 「11月4日（水）、給食、手動で変更、明日」 / "Wed, Nov 4, school lunch, changed by you, tomorrow"; 「11月20日（金）、手作りお弁当の日、お弁当の準備が未定」 / "Fri, Nov 20, bento day, bento still to plan".
+`cell.flag.allergen` (「アレルゲン注意」, §8) is **not used on the tile**; the tile uses `cell.aria.allergen` (BA wording 「アレルギーに注意」). The row stays for the day-sheet banner and reminders only; recommendation: do not use both words for the same fact on one screen (PO may prefer to retire the row). Reused unchanged: `cell.aria.override` 「、手動で変更」 / ", changed by you" (user-changed, red top bar; PO's shorter 「変更あり」 is not used: it would be a second word for the same thing next to `assess.override`), `cell.aria.past` 「、過去の日」, `cell.aria.holiday`, `cell.aria.noLunch`, `cell.aria.outside`, `cell.aria.noMenu` (the suffixes today / tomorrow / past apply to these too, no override or dash). Suffix order: アレルギーに注意、手動で変更、今日|明日|過去の日、お弁当の準備が未定. Examples: 「11月4日（水）、給食、手動で変更、明日」 / "Wed, Nov 4, school lunch, changed by you, tomorrow"; 「11月20日（金）、手作りお弁当の日、お弁当の準備が未定」 / "Fri, Nov 20, bento day, bento still to plan".
 
 ### 24.2 Legend 「表示の見かた」 (replaces the legend rows of §8; the key legend.title is unchanged)
 
@@ -1092,10 +1093,11 @@ Reused unchanged: `cell.aria.override` 「、手動で変更」 / ", changed by 
 | legend.home | 手作りお弁当の日 | Homemade bento day | Row with the `home-bento` sample | US-E5-01/AC3, AC15 |
 | legend.unsure | お弁当かも？（未定・あとで決める） | Maybe a bento? (undecided, decide later) | Row with the `bento-unsure` sample | US-E5-01/AC3, AC15 |
 | legend.dash | 赤い短い線：お弁当の準備が未定（今日から先の日） | Short red line: bento still to plan (today and later) | Row with the red-dash sample | US-E5-01/AC13, AC15 |
+| legend.allergen | ！：登録したアレルギーに注意が必要な給食の日 | ! mark: school lunch day that needs allergen attention (your registered allergens) | Row with the lunch-box-and-mark sample | US-E5-01/AC16, AC15 |
 | legend.changedEdge | 赤い上の線：手動で変更した日 | Red line along the top: a day you changed | Row with the red-top-bar sample | US-E5-01/AC10, AC15 |
 | legend.today | 塗りつぶし：今日 | Filled tile: today | Row with the filled sample | US-E5-01/AC11, AC15 |
 | legend.tomorrow | 太い枠：明日 | Thick frame: tomorrow | Row with the framed sample | US-E5-01/AC12, AC15 |
 | legend.past | グレー：過去の日 | Grey: past day | Row with the grey sample | US-E5-01/AC9, AC15 |
 | legend.weekend | 土・日・祝（数字の色と「祝」） | Sat, Sun, holidays (number colour and "Hol") | unchanged row | US-E5-01/AC2 |
 
-No new strings are needed for the tile's visible parts (the number is a numeral; 「祝」 is `cell.word.holiday`). The agenda rows reuse `cell.state.*`, `cell.aria.override` text without the leading comma (the developer strips the 「、」 / ", " separator: same rule as the other suffixes) and `cell.aria.dash`.
+The mark itself is the character 「!」, not a string. No other new strings are needed for the tile's visible parts (the number is a numeral; 「祝」 is `cell.word.holiday`). The agenda rows reuse `cell.state.*`, `cell.aria.override` text without the leading comma (the developer strips the 「、」 / ", " separator: same rule as the other suffixes) and `cell.aria.dash`.

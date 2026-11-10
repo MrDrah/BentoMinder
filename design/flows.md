@@ -592,8 +592,9 @@ Supersedes every frame or table cell in this file that describes what a calendar
 | F21.8 | Last day of a month | the framed (tomorrow) tile is the 1st of the next month, visible after 「次の月」 | US-E5-01/AC12 |
 | F21.9 | Past day | grey number and icon, no fill, red top bar kept if it was changed, no dash; opens read-only | US-E5-01/AC9, AC10, US-E5-02/AC3 |
 | F21.10 | No-lunch day, outside the menu, weekend, month without a menu | number only (no icon, no box) except today (filled) and tomorrow (framed) | US-E5-01/AC3, US-E3-06/AC1 |
-| F21.11 | Refresh conflict or allergen warning on a planned day | the tile does not show it any more; the day sheet banner, the upcoming row 「献立が変わりました：{date}」 and the reminder carry it | US-E3-05/AC2, US-E1-05/AC2 |
-| F21.12 | Open the legend | closed by default; the button in the tools row opens the card with the lead line and nine rows (three icons, dash, top bar, filled, frame, grey, number colours) | US-E5-01/AC15 |
+| F21.11 | Refresh conflict or needs-review on a planned day | the tile does not show it; the day sheet banner, the upcoming row 「献立が変わりました：{date}」 and the reminder carry it | US-E3-05/AC2, US-E1-05/AC2 |
+| F21.11a | School-lunch day whose menu carries the allergen alert for the registered allergens | number + `lunchbox` + one small 「!」 mark bottom right; name 「11月19日（木）、給食、アレルギーに注意」; shown on past, today and tomorrow tiles too; the day sheet banner explains it; never together with the red dash; no other alert is on the tile | US-E5-01/AC16, US-E1-05/AC2 |
+| F21.12 | Open the legend | closed by default; the button in the tools row opens the card with the lead line and ten rows (three icons, dash, allergen mark, top bar, filled, frame, grey, number colours) | US-E5-01/AC15 |
 | F21.13 | Narrow container (< 340 px) or 200 % text | agenda rows: date, icon, state word, marker words; filled / framed / grey rows as in components §18.9 | US-NF-02 |
 | F21.14 | Error and empty paths | unchanged (storage banners, missing-menu card, numerals-only grid for a month without a menu: number-only tiles) | US-E3-06/AC1, US-E10-02 |
 | F21.15 | Signed out / session expired | login screen as in F20.13; no calendar | US-E13-01 |

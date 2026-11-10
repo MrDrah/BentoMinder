@@ -307,3 +307,5 @@
 {"v":1,"at":"2026-11-10T10:58:00.551Z","by":"orchestrator","type":"task-start","task":"tile-design","summary":"Task tile-design dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-10T11:10:28.819Z","by":"orchestrator","type":"task-end","task":"tile-design","outcome":"failure","summary":"diff-guard: 25 files outside the allow-list"}
 {"v":1,"at":"2026-11-10T11:58:23.822Z","by":"orchestrator","type":"task-start","task":"tile-design2","summary":"Task tile-design2 dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T11:58:50.061Z","by":"orchestrator","type":"task-start","task":"ui-refresh-dev1","summary":"Task ui-refresh-dev1 dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-10T12:02:42.820Z","by":"orchestrator","type":"task-end","task":"tile-design2","outcome":"failure","summary":"diff-guard: 18 files outside the allow-list"}
