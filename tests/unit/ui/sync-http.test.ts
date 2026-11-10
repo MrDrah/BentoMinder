@@ -54,7 +54,7 @@ describe('US-E15-06/AC3 the wire operations (slice-b-wire.md)', () => {
     const port = portWith(auth, fetchImpl);
     expect(await port.readMembership()).toEqual({ status: 'none' });
     expect(await port.readMembership()).toEqual({ status: 'ended', reason: 'removed' });
-    expect(await port.readMembership()).toEqual({ status: 'member', familyId: 'fam1', consentVersion: 1 });
+    expect(await port.readMembership()).toEqual({ status: 'member', familyId: 'fam1', consentVersion: 1, maxMembers: 2, members: [], invite: null });
     expect(await port.createFamily({ version: 1 })).toEqual({ familyId: 'fam1' });
     expect(await port.createInvite()).toEqual({ code: 'ABCD234567', expiresAt: T });
     await port.cancelInvite();

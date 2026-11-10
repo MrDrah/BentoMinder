@@ -11,6 +11,7 @@ import { createTranslator, type Language } from '../../i18n/index.ts';
 import { App } from '../App.tsx';
 import { AppProvider, type AppServices } from '../app-store.tsx';
 import type { SyncController } from '../sync/controller.ts';
+import { syncConfigured } from '../../adapters/select-sync.ts';
 import { navigate, parseHash } from '../router.ts';
 import { AccountContext, type AccountValue } from './account-context.tsx';
 import { LoginScreen, RestoringScreen } from './LoginScreen.tsx';
@@ -166,6 +167,7 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
       error={error === 'sessionEnded' ? null : error}
       expired={session.lastError === 'sessionEnded'}
       signedOut={justSignedOut}
+      joinHint={syncConfigured() && parseHash(window.location.hash).name === 'join'}
       onSignIn={() => void signIn()}
     />
   );

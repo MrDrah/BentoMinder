@@ -37,6 +37,9 @@ describe('US-E15-11/AC1 no fake seam in the production build, sync on', () => {
       ['FakeA', 'uth'].join(''),
       ['test', 'uid', '001'].join('-'),
       ['bentominder', 'fake', 'auth'].join('.'),
+      // Slice D e2e seam: the localStorage key that switches sync on in the e2e build only (select-sync.ts).
+      ['bentominder', 'fake', 'sync', 'base'].join('.'),
+      ['fake', 'sync', 'base'].join('-'),
     ];
     expect(markers.filter((m) => text.includes(m))).toEqual([]);
     expect(text).toContain(BASE);

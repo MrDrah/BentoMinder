@@ -26,6 +26,8 @@ export function screenTitle(route: TitledRoute, t: Translate, lang: Language): s
       return t('settings.title');
     case 'profile':
       return t('profileEdit.title');
+    case 'join':
+      return t('family.docTitle.join');
     case 'import':
       return t('ob.step2.name');
     case 'review':

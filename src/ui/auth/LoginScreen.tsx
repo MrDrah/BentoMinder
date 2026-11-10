@@ -25,10 +25,12 @@ export interface LoginScreenProps {
   expired: boolean;
   /** The parent just signed out: announce it and move focus to the heading (components §15.4). */
   signedOut: boolean;
+  /** A family invite link was opened while signed out (US-E15-04/AC1): say what happens after sign-in. */
+  joinHint?: boolean;
   onSignIn: () => void;
 }
 
-export function LoginScreen({ t, language, onLanguage, busy, error, expired, signedOut, onSignIn }: LoginScreenProps) {
+export function LoginScreen({ t, language, onLanguage, busy, error, expired, signedOut, joinHint = false, onSignIn }: LoginScreenProps) {
   const title = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (signedOut) title.current?.focus();
@@ -61,6 +63,11 @@ export function LoginScreen({ t, language, onLanguage, busy, error, expired, sig
         {expired && (
           <Banner variant="info" testId="login-expired" title={t('auth.expired.title')}>
             <p className="banner__body">{t('auth.expired.body')}</p>
+          </Banner>
+        )}
+        {joinHint && (
+          <Banner variant="info" testId="login-join-hint">
+            <p className="banner__body">{t('family.join.loginHint')}</p>
           </Banner>
         )}
         <p className="auth__lead">{t('auth.login.lead')}</p>

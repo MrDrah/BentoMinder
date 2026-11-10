@@ -1,6 +1,6 @@
 // Typed hash router (ADR 001): `#/calendar/<YYYY-MM>`, `#/day/<date>`, `#/recipe/<id>`,
 // `#/recipes` (library, US-E6-05), `#/settings[?from=<onboarding step>]`, `#/profile` (edit), `#/recommend/<date>` (M3), `#/refresh-review/<YYYY-MM>[?fresh=1]`, `#/import`,
-// `#/review/<YYYY-MM>[?manual=1]`, `#/onboarding/<1|2|3>[?month=YYYY-MM&manual=1]`.
+// `#/join[/<code>]` (E15 family join), `#/review/<YYYY-MM>[?manual=1]`, `#/onboarding/<1|2|3>[?month=YYYY-MM&manual=1]`.
 // Pure parse/format; the hook listens to hashchange. A leave guard lets a screen hold the
 // parent on it (US-E3-03/AC5: leaving the review asks first).
 import { useEffect, useState } from 'react';
@@ -18,6 +18,7 @@ export type Route =
   | { name: 'refresh-review'; month: YearMonth; fresh: boolean }
   | { name: 'profile' }
   | { name: 'import' }
+  | { name: 'join'; code: string | null }
   | { name: 'review'; month: YearMonth; manual: boolean }
   | { name: 'onboarding'; step: OnboardingStep; month: YearMonth | null; manual: boolean }
   | { name: 'not-found' };
@@ -49,6 +50,9 @@ export function parseHash(hash: string): Route {
       const from = Number(params.get('from'));
       return from === 1 || from === 2 || from === 3 ? { name: 'settings', from } : { name: 'settings' };
     }
+    case 'join':
+      // The code is kept as typed in the link (letters, digits, hyphens); the screen normalises it. Anything else is not a code.
+      return arg === undefined ? { name: 'join', code: null } : /^[A-Za-z0-9-]{1,24}$/.test(arg) ? { name: 'join', code: arg } : { name: 'not-found' };
     case 'recommend':
       return arg !== undefined && isLocalDate(arg) ? { name: 'recommend', date: arg } : { name: 'not-found' };
     case 'refresh-review':
@@ -80,6 +84,8 @@ export function toHash(route: Route): string {
       return route.date === null ? `#/recipe/${route.id}` : `#/recipe/${route.id}?date=${route.date}`;
     case 'settings':
       return route.from === undefined ? '#/settings' : `#/settings?from=${route.from}`;
+    case 'join':
+      return route.code === null ? '#/join' : `#/join/${route.code}`;
     case 'recommend':
       return `#/recommend/${route.date}`;
     case 'refresh-review':

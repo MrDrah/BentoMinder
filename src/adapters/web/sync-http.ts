@@ -177,7 +177,27 @@ export function createHttpSyncPort(options: HttpSyncOptions): HttpSyncPort {
           const familyId = str(r['familyId']);
           if (familyId === undefined) throw badReply();
           const cv = r['consentVersion'];
-          return { status: 'member', familyId, consentVersion: typeof cv === 'number' ? cv : null };
+          const members = Array.isArray(r['members'])
+            ? r['members'].filter(isObject).map((m) => {
+                const email = str(m['email']);
+                const joinedAt = str(m['joinedAt']);
+                return { uid: str(m['uid']) ?? '', you: m['you'] === true, ...(joinedAt === undefined ? {} : { joinedAt }), ...(email === undefined ? {} : { email }) };
+              })
+            : undefined;
+          const inv = r['invite'];
+          const code = isObject(inv) ? str(inv['code']) : undefined;
+          const expiresAt = isObject(inv) ? str(inv['expiresAt']) : undefined;
+          const consentedAt = str(r['consentedAt']);
+          const maxMembers = r['maxMembers'];
+          return {
+            status: 'member',
+            familyId,
+            consentVersion: typeof cv === 'number' ? cv : null,
+            ...(consentedAt === undefined ? {} : { consentedAt }),
+            ...(typeof maxMembers === 'number' ? { maxMembers } : {}),
+            ...(members === undefined ? {} : { members }),
+            ...('invite' in r ? { invite: code !== undefined && expiresAt !== undefined ? { code, expiresAt } : null } : {}),
+          };
         }
         default:
           throw badReply();
