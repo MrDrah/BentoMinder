@@ -1,0 +1,16 @@
+// Public surface of the pure sync core (ADR 016 slice A). The fake port is test support and is exported separately.
+export * from './config.ts';
+export * from './types.ts';
+export * from './hash.ts';
+export * from './envelope.ts';
+export * from './merge.ts';
+export * from './records.ts';
+export * from './meta.ts';
+export * from './dirty.ts';
+export * from './schedule.ts';
+export * from './status.ts';
+export * from './adoption.ts';
+export * from './gate.ts';
+export * from './owner.ts';
+export * from './membership.ts';
+export * from './cycle.ts';
