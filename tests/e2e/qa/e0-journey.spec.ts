@@ -92,9 +92,10 @@ test('US-E0-01/AC1 US-E0-01/AC2 US-E0-01/AC3 the main journey from a fresh devic
   const first = LIB.find((x) => x.id === firstId) as Json;
   await expect(page.getByTestId('rec-card-0-confirm')).toContainText('この日に決定');
   await a.click(page.getByTestId('rec-card-0-confirm'));
-  // Then the cell shows the confirmed-bento marker and the recipe's Japanese name
+  // Then (UI refresh 2026-11-10, US-E5-01/AC3 AC4, US-E5-03/AC2) the tile shows the crossed spoon-and-spatula icon and the red top border, never the recipe name
   await expect(cell(page, '2026-11-04')).toHaveAttribute('data-decision', 'homemade-bento-planned');
-  await expect(cell(page, '2026-11-04')).toContainText(first.shortNameJa);
+  await expect(cell(page, '2026-11-04')).toHaveAttribute('data-icon', 'home');
+  await expect(cell(page, '2026-11-04')).not.toContainText(first.shortNameJa);
   expect((await readStore(page)).decisions['2026-11-04']).toMatchObject({ state: 'homemade-bento-planned', recipeId: firstId });
   // And the upcoming-bento summary lists 「11月4日（水）」 with that recipe
   if (await page.getByTestId('day-sheet-close').isVisible().catch(() => false)) await page.getByTestId('day-sheet-close').click();
@@ -129,7 +130,8 @@ test('US-E0-01/AC1 US-E0-01/AC2 US-E0-01/AC3 the main journey from a fresh devic
   await page.getByTestId('cal-next').click();
   await expect(page.getByTestId('cal-title')).toHaveText('2026年11月');
   await expect(cell(page, '2026-11-04')).toHaveAttribute('data-decision', 'homemade-bento-planned');
-  await expect(cell(page, '2026-11-04')).toContainText(first.shortNameJa);
+  await expect(cell(page, '2026-11-04')).toHaveAttribute('data-icon', 'home');
+  await expect(cell(page, '2026-11-04')).not.toContainText(first.shortNameJa);
   const reloaded = await readStore(page);
   expect(reloaded.profile).toEqual(afterJourney.profile);
   expect(reloaded.menus).toEqual(afterJourney.menus);
