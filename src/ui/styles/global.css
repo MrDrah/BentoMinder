@@ -81,6 +81,9 @@ a {
   top: -100px;
   z-index: var(--z-toast);
   padding: var(--space-2) var(--space-4);
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
   background: var(--surface-2);
   color: var(--ink-1);
 }
@@ -367,6 +370,7 @@ a {
     background: none;
   }
   .sticky-footer.action-bar {
+    position: static;
     margin: 0;
     padding: var(--space-3) 0;
     border: 0;
@@ -441,6 +445,24 @@ a {
 }
 .monthnav .btn {
   margin-left: auto;
+}
+@media (max-width: 359px) {
+  .monthnav {
+    gap: var(--space-1);
+  }
+  .monthnav .iconbtn {
+    flex: none;
+    width: 44px;
+    height: 44px;
+  }
+  .monthnav .btn {
+    flex: none;
+    padding-inline: var(--space-2);
+  }
+  .monthnav__title {
+    font-size: calc(var(--text-lg) * var(--title-scale));
+    overflow-wrap: anywhere;
+  }
 }
 @media (min-width: 768px) {
   .monthnav__title {

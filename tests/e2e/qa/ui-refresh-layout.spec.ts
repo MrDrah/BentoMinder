@@ -154,8 +154,7 @@ test('US-NF-02/AC2 about panel: closed on load, aria wiring, Escape and Close re
 // UIR-D01 (P3): design/components.md 17.2 and a11y 12 say the next Tab after the brand button enters the panel (consent button, then
 // Close) and Tab past Close continues to the language toggle. The panel is after the whole app bar in the DOM, so Tab goes to the
 // language toggle, library and settings first. test.fail() keeps this repro in the suite: it goes red when the defect is fixed.
-test('UIR-D01 US-NF-02/AC2 [expected to fail until fixed] after opening the panel, the next Tab enters it', async ({ page }) => {
-  test.fail(true, 'UIR-D01: Tab order puts the panel after the language toggle and the two icon links (P3, qa-ui-refresh.md)');
+test('UIR-D01 US-NF-02/AC2 after opening the panel, the next Tab enters it', async ({ page }) => {
   await openHome(page, '2026-11-10');
   await page.getByTestId('about-toggle').focus();
   await page.keyboard.press('Enter');
@@ -364,7 +363,6 @@ for (const sc of BAR_SCREENS) {
     [1280, 800],
   ] as const) {
     test(`US-NF-02/AC3 sticky action bar on ${sc.name} at ${w}x${h}: phone only, safe-area rule, never covers the last field, 40% rule`, async ({ page }) => {
-      if (sc.name === 'review' && w >= 768) test.fail(true, 'UIR-D02 (P4): the review footer stays sticky from 768 px; components 17.6 says it is not sticky there');
       await page.clock.setFixedTime(jst10('2026-11-02'));
       await seed(page, sc.store());
       await page.setViewportSize({ width: w, height: h });

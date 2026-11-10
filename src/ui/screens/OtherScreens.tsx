@@ -43,7 +43,7 @@ export function NotFoundScreen() {
     <div className="screen" data-testid="screen-not-found">
       <TopBar title={t('notFound.title')} />
       <main id="main" className="page">
-        <a className="btn" href={toHash({ name: 'calendar', month: null })}>
+        <a className="btn btn--secondary" href={toHash({ name: 'calendar', month: null })}>
           {t('notFound.back')}
         </a>
       </main>

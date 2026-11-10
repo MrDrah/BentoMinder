@@ -860,8 +860,34 @@
   color: var(--ink-inverse);
 }
 .plan-action--danger {
-  border-color: var(--danger);
+  align-items: center;
+  border-color: transparent;
+  background: transparent;
   color: var(--danger);
+  font-weight: var(--weight-regular);
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (hover: hover) {
+  .plan-action:not(.plan-action--primary):not(.plan-action--danger):not(:disabled):hover {
+    background: var(--surface-3);
+  }
+  .plan-action--primary:not(:disabled):hover {
+    background: var(--accent-strong-hover);
+  }
+  .plan-action--danger:not(:disabled):hover {
+    text-decoration-thickness: 2px;
+  }
+}
+.plan-action:not(.plan-action--primary):not(.plan-action--danger):not(:disabled):active {
+  background: var(--surface-3);
+}
+.plan-action--primary:not(:disabled):active {
+  background: var(--accent-strong-hover);
+}
+.plan-action--danger:not(:disabled):active {
+  background: var(--surface-3);
 }
 .plan-action__sub {
   font-size: var(--text-sm);

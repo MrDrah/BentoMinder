@@ -38,7 +38,7 @@ export function RecipeScreen({ id, date }: { id: string; date: LocalDate | null 
         <main id="main" className="page">
           <section className="card" data-testid="recipe-not-found">
             <h2 className="card__title">{t('recipe.notFound')}</h2>
-            <a className="btn" href={toHash({ name: 'calendar', month: null })} data-testid="recipe-not-found-back">
+            <a className="btn btn--secondary" href={toHash({ name: 'calendar', month: null })} data-testid="recipe-not-found-back">
               {t('recipe.notFound.back')}
             </a>
           </section>
