@@ -1,5 +1,5 @@
 // Upcoming summary (design/components.md §2.5) and legend (§2.8).
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { UpcomingSummary } from '../../domain/calendar/day-view.ts';
 import { diffDays, type LocalDate } from '../../domain/time/jst.ts';
 import { formatDate } from '../../i18n/format.ts';
@@ -78,20 +78,25 @@ export function UpcomingSummaryCard({ summary, today }: { summary: UpcomingSumma
   );
 }
 
-/** Expanded until the first bento is planned, then collapsed; the parent can toggle it. */
-export function Legend({ anyPlanned }: { anyPlanned: boolean }) {
+/**
+ * Tools row (components.md §17.5): the share button `share` and the legend toggle on one row, the legend body
+ * below as a card. Always closed on load (UI refresh 2026-11); the open state lasts for the session only.
+ */
+export function Legend({ share }: { share: ReactNode }) {
   const { t } = useApp();
-  const [open, setOpen] = useState<boolean | null>(null);
-  const expanded = open ?? !anyPlanned;
+  const [expanded, setExpanded] = useState(false);
   return (
-    <section className="legend" data-testid="legend">
-      <button type="button" className="legend__toggle" aria-expanded={expanded} aria-controls="legend-body" data-testid="legend-toggle" onClick={() => setOpen(!expanded)}>
-        {t('legend.title')}
-        <svg className="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style={{ transform: expanded ? 'rotate(90deg)' : undefined }}>
-          <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-      <div id="legend-body" hidden={!expanded}>
+    <div className="legend" data-testid="legend">
+      <div className="cal-tools">
+        {share}
+        <button type="button" className="legend__toggle" aria-expanded={expanded} aria-controls="legend-body" data-testid="legend-toggle" onClick={() => setExpanded(!expanded)}>
+          {t('legend.title')}
+          <svg className="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style={{ transform: expanded ? 'rotate(90deg)' : undefined }}>
+            <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+      <div id="legend-body" className="card" hidden={!expanded}>
         <p className="card__body">{t('legend.rule')}</p>
         <ul className="legend__list">
           <li className="legend__item">
@@ -160,6 +165,6 @@ export function Legend({ anyPlanned }: { anyPlanned: boolean }) {
           </li>
         </ul>
       </div>
-    </section>
+    </div>
   );
 }

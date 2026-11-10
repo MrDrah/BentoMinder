@@ -384,7 +384,7 @@ export function ProfileForm({ initial, submitLabel, submitTestId, onSubmit, foot
       </div>
 
       {footerNote}
-      <div className="footer-actions">
+      <div className="footer-actions action-bar">
         <button type="submit" className="btn btn--primary btn--block" data-testid={submitTestId} aria-busy={busy || undefined} disabled={busy}>
           {submitLabel}
         </button>

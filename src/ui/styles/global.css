@@ -20,6 +20,30 @@
   --title-scale: 1.3;
 }
 
+/* UI refresh 2026-11 (components.md §17.3): vertical rhythm aliases, built from the 4 px space tokens. */
+:root {
+  --page-gutter: var(--space-5);
+  --rhythm-block: var(--space-6);
+  --rhythm-section: var(--space-10);
+  --rhythm-related: var(--space-3);
+  --card-pad: var(--space-5);
+}
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: var(--space-6);
+    --rhythm-block: var(--space-8);
+    --rhythm-section: var(--space-12);
+    --card-pad: var(--space-6);
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --rhythm-block: var(--space-10);
+    --rhythm-section: var(--space-16);
+    --rhythm-related: var(--space-4);
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -71,6 +95,7 @@ a {
   top: 0;
   z-index: var(--z-appbar);
   background: var(--surface-1);
+  padding-top: env(safe-area-inset-top);
   border-bottom: 8px solid transparent;
   border-image: var(--stripe-band) 8;
 }
@@ -102,6 +127,122 @@ a {
   font-weight: var(--weight-bold);
   font-size: var(--text-lg);
   letter-spacing: var(--tracking-heading);
+}
+/* Brand-info disclosure (components.md §17.2): button in the bar, panel after it. */
+.brand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  padding: 0 var(--space-1);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--ink-1);
+  font: inherit;
+  cursor: pointer;
+}
+.brand-btn:active {
+  background: var(--surface-3);
+}
+@media (hover: hover) {
+  .brand-btn:hover {
+    background: var(--surface-3);
+  }
+}
+.brand-btn__badge {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface-1);
+  color: var(--ink-1);
+}
+.brand-btn__badge .icon {
+  width: 100%;
+  height: 100%;
+}
+.brand-btn[aria-expanded='true'] .brand-btn__badge {
+  background: var(--ink-1);
+  color: var(--ink-inverse);
+}
+@media (min-width: 400px) {
+  .brand-btn__badge {
+    position: static;
+    width: 20px;
+    height: 20px;
+  }
+}
+.about {
+  display: grid;
+  gap: var(--rhythm-related);
+  justify-items: start;
+  padding: var(--space-5) var(--page-gutter);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line-1);
+}
+.about[hidden] {
+  display: none;
+}
+.about__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+}
+.about__text {
+  margin: 0;
+  max-width: 36em;
+  color: var(--ink-2);
+}
+.about__link {
+  padding-left: 0;
+}
+.about__version {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+.about__close {
+  justify-self: end;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .about:not([hidden]) {
+    animation: about-in 200ms ease-out;
+  }
+}
+@keyframes about-in {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 600px;
+  }
+}
+@media (min-width: 768px) {
+  .about {
+    position: fixed;
+    top: 80px;
+    left: max(var(--space-4), calc((100vw - 1280px) / 2 + var(--space-4)));
+    width: 360px;
+    max-width: calc(100vw - 2 * var(--space-4));
+    max-height: calc(100dvh - 96px);
+    overflow-y: auto;
+    padding: var(--space-6);
+    background: var(--surface-1);
+    border: 1px solid var(--line-1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--elevation-2);
+    z-index: calc(var(--z-appbar) + 1);
+  }
 }
 .appbar__controls {
   display: flex;
@@ -169,26 +310,91 @@ a {
 }
 
 /* Page */
+/* Blocks are separated by a gap, never by margin (components.md §17.3). */
 .page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--rhythm-block);
+  align-content: start;
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--space-4);
+  padding: var(--space-6) var(--page-gutter) max(var(--space-10), env(safe-area-inset-bottom));
+}
+/* A button placed straight in the page keeps its own width instead of stretching. */
+.page > .btn {
+  justify-self: start;
 }
 .card {
-  padding: var(--space-4);
-  margin-bottom: var(--space-4);
+  padding: var(--card-pad);
+  margin-bottom: 0;
   border: 1px solid var(--line-1);
   border-radius: var(--radius-md);
   background: var(--surface-2);
 }
 .card__title {
-  margin: 0 0 var(--space-2);
+  margin: 0 0 var(--rhythm-related);
   font-family: var(--font-display);
   font-size: calc(var(--text-lg) * var(--title-scale));
 }
 .card__body {
   margin: 0;
   color: var(--ink-2);
+}
+.card__body,
+.note,
+.page p {
+  max-width: 36em;
+}
+/* Sticky bottom action bar (phones only, components.md §17.6): sticky, not fixed, so the on-screen
+   keyboard never covers a focused field; it flows at the end of the content once the page is short. */
+.action-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: var(--z-banner);
+  display: grid;
+  gap: var(--space-2);
+  margin: auto calc(-1 * var(--page-gutter)) 0;
+  padding: var(--space-3) var(--page-gutter) max(var(--space-3), env(safe-area-inset-bottom));
+  background: var(--surface-1);
+  border-top: 1px solid var(--line-1);
+}
+@media (min-width: 768px) {
+  .action-bar:not(.sticky-footer) {
+    position: static;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  .sticky-footer.action-bar {
+    margin: 0;
+    padding: var(--space-3) 0;
+    border: 0;
+  }
+}
+/* Very short viewports (landscape, 200 % text): the bar stops being sticky and flows at the end. */
+@media (max-height: 520px) {
+  .action-bar {
+    position: static;
+  }
+}
+/* A screen with an action bar fills the viewport so a short page still pins the bar to the bottom. */
+.screen:has(.action-bar) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+.screen:has(.action-bar) > .page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.screen:has(.action-bar) > .page > :last-child {
+  flex: 1;
+}
+.screen:has(.action-bar) > .page > .btn {
+  align-self: flex-start;
 }
 .btn {
   display: inline-flex;
@@ -223,12 +429,26 @@ a {
 .monthnav {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--space-2);
-  margin: var(--space-2) 0;
+  margin: 0;
+}
+.monthnav .iconbtn {
+  width: 48px;
+  height: 48px;
+}
+.monthnav .btn {
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .monthnav__title {
+    flex: 1;
+    text-align: center;
+  }
 }
 .monthnav__title {
   margin: 0;
+  min-width: 0;
   font-family: var(--font-display);
   font-size: calc(var(--text-xl) * var(--title-scale));
   font-weight: var(--weight-bold);
@@ -243,21 +463,8 @@ a {
   }
   .page {
     max-width: 760px;
-    padding: var(--space-8) var(--space-6) var(--space-12);
-  }
-  .card {
-    padding: var(--space-6);
-    margin-bottom: var(--space-6);
-  }
-  .card__title {
-    margin-bottom: var(--space-3);
-  }
-  .cell,
-  .cal-row.is-compact .cell {
-    min-height: 88px;
-  }
-  .cal-row.is-compact .cell {
-    min-height: var(--cell-row-compact);
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-12);
   }
 }
 

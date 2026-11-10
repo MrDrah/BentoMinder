@@ -19,6 +19,22 @@
   flex-direction: column;
   gap: var(--space-3);
 }
+/* UI refresh 2026-11 (components §17.7): on phones the brand sits in the top third and the sign-in
+   actions (Google button, error, privacy line) in the lower third, within thumb reach. */
+@media (max-width: 767px) {
+  .auth {
+    min-height: 100dvh;
+  }
+  .auth__col:not(.auth__col--center) {
+    flex: 1;
+    padding-top: var(--space-8);
+    padding-bottom: max(var(--space-8), env(safe-area-inset-bottom));
+  }
+  .auth__col .auth-google,
+  .auth__col .family-actions {
+    margin-top: auto;
+  }
+}
 .auth__col--center {
   align-items: center;
   margin-top: 25vh;
@@ -106,12 +122,15 @@
     border-top-color: var(--line-ui);
   }
 }
+/* Tablet and desktop: one centred 400 px column, vertically centred in the remaining height. */
+@media (min-width: 768px) {
+  .auth__col:not(.auth__col--center) {
+    margin-block: auto;
+  }
+}
 @media (min-width: 1280px) {
   .auth__wordmark {
     font-size: var(--text-3xl);
-  }
-  .auth__col {
-    margin-top: 8vh;
   }
 }
 

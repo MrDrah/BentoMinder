@@ -11,8 +11,8 @@
 .rec-grid,
 .rec-rows {
   display: grid;
-  gap: var(--space-4);
-  margin-bottom: var(--space-4);
+  gap: var(--space-6);
+  margin: 0;
 }
 @media (min-width: 1280px) {
   .rec-grid {
@@ -20,10 +20,10 @@
   }
 }
 .rec-more {
-  margin-top: var(--space-4);
+  margin: 0;
 }
 .rec-empty {
-  margin-bottom: var(--space-4);
+  margin: 0;
 }
 
 .rec-card {
@@ -84,7 +84,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   margin-top: var(--space-2);
 }
 .rec-reasons {
@@ -127,7 +127,12 @@
   overflow: hidden;
 }
 .recipe-art--card {
-  height: 112px;
+  height: 72px;
+}
+@media (min-width: 768px) {
+  .recipe-art--card {
+    height: 120px;
+  }
 }
 .recipe-art--thumb {
   width: 64px;
@@ -154,7 +159,7 @@
 /* Recipe detail */
 .recipe__cols {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--rhythm-block);
 }
 @media (min-width: 1280px) {
   .recipe__cols {
@@ -166,7 +171,7 @@
 .recipe__right {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--rhythm-block);
   min-width: 0;
 }
 .recipe__meta {
@@ -258,12 +263,20 @@
     background: var(--surface-1);
   }
 }
+/* Phones: the "decide this day" footer is the sticky action bar (components §17.6). */
+@media (max-width: 767px) {
+  .recipe__footer:not(:empty) {
+    margin: 0 calc(-1 * var(--page-gutter));
+    padding: var(--space-3) var(--page-gutter) max(var(--space-3), env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line-1);
+  }
+}
 
 /* Library */
 .library-list {
   display: grid;
-  gap: var(--space-2);
-  margin: 0 0 var(--space-4);
+  gap: var(--space-3);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -309,7 +322,7 @@
   flex: 1;
   flex-direction: column;
   gap: var(--space-1);
-  padding: var(--space-3) 0;
+  padding: var(--space-4) 0;
   min-width: 0;
 }
 .library-row__name {

@@ -210,7 +210,7 @@ export function ReviewScreen({ month, manual, onboarding }: { month: YearMonth; 
         </details>
       )}
 
-      <div className="sticky-footer">
+      <div className="sticky-footer action-bar">
         <button
           type="button"
           className={`btn btn--primary btn--block${block !== null ? ' is-disabled' : ''}`}

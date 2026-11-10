@@ -76,7 +76,7 @@
 .review {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 .field {
   display: flex;
@@ -237,7 +237,7 @@ legend.field__label {
 .radios {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 .radio {
   display: flex;
@@ -448,7 +448,21 @@ legend.field__label {
 .stack {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
+}
+/* A destructive entry is set apart from the safe buttons of its card: 20 px and a divider (components §17.7). */
+.stack > .btn--destructive-text {
+  position: relative;
+  margin-top: var(--space-2);
+}
+.stack > .btn--destructive-text::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--space-4));
+  height: 1px;
+  background: var(--line-1);
 }
 .progress {
   display: flex;

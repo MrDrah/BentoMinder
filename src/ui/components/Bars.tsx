@@ -2,6 +2,7 @@
 import { useApp } from '../app-store.tsx';
 import { toHash, type Route } from '../router.ts';
 import { SyncStatusButton, useSyncButtonShown } from '../sync/SyncStatusButton.tsx';
+import { AboutDisclosure } from './AboutPanel.tsx';
 import { Icon } from './Icon.tsx';
 import { LangToggle } from './LangToggle.tsx';
 
@@ -9,28 +10,29 @@ export function AppBar() {
   const { t } = useApp();
   const syncShown = useSyncButtonShown();
   return (
-    <header className={`appbar${syncShown ? ' appbar--sync' : ''}`} data-testid="appbar">
-      <div className="appbar__inner">
-        <span className="appbar__brand">
-          <span className="appbar__logo" role="img" aria-label={t('app.name')} />
-          <span className="appbar__name" aria-hidden="true">{t('app.name')}</span>
-        </span>
-        <div className="appbar__controls">
-          <div data-testid="appbar-lang">
-            <LangToggle />
+    <AboutDisclosure
+      bar={(brand) => (
+        <header className={`appbar${syncShown ? ' appbar--sync' : ''}`} data-testid="appbar">
+          <div className="appbar__inner">
+            <span className="appbar__brand">{brand}</span>
+            <div className="appbar__controls">
+              <div data-testid="appbar-lang">
+                <LangToggle />
+              </div>
+              <a className="iconbtn" href={toHash({ name: 'recipes' })} data-testid="appbar-recipes" aria-label={t('nav.recipes')}>
+                <Icon name="book" />
+                <span className="iconbtn__label">{t('nav.recipes')}</span>
+              </a>
+              <SyncStatusButton />
+              <a className="iconbtn" href={toHash({ name: 'settings' })} data-testid="appbar-settings" aria-label={t('nav.settings')}>
+                <Icon name="gear" />
+                <span className="iconbtn__label">{t('nav.settings')}</span>
+              </a>
+            </div>
           </div>
-          <a className="iconbtn" href={toHash({ name: 'recipes' })} data-testid="appbar-recipes" aria-label={t('nav.recipes')}>
-            <Icon name="book" />
-            <span className="iconbtn__label">{t('nav.recipes')}</span>
-          </a>
-          <SyncStatusButton />
-          <a className="iconbtn" href={toHash({ name: 'settings' })} data-testid="appbar-settings" aria-label={t('nav.settings')}>
-            <Icon name="gear" />
-            <span className="iconbtn__label">{t('nav.settings')}</span>
-          </a>
-        </div>
-      </div>
-    </header>
+        </header>
+      )}
+    />
   );
 }
 
