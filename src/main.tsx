@@ -14,6 +14,7 @@ import { AuthRoot, type AccountEnv } from './ui/auth/AuthRoot.tsx';
 import 'virtual:display-font.css';
 import './ui/styles/global.css';
 import './ui/styles/processed.css';
+import './ui/styles/family.css';
 
 /** One signed-in account: its storage keys (after the one-time adoption of the old unkeyed data), adapters and reminders. */
 async function openAccount(auth: AuthPort, accountId: string | undefined): Promise<AccountEnv> {

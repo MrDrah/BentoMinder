@@ -16,6 +16,9 @@ import { TopBar } from '../components/Bars.tsx';
 import { Dialog } from '../components/Controls.tsx';
 import type { MessageKey } from '../../i18n/index.ts';
 import { navigate, setLeaveGuard, toHash, type OnboardingStep, type Route } from '../router.ts';
+import { FamilyCard } from '../sync/FamilyCard.tsx';
+import { useFamily } from '../sync/hooks.ts';
+import { ChunkBoundary, LazyImportFamilyDialog } from '../sync/lazy.tsx';
 import { ConsentDialog } from './ImportScreen.tsx';
 import { ReminderSettings } from './ReminderSettings.tsx';
 import { ProfileForm } from './ProfileForm.tsx';
@@ -33,6 +36,8 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
   const { t, state, today, now, commit, startOver, replaceStore, repository, services, showToast, showSaveFailed } = useApp();
   const store = useStore();
   const viewer = useDayViewer();
+  const fam = useFamily();
+  const inFamily = fam !== null && fam.state.familyId !== null; // US-E15-11: the data is shared with the family
   const persisted = state.phase === 'ready' && state.persisted;
   const [dialog, setDialog] = useState<'delete-profile' | 'delete-all' | 'import-data' | 'consent' | null>(null);
   const [importError, setImportError] = useState<string | null>(null);
@@ -82,6 +87,7 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
           {saved}
         </p>
         <AccountSection />
+        <FamilyCard />
         <ReminderSettings onChange={(patch) => void saveReminders(patch)} />
 
         <section className="card" aria-labelledby="settings-display">
@@ -185,7 +191,7 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
           <h2 id="settings-data" className="card__title">
             {t('settings.data')}
           </h2>
-          <p className="field__hint">{t('settings.data.where')}</p>
+          <p className="field__hint">{inFamily ? t('family.data.where') : t('settings.data.where')}</p>
           <div className="stack">
             <button
               type="button"
@@ -261,7 +267,12 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
           name="delete-all"
           destructive
           title={t('data.deleteAll.title')}
-          body={<p>{t('data.deleteAll.body')}</p>}
+          body={
+            <>
+              {inFamily && <p data-testid="delete-all-family-note">{t('family.deleteAll.note')}</p>}
+              <p>{t('data.deleteAll.body')}</p>
+            </>
+          }
           confirmLabel={t('data.deleteAll.confirm')}
           cancelLabel={t('data.deleteAll.cancel')}
           onConfirm={() => {
@@ -270,7 +281,23 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
           onCancel={() => setDialog(null)}
         />
       )}
-      {dialog === 'import-data' && incoming !== null && (
+      {dialog === 'import-data' && incoming !== null && inFamily && (
+        <ChunkBoundary fallback={null}>
+          <LazyImportFamilyDialog
+            onConfirm={async () => {
+              const ok = await replaceStore(incoming);
+              setDialog(null);
+              if (ok) navigate({ name: 'calendar', month: null });
+              else showSaveFailed();
+            }}
+            onCancel={() => {
+              setIncoming(null);
+              setDialog(null);
+            }}
+          />
+        </ChunkBoundary>
+      )}
+      {dialog === 'import-data' && incoming !== null && !inFamily && (
         <Dialog
           name="import-data"
           destructive

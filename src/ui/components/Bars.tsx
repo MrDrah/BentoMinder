@@ -1,13 +1,15 @@
 // design/components.md §1.1 App bar (calendar home) and §1.2 Top bar (every other screen).
 import { useApp } from '../app-store.tsx';
 import { toHash, type Route } from '../router.ts';
+import { SyncStatusButton, useSyncButtonShown } from '../sync/SyncStatusButton.tsx';
 import { Icon } from './Icon.tsx';
 import { LangToggle } from './LangToggle.tsx';
 
 export function AppBar() {
   const { t } = useApp();
+  const syncShown = useSyncButtonShown();
   return (
-    <header className="appbar" data-testid="appbar">
+    <header className={`appbar${syncShown ? ' appbar--sync' : ''}`} data-testid="appbar">
       <div className="appbar__inner">
         <span className="appbar__brand">
           <span className="appbar__logo" role="img" aria-label={t('app.name')} />
@@ -21,6 +23,7 @@ export function AppBar() {
             <Icon name="book" />
             <span className="iconbtn__label">{t('nav.recipes')}</span>
           </a>
+          <SyncStatusButton />
           <a className="iconbtn" href={toHash({ name: 'settings' })} data-testid="appbar-settings" aria-label={t('nav.settings')}>
             <Icon name="gear" />
             <span className="iconbtn__label">{t('nav.settings')}</span>

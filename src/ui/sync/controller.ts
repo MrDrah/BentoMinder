@@ -5,6 +5,7 @@
 import type { Storage } from '../../domain/ports.ts';
 import type { BentoMinderStore } from '../../domain/schema/store.ts';
 import { StoreConflictError, type Repository } from '../../domain/storage/repository.ts';
+import { CLOUD_NOTICE_VERSION } from '../../domain/sync/config.ts';
 import { syncCycle, type CycleResult, type LostEdit } from '../../domain/sync/cycle.ts';
 import { detectDirty, noteLocalChange } from '../../domain/sync/dirty.ts';
 import type { HostEvent, SyncHost } from '../../domain/sync/host.ts';
@@ -15,6 +16,7 @@ import { emptySchedule, nextDelay, pollDelayMs, type ScheduleState } from '../..
 import { pendingSummary } from '../../domain/sync/dirty.ts';
 import { statusView, type StatusFacts } from '../../domain/sync/status.ts';
 import type { EndedReason, SyncPort } from '../../domain/sync/types.ts';
+import { createFamilyOps, type FamilyOps } from './family-ops.ts';
 import { DISABLED_SYNC_STATE, type SyncState } from './state.ts';
 
 export { DISABLED_SYNC_STATE, type SyncState };
@@ -44,6 +46,10 @@ export interface SyncController {
   /** The store the engine applied from the family is now saved; the app shows it. */
   onStoreApplied(handler: (store: BentoMinderStore) => void): () => void;
   clearNotices(): void;
+  /** Slice D: the actions of the family screens (create, invite, join, adoption, leave...). */
+  readonly family: FamilyOps;
+  /** Reads the membership again after a failed first read (the new-device retry button, US-E15-05/AC3). */
+  retryDiscovery(): void;
 }
 
 export interface SyncControllerDeps {
@@ -103,6 +109,9 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
   let lostEdits: LostEdit[] = [];
   let ignored = 0;
   let syncing = false;
+  let discovery: SyncState['membership'] = 'unknown';
+  let askedByDiscovery = false;
+  let limitScope: SyncState['limitScope'] = null;
   let fresh: BentoMinderStore | null = null;
   let unsubscribeHost: (() => void) | null = null;
   let soonTimer: ReturnType<typeof setTimeout> | null = null;
@@ -116,7 +125,7 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
     return run;
   };
 
-  let state: SyncState = { ...DISABLED_SYNC_STATE, enabled: true };
+  let state: SyncState = { ...DISABLED_SYNC_STATE, enabled: true, membership: 'unknown' };
 
   function publish(): void {
     const facts: StatusFacts = {
@@ -135,6 +144,13 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
       endedReason: membershipEnded,
       lostEdits,
       ignoredRecords: ignored,
+      familyId: meta.familyId,
+      consent: meta.consent,
+      adoptionFromDiscovery: askedByDiscovery,
+      adoptionPending: meta.familyId !== null && meta.adoption !== null && !meta.adoption.done,
+      safetyCreatedAt: meta.safety === null ? null : meta.safety.createdAt,
+      membership: meta.familyId !== null ? 'member' : discovery,
+      limitScope: limitHit ? limitScope : null,
     };
     for (const l of [...listeners]) l();
   }
@@ -316,6 +332,7 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
         break;
       case 'paused-limit':
         limitHit = true;
+        limitScope = o.scope;
         break;
       case 'retry':
       case 'refused':
@@ -373,7 +390,44 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
     });
   }
 
-  return {
+  async function discover(): Promise<void> {
+    discovery = 'unknown';
+    publish();
+    try {
+      const found = await family.discover();
+      if (!alive.current) return;
+      discovery = found.kind === 'member' ? 'member' : 'none';
+      askedByDiscovery = found.kind === 'member' && found.adoptionAsked && meta.adoption !== null && !meta.adoption.done;
+    } catch {
+      if (!alive.current) return;
+      discovery = 'failed'; // a device with a local copy stays quiet; a new device shows the retry screen
+    }
+    await serialMeta(readMeta);
+    publish();
+  }
+
+  const family: FamilyOps = createFamilyOps({
+    uid,
+    port: deps.port,
+    repository,
+    storage,
+    scope,
+    nowMs,
+    noticeVersion: deps.noticeVersion ?? CLOUD_NOTICE_VERSION,
+    freshStore: () => (fresh ??= deps.freshStore()),
+    serial: serialMeta,
+    loadMeta: async () => (await loadSyncMeta(storage, uid)).meta,
+    applyStore: (store) => {
+      for (const h of [...appliedHandlers]) h(store);
+    },
+    resync: () => api.metaChanged(),
+  });
+
+  const api: SyncController = {
+    family,
+    retryDiscovery() {
+      void discover();
+    },
     getState: () => state,
     subscribe(listener) {
       listeners.add(listener);
@@ -391,6 +445,8 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
         if (!alive.current) return;
         publish();
         requestCycle(0);
+        if (meta.familyId === null && !tooNew) void discover(); // US-E15-05: a member's other device learns its family here
+        else discovery = 'member';
       });
     },
     stop() {
@@ -443,5 +499,6 @@ export function createSyncController(deps: SyncControllerDeps): SyncController {
       publish();
     },
   };
+  return api;
 }
 

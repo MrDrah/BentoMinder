@@ -52,6 +52,8 @@ const normalise = (code: string): string => code.toUpperCase().replace(/[\s-]/g,
 export class FakeBackend {
   readonly families = new Map<string, FakeFamily>();
   readonly accounts = new Map<string, FakeAccount>();
+  /** Sign-in e-mails shown in the member list (the wire sends `email` only when known). */
+  readonly emails = new Map<string, string>();
   readonly nowMs: () => number;
   readonly maxMembers: number;
   readonly minConsentVersion: number;
@@ -158,13 +160,25 @@ export class FakeSyncPort implements SyncPort {
     return fam;
   }
 
-  async readMembership(): Promise<Membership> {
+  async readMembership(detail = false): Promise<Membership> {
     this.enter('readMembership');
     const acc = this.account();
     if (acc === undefined) return { status: 'none' };
     if (acc.status === 'ended') return { status: 'ended', reason: acc.endedReason ?? 'family-deleted' };
     const fam = this.backend.families.get(acc.familyId ?? '');
-    return { status: 'member', familyId: acc.familyId ?? '', consentVersion: fam?.members.get(this.uid)?.consentVersion ?? null };
+    const base = { status: 'member' as const, familyId: acc.familyId ?? '', consentVersion: fam?.members.get(this.uid)?.consentVersion ?? null };
+    if (!detail || fam === undefined) return base;
+    const inv = fam.invite;
+    const live = inv !== null && inv.usedBy === undefined && inv.cancelled !== true && this.backend.nowMs() < inv.expiresAtMs;
+    return {
+      ...base,
+      maxMembers: this.backend.maxMembers,
+      members: [...fam.members.keys()].map((uid) => {
+        const email = this.backend.emails.get(uid);
+        return { uid, you: uid === this.uid, ...(email === undefined ? {} : { email }) };
+      }),
+      invite: live ? { code: inv.code, expiresAt: toJstTimestamp(inv.expiresAtMs as Instant) } : null,
+    };
   }
 
   async createFamily(consent: Consent): Promise<{ familyId: string }> {

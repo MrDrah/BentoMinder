@@ -14,6 +14,20 @@ export interface SyncState {
   lostEdits: readonly LostEdit[];
   /** Downloaded records that were ignored, not yet shown once (US-E15-06/AC9). */
   ignoredRecords: number;
+  /** Slice D. The family the metadata names, else null. */
+  familyId: string | null;
+  /** The cached consent of this device (version and ISO time), else null. */
+  consent: { version: number; at: string } | null;
+  /** A join was committed but the question "what happens to this device's data" is not answered (US-E15-04/AC4, AC11). */
+  adoptionPending: boolean;
+  /** The question was raised by this session's membership read (a further device of a member), not by a join (US-E15-05/AC6). */
+  adoptionFromDiscovery: boolean;
+  /** When the backup copy of the pre-join data was made, else null (US-E15-04/AC5). */
+  safetyCreatedAt: string | null;
+  /** The start-up membership read (US-E15-05): unknown until it answered; failed = could not read. */
+  membership: 'unknown' | 'none' | 'member' | 'failed';
+  /** Why a size or write limit stopped sending, to choose the status word (US-E15-10/AC1, AC3). */
+  limitScope: 'record' | 'family' | 'writes' | null;
 }
 
 export const DISABLED_SYNC_STATE: SyncState = {
@@ -22,4 +36,11 @@ export const DISABLED_SYNC_STATE: SyncState = {
   endedReason: null,
   lostEdits: [],
   ignoredRecords: 0,
+  familyId: null,
+  consent: null,
+  adoptionPending: false,
+  adoptionFromDiscovery: false,
+  safetyCreatedAt: null,
+  membership: 'none',
+  limitScope: null,
 };

@@ -19,11 +19,19 @@ import { ReviewScreen } from './screens/ReviewScreen.tsx';
 import { ProfileEditScreen, SettingsScreen } from './screens/SettingsScreen.tsx';
 import { TopBar } from './components/Bars.tsx';
 import { RemindersProvider } from './reminders/use-reminders.tsx';
+import { useConsentPromptDismissed } from './sync/consent-prompt.ts';
+import { useFamily } from './sync/hooks.ts';
+import { ChunkBoundary, LazyAdoptionGate, LazyJoinScreen, LazyUpgradeConsent } from './sync/lazy.tsx';
+import { NewDeviceScreen, useNewDeviceGate } from './sync/NewDeviceScreen.tsx';
+import { SyncLive } from './sync/SyncLive.tsx';
+import { SyncNotes } from './sync/SyncNotes.tsx';
 
 export function App() {
   const { state, t, today, services, updatedElsewhere, dismissUpdatedElsewhere } = useApp();
   const route = useRoute();
   const gated = useRef(false);
+  const gate = useNewDeviceGate(); // US-E15-05: a member's new device waits for the family data, never onboarding
+  const fam = useFamily();
 
   const docScreen = (r: Route): string => {
     if (r.name === 'calendar') return formatMonth(t, state.language, r.month ?? monthOf(today));
@@ -41,13 +49,14 @@ export function App() {
 
   // Decided once, on the first ready render, and shown at once (no flash of the calendar).
   const [redirect, setRedirect] = useState<Route | null>(null);
-  if (state.phase === 'ready' && !gated.current) {
+  if (state.phase === 'ready' && !gated.current && gate.kind === 'pass') {
     gated.current = true;
     const start = startScreen(state.store);
     let target: Route | null = null;
     // Settings are reachable from every onboarding step (US-E1-01/AC6, D-M1-03 ruling): the top bar's link
     // carries the step (`?from=`); a bare #/settings typed with nothing set up still opens onboarding, as in M1.
-    const settingsFromStep = route.name === 'settings' && route.from !== undefined;
+    // The join screen (invite link, E15) is the way into a family for a device with nothing set up: never redirected.
+    const settingsFromStep = (route.name === 'settings' && route.from !== undefined) || route.name === 'join';
     if (start === 'onboarding-1' && !(route.name === 'onboarding' && route.step === 1) && !settingsFromStep) target = { name: 'onboarding', step: 1, month: null, manual: false };
     // A deep link to the import or a pending review is honoured once a profile exists.
     else if (start === 'onboarding-2' && route.name !== 'onboarding' && route.name !== 'review' && route.name !== 'import' && !settingsFromStep) target = { name: 'onboarding', step: 2, month: null, manual: false };
@@ -62,6 +71,19 @@ export function App() {
 
   if (state.phase === 'loading') return <LoadingScreen />;
   if (state.phase === 'too-new' || state.phase === 'corrupt') return <RecoveryScreen kind={state.phase} raw={state.raw} />;
+  if (gate.kind !== 'pass') return <NewDeviceScreen gate={gate} />;
+  // US-E15-04/AC4, AC11: a committed join waits for the answer "what happens to this device's data" before anything else.
+  if (fam !== null && fam.state.adoptionPending) {
+    return (
+      <>
+        <ChunkBoundary fallback={<NewDeviceScreen gate={{ ...gate, kind: 'loading', resuming: true }} />}>
+          <LazyAdoptionGate />
+        </ChunkBoundary>
+        <SyncLive />
+        <Toast />
+      </>
+    );
+  }
 
   return (
     <>
@@ -84,16 +106,31 @@ export function App() {
           </div>
         </Banner>
       )}
+      {(shown.name === 'calendar' || shown.name === 'settings') && <SyncNotes includeEnded={shown.name === 'calendar'} />}
       <RemindersProvider>
         <Screen route={shown} />
       </RemindersProvider>
+      <ConsentHost />
+      <SyncLive />
       <Toast />
     </>
   );
 }
 
+function ConsentHost() {
+  const fam = useFamily();
+  const dismissed = useConsentPromptDismissed();
+  if (fam === null || dismissed || fam.state.familyId === null || fam.state.view.state !== 'paused-no-consent') return null;
+  return (
+    <ChunkBoundary fallback={null}>
+      <LazyUpgradeConsent />
+    </ChunkBoundary>
+  );
+}
+
 function Screen({ route }: { route: Route }) {
   const { t } = useApp();
+  const fam = useFamily();
   switch (route.name) {
     case 'calendar':
       return <CalendarScreen month={route.month} openDate={null} />;
@@ -126,6 +163,14 @@ function Screen({ route }: { route: Route }) {
             <ReviewScreen key={`${route.month}-${route.manual}`} month={route.month} manual={route.manual} onboarding={false} />
           </main>
         </div>
+      );
+    case 'join':
+      return fam === null ? (
+        <NotFoundScreen />
+      ) : (
+        <ChunkBoundary>
+          <LazyJoinScreen code={route.code} />
+        </ChunkBoundary>
       );
     case 'settings':
       return <SettingsScreen from={route.from ?? null} />;

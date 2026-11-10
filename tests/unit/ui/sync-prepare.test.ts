@@ -57,7 +57,10 @@ describe('US-E15-06/AC10 prepareSync: the token is never asked for after sign-ou
     const ctl = prepared.attach(createRepository(storage, clock, { accountId: 'u1' }));
     ctl.start();
     await new Promise((r) => setTimeout(r, 40));
-    expect(fetchImpl).not.toHaveBeenCalled();
+    // Slice D: the start-up membership read is the only request (it carries no family data); the account has no family.
+    const urls = fetchImpl.mock.calls.map((c) => String(c[0]));
+    expect(urls.every((u) => u.endsWith('/v1/membership.get'))).toBe(true);
+    expect(ctl.getState().view.state).toBe('local-only');
     ctl.stop();
   });
 });

@@ -146,7 +146,8 @@ describe('US-E15-05/AC5 and US-E15-11/AC1 an account in no family: sync does not
     const before = d.storage.data.get(storeKeysFor(UID1).state);
     d.ctl.start();
     await run(5 * MIN);
-    expect(d.port.calls).toEqual([]);
+    // Slice D (US-E15-05/AC1, AC5, AC6): one membership read at start (no family data), nothing is pulled or pushed.
+    expect(d.port.calls.map((c) => c.op)).toEqual(['readMembership']);
     expect(d.ctl.getState().view.state).toBe('local-only');
     expect(d.storage.data.get(storeKeysFor(UID1).state)).toBe(before);
     d.ctl.stop();
@@ -474,7 +475,9 @@ describe('US-E15-06/AC10 and US-E15-05/AC9 sync follows the account', () => {
     const other = device(backend, UID2, DEVICE_B, { familyId: null, store: storeWithData(DEVICE_B, UID2) });
     other.ctl.start();
     await run(5 * MIN);
-    expect(other.port.calls).toEqual([]); // not a member: nothing at all
+    // Slice D: the other account is a member in the cloud, so its own device discovers that (its own uid, its own keys).
+    expect(other.port.calls.length).toBeGreaterThan(0);
+    expect(other.port.calls.every((c) => c.uid === UID2)).toBe(true);
     expect(a.port.calls.every((c) => c.uid === UID1)).toBe(true);
     expect(other.storage.data.has(syncMetaKey(UID1))).toBe(false);
   });

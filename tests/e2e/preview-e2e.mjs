@@ -12,6 +12,8 @@ import { build, preview } from 'vite';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const outDir = join(root, 'node_modules', '.cache', 'bentominder-e2e-dist');
 
+// VITE_AUTH_FAKE=1 also lets a spec switch sync on for one browser (localStorage `bentominder.fake-sync-base`, slice D,
+// src/adapters/select-sync.ts); with no such key sync stays off exactly as in a normal build.
 process.env.VITE_AUTH_FAKE = '1';
 await build({ root, logLevel: 'warn', build: { outDir, emptyOutDir: true } });
 const server = await preview({ root, build: { outDir }, preview: { port: 4173, strictPort: true } });

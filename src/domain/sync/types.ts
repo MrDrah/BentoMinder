@@ -44,9 +44,26 @@ export type SyncStatus =
 
 export type EndedReason = 'left' | 'removed' | 'family-deleted';
 
+/** One member as the family's own members see it (slice D: the member list); the e-mail is only what sign-in sent. */
+export interface MemberInfo {
+  uid: string;
+  you: boolean;
+  joinedAt?: string;
+  email?: string;
+}
+
 export type Membership =
   | { status: 'none' }
-  | { status: 'member'; familyId: string; consentVersion: number | null }
+  | {
+      status: 'member';
+      familyId: string;
+      consentVersion: number | null;
+      /** The details below come with the full read of membership.get (slice D); the engine does not use them. */
+      consentedAt?: string;
+      maxMembers?: number;
+      members?: MemberInfo[];
+      invite?: Invite | null;
+    }
   | { status: 'ended'; reason: EndedReason };
 
 export interface Consent {
@@ -95,7 +112,8 @@ export class SyncPortError extends Error {
 }
 
 export interface SyncPort {
-  readMembership(): Promise<Membership>;
+  /** `detail`: also the member list and the open invite (the settings screen); the HTTP adapter always sends them. */
+  readMembership(detail?: boolean): Promise<Membership>;
   createFamily(consent: Consent): Promise<{ familyId: string }>;
   createInvite(): Promise<Invite>;
   cancelInvite(): Promise<void>;

@@ -16,7 +16,8 @@ describe('US-E8-02/AC1 catalog parity (BR-23)', () => {
 
   it('US-E8-02/AC1 every placeholder in a ja message exists in the en message and vice versa', () => {
     // `{n}` in ja and `{n, plural, …}` in en name the same parameter.
-    const names = (s: string) => [...new Set([...s.matchAll(/\{(\w+)(?:\}|,)/g)].map((m) => m[1]))].sort();
+    // The branches of a select (`yes {yes} other {none}` in family.adopt.localSummary) are text, not parameters.
+    const names = (s: string) => [...new Set([...s.replace(/\b(?:yes|no|other) \{[^{}]*\}/g, '').matchAll(/\{(\w+)(?:\}|,)/g)].map((m) => m[1]))].sort();
     const differing = (Object.keys(ja) as (keyof typeof ja)[]).filter((k) => {
       // Date formats legitimately use different parts per language (copy.md §2).
       if (k.startsWith('fmt.')) return false;
