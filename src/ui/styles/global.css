@@ -396,7 +396,9 @@ a {
 .screen:has(.action-bar) > .page > .btn {
   align-self: flex-start;
 }
-.btn {
+/* Base button: zero specificity (:where) so the variant and state rules in forms.css (@imported above) always win
+   whatever the source order. Do not turn this back into a plain .btn rule. */
+:where(.btn) {
   display: inline-flex;
   align-items: center;
   min-height: var(--touch-min);
@@ -410,7 +412,7 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-.btn--small {
+:where(.btn--small) {
   font-size: var(--text-sm);
 }
 .banner {
