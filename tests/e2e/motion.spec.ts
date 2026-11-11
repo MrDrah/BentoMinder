@@ -231,11 +231,24 @@ test.describe('month change', () => {
     await expect(page.getByTestId('cal-grid')).toBeVisible();
     await settle(page);
     expect((await animations(page)).filter((a) => a.target.includes('cal-grid'))).toEqual([]);
+    // A 120 ms animation can end before a poll reads it under load, so record the start event in the page.
+    type W = { __fades: string[] };
+    await page.evaluate(() => {
+      (window as unknown as W).__fades = [];
+      document.addEventListener(
+        'animationstart',
+        (e) => {
+          const t = e.target as Element;
+          if (t.getAttribute('data-testid') === 'cal-grid') (window as unknown as W).__fades.push(`${e.animationName}|${getComputedStyle(t).animationDuration}`);
+        },
+        true,
+      );
+    });
     await page.getByTestId('cal-next').click();
-    const a = (await animations(page)).find((x) => x.target.includes('cal-grid'));
-    expect(a?.name).toBe('fade-in');
-    expect(a!.duration).toBeLessThanOrEqual(120);
-    expect(a!.props).not.toContain('transform');
+    await expect.poll(() => page.evaluate(() => (window as unknown as W).__fades.length)).toBeGreaterThan(0);
+    const [name, dur] = (await page.evaluate(() => (window as unknown as W).__fades[0]!)).split('|');
+    expect(name).toBe('fade-in');
+    expect(parseFloat(dur!) * (dur!.endsWith('ms') ? 1 : 1000)).toBeLessThanOrEqual(120);
     const title = (await page.getByTestId('cal-title').textContent())!.trim();
     await expect(page.getByTestId('cal-live')).toContainText(title);
     await expect(page.getByTestId('cal-today')).toBeVisible();

@@ -19,6 +19,7 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 
 ### Done ✅
 | UI refresh (2026-11-11) | Breathy SP-first layout, collapsible about, redesigned day tiles + legend, button cascade fix; independent QA passed (0 P1/P2), cycle-1 fixes merged, release gate green. Open: PO phone check, wife join test, LCP 2.9–3.3 s vs 2.5 s | `tests/reports/qa-ui-refresh.md`, `design/ui-refresh-2026-11.md` |
+| Motion (2026-11-11) | Press feedback, sheet/dialog entrance, month fade; CSS-only, reduced-motion safe; US-E16-01 | `design/motion.md`, `tests/e2e/motion.spec.ts` |
 | Area | What exists | Key files |
 |------|-------------|-----------|
 | Scaffold | Project created with `new-project.mjs --content-app`, local git, first commit | `.claude/`, `quality-gate.json` |
