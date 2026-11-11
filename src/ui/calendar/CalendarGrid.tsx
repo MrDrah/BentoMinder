@@ -41,6 +41,13 @@ export function CalendarGrid({ t, lang, month, today, weekStartsOn, views, selec
   const [focusDate, setFocusDate] = useState<LocalDate>(initial);
   const pending = useRef<LocalDate | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  // Month change fade (motion §4): the grid root is keyed by month, so it remounts and plays a 120 ms fade; not on first paint.
+  const [seenMonth, setSeenMonth] = useState(month);
+  const [fade, setFade] = useState(false);
+  if (seenMonth !== month) {
+    setSeenMonth(month);
+    setFade(true);
+  }
 
   // A new month: land on the requested date (keyboard move), else today or the 1st (roving stop).
   useEffect(() => {
@@ -99,7 +106,7 @@ export function CalendarGrid({ t, lang, month, today, weekStartsOn, views, selec
   };
 
   return (
-    <div ref={rootRef} className="cal-grid" role="grid" aria-label={t('cal.grid.label', { month: title })} data-testid="cal-grid" data-week-starts-on={weekStartsOn} onKeyDown={onKeyDown} style={{ ['--cal-cols' as string]: columns(weekStartsOn) }}>
+    <div key={month} ref={rootRef} className={`cal-grid${fade ? ' is-fade' : ''}`} role="grid" aria-label={t('cal.grid.label', { month: title })} data-testid="cal-grid" data-week-starts-on={weekStartsOn} onKeyDown={onKeyDown} style={{ ['--cal-cols' as string]: columns(weekStartsOn) }}>
       <div role="row" className="cal-head">
         {weekdayOrder(weekStartsOn).map((wd) => (
           <div key={wd} role="columnheader" className={`cal-wd wd-${wd}${todayWd === wd ? ' is-today-col' : ''}`} aria-label={t(`wd.long.${wd}` as MessageKey)}>

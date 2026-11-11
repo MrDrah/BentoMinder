@@ -217,7 +217,7 @@ a {
 }
 @media (prefers-reduced-motion: no-preference) {
   .about:not([hidden]) {
-    animation: about-in 200ms ease-out;
+    animation: about-in var(--duration-base) var(--ease-enter);
   }
 }
 @keyframes about-in {
@@ -276,6 +276,9 @@ a {
   text-decoration: none;
   cursor: pointer;
   font: inherit;
+}
+.iconbtn:active {
+  background: var(--surface-3);
 }
 .iconbtn__label {
   display: none;
@@ -495,5 +498,90 @@ a {
 @media (max-width: 399px) {
   .appbar__name {
     display: none;
+  }
+}
+
+/* Motion (design/motion.md, US-E16-01). CSS only; transform, opacity and colour only (the phone about reveal keeps
+   max-height). Everything that moves or fades lives inside prefers-reduced-motion: no-preference, so under
+   reduce no animation or transition is created at all. Fill is "backwards": the end state is the normal style. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise-offset));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* The centred sheet, picker and date picker carry their centring translate in both keyframes. */
+@keyframes sheet-in-centred {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + var(--rise-offset)));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .iconbtn {
+    transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+  }
+  .iconbtn:active {
+    transform: scale(0.94);
+    transition-duration: 0ms;
+  }
+  .sheet-scrim,
+  .scrim,
+  .datefix__scrim {
+    animation: fade-in var(--duration-base) var(--ease-standard) backwards;
+  }
+  .dialog {
+    animation: dialog-in var(--duration-sheet) var(--ease-enter) backwards;
+  }
+  .dialog.consent {
+    animation: fade-in var(--duration-sheet) var(--ease-enter) backwards;
+  }
+  .sheet:not(.sheet--panel),
+  .picker,
+  .datefix {
+    animation: sheet-up var(--duration-sheet) var(--ease-enter) backwards;
+  }
+  .cal-grid.is-fade {
+    animation: fade-in var(--duration-fast) var(--ease-standard) backwards;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  .about:not([hidden]) {
+    animation: dialog-in var(--duration-base) var(--ease-enter) backwards;
+  }
+  .picker,
+  .datefix {
+    animation-name: sheet-in-centred;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) and (max-width: 1279px) {
+  .sheet:not(.sheet--panel) {
+    animation-name: sheet-in-centred;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 1280px) {
+  .sheet--panel {
+    animation: fade-in var(--duration-base) var(--ease-standard) backwards;
   }
 }

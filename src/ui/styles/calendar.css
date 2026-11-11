@@ -256,6 +256,15 @@
 .cell:not(.is-past):not(.is-today) .cell__btn:active {
   background: var(--surface-3);
 }
+@media (prefers-reduced-motion: no-preference) {
+  .cell__btn {
+    transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+  }
+  .cell__btn:active {
+    transform: scale(0.98);
+    transition-duration: 0ms;
+  }
+}
 /* The allergen mark (components §18.12): keeps its own colours on every tile state. */
 .cell__allergen {
   position: absolute;
