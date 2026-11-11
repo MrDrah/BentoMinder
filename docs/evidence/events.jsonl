@@ -322,3 +322,4 @@
 {"v":1,"at":"2026-11-11T12:00:08.330Z","by":"orchestrator","type":"task-end","task":"motion-design","outcome":"failure","summary":"diff-guard: 4 files outside the allow-list"}
 {"v":1,"at":"2026-11-11T12:00:21.153Z","by":"orchestrator","type":"task-start","task":"motion-build","summary":"Task motion-build dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-11T12:58:51.151Z","type":"verification","summary":"Motion slice: release gate green; disk full incident, merged worktrees removed","outcome":"success"}
+{"v":1,"at":"2026-11-11T14:03:02.411Z","type":"product-decision","summary":"Equal-width calendar columns; email+password sign-up requested"}

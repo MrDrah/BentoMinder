@@ -24,10 +24,9 @@ export interface CalendarGridProps {
 }
 
 
-function columns(weekStartsOn: WeekStartsOn): string {
-  const weekend = 'minmax(44px, 0.62fr)';
+function columns(): string {
   const day = 'minmax(0, 1fr)';
-  return (weekStartsOn === 'monday' ? [day, day, day, day, day, weekend, weekend] : [weekend, day, day, day, day, day, weekend]).join(' ');
+  return [day, day, day, day, day, day, day].join(' '); // all seven equal (PO 2026-11-11): weekend columns are no longer narrower
 }
 
 const clampDay = (month: YearMonth, day: number): LocalDate => `${month}-${String(Math.min(day, daysInMonth(month))).padStart(2, '0')}` as LocalDate;
@@ -106,7 +105,7 @@ export function CalendarGrid({ t, lang, month, today, weekStartsOn, views, selec
   };
 
   return (
-    <div key={month} ref={rootRef} className={`cal-grid${fade ? ' is-fade' : ''}`} role="grid" aria-label={t('cal.grid.label', { month: title })} data-testid="cal-grid" data-week-starts-on={weekStartsOn} onKeyDown={onKeyDown} style={{ ['--cal-cols' as string]: columns(weekStartsOn) }}>
+    <div key={month} ref={rootRef} className={`cal-grid${fade ? ' is-fade' : ''}`} role="grid" aria-label={t('cal.grid.label', { month: title })} data-testid="cal-grid" data-week-starts-on={weekStartsOn} onKeyDown={onKeyDown} style={{ ['--cal-cols' as string]: columns() }}>
       <div role="row" className="cal-head">
         {weekdayOrder(weekStartsOn).map((wd) => (
           <div key={wd} role="columnheader" className={`cal-wd wd-${wd}${todayWd === wd ? ' is-today-col' : ''}`} aria-label={t(`wd.long.${wd}` as MessageKey)}>
