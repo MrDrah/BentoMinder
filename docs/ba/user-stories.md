@@ -3560,3 +3560,29 @@ Scenario: AC8 The device id stays private to the family
 Scenario: AC9 The store shape does not change
   Then no field is added to BentoMinderStore, schemaVersion stays 1, and the existing unit tests of E10 pass unchanged
 ```
+
+## E16 Motion
+
+### US-E16-01 Motion
+As a parent using BentoMinder on my phone, I want buttons to feel pressed and dialogs to appear smoothly, so that taps feel registered and screens do not jump. (Spec: design/motion.md; PO request 2026-11-11.)
+
+Scenario: AC1 Button press feedback
+  Given a primary, secondary or destructive button, when pressed, then it scales to 0.97 and shows its pressed fill, and returns on release; disabled and busy buttons do not scale
+
+Scenario: AC2 Phone sheets slide up
+  Given a phone width (below 768), when a sheet opens, then it slides up from the bottom edge over at most 250 ms while the backdrop fades in, and focus is on its title or first control from the first frame
+
+Scenario: AC3 Dialogs on wider screens
+  Given 768 px or wider, when a dialog opens, then it fades in with a rise of 12 px or less in at most 250 ms and stays centred throughout
+
+Scenario: AC4 Instant close
+  Given any overlay, when it closes, then it is removed immediately and focus returns to the opener
+
+Scenario: AC5 Month change
+  Given the month changes, then the grid fades in over 120 ms or less with no horizontal movement, and the month announcement is unchanged
+
+Scenario: AC6 Reduced motion
+  Given prefers-reduced-motion: reduce, when any button is pressed or any sheet, dialog or about panel opens, then no animation or transition runs and elements are at their final position at once
+
+Scenario: AC7 Cheap properties only
+  Given any motion, then only transform, opacity and colour properties are animated (the about phone reveal excepted), and none lasts longer than 250 ms

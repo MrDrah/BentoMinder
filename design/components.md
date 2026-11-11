@@ -1491,3 +1491,6 @@ Measured in the preview (390 geometry, all combinations, `docs/dev/_scratch/ui-r
 
 ### 18.11 Coverage
 US-E5-01/AC1-AC4, AC9-AC16; US-E1-05/AC2; US-E5-02/AC1 (the sheet keeps assessment and recipe); US-E4-03/AC1, AC3; US-E5-05/AC1; US-E5-08/AC1; US-E6-06/AC1; US-E7-03/AC1 (Today card below the calendar); US-E8-04/AC1; US-E8-05/AC3; US-NF-02/AC3-AC4; BR-01, BR-02, BR-03, BR-15, BR-27.
+
+## 19. Motion (pointer)
+Press feedback, sheet/dialog entrance, about reveal and reduced-motion rules are specified in `design/motion.md`. Tokens: `--duration-sheet`, `--rise-offset`, `--press-scale` (added 2026-11-11).

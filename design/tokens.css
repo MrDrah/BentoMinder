@@ -130,6 +130,9 @@
   --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
   --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
   --sheet-offset: 24px;
+  --duration-sheet: 240ms;
+  --rise-offset: 12px;
+  --press-scale: 0.97;
 
   /* Layers */
   --z-base: 0;
@@ -273,6 +276,9 @@ html[lang="en"] {
     --duration-slow: 0ms;
     --duration-shimmer: 0ms;
     --sheet-offset: 0px;
+    --duration-sheet: 0ms;
+    --rise-offset: 0px;
+    --press-scale: 1;
   }
 }
 

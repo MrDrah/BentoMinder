@@ -317,3 +317,6 @@
 {"v":1,"at":"2026-11-10T14:44:11.045Z","by":"orchestrator","type":"task-start","task":"ui-refresh-fix1","summary":"Task ui-refresh-fix1 dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-10T14:44:11.156Z","type":"defect","summary":"UI refresh QA: 0 P1/P2, 2 P3 (UIR-D01 about-panel tab order, UIR-D08 EN 320px month row overflow), 5 P4","by":"qa","defect":"UIR-D01","severity":"P3","state":"found"}
 {"v":1,"at":"2026-11-10T15:08:05.989Z","type":"defect","summary":"UIR-D01..D08 fixed in cycle 1, QA suite green","by":"developer","defect":"UIR-D01","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-11T11:58:25.632Z","type":"product-decision","summary":"PO asks for button press and modal/sheet entrance animations; CSS-only, reduced-motion safe"}
+{"v":1,"at":"2026-11-11T11:58:25.786Z","by":"orchestrator","type":"task-start","task":"motion-design","summary":"Task motion-design dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-11T12:00:08.330Z","by":"orchestrator","type":"task-end","task":"motion-design","outcome":"failure","summary":"diff-guard: 4 files outside the allow-list"}
