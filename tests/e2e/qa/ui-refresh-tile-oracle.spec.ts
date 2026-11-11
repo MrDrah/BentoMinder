@@ -346,6 +346,8 @@ test('QA negative control: the comparison reports a tampered tile (so a pass abo
     d.className = 'cell__dash';
     document.querySelector('[data-testid="cal-cell-2026-11-25"] .cell__btn')!.append(d);
   });
+  // the tile background now transitions over 120 ms (US-E16-01): read the tampered fill once it has finished
+  await page.evaluate(() => Promise.all(document.getAnimations().map((x) => x.finished.catch(() => undefined))));
   const problems: string[] = [];
   for (const p of await probe(page)) if (p.date.startsWith('2026-11')) checkTile(p, 'light', '2026-11-17', page.viewportSize()!.width, problems);
   expect(problems.some((m) => m.includes('2026-11-18') && m.includes('fill'))).toBe(true);

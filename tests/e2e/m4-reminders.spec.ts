@@ -189,7 +189,8 @@ test('US-E8-05/AC1 US-E8-05/AC2 US-E8-05/AC3 the theme follows the device by def
   await page.emulateMedia({ colorScheme: 'dark' }); // auto follows the device
   await expect.poll(body).not.toBe(light);
   const darkNavy = await rgb(page, 'var(--navy-fill)');
-  expect(await bg(planned())).toBe(darkNavy);
+  // the tile background fades over 120 ms (US-E16-01): read it once the transition has finished
+  await expect.poll(() => bg(planned())).toBe(darkNavy);
   expect(await bg(plain())).not.toBe(darkNavy);
   await settled(page);
   await expectNoSeriousAxe(page, 'auto dark calendar');
