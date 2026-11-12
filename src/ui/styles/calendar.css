@@ -258,8 +258,45 @@
     transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
   }
   .cell__btn:active {
-    transform: scale(0.98);
+    transform: scale(0.94);
     transition-duration: 0ms;
+  }
+  /* Tap shake: a short left-right wobble, set from CalendarGrid on click. */
+  .cell__btn.is-shake {
+    animation: tile-shake 260ms var(--ease-standard);
+  }
+  .upcoming__row,
+  .cal-agenda__btn,
+  .legend__toggle,
+  .plan-action {
+    transition: background-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+  }
+  .upcoming__row:active,
+  .cal-agenda__btn:active,
+  .legend__toggle:active,
+  .plan-action:not(:disabled):active {
+    transform: scale(var(--press-scale));
+    transition-duration: 0ms;
+  }
+}
+@keyframes tile-shake {
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+  20% {
+    transform: translateX(-3px) rotate(-1.5deg);
+  }
+  40% {
+    transform: translateX(3px) rotate(1.5deg);
+  }
+  60% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  80% {
+    transform: translateX(1px) rotate(0.5deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0);
   }
 }
 /* The allergen mark (components §18.12): keeps its own colours on every tile state. */
