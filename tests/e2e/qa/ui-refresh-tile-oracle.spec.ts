@@ -221,17 +221,12 @@ for (const { today, note } of TODAYS) {
         const expectFilled = today.startsWith('2026-11') ? [today] : [];
         if (JSON.stringify(filled) !== JSON.stringify(expectFilled)) problems.push(`${theme} filled tiles ${filled.join(',')} != ${expectFilled.join(',')}`);
       }
-      // row heights: compact 44, otherwise the token for the viewport; compact exactly when no icon/today/tomorrow tile
+      // row heights (PO 2026-11-12): every row has the token height for the viewport; no compact rows, so tiles keep one shape
       const probes = await probe(page);
       const expectH = width >= 1280 ? 104 : width >= 768 ? 96 : 80;
       for (const p of probes) {
-        const rowDates = probes.filter((q) => rowKey(q.date) === rowKey(p.date)).map((q) => q.date);
-        const compact = !rowDates.some((d) => {
-          const t = expectedTile(d, today, specOf(d));
-          return t.icon !== 'none' || t.today || t.tomorrow;
-        });
-        if (compact && Math.abs(p.rowH - 44) > 1) problems.push(`row of ${p.date} should be compact 44, is ${p.rowH}`);
-        if (!compact && Math.abs(p.rowH - expectH) > 1) problems.push(`row of ${p.date} should be ${expectH}, is ${p.rowH}`);
+        if (p.rowCompact) problems.push(`row of ${p.date} must not be compact`);
+        if (Math.abs(p.rowH - expectH) > 1) problems.push(`row of ${p.date} should be ${expectH}, is ${p.rowH}`);
       }
       expect(problems, problems.slice(0, 25).join('\n')).toEqual([]);
     });
