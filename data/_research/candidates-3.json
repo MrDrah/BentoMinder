@@ -1,0 +1,1133 @@
+{
+  "version": 1,
+  "phase": 3,
+  "generatedBy": "ba-research (batch i)",
+  "generatedOn": "2026-11-12",
+  "notes": [
+    "Batch i: 30 recipes. Candidates 1-30 below are what batch-i.json records. 2 came from candidates-2 (kikkoman-ebichahan, sirogohan-yakionigiri); the other 28 are new, found on the Kikkoman Home Cooking bento pages (meat / seafood / shouwa / enji lists) and on sirogohan.com, each page fetched on 2026-11-12 with the page title checked.",
+    "Most Delish Kitchen recipe pages are now behind the Premium wall (ingredients and steps hidden), so the unused candidates-2 reserves from that host could not be used; reasons are in skippedFromCandidates2.",
+    "Kikkoman set pages show bentos of 2-4 components that are 2-serving (or 4-serving) recipes; batch i records the main dish plus one or two sides, all in the same unit, with the source amounts unchanged (yield 2人分).",
+    "estMinutes is the sum of the component times shown on the source pages."
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-riceball-bento",
+      "nameJa": "ライスボール弁当",
+      "nameEn": "Rice ball bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/enji/riceball.html",
+      "sourceTitle": "ライスボール弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "western-inspired",
+      "themeId": null,
+      "estMinutes": 20,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-milk",
+        "alg-wheat",
+        "alg-egg",
+        "alg-shrimp",
+        "alg-soybean"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": false,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 2,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-torikuwa-bento",
+      "nameJa": "鶏もも肉のくわ焼き弁当",
+      "nameEn": "Chicken thigh kuwayaki bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/torikuwa.html",
+      "sourceTitle": "鶏もも肉のくわ焼き弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 25,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-sesame",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 3,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-karaage-bento",
+      "nameJa": "鶏のから揚げ弁当",
+      "nameEn": "Chicken karaage bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/karaage.html",
+      "sourceTitle": "鶏のから揚げ弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 35,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 4,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-tori-terini-bento",
+      "nameJa": "鶏肉のてり煮弁当",
+      "nameEn": "Glazed simmered chicken bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/torinikuterini.html",
+      "sourceTitle": "鶏肉のてり煮弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-sesame"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 5,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-agedori-amazu-bento",
+      "nameJa": "中華風揚げ鶏弁当",
+      "nameEn": "Chinese-style fried chicken bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/chyukahu.html",
+      "sourceTitle": "中華風揚げ鶏弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "other",
+      "themeId": null,
+      "estMinutes": 35,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 6,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-marmalade-chicken-bento",
+      "nameJa": "チキンのマーマレード煮弁当",
+      "nameEn": "Marmalade chicken bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/tikinnomamaredo.html",
+      "sourceTitle": "チキンのマーマレード煮弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "western-inspired",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-egg"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 7,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-butaniku-shishito-bento",
+      "nameJa": "豚肉と野菜の炒め物弁当",
+      "nameEn": "Pork and vegetable stir-fry bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/itamemono.html",
+      "sourceTitle": "豚肉と野菜の炒め物弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 40,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-sesame",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 8,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-butashabu-goma-bento",
+      "nameJa": "豚しゃぶのごまじょうゆだれ弁当",
+      "nameEn": "Pork shabu with sesame soy dressing bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/butashabugoma.html",
+      "sourceTitle": "豚しゃぶのごまじょうゆだれ弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-sesame",
+        "alg-egg",
+        "alg-milk"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": false,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 9,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-butateri-peanut-bento",
+      "nameJa": "豚肉のてり焼き弁当",
+      "nameEn": "Pork teriyaki bento with peanut butter",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/butateri.html",
+      "sourceTitle": "豚肉のてり焼き弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 20,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-sesame",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-peanut"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 10,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-pork-ketchup-saute-bento",
+      "nameJa": "ポークケチャップソテー弁当",
+      "nameEn": "Pork ketchup saute bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/ketchupsaute.html",
+      "sourceTitle": "ポークケチャップソテー弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "western-inspired",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 11,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-butashogayaki-bento",
+      "nameJa": "豚肉のしょうが焼き弁当",
+      "nameEn": "Ginger pork bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/butashougayaki.html",
+      "sourceTitle": "豚肉のしょうが焼き弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-sesame"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 12,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-tonkatsu-bento",
+      "nameJa": "とんかつ弁当",
+      "nameEn": "Tonkatsu bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/tonkatsu.html",
+      "sourceTitle": "とんかつ弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 40,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-milk"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": false,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 13,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-sake-teriyaki-aonori-bento",
+      "nameJa": "鮭の照り焼き弁当",
+      "nameEn": "Salmon teriyaki bento with aonori",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/seafood/sake.html",
+      "sourceTitle": "鮭の照り焼き弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 35,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-salmon",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-milk",
+        "alg-sesame"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": false,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 14,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-sawara-tsukeyaki-bento",
+      "nameJa": "さわらのつけ焼き弁当",
+      "nameEn": "Marinated grilled Spanish mackerel bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/seafood/noribentousawara.html",
+      "sourceTitle": "さわらのつけ焼き弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-soybean",
+        "alg-wheat",
+        "alg-shrimp",
+        "alg-sesame"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 15,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-kajiki-gomashiso-bento",
+      "nameJa": "かじきのごましそ焼き弁当",
+      "nameEn": "Swordfish sesame shiso bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/seafood/kajikigomasio.html",
+      "sourceTitle": "かじきのごましそ焼き弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-soybean",
+        "alg-wheat",
+        "alg-egg",
+        "alg-sesame"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 16,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-ebi-chahan-bento",
+      "nameJa": "えびチャーハン弁当",
+      "nameEn": "Shrimp fried rice bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/seafood/ebichahan.html",
+      "sourceTitle": "えびチャーハン弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "other",
+      "themeId": null,
+      "estMinutes": 25,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-shrimp",
+        "alg-egg",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-pork"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": "kikkoman-ebichahan"
+    },
+    {
+      "rank": 17,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-iritori-bento",
+      "nameJa": "炒り鶏弁当",
+      "nameEn": "Iridori chicken and vegetables bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/shouwa/iritori.html",
+      "sourceTitle": "炒り鶏弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 18,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-sake-fry-bento",
+      "nameJa": "鮭フライ弁当",
+      "nameEn": "Salmon fry bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/shouwa/sakefry.html",
+      "sourceTitle": "鮭フライ弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 40,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-salmon",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-egg",
+        "alg-pork",
+        "alg-milk"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": false,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 19,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-moyashi-tamago-bento",
+      "nameJa": "もやしの卵炒め弁当",
+      "nameEn": "Bean sprout and egg stir-fry bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/shouwa/moyashitamago.html",
+      "sourceTitle": "もやしの卵炒め弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 10,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-egg",
+        "alg-sesame",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 20,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-kajiki-teriyaki-bento",
+      "nameJa": "かじきの照り焼き弁当",
+      "nameEn": "Swordfish teriyaki bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/shouwa/kajikiteriyaki.html",
+      "sourceTitle": "かじきの照り焼き弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 40,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-soybean",
+        "alg-wheat",
+        "alg-pork",
+        "alg-sesame"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 21,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-butaniku-miso-bento",
+      "nameJa": "豚肉のみそ漬け弁当",
+      "nameEn": "Miso-flavoured pork bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/shouwa/butanikumiso.html",
+      "sourceTitle": "豚肉のみそ漬け弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-pork",
+        "alg-wheat",
+        "alg-soybean"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 22,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-yakiniku-sand-bento",
+      "nameJa": "焼き肉サンド弁当",
+      "nameEn": "Yakiniku beef sandwich bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/yakiniku.html",
+      "sourceTitle": "焼き肉サンド弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "western-inspired",
+      "themeId": null,
+      "estMinutes": 15,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-wheat",
+        "alg-beef",
+        "alg-sesame",
+        "alg-milk",
+        "alg-soybean"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": false,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 23,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-ebi-shiso-fry-bento",
+      "nameJa": "えびしそフライ弁当",
+      "nameEn": "Shrimp and shiso fry bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/seafood/ebishiso.html",
+      "sourceTitle": "えびしそフライ弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 15,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-shrimp",
+        "alg-wheat",
+        "alg-egg"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 24,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "kikkoman-beef-roll-katsu-bento",
+      "nameJa": "ビーフロールカツ弁当",
+      "nameEn": "Beef and cheese roll cutlet bento",
+      "sourceUrl": "https://www.kikkoman.co.jp/homecook/lunch/meat/beefben.html",
+      "sourceTitle": "ビーフロールカツ弁当 | キッコーマン | ホームクッキング",
+      "sourceHost": "www.kikkoman.co.jp",
+      "publisher": "キッコーマン株式会社（ホームクッキング）",
+      "accessed": "2026-11-12",
+      "style": "western-inspired",
+      "themeId": null,
+      "estMinutes": 30,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-beef",
+        "alg-soybean",
+        "alg-wheat",
+        "alg-milk",
+        "alg-egg",
+        "alg-shrimp"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": false,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 25,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "siro-yakionigiri",
+      "nameJa": "焼きおにぎり",
+      "nameEn": "Yaki onigiri (grilled rice balls)",
+      "sourceUrl": "https://www.sirogohan.com/recipe/yakionigiri/",
+      "sourceTitle": "焼きおにぎりのレシピ/作り方：白ごはん.com",
+      "sourceHost": "www.sirogohan.com",
+      "publisher": "白ごはん.com（冨田ただすけ）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 20,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": "sirogohan-yakionigiri"
+    },
+    {
+      "rank": 26,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "siro-sankaku-tamagoyaki",
+      "nameJa": "三角たまご焼き",
+      "nameEn": "Triangle rolled omelette",
+      "sourceUrl": "https://www.sirogohan.com/recipe/sankakuyaki/",
+      "sourceTitle": "卵1個で弁当おかず！プレーンの三角たまご焼きのレシピ/1人分にも2人分にもなる！：白ごはん.com",
+      "sourceHost": "www.sirogohan.com",
+      "publisher": "白ごはん.com（冨田ただすけ）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 5,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-egg"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": true,
+        "wheat": true,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 27,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "siro-meatball-ishii-style",
+      "nameJa": "お弁当にも！ ミートボール",
+      "nameEn": "Chicken meatballs in ketchup glaze",
+      "sourceUrl": "https://www.sirogohan.com/recipe/meatball/",
+      "sourceTitle": "お弁当にも！ミートボールのレシピ/イシイ風の味付けで：白ごはん.com",
+      "sourceHost": "www.sirogohan.com",
+      "publisher": "白ごはん.com（冨田ただすけ）",
+      "accessed": "2026-11-12",
+      "style": "western-inspired",
+      "themeId": null,
+      "estMinutes": 20,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-chicken",
+        "alg-egg",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": false,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 28,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "siro-kinpira-gobo",
+      "nameJa": "きんぴらごぼう",
+      "nameEn": "Kinpira burdock",
+      "sourceUrl": "https://www.sirogohan.com/recipe/kinpira/",
+      "sourceTitle": "きんぴらごぼうのレシピ/作り方：白ごはん.com",
+      "sourceHost": "www.sirogohan.com",
+      "publisher": "白ごはん.com（冨田ただすけ）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 20,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-sesame",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 29,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "siro-hijiki-nimono",
+      "nameJa": "ひじきの煮物",
+      "nameEn": "Simmered hijiki with carrot and fried tofu",
+      "sourceUrl": "https://www.sirogohan.com/recipe/hijiki/",
+      "sourceTitle": "ひじきの煮物のレシピ/作り方：白ごはん.com",
+      "sourceHost": "www.sirogohan.com",
+      "publisher": "白ごはん.com（冨田ただすけ）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 20,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": true,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    },
+    {
+      "rank": 30,
+      "tier": "main",
+      "batch": "i",
+      "candidateId": "siro-nikujaga",
+      "nameJa": "だしなし簡単！肉じゃがの基本レシピ",
+      "nameEn": "Basic nikujaga (beef and potato simmer, no dashi)",
+      "sourceUrl": "https://www.sirogohan.com/recipe/nikujaga/",
+      "sourceTitle": "だしなし簡単！肉じゃがの基本レシピ作り方：白ごはん.com",
+      "sourceHost": "www.sirogohan.com",
+      "publisher": "白ごはん.com（冨田ただすけ）",
+      "accessed": "2026-11-12",
+      "style": "japanese",
+      "themeId": null,
+      "estMinutes": 40,
+      "minutesBasis": "sum of the component times shown on the source pages (set page / recipe pages); sirogohan: page time",
+      "expectedAllergens": [
+        "alg-beef",
+        "alg-soybean",
+        "alg-wheat"
+      ],
+      "tags": [],
+      "free": {
+        "egg": true,
+        "milk": true,
+        "wheat": false,
+        "all3": false
+      },
+      "vegetarianOrFishOnly": false,
+      "verified": "fetched 2026-11-12 (HTTP 200); page title matches the dish; recipe text read and recorded in batch-i.json",
+      "status": "recorded",
+      "fromCandidates2": null
+    }
+  ],
+  "skippedFromCandidates2": [
+    {
+      "candidateId": "delish-sakekomi",
+      "reason": "premium-only page: ingredients and steps hidden behind the Delish Premium wall"
+    },
+    {
+      "candidateId": "delish-tsukuneonly",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-sakefry",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-kurishimeji",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-akinomikaku",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-sakura",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-picnicwrap",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-wappa",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-meatballporkchop",
+      "reason": "premium-only page"
+    },
+    {
+      "candidateId": "delish-teritama",
+      "reason": "needs a branded iron supplement (Lepeel) that is not a food ingredient in the dictionary"
+    },
+    {
+      "candidateId": "delish-hanamaki",
+      "reason": "decorative kamaboko / fish-sausage flowers for 4 servings; fish sausage not in the dictionary; little recipe value"
+    },
+    {
+      "candidateId": "nhk-19062",
+      "reason": "sides are separate sub-recipes without amounts on the page; no total time (PT0M)"
+    },
+    {
+      "candidateId": "nhk-1468",
+      "reason": "components refer to other recipe pages (frozen stock dishes) with no amounts on this page"
+    },
+    {
+      "candidateId": "nhk-41062",
+      "reason": "composite of three linked recipes; page has only titles"
+    },
+    {
+      "candidateId": "nhk-12142",
+      "reason": "three-colour rice balls with many sub-recipes and no total time"
+    },
+    {
+      "candidateId": "nhk-19544",
+      "reason": "composite of linked recipes; page has only titles"
+    },
+    {
+      "candidateId": "nhk-1465",
+      "reason": "steps refer to a base recipe (miso marinade) not on the page; no time"
+    },
+    {
+      "candidateId": "nhk-780",
+      "reason": "refers to another recipe (rid=779) for the main component"
+    },
+    {
+      "candidateId": "nhk-11626",
+      "reason": "meatballs are a separate linked recipe (rid=11625)"
+    },
+    {
+      "candidateId": "nhk-18755",
+      "reason": "both components are linked sub-recipes without amounts on the page"
+    },
+    {
+      "candidateId": "nhk-18659",
+      "reason": "components are linked sub-recipes without amounts"
+    },
+    {
+      "candidateId": "nhk-21963",
+      "reason": "composite of linked recipes; page has only titles"
+    },
+    {
+      "candidateId": "nhk-19549",
+      "reason": "composite of linked recipes; page has only titles"
+    },
+    {
+      "candidateId": "nhk-22045",
+      "reason": "composite of linked recipes; page has only titles"
+    },
+    {
+      "candidateId": "joc-chicken-nanban",
+      "reason": "page is an assembly of pre-cooked leftovers with no quantities (the chicken nanban itself is a separate page)"
+    }
+  ]
+}

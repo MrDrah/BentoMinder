@@ -145,7 +145,7 @@
     {
       "name": "Recipe library",
       "glob": "data/library.json",
-      "maxGzipKb": 200
+      "maxGzipKb": 250
     }
   ],
   "secrets": {

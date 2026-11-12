@@ -1822,11 +1822,11 @@ Scenario: AC1 Missing recipe id (BR-02)
 ```
 
 ### US-E6-07 Curated recipe library content · M · L
-As the product owner I want 15–120 real, sourced bento recipes so that suggestions are trustworthy.
+As the product owner I want 15–150 real, sourced bento recipes so that suggestions are trustworthy.
 
 ```gherkin
 Scenario: AC1 Library size and validity (BR-26)
-  Then the shipped library has between 15 and 120 recipes and the validator reports 0 errors for it
+  Then the shipped library has between 15 and 150 recipes and the validator reports 0 errors for it
 
 Scenario: AC2 Mix
   Then at least 6 recipes have style "japanese", at least 4 have style "western-inspired", and at least 5 have minutes ≤ 20

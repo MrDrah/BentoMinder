@@ -33,9 +33,9 @@ const unreviewed = lib.filter((r) => r.reviewedBy !== 'verifier').length;
 const cp = (s: string) => [...s].length;
 
 describe('US-E6-07 library content', () => {
-  it('US-E6-07/AC1 the library has 15 to 120 recipes with unique ids', () => {
+  it('US-E6-07/AC1 the library has 15 to 150 recipes with unique ids', () => {
     expect(lib.length).toBeGreaterThanOrEqual(15);
-    expect(lib.length).toBeLessThanOrEqual(120);
+    expect(lib.length).toBeLessThanOrEqual(150);
     expect(new Set(lib.map((r) => r.id)).size).toBe(lib.length);
   });
 
