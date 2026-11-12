@@ -177,3 +177,82 @@
   color: var(--ink-2);
   font-size: var(--text-sm);
 }
+
+/* E-mail + password form (components §20; US-E13-08). Existing tokens only. */
+.auth__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.auth__divider::before,
+.auth__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line-ui);
+}
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.auth__pw {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.auth__pw .input {
+  padding-right: 76px;
+}
+.auth__pw-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+}
+.auth__pw-toggle:active {
+  transform: translateY(-50%);
+  background: var(--surface-3);
+}
+.auth__forgot {
+  align-self: flex-end;
+}
+.auth__mode {
+  align-self: center;
+  color: var(--ink-1);
+}
+.auth__submit {
+  min-height: 52px;
+  justify-content: center;
+  gap: var(--space-2);
+  scroll-margin-bottom: 96px;
+}
+.auth__hint {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.auth__address,
+.auth__verify-body {
+  overflow-wrap: anywhere;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .auth__form {
+    animation: auth-fade var(--duration-fast) var(--ease-standard) both;
+  }
+}
+@keyframes auth-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

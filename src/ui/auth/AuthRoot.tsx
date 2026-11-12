@@ -4,7 +4,7 @@
 // here, so the screen it names opens after sign-in (US-E13-01/AC2, AC6).
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react';
 import { authReducer, initialAuthSession } from '../../domain/auth/session.ts';
-import type { AuthPort, AuthUser } from '../../domain/auth/types.ts';
+import { needsEmailVerification, type AuthPort, type AuthUser, type SignInResult } from '../../domain/auth/types.ts';
 import type { Clock } from '../../domain/ports.ts';
 import type { Repository } from '../../domain/storage/repository.ts';
 import { createTranslator, type Language } from '../../i18n/index.ts';
@@ -15,6 +15,7 @@ import { syncConfigured } from '../../adapters/select-sync.ts';
 import { navigate, parseHash } from '../router.ts';
 import { AccountContext, type AccountValue } from './account-context.tsx';
 import { LoginScreen, RestoringScreen } from './LoginScreen.tsx';
+import { VerifyEmailScreen } from './VerifyEmailScreen.tsx';
 
 /** Everything one account's app needs; built after sign-in, before the first load (adoption has run). */
 export interface AccountEnv {
@@ -76,6 +77,9 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
   const [language, setLanguage] = useState<Language>(initialLanguage);
   const [fallback, setFallback] = useState(false);
   const [justSignedOut, setJustSignedOut] = useState(false);
+  // Which control started the last sign-in: only a Google error shows under the Google button (US-E13-08, components §20.1).
+  const [errorFrom, setErrorFrom] = useState<'google' | 'form'>('google');
+  const justCreated = useRef(false);
   const t = useMemo(() => createTranslator(language), [language]);
   const envRef = useRef<AccountEnv | null>(null);
   const opening = useRef(new Map<string, Promise<AccountEnv>>());
@@ -109,23 +113,51 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
     };
   }, [auth, restoreFallbackMs]);
 
-  const signIn = useCallback(async () => {
-    if (signingIn.current) return; // US-E13-03/AC3: one sign-in at a time
+  /** One sign-in at a time (US-E13-03/AC3), whichever control started it (Google or the e-mail form, US-E13-08). */
+  const runSignIn = useCallback(async (run: () => Promise<SignInResult>, from: 'google' | 'form'): Promise<SignInResult> => {
+    if (signingIn.current) return { ok: false, error: 'cancelled' };
     signingIn.current = true;
     setFallback(false);
     setJustSignedOut(false);
+    setErrorFrom(from);
     dispatch({ type: 'signInStarted' });
+    let result: SignInResult;
     try {
-      const result = await auth.signInWithGoogle();
+      result = await run();
+    } catch (err) {
+      console.warn(`Sign-in threw: ${err instanceof Error ? err.name : 'unknown error'}`);
+      result = { ok: false, error: 'other' };
+    }
+    try {
       // US-E13-01/AC2: a valid deep link is kept; an address that names no screen opens the start screen instead of not-found.
       if (result.ok && parseHash(window.location.hash).name === 'not-found') navigate({ name: 'calendar', month: null });
       dispatch({ type: 'signInFinished', result });
-    } catch (err) {
-      console.warn(`Sign-in threw: ${err instanceof Error ? err.name : 'unknown error'}`);
-      dispatch({ type: 'signInFinished', result: { ok: false, error: 'other' } });
     } finally {
       signingIn.current = false;
     }
+    return result;
+  }, []);
+
+  const signIn = useCallback(async () => {
+    justCreated.current = false;
+    await runSignIn(() => auth.signInWithGoogle(), 'google');
+  }, [auth, runSignIn]);
+
+  const submitForm = useCallback(
+    (mode: 'signin' | 'create', email: string, password: string) => {
+      justCreated.current = mode === 'create';
+      return runSignIn(() => (mode === 'create' ? auth.createAccount(email, password) : auth.signInWithEmail(email, password)), 'form');
+    },
+    [auth, runSignIn],
+  );
+
+  const resetPassword = useCallback((email: string) => auth.sendPasswordReset(email), [auth]);
+
+  /** US-E13-08/AC3: re-read the account (and refresh its token); a confirmed e-mail opens the app, no second sign-in. */
+  const checkVerified = useCallback(async (): Promise<SignInResult> => {
+    const result = await auth.reloadUser();
+    if (result.ok) dispatch({ type: 'changed', change: { user: result.user } });
+    return result;
   }, [auth]);
 
   const signOut = useCallback(async () => {
@@ -152,6 +184,24 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
   if (gate === 'blank') return <div className="screen auth" aria-busy="true" data-testid="screen-blank" />;
   if (gate === 'splash') return <RestoringScreen t={t} />;
 
+  // The hard wall (US-E13-08/AC3, AC9): an unconfirmed password account sees only this screen. Nothing below it
+  // (store, sync, hosted AI, family) is mounted or started for it.
+  if (session.status === 'signedIn' && user !== undefined && needsEmailVerification(user)) {
+    return (
+      <VerifyEmailScreen
+        key={user.uid}
+        t={t}
+        language={language}
+        onLanguage={setLanguage}
+        email={user.email ?? ''}
+        justCreated={justCreated.current}
+        onResend={() => auth.sendVerification()}
+        onCheck={checkVerified}
+        onSignOut={() => void signOut()}
+      />
+    );
+  }
+
   if (session.status === 'signedIn' && account !== null && user !== undefined) {
     const accountId = accountOf(user);
     return <SignedInApp key={user.uid} user={user} accountId={accountId} openAccount={openAccount} opening={opening.current} envRef={envRef} account={account} />;
@@ -164,11 +214,13 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
       language={language}
       onLanguage={setLanguage}
       busy={session.status === 'signingIn'}
-      error={error === 'sessionEnded' ? null : error}
+      error={error === 'sessionEnded' || (errorFrom === 'form' && session.lastError !== null) ? null : error}
       expired={session.lastError === 'sessionEnded'}
       signedOut={justSignedOut}
       joinHint={syncConfigured() && parseHash(window.location.hash).name === 'join'}
       onSignIn={() => void signIn()}
+      onSubmit={submitForm}
+      onReset={resetPassword}
     />
   );
 }

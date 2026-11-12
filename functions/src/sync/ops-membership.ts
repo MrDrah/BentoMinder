@@ -43,7 +43,8 @@ function consentOf(ctx: Ctx, body: Body): number {
 function memberDoc(ctx: Ctx, caller: Caller, consentVersion: number): Data {
   const d: Data = { joinedAt: stamp(ctx.nowMs()), consentVersion, consentedAt: stamp(ctx.nowMs()) };
   // The e-mail comes from the verified token only, is returned only to members and is never stored locally (ADR 016 Q5).
-  if (caller.email !== undefined && caller.email !== '') d['email'] = caller.email;
+  // US-E13-08/AC9: an e-mail the provider has not confirmed (a password account) is not stored or shown to members.
+  if (caller.emailVerified && caller.email !== undefined && caller.email !== '') d['email'] = caller.email;
   return d;
 }
 

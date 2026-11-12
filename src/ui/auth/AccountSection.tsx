@@ -16,8 +16,10 @@ export function AccountSection() {
 
   const name = (user.displayName ?? '').trim();
   const email = (user.email ?? '').trim();
-  const shownName = name !== '' ? name : email !== '' ? email : t('auth.account.noName');
-  const initial = Array.from(name !== '' ? name : email)[0] ?? '';
+  // US-E13-08/AC11: a password account has no photo; its e-mail is the name line and is not repeated.
+  const isPassword = user.provider === 'password';
+  const shownName = isPassword && email !== '' ? email : name !== '' ? name : email !== '' ? email : t('auth.account.noName');
+  const initial = Array.from(isPassword ? email : name !== '' ? name : email)[0] ?? '';
 
   const confirm = async () => {
     setBusy(true);
@@ -36,7 +38,7 @@ export function AccountSection() {
         {t('auth.account.section')}
       </h2>
       <div className="account__row">
-        {user.photoUrl !== null && !photoBroken ? (
+        {!isPassword && user.photoUrl !== null && !photoBroken ? (
           // Decorative: the name is next to it (US-E13-05/AC1). Google's own image host, display only.
           <img className="account__avatar" src={user.photoUrl} alt="" referrerPolicy="no-referrer" onError={() => setPhotoBroken(true)} data-testid="account-avatar" />
         ) : (
@@ -48,12 +50,12 @@ export function AccountSection() {
           <p className={`account__name${name === '' && email === '' ? ' account__name--empty' : ''}`} title={shownName} data-testid="account-name">
             {shownName}
           </p>
-          {email !== '' && (
+          {!isPassword && email !== '' && (
             <p className="account__email" title={email} data-testid="account-email">
               {email}
             </p>
           )}
-          <p className="account__caption">{t('auth.account.google')}</p>
+          <p className="account__caption">{t(isPassword ? 'auth.account.password' : 'auth.account.google')}</p>
         </div>
       </div>
       <button type="button" className="btn btn--destructive-text btn--block account__signout" data-testid="account-sign-out" onClick={() => setAsking(true)}>
