@@ -1494,3 +1494,49 @@ US-E5-01/AC1-AC4, AC9-AC16; US-E1-05/AC2; US-E5-02/AC1 (the sheet keeps assessme
 
 ## 19. Motion (pointer)
 Press feedback, sheet/dialog entrance, about reveal and reduced-motion rules are specified in `design/motion.md`. Tokens: `--duration-sheet`, `--rise-offset`, `--press-scale` (added 2026-11-11).
+
+## 20. Email + password sign-in (US-E13-08; extends §15; PO 2026-11-12)
+Same screen A1, same column, tokens and Google button as §15.1. No new colours: pairs are ink-1/surface-1, ink-2/surface-1, danger/surface-1, line-ui, focus ring (all in the a11y §2 audit, light and dark). Motion uses existing tokens only.
+
+### 20.1 Login screen, modes
+One screen, three modes switched in place (no route change): `signin` (default), `create`, `forgot`. Focus order (signin): language toggle, Google button, Email, Password, show/hide, 「パスワードを忘れた」 link, primary 「ログイン」, mode link 「アカウントを作る」, privacy line. The divider sits between the Google button and Email. Form errors use a persistent assertive error line (§15.1) directly above the primary; Google errors keep their line under the Google button (two nodes, both always rendered).
+- **Divider:** `auth.divider`, 1 px `line-ui` rules either side, text `text-sm` `ink-2`, decorative (`aria-hidden`), 16 px above and below.
+- **Fields:** §1.4 text input (52 px, visible label above, no placeholder). Email: `type="email" inputmode="email" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" name="email"`. Password: `type="password"` (switches to `text`), `autocomplete="current-password"` in signin and `"new-password"` in create, `name="password"`; hint `auth.pw.hint` in create only, via `aria-describedby`. No `minlength` attribute (our own message is shown).
+- **Show/hide:** 44 x 44 text button at the field's right edge, label swaps `auth.pw.show` / `auth.pw.hide`, accessible name `auth.pw.show.aria` / `auth.pw.hide.aria`, `aria-pressed`, `aria-controls` = password id, `type="button"`. Tab order: right after the field. Resets to hidden on mode change and on submit; never auto-shown.
+- **Primary** (`btn--primary btn--block`, 52 px, `type="submit"`): `auth.pw.signIn` / `auth.pw.create` / `auth.pw.sendReset` by mode. Enter in any field submits. Mode link (text button, 44 px, `ink-1`, underlined): `auth.pw.toCreate` / `auth.pw.toSignIn`. Forgot link `auth.pw.forgot` (text button, 44 px, right-aligned under Password, signin only).
+- **Create mode:** lead `auth.pw.createLead`; Google button and divider stay (Google also creates).
+- **Forgot mode:** lead `auth.pw.forgotLead`, Email only (prefilled from signin), primary `auth.pw.sendReset`, link `auth.pw.backToSignIn`; Google and divider hidden. After send: an info banner (§1.10, `role="status"`) with `auth.pw.resetSent.*` replaces the field and primary, only `auth.pw.backToSignIn` remains, focus moves to the banner title (`tabindex=-1`). Identical for every address.
+- **Mode change:** focus goes to the h1 (`tabindex=-1`), polite live says `auth.pw.mode.*`; email kept, password cleared, errors cleared.
+
+| State (each control) | Look and behaviour |
+|---|---|
+| default | as §1.4 / §15.1 |
+| hover | primary and links: existing hover fills (primary-hover / `surface-3`); fields unchanged |
+| focus-visible | ring + halo (§1.3) on every control; on a field the border stays |
+| pressed | primary and links scale `--press-scale` (motion.md §2); show/hide `surface-3` fill, no scale; fields none |
+| disabled | fields n/a; the primary is never disabled for empty input (a tap shows the field message, so the reason is visible) |
+| busy | primary: 20 px spinner + `auth.pw.busy.*`, `aria-disabled` + `aria-busy`, stays focusable; fields `readonly`; Google, links and show/hide `aria-disabled`; polite live `auth.pw.busy.live`. Reduced motion: static dots |
+| error | field: 2 px `danger` border + "!" icon + message under it, `aria-invalid="true"`, `aria-describedby`; form: error line above the primary. Focus goes to the first invalid field, or to Password after a failed sign-in (password cleared, email kept) |
+
+Validation: on submit, and on Email blur once it had text. Order: email empty, email invalid, password empty, password short (create only; signin never judges length). Request errors (wrong, inUse, tooMany, offline, other) go to the assertive form error line. Cleared on the next input or submit.
+Motion: the mode swap fades the form block in (`fade-in`, `--duration-fast`, opacity only); the neutral panel and A3 fade in at `--duration-base` `--ease-enter`. All inside `no-preference`; none under reduced motion.
+Layout: 390 = column minus 48 px, brand top, form in the lower part (§17 pattern); the form may scroll and the primary has `scroll-margin-bottom: 96px` so the keyboard never hides it. >= 768: centred 400 px.
+Test ids: `login-form`, `login-email`, `login-email-error`, `login-password`, `login-password-error`, `login-password-toggle`, `login-submit`, `login-mode-toggle`, `login-forgot`, `login-form-error`, `login-reset-sent`.
+
+### 20.2 Check-your-email screen (A3)
+Shown after create and on every unconfirmed sign-in or reopen; the app is unreachable. Same shell as A1 (brand, language toggle), no tab bar. Order: h1 `auth.verify.title` (focused on arrival), body `auth.verify.body` with the address bold (`overflow-wrap: anywhere`), hint `auth.verify.spam` (`text-sm`, `ink-2`), primary 「確認しました」 (`auth.verify.done`, 52 px), secondary 「確認メールを再送する」 (`auth.verify.resend`, 52 px), text button `auth.signOut` (44 px, signs out at once, no dialog: nothing is lost), error line (assertive), status node (polite, from first render).
+| State | Resend | 「確認しました」 |
+|---|---|---|
+| default | enabled | enabled |
+| busy | spinner + `auth.verify.resending`, `aria-disabled` | enabled |
+| cooldown (60 s) | `aria-disabled`, label `auth.verify.resendIn`; the number updates each second visually, but the live region speaks only `auth.verify.sent` at start and `auth.verify.canResend` at 0 | enabled |
+| checking | enabled | spinner + `auth.verify.checking`, `aria-disabled`, `aria-busy` |
+| not confirmed yet | n/a | error line `auth.verify.notYet`, button enabled |
+| error | `auth.error.offline` / `auth.pw.error.tooMany` / `auth.error.other` in the error line | same |
+Hover, focus, pressed as §20.1. Arriving from create starts the cooldown at once (the first email was just sent); arriving from a sign-in starts enabled. On success the app opens with no second sign-in and focus on its first heading. Test ids: `screen-verify-email`, `verify-address`, `verify-resend`, `verify-done`, `verify-sign-out`, `verify-error`, `verify-live`.
+
+### 20.3 AccountSection for password accounts (AC11)
+Differs from §15.3 only here: no photo (the initial of the email, `aria-hidden`); the name line shows the email (never `auth.account.noName`); the caption is `auth.account.password` (the email is not repeated). Sign-out and its dialog (§15.4) unchanged. No change-password control in this story.
+
+### 20.4 Accessibility
+Targets >= 44 px (fields and buttons 52). Visible labels, no placeholders. Errors never by colour alone ("!" + text). The password is never in a `title`, URL or live region. Real `<form>` (submit handled in JS with preventDefault) so password managers work. Reflow at 320 px and 200 % zoom: show/hide stays inside the field, nothing clipped.

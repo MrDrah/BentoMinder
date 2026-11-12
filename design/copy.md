@@ -1101,3 +1101,54 @@ A tile shows a day number and one icon, so these strings are **not visible on th
 | legend.weekend | 土・日・祝（数字の色と「祝」） | Sat, Sun, holidays (number colour and "Hol") | unchanged row | US-E5-01/AC2 |
 
 The mark itself is the character 「!」, not a string. No other new strings are needed for the tile's visible parts (the number is a numeral; 「祝」 is `cell.word.holiday`). The agenda rows reuse `cell.state.*`, `cell.aria.override` text without the leading comma (the developer strips the 「、」 / ", " separator: same rule as the other suffixes) and `cell.aria.dash`.
+
+## 21. Email + password sign-in (`auth.pw.*`, `auth.verify.*`; US-E13-08, PO 2026-11-12)
+Verbatim. Reused unchanged: `auth.google.button`, `auth.error.offline`, `auth.error.other`, `auth.signOut`, `auth.privacy`. Screen-reader names equal the visible labels unless a key says otherwise.
+| Key | ja | en | Where |
+|---|---|---|---|
+| auth.divider | または | or | Divider between Google and the form |
+| auth.pw.email | メールアドレス | Email address | Field label |
+| auth.pw.password | パスワード | Password | Field label |
+| auth.pw.hint | 8文字以上で入力してください。 | At least 8 characters. | Hint, create mode only |
+| auth.pw.show | 表示 | Show | Show/hide button |
+| auth.pw.hide | 隠す | Hide | Show/hide button |
+| auth.pw.show.aria | パスワードを表示 | Show password | Accessible name of the button |
+| auth.pw.hide.aria | パスワードを隠す | Hide password | Accessible name of the button |
+| auth.pw.signIn | ログイン | Sign in | Primary, signin |
+| auth.pw.create | アカウントを作る | Create account | Primary, create |
+| auth.pw.sendReset | 再設定メールを送る | Send reset email | Primary, forgot |
+| auth.pw.toCreate | アカウントを作る | Create an account | Mode link in signin |
+| auth.pw.toSignIn | ログインに戻る | Back to sign in | Mode link in create |
+| auth.pw.forgot | パスワードを忘れた | Forgot your password? | Link in signin |
+| auth.pw.backToSignIn | ログインに戻る | Back to sign in | Forgot mode and neutral panel |
+| auth.pw.createLead | メールアドレスとパスワードで、アカウントを作ります。 | Create an account with your email and a password. | Lead, create |
+| auth.pw.forgotLead | ご登録のメールアドレスを入力してください。パスワードを再設定するメールをお送りします。 | Enter your email address and we'll send you an email to reset your password. | Lead, forgot |
+| auth.pw.resetSent.title | メールを確認してください | Check your email | Neutral panel title |
+| auth.pw.resetSent.body | そのメールアドレスのアカウントがある場合、パスワードを再設定するメールをお送りしました。 | If an account exists for that address, we've sent an email to reset your password. | Neutral panel, same for every address (AC6) |
+| auth.pw.busy.signIn | ログインしています… | Signing in… | Primary busy |
+| auth.pw.busy.create | 作成しています… | Creating your account… | Primary busy |
+| auth.pw.busy.send | 送信しています… | Sending… | Primary busy |
+| auth.pw.busy.live | お待ちください。 | Please wait. | Polite live while busy |
+| auth.pw.mode.signin | ログインの画面です。 | Sign-in form. | Live on mode change |
+| auth.pw.mode.create | アカウント作成の画面です。 | Create-account form. | Live on mode change |
+| auth.pw.mode.forgot | パスワード再設定の画面です。 | Password reset form. | Live on mode change |
+| auth.pw.error.emailEmpty | メールアドレスを入力してください。 | Please enter your email address. | Field error |
+| auth.pw.error.emailInvalid | メールアドレスの形式が正しくありません。 | That email address doesn't look right. | Field error (AC7) |
+| auth.pw.error.passwordEmpty | パスワードを入力してください。 | Please enter your password. | Field error |
+| auth.pw.error.passwordShort | パスワードは8文字以上にしてください。 | Your password needs at least 8 characters. | Field error, create (AC7) |
+| auth.pw.error.wrong | メールアドレスまたはパスワードが違います | The email or password is incorrect. | Form error, signin; never says which (AC7) |
+| auth.pw.error.inUse | このメールアドレスは、すでに使われています。Googleでログインするか、「パスワードを忘れた」からパスワードを設定してください。 | This email address is already in use. Sign in with Google, or use "Forgot your password?" to set a password. | Form error, create; also the Google-account case, nothing is merged (AC7, AC8) |
+| auth.pw.error.tooMany | しばらくしてからもう一度お試しください | Please try again in a little while. | Form error, any form or resend (AC7) |
+| auth.verify.title | メールを確認してください | Check your email | A3 h1 |
+| auth.verify.body | 確認のメールを {email} に送りました。メールのリンクを開いてから、「確認しました」を押してください。 | We sent a confirmation email to {email}. Open the link in it, then tap "I've confirmed". | A3 body |
+| auth.verify.spam | メールが届かないときは、迷惑メールのフォルダも見てください。 | If it doesn't arrive, check your spam folder. | A3 hint |
+| auth.verify.done | 確認しました | I've confirmed | A3 primary |
+| auth.verify.checking | 確認しています… | Checking… | Primary busy |
+| auth.verify.notYet | まだ確認できていません。メールのリンクを開いてから、もう一度押してください。 | We can't see the confirmation yet. Open the link in the email, then try again. | Error line |
+| auth.verify.resend | 確認メールを再送する | Resend confirmation email | A3 secondary |
+| auth.verify.resending | 送信しています… | Sending… | Resend busy |
+| auth.verify.resendIn | 再送できるまで あと{seconds}秒 | Resend available in {seconds} s | Resend label during the 60 s cooldown (AC4) |
+| auth.verify.sent | 確認メールを送りました。 | Confirmation email sent. | Polite live at cooldown start (AC4) |
+| auth.verify.canResend | もう一度再送できます。 | You can resend the email now. | Polite live at 0 s |
+| auth.account.password | メールアドレスでログイン中 | Signed in with email | AccountSection caption, password accounts (AC11) |
+| auth.docTitle.verify | メールの確認 | Confirm your email | `{screen}` for A3 |
