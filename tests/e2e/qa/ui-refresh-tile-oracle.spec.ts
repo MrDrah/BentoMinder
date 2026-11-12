@@ -3,7 +3,7 @@
 // colours of design/tokens.json, and the accessible names read from Chrome's accessibility tree, in ja and en, light and dark.
 // Stories: US-E5-01/AC1 AC2 AC3 AC4 AC9 AC10 AC11 AC12 AC13 AC14 AC16, US-E4-03/AC8, US-E5-03/AC2, US-E5-05/AC1, US-E6-06/AC1, US-E8-05/AC3, US-NF-02/AC3 AC4
 import { expect, test, type Page } from '@playwright/test';
-import { ALL_STATE_WORDS, ALL_SUFFIX_WORDS, expectedName, expectedTile, expectedTimeWord, addDay, weekday } from '../../oracle/ui-refresh-tile.ts';
+import { ALL_STATE_WORDS, ALL_SUFFIX_WORDS, expectedName, expectedTile, expectedTimeWord, weekday } from '../../oracle/ui-refresh-tile.ts';
 import { css, isHoliday, jst10, matrixStore, NOV_DATES, realNames, seed, setScheme, specOf, type Theme } from './ui-refresh-common.ts';
 
 interface Probe {
@@ -231,12 +231,6 @@ for (const { today, note } of TODAYS) {
       expect(problems, problems.slice(0, 25).join('\n')).toEqual([]);
     });
   }
-}
-
-// Monday-first weeks: row key = the Monday of the date's week.
-function rowKey(date: string): string {
-  const wd = weekday(date);
-  return addDay(date, -((wd + 6) % 7));
 }
 
 test('US-E5-01/AC12 US-E5-01/AC1 month end: 2026-11-30 today, the border is on 2026-12-01 when December is shown (no menu there)', async ({ page }) => {
