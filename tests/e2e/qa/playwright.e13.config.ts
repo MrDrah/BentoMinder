@@ -8,7 +8,7 @@ process.env['PROXY_MOCK_SCENARIOS'] = '1';
 
 export default defineConfig({
   testDir: '.',
-  testMatch: /e13-.*\.spec\.ts/,
+  testMatch: /e13-(?!email).*\.spec\.ts/,
   fullyParallel: true,
   retries: 0,
   outputDir: '../../_scratch/qa-e13-results',

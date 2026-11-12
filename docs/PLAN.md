@@ -225,3 +225,5 @@ Phase 5  M6 Android feasibility doc → PO decides v1 Android build
 | 2026-11-12 | Email sign-in design accepted with the designer's defaults: one "email already in use" message for both password and Google cases; 「ログアウト」 on the check-your-email screen signs out with no dialog; resend cooldown starts at 60 s after account creation and enabled after an unconfirmed sign-in; reset button wording 「再設定メールを送る」. Spec: design/components.md §20, design/copy.md §21. | Orchestrator |
 
 | 2026-11-12 | JS budget raised 445 -> 450 KB gzip total (email+password sign-in: 46 strings per language, login form, verify screen; built total 445.3 KB). Orchestrator decision, same pattern as the earlier Auth and family raises. | Orchestrator |
+
+| 2026-11-12 | Email sign-in QA (tests/reports/qa-e13-email.md): 0 P1/P2. E13E-D02 (focus after 「確認しました」) fixed. E13E-D01 (60 s resend limit is per screen visit; a reload re-enables resend) accepted as a ruling: Firebase throttles resends itself and the error is mapped; probes kept as test.fail. Not verified: real Firebase email delivery, emailVerified through a refreshed token, real phone. Release gate green. | Orchestrator |

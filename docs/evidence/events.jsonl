@@ -326,3 +326,5 @@
 {"v":1,"at":"2026-11-12T10:28:07.721Z","type":"product-decision","summary":"Email+password sign-up approved (US-E13-08), email confirmation required"}
 {"v":1,"at":"2026-11-12T10:28:07.874Z","by":"orchestrator","type":"task-start","task":"email-auth-design","summary":"Task email-auth-design dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-12T10:29:54.045Z","by":"orchestrator","type":"task-start","task":"email-auth-build","summary":"Task email-auth-build dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-12T10:53:46.702Z","by":"orchestrator","type":"task-start","task":"email-auth-qa","summary":"Task email-auth-qa dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-12T11:24:23.384Z","type":"defect","summary":"E13E-D02 focus after confirm fixed; D01 accepted as ruling","by":"orchestrator","defect":"E13E-D02","severity":"P3","state":"fixed"}

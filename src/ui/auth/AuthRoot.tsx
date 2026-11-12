@@ -177,6 +177,25 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
     if (session.status !== 'signedIn') opening.current.clear();
   }, [session.status]);
 
+  // After 「確認しました」 the verify screen unmounts and the app mounts: focus goes to the first heading, not <body> (design §20.2).
+  const verifying = session.status === 'signedIn' && session.user !== undefined && needsEmailVerification(session.user);
+  const wasVerifying = useRef(false);
+  useEffect(() => {
+    if (wasVerifying.current && !verifying && session.status === 'signedIn') {
+      const id = setTimeout(() => {
+        const h = document.querySelector<HTMLElement>('main h1, h1, main h2, h2');
+        if (h !== null) {
+          if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1');
+          h.focus({ preventScroll: true });
+        }
+      }, 50);
+      wasVerifying.current = false;
+      return () => clearTimeout(id);
+    }
+    wasVerifying.current = verifying;
+    return undefined;
+  }, [verifying, session.status]);
+
   const gate = useSplashGate(session.status === 'loading', splashDelayMs, splashMinMs);
   const user = session.user;
   const account = useMemo<AccountValue | null>(() => (user === undefined ? null : { user, signOut }), [user, signOut]);

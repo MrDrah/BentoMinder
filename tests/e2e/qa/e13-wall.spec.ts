@@ -24,7 +24,7 @@ test.describe('US-E13-01 login wall', () => {
       await expect(page.getByTestId('login-google')).toBeVisible();
       for (const id of APP_ONLY) await expect(page.getByTestId(id), id).toHaveCount(0);
       await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
-      await expect(page.getByRole('button')).toHaveCount(1); // Googleでログイン is the only button (plus the two language radios)
+      await expect(page.getByTestId('login-google')).toBeVisible(); // US-E13-08/AC1 (2026-11-12): the e-mail form's buttons now sit next to Google; the wall itself is asserted above
       await expect(page.locator('body')).not.toContainText('はなちゃん');
       await page.waitForTimeout(400);
       expect(popups).toBe(0);
