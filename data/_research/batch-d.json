@@ -9,6 +9,7 @@
     "shortNameEn": "Squirrel",
     "nameKana": "どんぐりとりすのおにぎり",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-animals",
     "description": {
       "ja": "ケチャップごはんで丸いリスの顔を作り、ミートボールとソーセージで作ったどんぐりを持たせる、かわいいキャラ弁風のおにぎりです。",
@@ -216,6 +217,7 @@
     "shortNameEn": "Mix rice",
     "nameKana": "ぶろっこりーとしょうがのまぜごはん",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "レンジで加熱したブロッコリーとしょうが、塩昆布をごはんに混ぜるだけの5分の混ぜご飯。おにぎりにしても使えます。",
@@ -414,6 +416,7 @@
     "shortNameEn": "Yakiudon",
     "nameKana": "やきうどんべんとう",
     "style": "japanese",
+    "dishType": "noodles",
     "themeId": null,
     "description": {
       "ja": "豚肉と野菜をめんつゆ味で炒めたシンプルな焼うどん。仕上げのごま油で麺がくっつきにくく、紅しょうがを添えます。",
@@ -741,6 +744,7 @@
     "shortNameEn": "Soboro",
     "nameKana": "ようふうそぼろべんとう",
     "style": "western-inspired",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "ケチャップとソース味の合いびき肉そぼろとバターコーンをごはんにのせた彩りのよいお弁当。そぼろを炒める間にコーンをレンジにかけます。",
@@ -1046,6 +1050,7 @@
     "shortNameEn": "Flower",
     "nameKana": "たまごやききでよんひんふらわーべんとう",
     "style": "western-inspired",
+    "dishType": "egg",
     "themeId": "theme-flowers",
     "description": {
       "ja": "卵焼き器ひとつで、のり巻き卵焼き、花の形のソーセージ、ささみのケチャップ炒め、ごま風味のピーマンとちくわ炒めを作る4品のお弁当です。",
@@ -1423,6 +1428,7 @@
     "shortNameEn": "Asp roll",
     "nameKana": "あすぱらちーずまきやきべんとう",
     "style": "western-inspired",
+    "dishType": "meat-roll",
     "themeId": null,
     "description": {
       "ja": "アスパラガスとチーズをささみで巻いて焼いたメインに、かぼちゃとハムのサラダ、いんげんのきんぴらを添えた園児用の3品弁当です。",
@@ -1941,6 +1947,7 @@
     "shortNameEn": "Hoisin",
     "nameKana": "ほいしんそーすのらっぷ",
     "style": "other",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "ホイシンソースをからめて焼いた鶏肉と、きゅうり、ねぎ、クレソンをトルティーヤで巻く、10分でできるラップサンドです。",
@@ -2143,6 +2150,7 @@
     "shortNameEn": "Quick 5",
     "nameKana": "たまごやききごふんべんとう",
     "style": "western-inspired",
+    "dishType": "egg",
     "themeId": null,
     "description": {
       "ja": "はんぺんと卵のふわふわ卵焼き、ハムチーズのはんぺん焼き、ピーマンと桜えびのマヨ炒めを卵焼き器だけで作る、5分のお弁当です。",
@@ -2488,6 +2496,7 @@
     "shortNameEn": "Hamburg",
     "nameKana": "みにはんばーぐべんとう",
     "style": "western-inspired",
+    "dishType": "meat-patty",
     "themeId": null,
     "description": {
       "ja": "小さく作るミニハンバーグに、焼きかぼちゃとピーマンのサラダ、チーズ入りパン粉で縁取ったうずら卵焼きを添えた3品弁当。フライパンで同時に焼けます。",
@@ -3032,6 +3041,7 @@
     "shortNameEn": "Tsukune",
     "nameKana": "とりつくねべんとう",
     "style": "japanese",
+    "dishType": "meat-patty",
     "themeId": null,
     "description": {
       "ja": "ししとうと一緒に焼いて甘辛だれをからめる鶏つくねと、いんげんとパプリカを入れた卵焼きを組み合わせたお弁当です。",

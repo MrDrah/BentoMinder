@@ -9,6 +9,7 @@
     "shortNameEn": "Layers",
     "nameKana": "れんじそぼろのみるふぃーゆべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "電子レンジだけで作る鶏そぼろ・炒り卵・いんげんを、ごはんと交互に重ねて詰める、断面がきれいな層になったそぼろ弁当です。",
@@ -360,6 +361,7 @@
     "shortNameEn": "BearRoll",
     "nameKana": "くまのかざりまき",
     "style": "japanese",
+    "dishType": "meat-roll",
     "themeId": "theme-animals",
     "description": {
       "ja": "ふりかけごはんをのりで巻いて組み合わせ、切り口にクマの顔が出る飾り巻きです。ひと口で食べられる厚さに切れば、行事のお弁当にも使えます。",
@@ -541,6 +543,7 @@
     "shortNameEn": "Gyudon",
     "nameKana": "ぎゅうどんべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "牛肉と玉ねぎ、ゆで卵を甘辛く煮てごはんにのせ、ごま和えのいんげんを添えた牛丼弁当です。味がしっかりして冷めてもおいしいです。",
@@ -910,6 +913,7 @@
     "shortNameEn": "Pumpkin",
     "nameKana": "ぱんぷきんべんとう",
     "style": "western-inspired",
+    "dishType": "onigiri",
     "themeId": "theme-seasonal",
     "description": {
       "ja": "ソーセージ入りのケチャップライスに薄焼き卵をかぶせ、のりとチーズの帽子でハロウィンのかぼちゃおばけに仕上げるオムライス風のお弁当です。",
@@ -1240,6 +1244,7 @@
     "shortNameEn": "Snowman",
     "nameKana": "ゆきだるまとうずらのたまごいりみーとぼーるべんとう",
     "style": "western-inspired",
+    "dishType": "onigiri",
     "themeId": "theme-seasonal",
     "description": {
       "ja": "丸い塩おにぎり2つにかに風味かまぼことのりで顔を付けた雪だるまと、うずらの卵を包んだミートボールを一緒に詰める冬向けのお弁当です。",
@@ -1681,6 +1686,7 @@
     "shortNameEn": "NasiGor",
     "nameKana": "なしごれんふうべんとう",
     "style": "other",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "鶏ひき肉と赤パプリカ、コーンをレンジで火を通してごはんに混ぜ、ゆで卵をのせる、朝に手早く作れるインドネシア風のごはん弁当です。",
@@ -1970,6 +1976,7 @@
     "shortNameEn": "SalmonBx",
     "nameKana": "さけべんとう",
     "style": "japanese",
+    "dishType": "grilled-fish",
     "themeId": null,
     "description": {
       "ja": "レンジで蒸した甘塩鮭に、卵焼き、塩ゆでアスパラ、にんじんとごぼうのきんぴらを合わせ、ごはんにのりを敷いた朝10分の和風弁当です。",
@@ -2394,6 +2401,7 @@
     "shortNameEn": "Kajiki",
     "nameKana": "かじきのすぱいしーまよすてーきべんとう",
     "style": "western-inspired",
+    "dishType": "grilled-fish",
     "themeId": null,
     "description": {
       "ja": "マヨネーズで焼いたかじきのステーキに、ブロッコリーの卵とじと梅入りのセロリピクルスを添え、粉チーズとパセリをふったごはんと詰める弁当です。",
@@ -2886,6 +2894,7 @@
     "shortNameEn": "ImoChick",
     "nameKana": "さつまいもととりにくのばたーいためべんとう",
     "style": "japanese",
+    "dishType": "simmered",
     "themeId": null,
     "description": {
       "ja": "レンジでやわらかくしたさつまいもと鶏もも肉、ピーマンをバターじょうゆで炒め、塩昆布入りのレンジ卵焼きを添えるおかず弁当です。",
@@ -3211,6 +3220,7 @@
     "shortNameEn": "Hallowee",
     "nameKana": "はろうぃんべんとう",
     "style": "western-inspired",
+    "dishType": "onigiri",
     "themeId": "theme-seasonal",
     "description": {
       "ja": "かぼちゃ形のケチャップごはん、パンを巻いたソーセージのミイラ、ゆで卵のおばけを並べて、いんげんのごま和えと野菜を添えるハロウィン弁当です。",
@@ -3696,6 +3706,7 @@
     "shortNameEn": "Chickpea",
     "nameKana": "ころねーしょんひよこまめさんど",
     "style": "other",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "ひよこ豆をマヨネーズ、マンゴーチャツネ、カレー粉、レモン汁であえてレーズンと玉ねぎを混ぜた、ロールパンや食パンにはさむ具です。8分でできて、冷蔵庫で数日もちます。",
@@ -4011,6 +4022,7 @@
     "shortNameEn": "Couscous",
     "nameKana": "さまーくすくすさらだ",
     "style": "other",
+    "dishType": "salad",
     "themeId": null,
     "description": {
       "ja": "ひよこ豆を混ぜたクスクスに、焼いたズッキーニとトマト、カリッと焼いたハルーミチーズをのせ、ライムとミントのドレッシングをかける夏のサラダです。",

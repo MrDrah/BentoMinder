@@ -9,6 +9,7 @@
     "shortNameEn": "Soboro",
     "nameKana": "あまからそぼろのえだまめごはん",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "豚ひき肉を調味料と一緒に電子レンジで加熱してそぼろにし、枝豆とあたたかいごはんに混ぜる、火も包丁も使わない混ぜごはんです。",
@@ -273,6 +274,7 @@
     "shortNameEn": "Tsukune",
     "nameKana": "たけのこいりつくねべんとう",
     "style": "japanese",
+    "dishType": "meat-patty",
     "themeId": null,
     "description": {
       "ja": "甘辛いたれのたけのこ入り鶏つくねに、ハム入りポテトサラダとしらす入りのスクランブルエッグを合わせた、3品の園児向けお弁当です。",
@@ -792,6 +794,7 @@
     "shortNameEn": "Cat",
     "nameKana": "ねこのきのこいなりずし",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-animals",
     "description": {
       "ja": "甘辛く煮た油揚げに、鶏ひき肉・しめじ・コーン入りの酢飯を詰め、のりでネコの顔を作ったいなり寿司です。キャラ弁にも向きます。",
@@ -1139,6 +1142,7 @@
     "shortNameEn": "Satsuma",
     "nameKana": "さつまいもごはんべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "電子レンジでやわらかくしたさつまいもをごはんに混ぜ、レンジで作る鶏もも肉の照り焼きを添えた、やさしい甘みの1人分のお弁当です。",
@@ -1376,6 +1380,7 @@
     "shortNameEn": "Kakiage",
     "nameKana": "みにかきあげべんとう",
     "style": "japanese",
+    "dishType": "fritter",
     "themeId": null,
     "description": {
       "ja": "アスパラと桜えびの小さなかき揚げに、鮭の照り焼きとさつまいものはちみつ煮を合わせた、彩りのよい園児向けの3品お弁当です。",
@@ -1854,6 +1859,7 @@
     "shortNameEn": "Napoli",
     "nameKana": "なぽりたんべんとう",
     "style": "western-inspired",
+    "dishType": "noodles",
     "themeId": null,
     "description": {
       "ja": "ソーセージと玉ねぎ、ピーマン、しいたけを炒め、ゆでたスパゲッティにケチャップをからめる、冷めてもおいしい1人分のパスタ弁当です。",
@@ -2141,6 +2147,7 @@
     "shortNameEn": "Cornball",
     "nameKana": "ひきにくいりこーんぼーるべんとう",
     "style": "western-inspired",
+    "dishType": "fritter",
     "themeId": null,
     "description": {
       "ja": "豚ひき肉のたねにコーンをまぶしてレンジで蒸し、ケチャップ焼きのブロッコリーと、かぼちゃの茶巾絞りを添えた3品のお弁当です。",
@@ -2637,6 +2644,7 @@
     "shortNameEn": "Sandwich",
     "nameKana": "かふぇふうさんどいっちおべんとう",
     "style": "western-inspired",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "電子レンジで作るバジル風味の鶏肉に、甘酢の紫キャベツ、にんじん、ゆで卵を重ねて全粒粉入りの食パンではさみ、いちごとパイナップルを添えます。",
@@ -3037,6 +3045,7 @@
     "shortNameEn": "Lion",
     "nameKana": "おはなばたけらいおん",
     "style": "western-inspired",
+    "dishType": "rice-bowl",
     "themeId": "theme-animals",
     "description": {
       "ja": "カレー風味のソーセージごはんを丸くにぎり、ソーセージのたてがみとチーズ・のりの顔でライオンにして、ピーマンの花の目玉焼きを添えます。",
@@ -3373,6 +3382,7 @@
     "shortNameEn": "Chicken",
     "nameKana": "ささみでれんちんかおまんがいふうべんとう",
     "style": "other",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "レンジで蒸したささみの蒸し汁をごはんに混ぜ、ナンプラーとオイスターソースのたれを添える、セロリのピクルスとゆで卵つきのタイ風弁当です。",
@@ -3762,6 +3772,7 @@
     "shortNameEn": "Falafel",
     "nameKana": "ふぁらふぇるらんちぼっくす",
     "style": "other",
+    "dishType": "salad",
     "themeId": null,
     "description": {
       "ja": "火を使わず、調理済みの雑穀に生野菜、ファラフェル、フムスをのせるだけで作る、ベジタリアン向けのお弁当風サラダです。",
@@ -4035,6 +4046,7 @@
     "shortNameEn": "Enoki",
     "nameKana": "ぶたにくとえのきのあまからにべんとうようじむけ",
     "style": "japanese",
+    "dishType": "meat-roll",
     "themeId": null,
     "description": {
       "ja": "えのきを豚薄切り肉で巻いて甘辛く焼いた主菜に、チーズののり巻き、しらす入り卵焼き、ブロッコリのおかかあえを合わせた4品の幼児向け弁当です。",
@@ -4506,6 +4518,7 @@
     "shortNameEn": "Nuggets",
     "nameKana": "くまちゃんなげっと",
     "style": "western-inspired",
+    "dishType": "fried-chicken",
     "themeId": "theme-animals",
     "description": {
       "ja": "鶏むね肉と豆腐で作る小さなナゲットに、ミニソーセージの耳と鼻、のりの目と口をつけて、クマの顔にしたお弁当のおかずです。",

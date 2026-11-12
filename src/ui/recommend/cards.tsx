@@ -31,7 +31,7 @@ export function RecCard({ ranked, prefix, rank, date, current, canConfirm, prima
   return (
     <article className={`rec-card${compact ? ' rec-card--row' : ''}`} data-testid={prefix} data-recipe-id={recipe.id} data-score={ranked.score}>
       <div className="rec-card__art">
-        <RecipeArt size={compact ? 'thumb' : 'card'} />
+        <RecipeArt size={compact ? 'thumb' : 'card'} dishType={recipe.dishType} />
         {rank !== undefined && <span className="rec-card__rank">{t('rec.rank', { n: rank })}</span>}
       </div>
       <div className="rec-card__main">

@@ -9,6 +9,7 @@
     "shortNameEn": "Mosaic",
     "nameKana": "さけそぼろのもざいくべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "ごはんの上に、ほぐした鮭、黄色い炒り卵、緑の小松菜を交互にのせて、しま模様に仕上げる彩りのよいそぼろ弁当です。",
@@ -363,6 +364,7 @@
     "shortNameEn": "Cheer",
     "nameKana": "うんどうかいおうえんべんとう",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-seasonal",
     "description": {
       "ja": "丸いおにぎりに、のりで髪・目・口をつけ、かにかまのはちまきを巻いた笑顔のおにぎりです。運動会の日のお弁当向けです。",
@@ -527,6 +529,7 @@
     "shortNameEn": "Jako",
     "nameKana": "じゃこおにぎりととりひきにくのみそにぷれーと",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "ちりめんじゃこ・ごま・青のりを混ぜたおにぎりに、白菜とまいたけと鶏ひき肉をみそで煮た温かいおかずを添えます。",
@@ -814,6 +817,7 @@
     "shortNameEn": "Saba",
     "nameKana": "さばかんおにぎり",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "味つきのさば缶をほぐしてごはんに混ぜ、真ん中に梅干しを入れて三角ににぎる、包丁を使わない5分のおにぎりです。",
@@ -1006,6 +1010,7 @@
     "shortNameEn": "Shrimp",
     "nameKana": "えびのあげものべんとう",
     "style": "japanese",
+    "dishType": "fritter",
     "themeId": null,
     "description": {
       "ja": "春巻きの皮でえびを巻いて揚げ、まるく盛ったポテトサラダとゆでブロッコリーを添える幼稚園児向けのお弁当です。",
@@ -1386,6 +1391,7 @@
     "shortNameEn": "Bear",
     "nameKana": "くまのはんばーぐ",
     "style": "western-inspired",
+    "dishType": "meat-patty",
     "themeId": "theme-animals",
     "description": {
       "ja": "顔と耳の形に丸めて焼いたハンバーグに、チーズとのりでくまの顔をつけます。ごはんが多くなりがちなキャラ弁のおかずにも向きます。",
@@ -1729,6 +1735,7 @@
     "shortNameEn": "Wrap",
     "nameKana": "とりむねにくでらっぷさんど",
     "style": "western-inspired",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "薄くのばしたサンドイッチ用パンに、甘酸っぱいたれをからめた鶏むね肉とレタスをのせて巻く、トルティーヤ風のサンドです。",
@@ -2055,6 +2062,7 @@
     "shortNameEn": "Tacorice",
     "nameKana": "たこらいすべんとう",
     "style": "western-inspired",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "合いびき肉をカレー粉とソースで味つけしたタコミートに、レタス、ミニトマト、粉チーズを添えてごはんにのせる、冷めてもおいしい弁当です。",
@@ -2464,6 +2472,7 @@
     "shortNameEn": "Giraffe",
     "nameKana": "たまごやきをつかってきりんさんのでこべん",
     "style": "japanese",
+    "dishType": "egg",
     "themeId": "theme-animals",
     "description": {
       "ja": "卵焼きを切って組み合わせ、のりで模様と目をつけてごはんの上にキリンの形に並べる、立体的なキャラ弁です。",
@@ -2688,6 +2697,7 @@
     "shortNameEn": "Shumai",
     "nameKana": "ごふんでかんたんれんじしゅうまいべんとう",
     "style": "other",
+    "dishType": "dumpling",
     "themeId": null,
     "description": {
       "ja": "皮の代わりにごはんで肉だねを包むしゅうまいに、アスパラとかにかまの中華あえ、桜えびと卵のチリ風を合わせた、レンジ中心のお弁当です。",
@@ -3093,6 +3103,7 @@
     "shortNameEn": "Olive",
     "nameKana": "べじたぶるとおりーぶのらっぷ",
     "style": "other",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "細切りの野菜とオリーブをマスタード風味の酢と油であえ、大きなトルティーヤで巻く、火を使わない10分の野菜ラップです。",
@@ -3354,6 +3365,7 @@
     "shortNameEn": "Yakisoba",
     "nameKana": "やさいたっぷりやきそばべんとう",
     "style": "japanese",
+    "dishType": "noodles",
     "themeId": null,
     "description": {
       "ja": "ほぐした蒸し中華麺を豚肉とキャベツ・ピーマン・にんじんと炒め、ソース味にして青のりをたっぷりからめた焼きそば弁当です。",
@@ -3720,6 +3732,7 @@
     "shortNameEn": "Pasta",
     "nameKana": "らんちぼっくすぱすたさらだ",
     "style": "western-inspired",
+    "dishType": "salad",
     "themeId": null,
     "description": {
       "ja": "ゆでたパスタをバジルペーストであえ、冷めてからマヨネーズとヨーグルト、ゆで野菜、ミニトマトを混ぜて、鶏肉をのせる子ども向けの弁当サラダです。",

@@ -31,7 +31,7 @@ const animations = (page: Page): Promise<Anim[]> =>
       };
     }),
   );
-const settle = (page: Page) => page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished.catch(() => undefined))));
+const settle = (page: Page) => page.evaluate(() => Promise.all(document.getAnimations().filter((a) => !((a.effect as KeyframeEffect | null)?.target as Element | null)?.closest('.dish .a')).map((a) => a.finished.catch(() => undefined))));
 const cell = (page: Page, date: string) => page.getByTestId(`cal-cell-${date}`);
 const mobile = (name: string) => name === 'mobile';
 const riseToken = (page: Page) => page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rise-offset')));

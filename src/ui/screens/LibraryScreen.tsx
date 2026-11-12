@@ -22,7 +22,7 @@ export function LibraryScreen() {
     return (
       <li key={recipe.id} className={`library-row${reasons.length > 0 ? ' is-blocked' : ''}`} data-testid={`library-row-${recipe.id}`} data-blocked={reasons.length > 0 ? 'true' : undefined}>
         <a className="library-row__link" href={toHash({ name: 'recipe', id: recipe.id, date: null })} data-testid={`library-row-${recipe.id}-link`}>
-          <RecipeArt size="thumb" />
+          <RecipeArt size="thumb" dishType={recipe.dishType} />
           <span className="library-row__body">
             <span className="library-row__name" lang={names.main.lang}>
               {names.main.text}

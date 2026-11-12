@@ -9,6 +9,7 @@
     "shortNameEn": "2-colour",
     "nameKana": "れんじでかんたんにしょくそぼろべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "甘辛い鶏そぼろとやさしい味の卵そぼろを、電子レンジだけで作る2色のそぼろ弁当です。火を使わず、朝の短い時間で仕上がります。",
@@ -359,6 +360,7 @@
     "shortNameEn": "Soccer",
     "nameKana": "さっかーぼーるおにぎりべんとう",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "鮭フレーク入りの丸いおにぎり2個に、五角形に切ったのりをのせてサッカーボールに見立てる、手早く作れるキャラ弁です。",
@@ -545,6 +547,7 @@
     "shortNameEn": "Inari",
     "nameKana": "いなりずきんちゃん",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "酢飯を稲荷揚げに詰め、のりで目と口をつけて、ずきんをかぶった顔に見立てるかわいいお弁当。2個を並べて詰めます。",
@@ -756,6 +759,7 @@
     "shortNameEn": "Nanohana",
     "nameKana": "なのはなとえびのはるいろおにぎり",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-seasonal",
     "description": {
       "ja": "すし酢で味つけしたごはんに、きざんだ菜の花とゆでえび、マヨネーズ、ごまを混ぜた春らしい三角おにぎり。3個できます。",
@@ -1001,6 +1005,7 @@
     "shortNameEn": "Jako",
     "nameKana": "じゃことやさいのぱすたべんとう",
     "style": "western-inspired",
+    "dishType": "noodles",
     "themeId": null,
     "description": {
       "ja": "ちりめんじゃこの塩けとうまみで味つけする、しめじと水菜入りのスパゲッティ弁当。前の晩にパスタをゆでておくこともできます。",
@@ -1229,6 +1234,7 @@
     "shortNameEn": "Sakura",
     "nameKana": "はるまんかいにゅうがくしきのおべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": "theme-seasonal",
     "description": {
       "ja": "鶏そぼろを木の幹に、ゆでブロッコリーを葉に、桜型に抜いたハムを花に見立てて、ごはんの上に春の桜の木を描くお弁当です。",
@@ -1503,6 +1509,7 @@
     "shortNameEn": "Gimbap",
     "nameKana": "かんこくふうのりまきべんとう",
     "style": "other",
+    "dishType": "meat-roll",
     "themeId": null,
     "description": {
       "ja": "にんじんといんげん、牛そぼろをごま油をぬったのりで巻く、韓国風ののり巻き弁当。ゆで卵とぶどうを添えます。",
@@ -1908,6 +1915,7 @@
     "shortNameEn": "Wrap",
     "nameKana": "すーぱーさらだらっぷ",
     "style": "western-inspired",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "トルティーヤにフムスをぬり、レタス、にんじん、きゅうり、トマト、チェダーチーズをのせて巻く、5分でできる野菜たっぷりのラップです。",
@@ -2130,6 +2138,7 @@
     "shortNameEn": "Tsukune",
     "nameKana": "きつねつくねさんどべんとう",
     "style": "japanese",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "油揚げの袋に鶏つくねのたねを詰めてトースターで焼いたサンドと、コンビーフ入りの香ばしいハッシュドポテトを組み合わせた弁当です。",
@@ -2541,6 +2550,7 @@
     "shortNameEn": "Menchi",
     "nameKana": "ひとくちめんちかつべんとう",
     "style": "japanese",
+    "dishType": "fried-chicken",
     "themeId": null,
     "description": {
       "ja": "中にチーズを包んだひと口サイズのメンチカツに、キャベツとミニトマトを添え、ベーコンとトマトにチーズをのせて焼いた副菜もつけた、チーズづくしの弁当です。",

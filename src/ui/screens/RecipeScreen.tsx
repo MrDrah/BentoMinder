@@ -94,7 +94,7 @@ function RecipeDetail({ recipe, date, lang }: { recipe: Recipe; date: LocalDate 
         )}
         <div className="recipe__cols">
           <div className="recipe__left">
-            <RecipeArt size="hero" />
+            <RecipeArt size="hero" dishType={recipe.dishType} />
             {names.other !== null && (
               <p className="rec-card__other" lang={names.other.lang} data-testid="recipe-other-name">
                 {names.other.text}
