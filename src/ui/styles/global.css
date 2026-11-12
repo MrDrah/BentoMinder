@@ -486,7 +486,9 @@ a {
     min-height: 64px;
   }
   .iconbtn__label {
-    display: inline;
+    display: inline-block;
+    min-width: 5em; /* same width in 日本語 and EN ("設定" / "Settings"), so the language toggle never moves (PO 2026-11-12) */
+    text-align: left;
   }
   .page {
     max-width: 760px;

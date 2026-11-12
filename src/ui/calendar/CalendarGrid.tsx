@@ -114,13 +114,9 @@ export function CalendarGrid({ t, lang, month, today, weekStartsOn, views, selec
         ))}
       </div>
       {rows.map((row, r) => {
-        // A row with no iconed tile and no today or tomorrow tile stays compact (components §18.4).
-        const compact = !row.some((date) => {
-          const v = date === null ? undefined : views.get(date);
-          return v !== undefined && (tileOf(v, today).icon !== 'none' || v.isToday || v.date === addDays(today, 1));
-        });
+        // Every row has the same height (PO 2026-11-12): a tile keeps its shape whether or not it has an icon.
         return (
-          <div key={r} role="row" className={`cal-row${compact ? ' is-compact' : ''}`}>
+          <div key={r} role="row" className="cal-row">
             {row.map((date, c) => {
               const v = date === null ? undefined : views.get(date);
               if (date === null || v === undefined) return <div key={c} role="gridcell" className="cell cell--pad" aria-hidden="true" />;

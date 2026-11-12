@@ -17,6 +17,8 @@ Roles and briefs: `CLAUDE.md` §1 and `.claude/agents/`. Rules and decisions: `d
 
 ## 3. Status
 
+> ⚠️ **WARNING for parallel agents (2026-11-12).** Local `main` in `C:ProjectsBentoMinder` has an unpushed commit `c2e16f9` whose `src/ui/calendar/CalendarGrid.tsx` is **truncated** (the file ends mid-tag after `<CellName … />`), so that checkout does not build. It also swept in an unrelated tile-fix edit to `global.css` / `family.css`. Do not push that `main` as is: finish the tap-shake work, restore the end of `DayCell`, run `tsc` and the gate first. The uniform-row and stable-app-bar fix is on branch `fix/uniform-tiles-stable-appbar` (PR to `main`): rows no longer use `.is-compact`, so rebase any calendar.css / CalendarGrid.tsx edits onto it and expect small conflicts there.
+
 ### Done ✅
 | UI refresh (2026-11-11) | Breathy SP-first layout, collapsible about, redesigned day tiles + legend, button cascade fix; independent QA passed (0 P1/P2), cycle-1 fixes merged, release gate green. Open: PO phone check, wife join test, LCP 2.9–3.3 s vs 2.5 s | `tests/reports/qa-ui-refresh.md`, `design/ui-refresh-2026-11.md` |
 | Email + password sign-in (2026-11-12) | US-E13-08: sign-in/create/forgot modes, confirmed-email hard wall, membership never stores an unconfirmed email; QA 208 tests, 0 P1/P2. PO steps: enable Email/Password provider, add wife email to ALLOWED_ACCOUNTS, redeploy functions | `docs/dev/adr/014-accounts-and-sign-in.md`, `tests/reports/qa-e13-email.md` |
