@@ -263,7 +263,7 @@
   }
   /* Tap shake: a short left-right wobble, set from CalendarGrid on click. */
   .cell__btn.is-shake {
-    animation: tile-shake 260ms var(--ease-standard);
+    animation: tile-shake 240ms var(--ease-standard);
   }
   .upcoming__row,
   .cal-agenda__btn,
