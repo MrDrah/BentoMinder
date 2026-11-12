@@ -325,3 +325,4 @@
 {"v":1,"at":"2026-11-11T14:03:02.411Z","type":"product-decision","summary":"Equal-width calendar columns; email+password sign-up requested"}
 {"v":1,"at":"2026-11-12T10:28:07.721Z","type":"product-decision","summary":"Email+password sign-up approved (US-E13-08), email confirmation required"}
 {"v":1,"at":"2026-11-12T10:28:07.874Z","by":"orchestrator","type":"task-start","task":"email-auth-design","summary":"Task email-auth-design dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-12T10:29:54.045Z","by":"orchestrator","type":"task-start","task":"email-auth-build","summary":"Task email-auth-build dispatched (1 allowed globs)"}

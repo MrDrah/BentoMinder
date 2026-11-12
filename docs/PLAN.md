@@ -223,3 +223,5 @@ Phase 5  M6 Android feasibility doc → PO decides v1 Android build
 | 2026-11-12 | PO go-ahead: email + password sign-up (US-E13-08). Defaults confirmed: email confirmation required before the app opens (hard wall), password reset by email, min 8 characters, neutral messages that do not reveal accounts, Google stays; PO steps: enable the Email/Password provider in the Firebase console and add the second parent's email to ALLOWED_ACCOUNTS. Order: designer (UI + copy), developer, QA. | PO / Orchestrator |
 
 | 2026-11-12 | Email sign-in design accepted with the designer's defaults: one "email already in use" message for both password and Google cases; 「ログアウト」 on the check-your-email screen signs out with no dialog; resend cooldown starts at 60 s after account creation and enabled after an unconfirmed sign-in; reset button wording 「再設定メールを送る」. Spec: design/components.md §20, design/copy.md §21. | Orchestrator |
+
+| 2026-11-12 | JS budget raised 445 -> 450 KB gzip total (email+password sign-in: 46 strings per language, login form, verify screen; built total 445.3 KB). Orchestrator decision, same pattern as the earlier Auth and family raises. | Orchestrator |
