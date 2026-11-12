@@ -1,6 +1,6 @@
 # Motion spec (2026-11-11)
 
-Calm, quick, phone-first. Motion confirms "your tap registered" and "something appeared from there"; it never decorates. Developer builds this in one CSS-only slice. Tokens: `design/tokens.css` / `tokens.json` (existing `--duration-fast 120ms`, `--duration-base 200ms`, `--ease-standard`, `--ease-enter`, `--ease-exit`; added `--duration-sheet 240ms`, `--rise-offset 12px`, `--press-scale 0.97`). All zero out under `prefers-reduced-motion: reduce`.
+Calm, quick, phone-first. Motion confirms "your tap registered" and "something appeared from there"; it never decorates. Developer builds this in one CSS-only slice. Tokens: `design/tokens.css` / `tokens.json` (existing `--duration-fast 120ms`, `--duration-base 200ms`, `--ease-standard`, `--ease-enter`, `--ease-exit`; added `--duration-sheet 240ms`, `--rise-offset 12px`, `--press-scale 0.95` (raised from 0.97 on 2026-11-12 for a firmer press); calendar tiles also play a 260 ms `tile-shake` on tap). All zero out under `prefers-reduced-motion: reduce`.
 
 ## 1. Rules (all motion)
 1. Animate `transform` and `opacity` only (plus `background-color`/`color` for hover/press fills). Never `height`, `top`, `margin`, `box-shadow` size. Exception: the existing about reveal keeps `max-height` (see 4.3) because it already ships and the content height is unknown.

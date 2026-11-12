@@ -187,4 +187,16 @@ function DayCell({ t, lang, v, today, tabbable, selected, onOpen, onFocus }: Cel
       <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} onClick={(e) => { shake(e.currentTarget); onOpen(v.date); }} onFocus={() => onFocus(v.date)}>
         {/* The name comes from this sentence, not from an aria-label: the visible number is part of it (WCAG 2.5.3) */}
         <CellName t={t} lang={lang} v={v} today={today} />
-        <
+        <span className="cell__top">
+          <span className="cell__num" aria-hidden="true">
+            {dateParts(v.date).day}
+          </span>
+        </span>
+        {tile.icon !== 'none' && <TileIcon name={TILE_ICON_NAMES[tile.icon]} className="cell__icon" />}
+        {tile.dash && <span className="cell__dash" aria-hidden="true" />}
+        {tile.allergen && <AllergenMark />}
+      </button>
+    </div>
+  );
+}
+
