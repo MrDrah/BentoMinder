@@ -145,6 +145,13 @@ interface CellProps {
 function DayCell({ t, lang, v, today, tabbable, selected, onOpen, onFocus }: CellProps) {
   const tile = tileOf(v, today);
   const wd = weekdayOf(v.date);
+  /* Tap feedback (design/motion.md): the keyframes live in a no-preference block, so under reduced motion the class is inert. */
+  const shake = (el: HTMLElement) => {
+    el.classList.remove('is-shake');
+    void el.offsetWidth; // restart the animation on a quick second tap
+    el.classList.add('is-shake');
+    el.addEventListener('animationend', () => el.classList.remove('is-shake'), { once: true });
+  };
   const classes = [
     'cell',
     `wd-${wd}`,
@@ -177,7 +184,7 @@ function DayCell({ t, lang, v, today, tabbable, selected, onOpen, onFocus }: Cel
       aria-current={v.isToday ? 'date' : undefined}
       aria-selected={selected ? true : undefined}
     >
-      <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} onClick={() => onOpen(v.date)} onFocus={() => onFocus(v.date)}>
+      <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} onClick={(e) => { shake(e.currentTarget); onOpen(v.date); }} onFocus={() => onFocus(v.date)}>
         {/* The name comes from this sentence, not from an aria-label: the visible number is part of it (WCAG 2.5.3) */}
         <CellName t={t} lang={lang} v={v} today={today} />
         <span className="cell__top">

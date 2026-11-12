@@ -132,7 +132,7 @@
   --sheet-offset: 24px;
   --duration-sheet: 240ms;
   --rise-offset: 12px;
-  --press-scale: 0.97;
+  --press-scale: 0.95;
 
   /* Layers */
   --z-base: 0;
@@ -275,10 +275,10 @@ html[lang="en"] {
     --duration-base: 0ms;
     --duration-slow: 0ms;
     --duration-shimmer: 0ms;
-    --sheet-offset: 0px;
     --duration-sheet: 0ms;
     --rise-offset: 0px;
     --press-scale: 1;
+    --sheet-offset: 0px;
   }
 }
 
