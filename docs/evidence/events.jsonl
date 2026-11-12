@@ -328,3 +328,6 @@
 {"v":1,"at":"2026-11-12T10:29:54.045Z","by":"orchestrator","type":"task-start","task":"email-auth-build","summary":"Task email-auth-build dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-12T10:53:46.702Z","by":"orchestrator","type":"task-start","task":"email-auth-qa","summary":"Task email-auth-qa dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-12T11:24:23.384Z","type":"defect","summary":"E13E-D02 focus after confirm fixed; D01 accepted as ruling","by":"orchestrator","defect":"E13E-D02","severity":"P3","state":"fixed"}
+{"v":1,"at":"2026-11-12T14:20:25.103Z","type":"product-decision","summary":"30 more recipes; dish-type SVG illustrations with slight animation"}
+{"v":1,"at":"2026-11-12T14:20:40.464Z","by":"orchestrator","type":"task-start","task":"research-i","summary":"Task research-i dispatched (1 allowed globs)"}
+{"v":1,"at":"2026-11-12T14:20:40.603Z","by":"orchestrator","type":"task-start","task":"illustration-design","summary":"Task illustration-design dispatched (1 allowed globs)"}
