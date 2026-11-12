@@ -139,7 +139,7 @@
   --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
   --duration-sheet: 240ms;
   --rise-offset: 12px;
-  --press-scale: 0.95;
+  --press-scale: 0.97;
   --sheet-offset: 24px;
 
   /* Layers */
