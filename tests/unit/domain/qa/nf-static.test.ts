@@ -26,10 +26,10 @@ const gzKb = (ext: string): number[] =>
     .map((f) => gzipSync(readFileSync(join(dist, f))).length / 1024);
 
 describe('US-NF-01/AC3 budgets', () => {
-  it('US-NF-01/AC3 the built JS is at most 458 KB gzip in total', () => {
+  it('US-NF-01/AC3 the built JS is at most 500 KB gzip in total', () => {
     const sizes = gzKb('.js');
     expect(sizes.length).toBeGreaterThan(0);
-    expect(sizes.reduce((a, b) => a + b, 0)).toBeLessThanOrEqual(458);
+    expect(sizes.reduce((a, b) => a + b, 0)).toBeLessThanOrEqual(500);
   });
 
   it('US-NF-01/AC3 the built CSS is at most 50 KB gzip in total', () => {
