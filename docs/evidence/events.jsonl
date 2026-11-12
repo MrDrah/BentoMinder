@@ -332,3 +332,4 @@
 {"v":1,"at":"2026-11-12T14:20:40.464Z","by":"orchestrator","type":"task-start","task":"research-i","summary":"Task research-i dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-12T14:20:40.603Z","by":"orchestrator","type":"task-start","task":"illustration-design","summary":"Task illustration-design dispatched (1 allowed globs)"}
 {"v":1,"at":"2026-11-12T14:27:07.202Z","type":"product-decision","summary":"Illustrations: child-drawn hand-made look requested"}
+{"v":1,"at":"2026-11-12T14:31:05.898Z","type":"approval","summary":"PO approves child-drawn illustration style; to be reused for logo"}

@@ -3641,3 +3641,50 @@ Scenario: AC11 Account section shows the method
 Scenario: AC12 Testability
   Then the fake `AuthPort` supports the new methods (createAccount, signInWithEmail, sendVerification, reloadUser, sendPasswordReset) and the e2e-only fake seam covers every scenario above without calling Firebase
 ```
+
+## E17 Recipe illustrations
+
+### US-E17-01 Dish illustrations on recipes
+PO request 2026-11-12 (the recipe card and page feel "sad"; PO approved the child-drawn look). Spec: design/illustrations.md; preview design/preview/illustrations-standalone.html. Each recipe has a `dishType` (one of 18: onigiri, rice-bowl, sandwich, noodles, egg, fried-chicken, meat-patty, meat-roll, grilled-fish, simmered, tofu, salad, soup, vegetable-side, fritter, dumpling, sweet, other). Data contract: `dishType` is a required string enum on `Recipe`; the validator rejects a value outside the list.
+As a parent browsing recipes on my phone, I want each recipe to show a friendly picture of its dish type, so that the cards and the recipe page feel warm and I recognise dishes at a glance.
+
+```gherkin
+Scenario: AC1 Matching illustration in the existing art frame
+  Given any recipe with a dish type
+  When its card (recommendation, library, compact row) or its page header is shown
+  Then the matching illustration is displayed in the existing art frame (72/120 px card, 64 px thumb, 150 px hero)
+
+Scenario: AC2 Unknown type
+  Given a recipe with no dish type or an unknown one
+  Then the `other` illustration is shown and nothing breaks
+
+Scenario: AC3 Decorative only
+  Given any illustration
+  Then the SVG has aria-hidden="true", no accessible name, no text, and conveys no allergen or safety information
+
+Scenario: AC4 Reduced motion
+  Given prefers-reduced-motion: reduce
+  Then no illustration animation runs and the drawing is in its rest pose
+
+Scenario: AC5 Themes and contrast
+  Given light or dark theme
+  Then illustrations use the theme's illustration tokens (outline and fill as separate paths, fill offset from the outline), outlines reach 3:1 against the frame, and no pure white or black is used
+
+Scenario: AC6 No layout shift
+  Given the card frame
+  When the illustration loads
+  Then the frame size is unchanged and the page is usable before the illustration chunk arrives
+
+Scenario: AC7 Calm motion
+  Given a recipe list
+  Then no illustration animates without hover, focus or press, and at most one card animates at a time
+  And on the recipe page the header loop runs at most 5 cycles, pauses off-screen, uses only transform and opacity, at most 2 animated groups
+
+Scenario: AC8 Cheap and offline
+  Given the app online or offline
+  Then showing illustrations causes no network request for images, the added JS plus CSS is at most 16 KB gzip, and no SVG filter or CSS filter is used
+
+Scenario: AC9 Every recipe has a type
+  Given the library
+  Then every recipe has a dishType from the list of 18 and the data validator fails otherwise
+```
