@@ -66,13 +66,13 @@ test.describe('buttons', () => {
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   };
 
-  test('US-E16-01/AC1 primary, secondary and destructive buttons scale to 0.97 with the pressed fill and return on release', async ({ page }) => {
+  test('US-E16-01/AC1 primary, secondary and destructive buttons scale to 0.95 with the pressed fill and return on release', async ({ page }) => {
     for (const id of ['b-primary', 'b-secondary', 'b-destructive']) {
       const b = page.locator(`#${id}`);
       const before = await b.evaluate((el) => getComputedStyle(el).backgroundColor);
       await centre(page, id);
       await page.mouse.down();
-      expect(await transform(page, id), id).toBe('matrix(0.97, 0, 0, 0.97, 0, 0)');
+      expect(await transform(page, id), id).toBe('matrix(0.95, 0, 0, 0.95, 0, 0)');
       await page.mouse.up();
       await page.mouse.move(2, 2);
       await expect.poll(() => transform(page, id), { message: id }).toBe('none');

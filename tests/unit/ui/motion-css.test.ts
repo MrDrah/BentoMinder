@@ -23,7 +23,7 @@ describe('motion tokens', () => {
   it('US-E16-01/AC7 the three motion tokens exist and none of the durations exceeds 250 ms', () => {
     expect(tokens).toMatch(/--duration-sheet:\s*240ms/);
     expect(tokens).toMatch(/--rise-offset:\s*12px/);
-    expect(tokens).toMatch(/--press-scale:\s*0\.97/);
+    expect(tokens).toMatch(/--press-scale:\s*0\.95/);
     for (const name of ['fast', 'base', 'sheet']) {
       const ms = Number(new RegExp(`--duration-${name}:\\s*(\\d+)ms`).exec(tokens)?.[1]);
       expect(ms).toBeLessThanOrEqual(250);
