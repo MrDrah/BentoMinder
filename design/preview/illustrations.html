@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BentoMinder dish illustrations (preview, rough)</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+body{margin:0;font:14px/1.6 var(--font-body);background:var(--surface-1);color:var(--ink-1)}
+header{padding:16px;max-width:900px;margin:auto}
+h1{font:700 22px var(--font-display);margin:0 0 4px}
+button{font:inherit;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line-ui);background:var(--surface-2);color:var(--ink-1)}
+.themes{display:grid;grid-template-columns:1fr}
+@media(min-width:900px){.themes{grid-template-columns:1fr 1fr}}
+.theme{background:var(--surface-1);color:var(--ink-1);padding:16px}
+.theme h2{font:700 16px var(--font-display);margin:0 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.tile{background:var(--surface-2);border:1px solid var(--line-1);border-radius:12px;overflow:hidden;margin:0}
+.tile figcaption{padding:4px 8px;font-size:12px;color:var(--ink-2)}
+.art{background:var(--surface-3);display:block;height:120px}
+.art svg{display:block;width:100%;height:100%}
+.sizes{display:flex;gap:12px;align-items:flex-end;margin-top:12px}
+.sizes .art{border-radius:8px;overflow:hidden}
+/* ---- illustration rules (production: same classes, scoped under .dish) ---- */
+.dish *{stroke-linejoin:round;stroke-linecap:round}
+.dish .l{stroke:var(--illus-line);stroke-width:2}
+.dish .nf{fill:none}
+.dish .bw{fill:var(--illus-blob-warm)}.dish .bc{fill:var(--illus-blob-cool)}
+.dish .rice{fill:var(--illus-rice)}.dish .egg{fill:var(--illus-egg)}.dish .grn{fill:var(--illus-green)}
+.dish .brn{fill:var(--illus-brown)}.dish .nori{fill:var(--illus-nori)}.dish .pnk{fill:var(--illus-pink)}
+.dish .red{fill:var(--illus-red)}.dish .org{fill:var(--illus-orange)}.dish .tan{fill:var(--illus-tan)}
+.dish .blu{fill:var(--illus-blue)}.dish .ware{fill:var(--surface-2)}
+.dish .stm{stroke:var(--illus-steam);stroke-width:2.5;fill:none}
+.dish .spk{fill:var(--illus-steam)}
+.dish .a1,.dish .a2{transform-box:fill-box;animation-play-state:paused}
+.live .dish .a1,.live .dish .a2{animation-play-state:running}
+@media (prefers-reduced-motion:no-preference){
+ .dish .steam1{opacity:0;animation:steam 3.6s ease-in-out infinite}
+ .dish .steam2{opacity:0;animation:steam 3.6s ease-in-out 1.8s infinite}
+ .dish .wob{transform-origin:50% 100%;animation:wob 3.2s ease-in-out infinite}
+ .dish .squash{transform-origin:50% 100%;animation:squash 3s ease-in-out infinite}
+ .dish .sway{transform-origin:50% 100%;animation:sway 4s ease-in-out infinite}
+ .dish .tail{transform-origin:0% 50%;animation:wob 3.4s ease-in-out infinite}
+ .dish .lift{animation:lift 3.6s ease-in-out infinite}
+ .dish .twk1{transform-origin:50% 50%;opacity:0;animation:twk 2.4s ease-in-out infinite}
+ .dish .twk2{transform-origin:50% 50%;opacity:0;animation:twk 2.4s ease-in-out 1.2s infinite}
+ .dish .puff{transform-origin:50% 100%;animation:puff 3.2s ease-in-out infinite}
+ .dish .bob{transform-origin:50% 100%;animation:bob 3.6s ease-in-out infinite}
+}
+@keyframes steam{0%{opacity:0;transform:translateY(5px)}40%{opacity:.9}100%{opacity:0;transform:translateY(-7px)}}
+@keyframes wob{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes squash{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.96)}}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes lift{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes twk{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}}
+@keyframes puff{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+</style></head><body>
+<header><h1>Dish illustrations (rough preview)</h1>
+<p>18 dish types, 120x120 viewBox, light and dark. Decorative only. Animations are paused until you press the button (in the app: running on the recipe page header, press/hover/focus on cards). With reduced motion set in your OS, nothing moves.</p>
+<button id="t" aria-pressed="false">Play animations</button>
+<div class="sizes" id="sizes" aria-label="Sizes"></div></header>
+<div class="themes" id="themes">
+<section class="theme" data-theme="light"><h2>Light</h2><div class="grid" id="g-light"></div></section>
+<section class="theme" data-theme="dark"><h2>Dark</h2><div class="grid" id="g-dark"></div></section>
+</div>
+<script>
+const st=(d,c)=>`<path class="stm ${c}" d="${d}"/>`;
+const steam=(x=0)=>st(`M${46+x} 34c-5-5 5-8 0-14`,'a1 steam1')+st(`M${66+x} 34c-5-5 5-8 0-14`,'a2 steam2');
+const bowl=(f='blu',y=62)=>`<path class="l ${f}" d="M24 ${y}h72c0 22-14 36-36 36S24 ${y+22} 24 ${y}Z"/>`;
+const star=(x,y)=>`<path class="spk" d="M${x} ${y-7}l2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/>`;
+const D={
+onigiri:['bw',`<g class="a1 wob"><path class="l rice" d="M60 26c6 0 9 5 26 42 4 9-2 20-13 20H47c-11 0-17-11-13-20C51 31 54 26 60 26Z"/><path class="l nori" d="M45 88V70h30v18Z"/><circle cx="52" cy="58" r="2.5" class="nori"/><circle cx="68" cy="58" r="2.5" class="nori"/><circle cx="46" cy="64" r="3.5" class="pnk"/><circle cx="74" cy="64" r="3.5" class="pnk"/></g>`],
+'rice-bowl':['bw',`${bowl()}<path class="l rice" d="M28 62c0-20 15-30 32-30s32 10 32 30Z"/><circle class="l egg" cx="60" cy="48" r="9"/><path class="l grn" d="M40 54l8-4M80 54l-8-4"/>${steam()}`],
+sandwich:['bw',`<g class="a1 lift"><path class="l tan" d="M24 50c0-10 10-14 36-14s36 4 36 14v6H24Z"/></g><path class="l grn" d="M22 62c6-6 10 4 16-2s10 4 16-2 10 4 16-2 10 4 14 0v8H22Z"/><rect class="l red" x="26" y="70" width="68" height="7" rx="3"/><rect class="l pnk" x="24" y="77" width="72" height="8" rx="3"/><path class="l tan" d="M24 85h72v6c0 5-4 8-9 8H33c-5 0-9-3-9-8Z"/>`],
+noodles:['bc',`${bowl()}<path class="l tan" d="M30 62c0-14 14-22 30-22s30 8 30 22Z"/><path class="l nf" d="M38 60c8-6 14 4 22-2s14 4 22-2M42 50c6-4 12 2 18-2s12 2 18-2"/><ellipse class="l egg" cx="74" cy="52" rx="8" ry="6"/><rect class="l nori" x="42" y="44" width="10" height="14" rx="2"/>${steam()}`],
+egg:['bw',`<g class="a1 wob"><path class="l egg" d="M24 52c0-6 4-10 10-10h52c6 0 10 4 10 10v22c0 6-4 10-10 10H34c-6 0-10-4-10-10Z"/><path class="l nf" d="M34 52c6 0 6 8 12 8M60 44v38M82 44v38"/></g>`],
+'fried-chicken':['bw',`<path class="l grn" d="M20 84c8-14 22-16 30-10l-6 16Z"/><path class="l org" d="M30 78c-2-18 12-32 28-30 16 2 20 20 8 34-8 8-30 10-36-4Z"/><path class="l tan" d="M60 56c14-10 34-2 32 16-2 14-20 20-32 12 10-6 10-20 0-28Z"/><path class="l nf" d="M42 62l6 4M70 64l6 3M50 76l6 2"/><g class="a1 twk1">${star(88,40)}</g><g class="a2 twk2">${star(32,44)}</g>`],
+'meat-patty':['bw',`<path class="l grn" d="M22 74c4-16 20-20 30-12l-8 24Z"/><ellipse class="l brn" cx="62" cy="68" rx="32" ry="22"/><path class="l nf" d="M44 60l12 14M58 56l12 14M72 54l10 12"/><path class="l red" d="M60 52c6-4 14 0 12 6-4 4-14 2-12-6Z"/>${steam(2)}`],
+'meat-roll':['bw',`<g class="a1 wob"><circle class="l brn" cx="40" cy="58" r="20"/><circle class="l pnk" cx="40" cy="58" r="13"/><circle class="l grn" cx="40" cy="58" r="6"/><circle class="l brn" cx="80" cy="64" r="20"/><circle class="l pnk" cx="80" cy="64" r="13"/><circle class="l grn" cx="80" cy="64" r="6"/></g>`],
+'grilled-fish':['bc',`<path class="l org" d="M22 62c10-18 40-22 58-6l4 6c-20 24-48 20-62 0Z"/><circle cx="38" cy="58" r="2.5" class="nori"/><path class="l nf" d="M52 48v26M62 50v22M72 56v12"/><g class="a1 tail"><path class="l blu" d="M82 60l16-14v30Z"/></g><path class="l nf grn" d="M24 92h60"/>`],
+simmered:['bw',`${bowl()}<path class="l brn" d="M28 62h64c0-6-14-12-32-12S28 56 28 62Z"/><circle class="l org" cx="46" cy="58" r="7"/><circle class="l rice" cx="64" cy="56" r="8"/><circle class="l org" cx="80" cy="60" r="6"/><circle class="l grn" cx="58" cy="62" r="3"/>${steam()}`],
+tofu:['bc',`<g class="a1 squash"><path class="l rice" d="M30 56l14-12h46v32l-14 12H30Z"/><path class="l nf" d="M30 56h46v32M76 56l14-12"/><circle class="grn" cx="46" cy="68" r="2.5"/><circle class="grn" cx="60" cy="74" r="2.5"/><circle class="brn" cx="52" cy="80" r="2"/></g>`],
+salad:['bc',`<g class="a1 sway"><path class="l grn" d="M32 66c-4-16 10-26 18-18 4-12 22-12 26 0 10-6 20 6 12 18Z"/><circle class="l red" cx="52" cy="56" r="6"/><circle class="l red" cx="74" cy="60" r="5"/></g>${bowl('blu',66)}<circle class="l egg" cx="62" cy="76" r="4"/>`],
+soup:['bc',`${bowl()}<ellipse class="l org" cx="60" cy="62" rx="36" ry="7"/><rect class="l rice" x="48" y="56" width="10" height="10" rx="2"/><circle class="grn" cx="70" cy="62" r="3"/><circle class="grn" cx="76" cy="60" r="2.5"/>${steam()}`],
+'vegetable-side':['bc',`<path class="l ware" d="M18 74h84c0 12-12 22-42 22S18 86 18 74Z"/><g class="a1 bob"><circle class="l grn" cx="42" cy="56" r="11"/><circle class="l grn" cx="56" cy="50" r="12"/><circle class="l grn" cx="68" cy="58" r="10"/><path class="l nf" d="M50 68v8M62 68v8"/></g><path class="l org" d="M78 78l16-10 4 8-16 10Z"/>`],
+fritter:['bw',`<path class="l tan" d="M24 66c-2-14 10-22 22-18 6-8 22-6 24 4 12-2 20 8 14 20-4 10-18 12-30 10-14 2-28-2-30-16Z"/><path class="l nf org" d="M40 62l6 6M62 58l4 8M78 66l5 3"/><path class="l red" d="M70 82c8-4 22 0 20 6-6 4-18 2-20-6Z"/><g class="a1 twk1">${star(92,40)}</g><g class="a2 twk2">${star(30,40)}</g>`],
+dumpling:['bc',`<g class="a1 puff"><path class="l rice" d="M20 72c4-26 24-34 40-34s36 8 40 34c0 8-8 12-16 12H36c-8 0-16-4-16-12Z"/><path class="l nf" d="M38 48l2 14M48 44l1 18M60 42v20M72 44l-1 18M82 48l-2 14"/></g><path class="l nf grn" d="M20 92h80"/>`],
+sweet:['bw',`<path class="l tan" d="M24 76c0-18 16-28 36-28s36 10 36 28Z"/><path class="l pnk" d="M24 76c4-8 10-6 14 0s10 6 14 0 10-6 14 0 10 6 14 0 8-6 12 0v6c0 6-4 10-10 10H34c-6 0-10-4-10-10Z"/><circle class="l red" cx="60" cy="44" r="7"/><g class="a1 twk1">${star(34,40)}</g><g class="a2 twk2">${star(88,38)}</g>`],
+other:['bw',`<g class="a1 bob"><rect class="l ware" x="22" y="40" width="76" height="52" rx="12"/><path class="l nf" d="M62 40v52"/><path class="l rice" d="M30 78c0-12 8-18 16-18s16 6 16 18Z"/><circle class="l egg" cx="80" cy="56" r="8"/><circle class="l grn" cx="76" cy="76" r="6"/><circle class="l red" cx="88" cy="80" r="5"/></g>`]
+};
+const svg=k=>`<svg class="dish" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><path class="${D[k][0]}" d="M16 62C14 34 40 16 66 20c26 4 40 24 38 46-2 24-24 38-46 36C34 100 18 86 16 62Z"/>${D[k][1]}</svg>`;
+for(const th of ['light','dark']){document.getElementById('g-'+th).innerHTML=Object.keys(D).map(k=>`<figure class="tile"><span class="art">${svg(k)}</span><figcaption>${k}</figcaption></figure>`).join('')}
+document.getElementById('sizes').innerHTML=[[72,108,'card 72'],[120,180,'card 120'],[150,225,'hero 150'],[64,64,'thumb 64']].map(([h,w,n])=>`<div><span class="art" style="width:${w}px;height:${h}px">${svg('onigiri')}</span><small>${n}</small></div>`).join('');
+const b=document.getElementById('t');
+b.onclick=()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.textContent=on?'Pause animations':'Play animations';document.getElementById('themes').classList.toggle('live',on);document.getElementById('sizes').classList.toggle('live',on)};
+</script></body></html>

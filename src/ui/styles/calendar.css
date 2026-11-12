@@ -105,11 +105,8 @@
   min-width: 0;
   min-height: var(--cell-min-height);
 }
-.cal-row.is-compact .cell {
-  min-height: var(--cell-row-compact);
-}
 .cell--pad {
-  min-height: var(--cell-row-compact);
+  min-height: 0; /* padding cells take the row height from their neighbours */
 }
 .cell__btn {
   position: relative;
@@ -289,7 +286,7 @@
     min-height: var(--cell-min-height-md);
   }
   .cell.cell--pad {
-    min-height: var(--cell-row-compact);
+    min-height: 0;
   }
   .cell__num {
     font-size: var(--text-lg);

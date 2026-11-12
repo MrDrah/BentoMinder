@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BentoMinder dish illustrations (preview, rough)</title>
+<style>/* BentoMinder design tokens v1.0.0 (H2 final, 2026-10-24)
+   GENERATED from design/tokens.json by design/_scratch/build-tokens.mjs. Edit the JSON, then regenerate.
+   Light is the default. Dark applies with [data-theme="dark"] (settings.theme = "dark")
+   or, when settings.theme = "auto" (no data-theme attribute), with prefers-color-scheme: dark.
+   settings.theme = "light" sets [data-theme="light"], which blocks the OS dark preference. */
+
+:root {
+  color-scheme: light;
+
+  /* Colour roles: light */
+  --surface-1: #FFFFFF;
+  --surface-2: #FFFDF8;
+  --surface-3: #F2EADB;
+  --line-1: #E4DAC8;
+  --line-ui: #8C8574;
+  --ink-1: #1B2A4A;
+  --ink-2: #3F4B66;
+  --ink-3: #5F6880;
+  --ink-inverse: #FBF6EC;
+  --accent: #D2574F;
+  --accent-strong: #B8443C;
+  --accent-strong-hover: #A23A33;
+  --accent-ink: #A83A33;
+  --accent-soft: #F8E1DC;
+  --navy-fill: #1B2A4A;
+  --planned-edge: #D2574F;
+  --saturday: #2F5C9A;
+  --sunday: #A83A33;
+  --info: #2F5C9A;
+  --info-soft: #E3ECF8;
+  --success: #2F6B4F;
+  --success-soft: #E1F0E6;
+  --warning: #7A4E00;
+  --warning-soft: #FFF0D1;
+  --danger: #A3271F;
+  --danger-soft: #FBE3E0;
+  --danger-strong: #A3271F;
+  --danger-strong-hover: #86201A;
+  --focus-ring: #1F5FBF;
+  --focus-halo: #FFFFFF;
+  --link: #2F5C9A;
+  --stripe-a: #1B2A4A;
+  --stripe-b: #D2574F;
+  --scrim: rgba(27, 42, 74, 0.45);
+  --skeleton: #F2EADB;
+  --skeleton-highlight: #FFFDF8;
+  --debug-surface: #2A1145;
+  --debug-ink: #F5EDFF;
+  --debug-accent: #D8B4FE;
+  --illus-rice: #FFFFFF;
+  --illus-egg: #F2C14E;
+  --illus-green: #7FA86A;
+  --illus-brown: #9A6544;
+  --illus-nori: #1B2A4A;
+  --illus-pink: #F4B6AE;
+  --illus-line: #3F4B66;
+  --illus-steam: #7B859B;
+  --illus-red: #D9564B;
+  --illus-orange: #E58A3A;
+  --illus-tan: #D9AE6C;
+  --illus-blue: #4F7AB3;
+  --illus-blob-warm: #F5D6A8;
+  --illus-blob-cool: #C9DDE8;
+
+  /* Typography */
+  --font-display: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --font-body: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Yu Gothic UI", "Noto Sans JP", Meiryo, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "BIZ UDGothic", monospace;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 34px;
+  --leading-tight: 1.35;
+  --leading-normal: 1.7;
+  --leading-relaxed: 1.85;
+  --tracking-body: 0.02em;
+  --tracking-heading: 0.04em;
+
+  /* Spacing: 4 px scale */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Sizes */
+  --touch-min: 44px;
+  --touch-comfy: 52px;
+  --cell-min-height: 80px;
+  --cell-min-height-md: 96px;
+  --cell-min-height-lg: 104px;
+  --cell-row-compact: 44px;
+  --weekend-col-ratio: 0.62;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --content-max: 560px;
+  --panel-width: 440px;
+  --dialog-max: 480px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-cell: 10px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgba(27, 42, 74, 0.06), 0 1px 1px rgba(27, 42, 74, 0.04);
+  --elevation-2: 0 4px 12px rgba(27, 42, 74, 0.08), 0 1px 3px rgba(27, 42, 74, 0.06);
+  --elevation-3: 0 -8px 28px rgba(27, 42, 74, 0.14);
+  --elevation-4: 0 12px 40px rgba(27, 42, 74, 0.22);
+
+  /* Motion */
+  --duration-instant: 0ms;
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --duration-shimmer: 1400ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --duration-sheet: 240ms;
+  --rise-offset: 12px;
+  --press-scale: 0.97;
+  --sheet-offset: 24px;
+
+  /* Layers */
+  --z-base: 0;
+  --z-appbar: 10;
+  --z-banner: 20;
+  --z-sheet: 40;
+  --z-dialog: 50;
+  --z-toast: 60;
+  --z-debug: 90;
+
+  /* Breakpoints (for reference in JS; CSS media queries use the literal values) */
+  --bp-xs: 360px;
+  --bp-sm: 390px;
+  --bp-md: 768px;
+  --bp-lg: 1280px;
+
+  /* Patterns */
+  --stripe-band: repeating-linear-gradient(180deg, var(--stripe-a) 0 2px, transparent 2px 5px);
+  --stripe-band-red: repeating-linear-gradient(180deg, var(--stripe-b) 0 3px, transparent 3px 6px);
+  --hatch: repeating-linear-gradient(135deg, var(--line-1) 0 2px, transparent 2px 7px);
+  --debug-hatch: repeating-linear-gradient(45deg, var(--debug-accent) 0 6px, var(--debug-surface) 6px 12px);
+}
+
+html[lang="en"] {
+  --tracking-body: 0;
+  --tracking-heading: 0;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-1: #141B2B;
+  --surface-2: #1C2539;
+  --surface-3: #253049;
+  --line-1: #2F3A54;
+  --line-ui: #8A877E;
+  --ink-1: #F6EFE2;
+  --ink-2: #CDC6B8;
+  --ink-3: #A7A398;
+  --ink-inverse: #141B2B;
+  --accent: #F08A80;
+  --accent-strong: #F08A80;
+  --accent-strong-hover: #F4A097;
+  --accent-ink: #F4A097;
+  --accent-soft: #3A2429;
+  --navy-fill: #F6EFE2;
+  --planned-edge: #B8443C;
+  --saturday: #8FB4F0;
+  --sunday: #F4A097;
+  --info: #8FB4F0;
+  --info-soft: #22314F;
+  --success: #8FD3AE;
+  --success-soft: #1D3A30;
+  --warning: #F2C66D;
+  --warning-soft: #3A3020;
+  --danger: #FF9C92;
+  --danger-soft: #40242A;
+  --danger-strong: #FF9C92;
+  --danger-strong-hover: #FFB8B0;
+  --focus-ring: #8FB4F0;
+  --focus-halo: #141B2B;
+  --link: #8FB4F0;
+  --stripe-a: #F6EFE2;
+  --stripe-b: #F08A80;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --skeleton: #253049;
+  --skeleton-highlight: #2F3A54;
+  --debug-surface: #2A1145;
+  --debug-ink: #F5EDFF;
+  --debug-accent: #D8B4FE;
+  --illus-rice: #F6EFE2;
+  --illus-egg: #F2C14E;
+  --illus-green: #7FA86A;
+  --illus-brown: #9A6544;
+  --illus-nori: #141B2B;
+  --illus-pink: #F4B6AE;
+  --illus-line: #CDC6B8;
+  --illus-steam: #B5BCCC;
+  --illus-red: #EE8B80;
+  --illus-orange: #EDA460;
+  --illus-tan: #D8B47A;
+  --illus-blue: #7FA3D6;
+  --illus-blob-warm: #4A3F3F;
+  --illus-blob-cool: #2F4660;
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+  --elevation-4: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --surface-1: #141B2B;
+    --surface-2: #1C2539;
+    --surface-3: #253049;
+    --line-1: #2F3A54;
+    --line-ui: #8A877E;
+    --ink-1: #F6EFE2;
+    --ink-2: #CDC6B8;
+    --ink-3: #A7A398;
+    --ink-inverse: #141B2B;
+    --accent: #F08A80;
+    --accent-strong: #F08A80;
+    --accent-strong-hover: #F4A097;
+    --accent-ink: #F4A097;
+    --accent-soft: #3A2429;
+    --navy-fill: #F6EFE2;
+    --planned-edge: #B8443C;
+    --saturday: #8FB4F0;
+    --sunday: #F4A097;
+    --info: #8FB4F0;
+    --info-soft: #22314F;
+    --success: #8FD3AE;
+    --success-soft: #1D3A30;
+    --warning: #F2C66D;
+    --warning-soft: #3A3020;
+    --danger: #FF9C92;
+    --danger-soft: #40242A;
+    --danger-strong: #FF9C92;
+    --danger-strong-hover: #FFB8B0;
+    --focus-ring: #8FB4F0;
+    --focus-halo: #141B2B;
+    --link: #8FB4F0;
+    --stripe-a: #F6EFE2;
+    --stripe-b: #F08A80;
+    --scrim: rgba(0, 0, 0, 0.6);
+    --skeleton: #253049;
+    --skeleton-highlight: #2F3A54;
+    --debug-surface: #2A1145;
+    --debug-ink: #F5EDFF;
+    --debug-accent: #D8B4FE;
+    --illus-rice: #F6EFE2;
+    --illus-egg: #F2C14E;
+    --illus-green: #7FA86A;
+    --illus-brown: #9A6544;
+    --illus-nori: #141B2B;
+    --illus-pink: #F4B6AE;
+    --illus-line: #CDC6B8;
+    --illus-steam: #B5BCCC;
+    --illus-red: #EE8B80;
+    --illus-orange: #EDA460;
+    --illus-tan: #D8B47A;
+    --illus-blue: #7FA3D6;
+    --illus-blob-warm: #4A3F3F;
+    --illus-blob-cool: #2F4660;
+    --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
+    --elevation-3: 0 -8px 28px rgba(0, 0, 0, 0.55);
+    --elevation-4: 0 12px 40px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+    --duration-shimmer: 0ms;
+    --sheet-offset: 0px;
+  }
+}
+
+/* Focus: one rule for every focusable element (a11y-responsive.md §4). */
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  box-shadow: 0 0 0 var(--focus-offset) var(--focus-halo);
+}
+</style>
+<style>
+body{margin:0;font:14px/1.6 var(--font-body);background:var(--surface-1);color:var(--ink-1)}
+header{padding:16px;max-width:900px;margin:auto}
+h1{font:700 22px var(--font-display);margin:0 0 4px}
+button{font:inherit;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line-ui);background:var(--surface-2);color:var(--ink-1)}
+.themes{display:grid;grid-template-columns:1fr}
+@media(min-width:900px){.themes{grid-template-columns:1fr 1fr}}
+.theme{background:var(--surface-1);color:var(--ink-1);padding:16px}
+.theme h2{font:700 16px var(--font-display);margin:0 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.tile{background:var(--surface-2);border:1px solid var(--line-1);border-radius:12px;overflow:hidden;margin:0}
+.tile figcaption{padding:4px 8px;font-size:12px;color:var(--ink-2)}
+.art{background:var(--surface-3);display:block;height:120px}
+.art svg{display:block;width:100%;height:100%}
+.sizes{display:flex;gap:12px;align-items:flex-end;margin-top:12px}
+.sizes .art{border-radius:8px;overflow:hidden}
+/* ---- illustration rules (production: same classes, scoped under .dish) ---- */
+.dish *{stroke-linejoin:round;stroke-linecap:round}
+.dish .l{stroke:var(--illus-line);stroke-width:2}
+.dish .nf{fill:none}
+.dish .bw{fill:var(--illus-blob-warm)}.dish .bc{fill:var(--illus-blob-cool)}
+.dish .rice{fill:var(--illus-rice)}.dish .egg{fill:var(--illus-egg)}.dish .grn{fill:var(--illus-green)}
+.dish .brn{fill:var(--illus-brown)}.dish .nori{fill:var(--illus-nori)}.dish .pnk{fill:var(--illus-pink)}
+.dish .red{fill:var(--illus-red)}.dish .org{fill:var(--illus-orange)}.dish .tan{fill:var(--illus-tan)}
+.dish .blu{fill:var(--illus-blue)}.dish .ware{fill:var(--surface-2)}
+.dish .stm{stroke:var(--illus-steam);stroke-width:2.5;fill:none}
+.dish .spk{fill:var(--illus-steam)}
+.dish .a1,.dish .a2{transform-box:fill-box;animation-play-state:paused}
+.live .dish .a1,.live .dish .a2{animation-play-state:running}
+@media (prefers-reduced-motion:no-preference){
+ .dish .steam1{opacity:0;animation:steam 3.6s ease-in-out infinite}
+ .dish .steam2{opacity:0;animation:steam 3.6s ease-in-out 1.8s infinite}
+ .dish .wob{transform-origin:50% 100%;animation:wob 3.2s ease-in-out infinite}
+ .dish .squash{transform-origin:50% 100%;animation:squash 3s ease-in-out infinite}
+ .dish .sway{transform-origin:50% 100%;animation:sway 4s ease-in-out infinite}
+ .dish .tail{transform-origin:0% 50%;animation:wob 3.4s ease-in-out infinite}
+ .dish .lift{animation:lift 3.6s ease-in-out infinite}
+ .dish .twk1{transform-origin:50% 50%;opacity:0;animation:twk 2.4s ease-in-out infinite}
+ .dish .twk2{transform-origin:50% 50%;opacity:0;animation:twk 2.4s ease-in-out 1.2s infinite}
+ .dish .puff{transform-origin:50% 100%;animation:puff 3.2s ease-in-out infinite}
+ .dish .bob{transform-origin:50% 100%;animation:bob 3.6s ease-in-out infinite}
+}
+@keyframes steam{0%{opacity:0;transform:translateY(5px)}40%{opacity:.9}100%{opacity:0;transform:translateY(-7px)}}
+@keyframes wob{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes squash{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.96)}}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes lift{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes twk{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}}
+@keyframes puff{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+</style></head><body>
+<header><h1>Dish illustrations (rough preview)</h1>
+<p>18 dish types, 120x120 viewBox, light and dark. Decorative only. Animations are paused until you press the button (in the app: running on the recipe page header, press/hover/focus on cards). With reduced motion set in your OS, nothing moves.</p>
+<button id="t" aria-pressed="false">Play animations</button>
+<div class="sizes" id="sizes" aria-label="Sizes"></div></header>
+<div class="themes" id="themes">
+<section class="theme" data-theme="light"><h2>Light</h2><div class="grid" id="g-light"></div></section>
+<section class="theme" data-theme="dark"><h2>Dark</h2><div class="grid" id="g-dark"></div></section>
+</div>
+<script>
+const st=(d,c)=>`<path class="stm ${c}" d="${d}"/>`;
+const steam=(x=0)=>st(`M${46+x} 34c-5-5 5-8 0-14`,'a1 steam1')+st(`M${66+x} 34c-5-5 5-8 0-14`,'a2 steam2');
+const bowl=(f='blu',y=62)=>`<path class="l ${f}" d="M24 ${y}h72c0 22-14 36-36 36S24 ${y+22} 24 ${y}Z"/>`;
+const star=(x,y)=>`<path class="spk" d="M${x} ${y-7}l2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/>`;
+const D={
+onigiri:['bw',`<g class="a1 wob"><path class="l rice" d="M60 26c6 0 9 5 26 42 4 9-2 20-13 20H47c-11 0-17-11-13-20C51 31 54 26 60 26Z"/><path class="l nori" d="M45 88V70h30v18Z"/><circle cx="52" cy="58" r="2.5" class="nori"/><circle cx="68" cy="58" r="2.5" class="nori"/><circle cx="46" cy="64" r="3.5" class="pnk"/><circle cx="74" cy="64" r="3.5" class="pnk"/></g>`],
+'rice-bowl':['bw',`${bowl()}<path class="l rice" d="M28 62c0-20 15-30 32-30s32 10 32 30Z"/><circle class="l egg" cx="60" cy="48" r="9"/><path class="l grn" d="M40 54l8-4M80 54l-8-4"/>${steam()}`],
+sandwich:['bw',`<g class="a1 lift"><path class="l tan" d="M24 50c0-10 10-14 36-14s36 4 36 14v6H24Z"/></g><path class="l grn" d="M22 62c6-6 10 4 16-2s10 4 16-2 10 4 16-2 10 4 14 0v8H22Z"/><rect class="l red" x="26" y="70" width="68" height="7" rx="3"/><rect class="l pnk" x="24" y="77" width="72" height="8" rx="3"/><path class="l tan" d="M24 85h72v6c0 5-4 8-9 8H33c-5 0-9-3-9-8Z"/>`],
+noodles:['bc',`${bowl()}<path class="l tan" d="M30 62c0-14 14-22 30-22s30 8 30 22Z"/><path class="l nf" d="M38 60c8-6 14 4 22-2s14 4 22-2M42 50c6-4 12 2 18-2s12 2 18-2"/><ellipse class="l egg" cx="74" cy="52" rx="8" ry="6"/><rect class="l nori" x="42" y="44" width="10" height="14" rx="2"/>${steam()}`],
+egg:['bw',`<g class="a1 wob"><path class="l egg" d="M24 52c0-6 4-10 10-10h52c6 0 10 4 10 10v22c0 6-4 10-10 10H34c-6 0-10-4-10-10Z"/><path class="l nf" d="M34 52c6 0 6 8 12 8M60 44v38M82 44v38"/></g>`],
+'fried-chicken':['bw',`<path class="l grn" d="M20 84c8-14 22-16 30-10l-6 16Z"/><path class="l org" d="M30 78c-2-18 12-32 28-30 16 2 20 20 8 34-8 8-30 10-36-4Z"/><path class="l tan" d="M60 56c14-10 34-2 32 16-2 14-20 20-32 12 10-6 10-20 0-28Z"/><path class="l nf" d="M42 62l6 4M70 64l6 3M50 76l6 2"/><g class="a1 twk1">${star(88,40)}</g><g class="a2 twk2">${star(32,44)}</g>`],
+'meat-patty':['bw',`<path class="l grn" d="M22 74c4-16 20-20 30-12l-8 24Z"/><ellipse class="l brn" cx="62" cy="68" rx="32" ry="22"/><path class="l nf" d="M44 60l12 14M58 56l12 14M72 54l10 12"/><path class="l red" d="M60 52c6-4 14 0 12 6-4 4-14 2-12-6Z"/>${steam(2)}`],
+'meat-roll':['bw',`<g class="a1 wob"><circle class="l brn" cx="40" cy="58" r="20"/><circle class="l pnk" cx="40" cy="58" r="13"/><circle class="l grn" cx="40" cy="58" r="6"/><circle class="l brn" cx="80" cy="64" r="20"/><circle class="l pnk" cx="80" cy="64" r="13"/><circle class="l grn" cx="80" cy="64" r="6"/></g>`],
+'grilled-fish':['bc',`<path class="l org" d="M22 62c10-18 40-22 58-6l4 6c-20 24-48 20-62 0Z"/><circle cx="38" cy="58" r="2.5" class="nori"/><path class="l nf" d="M52 48v26M62 50v22M72 56v12"/><g class="a1 tail"><path class="l blu" d="M82 60l16-14v30Z"/></g><path class="l nf grn" d="M24 92h60"/>`],
+simmered:['bw',`${bowl()}<path class="l brn" d="M28 62h64c0-6-14-12-32-12S28 56 28 62Z"/><circle class="l org" cx="46" cy="58" r="7"/><circle class="l rice" cx="64" cy="56" r="8"/><circle class="l org" cx="80" cy="60" r="6"/><circle class="l grn" cx="58" cy="62" r="3"/>${steam()}`],
+tofu:['bc',`<g class="a1 squash"><path class="l rice" d="M30 56l14-12h46v32l-14 12H30Z"/><path class="l nf" d="M30 56h46v32M76 56l14-12"/><circle class="grn" cx="46" cy="68" r="2.5"/><circle class="grn" cx="60" cy="74" r="2.5"/><circle class="brn" cx="52" cy="80" r="2"/></g>`],
+salad:['bc',`<g class="a1 sway"><path class="l grn" d="M32 66c-4-16 10-26 18-18 4-12 22-12 26 0 10-6 20 6 12 18Z"/><circle class="l red" cx="52" cy="56" r="6"/><circle class="l red" cx="74" cy="60" r="5"/></g>${bowl('blu',66)}<circle class="l egg" cx="62" cy="76" r="4"/>`],
+soup:['bc',`${bowl()}<ellipse class="l org" cx="60" cy="62" rx="36" ry="7"/><rect class="l rice" x="48" y="56" width="10" height="10" rx="2"/><circle class="grn" cx="70" cy="62" r="3"/><circle class="grn" cx="76" cy="60" r="2.5"/>${steam()}`],
+'vegetable-side':['bc',`<path class="l ware" d="M18 74h84c0 12-12 22-42 22S18 86 18 74Z"/><g class="a1 bob"><circle class="l grn" cx="42" cy="56" r="11"/><circle class="l grn" cx="56" cy="50" r="12"/><circle class="l grn" cx="68" cy="58" r="10"/><path class="l nf" d="M50 68v8M62 68v8"/></g><path class="l org" d="M78 78l16-10 4 8-16 10Z"/>`],
+fritter:['bw',`<path class="l tan" d="M24 66c-2-14 10-22 22-18 6-8 22-6 24 4 12-2 20 8 14 20-4 10-18 12-30 10-14 2-28-2-30-16Z"/><path class="l nf org" d="M40 62l6 6M62 58l4 8M78 66l5 3"/><path class="l red" d="M70 82c8-4 22 0 20 6-6 4-18 2-20-6Z"/><g class="a1 twk1">${star(92,40)}</g><g class="a2 twk2">${star(30,40)}</g>`],
+dumpling:['bc',`<g class="a1 puff"><path class="l rice" d="M20 72c4-26 24-34 40-34s36 8 40 34c0 8-8 12-16 12H36c-8 0-16-4-16-12Z"/><path class="l nf" d="M38 48l2 14M48 44l1 18M60 42v20M72 44l-1 18M82 48l-2 14"/></g><path class="l nf grn" d="M20 92h80"/>`],
+sweet:['bw',`<path class="l tan" d="M24 76c0-18 16-28 36-28s36 10 36 28Z"/><path class="l pnk" d="M24 76c4-8 10-6 14 0s10 6 14 0 10-6 14 0 10 6 14 0 8-6 12 0v6c0 6-4 10-10 10H34c-6 0-10-4-10-10Z"/><circle class="l red" cx="60" cy="44" r="7"/><g class="a1 twk1">${star(34,40)}</g><g class="a2 twk2">${star(88,38)}</g>`],
+other:['bw',`<g class="a1 bob"><rect class="l ware" x="22" y="40" width="76" height="52" rx="12"/><path class="l nf" d="M62 40v52"/><path class="l rice" d="M30 78c0-12 8-18 16-18s16 6 16 18Z"/><circle class="l egg" cx="80" cy="56" r="8"/><circle class="l grn" cx="76" cy="76" r="6"/><circle class="l red" cx="88" cy="80" r="5"/></g>`]
+};
+const svg=k=>`<svg class="dish" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><path class="${D[k][0]}" d="M16 62C14 34 40 16 66 20c26 4 40 24 38 46-2 24-24 38-46 36C34 100 18 86 16 62Z"/>${D[k][1]}</svg>`;
+for(const th of ['light','dark']){document.getElementById('g-'+th).innerHTML=Object.keys(D).map(k=>`<figure class="tile"><span class="art">${svg(k)}</span><figcaption>${k}</figcaption></figure>`).join('')}
+document.getElementById('sizes').innerHTML=[[72,108,'card 72'],[120,180,'card 120'],[150,225,'hero 150'],[64,64,'thumb 64']].map(([h,w,n])=>`<div><span class="art" style="width:${w}px;height:${h}px">${svg('onigiri')}</span><small>${n}</small></div>`).join('');
+const b=document.getElementById('t');
+b.onclick=()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.textContent=on?'Pause animations':'Play animations';document.getElementById('themes').classList.toggle('live',on);document.getElementById('sizes').classList.toggle('live',on)};
+</script></body></html>

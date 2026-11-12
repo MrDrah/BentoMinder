@@ -114,13 +114,9 @@ export function CalendarGrid({ t, lang, month, today, weekStartsOn, views, selec
         ))}
       </div>
       {rows.map((row, r) => {
-        // A row with no iconed tile and no today or tomorrow tile stays compact (components §18.4).
-        const compact = !row.some((date) => {
-          const v = date === null ? undefined : views.get(date);
-          return v !== undefined && (tileOf(v, today).icon !== 'none' || v.isToday || v.date === addDays(today, 1));
-        });
+        // Every row has the same height (PO 2026-11-12): a tile keeps its shape whether or not it has an icon.
         return (
-          <div key={r} role="row" className={`cal-row${compact ? ' is-compact' : ''}`}>
+          <div key={r} role="row" className="cal-row">
             {row.map((date, c) => {
               const v = date === null ? undefined : views.get(date);
               if (date === null || v === undefined) return <div key={c} role="gridcell" className="cell cell--pad" aria-hidden="true" />;
@@ -149,6 +145,13 @@ interface CellProps {
 function DayCell({ t, lang, v, today, tabbable, selected, onOpen, onFocus }: CellProps) {
   const tile = tileOf(v, today);
   const wd = weekdayOf(v.date);
+  /* Tap feedback (design/motion.md): the keyframes live in a no-preference block, so under reduced motion the class is inert. */
+  const shake = (el: HTMLElement) => {
+    el.classList.remove('is-shake');
+    void el.offsetWidth; // restart the animation on a quick second tap
+    el.classList.add('is-shake');
+    el.addEventListener('animationend', () => el.classList.remove('is-shake'), { once: true });
+  };
   const classes = [
     'cell',
     `wd-${wd}`,
@@ -181,19 +184,7 @@ function DayCell({ t, lang, v, today, tabbable, selected, onOpen, onFocus }: Cel
       aria-current={v.isToday ? 'date' : undefined}
       aria-selected={selected ? true : undefined}
     >
-      <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} onClick={() => onOpen(v.date)} onFocus={() => onFocus(v.date)}>
+      <button type="button" className="cell__btn" data-date={v.date} tabIndex={tabbable ? 0 : -1} onClick={(e) => { shake(e.currentTarget); onOpen(v.date); }} onFocus={() => onFocus(v.date)}>
         {/* The name comes from this sentence, not from an aria-label: the visible number is part of it (WCAG 2.5.3) */}
         <CellName t={t} lang={lang} v={v} today={today} />
-        <span className="cell__top">
-          <span className="cell__num" aria-hidden="true">
-            {dateParts(v.date).day}
-          </span>
-        </span>
-        {tile.icon !== 'none' && <TileIcon name={TILE_ICON_NAMES[tile.icon]} className="cell__icon" />}
-        {tile.dash && <span className="cell__dash" aria-hidden="true" />}
-        {tile.allergen && <AllergenMark />}
-      </button>
-    </div>
-  );
-}
-
+        <

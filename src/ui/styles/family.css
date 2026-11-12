@@ -17,7 +17,9 @@
 }
 @media (min-width: 768px) {
   .sync-btn__word {
-    display: inline;
+    display: inline-block;
+    min-width: 6em; /* the word's width does not depend on the display language, so the app bar stays put */
+    text-align: left;
   }
 }
 .sync-btn--stale {
