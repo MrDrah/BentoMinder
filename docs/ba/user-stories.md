@@ -3586,3 +3586,58 @@ Scenario: AC6 Reduced motion
 
 Scenario: AC7 Cheap properties only
   Given any motion, then only transform, opacity and colour properties are animated (the about phone reveal excepted), and none lasts longer than 250 ms
+
+### US-E13-08 Sign in with email and password · M · M
+PO decision 2026-11-12 (the second parent has no Google account). Extends E13: Firebase email + password next to Google. The login wall, session, offline and per-account data rules of US-E13-01..07 apply unchanged. Working labels; the designer writes final copy (`design/copy.md`).
+As a parent without a Google account I want to create an account with my email address and a password so that I can use the app and join my family space.
+
+```gherkin
+Scenario: AC1 Login screen offers both ways
+  Given nobody is signed in
+  Then the login screen shows 「Googleでログイン」 and an email + password form with 「ログイン」 and 「アカウントを作る」, and no screen of the app is reachable
+
+Scenario: AC2 Create an account
+  When the parent enters a valid email and a password of at least 8 characters and taps 「アカウントを作る」
+  Then the account is created, a confirmation email is sent, and the parent sees a "check your email" screen (not the app) with 「確認メールを再送する」, 「確認しました」 and 「ログアウト」
+
+Scenario: AC3 Email must be confirmed before the app opens
+  Given an account whose email is not confirmed
+  When the parent signs in or reopens the app
+  Then the "check your email" screen is shown and no data screen, sync or hosted AI call is reachable
+  And after the parent confirms the email and taps 「確認しました」, the app opens (the session is refreshed, no second sign-in)
+
+Scenario: AC4 Resend is limited and calm
+  When the parent taps 「確認メールを再送する」
+  Then at most one email is sent per 60 seconds (the button is disabled with the seconds left) and a plain message says it was sent
+
+Scenario: AC5 Sign in with email and password
+  Given a confirmed account
+  When the parent enters the email and password and taps 「ログイン」
+  Then the app opens for that account with the same data keying as Google (US-E13-04) and the same session persistence (US-E13-02)
+
+Scenario: AC6 Forgot password
+  When the parent taps 「パスワードを忘れた」, enters an email and sends
+  Then the same neutral message is shown whether or not that email has an account ("if it exists, an email was sent") and Firebase sends the reset email
+
+Scenario: AC7 Errors are plain and do not reveal accounts
+  Then: wrong email or password shows one message (「メールアドレスまたはパスワードが違います」, never saying which); an invalid email format, a password under 8 characters and an email already in use each show their own plain message before or after the request; offline shows the US-E13-03/AC4 message; too many attempts shows 「しばらくしてからもう一度お試しください」; no error code or technical text is ever shown, and the password is never shown, logged, stored or put in a URL
+
+Scenario: AC8 Same person, two methods
+  Given an email already used with Google
+  When the parent creates an email + password account with the same address
+  Then the result is a plain message (use Google, or reset the password to add one) and nothing is merged silently
+
+Scenario: AC9 Allow-list and sync need a confirmed email
+  Given a password account whose email is not confirmed
+  Then the hosted proxy and sync refuse it (US-E14 allow-list already requires a confirmed email) and the client never calls them (AC3)
+
+Scenario: AC10 Form accessibility and privacy
+  Then the form has visible labels, correct input types and autocomplete values (email, current-password, new-password), a show/hide password control, targets of at least 44 px, passes axe in ja and en, light and dark, and sends nothing to any host except Firebase Auth
+
+Scenario: AC11 Account section shows the method
+  Given the signed-in account
+  Then the account section shows the email and, for password accounts, no Google avatar; sign-out works as in US-E13-05
+
+Scenario: AC12 Testability
+  Then the fake `AuthPort` supports the new methods (createAccount, signInWithEmail, sendVerification, reloadUser, sendPasswordReset) and the e2e-only fake seam covers every scenario above without calling Firebase
+```
