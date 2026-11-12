@@ -45,7 +45,7 @@ const typeCode = async (user: ReturnType<typeof userEvent.setup>, text: string) 
 describe('US-E15-04/AC1 the invite link while signed out', () => {
   it('US-E15-04/AC1 the login screen says what happens after sign-in when a join link was opened', () => {
     const t = createTranslator('ja');
-    const props = { t, language: 'ja' as const, onLanguage: vi.fn(), busy: false, error: null, expired: false, signedOut: false, onSignIn: vi.fn() };
+    const props = { t, language: 'ja' as const, onLanguage: vi.fn(), busy: false, error: null, expired: false, signedOut: false, onSignIn: vi.fn(), onSubmit: vi.fn(), onReset: vi.fn() };
     const { rerender } = render(<LoginScreen {...props} />);
     expect(screen.queryByTestId('login-join-hint')).toBeNull();
     rerender(<LoginScreen {...props} joinHint />);

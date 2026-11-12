@@ -2,7 +2,7 @@
 // in the browser (browserLocalPersistence). This is the only module that imports the Firebase SDK, and it
 // does so lazily (dynamic import) so the SDK is a separate chunk that is fetched only when the app starts.
 // Analytics is never loaded: the measurement id is part of the config object and nothing more (US-E13-06/AC4).
-import type { AuthChange, AuthPort, AuthUser, SignInErrorKind, SignInResult } from '../../domain/auth/types.ts';
+import type { ActionResult, AuthChange, AuthPort, AuthUser, SignInErrorKind, SignInResult } from '../../domain/auth/types.ts';
 
 /** The variables the web app reads (document them in .env.example; the values stay in the git-ignored env file). */
 export const FIREBASE_ENV_NAMES = [
@@ -40,12 +40,42 @@ export function mapFirebaseAuthError(code: unknown, online: boolean = true): Sig
   }
 }
 
+/** US-E13-08/AC7: Firebase error code of an e-mail + password call to the contract's kinds. Never shown; a wrong password, an unknown address and bad credentials are one kind. */
+export function mapFirebaseEmailError(code: unknown, online: boolean = true): SignInErrorKind {
+  switch (code) {
+    case 'auth/wrong-password':
+    case 'auth/user-not-found':
+    case 'auth/invalid-credential':
+    case 'auth/invalid-login-credentials':
+      return 'wrong';
+    case 'auth/email-already-in-use':
+      return 'inUse';
+    case 'auth/invalid-email':
+      return 'invalidEmail';
+    case 'auth/weak-password':
+      return 'weakPassword';
+    case 'auth/too-many-requests':
+      return 'tooMany';
+    case 'auth/network-request-failed':
+      return 'offline';
+    case 'auth/user-disabled':
+      return 'disabled';
+    default:
+      return online ? 'other' : 'offline';
+  }
+}
+
 interface Sdk {
   auth: import('firebase/auth').Auth;
   mod: typeof import('firebase/auth');
 }
 
-const toUser = (u: import('firebase/auth').User): AuthUser => ({ uid: u.uid, displayName: u.displayName, email: u.email, photoUrl: u.photoURL });
+const toUser = (u: import('firebase/auth').User): AuthUser => {
+  // A Google link makes the e-mail the provider's own; otherwise it is a password account until it is confirmed.
+  const provider = u.providerData.some((p) => p.providerId === 'google.com') ? 'google' : u.providerData.some((p) => p.providerId === 'password') ? 'password' : 'google';
+  return { uid: u.uid, displayName: u.displayName, email: u.email, photoUrl: u.photoURL, emailVerified: u.emailVerified, provider };
+};
+const codeOf = (err: unknown): unknown => (typeof err === 'object' && err !== null && 'code' in err ? (err as { code: unknown }).code : undefined);
 
 export interface FirebaseAuthOptions {
   /** Defaults to console.warn. Receives variable NAMES only. */
@@ -100,6 +130,13 @@ export function createFirebaseAuth(env: Env, options: FirebaseAuthOptions = {}):
     });
   };
 
+  const failed = (err: unknown, what: string): { ok: false; error: SignInErrorKind } => {
+    const code = codeOf(err);
+    const kind = mapFirebaseEmailError(code, isOnline());
+    warn(`${what} failed: ${typeof code === 'string' ? code : 'unknown error'}`); // the code only: no address, no password
+    return { ok: false, error: kind };
+  };
+
   return {
     async restore() {
       const s = await load();
@@ -126,6 +163,75 @@ export function createFirebaseAuth(env: Env, options: FirebaseAuthOptions = {}):
         // Support aid: the provider's error code only (no user data, no config values).
         if (kind !== 'cancelled') warn(`Sign-in failed: ${typeof code === 'string' ? code : 'unknown error'}`);
         return { ok: false, error: kind };
+      }
+    },
+
+    async createAccount(email, password): Promise<SignInResult> {
+      const s = await load();
+      if (s === null) return { ok: false, error: 'other' };
+      try {
+        attach(s);
+        const cred = await s.mod.createUserWithEmailAndPassword(s.auth, email.trim(), password);
+        lastUid = cred.user.uid;
+        try {
+          await s.mod.sendEmailVerification(cred.user); // a failure here is not fatal: the parent can resend
+        } catch (err) {
+          warn(`Confirmation e-mail failed: ${String(codeOf(err) ?? 'unknown error')}`);
+        }
+        return { ok: true, user: toUser(cred.user) };
+      } catch (err) {
+        return failed(err, 'Create account');
+      }
+    },
+
+    async signInWithEmail(email, password): Promise<SignInResult> {
+      const s = await load();
+      if (s === null) return { ok: false, error: 'other' };
+      try {
+        attach(s);
+        const cred = await s.mod.signInWithEmailAndPassword(s.auth, email.trim(), password);
+        lastUid = cred.user.uid;
+        return { ok: true, user: toUser(cred.user) };
+      } catch (err) {
+        return failed(err, 'E-mail sign-in');
+      }
+    },
+
+    async sendVerification(): Promise<ActionResult> {
+      const s = await load();
+      const user = s?.auth.currentUser ?? null;
+      if (s === null || user === null) return { ok: false, error: 'other' };
+      try {
+        await s.mod.sendEmailVerification(user);
+        return { ok: true };
+      } catch (err) {
+        return failed(err, 'Resend');
+      }
+    },
+
+    async reloadUser(): Promise<SignInResult> {
+      const s = await load();
+      const user = s?.auth.currentUser ?? null;
+      if (s === null || user === null) return { ok: false, error: 'other' };
+      try {
+        await user.reload();
+        await user.getIdToken(true); // the confirmed e-mail must show in the token the server sees (AC3, AC9)
+        return { ok: true, user: toUser(user) };
+      } catch (err) {
+        return failed(err, 'Reload');
+      }
+    },
+
+    async sendPasswordReset(email): Promise<ActionResult> {
+      const s = await load();
+      if (s === null) return { ok: false, error: 'other' };
+      try {
+        await s.mod.sendPasswordResetEmail(s.auth, email.trim());
+        return { ok: true };
+      } catch (err) {
+        // An address without an account looks exactly like success (AC6).
+        if (codeOf(err) === 'auth/user-not-found') return { ok: true };
+        return failed(err, 'Password reset');
       }
     },
 
