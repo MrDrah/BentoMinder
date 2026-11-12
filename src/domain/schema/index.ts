@@ -5,5 +5,6 @@ export * from './extracted-menu.ts';
 export * from './menu.ts';
 export * from './decision.ts';
 export * from './store.ts';
+export * from './dish-type.ts';
 export * from './recipe.ts';
 export * from './dictionary.ts';

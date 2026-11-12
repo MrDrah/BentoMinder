@@ -38,7 +38,7 @@ export function requestText(r: Request): string {
 
 export async function axeSerious(page: Page, label: string) {
   // The reminder banner fades in over 200 ms: axe would read colours mid-fade (same rule as tests/e2e/helpers.ts; UI refresh QA pass).
-  await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished.catch(() => undefined))));
+  await page.evaluate(() => Promise.all(document.getAnimations().filter((a) => !((a.effect as KeyframeEffect | null)?.target as Element | null)?.closest('.dish .a')).map((a) => a.finished.catch(() => undefined))));
   const results = await new AxeBuilder({ page }).analyze();
   const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
   expect(serious.map((v) => `${label} ${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual([]);

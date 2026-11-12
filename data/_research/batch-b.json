@@ -9,6 +9,7 @@
     "shortNameEn": "Omurice",
     "nameKana": "おむらいすべんとう",
     "style": "western-inspired",
+    "dishType": "egg",
     "themeId": null,
     "description": {
       "ja": "ケチャップ味のチキンライスの上に小ぶりのオムレツを重ねた園児向けのお弁当。じゃこ入りのコーンサラダとキウイを添えます。",
@@ -530,6 +531,7 @@
     "shortNameEn": "Pork fry",
     "nameKana": "ぶたにくのけちゃっぷいためべんとう",
     "style": "western-inspired",
+    "dishType": "simmered",
     "themeId": null,
     "description": {
       "ja": "片栗粉をまぶした薄切り豚肉を玉ねぎ、パプリカとケチャップ味に炒めた園児用のおかず。レンジで作るさつまいもとりんごの甘煮を添えます。",
@@ -872,6 +874,7 @@
     "shortNameEn": "Hamburg",
     "nameKana": "じゅーしーはんばーぐべんとう",
     "style": "western-inspired",
+    "dishType": "meat-patty",
     "themeId": null,
     "description": {
       "ja": "すりおろしにんじん入りで冷めても柔らかい小さなハンバーグに、はちみつをからめたかぼちゃとおかかキャベツを合わせた子ども弁当です。",
@@ -1227,6 +1230,7 @@
     "shortNameEn": "Ham roll",
     "nameKana": "そっこうじゅうごふんかんたんようふうまきずしべんとう",
     "style": "western-inspired",
+    "dishType": "meat-roll",
     "themeId": null,
     "description": {
       "ja": "ハムとチーズとほうれん草を芯にした細巻きに、鶏そぼろをからめたかぼちゃと、レーズン入りのにんじんサラダを組み合わせた園児弁当です。",
@@ -1773,6 +1777,7 @@
     "shortNameEn": "Bear bun",
     "nameKana": "くまとうさぎのさんどいっち",
     "style": "western-inspired",
+    "dishType": "sandwich",
     "themeId": "theme-animals",
     "description": {
       "ja": "ロールパンにカレー風味のキャベツとソーセージをはさみ、のりで顔をつけてくまとうさぎにした、火を使わずレンジで作れるサンドイッチです。",
@@ -2066,6 +2071,7 @@
     "shortNameEn": "Quesa",
     "nameKana": "ちーずとぶらっくびーんずのけさでぃーや",
     "style": "western-inspired",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "つぶした黒いんげん豆にチーズ、青ねぎ、パクチー、スパイスを混ぜてトルティーヤにはさみ、焼いてくし形に切る、肉を使わない一品です。",
@@ -2319,6 +2325,7 @@
     "shortNameEn": "Curry",
     "nameKana": "とくていげんざいりょうはちひんもくふしようはじめてたべるかれーちゃーはん",
     "style": "other",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "細かく刻んだ豚肉と彩り野菜を炒め、小麦・乳・卵などを使わずに作られた子ども向けのカレールウで味をつけた、甘口のカレー炒めごはんです。",
@@ -2590,6 +2597,7 @@
     "shortNameEn": "Egg sand",
     "nameKana": "たまごさんどべんとう",
     "style": "western-inspired",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "前日にゆでておいた卵をつぶしてマヨネーズで和え、食パンにはさんで切るだけの、朝10分でできる日本風のたまごサンドです。",

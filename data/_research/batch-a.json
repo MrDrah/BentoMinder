@@ -9,6 +9,7 @@
     "shortNameEn": "Teriyaki",
     "nameKana": "さけのてりやきべんとうようじむけ",
     "style": "japanese",
+    "dishType": "grilled-fish",
     "themeId": null,
     "description": {
       "ja": "フライパンひとつで、ブロッコリーをゆで、たらこ入りのにんじんいためを作り、最後に鮭を焼き上げる小さな子ども向けのお弁当。のりを貼った一口おにぎりを3つ添えます。",
@@ -352,6 +353,7 @@
     "shortNameEn": "Salmon",
     "nameKana": "さけはんばーぐべんとう",
     "style": "japanese",
+    "dishType": "meat-patty",
     "themeId": null,
     "description": {
       "ja": "たたいた鮭にすりおろしたにんじんを混ぜて焼く、ごまの目がついた小さなハンバーグ。電子レンジで火を通したじゃがいも・にんじん・玉ねぎを、ケチャップとしょうゆで味つけした副菜と組み合わせます。",
@@ -727,6 +729,7 @@
     "shortNameEn": "Chicks",
     "nameKana": "にわとりとひよこのおにぎり",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-animals",
     "description": {
       "ja": "白いにわとり1羽と、カレー粉で黄色くしたひよこ2羽の丸いおにぎり。コーンのくちばし、にんじんのほっぺ、のりの目で顔を作ります。肉も魚も使いません。",
@@ -969,6 +972,7 @@
     "shortNameEn": "Tuna egg",
     "nameKana": "つなとたまごのそぼろごはんべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "電子レンジだけで作るツナのそぼろといり卵を、ご飯の上に並べた2色のそぼろご飯。塩でしんなりさせたキャベツでハムを巻いた一品を添えます。",
@@ -1334,6 +1338,7 @@
     "shortNameEn": "Himawari",
     "nameKana": "ひまわりべんとう",
     "style": "japanese",
+    "dishType": "other",
     "themeId": "theme-flowers",
     "description": {
       "ja": "鮭フレークと大葉、ごまを混ぜたごはんを敷き、焼いたソーセージを花の中心に、コーンを花びらにして並べたひまわりのお弁当。10分ほどでできます。",
@@ -1605,6 +1610,7 @@
     "shortNameEn": "Flowers",
     "nameKana": "おはなばたけべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": "theme-flowers",
     "description": {
       "ja": "みそ味のしっとりした鶏そぼろを、ブロッコリーご飯といり卵ご飯ではさんだ子ども弁当。上には、花の形に抜いたハムと、ブロッコリーの茎の花を飾ります。",
@@ -2001,6 +2007,7 @@
     "shortNameEn": "Penguins",
     "nameKana": "ぺんぎんさんせいれつべんとう",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-sea",
     "description": {
       "ja": "のり巻きを輪切りにして、切り口をペンギンの顔に見立てたお弁当。コーンのくちばし、黒ごまの目、桜でんぶのほっぺをつけて、ずらりと並べます。",
@@ -2183,6 +2190,7 @@
     "shortNameEn": "Beefroll",
     "nameKana": "にくのやさいまきべんとう",
     "style": "japanese",
+    "dishType": "meat-roll",
     "themeId": null,
     "description": {
       "ja": "水菜とにんじん、棒状に切ったチーズを薄切り牛肉で巻き、甘辛いたれを煮からめた肉巻き。赤と黄のパプリカが入ったキャベツのしょうゆあえを添えます。",
@@ -2542,6 +2550,7 @@
     "shortNameEn": "Oyakodon",
     "nameKana": "やきおやこどんべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "鶏肉と玉ねぎを甘辛く炒め、角切りにした卵焼きと一緒に、刻みのりを敷いたごはんにのせる焼き親子丼。卵焼き器ひとつで15分ほどで作れます。",
@@ -2831,6 +2840,7 @@
     "shortNameEn": "Mini oni",
     "nameKana": "そっこうじゅうごふんさんしょくみにおにぎりべんとう",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "しらす、たらこ、いり卵の3種類の小さな三角おにぎりに、薄く切ったれんこんのきんぴらとキャベツのウインナ炒めを添えたお弁当。段取りよく進めれば15分で詰め終わります。",
@@ -3282,6 +3292,7 @@
     "shortNameEn": "Onigiri",
     "nameKana": "とりとたまごのおにぎりべんとう",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "いり卵と鶏そぼろを具にして、ラップで丸くにぎったおにぎり2個。ぽろぽろしがちなそぼろもまとまって食べやすくなります。きゅうりのしょうゆ漬けを添えます。",
@@ -3588,6 +3599,7 @@
     "shortNameEn": "Penguin",
     "nameKana": "ぺんぎんおにぎらずべんとう",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-sea",
     "description": {
       "ja": "レンジで作る卵をはさんだおにぎらずを半分に切り、のりの目とケチャップのほっぺでペンギンの顔に。コーンを留めた花形ウインナーと、かぼちゃのごまあえを添えます。",

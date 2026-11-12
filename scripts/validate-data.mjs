@@ -102,7 +102,9 @@ for (const file of batches) {
     continue;
   }
   items.forEach((r, n) => {
-    const parsed = recipeSchema.safeParse(r);
+    // dishType is required in data/library.json only; a batch may omit it (the merge step adds it), but a
+    // value that is present must be valid (US-E17-01/AC9).
+    const parsed = recipeSchema.safeParse(r && typeof r === 'object' && !('dishType' in r) ? { ...r, dishType: 'other' } : r);
     if (!parsed.success) zodReport(rel(file), parsed.error, `${n}(${r?.id ?? '?'})`);
   });
 }

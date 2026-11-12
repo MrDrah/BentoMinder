@@ -119,7 +119,7 @@ export async function seed(page: Page, json: string): Promise<void> {
 }
 
 export async function settle(page: Page): Promise<void> {
-  await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished.catch(() => undefined))));
+  await page.evaluate(() => Promise.all(document.getAnimations().filter((a) => !((a.effect as KeyframeEffect | null)?.target as Element | null)?.closest('.dish .a')).map((a) => a.finished.catch(() => undefined))));
 }
 
 export async function setScheme(page: Page, scheme: Theme, reducedMotion: 'reduce' | 'no-preference' = 'reduce'): Promise<void> {

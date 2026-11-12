@@ -4,11 +4,13 @@ import { dictIndex } from '../../domain/assessment/dictionary-index.ts';
 import { allergenSummary } from '../../domain/recommend/views.ts';
 import type { ExclusionReason, RankReason } from '../../domain/recommend/rank.ts';
 import type { Dictionary } from '../../domain/schema/dictionary.ts';
+import { normalizeDishType } from '../../domain/schema/dish-type.ts';
 import type { Recipe } from '../../domain/schema/recipe.ts';
 import type { Language, MessageKey, Translate } from '../../i18n/index.ts';
 import { useApp } from '../app-store.tsx';
 import { inSentence } from '../calendar/labels.ts';
 import { Banner, BannerIcon } from '../components/Controls.tsx';
+import { DishArtSlot } from '../dish-art/DishArtSlot.tsx';
 
 const joiner = (lang: Language) => (lang === 'ja' ? '、' : ', ');
 
@@ -136,9 +138,11 @@ export function ProcessedNotice({ allergenIds, live }: { allergenIds: readonly s
   );
 }
 
-export function RecipeArt({ size }: { size: 'card' | 'thumb' | 'hero' }) {
+export function RecipeArt({ size, dishType }: { size: 'card' | 'thumb' | 'hero'; dishType?: unknown }) {
+  const type = normalizeDishType(dishType);
   return (
-    <div className={`recipe-art recipe-art--${size}`} aria-hidden="true">
+    <div className={`recipe-art recipe-art--${size}`} aria-hidden="true" data-testid="recipe-art" data-dish-type={type}>
+      <DishArtSlot type={type} ambient={size === 'hero'} />
       <span className="recipe-art__stripe" />
     </div>
   );

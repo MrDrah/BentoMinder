@@ -90,6 +90,7 @@ function syntheticRecipe(): Recipe {
     shortNameEn: 'Egg rice',
     nameKana: 'ごうせいてすとようたまごごはん',
     style: 'japanese',
+    dishType: 'rice-bowl',
     themeId: 'theme-animals',
     description: l10n('テスト専用の合成レシピです。実在のレシピではありません。', 'A synthetic test record, not a real recipe.'),
     yield: l10n('幼児1人分', '1 child portion'),

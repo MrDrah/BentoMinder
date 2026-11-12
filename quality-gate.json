@@ -53,6 +53,11 @@
       "by": "npm run merge:research"
     },
     {
+      "path": "src/ui/dish-art/art-data.ts",
+      "from": "design/preview/illustrations.html",
+      "by": "node tools/bake-dish-art.mjs (authoring time, seeded generator baked once; not part of the build)"
+    },
+    {
       "path": "data/dictionary.json",
       "from": "docs/ba/domain-dictionary.md",
       "by": "npm run build:dictionary"

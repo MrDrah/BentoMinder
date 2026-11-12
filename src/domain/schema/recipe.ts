@@ -3,6 +3,7 @@
 // whole library are in `recipeLibraryIssues`.
 import { z } from 'zod';
 import type { Dictionary } from './dictionary.ts';
+import { DISH_TYPES } from './dish-type.ts';
 import {
   ALLERGEN_SCHEME,
   allergenIdSchema,
@@ -80,6 +81,7 @@ export const recipeSchema = obj({
   shortNameEn: shortName,
   nameKana: textSchema.min(1),
   style: z.enum(['japanese', 'western-inspired', 'other']),
+  dishType: z.enum(DISH_TYPES, { error: 'recipe-dish-type' }),
   themeId: themeIdSchema.nullable(),
   description: jaLength(20, 120),
   yield: localizedTextSchema,

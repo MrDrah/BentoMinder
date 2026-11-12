@@ -52,6 +52,12 @@ export default defineConfig({
     target: ['es2022', 'chrome111'],
     sourcemap: false,
     assetsInlineLimit: (file) => (file.endsWith('.woff2') ? false : undefined),
+    rollupOptions: {
+      output: {
+        // US-E17-01: the baked dish illustrations load lazily as one `dish-art` chunk (DishArtSlot stays in main).
+        chunkFileNames: (chunk) => (chunk.name === 'DishArt' ? 'assets/dish-art-[hash].js' : 'assets/[name]-[hash].js'),
+      },
+    },
   },
   server: {
     proxy: {

@@ -251,6 +251,7 @@ Cross-field rules:
 | `shortNameEn` | string | ✔ | 1–8 characters (`recipe-short-name`), curated from `name.en`, kept as data, not shown on the calendar tile since 2026-11-10 [CHANGED 2026-11-10 tile redesign]; uniqueness not required | `Bear oni` |
 | `nameKana` | string | ✔ | hiragana reading for sorting | `くまさんおにぎりべんとう` |
 | `style` | enum | ✔ | `japanese` \| `western-inspired` \| `other` | `japanese` |
+| `dishType` | enum | ✔ in `data/library.json` | one of 18: `onigiri` \| `rice-bowl` \| `sandwich` \| `noodles` \| `egg` \| `fried-chicken` \| `meat-patty` \| `meat-roll` \| `grilled-fish` \| `simmered` \| `tofu` \| `salad` \| `soup` \| `vegetable-side` \| `fritter` \| `dumpling` \| `sweet` \| `other` (the closest dish shape; `other` when none fits). Picks the recipe illustration (US-E17-01, `design/illustrations.md` §1), never shown as text. A value outside the list fails validation (`recipe-dish-type`, US-E17-01/AC9) in the library; the app renders `other` for a missing or unknown value. Batch files may omit it until the merge step adds it | `onigiri` |
 | `themeId` | string \| null | ✔ | `theme-` id or null | `theme-animals` |
 | `description` | localized text | ✔ | 20–120 characters (ja); own words (overlap-checked) | |
 | `yield` | localized text | ✔ | e.g. 「幼児1人分」/"1 child portion"; quantities are for this yield | |
@@ -460,6 +461,7 @@ This table is the full list of rule ids. Code reports only these ids; a check wi
 | `recipe-id-unique` | L | Recipe ids are unique across the library and all batches. |
 | `recipe-short-name` | S | `shortNameJa` / `shortNameEn` (and the decision snapshot) are 1–8 code points. |
 | `recipe-short-name-unique` | L | `shortNameJa` is unique across the library. |
+| `recipe-dish-type` | S | `dishType` is one of the 18 values of §3.7 (required in `data/library.json`; batch files may omit it, but a value that is present must be valid). |
 | `recipe-ingredient-resolves` | L | Every `ingredientId` resolves in the dictionary. |
 | `recipe-quantity` | S | `quantity` > 0 with ≤ 2 decimals, or null only with `to-taste` / `small-amount`. |
 | `recipe-ingredient-inherent-allergen` | L | An ingredient's `allergenIds` include the dictionary's inherent allergens. |

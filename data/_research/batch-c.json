@@ -9,6 +9,7 @@
     "shortNameEn": "Soboro",
     "nameKana": "とりそぼろべんとう",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "だしで煮てから甘辛く炒りつけた鶏そぼろを、そぼろ入り炊き込みごはんにのせ、いり卵と絹さやを添えた弁当です。",
@@ -422,6 +423,7 @@
     "shortNameEn": "Panda",
     "nameKana": "ぱんだのおにぎり",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-animals",
     "description": {
       "ja": "塩むすびを丸くにぎり、のりで作った耳・目・鼻をのせてパンダの顔にした、材料3つだけの簡単なキャラおにぎりです。",
@@ -564,6 +566,7 @@
     "shortNameEn": "Nikumaki",
     "nameKana": "すてぃっくにくまきおにぎり",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "ごはんを棒状に包んで豚バラ肉を巻き、しょうゆ・みりん・砂糖の甘辛いたれをからめて焼いた、手で持って食べやすい肉巻きおにぎりです。",
@@ -793,6 +796,7 @@
     "shortNameEn": "Shimeji",
     "nameKana": "さけとしめじのてりやきべんとう",
     "style": "japanese",
+    "dishType": "grilled-fish",
     "themeId": null,
     "description": {
       "ja": "照り焼きにした鮭としめじに、れんこんのたらこあえとしば漬けをのせたごはんを合わせた、焼いて炒めるだけの手早い和風弁当です。",
@@ -1139,6 +1143,7 @@
     "shortNameEn": "Corn mix",
     "nameKana": "とうもろこしとえだまめのまぜごはん",
     "style": "japanese",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "レンジで加熱したとうもろこしの実をそぎ、解凍した枝豆と一緒に、だしと塩で味つけしたごはんに混ぜた、色のきれいな混ぜごはんです。",
@@ -1329,6 +1334,7 @@
     "shortNameEn": "Nori ben",
     "nameKana": "ささみのからあげのりべんとう",
     "style": "japanese",
+    "dishType": "fried-chicken",
     "themeId": null,
     "description": {
       "ja": "かつお節としょうゆののりごはんに、トースター焼きのささみ唐揚げと、電子レンジで作る卵焼き、それにれんこん入りのきんぴらを合わせた手早い弁当です。",
@@ -1817,6 +1823,7 @@
     "shortNameEn": "Reindeer",
     "nameKana": "となかいべんとう",
     "style": "japanese",
+    "dishType": "onigiri",
     "themeId": "theme-seasonal",
     "description": {
       "ja": "かつお節としょうゆを混ぜたごはんでトナカイの顔を作り、ソーセージの角、のりの目と口、梅干しの鼻をつけた、クリスマス向けのキャラ弁です。",
@@ -2052,6 +2059,7 @@
     "shortNameEn": "Frozen",
     "nameKana": "ふろーずんさんどべんとう",
     "style": "western-inspired",
+    "dishType": "sandwich",
     "themeId": null,
     "description": {
       "ja": "塩もみたまねぎ入りの卵サンドをあらかじめ冷凍し、凍ったまま詰めておく弁当です。キウイのヨーグルトかけを添えます。",
@@ -2366,6 +2374,7 @@
     "shortNameEn": "Korokke",
     "nameKana": "ぽてところっけべんとう",
     "style": "western-inspired",
+    "dishType": "fritter",
     "themeId": null,
     "description": {
       "ja": "レンジでつぶしたじゃがいもに玉ねぎとひき肉を混ぜて揚げた小さなコロッケに、ズッキーニのごまあえを添えた園児向けの弁当です。",
@@ -2840,6 +2849,7 @@
     "shortNameEn": "Panko",
     "nameKana": "ぶたひれにくのぱんこやきべんとう",
     "style": "western-inspired",
+    "dishType": "fried-chicken",
     "themeId": null,
     "description": {
       "ja": "粉チーズ入りのパン粉をつけて揚げ焼きにした豚ヒレ肉に、青のりの卵焼きと、さつまいもに粉チーズをまとわせた一品を詰めた園児向けの小さな弁当です。",
@@ -3258,6 +3268,7 @@
     "shortNameEn": "Kumahiyo",
     "nameKana": "くまひよべんとう",
     "style": "western-inspired",
+    "dishType": "onigiri",
     "themeId": "theme-animals",
     "description": {
       "ja": "くまとヒヨコの顔のごはんに、焼肉のたれの簡単唐揚げ、ハート形の卵焼き、ブロッコリーを添えた、レンジとフライパンで作るキャラ弁です。",
@@ -3745,6 +3756,7 @@
     "shortNameEn": "5 minute",
     "nameKana": "れんじでさんぴんごふんべんとう",
     "style": "western-inspired",
+    "dishType": "egg",
     "themeId": null,
     "description": {
       "ja": "ハムチーズオムレツ、温野菜、カレー味のジャーマンポテトを、耐熱カップに入れてまとめてレンジにかけるだけの、5分でできる弁当のおかずです。",
@@ -4147,6 +4159,7 @@
     "shortNameEn": "Kareoni",
     "nameKana": "かれーそぼろむすび",
     "style": "other",
+    "dishType": "onigiri",
     "themeId": null,
     "description": {
       "ja": "コンソメで炊いたごはんに、カレー粉で味つけした鶏そぼろと細かく刻んだピーマンを混ぜ、一口大ににぎってサラダ菜にのせたおにぎりです。",
@@ -4521,6 +4534,7 @@
     "shortNameEn": "Keema",
     "nameKana": "わふうきーまかれーべんとう",
     "style": "other",
+    "dishType": "rice-bowl",
     "themeId": null,
     "description": {
       "ja": "ひき肉・玉ねぎ・カレールウを混ぜて電子レンジで10分加熱するだけのキーマカレーを、ごはん、ゆで卵、ミニトマト、ブロッコリーの弁当にかけた一品です。",
