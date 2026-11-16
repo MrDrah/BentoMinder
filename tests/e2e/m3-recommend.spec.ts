@@ -108,6 +108,7 @@ test('US-E6-04/AC1 US-E6-04/AC2 US-E6-04/AC3 recipe detail: content, the 農林�
 test('US-E6-05/AC1 US-E6-05/AC2 US-E6-05/AC3 the library lists blocked recipes last; the picker plans a date by keyboard; axe with the picker open', async ({ page }) => {
   await seedStore(page, STATE);
   await page.goto('./#/recipes');
+  await expect(page.getByTestId('library-list')).toBeVisible(); // the library arrives as its own chunk after the first paint
   const rows = page.getByTestId('library-list').locator('> li');
   const total = await rows.count();
   expect(total).toBeGreaterThanOrEqual(15);

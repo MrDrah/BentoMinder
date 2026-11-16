@@ -2,10 +2,11 @@
 // first load it opens onboarding when needed (US-E1-01/AC1–AC3, US-E1-06/AC3).
 import { useEffect, useRef, useState } from 'react';
 import { startScreen } from '../domain/menu/store-ops.ts';
-import { formatMonth } from '../i18n/format.ts';
+import { formatDate, formatMonth } from '../i18n/format.ts';
 import { monthOf } from '../domain/time/jst.ts';
 import { useApp } from './app-store.tsx';
 import { Banner, Toast } from './components/Controls.tsx';
+import { LibraryGate } from './components/LibraryGate.tsx';
 import { navigate, toHash, useRoute, type Route } from './router.ts';
 import { CalendarScreen } from './screens/CalendarScreen.tsx';
 import { ImportScreen } from './screens/ImportScreen.tsx';
@@ -27,7 +28,7 @@ import { SyncLive } from './sync/SyncLive.tsx';
 import { SyncNotes } from './sync/SyncNotes.tsx';
 
 export function App() {
-  const { state, t, today, services, updatedElsewhere, dismissUpdatedElsewhere } = useApp();
+  const { state, t, today, services, libraryStatus, updatedElsewhere, dismissUpdatedElsewhere } = useApp();
   const route = useRoute();
   const gated = useRef(false);
   const gate = useNewDeviceGate(); // US-E15-05: a member's new device waits for the family data, never onboarding
@@ -38,6 +39,7 @@ export function App() {
     if (r.name === 'not-found') return t('notFound.title');
     if (r.name === 'recipe') {
       const recipe = services.library.find((x) => x.id === r.id);
+      if (libraryStatus !== 'ready') return t('library.title');
       return recipe === undefined ? t('recipe.notFound') : state.language === 'en' ? (recipe.name.en ?? recipe.name.ja) : recipe.name.ja;
     }
     return screenTitle(r, t, state.language);
@@ -129,7 +131,7 @@ function ConsentHost() {
 }
 
 function Screen({ route }: { route: Route }) {
-  const { t } = useApp();
+  const { t, state } = useApp();
   const fam = useFamily();
   switch (route.name) {
     case 'calendar':
@@ -137,11 +139,23 @@ function Screen({ route }: { route: Route }) {
     case 'day':
       return <CalendarScreen month={null} openDate={route.date} />;
     case 'recommend':
-      return <RecommendScreen date={route.date} />;
+      return (
+        <LibraryGate title={t('rec.title', { date: formatDate(t, state.language, route.date) })} testId="screen-recommend">
+          <RecommendScreen date={route.date} />
+        </LibraryGate>
+      );
     case 'recipe':
-      return <RecipeScreen id={route.id} date={route.date} />;
+      return (
+        <LibraryGate title={t('library.title')} testId="screen-recipe">
+          <RecipeScreen id={route.id} date={route.date} />
+        </LibraryGate>
+      );
     case 'recipes':
-      return <LibraryScreen />;
+      return (
+        <LibraryGate title={t('library.title')} testId="screen-library">
+          <LibraryScreen />
+        </LibraryGate>
+      );
     case 'refresh-review':
       return <RefreshReviewScreen month={route.month} fresh={route.fresh} />;
     case 'onboarding':

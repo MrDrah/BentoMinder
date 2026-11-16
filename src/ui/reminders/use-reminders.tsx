@@ -32,7 +32,7 @@ const byOrder = (a: ShownReminder, b: ShownReminder) =>
   a.job.type === b.job.type ? b.job.dueAt - a.job.dueAt || (a.job.key < b.job.key ? -1 : 1) : a.job.type === 'day-before' ? -1 : 1;
 
 export function RemindersProvider({ children }: { children: ReactNode }) {
-  const { services, now, commit, showSaveFailed } = useApp();
+  const { services, libraryStatus, now, commit, showSaveFailed } = useApp();
   const store = useStore();
   const viewer = useDayViewer();
   const [tick, setTick] = useState(0);
@@ -43,6 +43,7 @@ export function RemindersProvider({ children }: { children: ReactNode }) {
   const storeRef = useRef(store);
   storeRef.current = store;
   const { notifications, library } = services;
+  const libraryReady = libraryStatus === 'ready';
 
   useEffect(() => {
     const bump = () => setTick((n) => n + 1);
@@ -60,6 +61,8 @@ export function RemindersProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // Whether a planned recipe exists and which allergens it has are read from the library: wait until it is loaded.
+    if (!libraryReady) return;
     const at = now();
     const before = lastEval.current;
     lastEval.current = at;
@@ -84,7 +87,7 @@ export function RemindersProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [store, viewer, tick, now, notifications, library]);
+  }, [store, viewer, tick, now, notifications, library, libraryReady]);
 
   // Called by the reminder list once its banners are on screen: shownAt is written once per key, so
   // nothing is written for reminders the parent could not have seen (e.g. while on the settings screen).

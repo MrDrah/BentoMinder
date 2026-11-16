@@ -33,7 +33,7 @@ function NoLunch() {
 const day = (date: LocalDate) => toHash({ name: 'day', date });
 
 export function TodayCard() {
-  const { t, state, today, now, commit, showSaveFailed, services } = useApp();
+  const { t, state, today, now, commit, showSaveFailed, services, libraryStatus } = useApp();
   const store = useStore();
   const viewer = useDayViewer();
   const lang = state.language;
@@ -115,7 +115,7 @@ export function TodayCard() {
       const known = new Set(store.profile?.knownAllergenIds ?? []);
       const recipe = id === undefined ? undefined : services.library.find((r) => r.id === id);
       const hits = recipe === undefined ? [] : recipe.allergenIds.filter((a) => known.has(a));
-      const href = id !== undefined && recipe !== undefined ? toHash({ name: 'recipe', id, date: today }) : day(today);
+      const href = id !== undefined && (recipe !== undefined || libraryStatus !== 'ready') ? toHash({ name: 'recipe', id, date: today }) : day(today);
       return card(
         'homemade-bento-planned',
         <TileIcon name="home-bento" />,
