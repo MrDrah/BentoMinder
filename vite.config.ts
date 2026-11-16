@@ -55,7 +55,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // US-E17-01: the baked dish illustrations load lazily as one `dish-art` chunk (DishArtSlot stays in main).
-        chunkFileNames: (chunk) => (chunk.name === 'DishArt' ? 'assets/dish-art-[hash].js' : 'assets/[name]-[hash].js'),
+        // The recipe library is its own lazy chunk in assets/library/ so the JS budget glob (assets/*.js) counts the app code only.
+        chunkFileNames: (chunk) => (chunk.name === 'DishArt' ? 'assets/dish-art-[hash].js' : chunk.name === 'library' ? 'assets/library/library-[hash].js' : 'assets/[name]-[hash].js'),
       },
     },
   },

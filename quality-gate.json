@@ -135,7 +135,12 @@
     {
       "name": "JS bundle",
       "glob": "dist/assets/*.js",
-      "maxGzipKb": 500
+      "maxGzipKb": 458
+    },
+    {
+      "name": "Recipe library chunk",
+      "glob": "dist/assets/library/*.js",
+      "maxGzipKb": 250
     },
     {
       "name": "CSS",

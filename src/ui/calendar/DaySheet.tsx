@@ -316,7 +316,7 @@ const SAVED_KEYS = {
 } as const;
 
 function PlanSection({ v }: { v: DayView }) {
-  const { t, state, today, now, commit, showToast, showSaveFailed, services } = useApp();
+  const { t, state, today, now, commit, showToast, showSaveFailed, services, libraryStatus } = useApp();
   const store = useStore();
   const lang = state.language;
   const [ask, setAsk] = useState<'cancel-plan' | 'clear-plan' | null>(null);
@@ -392,7 +392,7 @@ function PlanSection({ v }: { v: DayView }) {
   };
   const primary: DayAction[] = ['bento', 'plan-bento-day', 'view-recipe'];
   // US-E6-06/AC1: the planned recipe is no longer in the library; the plan stays as stored.
-  const missing = shown === 'homemade-bento-planned' && record?.recipeId !== undefined && !services.library.some((r) => r.id === record.recipeId);
+  const missing = shown === 'homemade-bento-planned' && record?.recipeId !== undefined && libraryStatus === 'ready' && !services.library.some((r) => r.id === record.recipeId);
   if (missing) {
     label['change-recipe'] = 'day.recipeMissing.action';
     primary.push('change-recipe');

@@ -18,7 +18,7 @@ import { toJstTimestamp, todayJst, type Instant, type LocalDate } from '../domai
 import { createTranslator, type Language, type Translate } from '../i18n/index.ts';
 import { prepareFamilyImport } from '../domain/sync/import.ts';
 import { shippedDictionary } from './dictionary.ts';
-import { shippedLibrary } from './library.ts';
+import { loadShippedLibrary } from './library.ts';
 import { setProfileDraft } from './session.ts';
 import type { SyncController } from './sync/controller.ts';
 import { SyncContext } from './sync/sync-context.tsx';
@@ -73,8 +73,13 @@ export interface AppServices {
   notifications: WebNotifications;
   isOnline: () => boolean;
   dictionary: Dictionary;
+  /** Empty until `libraryStatus` is 'ready'; screens that need recipes wait for it (LibraryGate). */
   library: readonly Recipe[];
 }
+
+export type LibraryStatus = 'loading' | 'ready' | 'error';
+
+const NO_RECIPES: readonly Recipe[] = [];
 
 /** One-shot notes passed from the import screen to the review screen (in memory only). */
 export interface Flash {
@@ -87,6 +92,11 @@ interface AppContextValue {
   today: LocalDate;
   now: () => Instant;
   services: AppServices;
+  libraryStatus: LibraryStatus;
+  /** Starts the library request now; a no-op when it is under way or ready. */
+  requestLibrary: () => void;
+  /** After an error: asks again. */
+  retryLibrary: () => void;
   repository: Repository;
   setLanguage: (language: Language) => void;
   /** Validates and writes; true when stored. The screen updates only on success. */
@@ -130,6 +140,39 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   const stateRef = useRef(state);
   stateRef.current = state;
   const [fallbackNotifications] = useState(() => createWebNotifications());
+  const injectedLibrary = given?.library;
+  const [fetched, setFetched] = useState<{ status: LibraryStatus; data: readonly Recipe[] }>({ status: 'loading', data: NO_RECIPES });
+  const libraryRequested = useRef(false);
+  const requestLibrary = useCallback(() => {
+    if (injectedLibrary !== undefined || libraryRequested.current) return;
+    libraryRequested.current = true;
+    loadShippedLibrary().then(
+      (data) => setFetched({ status: 'ready', data }),
+      () => {
+        libraryRequested.current = false;
+        setFetched({ status: 'error', data: NO_RECIPES });
+      },
+    );
+  }, [injectedLibrary]);
+  const retryLibrary = useCallback(() => {
+    setFetched({ status: 'loading', data: NO_RECIPES });
+    requestLibrary();
+  }, [requestLibrary]);
+  // Right after first paint, when the browser is idle: the chunk lands in the HTTP cache for offline use without
+  // delaying the calendar. A screen that needs recipes earlier asks at once (LibraryGate).
+  useEffect(() => {
+    if (injectedLibrary !== undefined) return;
+    const warm = requestLibrary;
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (h: number) => void };
+    if (typeof w.requestIdleCallback === 'function') {
+      const h = w.requestIdleCallback(warm, { timeout: 2000 });
+      return () => w.cancelIdleCallback?.(h);
+    }
+    const h = setTimeout(warm, 200);
+    return () => clearTimeout(h);
+  }, [injectedLibrary, requestLibrary]);
+  const libraryStatus: LibraryStatus = injectedLibrary !== undefined ? 'ready' : fetched.status;
+  const library = injectedLibrary ?? fetched.data;
   const services = useMemo<AppServices>(
     () => ({
       pdfSource: given?.pdfSource ?? createWebPdfSource(),
@@ -139,9 +182,9 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
       notifications: given?.notifications ?? fallbackNotifications,
       isOnline: given?.isOnline ?? webIsOnline,
       dictionary: given?.dictionary ?? shippedDictionary,
-      library: given?.library ?? shippedLibrary,
+      library,
     }),
-    [given, fallbackNotifications],
+    [given, fallbackNotifications, library],
   );
 
   useEffect(() => {
@@ -303,8 +346,8 @@ export function AppProvider({ repository, clock, newDeviceId, services: given, w
   const dismissUpdatedElsewhere = useCallback(() => setUpdatedElsewhere(false), []);
 
   const value = useMemo(
-    () => ({ state, t, today, now, services, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash, setFlash }),
-    [state, t, today, now, services, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash],
+    () => ({ state, t, today, now, services, libraryStatus, requestLibrary, retryLibrary, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash, setFlash }),
+    [state, t, today, now, services, libraryStatus, requestLibrary, retryLibrary, repository, setLanguage, commit, showSaveFailed, updatedElsewhere, dismissUpdatedElsewhere, startOver, replaceStore, toast, showToast, flash],
   );
   return (
     <AppContext.Provider value={value}>
