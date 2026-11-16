@@ -249,3 +249,5 @@ Phase 5  M6 Android feasibility doc → PO decides v1 Android build
 | 2026-11-12 | US-E6-07/AC1 library size cap raised from 120 to 150 recipes (PO asked for 30 more: 122 now). | PO / Orchestrator |
 
 | 2026-11-13 | JS budget raised 458 -> 500 KB gzip total as an INTERIM: the recipe library (122 recipes, 222 KB gzip) is statically imported by `src/ui/library.ts` into the main chunk, so the 30 new recipes added about 41 KB to first load (main chunk 418 KB gzip). Follow-up proposed: load the library as its own lazy chunk (needs an async load state in app-store; also helps the known LCP 2.9-3.3 s vs 2.5 s target). Not done yet. | Orchestrator |
+
+| 2026-11-13 | PO go-ahead: load the recipe library as its own lazy chunk (`library`), removing ~220 KB gzip from first load. Rules: no behaviour change; screens that need recipes wait for it (skeleton, not empty states); chunk is requested right after first paint (idle preload) so it is in the HTTP cache for offline use; load failure shows a plain retry state; tests that inject a library are unaffected. JS budget back to 458 KB once the chunk is split (library chunk counted by its own budget). | PO / Orchestrator |
