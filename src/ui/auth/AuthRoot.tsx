@@ -44,6 +44,8 @@ export interface AuthRootProps {
   /** After this long without a session answer the login screen is shown with the generic error. */
   restoreFallbackMs?: number;
   initialLanguage?: Language;
+  /** False in the Android app for now: the Google popup cannot run in a WebView, so the login screen offers e-mail only. */
+  googleAvailable?: boolean;
 }
 
 type Gate = 'blank' | 'splash' | 'done';
@@ -72,7 +74,7 @@ function useSplashGate(loading: boolean, delayMs: number, minMs: number): Gate {
   return gate;
 }
 
-export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, splashMinMs = 300, restoreFallbackMs = 8000, initialLanguage = 'ja' }: AuthRootProps) {
+export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, splashMinMs = 300, restoreFallbackMs = 8000, initialLanguage = 'ja', googleAvailable = true }: AuthRootProps) {
   const [session, dispatch] = useReducer(authReducer, initialAuthSession);
   const [language, setLanguage] = useState<Language>(initialLanguage);
   const [fallback, setFallback] = useState(false);
@@ -237,6 +239,7 @@ export function AuthRoot({ auth, accountOf, openAccount, splashDelayMs = 150, sp
       expired={session.lastError === 'sessionEnded'}
       signedOut={justSignedOut}
       joinHint={syncConfigured() && parseHash(window.location.hash).name === 'join'}
+      googleAvailable={googleAvailable}
       onSignIn={() => void signIn()}
       onSubmit={submitForm}
       onReset={resetPassword}

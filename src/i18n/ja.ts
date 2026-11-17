@@ -604,6 +604,7 @@ export const ja = {
   'auth.login.lead': 'はじめにログインしてください。',
   'auth.google.button': 'Googleでログイン',
   'auth.google.signingIn': 'ログインしています…',
+  'auth.google.nativeNote': 'Androidアプリでは、いまはメールアドレスとパスワードでログインしてください。Googleでのログインは準備中です。',
   'auth.signingIn.live': 'ログインしています。しばらくお待ちください。',
   'auth.privacy': 'お名前とメールアドレスは、ログインの確認にだけ使います。献立やお子さまの情報は、この端末に保存されます。',
   'auth.restoring': '確認しています…',

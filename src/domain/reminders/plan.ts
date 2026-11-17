@@ -142,16 +142,24 @@ function weeklyJob(sunday: LocalDate, time: WallTime | string, byDate: ReadonlyM
   return build(`weekly:${from}`, 'weekly', jstWallToInstant(sunday, time), dayStart(addDays(sunday, 8)), `#/calendar/${monthOf(from)}`, 'reminders.weekly.title', bodyKey, params);
 }
 
-/** Stable 31-bit id of a key (Android notification id); a collision inside one plan is probed away. */
+/**
+ * Stable 31-bit id of a key (Android notification id, 1..2^31-1); an id already in `used` is probed away with a
+ * salt. The same key and the same `used` set always give the same id.
+ */
+export function numericIdForKey(key: string, used: ReadonlySet<number>): number {
+  let salt = 0;
+  let id = fnv1a(key) & 0x7fffffff;
+  while (id === 0 || used.has(id)) {
+    salt += 1;
+    id = fnv1a(`${key}#${salt}`) & 0x7fffffff;
+  }
+  return id;
+}
+
 function assignIds(drafts: Draft[]): ReminderJob[] {
   const used = new Set<number>();
   return drafts.map((draft) => {
-    let salt = 0;
-    let id = fnv1a(draft.key) & 0x7fffffff;
-    while (id === 0 || used.has(id)) {
-      salt += 1;
-      id = fnv1a(`${draft.key}#${salt}`) & 0x7fffffff;
-    }
+    const id = numericIdForKey(draft.key, used);
     used.add(id);
     return { ...draft, numericId: id };
   });

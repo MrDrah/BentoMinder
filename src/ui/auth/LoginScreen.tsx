@@ -48,6 +48,8 @@ export interface LoginScreenProps {
   signedOut: boolean;
   /** A family invite link was opened while signed out (US-E15-04/AC1): say what happens after sign-in. */
   joinHint?: boolean;
+  /** False in the Android app (no Google popup in a WebView): a short note replaces the Google button. Default true. */
+  googleAvailable?: boolean;
   onSignIn: () => void;
   /** US-E13-08/AC2, AC5: create an account or sign in with e-mail + password. The shell owns the session. */
   onSubmit: (mode: 'signin' | 'create', email: string, password: string) => Promise<SignInResult>;
@@ -55,7 +57,7 @@ export interface LoginScreenProps {
   onReset: (email: string) => Promise<ActionResult>;
 }
 
-export function LoginScreen({ t, language, onLanguage, busy, error, expired, signedOut, joinHint = false, onSignIn, onSubmit, onReset }: LoginScreenProps) {
+export function LoginScreen({ t, language, onLanguage, busy, error, expired, signedOut, joinHint = false, googleAvailable = true, onSignIn, onSubmit, onReset }: LoginScreenProps) {
   const title = useRef<HTMLHeadingElement>(null);
   const [mode, setMode] = useState<Mode>('signin');
   const [email, setEmail] = useState('');
@@ -170,7 +172,12 @@ export function LoginScreen({ t, language, onLanguage, busy, error, expired, sig
           </Banner>
         )}
         {mode === 'signin' && <p className="auth__lead">{t('auth.login.lead')}</p>}
-        {mode !== 'forgot' && (
+        {mode !== 'forgot' && !googleAvailable && (
+          <p className="auth__lead" data-testid="login-google-native-note">
+            {t('auth.google.nativeNote')}
+          </p>
+        )}
+        {mode !== 'forgot' && googleAvailable && (
           <button
             type="button"
             className="btn btn--secondary btn--block auth-google"
@@ -193,7 +200,7 @@ export function LoginScreen({ t, language, onLanguage, busy, error, expired, sig
             </>
           )}
         </div>
-        {mode !== 'forgot' && (
+        {mode !== 'forgot' && googleAvailable && (
           <div className="auth__divider" aria-hidden="true">
             <span>{t('auth.divider')}</span>
           </div>

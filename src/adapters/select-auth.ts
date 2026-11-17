@@ -2,6 +2,7 @@
 // VITE_AUTH_FAKE=1, which the e2e preview build alone sets. Vite replaces the flag with a literal, so a normal
 // build drops the whole branch and the fake adapter is never in the bundle.
 import type { AuthPort, AuthUser } from '../domain/auth/types.ts';
+import { isNativePlatform } from './platform.ts';
 
 export interface AuthSetup {
   auth: AuthPort;
@@ -15,7 +16,8 @@ export async function selectAuth(): Promise<AuthSetup> {
     return createE2eAuth();
   }
   const { createFirebaseAuth } = await import('./web/firebase-auth.ts');
-  return { auth: createFirebaseAuth(firebaseEnv()), accountOf: (user) => user.uid };
+  const auth = createFirebaseAuth(firebaseEnv());
+  return { auth: isNativePlatform() ? withoutGoogle(auth) : auth, accountOf: (user) => user.uid };
 }
 
 /** Vite inlines each name below at build time; nothing else of the environment is read or bundled. */
@@ -29,4 +31,12 @@ function firebaseEnv(): Record<string, unknown> {
     VITE_FIREBASE_APP_ID: import.meta.env.VITE_FIREBASE_APP_ID,
     VITE_FIREBASE_MEASUREMENT_ID: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
   };
+}
+
+/**
+ * Android app, first build: the Google popup cannot run in a WebView (the native Google step is a separate slice, see
+ * docs/dev/android-build.md). The seam answers with the plain 'other' result and the login screen shows e-mail only.
+ */
+export function withoutGoogle(auth: AuthPort): AuthPort {
+  return { ...auth, signInWithGoogle: () => Promise.resolve({ ok: false, error: 'other' }) };
 }

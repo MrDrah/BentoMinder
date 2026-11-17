@@ -43,3 +43,25 @@ functions/.env.*
 .firebase/
 firebase-debug.log
 firestore-debug.log
+
+# Android / Capacitor (docs/dev/android-build.md): build outputs, local SDK paths, keystores and Firebase config are never committed
+android/.gradle/
+android/build/
+android/app/build/
+android/capacitor-cordova-android-plugins/build/
+android/local.properties
+android/.idea/
+android/**/*.iml
+android/captures/
+android/.externalNativeBuild/
+android/.cxx/
+android/app/src/main/assets/public/
+android/app/src/main/assets/capacitor.config.json
+android/app/src/main/assets/capacitor.plugins.json
+android/app/src/main/res/xml/config.xml
+*.apk
+*.aab
+*.jks
+*.keystore
+google-services.json
+keystore.properties
