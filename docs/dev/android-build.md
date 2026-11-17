@@ -136,3 +136,20 @@ button is replaced by a short note). Native Google sign-in needs your accounts a
   (ADR 005 section 3 "Due-but-not-shown" is not implemented in this slice).
 - Reboot restore, exact-alarm behaviour, Doze and battery managers depend on the plugin and the phone: only the checklist can settle them.
 - No "go to system settings" button for a denied permission and no exact-alarm explanation row yet (needs copy).
+
+## First real build (2026-11-18): lessons, all verified on this PC
+
+- **Use JDK 21 for Gradle, not Android Studio's bundled JDK 25.** Gradle 8.14 with Android Gradle plugin 8.13 fails on Java 25
+  ("Unsupported class file major version 69"). Install Temurin 21 (`winget install EclipseAdoptium.Temurin.21.JDK`) and set
+  `JAVA_HOME` to it for the command line (`C:\Program Files\Eclipse Adoptium\jdk-21.0.13.9-hotspot`).
+- **`android/local.properties`** (git-ignored) needs forward slashes: `sdk.dir=C:/Users/<you>/AppData/Local/Android/Sdk`.
+  Backslashes are escapes in a properties file and break the build ("filename syntax is incorrect").
+- **Build-time settings.** `npm run cap:sync` builds the web app with whatever `VITE_*` values are in the environment: the
+  Firebase web config (`VITE_FIREBASE_*`) plus `VITE_AI_PROXY_BASE_URL=https://asia-northeast1-bentominder.cloudfunctions.net/api`
+  and `VITE_SYNC_BASE_URL=https://asia-northeast1-bentominder.cloudfunctions.net/sync`. Without the last two the APK has no
+  hosted AI import and no family sync.
+- **Command line build** (PowerShell, from the repo root):
+  `npm run cap:sync` then `cd android; ./gradlew.bat assembleDebug --no-daemon`. Gradle downloads SDK Platform 36 on the first run.
+- **Result:** `android/app/build/outputs/apk/debug/app-debug.apk` (about 6 MB, package `app.bentominder`, versionCode 1,
+  minSdk 24, compileSdk 36). It is signed with the debug key: fine for your own phone, not for Google Play.
+- **Install:** USB debugging + `adb install -r app-debug.apk`, or copy the APK to the phone and open it (allow "install unknown apps").
