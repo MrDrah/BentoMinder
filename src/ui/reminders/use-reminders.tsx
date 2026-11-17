@@ -6,6 +6,8 @@ import { planRemindersForStore } from '../../domain/calendar/reminder-days.ts';
 import type { ReminderJob } from '../../domain/ports.ts';
 import { pruneLog, recordDismissed, recordShown, visibleReminders } from '../../domain/reminders/index.ts';
 import { toJstTimestamp, type Instant } from '../../domain/time/jst.ts';
+import { createTranslator } from '../../i18n/index.ts';
+import { renderNotificationText } from '../../adapters/native/notification-text.ts';
 import { useApp, useStore } from '../app-store.tsx';
 import { useDayViewer } from '../calendar/use-day-viewer.ts';
 
@@ -32,7 +34,7 @@ const byOrder = (a: ShownReminder, b: ShownReminder) =>
   a.job.type === b.job.type ? b.job.dueAt - a.job.dueAt || (a.job.key < b.job.key ? -1 : 1) : a.job.type === 'day-before' ? -1 : 1;
 
 export function RemindersProvider({ children }: { children: ReactNode }) {
-  const { services, libraryStatus, now, commit, showSaveFailed } = useApp();
+  const { services, libraryStatus, now, commit, showSaveFailed, state } = useApp();
   const store = useStore();
   const viewer = useDayViewer();
   const [tick, setTick] = useState(0);
@@ -53,12 +55,21 @@ export function RemindersProvider({ children }: { children: ReactNode }) {
     };
     document.addEventListener('visibilitychange', onVisible);
     window.addEventListener('focus', bump);
+    const offResume = notifications.onResume?.(bump); // native: the app returned to the foreground (ADR 005 §3 "Revocation")
     return () => {
+      offResume?.();
       clearInterval(id);
       document.removeEventListener('visibilitychange', onVisible);
       window.removeEventListener('focus', bump);
     };
-  }, []);
+  }, [notifications]);
+
+  // Native: the system notification is worded in the parent's language when it is scheduled.
+  const language = state.language;
+  useEffect(() => {
+    const t = createTranslator(language);
+    notifications.setTextRenderer?.((job) => renderNotificationText(job, t, language));
+  }, [notifications, language]);
 
   useEffect(() => {
     // Whether a planned recipe exists and which allergens it has are read from the library: wait until it is loaded.
@@ -74,6 +85,7 @@ export function RemindersProvider({ children }: { children: ReactNode }) {
         : planRemindersForStore(store, viewer, at, notifications.scheduled(), {
             recipeExists: (id) => library.some((r) => r.id === id),
             recipeAllergenIds: (id) => library.find((r) => r.id === id)?.allergenIds ?? [],
+            ...(notifications.horizonDays === undefined ? {} : { horizonDays: notifications.horizonDays }),
           });
     void notifications.apply(plan.diff).then(() => {
       if (cancelled) return;

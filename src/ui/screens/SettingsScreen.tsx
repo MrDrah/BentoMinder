@@ -60,8 +60,15 @@ export function SettingsScreen({ from = null }: { from?: OnboardingStep | null }
   const saveReminders = async (patch: ReminderSettingsPatch) => {
     const next = updateReminderSettings(store, patch, now());
     if (next === null) return;
-    if (await commit(next)) setSaved(t('settings.saved'));
-    else showSaveFailed();
+    if (await commit(next)) {
+      setSaved(t('settings.saved'));
+      // Native only: the parent just turned a reminder on, the moment to ask for the system notification permission (ADR 005 §3).
+      // The web adapter answers 'not-needed', so nothing is asked there. A refusal leaves the in-app reminders as they were.
+      if (patch.weekly?.enabled === true || patch.dayBefore?.enabled === true) {
+        const { notifications } = services;
+        if ((await notifications.permission()) === 'prompt') await notifications.requestPermission();
+      }
+    } else showSaveFailed();
   };
 
   const exportData = async () => {

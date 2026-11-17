@@ -597,6 +597,7 @@ export const en = {
   'auth.login.lead': 'Please sign in to get started.',
   'auth.google.button': 'Continue with Google',
   'auth.google.signingIn': 'Signing in…',
+  'auth.google.nativeNote': 'In the Android app, please sign in with your email and password for now. Google sign-in is coming soon.',
   'auth.signingIn.live': 'Signing in. Please wait.',
   'auth.privacy': 'Your name and email are used only to sign you in. Menus and your child\'s details stay on this device.',
   'auth.restoring': 'Checking…',

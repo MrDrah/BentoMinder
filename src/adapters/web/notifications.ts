@@ -12,6 +12,12 @@ export interface WebNotifications extends NotificationScheduler {
   scheduled(): ScheduledRef[];
   /** The route of a tapped reminder goes to the handler registered with `onTap`. */
   tap(route: string): void;
+  /** Native only: how far ahead the planner schedules (ADR 004; absent = the web horizon). */
+  horizonDays?: number;
+  /** Native only: the app came back to the foreground (the in-app engine re-plans). Returns the unsubscribe function. */
+  onResume?(handler: () => void): () => void;
+  /** Native only: how a job's text is rendered into the system notification (language of the parent). */
+  setTextRenderer?(render: (job: ReminderJob) => { title: string; body: string }): void;
 }
 
 export function createWebNotifications(): WebNotifications {
